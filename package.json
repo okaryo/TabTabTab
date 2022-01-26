@@ -1,0 +1,29 @@
+{
+  "name": "TabTabTab",
+  "version": "1.0.0",
+  "description": "This chrome extension makes it easier to manage your open tabs.",
+  "scripts": {
+    "build": "webpack --config webpack.prod.js",
+    "dev": "webpack --config webpack.dev.js",
+    "watch": "webpack -w --config webpack.dev.js"
+  },
+  "author": "okaryo",
+  "license": "MIT",
+  "devDependencies": {
+    "@types/chrome": "^0.0.60",
+    "@types/react": "^16.9.32",
+    "@types/react-dom": "^16.9.6",
+    "css-loader": "^3.4.2",
+    "node-sass": "^4.13.1",
+    "style-loader": "^2.0.0",
+    "ts-loader": "^4.0.1",
+    "typescript": "^3.8.0",
+    "webpack": "^4.42.1",
+    "webpack-cli": "^3.3.11",
+    "webpack-merge": "^4.2.2"
+  },
+  "dependencies": {
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1"
+  }
+}
