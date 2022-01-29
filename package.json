@@ -6,7 +6,9 @@
     "build": "webpack --config webpack.prod.js",
     "dev": "webpack --config webpack.dev.js",
     "watch": "webpack -w --config webpack.dev.js",
-    "test": "jest"
+    "test": "jest",
+    "lint": "eslint ./src/**/*.{js,ts,tsx}",
+    "lint:fix": "eslint --fix ./src/**/*.{js,ts,tsx}"
   },
   "author": "okaryo",
   "license": "MIT",
@@ -15,7 +17,10 @@
     "@types/jest": "^27.4.0",
     "@types/react": "^17.0.38",
     "@types/react-dom": "^17.0.11",
+    "@typescript-eslint/eslint-plugin": "^5.10.1",
+    "@typescript-eslint/parser": "^5.10.1",
     "css-loader": "^6.5.1",
+    "eslint": "^7.32.0",
     "jest": "^27.4.7",
     "node-sass": "^7.0.1",
     "style-loader": "^3.3.1",
