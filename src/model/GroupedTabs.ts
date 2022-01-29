@@ -1,4 +1,4 @@
-import { GroupId } from './GroupId';
+import { GroupId } from './GroupId'
 import { Tab } from './Tab'
 
 export class GroupedTabs {
