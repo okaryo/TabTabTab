@@ -2,9 +2,11 @@ import { TabId } from './TabId'
 
 export class Tab {
   constructor(
-    private id: TabId,
-    private title: string,
-    private favIconUrl: string,
-    private isFocused: boolean
+    private _id: TabId,
+    private _title: string,
+    private _favIconUrl: string,
+    private _isFocused: boolean
   ) {}
+
+  get title(): string { return this._title }
 }

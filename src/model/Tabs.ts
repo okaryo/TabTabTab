@@ -6,6 +6,10 @@ type Tabable = Tab | PinnedTabs | GroupedTabs
 
 export class Tabs {
   constructor(
-    private values: Tabable[],
+    private _values: Tabable[],
   ) {}
+
+  get values(): Tabable[] {
+    return this._values
+  }
 }

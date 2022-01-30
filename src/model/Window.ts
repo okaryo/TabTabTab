@@ -4,8 +4,12 @@ import { WindowId } from './WindowId'
 // NOTE: 'Tb' is a prefix to avoid class name conflict with other libraries.
 export class TbWindow {
   constructor(
-    private id: WindowId,
-    private tabs: Tabs,
-    private isFocused: boolean
+    private _id: WindowId,
+    private _tabs: Tabs,
+    private _isFocused: boolean
   ) {}
+
+  get tabs(): Tabs {
+    return this._tabs
+  }
 }
