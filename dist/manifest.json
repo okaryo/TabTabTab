@@ -15,7 +15,8 @@
     }
   },
   "permissions": [
-    "tabs"
+    "tabs",
+    "tabGroups"
   ],
   "icons": {
     "16": "tabtabtab16.png",
