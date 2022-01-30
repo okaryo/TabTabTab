@@ -36,7 +36,6 @@ export class TbWindow {
 
   addGroupedTab(groupId: GroupId, groupName: string, color: GroupedColor, tab: Tab): TbWindow {
     const newTabs = this._tabs.addGroupedTabBy(groupId, groupName, color, tab)
-    console.log(newTabs)
     return new TbWindow(this._id, newTabs, this._isFocused)
   }
 }

@@ -38,7 +38,6 @@ export class Tabs {
     }
 
     const newTabs = this._values.map((value) => {
-      if (value instanceof GroupedTabs) console.log(groupedTabs.id === value.id)
       return (value instanceof GroupedTabs && groupedTabs.id === value.id) ? groupedTabs.add(tab) : value
     })
     return new Tabs(newTabs)
