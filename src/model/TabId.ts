@@ -1,3 +1,5 @@
 export class TabId {
-  constructor(private value: number) {}
+  constructor(private _value: number) {}
+
+  get value(): number { return this._value }
 }

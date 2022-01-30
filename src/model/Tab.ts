@@ -8,5 +8,9 @@ export class Tab {
     private _isFocused: boolean
   ) {}
 
+  get id(): number { return this._id.value }
+
   get title(): string { return this._title }
+
+  get favIconUrl(): string { return this._favIconUrl }
 }
