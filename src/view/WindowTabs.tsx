@@ -1,31 +1,32 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Tabs from '@mui/material/Tabs'
 import Box from '@mui/material/Box'
 import WindowTab from './WindowTab'
 
 type WindowTabsProps = {
-  unfocusedWindowCount: number
+  unfocusedWindowCount: number,
+  selectedIndex: number,
+  onSelect: Function
+
 }
 
 const WindowTabs = (props: WindowTabsProps) => {
-  const [, setState] = useState(0)
   const onChange = (_: React.SyntheticEvent, newValue: number) => {
-    setState(newValue)
+    props.onSelect(newValue)
   }
 
   const unfocusedWindows = []
   for (let i = 0; i < props.unfocusedWindowCount; i++) {
-    unfocusedWindows.push(<WindowTab key={i} label={`Window${i+1}`} />)
+    unfocusedWindows.push(<WindowTab key={i+1} label={`Window${i+1}`} />)
   }
 
   return (
     <Box sx={{ maxWidth: 480, borderBottom: 1, borderColor: 'divider' }}>
       <Tabs
-        value={0}
+        value={props.selectedIndex}
         onChange={onChange}
         variant="scrollable"
         scrollButtons={false}
-        aria-label="basic tabs example"
       >
         <WindowTab label="CurrentWindow" />
         {unfocusedWindows}

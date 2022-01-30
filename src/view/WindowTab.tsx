@@ -7,13 +7,15 @@ type WindowTabProps = {
 }
 
 const WindowTab = (props: WindowTabProps) => {
-  const { label } = props
+  const { label, ...other } = props
   return (
     <Tab
       style={{textTransform: 'none'}}
       label={label}
+      {...other}
     />
   )
 }
+WindowTab.muiName = 'Tab'
 
 export default WindowTab
