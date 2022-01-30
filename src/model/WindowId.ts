@@ -1,3 +1,7 @@
 export class WindowId {
-  constructor(private value: number) {}
+  constructor(private _value: number) {}
+
+  get value(): number { return this._value }
+
+  equalTo(id: WindowId): boolean { return this._value === id.value }
 }

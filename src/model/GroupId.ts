@@ -3,5 +3,5 @@ export class GroupId {
 
   get value(): number { return this._value }
 
-  equal(id: GroupId): boolean { return this._value === id.value }
+  equalTo(id: GroupId): boolean { return this._value === id.value }
 }

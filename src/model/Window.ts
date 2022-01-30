@@ -17,6 +17,8 @@ export class TbWindow {
     return new TbWindow(windowId, Tabs.empty(), isFocused)
   }
 
+  get id(): WindowId { return this._id }
+
   get tabs(): Tabs {
     return this._tabs
   }

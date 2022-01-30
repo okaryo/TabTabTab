@@ -59,7 +59,7 @@ export class Tabs {
 
   private findGroupedTabsBy(groupId: GroupId): GroupedTabs | null {
     const groupedTabsList = this._values.filter((value) => value instanceof GroupedTabs) as GroupedTabs[]
-    const groupedTabs = groupedTabsList.find((tabs) => tabs.id.equal(groupId))
+    const groupedTabs = groupedTabsList.find((tabs) => tabs.id.equalTo(groupId))
     return groupedTabs === undefined ? null : groupedTabs
   }
 
