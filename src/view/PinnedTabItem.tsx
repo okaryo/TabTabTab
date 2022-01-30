@@ -1,13 +1,14 @@
 import React from 'react'
-import { IconButton, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { Box, IconButton, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
 import Clear from '@mui/icons-material/Clear'
 
 type PinnedTabItemProps = {
-  name: string,
+  title: string,
+  favIconUrl: string
 }
 
 const PinnedTabItem = (props: PinnedTabItemProps) => {
-  const { name } = props
+  const { title, favIconUrl } = props
 
   return (
     <ListItem
@@ -18,8 +19,28 @@ const PinnedTabItem = (props: PinnedTabItemProps) => {
       }
       disablePadding
     >
-      <ListItemButton sx={{ pl: 4 }}>
-        <ListItemText primary={name} />
+      <ListItemButton sx={{ pl: 4, width: 400 }} >
+        <Box
+          component="img"
+          sx={{
+            height: 20,
+            width: 20,
+            marginRight: 2,
+          }}
+          alt={title}
+          src={favIconUrl}
+        />
+        <ListItemText
+          primary={<Typography
+            variant="subtitle1"
+            component="p"
+            sx={{ letterSpacing: 0 }}
+            style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+            >
+              {title}
+            </Typography>
+          }
+        />
       </ListItemButton>
     </ListItem>
   )

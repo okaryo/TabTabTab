@@ -1,13 +1,15 @@
 import React from 'react'
-import { IconButton, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { Box, IconButton, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
 import Clear from '@mui/icons-material/Clear'
 
 type GroupedTabItemProps = {
-  name: string,
+  title: string,
+  color: string,
+  favIconUrl: string
 }
 
 const GroupedTabItem = (props: GroupedTabItemProps) => {
-  const { name } = props
+  const { title, color, favIconUrl } = props
 
   return (
     <ListItem
@@ -18,8 +20,28 @@ const GroupedTabItem = (props: GroupedTabItemProps) => {
       }
       disablePadding
     >
-      <ListItemButton style={{ borderLeft: '10px solid yellow' }}>
-        <ListItemText primary={name} />
+      <ListItemButton style={{ borderLeft: `10px solid ${color}`, width: 400 }}>
+        <Box
+          component="img"
+          sx={{
+            height: 20,
+            width: 20,
+            marginRight: 2,
+          }}
+          alt={title}
+          src={favIconUrl}
+        />
+        <ListItemText
+          primary={<Typography
+            variant="subtitle1"
+            component="p"
+            sx={{ letterSpacing: 0 }}
+            style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+            >
+              {title}
+            </Typography>
+          }
+        />
       </ListItemButton>
     </ListItem>
   )

@@ -8,11 +8,11 @@ import WindowTabs from './WindowTabs'
 import TabList from './TabList'
 
 export default function App() {
-  const [, setStates] = useState(TbWindows.empty())
+  const [state, setStates] = useState(TbWindows.empty())
   useEffect(() => {
     const getWindows = async () => {
-      const windows = await ChromeTabsAPI.getWindows()
-      setStates(windows)
+      const window = await ChromeTabsAPI.getCurrentWindow()
+      setStates(new TbWindows([window]))
     }
     getWindows()
   }, [])
@@ -20,10 +20,10 @@ export default function App() {
   return (
     <div>
       <CssBaseline />
-      <Box sx={{ width: 400, height: 400, }} >
+      <Box sx={{ width: 400, height: 400 }} >
         <Header />
-        <WindowTabs />
-        <TabList />
+        <WindowTabs unfocusedWindowCount={state.unforcusedWindowCount} />
+        <TabList tabs={state.focusedWindowTabs} />
       </Box>
     </div>
   )

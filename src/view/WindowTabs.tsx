@@ -3,10 +3,19 @@ import Tabs from '@mui/material/Tabs'
 import Box from '@mui/material/Box'
 import WindowTab from './WindowTab'
 
-const WindowTabs = () => {
+type WindowTabsProps = {
+  unfocusedWindowCount: number
+}
+
+const WindowTabs = (props: WindowTabsProps) => {
   const [, setState] = useState(0)
-  const onChange = (event: React.SyntheticEvent, newValue: number) => {
+  const onChange = (_: React.SyntheticEvent, newValue: number) => {
     setState(newValue)
+  }
+
+  const unfocusedWindows = []
+  for (let i = 0; i < props.unfocusedWindowCount; i++) {
+    unfocusedWindows.push(<WindowTab key={i} label={`Window${i+1}`} />)
   }
 
   return (
@@ -19,10 +28,7 @@ const WindowTabs = () => {
         aria-label="basic tabs example"
       >
         <WindowTab label="CurrentWindow" />
-        <WindowTab label="Window1" />
-        <WindowTab label="Window2" />
-        <WindowTab label="Window3" />
-        <WindowTab label="Window4" />
+        {unfocusedWindows}
       </Tabs>
     </Box>
   )

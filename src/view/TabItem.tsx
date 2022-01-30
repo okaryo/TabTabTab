@@ -1,14 +1,15 @@
 import React from 'react'
-import { IconButton, ListItem, ListItemButton, ListItemText } from '@mui/material'
+import { Box, IconButton, ListItem, ListItemButton, ListItemText, Typography } from '@mui/material'
 
 import Clear from '@mui/icons-material/Clear'
 
 type TabItemProps = {
-  title: string
+  title: string,
+  favIconUrl: string
 }
 
 const TabItem = (props: TabItemProps) => {
-  const { title } = props
+  const { title, favIconUrl } = props
 
   return (
     <ListItem
@@ -19,8 +20,28 @@ const TabItem = (props: TabItemProps) => {
       }
       disablePadding
     >
-      <ListItemButton>
-        <ListItemText primary={title} />
+      <ListItemButton sx={{ width: 400 }}>
+        <Box
+          component="img"
+          sx={{
+            height: 20,
+            width: 20,
+            marginRight: 2,
+          }}
+          alt={title}
+          src={favIconUrl}
+        />
+        <ListItemText
+          primary={<Typography
+            variant="subtitle1"
+            component="p"
+            sx={{ letterSpacing: 0 }}
+            style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+            >
+              {title}
+            </Typography>
+          }
+        />
       </ListItemButton>
     </ListItem>
   )

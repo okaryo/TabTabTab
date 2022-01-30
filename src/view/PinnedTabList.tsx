@@ -1,13 +1,22 @@
 import React, { useState } from 'react'
-import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemText, Stack } from '@mui/material'
+import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemText, Stack, Typography } from '@mui/material'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import PushPin from '@mui/icons-material/PushPin'
 import PinnedTabItem from './PinnedTabItem'
+import { PinnedTabs } from '../model/PinnedTabs'
 
-const PinnedTabList = () => {
+type PinnedTabListProps = {
+  tabs: PinnedTabs
+}
+
+const PinnedTabList = (props: PinnedTabListProps) => {
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpenStatus = () => setIsOpen(!isOpen)
+
+  const tabs = props.tabs.map((tab) => {
+    return <PinnedTabItem key={tab.id} title={tab.title} favIconUrl={tab.favIconUrl} />
+  })
 
   return (
     <List
@@ -24,14 +33,22 @@ const PinnedTabList = () => {
       >
         <ListItemButton onClick={toggleOpenStatus}>
           <Stack direction="row" spacing={1} alignItems="center">
-            <ListItemText primary="Pinned" />
-            <PushPin />
+            <ListItemText
+              primary={<Typography
+                variant="h6"
+                component="h6"
+                >
+                  Pinned
+                </Typography>
+              }
+            />
+            <PushPin fontSize="small" />
           </Stack>
         </ListItemButton>
       </ListItem>
       <Collapse in={isOpen} timeout="auto" unmountOnExit>
         <List disablePadding>
-          <PinnedTabItem name="PinnedTabItem" />
+          {tabs}
         </List>
       </Collapse>
     </List>
