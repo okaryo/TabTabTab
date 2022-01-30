@@ -7,8 +7,8 @@
     "dev": "webpack --config webpack.dev.js",
     "watch": "webpack -w --config webpack.dev.js",
     "test": "jest",
-    "lint": "eslint ./src/**/*.{js,ts,tsx}",
-    "lint:fix": "eslint --fix ./src/**/*.{js,ts,tsx}"
+    "lint": "eslint ./src/**/*.{ts,tsx}",
+    "lint:fix": "eslint --fix ./src/**/*.{ts,tsx}"
   },
   "author": "okaryo",
   "license": "MIT",
@@ -20,6 +20,7 @@
     "@typescript-eslint/eslint-plugin": "^5.10.1",
     "@typescript-eslint/parser": "^5.10.1",
     "eslint": "^7.32.0",
+    "eslint-plugin-autofix": "^1.1.0",
     "jest": "^27.4.7",
     "node-sass": "^7.0.1",
     "ts-jest": "^27.1.3",

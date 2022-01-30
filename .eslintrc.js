@@ -7,6 +7,7 @@ module.exports = {
   parser: '@typescript-eslint/parser',
   plugins: [
     '@typescript-eslint',
+    'autofix',
   ],
   extends: [
     'eslint:recommended',
@@ -19,6 +20,8 @@ module.exports = {
   rules: {
     'semi': ['error', 'never'],
     'quotes': ['error', 'single'],
-    'no-trailing-spaces': ['error']
+    'no-trailing-spaces': ['error'],
+    'no-multi-spaces': 'error',
+    'autofix/no-unused-vars': 'error',
   },
 }
