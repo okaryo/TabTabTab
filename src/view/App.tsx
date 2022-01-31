@@ -53,9 +53,10 @@ export default function App() {
       <Box sx={{ width: 400, height: 400 }} >
         <Header />
         <WindowTabs
-          unfocusedWindowCount={state.unforcusedWindowCount}
-          onSelect={setSelectedIndex}
+          currentWindow={state.currentWindow}
+          unfocusedWindows={state.unfocusedWindows}
           selectedIndex={selectedIndex}
+          onSelect={setSelectedIndex}
         />
         {focusedWindowsTabList}
         {unfocusedWindowsTabList}

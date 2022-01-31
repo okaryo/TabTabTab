@@ -2,12 +2,14 @@ import React from 'react'
 import Tabs from '@mui/material/Tabs'
 import Box from '@mui/material/Box'
 import WindowTab from './WindowTab'
+import { TbWindow } from '../model/Window'
+import { TbWindows } from '../model/Windows'
 
 type WindowTabsProps = {
-  unfocusedWindowCount: number,
   selectedIndex: number,
+  currentWindow: TbWindow,
+  unfocusedWindows: TbWindows,
   onSelect: Function
-
 }
 
 const WindowTabs = (props: WindowTabsProps) => {
@@ -15,10 +17,9 @@ const WindowTabs = (props: WindowTabsProps) => {
     props.onSelect(newValue)
   }
 
-  const unfocusedWindows = []
-  for (let i = 0; i < props.unfocusedWindowCount; i++) {
-    unfocusedWindows.push(<WindowTab key={i+1} label={`Window${i+1}`} />)
-  }
+  const unfocusedWindows = props.unfocusedWindows.map((window, index) => {
+    return <WindowTab key={window.id.value} label={`Window${index+1}`} tabCount={window.tabCount} />
+  })
 
   return (
     <Box sx={{ maxWidth: 480, borderBottom: 1, borderColor: 'divider' }}>
@@ -28,7 +29,7 @@ const WindowTabs = (props: WindowTabsProps) => {
         variant="scrollable"
         scrollButtons={false}
       >
-        <WindowTab label="CurrentWindow" />
+        <WindowTab label="CurrentWindow" tabCount={props.currentWindow?.tabCount ?? 0} />
         {unfocusedWindows}
       </Tabs>
     </Box>
