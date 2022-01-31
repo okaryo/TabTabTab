@@ -3,8 +3,8 @@ import { Collapse, IconButton, List, ListItem, ListItemButton, ListItemText, Sta
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import PushPin from '@mui/icons-material/PushPin'
-import PinnedTabItem from './PinnedTabItem'
 import { PinnedTabs } from '../model/PinnedTabs'
+import TabItem from './TabItem'
 
 type PinnedTabListProps = {
   tabs: PinnedTabs
@@ -15,12 +15,13 @@ const PinnedTabList = (props: PinnedTabListProps) => {
   const toggleOpenStatus = () => setIsOpen(!isOpen)
 
   const tabs = props.tabs.map((tab) => {
-    return <PinnedTabItem key={tab.id.value} title={tab.title} favIconUrl={tab.favIconUrl} />
+    return <TabItem key={tab.id.value} tab={tab} sx={{ pl: 3 }} />
   })
 
   return (
     <List
       sx={{ width: '100%', bgcolor: 'background.paper' }}
+      style={{borderLeft: "5px solid #818181"}}
       disablePadding
     >
       <ListItem
@@ -31,7 +32,7 @@ const PinnedTabList = (props: PinnedTabListProps) => {
         }
         disablePadding
       >
-        <ListItemButton onClick={toggleOpenStatus}>
+        <ListItemButton onClick={toggleOpenStatus} sx={{ height: 56 }}>
           <Stack direction="row" spacing={1} alignItems="center">
             <ListItemText
               primary={<Typography
