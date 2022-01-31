@@ -6,19 +6,27 @@ import Header from './Header'
 import WindowTabs from './WindowTabs'
 import TabList from './TabList'
 import GetWindowsUseCase from '../usecase/GetWindowsUseCase'
+import { TabId } from '../model/TabId'
+import RemoveTabUseCase from '../usecase/RemoveTabUseCase'
 
 export default function App() {
-  const [state, setStates] = useState(TbWindows.empty())
+  const [windowsState, setWindowsState] = useState(TbWindows.empty())
   useEffect(() => {
     const getWindows = async () => {
       const windows = await GetWindowsUseCase()
-      setStates(windows)
+      setWindowsState(windows)
     }
     getWindows()
   }, [])
 
+  const onRemoveTab = async (tabId: TabId) => {
+    await RemoveTabUseCase(tabId)
+    const newWindows = windowsState.removeTabBy(tabId)
+    setWindowsState(newWindows)
+  }
+
   const [selectedIndex, setSelectedIndex] = useState(0)
-  const unfocusedWindowsTabList = state.unfocusedWindows.map((window, index) => {
+  const unfocusedWindowsTabList = windowsState.unfocusedWindows.map((window, index) => {
     return (
       <div
         key={window.id.value}
@@ -28,7 +36,7 @@ export default function App() {
         aria-labelledby={`simple-tab-${index+1}`}
       >
         {selectedIndex === index+1 && (
-          <TabList tabs={window.tabs} />
+          <TabList tabs={window.tabs} onRemoveTab={onRemoveTab} />
         )}
       </div>
     )
@@ -42,7 +50,7 @@ export default function App() {
         aria-labelledby={'simple-tab-0'}
       >
         {selectedIndex === 0 && (
-          <TabList tabs={state.focusedWindowTabs} />
+          <TabList tabs={windowsState.focusedWindowTabs} onRemoveTab={onRemoveTab} />
         )}
       </div>
   )
@@ -53,8 +61,8 @@ export default function App() {
       <Box sx={{ width: 400, height: 400 }} >
         <Header />
         <WindowTabs
-          currentWindow={state.currentWindow}
-          unfocusedWindows={state.unfocusedWindows}
+          currentWindow={windowsState.currentWindow}
+          unfocusedWindows={windowsState.unfocusedWindows}
           selectedIndex={selectedIndex}
           onSelect={setSelectedIndex}
         />

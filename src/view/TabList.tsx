@@ -9,15 +9,16 @@ import { PinnedTabs } from '../model/PinnedTabs'
 import { GroupedTabs } from '../model/GroupedTabs'
 
 type TabListProps = {
-  tabs: Tabs
+  tabs: Tabs,
+  onRemoveTab: Function
 }
 
 const TabList = (props: TabListProps) => {
   const tabs = props.tabs.map((tab) => {
-    if (tab instanceof PinnedTabs) return <PinnedTabList key={tab.toString()} tabs={tab} />
-    if (tab instanceof GroupedTabs) return <GroupedTabList key={tab.name} tabs={tab} />
+    if (tab instanceof PinnedTabs) return <PinnedTabList key={tab.toString()} tabs={tab} onRemoveTab={props.onRemoveTab} />
+    if (tab instanceof GroupedTabs) return <GroupedTabList key={tab.name} tabs={tab} onRemoveTab={props.onRemoveTab} />
 
-    return <TabItem key={tab.id.value} tab={tab} sx={{}} />
+    return <TabItem key={tab.id.value} tab={tab} sx={{}} onRemoveTab={props.onRemoveTab} />
   })
 
   return (

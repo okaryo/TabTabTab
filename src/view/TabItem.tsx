@@ -8,11 +8,12 @@ import { Tab } from '../model/Tab'
 
 type TabItemProps = {
   tab: Tab,
-  sx?: SxProps
+  sx?: SxProps,
+  onRemoveTab: Function
 }
 
 const TabItem = (props: TabItemProps) => {
-  const { tab, sx } = props
+  const { tab, sx, onRemoveTab } = props
   const onTap = () => MoveToTabUseCase(tab.id)
 
   let favIcon
@@ -43,7 +44,7 @@ const TabItem = (props: TabItemProps) => {
     )
   }
 
-  const onClickDeleteButton = () => RemoveTabUseCase(tab.id)
+  const onClickDeleteButton = () => onRemoveTab(tab.id)
 
   return (
     <ListItem
