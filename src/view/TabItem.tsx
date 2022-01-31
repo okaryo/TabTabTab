@@ -3,7 +3,7 @@ import { Box, IconButton, ListItem, ListItemButton, ListItemText, SxProps, Typog
 import BrokenImageIcon from '@mui/icons-material/BrokenImage'
 import Clear from '@mui/icons-material/Clear'
 import MoveToTabUseCase from '../usecase/MoveToTabUseCase'
-import RemoveTabUseCase from '../usecase/RemoveTabUseCase'
+
 import { Tab } from '../model/Tab'
 
 type TabItemProps = {
