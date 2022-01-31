@@ -60,4 +60,16 @@ export class ChromeTabsAPI {
     }
     return windows
   }
+
+  static async moveToTab(tabId: TabId) {
+    const tab = await chrome.tabs.get(tabId.value)
+    const windowId = tab.windowId
+
+    chrome.windows.update(windowId, { focused: true })
+    chrome.tabs.update(tabId.value, { active: true })
+  }
+
+  static async removeTab(tabId: TabId) {
+    await chrome.tabs.remove(tabId.value)
+  }
 }
