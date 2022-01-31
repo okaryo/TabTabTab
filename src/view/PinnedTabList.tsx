@@ -15,7 +15,7 @@ const PinnedTabList = (props: PinnedTabListProps) => {
   const toggleOpenStatus = () => setIsOpen(!isOpen)
 
   const tabs = props.tabs.map((tab) => {
-    return <PinnedTabItem key={tab.id} title={tab.title} favIconUrl={tab.favIconUrl} />
+    return <PinnedTabItem key={tab.id.value} title={tab.title} favIconUrl={tab.favIconUrl} />
   })
 
   return (

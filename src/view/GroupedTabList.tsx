@@ -14,7 +14,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   const toggleOpenStatus = () => setIsOpen(!isOpen)
 
   const tabs = props.tabs.map((tab) => {
-    return <GroupedTabItem key={tab.id} title={tab.title} color={props.tabs.colorCode} favIconUrl={tab.favIconUrl} />
+    return <GroupedTabItem key={tab.id.value} title={tab.title} color={props.tabs.colorCode} favIconUrl={tab.favIconUrl} />
   })
 
   return (

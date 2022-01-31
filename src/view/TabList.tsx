@@ -17,7 +17,7 @@ const TabList = (props: TabListProps) => {
     if (tab instanceof PinnedTabs) return <PinnedTabList key={tab.toString()} tabs={tab} />
     if (tab instanceof GroupedTabs) return <GroupedTabList key={tab.name} tabs={tab} />
 
-    return <TabItem key={tab.id} title={tab.title} favIconUrl={tab.favIconUrl} />
+    return <TabItem key={tab.id.value} tabId={tab.id} title={tab.title} favIconUrl={tab.favIconUrl} />
   })
 
   return (
