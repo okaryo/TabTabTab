@@ -1,5 +1,7 @@
 import { GroupedColor } from './GroupedColor'
+import { GroupedTabs } from './GroupedTabs'
 import { GroupId } from './GroupId'
+import { PinnedTabs } from './PinnedTabs'
 import { Tab } from './Tab'
 import { TabId } from './TabId'
 import { Tabs } from './Tabs'
@@ -61,7 +63,8 @@ export class TbWindows {
   addGroupedTab(windowId: WindowId, isFocused: boolean, tab: Tab, groupId: GroupId, groupName: string, color: GroupedColor): TbWindows {
     const window = this.findWindowBy(windowId)
     if (window === null) {
-      const newWindow = new TbWindow(windowId, new Tabs([tab]), isFocused)
+      const groupedTabs = new GroupedTabs(groupId, groupName, color, [tab])
+      const newWindow = new TbWindow(windowId, new Tabs([groupedTabs]), isFocused)
       return this.add(newWindow)
     }
 
@@ -75,7 +78,8 @@ export class TbWindows {
   addPinnedTab(windowId: WindowId, isFocused: boolean, tab: Tab): TbWindows {
     const window = this.findWindowBy(windowId)
     if (window === null) {
-      const newWindow = new TbWindow(windowId, new Tabs([tab]), isFocused)
+      const pinnedTabs = new PinnedTabs([tab])
+      const newWindow = new TbWindow(windowId, new Tabs([pinnedTabs]), isFocused)
       return this.add(newWindow)
     }
 
