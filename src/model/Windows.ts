@@ -1,6 +1,7 @@
 import { GroupedColor } from './GroupedColor'
 import { GroupId } from './GroupId'
 import { Tab } from './Tab'
+import { TabId } from './TabId'
 import { Tabs } from './Tabs'
 import { TbWindow } from './Window'
 import { WindowId } from './WindowId'
@@ -24,6 +25,10 @@ export class TbWindows {
   get focusedWindowTabs(): Tabs {
     const focusedWindow = this._values.find((value) => value.isFocused)
     return focusedWindow === undefined ? Tabs.empty() : focusedWindow.tabs
+  }
+
+  get currentWindow(): TbWindow {
+    return this._values.find((value) => value.isFocused)
   }
 
   get unfocusedWindows(): TbWindows {
@@ -78,6 +83,11 @@ export class TbWindows {
     const newWindows = this.map((window) => {
       return window.id.equalTo(newWindow.id) ? newWindow : window
     })
+    return new TbWindows(newWindows)
+  }
+
+  removeTabBy(tabId: TabId): TbWindows {
+    const newWindows = this._values.map((value) => value.removeTabBy(tabId))
     return new TbWindows(newWindows)
   }
 

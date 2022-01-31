@@ -2,6 +2,7 @@ import { GroupedColor } from './GroupedColor'
 import { GroupId } from './GroupId'
 
 import { Tab } from './Tab'
+import { TabId } from './TabId'
 import { Tabs } from './Tabs'
 import { WindowId } from './WindowId'
 
@@ -25,6 +26,8 @@ export class TbWindow {
 
   get isFocused(): boolean { return this._isFocused }
 
+  get tabCount(): number { return this._tabs.totalTabCount }
+
   addTab(tab: Tab): TbWindow {
     return new TbWindow(this._id, this._tabs.add(tab), this._isFocused)
   }
@@ -36,6 +39,11 @@ export class TbWindow {
 
   addGroupedTab(groupId: GroupId, groupName: string, color: GroupedColor, tab: Tab): TbWindow {
     const newTabs = this._tabs.addGroupedTabBy(groupId, groupName, color, tab)
+    return new TbWindow(this._id, newTabs, this._isFocused)
+  }
+
+  removeTabBy(tabId: TabId): TbWindow {
+    const newTabs = this._tabs.removeTabBy(tabId)
     return new TbWindow(this._id, newTabs, this._isFocused)
   }
 }

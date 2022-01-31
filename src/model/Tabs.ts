@@ -3,6 +3,7 @@ import { GroupedTabs } from './GroupedTabs'
 import { GroupId } from './GroupId'
 import { PinnedTabs } from './PinnedTabs'
 import { Tab } from './Tab'
+import { TabId } from './TabId'
 
 type Tabable = Tab | PinnedTabs | GroupedTabs
 
@@ -20,6 +21,14 @@ export class Tabs {
   get pinnedTabs(): PinnedTabs {
     const pinnedTabs = this.findPinnedTabs()
     return pinnedTabs === null ? PinnedTabs.empty() : pinnedTabs
+  }
+
+  get totalTabCount(): number {
+    return this._values.reduce((total, value) => {
+      if (value instanceof GroupedTabs) return total + value.length
+      if (value instanceof PinnedTabs) return total + value.length
+      return total + 1
+    }, 0)
   }
 
   add(value: Tabable): Tabs {
@@ -54,6 +63,32 @@ export class Tabs {
       return value instanceof PinnedTabs ? value.add(tab) : value
     })
     return new Tabs(newTabs)
+  }
+
+  removeTabBy(tabId: TabId): Tabs {
+    const tab = this.findNormalTabBy(tabId)
+    let tabs: Tabable[]
+    if (tab === null) {
+      tabs = this._values.map((value) => {
+        if (value instanceof GroupedTabs) return value.removeTabBy(tabId)
+        if (value instanceof PinnedTabs) return value.removeTabBy(tabId)
+        return value
+      })
+    } else {
+      tabs = this._values.filter((value) => {
+        if (value instanceof Tab) return !value.id.equalTo(tabId)
+        return true
+      })
+    }
+    return new Tabs(tabs)
+  }
+
+  private findNormalTabBy(tabId: TabId): Tab | null {
+    const tab = this._values.find((value) => {
+      if (value instanceof Tab) return value.id.equalTo(tabId)
+      return false
+    }) as (Tab | undefined)
+    return tab === undefined ? null : tab
   }
 
   private findGroupedTabsBy(groupId: GroupId): GroupedTabs | null {
