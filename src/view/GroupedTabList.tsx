@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { Box, Collapse, IconButton, List, ListItem, ListItemButton, Stack, Typography } from '@mui/material'
+import { Box, Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, Stack, Typography } from '@mui/material'
 import CircleIcon from '@mui/icons-material/Circle'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
@@ -16,12 +16,16 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   const toggleOpenStatus = () => setIsOpen(!isOpen)
 
   const tabs = props.tabs.map((tab) => {
-    return <TabItem key={tab.id.value} tab={tab} onRemoveTab={props.onRemoveTab} />
+    return <TabItem key={tab.id.value} tab={tab} onRemoveTab={props.onRemoveTab} sx={{ width: 395 }} />
   })
 
   let groupedTabLabel
   if (props.tabs.name === '') {
-    groupedTabLabel = <CircleIcon sx={{ color: `${props.tabs.colorCode}` }} />
+    groupedTabLabel = (
+      <ListItemIcon sx={{ flexGrow: 1 }}>
+        <CircleIcon sx={{ color: `${props.tabs.colorCode}` }} />
+      </ListItemIcon>
+    )
   } else {
     groupedTabLabel = (
       <Typography
