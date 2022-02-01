@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, IconButton, ListItem, ListItemButton, ListItemText, SxProps, Typography } from '@mui/material'
-import BrokenImageIcon from '@mui/icons-material/BrokenImage'
+import TabIcon from '@mui/icons-material/Tab';
 import Clear from '@mui/icons-material/Clear'
 import MoveToTabUseCase from '../usecase/MoveToTabUseCase'
 
@@ -27,13 +27,12 @@ const TabItem = (props: TabItemProps) => {
           width: 20,
           marginRight: 2,
         }}
-        alt={tab.title}
         src={favIconUrl}
       />
     )
   } else {
     favIcon = (
-      <BrokenImageIcon
+      <TabIcon
         color="disabled"
         sx={{
           height: 20,
