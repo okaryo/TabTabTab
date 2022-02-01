@@ -24,7 +24,6 @@ const PinnedTabList = (props: PinnedTabListProps) => {
       <Box style={{ borderRight: '5px solid #818181', borderRadius: '0 5px 5px 0' }} />
       <List
         sx={{ width: '100%', bgcolor: 'background.paper' }}
-        // style={{ borderLeft: "5px solid #818181", borderRadius: '5px'}}
         disablePadding
       >
         <ListItem
