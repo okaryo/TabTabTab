@@ -1,6 +1,6 @@
 import React from 'react'
 import { Box, IconButton, ListItem, ListItemButton, ListItemText, SxProps, Typography } from '@mui/material'
-import TabIcon from '@mui/icons-material/Tab';
+import TabIcon from '@mui/icons-material/Tab'
 import Clear from '@mui/icons-material/Clear'
 import MoveToTabUseCase from '../usecase/MoveToTabUseCase'
 
