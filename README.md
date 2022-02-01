@@ -1,3 +1,5 @@
+[![Test and Lint](https://github.com/okaryo/TabTabTab/actions/workflows/test-and-lint.yml/badge.svg)](https://github.com/okaryo/TabTabTab/actions/workflows/test-and-lint.yml)
+
 ## TabTabTab
 
 This chrome extension makes you show your opening tabs.  
