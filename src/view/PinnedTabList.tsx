@@ -16,7 +16,7 @@ const PinnedTabList = (props: PinnedTabListProps) => {
   const toggleOpenStatus = () => setIsOpen(!isOpen)
 
   const tabs = props.tabs.map((tab) => {
-    return <TabItem key={tab.id.value} tab={tab} sx={{ pl: 3 }} onRemoveTab={props.onRemoveTab} />
+    return <TabItem key={tab.id.value} tab={tab} sx={{ pl: 3, width: 395 }} onRemoveTab={props.onRemoveTab} />
   })
 
   return (
@@ -24,7 +24,6 @@ const PinnedTabList = (props: PinnedTabListProps) => {
       <Box style={{ borderRight: '5px solid #818181', borderRadius: '0 5px 5px 0' }} />
       <List
         sx={{ width: '100%', bgcolor: 'background.paper' }}
-        // style={{ borderLeft: "5px solid #818181", borderRadius: '5px'}}
         disablePadding
       >
         <ListItem
