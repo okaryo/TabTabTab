@@ -12,15 +12,15 @@ export class GroupedColor {
       case 'blue':
         return '#8AB4F8'
       case 'red':
-        return '	#F28B82'
+        return '#F28B82'
       case 'yellow':
         return '#FDD663'
       case 'green':
-        return '	#81C995'
+        return '#81C995'
       case 'pink':
         return '#F98BCB'
       case 'purple':
-        return '	#D7AEFB'
+        return '#D7AEFB'
       case 'cyan':
         return '#78D9EC'
     }
