@@ -80,7 +80,7 @@ export class Tabs {
         return true
       })
     }
-    return new Tabs(tabs)
+    return new Tabs(this.removeEmtpyNestedTab(tabs))
   }
 
   private findNormalTabBy(tabId: TabId): Tab | null {
@@ -100,5 +100,13 @@ export class Tabs {
   private findPinnedTabs(): PinnedTabs | null {
     const pinnedTabs = this._values.find((value) => value instanceof PinnedTabs) as (PinnedTabs | undefined)
     return pinnedTabs === undefined ? null : pinnedTabs
+  }
+
+  private removeEmtpyNestedTab(tabs: Tabable[]): Tabable[] {
+    return tabs.filter((value) => {
+        if (value instanceof GroupedTabs && value.isEmpty) return false;
+        if (value instanceof PinnedTabs && value.isEmpty) return false;
+        return true
+    })
   }
 }

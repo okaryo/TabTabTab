@@ -10,6 +10,8 @@ export class PinnedTabs {
 
   get length(): number { return this._values.length }
 
+  get isEmpty(): boolean { return this.length === 0 }
+
   add(tab: Tab): PinnedTabs {
     return new PinnedTabs([...this._values, tab])
   }

@@ -58,7 +58,7 @@ export default function App() {
   return (
     <div>
       <CssBaseline />
-      <Box sx={{ width: 400, height: 400 }} >
+      <Box sx={{ width: 400 }} >
         <Header />
         <WindowTabs
           currentWindow={windowsState.currentWindow}
