@@ -19,6 +19,8 @@ export class GroupedTabs {
 
   get length(): number { return this._values.length }
 
+  get isEmpty(): boolean { return this.length === 0 }
+
   add(tab: Tab): GroupedTabs {
     return new GroupedTabs(this._id, this._name, this._color, [...this._values, tab])
   }
