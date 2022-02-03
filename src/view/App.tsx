@@ -16,6 +16,7 @@ export default function App() {
       const windows = await GetWindowsUseCase()
       setWindowsState(windows)
     }
+    /* eslint @typescript-eslint/no-floating-promises: 0 */
     getWindows()
   }, [])
 
@@ -64,7 +65,7 @@ export default function App() {
           currentWindow={windowsState.currentWindow}
           unfocusedWindows={windowsState.unfocusedWindows}
           selectedIndex={selectedIndex}
-          onSelect={setSelectedIndex}
+          onSelectIndex={setSelectedIndex}
         />
         {focusedWindowsTabList}
         {unfocusedWindowsTabList}

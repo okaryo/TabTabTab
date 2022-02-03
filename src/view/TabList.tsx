@@ -5,12 +5,12 @@ import GroupedTabList from './GroupedTabList'
 import PinnedTabList from './PinnedTabList'
 import { Tabs } from '../model/Tabs'
 import { PinnedTabs } from '../model/PinnedTabs'
-
 import { GroupedTabs } from '../model/GroupedTabs'
+import { TabId } from '../model/TabId'
 
 type TabListProps = {
   tabs: Tabs,
-  onRemoveTab: Function
+  onRemoveTab: (tabId: TabId) => void
 }
 
 const TabList = (props: TabListProps) => {

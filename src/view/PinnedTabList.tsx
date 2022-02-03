@@ -5,10 +5,11 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import PushPin from '@mui/icons-material/PushPin'
 import { PinnedTabs } from '../model/PinnedTabs'
 import TabItem from './TabItem'
+import { TabId } from '../model/TabId'
 
 type PinnedTabListProps = {
   tabs: PinnedTabs,
-  onRemoveTab: Function
+  onRemoveTab: (tabId: TabId) => void
 }
 
 const PinnedTabList = (props: PinnedTabListProps) => {
