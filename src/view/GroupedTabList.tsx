@@ -1,13 +1,15 @@
 import React, { useState } from 'react'
-import { Box, Chip, Collapse, IconButton, List, ListItem, ListItemButton, ListItemText, Stack, Typography } from '@mui/material'
+import { Box, Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon, Stack, Typography } from '@mui/material'
+import CircleIcon from '@mui/icons-material/Circle'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import { GroupedTabs } from '../model/GroupedTabs'
 import TabItem from './TabItem'
+import { TabId } from '../model/TabId'
 
 type GroupedTabListProps = {
   tabs: GroupedTabs,
-  onRemoveTab: Function
+  onRemoveTab: (tabId: TabId) => void
 }
 
 const GroupedTabList = (props: GroupedTabListProps) => {
@@ -15,8 +17,32 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   const toggleOpenStatus = () => setIsOpen(!isOpen)
 
   const tabs = props.tabs.map((tab) => {
-    return <TabItem key={tab.id.value} tab={tab} onRemoveTab={props.onRemoveTab} />
+    return <TabItem key={tab.id.value} tab={tab} onRemoveTab={props.onRemoveTab} sx={{ width: 395 }} />
   })
+
+  let groupedTabLabel
+  if (props.tabs.name === '') {
+    groupedTabLabel = (
+      <ListItemIcon sx={{ flexGrow: 1 }}>
+        <CircleIcon sx={{ color: `${props.tabs.colorCode}` }} />
+      </ListItemIcon>
+    )
+  } else {
+    groupedTabLabel = (
+      <Typography
+        variant="h6"
+        component="h6"
+        style={{
+          display: 'inline-block',
+          padding: '2px 10px',
+          borderRadius: '8px',
+          backgroundColor: `${props.tabs.colorCode}`
+        }}
+      >
+        {props.tabs.name}
+      </Typography>
+    )
+  }
 
   return (
     <Stack direction="row">
@@ -34,18 +60,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
           disablePadding
         >
           <ListItemButton onClick={toggleOpenStatus} sx={{ height: 56 }}>
-            <Stack direction="row" spacing={1} alignItems="center">
-              <ListItemText
-                primary={<Typography
-                  variant="h6"
-                  component="h6"
-                  >
-                    {props.tabs.name}
-                  </Typography>
-                }
-              />
-              <Chip label="Group" size="small" color="info" />
-            </Stack>
+            {groupedTabLabel}
           </ListItemButton>
         </ListItem>
         <Collapse in={isOpen} timeout="auto" unmountOnExit>

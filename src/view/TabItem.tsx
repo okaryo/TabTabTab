@@ -1,22 +1,22 @@
-import React from 'react'
+import React, { ReactElement } from 'react'
 import { Box, IconButton, ListItem, ListItemButton, ListItemText, SxProps, Typography } from '@mui/material'
-import BrokenImageIcon from '@mui/icons-material/BrokenImage'
+import TabIcon from '@mui/icons-material/Tab'
 import Clear from '@mui/icons-material/Clear'
 import MoveToTabUseCase from '../usecase/MoveToTabUseCase'
-
 import { Tab } from '../model/Tab'
+import { TabId } from '../model/TabId'
 
 type TabItemProps = {
   tab: Tab,
   sx?: SxProps,
-  onRemoveTab: Function
+  onRemoveTab: (tabId: TabId) => void
 }
 
 const TabItem = (props: TabItemProps) => {
   const { tab, sx, onRemoveTab } = props
   const onTap = () => MoveToTabUseCase(tab.id)
 
-  let favIcon
+  let favIcon: ReactElement
   const favIconUrl = tab.favIconUrl
   if (favIconUrl !== undefined && (favIconUrl.startsWith('https') || favIconUrl.startsWith('http'))) {
     favIcon = (
@@ -27,13 +27,12 @@ const TabItem = (props: TabItemProps) => {
           width: 20,
           marginRight: 2,
         }}
-        alt={tab.title}
         src={favIconUrl}
       />
     )
   } else {
     favIcon = (
-      <BrokenImageIcon
+      <TabIcon
         color="disabled"
         sx={{
           height: 20,

@@ -22,6 +22,6 @@ module.exports = {
     'quotes': ['error', 'single'],
     'no-trailing-spaces': ['error'],
     'no-multi-spaces': 'error',
-    'autofix/no-unused-vars': 'error',
+    '@typescript-eslint/no-unsafe-return': 'warn',
   },
 }
