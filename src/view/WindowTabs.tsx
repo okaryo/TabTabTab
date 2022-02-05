@@ -9,12 +9,12 @@ type WindowTabsProps = {
   selectedIndex: number,
   currentWindow: TbWindow,
   unfocusedWindows: TbWindows,
-  onSelect: Function
+  onSelectIndex: (index: number) => void
 }
 
 const WindowTabs = (props: WindowTabsProps) => {
   const onChange = (_: React.SyntheticEvent, newValue: number) => {
-    props.onSelect(newValue)
+    props.onSelectIndex(newValue)
   }
 
   const unfocusedWindows = props.unfocusedWindows.map((window, index) => {

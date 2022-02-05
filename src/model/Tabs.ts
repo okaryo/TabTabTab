@@ -104,8 +104,8 @@ export class Tabs {
 
   private removeEmtpyNestedTab(tabs: Tabable[]): Tabable[] {
     return tabs.filter((value) => {
-        if (value instanceof GroupedTabs && value.isEmpty) return false;
-        if (value instanceof PinnedTabs && value.isEmpty) return false;
+        if (value instanceof GroupedTabs && value.isEmpty) return false
+        if (value instanceof PinnedTabs && value.isEmpty) return false
         return true
     })
   }

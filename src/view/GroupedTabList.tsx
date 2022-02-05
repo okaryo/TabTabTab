@@ -5,10 +5,11 @@ import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import { GroupedTabs } from '../model/GroupedTabs'
 import TabItem from './TabItem'
+import { TabId } from '../model/TabId'
 
 type GroupedTabListProps = {
   tabs: GroupedTabs,
-  onRemoveTab: Function
+  onRemoveTab: (tabId: TabId) => void
 }
 
 const GroupedTabList = (props: GroupedTabListProps) => {
