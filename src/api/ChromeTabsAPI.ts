@@ -65,8 +65,8 @@ export class ChromeTabsAPI {
     const tab = await chrome.tabs.get(tabId.value)
     const windowId = tab.windowId
 
-    await chrome.windows.update(windowId, { focused: true })
-    await chrome.tabs.update(tabId.value, { active: true })
+    chrome.windows.update(windowId, { focused: true })
+    chrome.tabs.update(tabId.value, { active: true })
   }
 
   static async removeTab(tabId: TabId) {
