@@ -14,7 +14,7 @@ type TabItemProps = {
 
 const TabItem = (props: TabItemProps) => {
   const { tab, sx, onRemoveTab } = props
-  const onTap = () => MoveToTabUseCase(tab.id)
+  const onTapTabItem = () => MoveToTabUseCase(tab.id)
 
   let favIcon: ReactElement
   const favIconUrl = tab.favIconUrl
@@ -54,7 +54,7 @@ const TabItem = (props: TabItemProps) => {
       }
       disablePadding
     >
-      <ListItemButton sx={{ width: 400, ...sx }} onClick={onTap} color="info" selected={tab.isFocused}>
+      <ListItemButton sx={{ width: 400, ...sx }} onClick={onTapTabItem} color="info" selected={tab.isFocused}>
         {favIcon}
         <ListItemText
           primary={
