@@ -65,7 +65,8 @@ export class ChromeTabsAPI {
     const tab = await chrome.tabs.get(tabId.value)
     const windowId = tab.windowId
 
-    chrome.windows.update(windowId, { focused: true })
+    /* eslint @typescript-eslint/no-floating-promises: 0 */
+    ome.windows.update(windowId, { focused: true })
     chrome.tabs.update(tabId.value, { active: true })
   }
 
