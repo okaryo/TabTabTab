@@ -16,6 +16,7 @@ export class ChromeTabsAPI {
       const newTab = new Tab(
         new TabId(tab.id),
         tab.title,
+        new URL(tab.url),
         tab.favIconUrl,
         tab.highlighted
       )
@@ -43,6 +44,7 @@ export class ChromeTabsAPI {
       const newTab = new Tab(
         new TabId(tab.id),
         tab.title,
+        new URL(tab.url),
         tab.favIconUrl,
         tab.highlighted
       )

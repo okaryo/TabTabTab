@@ -25,14 +25,14 @@ describe('#tabs', () => {
     const actual = new TbWindow(
       new WindowId(1),
       new Tabs([
-        new Tab(new TabId(1), 'title1', 'https://favicon.com', false),
-        new Tab(new TabId(2), 'title2', 'https://favicon.com', false)
+        new Tab(new TabId(1), 'title1', new URL('https://example.com/path'), 'https://favicon.com', false),
+        new Tab(new TabId(2), 'title2', new URL('https://example.com/path'), 'https://favicon.com', false)
       ]),
       false
     ).tabs
     const expected = new Tabs([
-        new Tab(new TabId(1), 'title1', 'https://favicon.com', false),
-        new Tab(new TabId(2), 'title2', 'https://favicon.com', false)
+        new Tab(new TabId(1), 'title1', new URL('https://example.com/path'), 'https://favicon.com', false),
+        new Tab(new TabId(2), 'title2', new URL('https://example.com/path'), 'https://favicon.com', false)
     ])
     expect(actual).toStrictEqual(expected)
   })
@@ -59,8 +59,8 @@ describe('#tabCount', () => {
     const actual = new TbWindow(
       new WindowId(1),
       new Tabs([
-        new Tab(new TabId(1), 'title1', 'https://favicon.com', false),
-        new Tab(new TabId(2), 'title2', 'https://favicon.com', false)
+        new Tab(new TabId(1), 'title1', new URL('https://example.com/path'), 'https://favicon.com', false),
+        new Tab(new TabId(2), 'title2', new URL('https://example.com/path'), 'https://favicon.com', false)
       ]),
       false
     ).tabCount
