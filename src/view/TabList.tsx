@@ -7,6 +7,7 @@ import { Tabs } from '../model/Tabs'
 import { PinnedTabs } from '../model/PinnedTabs'
 import { GroupedTabs } from '../model/GroupedTabs'
 import { TabId } from '../model/TabId'
+import { Tab } from '../model/Tab'
 
 type TabListProps = {
   tabs: Tabs,
@@ -18,7 +19,7 @@ const TabList = (props: TabListProps) => {
     if (tab instanceof PinnedTabs) return <PinnedTabList key={tab.toString()} tabs={tab} onRemoveTab={props.onRemoveTab} />
     if (tab instanceof GroupedTabs) return <GroupedTabList key={tab.name} tabs={tab} onRemoveTab={props.onRemoveTab} />
 
-    return <TabItem key={tab.id.value} tab={tab} sx={{}} onRemoveTab={props.onRemoveTab} />
+    return <TabItem key={(tab as Tab).id.value} tab={tab as Tab} sx={{}} onRemoveTab={props.onRemoveTab} />
   })
 
   return (

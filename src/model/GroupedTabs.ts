@@ -1,9 +1,10 @@
 import { GroupedColor } from './GroupedColor'
 import { GroupId } from './GroupId'
+import { NestedTabs } from './NestedTabs'
 import { Tab } from './Tab'
 import { TabId } from './TabId'
 
-export class GroupedTabs {
+export class GroupedTabs implements NestedTabs {
   constructor(
     private _id: GroupId,
     private _name: string,
