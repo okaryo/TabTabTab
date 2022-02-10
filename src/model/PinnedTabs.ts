@@ -1,7 +1,8 @@
+import { NestedTabs } from './NestedTabs'
 import { Tab } from './Tab'
 import { TabId } from './TabId'
 
-export class PinnedTabs {
+export class PinnedTabs implements NestedTabs {
   constructor(
     private _values: Tab[],
   ) {}
