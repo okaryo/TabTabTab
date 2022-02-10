@@ -16,6 +16,7 @@ export class ChromeTabsAPI {
       const newTab = new Tab(
         new TabId(tab.id),
         tab.title,
+        new URL(tab.url),
         tab.favIconUrl,
         tab.highlighted
       )
@@ -43,6 +44,7 @@ export class ChromeTabsAPI {
       const newTab = new Tab(
         new TabId(tab.id),
         tab.title,
+        new URL(tab.url),
         tab.favIconUrl,
         tab.highlighted
       )
@@ -65,6 +67,7 @@ export class ChromeTabsAPI {
     const tab = await chrome.tabs.get(tabId.value)
     const windowId = tab.windowId
 
+    /* eslint @typescript-eslint/no-floating-promises: 0 */
     chrome.windows.update(windowId, { focused: true })
     chrome.tabs.update(tabId.value, { active: true })
   }

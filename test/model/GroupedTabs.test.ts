@@ -43,7 +43,7 @@ describe('#length', () => {
         new GroupId(1),
         'name',
         new GroupedColor('red'),
-        [new Tab(new TabId(1), 'title', 'https://favicon.com', false)]
+        [new Tab(new TabId(1), 'title', new URL('https://example.com/path'), 'https://favicon.com', false)]
       ).length
       const expected = 1
       expect(actual).toBe(expected)
@@ -65,7 +65,7 @@ describe('#isEmpty', () => {
         new GroupId(1),
         'name',
         new GroupedColor('red'),
-        [new Tab(new TabId(1), 'title', 'https://favicon.com', false)]
+        [new Tab(new TabId(1), 'title', new URL('https://example.com/path'), 'https://favicon.com', false)]
       ).isEmpty
       expect(actual).toBeFalsy
     })
@@ -79,12 +79,12 @@ describe('#add', () => {
       'name',
       new GroupedColor('red'),
       []
-    ).add(new Tab(new TabId(1), 'title', 'https://favicon.com', false))
+    ).add(new Tab(new TabId(1), 'title', new URL('https://example.com/path'), 'https://favicon.com', false))
     const expected = new GroupedTabs(
       new GroupId(1),
       'name',
       new GroupedColor('red'),
-      [new Tab(new TabId(1), 'title', 'https://favicon.com', false)]
+      [new Tab(new TabId(1), 'title', new URL('https://example.com/path'), 'https://favicon.com', false)]
     )
     expect(actual).toStrictEqual(expected)
   })
@@ -97,7 +97,7 @@ describe('#map', () => {
         new GroupId(1),
         'name',
         new GroupedColor('red'),
-        [new Tab(new TabId(1), 'title', 'https://favicon.com', false)]
+        [new Tab(new TabId(1), 'title', new URL('https://example.com/path'), 'https://favicon.com', false)]
       ).map((tab) => tab.title)
       const expected = ['title']
       expect(actual).toStrictEqual(expected)
@@ -112,7 +112,7 @@ describe('#removeTabBy', () => {
         new GroupId(1),
         'name',
         new GroupedColor('red'),
-        [new Tab(new TabId(1), 'title', 'https://favicon.com', false)]
+        [new Tab(new TabId(1), 'title', new URL('https://example.com/path'), 'https://favicon.com', false)]
       ).removeTabBy(new TabId(1))
       const expected = new GroupedTabs(
         new GroupId(1),
@@ -130,13 +130,13 @@ describe('#removeTabBy', () => {
         new GroupId(1),
         'name',
         new GroupedColor('red'),
-        [new Tab(new TabId(1), 'title', 'https://favicon.com', false)]
+        [new Tab(new TabId(1), 'title', new URL('https://example.com/path'), 'https://favicon.com', false)]
       ).removeTabBy(new TabId(2))
       const expected = new GroupedTabs(
         new GroupId(1),
         'name',
         new GroupedColor('red'),
-        [new Tab(new TabId(1), 'title', 'https://favicon.com', false)]
+        [new Tab(new TabId(1), 'title', new URL('https://example.com/path'), 'https://favicon.com', false)]
       )
       expect(actual).toStrictEqual(expected)
     })
