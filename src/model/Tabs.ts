@@ -1,11 +1,12 @@
 import { GroupedColor } from './GroupedColor'
 import { GroupedTabs } from './GroupedTabs'
 import { GroupId } from './GroupId'
+import { NestedTabs } from './NestedTabs'
 import { PinnedTabs } from './PinnedTabs'
 import { Tab } from './Tab'
 import { TabId } from './TabId'
 
-type Tabable = Tab | PinnedTabs | GroupedTabs
+type Tabable = Tab | NestedTabs
 
 export class Tabs {
   constructor(
@@ -25,8 +26,7 @@ export class Tabs {
 
   get totalTabCount(): number {
     return this._values.reduce((total, value) => {
-      if (value instanceof GroupedTabs) return total + value.length
-      if (value instanceof PinnedTabs) return total + value.length
+      if (this.isNestedTabs(value)) return total + value.length
       return total + 1
     }, 0)
   }
@@ -70,8 +70,7 @@ export class Tabs {
     let tabs: Tabable[]
     if (tab === null) {
       tabs = this._values.map((value) => {
-        if (value instanceof GroupedTabs) return value.removeTabBy(tabId)
-        if (value instanceof PinnedTabs) return value.removeTabBy(tabId)
+        if (this.isNestedTabs(value)) return value.removeTabBy(tabId)
         return value
       })
     } else {
@@ -103,10 +102,10 @@ export class Tabs {
   }
 
   private removeEmtpyNestedTab(tabs: Tabable[]): Tabable[] {
-    return tabs.filter((value) => {
-        if (value instanceof GroupedTabs && value.isEmpty) return false
-        if (value instanceof PinnedTabs && value.isEmpty) return false
-        return true
-    })
+    return tabs.filter((value) => !this.isNestedTabs(value))
+  }
+
+  private isNestedTabs(value: Tabable): value is NestedTabs {
+    return value instanceof GroupedTabs || value instanceof PinnedTabs
   }
 }
