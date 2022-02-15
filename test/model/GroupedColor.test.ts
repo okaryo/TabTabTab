@@ -64,4 +64,12 @@ describe('code', () => {
       expect(actual).toBe(expected)
     })
   })
+
+  describe('color is orange', () => {
+    it('should return corresponding color code', () => {
+      const actual = new GroupedColor('orange').code
+      const expected = '#FBAD70'
+      expect(actual).toBe(expected)
+    })
+  })
 })
