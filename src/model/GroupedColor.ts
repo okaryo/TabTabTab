@@ -1,4 +1,4 @@
-type ColorType = 'grey' | 'blue' | 'red' | 'yellow' | 'green' | 'pink' | 'purple' | 'cyan'
+type ColorType = 'grey' | 'blue' | 'red' | 'yellow' | 'green' | 'pink' | 'purple' | 'cyan' | 'orange'
 
 export class GroupedColor {
   constructor(
@@ -23,6 +23,8 @@ export class GroupedColor {
         return '#D7AEFB'
       case 'cyan':
         return '#78D9EC'
+      case 'orange':
+        return '#FBAD70'
     }
   }
 }
