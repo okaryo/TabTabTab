@@ -102,7 +102,7 @@ export class Tabs {
   }
 
   private removeEmtpyNestedTab(tabs: Tabable[]): Tabable[] {
-    return tabs.filter((value) => !this.isNestedTabs(value))
+    return tabs.filter((value) => (!this.isNestedTabs(value) || !value.isEmpty))
   }
 
   private isNestedTabs(value: Tabable): value is NestedTabs {
