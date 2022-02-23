@@ -1,3 +1,4 @@
+import { valueToPercent } from '@mui/material'
 import { GroupedColor } from './GroupedColor'
 import { GroupedTabs } from './GroupedTabs'
 import { GroupId } from './GroupId'
@@ -102,7 +103,7 @@ export class Tabs {
   }
 
   private removeEmtpyNestedTab(tabs: Tabable[]): Tabable[] {
-    return tabs.filter((value) => !this.isNestedTabs(value))
+    return tabs.filter((value) => (!this.isNestedTabs(value) || !value.isEmpty))
   }
 
   private isNestedTabs(value: Tabable): value is NestedTabs {
