@@ -1,4 +1,3 @@
-import { valueToPercent } from '@mui/material'
 import { GroupedColor } from './GroupedColor'
 import { GroupedTabs } from './GroupedTabs'
 import { GroupId } from './GroupId'
