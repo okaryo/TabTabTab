@@ -1,8 +1,12 @@
+import { GroupedColor } from '../../src/model/GroupedColor'
+import { GroupedTabs } from '../../src/model/GroupedTabs'
+import { GroupId } from '../../src/model/GroupId'
 import { Tab } from '../../src/model/Tab'
 import { TabId } from '../../src/model/TabId'
 import { Tabs } from '../../src/model/Tabs'
 import { TbWindow } from '../../src/model/Window'
 import { WindowId } from '../../src/model/WindowId'
+import buildTab from '../factory/TabFactory'
 
 describe('#initializeBy', () => {
   it('should generate empty window', () => {
@@ -66,5 +70,89 @@ describe('#tabCount', () => {
     ).tabCount
     const expected = 2
     expect(actual).toBe(expected)
+  })
+})
+
+describe('#addTab', () => {})
+
+describe('#addPinnedTab', () => {})
+
+describe('#removeTabBy', () => {
+  describe('when target tab is in grouped tab', () => {
+    it('should remove tab', () => {
+      const actual = new TbWindow(
+        new WindowId(1),
+        new Tabs([
+          new GroupedTabs(
+            new GroupId(1),
+            'name',
+            new GroupedColor('red'),
+            [
+              buildTab(1),
+              buildTab(2)
+            ]
+          ),
+          buildTab(3),
+          buildTab(4)
+        ]),
+        false
+      ).removeTabBy(new TabId(1))
+      const expected = new TbWindow(
+        new WindowId(1),
+        new Tabs([
+          new GroupedTabs(
+            new GroupId(1),
+            'name',
+            new GroupedColor('red'),
+            [
+              buildTab(2)
+            ]
+          ),
+          buildTab(3),
+          buildTab(4)
+        ]),
+        false
+      )
+      expect(actual).toStrictEqual(expected)
+    })
+  })
+
+  describe('when target tab is normal tab', () => {
+    it('should remove tab', () => {
+      const actual = new TbWindow(
+        new WindowId(1),
+        new Tabs([
+          new GroupedTabs(
+            new GroupId(1),
+            'name',
+            new GroupedColor('red'),
+            [
+              buildTab(1),
+              buildTab(2)
+            ]
+          ),
+          buildTab(3),
+          buildTab(4)
+        ]),
+        false
+      ).removeTabBy(new TabId(3))
+      const expected = new TbWindow(
+        new WindowId(1),
+        new Tabs([
+          new GroupedTabs(
+            new GroupId(1),
+            'name',
+            new GroupedColor('red'),
+            [
+              buildTab(1),
+              buildTab(2)
+            ]
+          ),
+          buildTab(4)
+        ]),
+        false
+      )
+      expect(actual).toStrictEqual(expected)
+    })
   })
 })
