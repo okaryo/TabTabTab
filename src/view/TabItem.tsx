@@ -54,7 +54,7 @@ const TabItem = (props: TabItemProps) => {
       }
       disablePadding
     >
-      <ListItemButton sx={{ width: 400, pt: 0, pb: 0, ...sx }} onClick={onTapTabItem} color="info" selected={tab.isFocused}>
+      <ListItemButton sx={{ width: 400, pt: 0, pb: 0, ...sx }} onClick={() => onTapTabItem} color="info" selected={tab.isFocused}>
         {favIcon}
         <ListItemText
           primary={
