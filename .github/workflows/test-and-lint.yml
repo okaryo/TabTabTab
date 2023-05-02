@@ -12,8 +12,16 @@ jobs:
         with:
           node-version: 18
           cache: npm
-      - name: Install dependencies
-        run: npm ci
+      - uses: actions/cache@v3
+        id: node_modules_cache_id
+        env:
+          cache-name: cache-node-modules
+        with:
+          path: "**/node_modules"
+          key: ${{ runner.os }}-build-${{ env.cache-name }}-${{ hashFiles('**/package-lock.json') }}
+      - if: ${{ steps.node_modules_cache_id.outputs.cache-hit != 'true' }}
+        name: Install npm packages
+        run: npm install
       - name: Run Test
         run: npm run test
       - name: Run Lint
