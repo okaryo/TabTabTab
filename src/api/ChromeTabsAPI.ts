@@ -63,7 +63,7 @@ export class ChromeTabsAPI {
     return windows
   }
 
-  static async moveToTab(tabId: TabId) {
+  static async focusTab(tabId: TabId) {
     const tab = await chrome.tabs.get(tabId.value)
     const windowId = tab.windowId
 

@@ -2,7 +2,7 @@ import React, { ReactElement } from 'react'
 import { Box, IconButton, ListItem, ListItemButton, ListItemText, SxProps, Typography } from '@mui/material'
 import TabIcon from '@mui/icons-material/Tab'
 import Clear from '@mui/icons-material/Clear'
-import MoveToTabUseCase from '../usecase/MoveToTabUseCase'
+import FocusTabUseCase from '../usecase/FocusTabUseCase'
 import { Tab } from '../model/Tab'
 import { TabId } from '../model/TabId'
 
@@ -14,7 +14,7 @@ type TabItemProps = {
 
 const TabItem = (props: TabItemProps) => {
   const { tab, sx, onRemoveTab } = props
-  const onTapTabItem = () => MoveToTabUseCase(tab.id)
+  const onTapTabItem = () => FocusTabUseCase(tab.id)
 
   let favIcon: ReactElement
   const favIconUrl = tab.favIconUrl
