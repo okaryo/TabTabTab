@@ -89,7 +89,7 @@ export class Tabs {
   }
 
   removeTabBy(tabId: TabId): Tabs {
-    const tab = this.findTabBy(tabId)
+    const tab = this.findNormalTabBy(tabId)
     let tabs: Tabable[]
     if (tab === null) {
       tabs = this._values.map((value) => {
@@ -103,6 +103,14 @@ export class Tabs {
       })
     }
     return new Tabs(this.removeEmtpyNestedTab(tabs))
+  }
+
+  private findNormalTabBy(tabId: TabId): Tab | null {
+    const tab = this._values.find((value) => {
+      if (value instanceof Tab) return value.id.equalTo(tabId)
+      return false
+    }) as (Tab | undefined)
+    return tab === undefined ? null : tab
   }
 
   private findGroupedTabsBy(groupId: GroupId): GroupedTabs | null {
