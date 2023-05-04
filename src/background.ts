@@ -1,35 +1,39 @@
-import { TabId } from './model/TabId'
-import DeleteLastActivatedAtOfTabUseCase from './usecase/DeleteLastActivatedAtOfTabUseCase'
-import UdpateLastActivatedAtOfTabUseCase from './usecase/UdpateLastActivatedAtOfTabUseCase'
+/* eslint @typescript-eslint/no-floating-promises: 0 */
+import { TabId } from "./model/TabId"
+import DeleteLastActivatedAtOfTabUseCase from "./usecase/DeleteLastActivatedAtOfTabUseCase"
+import UdpateLastActivatedAtOfTabUseCase from "./usecase/UdpateLastActivatedAtOfTabUseCase"
 
-const addListenerOnTabFocused = () => {
-  chrome.tabs.onActivated.addListener(async (activeInfo) => {
+const addListenerOnTabActivated = () => {
+  chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo
-    await UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+    UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
   })
-  chrome.tabs.onAttached.addListener(async (tabId) => {
-    await UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+  chrome.tabs.onAttached.addListener((tabId) => {
+    UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
   })
-  chrome.tabs.onHighlighted.addListener(async (highlightInfo) => {
+  chrome.tabs.onHighlighted.addListener((highlightInfo) => {
     const { tabIds } = highlightInfo
     console.log(tabIds)
     for (const tabId of tabIds) {
-      await UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+      UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
     }
   })
-  chrome.tabs.onMoved.addListener(async (tabId) => {
-    await UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+  chrome.tabs.onMoved.addListener((tabId) => {
+    UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+  })
+  chrome.tabs.onUpdated.addListener((tabId) => {
+    UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
   })
 }
 
 const addListenerOnTabClosed = () => {
-  chrome.tabs.onDetached.addListener(async (tabId) => {
-    await DeleteLastActivatedAtOfTabUseCase(new TabId(tabId))
+  chrome.tabs.onDetached.addListener((tabId) => {
+    DeleteLastActivatedAtOfTabUseCase(new TabId(tabId))
   })
-  chrome.tabs.onRemoved.addListener(async (tabId) => {
-    await DeleteLastActivatedAtOfTabUseCase(new TabId(tabId))
+  chrome.tabs.onRemoved.addListener((tabId) => {
+    DeleteLastActivatedAtOfTabUseCase(new TabId(tabId))
   })
 }
 
-addListenerOnTabFocused()
+addListenerOnTabActivated()
 addListenerOnTabClosed()
