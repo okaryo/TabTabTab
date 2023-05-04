@@ -9,7 +9,7 @@ import { TabId } from '../model/TabId'
 
 type PinnedTabListProps = {
   tabs: PinnedTabs,
-  onRemoveTab: (tabId: TabId) => void
+  onRemoveTab: (tabId: TabId) => Promise<void>
 }
 
 const PinnedTabList = (props: PinnedTabListProps) => {

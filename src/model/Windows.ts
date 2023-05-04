@@ -90,6 +90,18 @@ export class TbWindows {
     return new TbWindows(newWindows)
   }
 
+  updateLastActivatedAtOfTabBy(tabId: TabId, lastActivatedAt: Date): TbWindows {
+    let tab: Tab = null
+    for (const tbWindow of this._values) {
+      tab = tbWindow.findTabBy(tabId)
+      if (tab !== null) break
+    }
+    if (tab === null) return this
+
+    const newWindows = this._values.map((value) => value.updateTab(tab.updateLastActivatedAt(lastActivatedAt)))
+    return new TbWindows(newWindows)
+  }
+
   removeTabBy(tabId: TabId): TbWindows {
     const newWindows = this._values.map((value) => value.removeTabBy(tabId))
     return new TbWindows(newWindows)

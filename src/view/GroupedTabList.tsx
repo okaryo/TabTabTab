@@ -9,7 +9,7 @@ import { TabId } from '../model/TabId'
 
 type GroupedTabListProps = {
   tabs: GroupedTabs,
-  onRemoveTab: (tabId: TabId) => void
+  onRemoveTab: (tabId: TabId) => Promise<void>
 }
 
 const GroupedTabList = (props: GroupedTabListProps) => {

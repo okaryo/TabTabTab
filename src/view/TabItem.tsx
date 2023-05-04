@@ -9,12 +9,12 @@ import { TabId } from '../model/TabId'
 type TabItemProps = {
   tab: Tab,
   sx?: SxProps,
-  onRemoveTab: (tabId: TabId) => void
+  onRemoveTab: (tabId: TabId) => Promise<void>
 }
 
 const TabItem = (props: TabItemProps) => {
   const { tab, sx, onRemoveTab } = props
-  const onTapTabItem = () => FocusTabUseCase(tab.id)
+  const onTapTabItem = (): Promise<void> => FocusTabUseCase(tab.id)
 
   let favIcon: ReactElement
   const favIconUrl = tab.favIconUrl
@@ -43,17 +43,53 @@ const TabItem = (props: TabItemProps) => {
     )
   }
 
+  let sinceLastActivatedAt = ''
+  const milliSecondsSinceLastActivatedAt = tab.milliSecondsSinceLastActivatedAt
+  if (milliSecondsSinceLastActivatedAt !== null) {
+    let difference: number
+    let unit: string
+    if (milliSecondsSinceLastActivatedAt < 60 * 1000) {
+      difference = Math.floor(milliSecondsSinceLastActivatedAt / 1000)
+      unit = 'secs ago'
+      if (difference === 1) unit = 'sec ago'
+    } else if (milliSecondsSinceLastActivatedAt < 60 * 60 * 1000) {
+      difference = Math.floor(milliSecondsSinceLastActivatedAt / (60 * 1000))
+      unit = 'mins ago'
+      if (difference === 1) unit = 'min ago'
+    } else if (milliSecondsSinceLastActivatedAt < 24 * 60 * 60 * 1000) {
+      difference = Math.floor(milliSecondsSinceLastActivatedAt / (60 * 60 * 1000))
+      unit = 'hours ago'
+      if (difference === 1) unit = 'hour ago'
+    } else if (milliSecondsSinceLastActivatedAt < 7 * 24 * 60 * 60 * 10000) {
+      difference = Math.floor(milliSecondsSinceLastActivatedAt / (24 * 60 * 60 * 1000))
+      unit = 'days ago'
+      if (difference === 1) unit = 'day ago'
+    } else if (milliSecondsSinceLastActivatedAt < 30 * 24 * 60 * 60 * 10000) {
+      difference = Math.floor(milliSecondsSinceLastActivatedAt / (7 * 24 * 60 * 60 * 1000))
+      unit = 'weeks ago'
+      if (difference === 1) unit = 'week ago'
+    } else {
+      difference = Math.floor(milliSecondsSinceLastActivatedAt / (30 * 7 * 24 * 60 * 60 * 1000))
+      unit = 'months ago'
+      if (difference === 1) unit = 'month ago'
+    }
+
+    sinceLastActivatedAt = `${difference} ${unit}`
+  }
+
   const onClickDeleteButton = () => onRemoveTab(tab.id)
 
   return (
     <ListItem
       secondaryAction={
+        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         <IconButton edge="end" aria-label="delete" onClick={onClickDeleteButton}>
           <Clear />
         </IconButton>
       }
       disablePadding
     >
+      {/* eslint-disable-next-line @typescript-eslint/no-misused-promises */}
       <ListItemButton sx={{ width: 400, pt: 0, pb: 0, ...sx }} onClick={onTapTabItem} color="info" selected={tab.isFocused}>
         {favIcon}
         <ListItemText
@@ -67,7 +103,15 @@ const TabItem = (props: TabItemProps) => {
               {tab.title}
             </Typography>
           }
-          secondary={tab.originUrl}
+          secondary={
+            (
+              <span style={{ display: 'flex' }}>
+                <span style={{ whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{tab.originUrl}</span>
+                { sinceLastActivatedAt !== '' && <span>・</span> }
+                { sinceLastActivatedAt !== '' && <span style={{ whiteSpace: 'nowrap' }}>{sinceLastActivatedAt}</span> }
+              </span>
+            )
+          }
         />
       </ListItemButton>
     </ListItem>

@@ -42,6 +42,15 @@ export class TbWindow {
     return new TbWindow(this._id, newTabs, this._isFocused)
   }
 
+  findTabBy(tabId: TabId): Tab | null {
+    return this._tabs.findTabBy(tabId)
+  }
+
+  updateTab(tab: Tab): TbWindow {
+    const newTabs = this._tabs.updateTab(tab)
+    return new TbWindow(this._id, newTabs, this._isFocused)
+  }
+
   removeTabBy(tabId: TabId): TbWindow {
     const newTabs = this._tabs.removeTabBy(tabId)
     return new TbWindow(this._id, newTabs, this._isFocused)

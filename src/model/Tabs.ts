@@ -65,8 +65,31 @@ export class Tabs {
     return new Tabs(newTabs)
   }
 
+  findTabBy(tabId: TabId): Tab | null {
+    for (const value of this._values) {
+      if (value instanceof Tab) {
+        if (value.id.equalTo(tabId)) {
+          return value
+        }
+      } else {
+        const tab = value.findTabBy(tabId)
+        if (tab !== null) return tab
+      }
+    }
+
+    return null
+  }
+
+  updateTab(tab: Tab): Tabs {
+    const tabs = this._values.map((value) => {
+      if (value instanceof Tab) return value.id.equalTo(tab.id) ? tab : value
+      return value.updateTab(tab)
+    })
+    return new Tabs(tabs)
+  }
+
   removeTabBy(tabId: TabId): Tabs {
-    const tab = this.findNormalTabBy(tabId)
+    const tab = this.findTabBy(tabId)
     let tabs: Tabable[]
     if (tab === null) {
       tabs = this._values.map((value) => {
@@ -80,14 +103,6 @@ export class Tabs {
       })
     }
     return new Tabs(this.removeEmtpyNestedTab(tabs))
-  }
-
-  private findNormalTabBy(tabId: TabId): Tab | null {
-    const tab = this._values.find((value) => {
-      if (value instanceof Tab) return value.id.equalTo(tabId)
-      return false
-    }) as (Tab | undefined)
-    return tab === undefined ? null : tab
   }
 
   private findGroupedTabsBy(groupId: GroupId): GroupedTabs | null {

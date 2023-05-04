@@ -16,8 +16,12 @@
   },
   "permissions": [
     "tabs",
-    "tabGroups"
+    "tabGroups",
+    "storage"
   ],
+  "background" : {
+    "service_worker" : "js/background.js"
+  },
   "icons": {
     "16": "tabtabtab16.png",
     "32": "tabtabtab32.png",

@@ -11,7 +11,7 @@ import { Tab } from '../model/Tab'
 
 type TabListProps = {
   tabs: Tabs,
-  onRemoveTab: (tabId: TabId) => void
+  onRemoveTab: (tabId: TabId) => Promise<void>
 }
 
 const TabList = (props: TabListProps) => {

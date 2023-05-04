@@ -17,12 +17,24 @@ export class PinnedTabs implements NestedTabs {
     return new PinnedTabs([...this._values, tab])
   }
 
-  map<T>(callback: (value: Tab) => T): T[] {
-    return this._values.map<T>((value) => callback(value))
+  findTabBy(tabId: TabId): Tab | null {
+    const tab = this._values.find((value) => value.id.equalTo(tabId))
+    return tab === undefined ? null : tab
+  }
+
+  updateTab(tab: Tab): PinnedTabs {
+    const tabs = this._values.map((value) => {
+      return value.id.equalTo(tab.id) ? tab : value
+    })
+    return new PinnedTabs(tabs)
   }
 
   removeTabBy(tabId: TabId): PinnedTabs {
     const tabs = this._values.filter((value) => !value.id.equalTo(tabId))
     return new PinnedTabs(tabs)
+  }
+
+  map<T>(callback: (value: Tab) => T): T[] {
+    return this._values.map<T>((value) => callback(value))
   }
 }

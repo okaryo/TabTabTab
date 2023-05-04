@@ -8,15 +8,17 @@ import TabList from './TabList'
 import GetWindowsUseCase from '../usecase/GetWindowsUseCase'
 import { TabId } from '../model/TabId'
 import RemoveTabUseCase from '../usecase/RemoveTabUseCase'
+import GetWindowsWithLastActivatedAtOfTabUseCase from '../usecase/GetWindowsWithLastActivatedAtOfTabUseCase'
 
 export default function App() {
   const [windowsState, setWindowsState] = useState(TbWindows.empty())
   useEffect(() => {
     const getWindows = async () => {
       const windows = await GetWindowsUseCase()
-      setWindowsState(windows)
+      const windowsWithLastActivatedAt = await GetWindowsWithLastActivatedAtOfTabUseCase(windows)
+      setWindowsState(windowsWithLastActivatedAt)
     }
-    /* eslint @typescript-eslint/no-floating-promises: 0 */
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     getWindows()
   }, [])
 

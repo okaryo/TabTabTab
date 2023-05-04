@@ -5,6 +5,8 @@ export interface NestedTabs {
   length: number
   isEmpty: boolean
   add(tab: Tab): NestedTabs
+  findTabBy(tabId: TabId): Tab | null
+  updateTab(tab: Tab): NestedTabs
   removeTabBy(tabId: TabId): NestedTabs
   map<T>(callbak: (value: Tab) => T): T[]
 }

@@ -26,6 +26,18 @@ export class GroupedTabs implements NestedTabs {
     return new GroupedTabs(this._id, this._name, this._color, [...this._values, tab])
   }
 
+  findTabBy(tabId: TabId): Tab | null {
+    const tab = this._values.find((value) => value.id.equalTo(tabId))
+    return tab === undefined ? null : tab
+  }
+
+  updateTab(tab: Tab): GroupedTabs {
+    const tabs = this._values.map((value) => {
+      return value.id.equalTo(tab.id) ? tab : value
+    })
+    return new GroupedTabs(this._id, this._name, this._color, tabs)
+  }
+
   map<T>(callback: (value: Tab) => T): T[] {
     return this._values.map<T>((value) => callback(value))
   }
