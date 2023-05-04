@@ -34,8 +34,8 @@ export class ChromeStorageAPI {
   }
 
   static async deleteLastActivatedAtOfTab(tabId: TabId) {
-    const storedLastActivatedAt: StoredLastActivatedAt = await chrome.storage.session.get(this.LAST_ACTIVATED_AT_KEY)
-    delete storedLastActivatedAt[tabId.value]
-    await chrome.storage.session.set({ [this.LAST_ACTIVATED_AT_KEY]: storedLastActivatedAt })
+    const { last_activated_at } = await chrome.storage.session.get(this.LAST_ACTIVATED_AT_KEY) as StoredData
+    delete last_activated_at[tabId.value]
+    await chrome.storage.session.set({ [this.LAST_ACTIVATED_AT_KEY]: last_activated_at })
   }
 }
