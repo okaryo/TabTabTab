@@ -13,7 +13,6 @@ const addListenerOnTabActivated = () => {
   })
   chrome.tabs.onHighlighted.addListener((highlightInfo) => {
     const { tabIds } = highlightInfo
-    console.log(tabIds)
     for (const tabId of tabIds) {
       UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
     }

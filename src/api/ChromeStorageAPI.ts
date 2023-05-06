@@ -18,10 +18,8 @@ export class ChromeStorageAPI {
     if (!last_activated_at || Object.keys(last_activated_at).length === 0) return tbWindows
 
     for (const [tabId, dateString] of Object.entries(last_activated_at)) {
-      console.log(tabId, dateString)
       newWindows = newWindows.updateLastActivatedAtOfTabBy(new TabId(Number(tabId)), new Date(dateString))
     }
-    console.log(newWindows)
     return newWindows
   }
 
