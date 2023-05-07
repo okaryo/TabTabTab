@@ -102,7 +102,7 @@ const TabItem = (props: TabItemProps) => {
               sx={{ display: 'flex', alignItems: 'center', gap: '4px', letterSpacing: 0, fontSize: 14 }}
             >
               <span style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{tab.title}</span>
-              {tab.hasDuplicatedTabs(windows) && <Chip label='Duplicated' size='small' variant='outlined' color='warning'/>}
+              {tab.hasDuplicatedTabs(windows) && <Chip label='Duplicated' size='small' variant='outlined' color='warning' component='span'/>}
             </Typography>
           }
           secondary={
