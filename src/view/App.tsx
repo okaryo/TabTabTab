@@ -39,7 +39,7 @@ export default function App() {
         aria-labelledby={`simple-tab-${index+1}`}
       >
         {selectedIndex === index+1 && (
-          <TabList tabs={window.tabs} onRemoveTab={onRemoveTab} />
+          <TabList windows={windowsState} tabs={window.tabs} onRemoveTab={onRemoveTab} />
         )}
       </div>
     )
@@ -53,7 +53,7 @@ export default function App() {
         aria-labelledby={'simple-tab-0'}
       >
         {selectedIndex === 0 && (
-          <TabList tabs={windowsState.focusedWindowTabs} onRemoveTab={onRemoveTab} />
+          <TabList windows={windowsState} tabs={windowsState.focusedWindowTabs} onRemoveTab={onRemoveTab} />
         )}
       </div>
   )

@@ -31,6 +31,13 @@ export class Tabs {
     }, 0)
   }
 
+  get flatTabs(): Tab[] {
+    return this._values.map((value) => {
+      if (this.isNestedTabs(value)) return value.values
+      return value
+    }).flat()
+  }
+
   add(value: Tabable): Tabs {
     return new Tabs([...this._values, value])
   }

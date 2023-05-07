@@ -1,19 +1,21 @@
 import React, { ReactElement } from 'react'
-import { Box, IconButton, ListItem, ListItemButton, ListItemText, SxProps, Typography } from '@mui/material'
+import { Box, Chip, IconButton, ListItem, ListItemButton, ListItemText, SxProps, Typography } from '@mui/material'
 import TabIcon from '@mui/icons-material/Tab'
 import Clear from '@mui/icons-material/Clear'
 import FocusTabUseCase from '../usecase/FocusTabUseCase'
 import { Tab } from '../model/Tab'
 import { TabId } from '../model/TabId'
+import { TbWindows } from '../model/Windows'
 
 type TabItemProps = {
+  windows: TbWindows,
   tab: Tab,
   sx?: SxProps,
   onRemoveTab: (tabId: TabId) => Promise<void>
 }
 
 const TabItem = (props: TabItemProps) => {
-  const { tab, sx, onRemoveTab } = props
+  const { windows, tab, sx, onRemoveTab } = props
   const onTapTabItem = (): Promise<void> => FocusTabUseCase(tab.id)
 
   let favIcon: ReactElement
@@ -97,10 +99,10 @@ const TabItem = (props: TabItemProps) => {
             <Typography
               variant="subtitle1"
               component="p"
-              sx={{ letterSpacing: 0, fontSize: 14 }}
-              style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}
+              sx={{ display: 'flex', alignItems: 'center', gap: '4px', letterSpacing: 0, fontSize: 14 }}
             >
-              {tab.title}
+              <span style={{ overflow: 'hidden', whiteSpace: 'nowrap', textOverflow: 'ellipsis' }}>{tab.title}</span>
+              {tab.hasDuplicatedTabs(windows) && <Chip label='Duplicated' size='small' variant='outlined' color='warning'/>}
             </Typography>
           }
           secondary={

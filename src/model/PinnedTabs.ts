@@ -13,6 +13,8 @@ export class PinnedTabs implements NestedTabs {
 
   get isEmpty(): boolean { return this.length === 0 }
 
+  get values(): Tab[] { return this._values }
+
   add(tab: Tab): PinnedTabs {
     return new PinnedTabs([...this._values, tab])
   }

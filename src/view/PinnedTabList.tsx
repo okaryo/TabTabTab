@@ -6,18 +6,21 @@ import PushPin from '@mui/icons-material/PushPin'
 import { PinnedTabs } from '../model/PinnedTabs'
 import TabItem from './TabItem'
 import { TabId } from '../model/TabId'
+import { TbWindows } from '../model/Windows'
 
 type PinnedTabListProps = {
+  windows: TbWindows,
   tabs: PinnedTabs,
   onRemoveTab: (tabId: TabId) => Promise<void>
 }
 
 const PinnedTabList = (props: PinnedTabListProps) => {
+  const { windows, tabs, onRemoveTab } = props
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpenStatus = () => setIsOpen(!isOpen)
 
-  const tabs = props.tabs.map((tab) => {
-    return <TabItem key={tab.id.value} tab={tab} sx={{ pl: 3, width: 395 }} onRemoveTab={props.onRemoveTab} />
+  const tabComponents = tabs.map((tab) => {
+    return <TabItem key={tab.id.value} windows={windows} tab={tab} sx={{ pl: 3, width: 395 }} onRemoveTab={onRemoveTab} />
   })
 
   return (
@@ -52,7 +55,7 @@ const PinnedTabList = (props: PinnedTabListProps) => {
         </ListItem>
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List disablePadding>
-            {tabs}
+            {tabComponents}
           </List>
         </Collapse>
       </List>

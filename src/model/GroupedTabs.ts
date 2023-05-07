@@ -22,6 +22,8 @@ export class GroupedTabs implements NestedTabs {
 
   get isEmpty(): boolean { return this.length === 0 }
 
+  get values(): Tab[] { return this._values }
+
   add(tab: Tab): GroupedTabs {
     return new GroupedTabs(this._id, this._name, this._color, [...this._values, tab])
   }

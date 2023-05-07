@@ -24,6 +24,8 @@ export class TbWindow {
     return this._tabs
   }
 
+  get flatTabs(): Tab[] { return this._tabs.flatTabs }
+
   get isFocused(): boolean { return this._isFocused }
 
   get tabCount(): number { return this._tabs.totalTabCount }

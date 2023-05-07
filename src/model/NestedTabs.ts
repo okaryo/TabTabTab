@@ -4,6 +4,7 @@ import { TabId } from './TabId'
 export interface NestedTabs {
   length: number
   isEmpty: boolean
+  values: Tab[]
   add(tab: Tab): NestedTabs
   findTabBy(tabId: TabId): Tab | null
   updateTab(tab: Tab): NestedTabs

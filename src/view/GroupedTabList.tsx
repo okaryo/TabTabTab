@@ -6,18 +6,21 @@ import ExpandMore from '@mui/icons-material/ExpandMore'
 import { GroupedTabs } from '../model/GroupedTabs'
 import TabItem from './TabItem'
 import { TabId } from '../model/TabId'
+import { TbWindows } from '../model/Windows'
 
 type GroupedTabListProps = {
+  windows: TbWindows,
   tabs: GroupedTabs,
   onRemoveTab: (tabId: TabId) => Promise<void>
 }
 
 const GroupedTabList = (props: GroupedTabListProps) => {
+  const { windows, tabs, onRemoveTab } = props
   const [isOpen, setIsOpen] = useState(false)
   const toggleOpenStatus = () => setIsOpen(!isOpen)
 
-  const tabs = props.tabs.map((tab) => {
-    return <TabItem key={tab.id.value} tab={tab} onRemoveTab={props.onRemoveTab} sx={{ width: 395 }} />
+  const tabComponents = tabs.map((tab) => {
+    return <TabItem key={tab.id.value} windows={windows} tab={tab} onRemoveTab={onRemoveTab} sx={{ width: 395 }} />
   })
 
   let groupedTabLabel
@@ -65,7 +68,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
         </ListItem>
         <Collapse in={isOpen} timeout="auto" unmountOnExit>
           <List disablePadding>
-            {tabs}
+            {tabComponents}
           </List>
         </Collapse>
       </List>

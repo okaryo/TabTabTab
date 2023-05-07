@@ -1,4 +1,5 @@
 import { TabId } from './TabId'
+import { TbWindows } from './Windows'
 
 export class Tab {
   constructor(
@@ -13,6 +14,8 @@ export class Tab {
   get id(): TabId { return this._id }
 
   get title(): string { return this._title }
+
+  get url(): string { return this._url.href }
 
   get originUrl(): string { return this._url.origin }
 
@@ -29,5 +32,11 @@ export class Tab {
 
   updateLastActivatedAt(lastActivatedAt: Date): Tab {
     return new Tab(this._id, this._title, this._url, this._favIconUrl, this._isFocused, lastActivatedAt)
+  }
+
+  hasDuplicatedTabs(windows: TbWindows): boolean {
+    return windows.values.some((window) => {
+      return window.flatTabs.some((tab) => !this.id.equalTo(tab.id) && this.title === tab.title && this.url === tab.url)
+    })
   }
 }
