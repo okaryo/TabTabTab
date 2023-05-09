@@ -3,10 +3,10 @@ import { Box, Collapse, IconButton, List, ListItem, ListItemButton, ListItemIcon
 import CircleIcon from '@mui/icons-material/Circle'
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
-import { GroupedTabs } from '../model/GroupedTabs'
+import { GroupedTabs } from '../../model/GroupedTabs'
 import TabItem from './TabItem'
-import { TabId } from '../model/TabId'
-import { TbWindows } from '../model/Windows'
+import { TabId } from '../../model/TabId'
+import { TbWindows } from '../../model/Windows'
 
 type GroupedTabListProps = {
   windows: TbWindows,

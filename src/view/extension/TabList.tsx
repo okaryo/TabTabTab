@@ -3,12 +3,12 @@ import { List } from '@mui/material'
 import TabItem from './TabItem'
 import GroupedTabList from './GroupedTabList'
 import PinnedTabList from './PinnedTabList'
-import { Tabs } from '../model/Tabs'
-import { PinnedTabs } from '../model/PinnedTabs'
-import { GroupedTabs } from '../model/GroupedTabs'
-import { TabId } from '../model/TabId'
-import { Tab } from '../model/Tab'
-import { TbWindows } from '../model/Windows'
+import { Tabs } from '../../model/Tabs'
+import { PinnedTabs } from '../../model/PinnedTabs'
+import { GroupedTabs } from '../../model/GroupedTabs'
+import { TabId } from '../../model/TabId'
+import { Tab } from '../../model/Tab'
+import { TbWindows } from '../../model/Windows'
 
 type TabListProps = {
   windows: TbWindows,

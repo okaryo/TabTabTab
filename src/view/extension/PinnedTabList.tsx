@@ -3,10 +3,10 @@ import { Box, Collapse, IconButton, List, ListItem, ListItemButton, ListItemText
 import ExpandLess from '@mui/icons-material/ExpandLess'
 import ExpandMore from '@mui/icons-material/ExpandMore'
 import PushPin from '@mui/icons-material/PushPin'
-import { PinnedTabs } from '../model/PinnedTabs'
 import TabItem from './TabItem'
-import { TabId } from '../model/TabId'
-import { TbWindows } from '../model/Windows'
+import { PinnedTabs } from '../../model/PinnedTabs'
+import { TabId } from '../../model/TabId'
+import { TbWindows } from '../../model/Windows'
 
 type PinnedTabListProps = {
   windows: TbWindows,

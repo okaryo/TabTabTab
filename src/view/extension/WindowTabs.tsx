@@ -2,8 +2,8 @@ import React from 'react'
 import Tabs from '@mui/material/Tabs'
 import Box from '@mui/material/Box'
 import WindowTab from './WindowTab'
-import { TbWindow } from '../model/Window'
-import { TbWindows } from '../model/Windows'
+import { TbWindow } from '../../model/Window'
+import { TbWindows } from '../../model/Windows'
 
 type WindowTabsProps = {
   selectedIndex: number,

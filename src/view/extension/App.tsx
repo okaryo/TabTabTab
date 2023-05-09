@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react'
-import { TbWindows } from '../model/Windows'
+import { TbWindows } from '../../model/Windows'
 import { Box } from '@mui/system'
 import { CssBaseline } from '@mui/material'
 import Header from './Header'
 import WindowTabs from './WindowTabs'
 import TabList from './TabList'
-import GetWindowsUseCase from '../usecase/GetWindowsUseCase'
-import { TabId } from '../model/TabId'
-import RemoveTabUseCase from '../usecase/RemoveTabUseCase'
-import GetWindowsWithLastActivatedAtOfTabUseCase from '../usecase/GetWindowsWithLastActivatedAtOfTabUseCase'
+import GetWindowsUseCase from '../../usecase/GetWindowsUseCase'
+import { TabId } from '../../model/TabId'
+import RemoveTabUseCase from '../../usecase/RemoveTabUseCase'
+import GetWindowsWithLastActivatedAtOfTabUseCase from '../../usecase/GetWindowsWithLastActivatedAtOfTabUseCase'
 
 export default function App() {
   const [windowsState, setWindowsState] = useState(TbWindows.empty())

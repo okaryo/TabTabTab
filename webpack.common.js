@@ -2,8 +2,9 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    index: path.join(__dirname, "src/index.tsx"),
-    background: path.join(__dirname, "src/background.ts"),
+    extension: path.join(__dirname, "src/view/extension/index.tsx"),
+    setting: path.join(__dirname, "src/view/setting/index.tsx"),
+    background: path.join(__dirname, "src/background/index.ts"),
   },
   output: {
     path: path.join(__dirname, "dist/js"),
