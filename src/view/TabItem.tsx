@@ -53,7 +53,7 @@ const TabItem = (props: TabItemProps) => {
     if (milliSecondsSinceLastActivatedAt < 60 * 1000) {
       difference = Math.floor(milliSecondsSinceLastActivatedAt / 1000)
       unit = 'secs ago'
-      if (difference === 1) unit = 'sec ago'
+      if (difference === 0 || difference === 1) unit = 'sec ago'
     } else if (milliSecondsSinceLastActivatedAt < 60 * 60 * 1000) {
       difference = Math.floor(milliSecondsSinceLastActivatedAt / (60 * 1000))
       unit = 'mins ago'
