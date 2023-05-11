@@ -1,26 +1,26 @@
 import React from 'react'
-import { Box, Container, Divider, Typography } from '@mui/material'
+import { AppBar, Container, Divider, Toolbar, Typography } from '@mui/material'
 import Settings from './Settings'
 
 export default function App() {
   return (
     <div>
-      <Container sx={{pl: 2, pr: 2}}>
-        <Box>
+      <AppBar position="static" color="primary">
+        <Toolbar>
           <Typography
-            variant='h6'
-            component='h1'
-            style={{display: 'flex', alignItems: 'center'}}
-            sx={{height: 54}}
+            style={{color:'white'}}
+            variant="h6"
+            component="h1"
+            sx={{ flexGrow: 1 }}
           >
-            TabTabTab
+            Settings
           </Typography>
-        </Box>
-      </Container>
+        </Toolbar>
+      </AppBar>
 
       <Divider />
 
-      <Container sx={{p: 2}}>
+      <Container sx={{p: 2}} style={{maxWidth: '680px'}}>
         <Settings />
       </Container>
 
