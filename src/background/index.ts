@@ -1,36 +1,35 @@
 /* eslint @typescript-eslint/no-floating-promises: 0 */
 import { TabId } from '../model/TabId'
-import DeleteLastActivatedAtOfTabUseCase from '../usecase/DeleteLastActivatedAtOfTabUseCase'
-import UdpateLastActivatedAtOfTabUseCase from '../usecase/UdpateLastActivatedAtOfTabUseCase'
+import { deleteLastActivatedAtOfTab, udpateLastActivatedAtOfTab } from '../repository/TabsRepository'
 
 const addListenerOnTabActivated = () => {
   chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo
-    UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+    udpateLastActivatedAtOfTab(new TabId(tabId))
   })
   chrome.tabs.onAttached.addListener((tabId) => {
-    UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+    udpateLastActivatedAtOfTab(new TabId(tabId))
   })
   chrome.tabs.onHighlighted.addListener((highlightInfo) => {
     const { tabIds } = highlightInfo
     for (const tabId of tabIds) {
-      UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+      udpateLastActivatedAtOfTab(new TabId(tabId))
     }
   })
   chrome.tabs.onMoved.addListener((tabId) => {
-    UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+    udpateLastActivatedAtOfTab(new TabId(tabId))
   })
   chrome.tabs.onUpdated.addListener((tabId) => {
-    UdpateLastActivatedAtOfTabUseCase(new TabId(tabId))
+    udpateLastActivatedAtOfTab(new TabId(tabId))
   })
 }
 
 const addListenerOnTabClosed = () => {
   chrome.tabs.onDetached.addListener((tabId) => {
-    DeleteLastActivatedAtOfTabUseCase(new TabId(tabId))
+    deleteLastActivatedAtOfTab(new TabId(tabId))
   })
   chrome.tabs.onRemoved.addListener((tabId) => {
-    DeleteLastActivatedAtOfTabUseCase(new TabId(tabId))
+    deleteLastActivatedAtOfTab(new TabId(tabId))
   })
 }
 

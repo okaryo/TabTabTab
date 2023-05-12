@@ -2,10 +2,10 @@ import React, { ReactElement } from 'react'
 import { Box, Chip, IconButton, ListItem, ListItemButton, ListItemText, SxProps, Typography } from '@mui/material'
 import TabIcon from '@mui/icons-material/Tab'
 import Clear from '@mui/icons-material/Clear'
-import FocusTabUseCase from '../../usecase/FocusTabUseCase'
 import { TbWindows } from '../../model/Windows'
 import { Tab } from '../../model/Tab'
 import { TabId } from '../../model/TabId'
+import { focusTab } from '../../repository/TabsRepository'
 
 type TabItemProps = {
   windows: TbWindows,
@@ -16,7 +16,7 @@ type TabItemProps = {
 
 const TabItem = (props: TabItemProps) => {
   const { windows, tab, sx, onRemoveTab } = props
-  const onTapTabItem = (): Promise<void> => FocusTabUseCase(tab.id)
+  const onTapTabItem = (): Promise<void> => focusTab(tab.id)
 
   let favIcon: ReactElement
   const favIconUrl = tab.favIconUrl

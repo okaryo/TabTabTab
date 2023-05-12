@@ -5,25 +5,22 @@ import { CssBaseline } from '@mui/material'
 import Header from './Header'
 import WindowTabs from './WindowTabs'
 import TabList from './TabList'
-import GetWindowsUseCase from '../../usecase/GetWindowsUseCase'
 import { TabId } from '../../model/TabId'
-import RemoveTabUseCase from '../../usecase/RemoveTabUseCase'
-import GetWindowsWithLastActivatedAtOfTabUseCase from '../../usecase/GetWindowsWithLastActivatedAtOfTabUseCase'
+import { getWindows } from '../../repository/WindowsRepository'
+import { removeTab } from '../../repository/TabsRepository'
 
 export default function App() {
   const [windowsState, setWindowsState] = useState(TbWindows.empty())
   useEffect(() => {
-    const getWindows = async () => {
-      const windows = await GetWindowsUseCase()
-      const windowsWithLastActivatedAt = await GetWindowsWithLastActivatedAtOfTabUseCase(windows)
-      setWindowsState(windowsWithLastActivatedAt)
+    const setWindows = async () => {
+      setWindowsState(await getWindows())
     }
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    getWindows()
+    setWindows()
   }, [])
 
   const onRemoveTab = async (tabId: TabId) => {
-    await RemoveTabUseCase(tabId)
+    await removeTab(tabId)
     const newWindows = windowsState.removeTabBy(tabId)
     setWindowsState(newWindows)
   }
