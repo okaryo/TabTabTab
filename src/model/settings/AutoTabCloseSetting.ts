@@ -1,4 +1,4 @@
-type DurationUnit = 'day' | 'hour'
+export type DurationUnit = 'day' | 'hour'
 
 export class AutoTabCloseSetting {
   constructor(

@@ -14,12 +14,14 @@ import {
   TextField,
   Typography
 } from '@mui/material'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { getAutoTabCloseSetting, updateAutoTabCloseSetting } from '../../repository/SettingsRepository';
+import { AutoTabCloseSetting, DurationUnit } from '../../model/settings/AutoTabCloseSetting';
 
 type SettingForm = {
   isEnabled: boolean,
   duration: string,
-  durationUnit: string,
+  durationUnit: DurationUnit,
 }
 type SubmittionState = {
   isLoading: boolean,
@@ -29,11 +31,25 @@ type SubmittionState = {
 type DurationErrorState = Omit<SubmittionState, 'isLoading'>;
 
 
-const AutoTabCloseSetting = () => {
+const AutoTabCloseSettingForm = () => {
   const [settingState, setSettingState] = useState<SettingForm>({isEnabled: false, duration: '5', durationUnit: 'day'})
   const [durationErrorState, setDurationErrorState] = useState<DurationErrorState>({isError: false, errorMessage: ''})
   const [submittionState, setSubmittionState] = useState<SubmittionState>({isLoading: false, isError: false, errorMessage: ''})
   const [isOpenSnackBarState, setIsOpenSnackBarState] = useState(false)
+
+  useEffect(() => {
+    const setSetting = async () => {
+      const setting = await getAutoTabCloseSetting()
+      console.log(setting)
+      setSettingState({
+        isEnabled: setting.isEnabled,
+        duration: setting.duration.toString(),
+        durationUnit: setting.durationUnit,
+      })
+    }
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    setSetting()
+  }, [])
 
   const validateDurationValue = (value: string): DurationErrorState => {
     if (!Number.isInteger(Number(value))) {
@@ -57,10 +73,10 @@ const AutoTabCloseSetting = () => {
   }
 
   const onChangeDurationUnit = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSettingState({...settingState, durationUnit: event.target.value})
+    setSettingState({...settingState, durationUnit: event.target.value as DurationUnit})
   }
 
-  const onSave = () => {
+  const onSave = async () => {
     setSubmittionState({isLoading: false, isError: false, errorMessage: ''})
 
     const durationErrorState = validateDurationValue(settingState.duration)
@@ -72,7 +88,12 @@ const AutoTabCloseSetting = () => {
 
     try {
       setSubmittionState({isLoading: true, isError: false, errorMessage: ''})
-      // TODO: execute chromeAPI
+      const setting = new AutoTabCloseSetting(
+        settingState.isEnabled,
+        Number(settingState.duration),
+        settingState.durationUnit
+      )
+      await updateAutoTabCloseSetting(setting)
       setSubmittionState({isLoading: false, isError: false, errorMessage: ''})
       setIsOpenSnackBarState(true)
     } catch (e) {
@@ -147,4 +168,4 @@ const AutoTabCloseSetting = () => {
   )
 }
 
-export default AutoTabCloseSetting
+export default AutoTabCloseSettingForm

@@ -1,9 +1,9 @@
 import React from 'react'
-import AutoTabCloseSetting from './AutoTabCloseSetting'
+import AutoTabCloseSettingForm from './AutoTabCloseSettingForm'
 
 const Settings = () => {
   return (
-    <AutoTabCloseSetting />
+    <AutoTabCloseSettingForm />
   )
 }
 
