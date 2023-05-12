@@ -15,8 +15,8 @@ import {
   Typography
 } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { getAutoTabCloseSetting, updateAutoTabCloseSetting } from '../../repository/SettingsRepository';
-import { AutoTabCloseSetting, DurationUnit } from '../../model/settings/AutoTabCloseSetting';
+import { getAutoTabCloseSetting, updateAutoTabCloseSetting } from '../../repository/SettingsRepository'
+import { AutoTabCloseSetting, DurationUnit } from '../../model/settings/AutoTabCloseSetting'
 
 type SettingForm = {
   isEnabled: boolean,
@@ -150,6 +150,7 @@ const AutoTabCloseSettingForm = () => {
               variant="contained"
               disabled={submittionState.isLoading}
               sx={{textTransform: 'none'}}
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={onSave}
             >
               {submittionState.isLoading ? 'Saving...' : 'Save'}
