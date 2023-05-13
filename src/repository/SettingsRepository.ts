@@ -1,33 +1,33 @@
-import { AutoTabCloseSetting, DurationUnit } from '../model/settings/AutoTabCloseSetting'
+import { TabCleaner, DurationUnit } from '../model/settings/TabCleaner'
 
 type StoredData = {
-  auto_tab_close_setting: {
+  tab_cleaner_setting: {
     isEnabled: boolean
     duration: number
     durationUnit: DurationUnit
   }
 }
 
-const AUTO_TAB_CLOSE_SETTING_KEY = 'auto_tab_close_setting'
+const TAB_CLEANER_SETTING_KEY = 'tab_cleaner_setting'
 
-export const getAutoTabCloseSetting = async (): Promise<AutoTabCloseSetting> => {
-  const { auto_tab_close_setting } = await chrome.storage.session.get(AUTO_TAB_CLOSE_SETTING_KEY) as StoredData
-  if (!auto_tab_close_setting) return new AutoTabCloseSetting(false, 5, 'day')
+export const getTabCleanerSetting = async (): Promise<TabCleaner> => {
+  const { tab_cleaner_setting } = await chrome.storage.local.get(TAB_CLEANER_SETTING_KEY) as StoredData
+  if (!tab_cleaner_setting) return new TabCleaner(false, 5, 'day')
 
-  return new AutoTabCloseSetting(
-    auto_tab_close_setting.isEnabled,
-    auto_tab_close_setting.duration,
-    auto_tab_close_setting.durationUnit
+  return new TabCleaner(
+    tab_cleaner_setting.isEnabled,
+    tab_cleaner_setting.duration,
+    tab_cleaner_setting.durationUnit
   )
 }
 
-export const updateAutoTabCloseSetting = (setting: AutoTabCloseSetting): Promise<void> => {
-  return chrome.storage.session.set(
+export const updateTabCleanerSetting = (TabCleaner: TabCleaner): Promise<void> => {
+  return chrome.storage.local.set(
     {
-      [AUTO_TAB_CLOSE_SETTING_KEY]: {
-        isEnabled: setting.isEnabled,
-        duration: setting.duration,
-        durationUnit: setting.durationUnit
+      [TAB_CLEANER_SETTING_KEY]: {
+        isEnabled: TabCleaner.isEnabled,
+        duration: TabCleaner.duration,
+        durationUnit: TabCleaner.durationUnit
       }
     }
   )

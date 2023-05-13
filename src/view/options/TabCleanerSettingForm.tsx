@@ -15,8 +15,8 @@ import {
   Typography
 } from '@mui/material'
 import React, { useEffect, useState } from 'react'
-import { getAutoTabCloseSetting, updateAutoTabCloseSetting } from '../../repository/SettingsRepository'
-import { AutoTabCloseSetting, DurationUnit } from '../../model/settings/AutoTabCloseSetting'
+import { getTabCleanerSetting, updateTabCleanerSetting } from '../../repository/SettingsRepository'
+import { TabCleaner, DurationUnit } from '../../model/settings/TabCleaner'
 
 type SettingForm = {
   isEnabled: boolean,
@@ -31,7 +31,7 @@ type SubmittionState = {
 type DurationErrorState = Omit<SubmittionState, 'isLoading'>;
 
 
-const AutoTabCloseSettingForm = () => {
+const TabCleanerSettingForm = () => {
   const [settingState, setSettingState] = useState<SettingForm>({isEnabled: false, duration: '5', durationUnit: 'day'})
   const [durationErrorState, setDurationErrorState] = useState<DurationErrorState>({isError: false, errorMessage: ''})
   const [submittionState, setSubmittionState] = useState<SubmittionState>({isLoading: false, isError: false, errorMessage: ''})
@@ -39,7 +39,7 @@ const AutoTabCloseSettingForm = () => {
 
   useEffect(() => {
     const setSetting = async () => {
-      const setting = await getAutoTabCloseSetting()
+      const setting = await getTabCleanerSetting()
       console.log(setting)
       setSettingState({
         isEnabled: setting.isEnabled,
@@ -88,12 +88,12 @@ const AutoTabCloseSettingForm = () => {
 
     try {
       setSubmittionState({isLoading: true, isError: false, errorMessage: ''})
-      const setting = new AutoTabCloseSetting(
+      const setting = new TabCleaner(
         settingState.isEnabled,
         Number(settingState.duration),
         settingState.durationUnit
       )
-      await updateAutoTabCloseSetting(setting)
+      await updateTabCleanerSetting(setting)
       setSubmittionState({isLoading: false, isError: false, errorMessage: ''})
       setIsOpenSnackBarState(true)
     } catch (e) {
@@ -116,7 +116,7 @@ const AutoTabCloseSettingForm = () => {
                 }
                 label={
                   <Stack>
-                    <Typography variant="subtitle1" component="h3">Close unused tabs automatically</Typography>
+                    <Typography variant="subtitle1" component="h3">Clean up unused tabs automatically</Typography>
                     <Typography variant="caption" component="p" style={{color: 'grey'}}>By enabling this setting, tabs will automatically close once the set duration has passed since they were last active.</Typography>
                   </Stack>
                 }
@@ -169,4 +169,4 @@ const AutoTabCloseSettingForm = () => {
   )
 }
 
-export default AutoTabCloseSettingForm
+export default TabCleanerSettingForm

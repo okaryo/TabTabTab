@@ -1,11 +1,11 @@
 import React from 'react'
-import AutoTabCloseSettingForm from './AutoTabCloseSettingForm'
+import TabCleanerSettingForm from './TabCleanerSettingForm'
 import { Divider, Link, Typography } from '@mui/material'
 
 const Settings = () => {
   return (
     <>
-      <AutoTabCloseSettingForm />
+      <TabCleanerSettingForm />
 
       <Divider sx={{ mt: 2, mb: 2 }} />
 
