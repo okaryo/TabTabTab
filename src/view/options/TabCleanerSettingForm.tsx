@@ -40,7 +40,6 @@ const TabCleanerSettingForm = () => {
   useEffect(() => {
     const setSetting = async () => {
       const setting = await getTabCleanerSetting()
-      console.log(setting)
       setSettingState({
         isEnabled: setting.isEnabled,
         duration: setting.duration.toString(),
