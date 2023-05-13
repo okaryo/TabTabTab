@@ -5,16 +5,7 @@ import { TabId } from '../model/TabId'
 import { TbWindow } from '../model/Window'
 import { WindowId } from '../model/WindowId'
 import { TbWindows } from '../model/Windows'
-
-type DateString = string
-type StoredData = {
-  last_activated_at: StoredLastActivatedAt
-}
-type StoredLastActivatedAt = {
-  [tabId: string]: DateString
-}
-
-const LAST_ACTIVATED_AT_KEY = 'last_activated_at'
+import { ChromeSessionStorage, LastActivatedAtStoredData } from './ChromeStorage'
 
 export const getWindows = async (): Promise<TbWindows> => {
   const currentWindow = await getCurrentWindow()
@@ -81,7 +72,7 @@ const getUnfocusedWindows = async (): Promise<TbWindows> => {
 
 const applyLastActivatedAtOfTabInWindows = async (tbWindows: TbWindows): Promise<TbWindows> => {
   let newWindows = tbWindows
-  const { last_activated_at } = await chrome.storage.session.get(LAST_ACTIVATED_AT_KEY) as StoredData
+  const { last_activated_at } = await chrome.storage.session.get(ChromeSessionStorage.LAST_ACTIVATED_AT_KEY) as LastActivatedAtStoredData
   if (!last_activated_at || Object.keys(last_activated_at).length === 0) return tbWindows
 
   for (const [tabId, dateString] of Object.entries(last_activated_at)) {
