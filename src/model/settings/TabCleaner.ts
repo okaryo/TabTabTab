@@ -1,3 +1,5 @@
+import { Tab } from "../Tab"
+
 export type DurationUnit = 'day' | 'hour'
 
 export class TabCleaner {
@@ -17,5 +19,19 @@ export class TabCleaner {
 
   updateDurationUnit(durationUnit: DurationUnit): TabCleaner {
     return new TabCleaner(this.isEnabled, this.duration, durationUnit)
+  }
+
+  shouldCleanUp(tab: Tab, currentDateTime: Date): boolean {
+    const lastActivatedAt = tab.lastActivatedAt
+    if (lastActivatedAt === null) return
+
+    const cleanUpDate = new Date(lastActivatedAt.getTime())
+    if (this.durationUnit === 'day') {
+      cleanUpDate.setDate(cleanUpDate.getDate() + this.duration)
+    } else if (this.durationUnit === 'hour') {
+      cleanUpDate.setHours(cleanUpDate.getHours() + this.duration)
+    }
+
+    return cleanUpDate.getTime() < currentDateTime.getTime()
   }
 }

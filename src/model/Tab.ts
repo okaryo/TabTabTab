@@ -23,6 +23,10 @@ export class Tab {
 
   get isFocused(): boolean { return this._isFocused }
 
+  get lastActivatedAt(): Date | null {
+    return this._lastActivatedAt || null
+  }
+
   get milliSecondsSinceLastActivatedAt(): number | null {
     if (!this._lastActivatedAt) return null
 

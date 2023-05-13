@@ -38,6 +38,11 @@ export class TbWindows {
     return new TbWindows(unfocusedWindows)
   }
 
+  get allTabs(): Tab[] {
+    const tabsByWindow = this._values.map((value) => value.tabs)
+    return tabsByWindow.map((tabs) => tabs.flatTabs).flat()
+  }
+
   add(window: TbWindow): TbWindows {
     return new TbWindows([...this._values, window])
   }
