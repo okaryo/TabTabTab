@@ -19,4 +19,3 @@ export class AutoTabCloseSetting {
     return new AutoTabCloseSetting(this.isEnabled, this.duration, durationUnit)
   }
 }
-
