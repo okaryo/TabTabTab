@@ -2,8 +2,17 @@
 
 ## TabTabTab
 
-This chrome extension makes it easier to manage your open tabs.  
-[chrome web store](https://chrome.google.com/webstore/detail/tabtabtab/hfmnidllojimehmfjkclnadpebibhgoi)  
-![ss](https://user-images.githubusercontent.com/44517313/153460394-2a4f819f-815f-4ad0-8bf0-1ee0d3ab061f.png)
+TabTabTab is an innovative solution for tab management. With this extension, your browsing environment becomes organized and your productivity skyrockets. Free yourself from tab chaos and allow your focus to center on your important tasks. Give TabTabTab a try to enhance your digital lifestyle!
 
-ver.1 Repository -> [https://github.com/okaryo/ChromeExtension/tree/master/TabTabTab](https://github.com/okaryo/ChromeExtension/tree/master/TabTabTab)
+[👉 ChromeWebStore](https://chrome.google.com/webstore/detail/tabtabtab/hfmnidllojimehmfjkclnadpebibhgoi)
+
+### Features
+
+* Display of open window and tab list
+* Display of elapsed time since last tab activation
+* Display duplicated tabs
+* Close tabs
+* Automatic clean up of tabs that have not been used for a certain period (ON/OFF and duration can be set from the settings page)
+
+![Screen Shot Popup](https://github.com/okaryo/TabTabTab/assets/44517313/0b0499b3-0528-4b01-b541-c641c0b36ef2)
+![Screen Shot Setting](https://github.com/okaryo/TabTabTab/assets/44517313/dd25ba41-fdd8-4fde-a88f-0eccb337ebe7)
