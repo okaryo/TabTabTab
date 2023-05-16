@@ -1,6 +1,7 @@
 import React from 'react'
 import { AppBar, IconButton, Toolbar, Typography } from '@mui/material'
 import SettingsIcon from '@mui/icons-material/Settings'
+import { navigateToOptionsPage } from '../../repository/SettingsRepository'
 
 const Header = () => (
   <AppBar position="static" color="primary">
@@ -14,7 +15,7 @@ const Header = () => (
         TabTabTab
       </Typography>
       <IconButton
-        onClick={() => window.open('chrome-extension://hfmnidllojimehmfjkclnadpebibhgoi/options.html')}
+        onClick={() => navigateToOptionsPage()}
         color="inherit"
       >
         <SettingsIcon />

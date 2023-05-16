@@ -23,3 +23,7 @@ export const updateTabCleanerSetting = (TabCleaner: TabCleaner): Promise<void> =
     }
   )
 }
+
+export const navigateToOptionsPage = () => {
+  chrome.runtime.openOptionsPage()
+}
