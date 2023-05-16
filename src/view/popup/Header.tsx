@@ -14,7 +14,7 @@ const Header = () => (
         TabTabTab
       </Typography>
       <IconButton
-        onClick={() => window.open('chrome-extension://ieklamoilnjjpebpgahkefakcjfekeop/options.html')}
+        onClick={() => window.open('chrome-extension://hfmnidllojimehmfjkclnadpebibhgoi/options.html')}
         color="inherit"
       >
         <SettingsIcon />
