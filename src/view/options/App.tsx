@@ -1,6 +1,6 @@
-import React from 'react'
-import { AppBar, Container, Divider, Toolbar, Typography } from '@mui/material'
-import Settings from './Settings'
+import React from "react";
+import { AppBar, Container, Divider, Toolbar, Typography } from "@mui/material";
+import Settings from "./Settings";
 
 export default function App() {
   return (
@@ -8,7 +8,7 @@ export default function App() {
       <AppBar position="static" color="primary">
         <Toolbar>
           <Typography
-            style={{color:'white'}}
+            style={{ color: "white" }}
             variant="h6"
             component="h1"
             sx={{ flexGrow: 1 }}
@@ -20,11 +20,12 @@ export default function App() {
 
       <Divider />
 
-      <Container sx={{p: 2}} style={{maxWidth: '680px'}}>
+      <Container sx={{ p: 2 }} style={{ maxWidth: "680px" }}>
         <Settings />
       </Container>
 
-      <style>{`
+      <style>
+        {`
         html, body {
           padding: 0;
           margin: 0;
@@ -32,7 +33,8 @@ export default function App() {
         * {
           box-sizing: border-box;
         }
-      `} </style>
+      `}{" "}
+      </style>
     </div>
-  )
+  );
 }

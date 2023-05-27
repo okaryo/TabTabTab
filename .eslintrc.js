@@ -18,8 +18,6 @@ module.exports = {
     project: './tsconfig.json',
   },
   rules: {
-    'semi': ['error', 'never'],
-    'quotes': ['error', 'single'],
     'no-trailing-spaces': ['error'],
     'no-multi-spaces': 'error',
     '@typescript-eslint/no-unsafe-return': 'warn',

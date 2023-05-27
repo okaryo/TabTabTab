@@ -1,24 +1,27 @@
-import { GroupedColor } from '../model/GroupedColor'
-import { GroupId } from '../model/GroupId'
-import { Tab } from '../model/Tab'
-import { TabId } from '../model/TabId'
-import { TbWindow } from '../model/Window'
-import { WindowId } from '../model/WindowId'
-import { TbWindows } from '../model/Windows'
-import { ChromeSessionStorage, LastActivatedAtStoredData } from './ChromeStorage'
+import { GroupedColor } from "../model/GroupedColor";
+import { GroupId } from "../model/GroupId";
+import { Tab } from "../model/Tab";
+import { TabId } from "../model/TabId";
+import { TbWindow } from "../model/Window";
+import { WindowId } from "../model/WindowId";
+import { TbWindows } from "../model/Windows";
+import {
+  ChromeSessionStorage,
+  LastActivatedAtStoredData,
+} from "./ChromeStorage";
 
 export const getWindows = async (): Promise<TbWindows> => {
-  const currentWindow = await getCurrentWindow()
-  const unfocusedWindows = await getUnfocusedWindows()
-  const windows = new TbWindows([currentWindow, ...(unfocusedWindows.values)])
-  return applyLastActivatedAtOfTabInWindows(windows)
-}
+  const currentWindow = await getCurrentWindow();
+  const unfocusedWindows = await getUnfocusedWindows();
+  const windows = new TbWindows([currentWindow, ...unfocusedWindows.values]);
+  return applyLastActivatedAtOfTabInWindows(windows);
+};
 
 const getCurrentWindow = async (): Promise<TbWindow> => {
-  const currentWindowTabs = await chrome.tabs.query({ currentWindow: true })
+  const currentWindowTabs = await chrome.tabs.query({ currentWindow: true });
 
-  const windowId = new WindowId(currentWindowTabs[0].windowId)
-  let currentWindow = TbWindow.initializeBy(windowId, true)
+  const windowId = new WindowId(currentWindowTabs[0].windowId);
+  let currentWindow = TbWindow.initializeBy(windowId, true);
   for (const tab of currentWindowTabs) {
     const newTab = new Tab(
       new TabId(tab.id),
@@ -26,57 +29,77 @@ const getCurrentWindow = async (): Promise<TbWindow> => {
       new URL(tab.url),
       tab.favIconUrl,
       tab.highlighted
-    )
+    );
 
     if (tab.pinned) {
-      currentWindow = currentWindow.addPinnedTab(newTab)
+      currentWindow = currentWindow.addPinnedTab(newTab);
     } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
-      const groupId = new GroupId(tab.groupId)
-      const group = await chrome.tabGroups.get(groupId.value)
-      const groupColor = new GroupedColor(group.color)
-      currentWindow = currentWindow.addGroupedTab(groupId, group.title, groupColor, newTab)
+      const groupId = new GroupId(tab.groupId);
+      const group = await chrome.tabGroups.get(groupId.value);
+      const groupColor = new GroupedColor(group.color);
+      currentWindow = currentWindow.addGroupedTab(
+        groupId,
+        group.title,
+        groupColor,
+        newTab
+      );
     } else {
-      currentWindow = currentWindow.addTab(newTab)
+      currentWindow = currentWindow.addTab(newTab);
     }
   }
-  return currentWindow
-}
+  return currentWindow;
+};
 
 const getUnfocusedWindows = async (): Promise<TbWindows> => {
-  const unfocusedWindowTabs = await chrome.tabs.query({ currentWindow: false })
+  const unfocusedWindowTabs = await chrome.tabs.query({ currentWindow: false });
 
-  let windows = TbWindows.empty()
+  let windows = TbWindows.empty();
   for (const tab of unfocusedWindowTabs) {
-    const windowId = new WindowId(tab.windowId)
+    const windowId = new WindowId(tab.windowId);
     const newTab = new Tab(
       new TabId(tab.id),
       tab.title,
       new URL(tab.url),
       tab.favIconUrl,
       tab.highlighted
-    )
+    );
 
     if (tab.pinned) {
-      windows = windows.addPinnedTab(windowId, false, newTab)
+      windows = windows.addPinnedTab(windowId, false, newTab);
     } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
-      const groupId = new GroupId(tab.groupId)
-      const group = await chrome.tabGroups.get(groupId.value)
-      const groupColor = new GroupedColor(group.color)
-      windows = windows.addGroupedTab(windowId, false, newTab, groupId, group.title, groupColor)
+      const groupId = new GroupId(tab.groupId);
+      const group = await chrome.tabGroups.get(groupId.value);
+      const groupColor = new GroupedColor(group.color);
+      windows = windows.addGroupedTab(
+        windowId,
+        false,
+        newTab,
+        groupId,
+        group.title,
+        groupColor
+      );
     } else {
-      windows = windows.addTab(windowId, false, newTab)
+      windows = windows.addTab(windowId, false, newTab);
     }
   }
-  return windows
-}
+  return windows;
+};
 
-const applyLastActivatedAtOfTabInWindows = async (tbWindows: TbWindows): Promise<TbWindows> => {
-  let newWindows = tbWindows
-  const { last_activated_at } = await chrome.storage.session.get(ChromeSessionStorage.LAST_ACTIVATED_AT_KEY) as LastActivatedAtStoredData
-  if (!last_activated_at || Object.keys(last_activated_at).length === 0) return tbWindows
+const applyLastActivatedAtOfTabInWindows = async (
+  tbWindows: TbWindows
+): Promise<TbWindows> => {
+  let newWindows = tbWindows;
+  const { last_activated_at } = (await chrome.storage.session.get(
+    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY
+  )) as LastActivatedAtStoredData;
+  if (!last_activated_at || Object.keys(last_activated_at).length === 0)
+    return tbWindows;
 
   for (const [tabId, dateString] of Object.entries(last_activated_at)) {
-    newWindows = newWindows.updateLastActivatedAtOfTabBy(new TabId(Number(tabId)), new Date(dateString))
+    newWindows = newWindows.updateLastActivatedAtOfTabBy(
+      new TabId(Number(tabId)),
+      new Date(dateString)
+    );
   }
-  return newWindows
-}
+  return newWindows;
+};
