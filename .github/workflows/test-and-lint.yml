@@ -26,3 +26,5 @@ jobs:
         run: npm run test
       - name: Run Lint
         run: npm run lint
+      - name: Run Formatter
+        run: npm run format
