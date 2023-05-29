@@ -5,7 +5,12 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 const Footer = () => {
   return (
     <Box
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        alignItems: "center",
+        justifyContent: "center",
+      }}
     >
       <Link
         href="https://github.com/okaryo/TabTabTab"
@@ -19,7 +24,11 @@ const Footer = () => {
           <Typography>Source Code</Typography>
         </Stack>
       </Link>
-      <Typography variant="caption" component="p">
+      <Typography
+        variant="caption"
+        component="p"
+        style={{ textAlign: "center" }}
+      >
         If you find TabTabTab helpful, we would greatly appreciate it if you
         could leave us a review on the&nbsp;
         <Link
