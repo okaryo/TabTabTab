@@ -1,6 +1,5 @@
 import { GroupedColor } from "./GroupedColor";
 import { GroupId } from "./GroupId";
-
 import { Tab } from "./Tab";
 import { TabId } from "./TabId";
 import { Tabs } from "./Tabs";

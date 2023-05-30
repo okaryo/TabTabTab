@@ -1,14 +1,15 @@
+import List from "@mui/material/List";
 import React from "react";
-import TabItem from "./TabItem";
+
+import { GroupedTabs } from "./../../model/GroupedTabs";
+import { PinnedTabs } from "./../../model/PinnedTabs";
+import { Tab } from "./../../model/Tab";
+import { TabId } from "./../../model/TabId";
+import { Tabs } from "./../../model/Tabs";
+import { TbWindows } from "./../../model/Windows";
 import GroupedTabList from "./GroupedTabList";
 import PinnedTabList from "./PinnedTabList";
-import { Tabs } from "../../model/Tabs";
-import { PinnedTabs } from "../../model/PinnedTabs";
-import { GroupedTabs } from "../../model/GroupedTabs";
-import { TabId } from "../../model/TabId";
-import { Tab } from "../../model/Tab";
-import { TbWindows } from "../../model/Windows";
-import List from "@mui/material/List";
+import TabItem from "./TabItem";
 
 type TabListProps = {
   windows: TbWindows;

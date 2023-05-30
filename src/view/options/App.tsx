@@ -1,9 +1,10 @@
-import React from "react";
 import AppBar from "@mui/material/AppBar";
+import Container from "@mui/material/Container";
+import Divider from "@mui/material/Divider";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import Divider from "@mui/material/Divider";
-import Container from "@mui/material/Container";
+import React from "react";
+
 import Settings from "./Settings";
 
 export default function App() {

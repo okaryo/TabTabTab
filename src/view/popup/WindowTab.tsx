@@ -1,6 +1,6 @@
-import React from "react";
-import Tab from "@mui/material/Tab";
 import Chip from "@mui/material/Chip";
+import Tab from "@mui/material/Tab";
+import React from "react";
 
 type WindowTabProps = {
   label: string;

@@ -1,9 +1,10 @@
-import React from "react";
-import Stack from "@mui/material/Stack";
 import Divider from "@mui/material/Divider";
-import TabCleanerSettingForm from "./TabCleanerSettingForm";
+import Stack from "@mui/material/Stack";
+import React from "react";
+
 import Footer from "./Footer";
 import PopupSizeSettingForm from "./PopupSizeSettingForm";
+import TabCleanerSettingForm from "./TabCleanerSettingForm";
 
 const Settings = () => {
   return (

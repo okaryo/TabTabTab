@@ -1,9 +1,9 @@
-import React from "react";
+import GitHubIcon from "@mui/icons-material/GitHub";
 import Box from "@mui/material/Box";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import GitHubIcon from "@mui/icons-material/GitHub";
+import React from "react";
 
 const Footer = () => {
   return (

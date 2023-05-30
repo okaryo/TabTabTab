@@ -1,24 +1,25 @@
-import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import Typography from "@mui/material/Typography";
-import FormControl from "@mui/material/FormControl";
-import Stack from "@mui/material/Stack";
-import FormControlLabel from "@mui/material/FormControlLabel";
 import Checkbox from "@mui/material/Checkbox";
-import TextField from "@mui/material/TextField";
-import InputLabel from "@mui/material/InputLabel";
-import Select from "@mui/material/Select";
+import FormControl from "@mui/material/FormControl";
+import FormControlLabel from "@mui/material/FormControlLabel";
 import FormHelperText from "@mui/material/FormHelperText";
-import Button from "@mui/material/Button";
+import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
+import Select from "@mui/material/Select";
 import Snackbar from "@mui/material/Snackbar";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from "react";
+
+import { TabCleaner, DurationUnit } from "./../../model/settings/TabCleaner";
 import {
   getTabCleanerSetting,
   updateTabCleanerSetting,
-} from "../../repository/SettingsRepository";
-import { TabCleaner, DurationUnit } from "../../model/settings/TabCleaner";
+} from "./../../repository/SettingsRepository";
 
 type SettingForm = {
   isEnabled: boolean;

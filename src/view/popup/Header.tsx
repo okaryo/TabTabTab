@@ -1,10 +1,11 @@
-import React from "react";
 import SettingsIcon from "@mui/icons-material/Settings";
-import { navigateToOptionsPage } from "../../repository/SettingsRepository";
 import AppBar from "@mui/material/AppBar";
+import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import IconButton from "@mui/material/IconButton";
+import React from "react";
+
+import { navigateToOptionsPage } from "./../../repository/SettingsRepository";
 
 const Header = () => (
   <AppBar position="static" color="primary">

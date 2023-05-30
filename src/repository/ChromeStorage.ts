@@ -1,4 +1,4 @@
-import { DurationUnit } from "../model/settings/TabCleaner";
+import { DurationUnit } from "./../model/settings/TabCleaner";
 
 export type TabCleanerSettingStoredData = {
   tab_cleaner_setting: {

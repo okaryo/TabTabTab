@@ -1,20 +1,21 @@
-import React, { useState } from "react";
 import CircleIcon from "@mui/icons-material/Circle";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
-import { GroupedTabs } from "../../model/GroupedTabs";
-import TabItem from "./TabItem";
-import { TabId } from "../../model/TabId";
-import { TbWindows } from "../../model/Windows";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import Typography from "@mui/material/Typography";
-import Stack from "@mui/material/Stack";
 import Box from "@mui/material/Box";
+import Collapse from "@mui/material/Collapse";
+import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import IconButton from "@mui/material/IconButton";
 import ListItemButton from "@mui/material/ListItemButton";
-import Collapse from "@mui/material/Collapse";
+import ListItemIcon from "@mui/material/ListItemIcon";
+import Stack from "@mui/material/Stack";
+import Typography from "@mui/material/Typography";
+import React, { useState } from "react";
+
+import { GroupedTabs } from "./../../model/GroupedTabs";
+import { TabId } from "./../../model/TabId";
+import { TbWindows } from "./../../model/Windows";
+import TabItem from "./TabItem";
 
 type GroupedTabListProps = {
   windows: TbWindows;

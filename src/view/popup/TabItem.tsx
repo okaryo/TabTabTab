@@ -1,18 +1,19 @@
-import React, { ReactElement } from "react";
-import TabIcon from "@mui/icons-material/Tab";
 import Clear from "@mui/icons-material/Clear";
-import { TbWindows } from "../../model/Windows";
-import { Tab } from "../../model/Tab";
-import { TabId } from "../../model/TabId";
-import { focusTab } from "../../repository/TabsRepository";
-import { SxProps } from "@mui/material/styles";
+import TabIcon from "@mui/icons-material/Tab";
 import Box from "@mui/material/Box";
-import ListItem from "@mui/material/ListItem";
+import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
+import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import { SxProps } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import Chip from "@mui/material/Chip";
+import React, { ReactElement } from "react";
+
+import { Tab } from "./../../model/Tab";
+import { TabId } from "./../../model/TabId";
+import { TbWindows } from "./../../model/Windows";
+import { focusTab } from "./../../repository/TabsRepository";
 
 type TabItemProps = {
   windows: TbWindows;

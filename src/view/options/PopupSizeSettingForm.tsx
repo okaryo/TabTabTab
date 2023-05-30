@@ -1,19 +1,20 @@
-import React, { useEffect, useState } from "react";
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
-import Typography from "@mui/material/Typography";
 import FormControl from "@mui/material/FormControl";
-import Stack from "@mui/material/Stack";
-import TextField from "@mui/material/TextField";
-import Button from "@mui/material/Button";
 import FormHelperText from "@mui/material/FormHelperText";
 import Snackbar from "@mui/material/Snackbar";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Typography from "@mui/material/Typography";
+import React, { useEffect, useState } from "react";
+
+import { PopupSize } from "./../../model/settings/PopupSize";
 import {
   getPopupSizeSetting,
   updatePopupSizeSetting,
-} from "../../repository/SettingsRepository";
-import { PopupSize } from "../../model/settings/PopupSize";
+} from "./../../repository/SettingsRepository";
 
 type SettingForm = {
   height: string;

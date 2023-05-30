@@ -1,9 +1,9 @@
 /* eslint @typescript-eslint/no-floating-promises: 0 */
-import { TabId } from "../model/TabId";
+import { TabId } from "./../model/TabId";
 import {
   deleteLastActivatedAtOfTab,
   udpateLastActivatedAtOfTab,
-} from "../repository/TabsRepository";
+} from "./../repository/TabsRepository";
 
 export const addListenerOnTabActivated = () => {
   chrome.tabs.onActivated.addListener((activeInfo) => {
