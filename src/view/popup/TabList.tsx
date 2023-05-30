@@ -21,7 +21,7 @@ const TabList = (props: TabListProps) => {
   const { windows, tabs, onRemoveTab } = props;
 
   const tabsComponent = tabs.map((tab) => {
-    if (tab instanceof PinnedTabs)
+    if (tab instanceof PinnedTabs) {
       return (
         <PinnedTabList
           key={tab.toString()}
@@ -30,7 +30,8 @@ const TabList = (props: TabListProps) => {
           onRemoveTab={onRemoveTab}
         />
       );
-    if (tab instanceof GroupedTabs)
+    }
+    if (tab instanceof GroupedTabs) {
       return (
         <GroupedTabList
           key={tab.name}
@@ -39,6 +40,7 @@ const TabList = (props: TabListProps) => {
           onRemoveTab={onRemoveTab}
         />
       );
+    }
 
     return (
       <TabItem

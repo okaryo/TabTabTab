@@ -36,6 +36,7 @@ export default function App() {
       return (
         selectedIndex === index + 1 && (
           <TabList
+            key={window.id.value}
             windows={windowsState}
             tabs={window.tabs}
             onRemoveTab={onRemoveTab}
@@ -47,6 +48,7 @@ export default function App() {
 
   const focusedWindowsTabList = selectedIndex === 0 && (
     <TabList
+      key={`focused-window`}
       windows={windowsState}
       tabs={windowsState.focusedWindowTabs}
       onRemoveTab={onRemoveTab}
