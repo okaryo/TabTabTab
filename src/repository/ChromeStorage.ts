@@ -7,6 +7,12 @@ export type TabCleanerSettingStoredData = {
     durationUnit: DurationUnit;
   };
 };
+export type PopupSizeSettingStoredData = {
+  popup_size_setting: {
+    height: number;
+    width: number;
+  };
+};
 
 type DateString = string;
 type StoredLastActivatedAt = {
@@ -18,6 +24,7 @@ export type LastActivatedAtStoredData = {
 
 export class ChromeLocalStorage {
   static readonly TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
+  static readonly POPUP_SIZE_SETTING_KEY = "popup_size_setting";
 }
 
 export class ChromeSessionStorage {

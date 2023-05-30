@@ -1,6 +1,8 @@
+import { PopupSize } from "../model/settings/PopupSize";
 import { TabCleaner } from "../model/settings/TabCleaner";
 import {
   ChromeLocalStorage,
+  PopupSizeSettingStoredData,
   TabCleanerSettingStoredData,
 } from "./ChromeStorage";
 
@@ -25,6 +27,24 @@ export const updateTabCleanerSetting = (
       isEnabled: TabCleaner.isEnabled,
       duration: TabCleaner.duration,
       durationUnit: TabCleaner.durationUnit,
+    },
+  });
+};
+
+export const getPopupSizeSetting = async (): Promise<PopupSize> => {
+  const { popup_size_setting } = (await chrome.storage.local.get(
+    ChromeLocalStorage.POPUP_SIZE_SETTING_KEY
+  )) as PopupSizeSettingStoredData;
+  if (!popup_size_setting) return new PopupSize(500, 500);
+
+  return new PopupSize(popup_size_setting.height, popup_size_setting.width);
+};
+
+export const updatePopupSizeSetting = (PopupSize: PopupSize): Promise<void> => {
+  return chrome.storage.local.set({
+    [ChromeLocalStorage.POPUP_SIZE_SETTING_KEY]: {
+      height: PopupSize.height,
+      width: PopupSize.width,
     },
   });
 };
