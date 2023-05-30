@@ -28,7 +28,7 @@ const WindowTabs = (props: WindowTabsProps) => {
   });
 
   return (
-    <Box sx={{ maxWidth: 480, borderBottom: 1, borderColor: "divider" }}>
+    <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
       <Tabs
         value={props.selectedIndex}
         onChange={onChange}

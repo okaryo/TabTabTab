@@ -8,15 +8,19 @@ import TabList from "./TabList";
 import { TabId } from "../../model/TabId";
 import { getWindows } from "../../repository/WindowsRepository";
 import { removeTab } from "../../repository/TabsRepository";
+import { PopupSize } from "../../model/settings/PopupSize";
+import { getPopupSizeSetting } from "../../repository/SettingsRepository";
 
 export default function App() {
   const [windowsState, setWindowsState] = useState(TbWindows.empty());
+  const [popupSizeState, setPopupSizeState] = useState<PopupSize>(null)
   useEffect(() => {
-    const setWindows = async () => {
+    const initState = async () => {
       setWindowsState(await getWindows());
+      setPopupSizeState(await getPopupSizeSetting());
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    setWindows();
+    initState();
   }, []);
 
   const onRemoveTab = async (tabId: TabId) => {
@@ -29,46 +33,33 @@ export default function App() {
   const unfocusedWindowsTabList = windowsState.unfocusedWindows.map(
     (window, index) => {
       return (
-        <div
-          key={window.id.value}
-          role="tabpanel"
-          hidden={selectedIndex !== index + 1}
-          id={`simple-tabpanel-${index + 1}`}
-          aria-labelledby={`simple-tab-${index + 1}`}
-        >
-          {selectedIndex === index + 1 && (
+          selectedIndex === index + 1 && (
             <TabList
               windows={windowsState}
               tabs={window.tabs}
               onRemoveTab={onRemoveTab}
             />
-          )}
-        </div>
+          )
       );
     }
   );
 
   const focusedWindowsTabList = (
-    <div
-      role="tabpanel"
-      hidden={selectedIndex !== 0}
-      id={"simple-tabpanel-0"}
-      aria-labelledby={"simple-tab-0"}
-    >
-      {selectedIndex === 0 && (
+      selectedIndex === 0 && (
         <TabList
           windows={windowsState}
           tabs={windowsState.focusedWindowTabs}
           onRemoveTab={onRemoveTab}
         />
-      )}
-    </div>
+      )
   );
 
+  if (popupSizeState === null) return <></>
+
   return (
-    <div>
+    <Box style={{ maxHeight: popupSizeState.height, width: popupSizeState.width, overflowY: 'auto', boxSizing: 'content-box' }}>
       <CssBaseline />
-      <Box sx={{ width: 400 }}>
+      <Box>
         <Header />
         <WindowTabs
           currentWindow={windowsState.currentWindow}
@@ -79,6 +70,6 @@ export default function App() {
         {focusedWindowsTabList}
         {unfocusedWindowsTabList}
       </Box>
-    </div>
+    </Box>
   );
 }

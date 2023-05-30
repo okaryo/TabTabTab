@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Card,
+  CardHeader,
   Checkbox,
   FormControl,
   FormControlLabel,
@@ -129,7 +130,15 @@ const TabCleanerSettingForm = () => {
   return (
     <Box>
       <Card sx={{ p: 2 }}>
-        <FormControl error={submittionState.isError}>
+        <CardHeader
+          sx={{ p: 0 }}
+          title={
+            <Typography variant="subtitle1" component="h3">
+              Clean up unused tabs automatically
+            </Typography>
+          }
+        />
+        <FormControl error={submittionState.isError} sx={{ width: "100%" }}>
           <Stack spacing={2}>
             <Box>
               <FormControlLabel
@@ -141,9 +150,6 @@ const TabCleanerSettingForm = () => {
                 }
                 label={
                   <Stack>
-                    <Typography variant="subtitle1" component="h3">
-                      Clean up unused tabs automatically
-                    </Typography>
                     <Typography
                       variant="caption"
                       component="p"
