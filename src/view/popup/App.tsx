@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { TbWindows } from "../../model/Windows";
-import { Box } from "@mui/system";
-import { CssBaseline } from "@mui/material";
 import Header from "./Header";
 import WindowTabs from "./WindowTabs";
 import TabList from "./TabList";
@@ -10,6 +8,8 @@ import { getWindows } from "../../repository/WindowsRepository";
 import { removeTab } from "../../repository/TabsRepository";
 import { PopupSize } from "../../model/settings/PopupSize";
 import { getPopupSizeSetting } from "../../repository/SettingsRepository";
+import CssBaseline from "@mui/material/CssBaseline";
+import Box from "@mui/material/Box";
 
 export default function App() {
   const [windowsState, setWindowsState] = useState(TbWindows.empty());
@@ -60,7 +60,6 @@ export default function App() {
         maxHeight: popupSizeState.height,
         width: popupSizeState.width,
         overflowY: "auto",
-        boxSizing: "content-box",
       }}
     >
       <CssBaseline />

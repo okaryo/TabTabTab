@@ -1,15 +1,4 @@
 import React, { useState } from "react";
-import {
-  Box,
-  Collapse,
-  IconButton,
-  List,
-  ListItem,
-  ListItemButton,
-  ListItemText,
-  Stack,
-  Typography,
-} from "@mui/material";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PushPin from "@mui/icons-material/PushPin";
@@ -17,6 +6,15 @@ import TabItem from "./TabItem";
 import { PinnedTabs } from "../../model/PinnedTabs";
 import { TabId } from "../../model/TabId";
 import { TbWindows } from "../../model/Windows";
+import Stack from "@mui/material/Stack";
+import Box from "@mui/material/Box";
+import List from "@mui/material/List";
+import ListItem from "@mui/material/ListItem";
+import IconButton from "@mui/material/IconButton";
+import ListItemButton from "@mui/material/ListItemButton";
+import ListItemText from "@mui/material/ListItemText";
+import Typography from "@mui/material/Typography";
+import Collapse from "@mui/material/Collapse";
 
 type PinnedTabListProps = {
   windows: TbWindows;

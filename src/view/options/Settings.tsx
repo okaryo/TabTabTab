@@ -1,6 +1,7 @@
 import React from "react";
+import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
 import TabCleanerSettingForm from "./TabCleanerSettingForm";
-import { Divider, Stack } from "@mui/material";
 import Footer from "./Footer";
 import PopupSizeSettingForm from "./PopupSizeSettingForm";
 

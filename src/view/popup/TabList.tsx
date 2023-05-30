@@ -1,5 +1,4 @@
 import React from "react";
-import { List } from "@mui/material";
 import TabItem from "./TabItem";
 import GroupedTabList from "./GroupedTabList";
 import PinnedTabList from "./PinnedTabList";
@@ -9,6 +8,7 @@ import { GroupedTabs } from "../../model/GroupedTabs";
 import { TabId } from "../../model/TabId";
 import { Tab } from "../../model/Tab";
 import { TbWindows } from "../../model/Windows";
+import List from "@mui/material/List";
 
 type TabListProps = {
   windows: TbWindows;

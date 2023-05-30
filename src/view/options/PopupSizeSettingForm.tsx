@@ -1,16 +1,14 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardHeader,
-  FormControl,
-  FormHelperText,
-  Snackbar,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
 import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import Stack from "@mui/material/Stack";
+import TextField from "@mui/material/TextField";
+import Button from "@mui/material/Button";
+import FormHelperText from "@mui/material/FormHelperText";
+import Snackbar from "@mui/material/Snackbar";
 import {
   getPopupSizeSetting,
   updatePopupSizeSetting,

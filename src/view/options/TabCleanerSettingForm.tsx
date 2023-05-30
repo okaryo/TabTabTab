@@ -1,21 +1,19 @@
-import {
-  Box,
-  Button,
-  Card,
-  CardHeader,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-  FormHelperText,
-  InputLabel,
-  MenuItem,
-  Select,
-  Snackbar,
-  Stack,
-  TextField,
-  Typography,
-} from "@mui/material";
 import React, { useEffect, useState } from "react";
+import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardHeader from "@mui/material/CardHeader";
+import Typography from "@mui/material/Typography";
+import FormControl from "@mui/material/FormControl";
+import Stack from "@mui/material/Stack";
+import FormControlLabel from "@mui/material/FormControlLabel";
+import Checkbox from "@mui/material/Checkbox";
+import TextField from "@mui/material/TextField";
+import InputLabel from "@mui/material/InputLabel";
+import Select from "@mui/material/Select";
+import FormHelperText from "@mui/material/FormHelperText";
+import Button from "@mui/material/Button";
+import MenuItem from "@mui/material/MenuItem";
+import Snackbar from "@mui/material/Snackbar";
 import {
   getTabCleanerSetting,
   updateTabCleanerSetting,
