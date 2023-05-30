@@ -116,7 +116,7 @@ const TabItem = (props: TabItemProps) => {
       disablePadding
     >
       <ListItemButton
-        sx={{ width: '100%', pt: 0, pb: 0, ...sx }}
+        sx={{ width: "100%", pt: 0, pb: 0, ...sx }}
         color="info"
         selected={tab.isFocused}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises

@@ -13,7 +13,7 @@ import { getPopupSizeSetting } from "../../repository/SettingsRepository";
 
 export default function App() {
   const [windowsState, setWindowsState] = useState(TbWindows.empty());
-  const [popupSizeState, setPopupSizeState] = useState<PopupSize>(null)
+  const [popupSizeState, setPopupSizeState] = useState<PopupSize>(null);
   useEffect(() => {
     const initState = async () => {
       setWindowsState(await getWindows());
@@ -33,31 +33,36 @@ export default function App() {
   const unfocusedWindowsTabList = windowsState.unfocusedWindows.map(
     (window, index) => {
       return (
-          selectedIndex === index + 1 && (
-            <TabList
-              windows={windowsState}
-              tabs={window.tabs}
-              onRemoveTab={onRemoveTab}
-            />
-          )
+        selectedIndex === index + 1 && (
+          <TabList
+            windows={windowsState}
+            tabs={window.tabs}
+            onRemoveTab={onRemoveTab}
+          />
+        )
       );
     }
   );
 
-  const focusedWindowsTabList = (
-      selectedIndex === 0 && (
-        <TabList
-          windows={windowsState}
-          tabs={windowsState.focusedWindowTabs}
-          onRemoveTab={onRemoveTab}
-        />
-      )
+  const focusedWindowsTabList = selectedIndex === 0 && (
+    <TabList
+      windows={windowsState}
+      tabs={windowsState.focusedWindowTabs}
+      onRemoveTab={onRemoveTab}
+    />
   );
 
-  if (popupSizeState === null) return <></>
+  if (popupSizeState === null) return <></>;
 
   return (
-    <Box style={{ maxHeight: popupSizeState.height, width: popupSizeState.width, overflowY: 'auto', boxSizing: 'content-box' }}>
+    <Box
+      style={{
+        maxHeight: popupSizeState.height,
+        width: popupSizeState.width,
+        overflowY: "auto",
+        boxSizing: "content-box",
+      }}
+    >
       <CssBaseline />
       <Box>
         <Header />

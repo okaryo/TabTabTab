@@ -11,7 +11,10 @@ import {
   Typography,
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
-import { getPopupSizeSetting, updatePopupSizeSetting } from "../../repository/SettingsRepository";
+import {
+  getPopupSizeSetting,
+  updatePopupSizeSetting,
+} from "../../repository/SettingsRepository";
 import { PopupSize } from "../../model/settings/PopupSize";
 
 type SettingForm = {
@@ -25,10 +28,10 @@ type SubmittionState = {
 };
 
 const PopupSizeSettingForm = () => {
-  const MIN_HEIGHT = 200
-  const MAX_HEIGHT = 600
-  const MIN_WIDTH = 400
-  const MAX_WIDTH = 800
+  const MIN_HEIGHT = 200;
+  const MAX_HEIGHT = 600;
+  const MIN_WIDTH = 400;
+  const MAX_WIDTH = 800;
 
   const [settingState, setSettingState] = useState<SettingForm>({
     height: "500",
@@ -67,21 +70,30 @@ const PopupSizeSettingForm = () => {
 
     const { height, width } = settingState;
     if (!Number.isInteger(Number(height)) || !Number.isInteger(Number(width))) {
-      setSubmittionState({ isLoading: false, isError: true, errorMessage: "Input an integer." });
-      return
+      setSubmittionState({
+        isLoading: false,
+        isError: true,
+        errorMessage: "Input an integer.",
+      });
+      return;
     }
-    if (MIN_HEIGHT > Number(height) || Number(height) > MAX_HEIGHT || MIN_WIDTH > Number(width) || Number(width) > MAX_WIDTH) {
-      setSubmittionState({ isLoading: false, isError: true, errorMessage: `The height should be set to a value between ${MIN_HEIGHT} and ${MAX_HEIGHT}, and the width should be set to a value between ${MIN_WIDTH} and ${MAX_WIDTH}.` });
-      return
+    if (
+      MIN_HEIGHT > Number(height) ||
+      Number(height) > MAX_HEIGHT ||
+      MIN_WIDTH > Number(width) ||
+      Number(width) > MAX_WIDTH
+    ) {
+      setSubmittionState({
+        isLoading: false,
+        isError: true,
+        errorMessage: `The height should be set to a value between ${MIN_HEIGHT} and ${MAX_HEIGHT}, and the width should be set to a value between ${MIN_WIDTH} and ${MAX_WIDTH}.`,
+      });
+      return;
     }
-
 
     try {
       setSubmittionState({ isLoading: true, isError: false, errorMessage: "" });
-      const setting = new PopupSize(
-        Number(height),
-        Number(width),
-      );
+      const setting = new PopupSize(Number(height), Number(width));
       await updatePopupSizeSetting(setting);
       setSubmittionState({
         isLoading: false,
@@ -109,7 +121,11 @@ const PopupSizeSettingForm = () => {
             </Typography>
           }
           subheader={
-            <Typography variant="caption" component="p" style={{ color: "grey" }}>
+            <Typography
+              variant="caption"
+              component="p"
+              style={{ color: "grey" }}
+            >
               {`Height: ${MIN_HEIGHT}-${MAX_HEIGHT}px, Width: ${MIN_WIDTH}-${MAX_WIDTH}px required.`}
             </Typography>
           }
