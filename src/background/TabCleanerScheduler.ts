@@ -4,9 +4,6 @@ import { getWindows } from "../repository/WindowsRepository";
 
 export const activateTabCleanerScheduler = async () => {
   const tabCleanerAlarmName = "tabCleanerAlarm";
-  chrome.storage.session.onChanged.addListener((object) => {
-    console.log(object);
-  });
   await chrome.alarms.create(tabCleanerAlarmName, {
     when: 0,
     periodInMinutes: 1,
