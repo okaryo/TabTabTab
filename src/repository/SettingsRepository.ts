@@ -35,7 +35,7 @@ export const getPopupSizeSetting = async (): Promise<PopupSize> => {
   const { popup_size_setting } = (await chrome.storage.local.get(
     ChromeLocalStorage.POPUP_SIZE_SETTING_KEY
   )) as PopupSizeSettingStoredData;
-  if (!popup_size_setting) return new PopupSize(500, 500);
+  if (!popup_size_setting) return PopupSize.default();
 
   return new PopupSize(popup_size_setting.height, popup_size_setting.width);
 };
