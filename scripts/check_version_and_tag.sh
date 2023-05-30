@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Usage: ./scripts/check_version_and_tag.sh 1.0.0
-# If the script does not have execute permissions, run `chmod +x ./scripts/check_version_and_tag.sh` to grant it.`
+# If the script does not have execute permissions, run `chmod +x ./scripts/check_version_and_tag.sh` to grant it.
 
 # Get argument
 tag_version=$1
