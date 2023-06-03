@@ -25,6 +25,8 @@ type TabItemProps = {
 const TabItem = (props: TabItemProps) => {
   const { windows, tab, sx, onRemoveTab } = props;
   const onTapTabItem = (): Promise<void> => focusTab(tab.id);
+  const [isHovered, setIsHovered] = React.useState(false);
+  const shouldShowCloseButton = tab.isFocused || isHovered;
 
   let favIcon: ReactElement;
   const favIconUrl = tab.favIconUrl;
@@ -103,15 +105,19 @@ const TabItem = (props: TabItemProps) => {
   return (
     <ListItem
       secondaryAction={
-        <IconButton
-          edge="end"
-          aria-label="delete"
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onClick={onClickDeleteButton}
-        >
-          <Clear />
-        </IconButton>
+        shouldShowCloseButton && (
+          <IconButton
+            edge="end"
+            aria-label="delete"
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onClick={onClickDeleteButton}
+          >
+            <Clear />
+          </IconButton>
+        )
       }
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
       disablePadding
     >
       <ListItemButton
