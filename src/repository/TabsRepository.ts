@@ -38,3 +38,7 @@ export const deleteLastActivatedAtOfTab = async (tabId: TabId) => {
     [ChromeSessionStorage.LAST_ACTIVATED_AT_KEY]: last_activated_at,
   });
 };
+
+export const bookmarkTab = async (title: string, url: string) => {
+  await chrome.bookmarks.create({ title: title, url: url });
+};

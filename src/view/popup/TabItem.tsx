@@ -6,12 +6,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { SxProps } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { Tab } from "./../../model/Tab";
 import { TabId } from "./../../model/TabId";
 import { TbWindows } from "./../../model/Windows";
 import { focusTab } from "./../../repository/TabsRepository";
+import TabActionMenu from "./TabActionMenu";
 import TabFavicon from "./TabFavicon";
 
 type TabItemProps = {
@@ -20,6 +21,7 @@ type TabItemProps = {
   sx?: SxProps;
   onRemoveTab: (tabId: TabId) => Promise<void>;
 };
+type AnchorPosition = { top: number; left: number } | null;
 
 const TabItem = (props: TabItemProps) => {
   const { windows, tab, sx, onRemoveTab } = props;
@@ -71,6 +73,26 @@ const TabItem = (props: TabItemProps) => {
 
   const onClickDeleteButton = () => onRemoveTab(tab.id);
 
+  const [menuAnchorPosition, setMenuAnchorPosition] =
+    React.useState<AnchorPosition | null>(null);
+  const [isMenuActionCompleted, setIsMenuActionCompleted] =
+    React.useState(false);
+  useEffect(() => {
+    if (isMenuActionCompleted) {
+      const timer = setTimeout(() => {
+        setIsMenuActionCompleted(false);
+      }, 3000);
+
+      return () => clearTimeout(timer);
+    }
+  }, [isMenuActionCompleted]);
+  const onRightClick = (event: React.MouseEvent<HTMLElement>) => {
+    event.preventDefault();
+    setMenuAnchorPosition({ top: event.clientY, left: event.clientX });
+  };
+  const onCloseMenu = () => setMenuAnchorPosition(null);
+  const onMenuActionCompleted = () => setIsMenuActionCompleted(true);
+
   return (
     <ListItem
       secondaryAction={
@@ -87,6 +109,7 @@ const TabItem = (props: TabItemProps) => {
       }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
+      onContextMenu={onRightClick}
       disablePadding
     >
       <ListItemButton
@@ -96,7 +119,11 @@ const TabItem = (props: TabItemProps) => {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={onTapTabItem}
       >
-        <TabFavicon url={tab.favIconUrl} />
+        <TabFavicon
+          url={tab.favIconUrl}
+          shouldShowCheckIcon={isMenuActionCompleted}
+          style={{ marginRight: "20px" }}
+        />
         <ListItemText
           primary={
             <Typography
@@ -151,6 +178,13 @@ const TabItem = (props: TabItemProps) => {
           }
         />
       </ListItemButton>
+      <TabActionMenu
+        tab={tab}
+        isOpenMenu={Boolean(menuAnchorPosition)}
+        anchorPostion={menuAnchorPosition}
+        onCloseMenu={onCloseMenu}
+        onMenuActionCompleted={onMenuActionCompleted}
+      />
     </ListItem>
   );
 };

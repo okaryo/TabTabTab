@@ -15,10 +15,11 @@
     }
   },
   "permissions": [
-    "tabs",
+    "alarms",
+    "bookmarks",
     "tabGroups",
-    "storage",
-    "alarms"
+    "tabs",
+    "storage"
   ],
   "background" : {
     "service_worker" : "js/background.js"
