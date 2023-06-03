@@ -1,4 +1,7 @@
+/* eslint @typescript-eslint/no-misused-promises: 0 */
+
 import BookmarkIcon from "@mui/icons-material/Bookmark";
+import LinkIcon from "@mui/icons-material/Link";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
@@ -16,14 +19,30 @@ type TabActionMenuProps = {
   onMenuActionCompleted: () => void;
 };
 type AnchorPosition = { top: number; left: number } | null;
+type ActionMenu = {
+  label: string;
+  icon: React.ReactNode;
+  action: () => void;
+};
 
 const TabActionMenu = (props: TabActionMenuProps) => {
   const { tab, isOpenMenu, anchorPostion, onCloseMenu, onMenuActionCompleted } =
     props;
 
-  const onBookMark = () => {
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
-    bookmarkTab(tab.title, tab.url);
+  const menus: ActionMenu[] = [
+    {
+      label: "Copy URL",
+      icon: <LinkIcon fontSize="small" />,
+      action: () => navigator.clipboard.writeText(tab.url),
+    },
+    {
+      label: "Bookmark",
+      icon: <BookmarkIcon fontSize="small" />,
+      action: () => bookmarkTab(tab.title, tab.url),
+    },
+  ];
+  const onClickMenu = (action: () => void) => {
+    action();
     onCloseMenu();
     onMenuActionCompleted();
   };
@@ -36,12 +55,16 @@ const TabActionMenu = (props: TabActionMenuProps) => {
       anchorReference="anchorPosition"
       anchorPosition={anchorPostion}
     >
-      <MenuItem onClick={onBookMark} style={{ minHeight: "24px" }}>
-        <ListItemIcon>
-          <BookmarkIcon fontSize="small" />
-        </ListItemIcon>
-        <ListItemText>Bookmark</ListItemText>
-      </MenuItem>
+      {menus.map((menu) => (
+        <MenuItem
+          key={menu.label}
+          onClick={() => onClickMenu(menu.action)}
+          style={{ minHeight: "24px" }}
+        >
+          <ListItemIcon>{menu.icon}</ListItemIcon>
+          <ListItemText>{menu.label}</ListItemText>
+        </MenuItem>
+      ))}
     </Menu>
   );
 };
