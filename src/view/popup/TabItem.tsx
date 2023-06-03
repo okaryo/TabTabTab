@@ -1,6 +1,4 @@
 import Clear from "@mui/icons-material/Clear";
-import TabIcon from "@mui/icons-material/Tab";
-import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
@@ -8,12 +6,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { SxProps } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React, { ReactElement } from "react";
+import React from "react";
 
 import { Tab } from "./../../model/Tab";
 import { TabId } from "./../../model/TabId";
 import { TbWindows } from "./../../model/Windows";
 import { focusTab } from "./../../repository/TabsRepository";
+import TabFavicon from "./TabFavicon";
 
 type TabItemProps = {
   windows: TbWindows;
@@ -27,36 +26,6 @@ const TabItem = (props: TabItemProps) => {
   const onTapTabItem = (): Promise<void> => focusTab(tab.id);
   const [isHovered, setIsHovered] = React.useState(false);
   const shouldShowCloseButton = tab.isFocused || isHovered;
-
-  let favIcon: ReactElement;
-  const favIconUrl = tab.favIconUrl;
-  if (
-    favIconUrl !== undefined &&
-    (favIconUrl.startsWith("https") || favIconUrl.startsWith("http"))
-  ) {
-    favIcon = (
-      <Box
-        component="img"
-        sx={{
-          height: 20,
-          width: 20,
-          marginRight: 2,
-        }}
-        src={favIconUrl}
-      />
-    );
-  } else {
-    favIcon = (
-      <TabIcon
-        color="disabled"
-        sx={{
-          height: 20,
-          width: 20,
-          marginRight: 2,
-        }}
-      />
-    );
-  }
 
   let sinceLastActivatedAt = "";
   const milliSecondsSinceLastActivatedAt = tab.milliSecondsSinceLastActivatedAt;
@@ -127,7 +96,7 @@ const TabItem = (props: TabItemProps) => {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={onTapTabItem}
       >
-        {favIcon}
+        <TabFavicon url={tab.favIconUrl} />
         <ListItemText
           primary={
             <Typography
