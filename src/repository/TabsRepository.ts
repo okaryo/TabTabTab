@@ -1,4 +1,5 @@
 import { TabId } from "../model/TabId";
+import { WindowId } from "../model/WindowId";
 
 import {
   ChromeSessionStorage,
@@ -46,4 +47,13 @@ export const bookmarkTab = async (title: string, url: string) => {
 
 export const pinTab = async (tabId: TabId) => {
   await chrome.tabs.update(tabId.value, { pinned: true });
+};
+
+export const screenshotVisibleArea = (
+  windowId: WindowId,
+  callback: (dataUrl: string) => void
+) => {
+  chrome.tabs.captureVisibleTab(windowId.value, { format: "png" }, (dataUrl) =>
+    callback(dataUrl)
+  );
 };

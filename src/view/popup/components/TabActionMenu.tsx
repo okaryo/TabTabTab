@@ -2,6 +2,7 @@
 
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import LinkIcon from "@mui/icons-material/Link";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -10,7 +11,10 @@ import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 
 import { Tab } from "../../../model/Tab";
-import { bookmarkTab } from "../../../repository/TabsRepository";
+import {
+  bookmarkTab,
+  screenshotVisibleArea,
+} from "../../../repository/TabsRepository";
 import { usePinTab } from "../hooks/usePinTab";
 
 type TabActionMenuProps = {
@@ -49,6 +53,21 @@ const TabActionMenu = (props: TabActionMenuProps) => {
       action: () => pinTab(tab),
     },
   ];
+  if (tab.isFocused) {
+    menus.push({
+      label: "Screenshot Visible Area",
+      icon: <PhotoCameraIcon fontSize="small" />,
+      action: () => {
+        screenshotVisibleArea(tab.windowId, (dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = `${tab.title}.png`;
+          link.click();
+          link.remove();
+        });
+      },
+    });
+  }
   const onClickMenu = (action: () => void) => {
     action();
     onCloseMenu();
