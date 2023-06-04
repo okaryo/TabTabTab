@@ -7,10 +7,10 @@
     "dev": "webpack --config webpack.dev.js",
     "watch": "webpack -w --config webpack.dev.js",
     "test": "jest",
-    "lint": "eslint ./src/**/*.{ts,tsx}",
-    "lint:fix": "eslint --fix ./src/**/*.{ts,tsx}",
-    "format": "prettier ./src/**/* --check",
-    "format:fix": "prettier ./src/**/* --write"
+    "lint": "eslint './src/**/*.{js,ts,jsx,tsx}'",
+    "lint:fix": "eslint --fix './src/**/*.{js,ts,jsx,tsx}'",
+    "format": "prettier './src/**/*.{js,ts,jsx,tsx}' --check",
+    "format:fix": "prettier './src/**/*.{js,ts,jsx,tsx}' --write"
   },
   "author": "okaryo",
   "license": "MIT",
