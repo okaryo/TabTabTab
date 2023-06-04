@@ -10,13 +10,13 @@ import React, { useEffect } from "react";
 
 import { Tab } from "./../../../model/Tab";
 import { TabId } from "./../../../model/TabId";
-import { TbWindows } from "./../../../model/Windows";
+import { Windows } from "./../../../model/Windows";
 import { focusTab } from "./../../../repository/TabsRepository";
 import TabActionMenu from "./TabActionMenu";
 import TabFavicon from "./TabFavicon";
 
 type TabItemProps = {
-  windows: TbWindows;
+  windows: Windows;
   tab: Tab;
   sx?: SxProps;
   onRemoveTab: (tabId: TabId) => Promise<void>;

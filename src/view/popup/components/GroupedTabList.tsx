@@ -14,11 +14,11 @@ import React, { useState } from "react";
 
 import { GroupedTabs } from "./../../../model/GroupedTabs";
 import { TabId } from "./../../../model/TabId";
-import { TbWindows } from "./../../../model/Windows";
+import { Windows } from "./../../../model/Windows";
 import TabItem from "./TabItem";
 
 type GroupedTabListProps = {
-  windows: TbWindows;
+  windows: Windows;
   tabs: GroupedTabs;
   onRemoveTab: (tabId: TabId) => Promise<void>;
 };

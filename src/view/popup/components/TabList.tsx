@@ -6,13 +6,13 @@ import { PinnedTabs } from "./../../../model/PinnedTabs";
 import { Tab } from "./../../../model/Tab";
 import { TabId } from "./../../../model/TabId";
 import { Tabs } from "./../../../model/Tabs";
-import { TbWindows } from "./../../../model/Windows";
+import { Windows } from "./../../../model/Windows";
 import GroupedTabList from "./GroupedTabList";
 import PinnedTabList from "./PinnedTabList";
 import TabItem from "./TabItem";
 
 type TabListProps = {
-  windows: TbWindows;
+  windows: Windows;
   tabs: Tabs;
   onRemoveTab: (tabId: TabId) => Promise<void>;
 };

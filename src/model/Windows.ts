@@ -5,22 +5,21 @@ import { PinnedTabs } from "./PinnedTabs";
 import { Tab } from "./Tab";
 import { TabId } from "./TabId";
 import { Tabs } from "./Tabs";
-import { TbWindow } from "./Window";
+import { Window } from "./Window";
 import { WindowId } from "./WindowId";
 
-// NOTE: 'Tb' is a prefix to avoid class name conflict with other libraries.
-export class TbWindows {
-  constructor(private _values: TbWindow[]) {}
+export class Windows {
+  constructor(private _values: Window[]) {}
 
-  static empty(): TbWindows {
-    return new TbWindows([]);
+  static empty(): Windows {
+    return new Windows([]);
   }
 
   get length(): number {
     return this._values.length;
   }
 
-  get values(): TbWindow[] {
+  get values(): Window[] {
     return this._values;
   }
 
@@ -33,13 +32,13 @@ export class TbWindows {
     return focusedWindow === undefined ? Tabs.empty() : focusedWindow.tabs;
   }
 
-  get currentWindow(): TbWindow {
+  get currentWindow(): Window {
     return this._values.find((value) => value.isFocused);
   }
 
-  get unfocusedWindows(): TbWindows {
+  get unfocusedWindows(): Windows {
     const unfocusedWindows = this._values.filter((value) => !value.isFocused);
-    return new TbWindows(unfocusedWindows);
+    return new Windows(unfocusedWindows);
   }
 
   get allTabs(): Tab[] {
@@ -47,18 +46,18 @@ export class TbWindows {
     return tabsByWindow.map((tabs) => tabs.flatTabs).flat();
   }
 
-  add(window: TbWindow): TbWindows {
-    return new TbWindows([...this._values, window]);
+  add(window: Window): Windows {
+    return new Windows([...this._values, window]);
   }
 
-  map<T>(callback: (value: TbWindow, index: number) => T): T[] {
+  map<T>(callback: (value: Window, index: number) => T): T[] {
     return this._values.map<T>((value, index) => callback(value, index));
   }
 
-  addTab(windowId: WindowId, isFocused: boolean, tab: Tab): TbWindows {
+  addTab(windowId: WindowId, isFocused: boolean, tab: Tab): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
-      const newWindow = new TbWindow(windowId, new Tabs([tab]), isFocused);
+      const newWindow = new Window(windowId, new Tabs([tab]), isFocused);
       return this.add(newWindow);
     }
 
@@ -66,7 +65,7 @@ export class TbWindows {
     const newWindows = this.map((window) => {
       return window.id.equalTo(newWindow.id) ? newWindow : window;
     });
-    return new TbWindows(newWindows);
+    return new Windows(newWindows);
   }
 
   addGroupedTab(
@@ -76,11 +75,11 @@ export class TbWindows {
     groupId: GroupId,
     groupName: string,
     color: GroupedColor
-  ): TbWindows {
+  ): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
       const groupedTabs = new GroupedTabs(groupId, groupName, color, [tab]);
-      const newWindow = new TbWindow(
+      const newWindow = new Window(
         windowId,
         new Tabs([groupedTabs]),
         isFocused
@@ -92,18 +91,14 @@ export class TbWindows {
     const newWindows = this.map((window) => {
       return window.id.equalTo(newWindow.id) ? newWindow : window;
     });
-    return new TbWindows(newWindows);
+    return new Windows(newWindows);
   }
 
-  addPinnedTab(windowId: WindowId, isFocused: boolean, tab: Tab): TbWindows {
+  addPinnedTab(windowId: WindowId, isFocused: boolean, tab: Tab): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
       const pinnedTabs = new PinnedTabs([tab]);
-      const newWindow = new TbWindow(
-        windowId,
-        new Tabs([pinnedTabs]),
-        isFocused
-      );
+      const newWindow = new Window(windowId, new Tabs([pinnedTabs]), isFocused);
       return this.add(newWindow);
     }
 
@@ -111,13 +106,13 @@ export class TbWindows {
     const newWindows = this.map((window) => {
       return window.id.equalTo(newWindow.id) ? newWindow : window;
     });
-    return new TbWindows(newWindows);
+    return new Windows(newWindows);
   }
 
-  updateLastActivatedAtOfTabBy(tabId: TabId, lastActivatedAt: Date): TbWindows {
+  updateLastActivatedAtOfTabBy(tabId: TabId, lastActivatedAt: Date): Windows {
     let tab: Tab = null;
-    for (const tbWindow of this._values) {
-      tab = tbWindow.findTabBy(tabId);
+    for (const window of this._values) {
+      tab = window.findTabBy(tabId);
       if (tab !== null) break;
     }
     if (tab === null) return this;
@@ -125,15 +120,15 @@ export class TbWindows {
     const newWindows = this._values.map((value) =>
       value.updateTab(tab.updateLastActivatedAt(lastActivatedAt))
     );
-    return new TbWindows(newWindows);
+    return new Windows(newWindows);
   }
 
-  removeTabBy(tabId: TabId): TbWindows {
+  removeTabBy(tabId: TabId): Windows {
     const newWindows = this._values.map((value) => value.removeTabBy(tabId));
-    return new TbWindows(newWindows);
+    return new Windows(newWindows);
   }
 
-  private findWindowBy(windowId: WindowId): TbWindow | null {
+  private findWindowBy(windowId: WindowId): Window | null {
     const window = this._values.find((value) => windowId.equalTo(value.id));
     return window === undefined ? null : window;
   }

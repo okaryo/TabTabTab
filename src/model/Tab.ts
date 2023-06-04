@@ -1,5 +1,5 @@
 import { TabId } from "./TabId";
-import { TbWindows } from "./Windows";
+import { Windows } from "./Windows";
 
 export class Tab {
   constructor(
@@ -57,7 +57,7 @@ export class Tab {
     );
   }
 
-  hasDuplicatedTabs(windows: TbWindows): boolean {
+  hasDuplicatedTabs(windows: Windows): boolean {
     return windows.values.some((window) => {
       return window.flatTabs.some(
         (tab) =>

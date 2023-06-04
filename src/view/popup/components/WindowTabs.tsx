@@ -2,14 +2,14 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import React from "react";
 
-import { TbWindow } from "./../../../model/Window";
-import { TbWindows } from "./../../../model/Windows";
+import { Window } from "./../../../model/Window";
+import { Windows } from "./../../../model/Windows";
 import WindowTab from "./WindowTab";
 
 type WindowTabsProps = {
   selectedIndex: number;
-  currentWindow: TbWindow;
-  unfocusedWindows: TbWindows;
+  currentWindow: Window;
+  unfocusedWindows: Windows;
   onSelectIndex: (index: number) => void;
 };
 

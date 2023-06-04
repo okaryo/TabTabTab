@@ -5,16 +5,15 @@ import { TabId } from "./TabId";
 import { Tabs } from "./Tabs";
 import { WindowId } from "./WindowId";
 
-// NOTE: 'Tb' is a prefix to avoid class name conflict with other libraries.
-export class TbWindow {
+export class Window {
   constructor(
     private _id: WindowId,
     private _tabs: Tabs,
     private _isFocused: boolean
   ) {}
 
-  static initializeBy(windowId: WindowId, isFocused = false): TbWindow {
-    return new TbWindow(windowId, Tabs.empty(), isFocused);
+  static initializeBy(windowId: WindowId, isFocused = false): Window {
+    return new Window(windowId, Tabs.empty(), isFocused);
   }
 
   get id(): WindowId {
@@ -37,13 +36,13 @@ export class TbWindow {
     return this._tabs.totalTabCount;
   }
 
-  addTab(tab: Tab): TbWindow {
-    return new TbWindow(this._id, this._tabs.add(tab), this._isFocused);
+  addTab(tab: Tab): Window {
+    return new Window(this._id, this._tabs.add(tab), this._isFocused);
   }
 
-  addPinnedTab(tab: Tab): TbWindow {
+  addPinnedTab(tab: Tab): Window {
     const newTabs = this._tabs.addPinnedTab(tab);
-    return new TbWindow(this._id, newTabs, this._isFocused);
+    return new Window(this._id, newTabs, this._isFocused);
   }
 
   addGroupedTab(
@@ -51,22 +50,22 @@ export class TbWindow {
     groupName: string,
     color: GroupedColor,
     tab: Tab
-  ): TbWindow {
+  ): Window {
     const newTabs = this._tabs.addGroupedTabBy(groupId, groupName, color, tab);
-    return new TbWindow(this._id, newTabs, this._isFocused);
+    return new Window(this._id, newTabs, this._isFocused);
   }
 
   findTabBy(tabId: TabId): Tab | null {
     return this._tabs.findTabBy(tabId);
   }
 
-  updateTab(tab: Tab): TbWindow {
+  updateTab(tab: Tab): Window {
     const newTabs = this._tabs.updateTab(tab);
-    return new TbWindow(this._id, newTabs, this._isFocused);
+    return new Window(this._id, newTabs, this._isFocused);
   }
 
-  removeTabBy(tabId: TabId): TbWindow {
+  removeTabBy(tabId: TabId): Window {
     const newTabs = this._tabs.removeTabBy(tabId);
-    return new TbWindow(this._id, newTabs, this._isFocused);
+    return new Window(this._id, newTabs, this._isFocused);
   }
 }

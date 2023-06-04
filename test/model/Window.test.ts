@@ -4,21 +4,21 @@ import { GroupId } from '../../src/model/GroupId'
 import { Tab } from '../../src/model/Tab'
 import { TabId } from '../../src/model/TabId'
 import { Tabs } from '../../src/model/Tabs'
-import { TbWindow } from '../../src/model/Window'
+import { Window } from '../../src/model/Window'
 import { WindowId } from '../../src/model/WindowId'
 import buildTab from '../factory/TabFactory'
 
 describe('#initializeBy', () => {
   it('should generate empty window', () => {
-    const actual = TbWindow.initializeBy(new WindowId(1), false)
-    const expected = new TbWindow(new WindowId(1), new Tabs([]), false)
+    const actual = Window.initializeBy(new WindowId(1), false)
+    const expected = new Window(new WindowId(1), new Tabs([]), false)
     expect(actual).toStrictEqual(expected)
   })
 })
 
 describe('#id', () => {
   it('should return it', () => {
-    const actual = new TbWindow(new WindowId(1), new Tabs([]), false).id
+    const actual = new Window(new WindowId(1), new Tabs([]), false).id
     const expected = new WindowId(1)
     expect(actual).toStrictEqual(expected)
   })
@@ -26,7 +26,7 @@ describe('#id', () => {
 
 describe('#tabs', () => {
   it('should return tabs', () => {
-    const actual = new TbWindow(
+    const actual = new Window(
       new WindowId(1),
       new Tabs([
         new Tab(new TabId(1), 'title1', new URL('https://example.com/path'), 'https://favicon.com', false),
@@ -45,14 +45,14 @@ describe('#tabs', () => {
 describe('#isFocused', () => {
   describe('when window is focused', () => {
     it('should return true', () => {
-      const actual = new TbWindow(new WindowId(1), new Tabs([]), true).isFocused
+      const actual = new Window(new WindowId(1), new Tabs([]), true).isFocused
       expect(actual).toBeTruthy
     })
   })
 
   describe('when window is not focused', () => {
     it('should return false', () => {
-      const actual = new TbWindow(new WindowId(1), new Tabs([]), false).isFocused
+      const actual = new Window(new WindowId(1), new Tabs([]), false).isFocused
       expect(actual).toBeFalsy
     })
   })
@@ -60,7 +60,7 @@ describe('#isFocused', () => {
 
 describe('#tabCount', () => {
   it('should return tab count', () => {
-    const actual = new TbWindow(
+    const actual = new Window(
       new WindowId(1),
       new Tabs([
         new Tab(new TabId(1), 'title1', new URL('https://example.com/path'), 'https://favicon.com', false),
@@ -80,7 +80,7 @@ describe('#addPinnedTab', () => {})
 describe('#removeTabBy', () => {
   describe('when target tab is in grouped tab', () => {
     it('should remove tab', () => {
-      const actual = new TbWindow(
+      const actual = new Window(
         new WindowId(1),
         new Tabs([
           new GroupedTabs(
@@ -97,7 +97,7 @@ describe('#removeTabBy', () => {
         ]),
         false
       ).removeTabBy(new TabId(1))
-      const expected = new TbWindow(
+      const expected = new Window(
         new WindowId(1),
         new Tabs([
           new GroupedTabs(
@@ -119,7 +119,7 @@ describe('#removeTabBy', () => {
 
   describe('when target tab is normal tab', () => {
     it('should remove tab', () => {
-      const actual = new TbWindow(
+      const actual = new Window(
         new WindowId(1),
         new Tabs([
           new GroupedTabs(
@@ -136,7 +136,7 @@ describe('#removeTabBy', () => {
         ]),
         false
       ).removeTabBy(new TabId(3))
-      const expected = new TbWindow(
+      const expected = new Window(
         new WindowId(1),
         new Tabs([
           new GroupedTabs(

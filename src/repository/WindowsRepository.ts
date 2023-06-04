@@ -2,26 +2,26 @@ import { GroupedColor } from "./../model/GroupedColor";
 import { GroupId } from "./../model/GroupId";
 import { Tab } from "./../model/Tab";
 import { TabId } from "./../model/TabId";
-import { TbWindow } from "./../model/Window";
+import { Window } from "./../model/Window";
 import { WindowId } from "./../model/WindowId";
-import { TbWindows } from "./../model/Windows";
+import { Windows } from "./../model/Windows";
 import {
   ChromeSessionStorage,
   LastActivatedAtStoredData,
 } from "./ChromeStorage";
 
-export const getWindows = async (): Promise<TbWindows> => {
+export const getWindows = async (): Promise<Windows> => {
   const currentWindow = await getCurrentWindow();
   const unfocusedWindows = await getUnfocusedWindows();
-  const windows = new TbWindows([currentWindow, ...unfocusedWindows.values]);
+  const windows = new Windows([currentWindow, ...unfocusedWindows.values]);
   return applyLastActivatedAtOfTabInWindows(windows);
 };
 
-const getCurrentWindow = async (): Promise<TbWindow> => {
+const getCurrentWindow = async (): Promise<Window> => {
   const currentWindowTabs = await chrome.tabs.query({ currentWindow: true });
 
   const windowId = new WindowId(currentWindowTabs[0].windowId);
-  let currentWindow = TbWindow.initializeBy(windowId, true);
+  let currentWindow = Window.initializeBy(windowId, true);
   for (const tab of currentWindowTabs) {
     const newTab = new Tab(
       new TabId(tab.id),
@@ -50,10 +50,10 @@ const getCurrentWindow = async (): Promise<TbWindow> => {
   return currentWindow;
 };
 
-const getUnfocusedWindows = async (): Promise<TbWindows> => {
+const getUnfocusedWindows = async (): Promise<Windows> => {
   const unfocusedWindowTabs = await chrome.tabs.query({ currentWindow: false });
 
-  let windows = TbWindows.empty();
+  let windows = Windows.empty();
   for (const tab of unfocusedWindowTabs) {
     const windowId = new WindowId(tab.windowId);
     const newTab = new Tab(
@@ -86,14 +86,14 @@ const getUnfocusedWindows = async (): Promise<TbWindows> => {
 };
 
 const applyLastActivatedAtOfTabInWindows = async (
-  tbWindows: TbWindows
-): Promise<TbWindows> => {
-  let newWindows = tbWindows;
+  windows: Windows
+): Promise<Windows> => {
+  let newWindows = windows;
   const { last_activated_at } = (await chrome.storage.session.get(
     ChromeSessionStorage.LAST_ACTIVATED_AT_KEY
   )) as LastActivatedAtStoredData;
   if (!last_activated_at || Object.keys(last_activated_at).length === 0)
-    return tbWindows;
+    return windows;
 
   for (const [tabId, dateString] of Object.entries(last_activated_at)) {
     newWindows = newWindows.updateLastActivatedAtOfTabBy(
