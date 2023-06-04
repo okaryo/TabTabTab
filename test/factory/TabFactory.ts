@@ -1,5 +1,5 @@
-import { Tab } from "./../../src/model/Tab"
-import { TabId } from "./../../src/model/TabId"
+import { Tab } from "../../src/model/Tab"
+import { TabId } from "../../src/model/TabId"
 
 const buildTab = (id = 1, isFocused = false) => {
   return new Tab(

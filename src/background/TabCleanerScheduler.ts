@@ -1,6 +1,6 @@
-import { getTabCleanerSetting } from "./../repository/SettingsRepository";
-import { removeTab } from "./../repository/TabsRepository";
-import { getWindows } from "./../repository/WindowsRepository";
+import { getTabCleanerSetting } from "../repository/SettingsRepository";
+import { removeTab } from "../repository/TabsRepository";
+import { getWindows } from "../repository/WindowsRepository";
 
 export const activateTabCleanerScheduler = async () => {
   const tabCleanerAlarmName = "tabCleanerAlarm";

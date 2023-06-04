@@ -1,4 +1,5 @@
-import { TabId } from "./../model/TabId";
+import { TabId } from "../model/TabId";
+
 import {
   ChromeSessionStorage,
   LastActivatedAtStoredData,

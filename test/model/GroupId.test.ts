@@ -1,4 +1,4 @@
-import { GroupId } from "./../../src/model/GroupId"
+import { GroupId } from "../../src/model/GroupId"
 
 describe('#value', () => {
   it('should return id value', () => {

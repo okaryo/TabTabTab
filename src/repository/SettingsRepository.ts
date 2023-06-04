@@ -1,5 +1,6 @@
-import { PopupSize } from "./../model/settings/PopupSize";
-import { TabCleaner } from "./../model/settings/TabCleaner";
+import { PopupSize } from "../model/settings/PopupSize";
+import { TabCleaner } from "../model/settings/TabCleaner";
+
 import {
   ChromeLocalStorage,
   PopupSizeSettingStoredData,

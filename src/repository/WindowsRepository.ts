@@ -1,10 +1,11 @@
-import { GroupedColor } from "./../model/GroupedColor";
-import { GroupId } from "./../model/GroupId";
-import { Tab } from "./../model/Tab";
-import { TabId } from "./../model/TabId";
-import { Window } from "./../model/Window";
-import { WindowId } from "./../model/WindowId";
-import { Windows } from "./../model/Windows";
+import { GroupedColor } from "../model/GroupedColor";
+import { GroupId } from "../model/GroupId";
+import { Tab } from "../model/Tab";
+import { TabId } from "../model/TabId";
+import { Window } from "../model/Window";
+import { WindowId } from "../model/WindowId";
+import { Windows } from "../model/Windows";
+
 import {
   ChromeSessionStorage,
   LastActivatedAtStoredData,

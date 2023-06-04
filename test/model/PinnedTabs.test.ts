@@ -1,6 +1,6 @@
-import { PinnedTabs } from "./../../src/model/PinnedTabs"
-import { Tab } from "./../../src/model/Tab"
-import { TabId } from "./../../src/model/TabId"
+import { PinnedTabs } from "../../src/model/PinnedTabs"
+import { Tab } from "../../src/model/Tab"
+import { TabId } from "../../src/model/TabId"
 
 describe('#empty', () => {
   it('should generate empty PinnedTabs', () => {
