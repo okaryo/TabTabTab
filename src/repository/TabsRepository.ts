@@ -43,3 +43,7 @@ export const deleteLastActivatedAtOfTab = async (tabId: TabId) => {
 export const bookmarkTab = async (title: string, url: string) => {
   await chrome.bookmarks.create({ title: title, url: url });
 };
+
+export const pinTab = async (tabId: TabId) => {
+  await chrome.tabs.update(tabId.value, { pinned: true });
+};

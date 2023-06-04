@@ -1,7 +1,7 @@
 import { useCallback, useContext } from "react";
 
 import { Tab } from "../../../model/Tab";
-import { removeTab } from "../../../repository/TabsRepository";
+import { pinTab as pin } from "../../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/Windows";
 
 export const usePinTab = (): ((tab: Tab) => Promise<void>) => {
@@ -9,7 +9,7 @@ export const usePinTab = (): ((tab: Tab) => Promise<void>) => {
 
   const pinTab = useCallback(
     async (tab: Tab) => {
-      await removeTab(tab.id);
+      await pin(tab.id);
       const newWindows = windows.pinTab(tab);
       setWindows(newWindows);
     },
