@@ -8,8 +8,8 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 
-import { Tab } from "./../../../model/Tab";
-import { bookmarkTab } from "./../../../repository/TabsRepository";
+import { Tab } from "../../../model/Tab";
+import { bookmarkTab } from "../../../repository/TabsRepository";
 
 type TabActionMenuProps = {
   tab: Tab;

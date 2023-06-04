@@ -12,32 +12,21 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
-import { GroupedTabs } from "./../../../model/GroupedTabs";
-import { TabId } from "./../../../model/TabId";
-import { Windows } from "./../../../model/Windows";
+import { GroupedTabs } from "../../../model/GroupedTabs";
+
 import TabItem from "./TabItem";
 
 type GroupedTabListProps = {
-  windows: Windows;
   tabs: GroupedTabs;
-  onRemoveTab: (tabId: TabId) => Promise<void>;
 };
 
 const GroupedTabList = (props: GroupedTabListProps) => {
-  const { windows, tabs, onRemoveTab } = props;
+  const { tabs } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpenStatus = () => setIsOpen(!isOpen);
 
   const tabComponents = tabs.map((tab) => {
-    return (
-      <TabItem
-        key={tab.id.value}
-        windows={windows}
-        tab={tab}
-        onRemoveTab={onRemoveTab}
-        sx={{ width: 395 }}
-      />
-    );
+    return <TabItem key={tab.id.value} tab={tab} sx={{ width: 395 }} />;
   });
 
   let groupedTabLabel;

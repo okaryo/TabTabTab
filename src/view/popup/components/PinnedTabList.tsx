@@ -12,32 +12,21 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
-import { PinnedTabs } from "./../../../model/PinnedTabs";
-import { TabId } from "./../../../model/TabId";
-import { Windows } from "./../../../model/Windows";
+import { PinnedTabs } from "../../../model/PinnedTabs";
+
 import TabItem from "./TabItem";
 
 type PinnedTabListProps = {
-  windows: Windows;
   tabs: PinnedTabs;
-  onRemoveTab: (tabId: TabId) => Promise<void>;
 };
 
 const PinnedTabList = (props: PinnedTabListProps) => {
-  const { windows, tabs, onRemoveTab } = props;
+  const { tabs } = props;
   const [isOpen, setIsOpen] = useState(false);
   const toggleOpenStatus = () => setIsOpen(!isOpen);
 
   const tabComponents = tabs.map((tab) => {
-    return (
-      <TabItem
-        key={tab.id.value}
-        windows={windows}
-        tab={tab}
-        sx={{ pl: 3, width: 395 }}
-        onRemoveTab={onRemoveTab}
-      />
-    );
+    return <TabItem key={tab.id.value} tab={tab} sx={{ pl: 3, width: 395 }} />;
   });
 
   return (

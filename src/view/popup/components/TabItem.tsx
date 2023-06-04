@@ -6,26 +6,26 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { SxProps } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect, useState } from "react";
 
-import { Tab } from "./../../../model/Tab";
-import { TabId } from "./../../../model/TabId";
-import { Windows } from "./../../../model/Windows";
-import { focusTab } from "./../../../repository/TabsRepository";
+import { Tab } from "../../../model/Tab";
+import { removeTab } from "../../../repository/TabsRepository";
+import { focusTab } from "../../../repository/TabsRepository";
+import { WindowsContext } from "../contexts/Windows";
+
 import TabActionMenu from "./TabActionMenu";
 import TabFavicon from "./TabFavicon";
 
 type TabItemProps = {
-  windows: Windows;
   tab: Tab;
   sx?: SxProps;
-  onRemoveTab: (tabId: TabId) => Promise<void>;
 };
 type AnchorPosition = { top: number; left: number } | null;
 
 const TabItem = (props: TabItemProps) => {
-  const { windows, tab, sx, onRemoveTab } = props;
-  const onTapTabItem = (): Promise<void> => focusTab(tab.id);
+  const { tab, sx } = props;
+  const { windows, setWindows } = useContext(WindowsContext);
+  const onTapTabItem = () => focusTab(tab.id);
   const [isHovered, setIsHovered] = React.useState(false);
   const shouldShowCloseButton = tab.isFocused || isHovered;
 
@@ -71,12 +71,15 @@ const TabItem = (props: TabItemProps) => {
     sinceLastActivatedAt = `${difference} ${unit}`;
   }
 
-  const onClickDeleteButton = () => onRemoveTab(tab.id);
+  const onClickDeleteButton = async () => {
+    await removeTab(tab.id);
+    const newWindows = windows.removeTabBy(tab.id);
+    setWindows(newWindows);
+  };
 
   const [menuAnchorPosition, setMenuAnchorPosition] =
-    React.useState<AnchorPosition | null>(null);
-  const [isMenuActionCompleted, setIsMenuActionCompleted] =
-    React.useState(false);
+    useState<AnchorPosition | null>(null);
+  const [isMenuActionCompleted, setIsMenuActionCompleted] = useState(false);
   useEffect(() => {
     if (isMenuActionCompleted) {
       const timer = setTimeout(() => {

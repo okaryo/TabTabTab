@@ -1,24 +1,25 @@
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
-import React from "react";
+import React, { useContext } from "react";
 
-import { Window } from "./../../../model/Window";
-import { Windows } from "./../../../model/Windows";
+import { WindowsContext } from "../contexts/Windows";
+
 import WindowTab from "./WindowTab";
 
 type WindowTabsProps = {
   selectedIndex: number;
-  currentWindow: Window;
-  unfocusedWindows: Windows;
   onSelectIndex: (index: number) => void;
 };
 
 const WindowTabs = (props: WindowTabsProps) => {
+  const { selectedIndex, onSelectIndex } = props;
+  const { windows } = useContext(WindowsContext);
+
   const onChange = (_: React.SyntheticEvent, newValue: number) => {
-    props.onSelectIndex(newValue);
+    onSelectIndex(newValue);
   };
 
-  const unfocusedWindows = props.unfocusedWindows.map((window, index) => {
+  const unfocusedWindows = windows.unfocusedWindows.map((window, index) => {
     return (
       <WindowTab
         key={window.id.value}
@@ -31,14 +32,14 @@ const WindowTabs = (props: WindowTabsProps) => {
   return (
     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
       <Tabs
-        value={props.selectedIndex}
+        value={selectedIndex}
         onChange={onChange}
         variant="scrollable"
         scrollButtons={false}
       >
         <WindowTab
           label="CurrentWindow"
-          tabCount={props.currentWindow?.tabCount ?? 0}
+          tabCount={windows.currentWindow?.tabCount ?? 0}
         />
         {unfocusedWindows}
       </Tabs>
