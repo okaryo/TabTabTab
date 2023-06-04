@@ -2,12 +2,12 @@ import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
 import React, { useState, useEffect } from "react";
 
-import { PopupSize } from "./../../model/settings/PopupSize";
-import { TabId } from "./../../model/TabId";
-import { TbWindows } from "./../../model/Windows";
-import { getPopupSizeSetting } from "./../../repository/SettingsRepository";
-import { removeTab } from "./../../repository/TabsRepository";
-import { getWindows } from "./../../repository/WindowsRepository";
+import { PopupSize } from "../../../model/settings/PopupSize";
+import { TabId } from "../../../model/TabId";
+import { TbWindows } from "../../../model/Windows";
+import { getPopupSizeSetting } from "../../../repository/SettingsRepository";
+import { removeTab } from "../../../repository/TabsRepository";
+import { getWindows } from "../../../repository/WindowsRepository";
 import Header from "./Header";
 import TabList from "./TabList";
 import WindowTabs from "./WindowTabs";

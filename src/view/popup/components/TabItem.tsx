@@ -8,10 +8,10 @@ import { SxProps } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useEffect } from "react";
 
-import { Tab } from "./../../model/Tab";
-import { TabId } from "./../../model/TabId";
-import { TbWindows } from "./../../model/Windows";
-import { focusTab } from "./../../repository/TabsRepository";
+import { Tab } from "./../../../model/Tab";
+import { TabId } from "./../../../model/TabId";
+import { TbWindows } from "./../../../model/Windows";
+import { focusTab } from "./../../../repository/TabsRepository";
 import TabActionMenu from "./TabActionMenu";
 import TabFavicon from "./TabFavicon";
 

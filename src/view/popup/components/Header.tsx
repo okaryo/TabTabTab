@@ -5,7 +5,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
 
-import { navigateToOptionsPage } from "./../../repository/SettingsRepository";
+import { navigateToOptionsPage } from "./../../../repository/SettingsRepository";
 
 const Header = () => (
   <AppBar position="static" color="primary">

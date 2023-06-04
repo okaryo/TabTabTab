@@ -12,9 +12,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
-import { PinnedTabs } from "./../../model/PinnedTabs";
-import { TabId } from "./../../model/TabId";
-import { TbWindows } from "./../../model/Windows";
+import { PinnedTabs } from "./../../../model/PinnedTabs";
+import { TabId } from "./../../../model/TabId";
+import { TbWindows } from "./../../../model/Windows";
 import TabItem from "./TabItem";
 
 type PinnedTabListProps = {
