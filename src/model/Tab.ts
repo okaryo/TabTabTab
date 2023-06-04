@@ -1,9 +1,11 @@
 import { TabId } from "./TabId";
+import { WindowId } from "./WindowId";
 import { Windows } from "./Windows";
 
 export class Tab {
   constructor(
     private _id: TabId,
+    private _windowId: WindowId,
     private _title: string,
     private _url: URL,
     private _favIconUrl: string,
@@ -13,6 +15,10 @@ export class Tab {
 
   get id(): TabId {
     return this._id;
+  }
+
+  get windowId(): WindowId {
+    return this._windowId;
   }
 
   get title(): string {
@@ -49,6 +55,7 @@ export class Tab {
   updateLastActivatedAt(lastActivatedAt: Date): Tab {
     return new Tab(
       this._id,
+      this._windowId,
       this._title,
       this._url,
       this._favIconUrl,

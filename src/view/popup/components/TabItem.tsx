@@ -9,9 +9,9 @@ import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
 
 import { Tab } from "../../../model/Tab";
-import { removeTab } from "../../../repository/TabsRepository";
 import { focusTab } from "../../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/Windows";
+import { useCloseTab } from "../hooks/useCloseTab";
 
 import TabActionMenu from "./TabActionMenu";
 import TabFavicon from "./TabFavicon";
@@ -24,7 +24,7 @@ type AnchorPosition = { top: number; left: number } | null;
 
 const TabItem = (props: TabItemProps) => {
   const { tab, sx } = props;
-  const { windows, setWindows } = useContext(WindowsContext);
+  const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab.id);
   const [isHovered, setIsHovered] = React.useState(false);
   const shouldShowCloseButton = tab.isFocused || isHovered;
@@ -71,11 +71,8 @@ const TabItem = (props: TabItemProps) => {
     sinceLastActivatedAt = `${difference} ${unit}`;
   }
 
-  const onClickDeleteButton = async () => {
-    await removeTab(tab.id);
-    const newWindows = windows.removeTabBy(tab.id);
-    setWindows(newWindows);
-  };
+  const closeTab = useCloseTab();
+  const onClickDeleteButton = () => closeTab(tab.id);
 
   const [menuAnchorPosition, setMenuAnchorPosition] =
     useState<AnchorPosition | null>(null);

@@ -2,6 +2,7 @@
 
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import LinkIcon from "@mui/icons-material/Link";
+import PushPinIcon from "@mui/icons-material/PushPin";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
@@ -10,6 +11,7 @@ import React from "react";
 
 import { Tab } from "../../../model/Tab";
 import { bookmarkTab } from "../../../repository/TabsRepository";
+import { usePinTab } from "../hooks/usePinTab";
 
 type TabActionMenuProps = {
   tab: Tab;
@@ -28,6 +30,7 @@ type ActionMenu = {
 const TabActionMenu = (props: TabActionMenuProps) => {
   const { tab, isOpenMenu, anchorPostion, onCloseMenu, onMenuActionCompleted } =
     props;
+  const pinTab = usePinTab();
 
   const menus: ActionMenu[] = [
     {
@@ -39,6 +42,11 @@ const TabActionMenu = (props: TabActionMenuProps) => {
       label: "Bookmark",
       icon: <BookmarkIcon fontSize="small" />,
       action: () => bookmarkTab(tab.title, tab.url),
+    },
+    {
+      label: "Pin",
+      icon: <PushPinIcon fontSize="small" />,
+      action: () => pinTab(tab),
     },
   ];
   const onClickMenu = (action: () => void) => {

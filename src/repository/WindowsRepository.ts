@@ -26,6 +26,7 @@ const getCurrentWindow = async (): Promise<Window> => {
   for (const tab of currentWindowTabs) {
     const newTab = new Tab(
       new TabId(tab.id),
+      windowId,
       tab.title,
       new URL(tab.url),
       tab.favIconUrl,
@@ -59,6 +60,7 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
     const windowId = new WindowId(tab.windowId);
     const newTab = new Tab(
       new TabId(tab.id),
+      windowId,
       tab.title,
       new URL(tab.url),
       tab.favIconUrl,

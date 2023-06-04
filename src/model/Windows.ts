@@ -128,6 +128,16 @@ export class Windows {
     return new Windows(newWindows);
   }
 
+  pinTab(tab: Tab): Windows {
+    const targetWindow = this.findWindowBy(tab.windowId);
+    const newWindows = this.removeTabBy(tab.id);
+    return newWindows.addPinnedTab(
+      targetWindow.id,
+      targetWindow.isFocused,
+      tab
+    );
+  }
+
   private findWindowBy(windowId: WindowId): Window | null {
     const window = this._values.find((value) => windowId.equalTo(value.id));
     return window === undefined ? null : window;
