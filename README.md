@@ -11,7 +11,10 @@ TabTabTab is an innovative solution for tab management. With this extension, you
 * Display of open window and tab list
 * Display of elapsed time since last tab activation
 * Display duplicated tabs
+* Basic tab operations like bookmarking, URL copying, and pinning with a right-click
+* Capture screenshots of your active tab's visible area via right-click menu
 * Close tabs
+* Move to selected tab
 * Automatic clean up of tabs that have not been used for a certain period (ON/OFF and duration can be set from the settings page)
 
 ![Screen Shot Popup](https://github.com/okaryo/TabTabTab/assets/44517313/0b0499b3-0528-4b01-b541-c641c0b36ef2)
