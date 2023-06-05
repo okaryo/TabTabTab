@@ -29,47 +29,38 @@ const TabItem = (props: TabItemProps) => {
   const [isHovered, setIsHovered] = React.useState(false);
   const shouldShowCloseButton = tab.isFocused || isHovered;
 
-  let sinceLastActivatedAt = "";
-  const milliSecondsSinceLastActivatedAt = tab.milliSecondsSinceLastActivatedAt;
-  if (milliSecondsSinceLastActivatedAt !== null) {
-    let difference: number;
-    let unit: string;
-    if (milliSecondsSinceLastActivatedAt < 60 * 1000) {
-      difference = Math.floor(milliSecondsSinceLastActivatedAt / 1000);
-      unit = "secs ago";
-      if (difference === 0 || difference === 1) unit = "sec ago";
-    } else if (milliSecondsSinceLastActivatedAt < 60 * 60 * 1000) {
-      difference = Math.floor(milliSecondsSinceLastActivatedAt / (60 * 1000));
-      unit = "mins ago";
-      if (difference === 1) unit = "min ago";
-    } else if (milliSecondsSinceLastActivatedAt < 24 * 60 * 60 * 1000) {
-      difference = Math.floor(
-        milliSecondsSinceLastActivatedAt / (60 * 60 * 1000)
-      );
-      unit = "hours ago";
-      if (difference === 1) unit = "hour ago";
-    } else if (milliSecondsSinceLastActivatedAt < 7 * 24 * 60 * 60 * 10000) {
-      difference = Math.floor(
-        milliSecondsSinceLastActivatedAt / (24 * 60 * 60 * 1000)
-      );
-      unit = "days ago";
-      if (difference === 1) unit = "day ago";
-    } else if (milliSecondsSinceLastActivatedAt < 30 * 24 * 60 * 60 * 10000) {
-      difference = Math.floor(
-        milliSecondsSinceLastActivatedAt / (7 * 24 * 60 * 60 * 1000)
-      );
-      unit = "weeks ago";
-      if (difference === 1) unit = "week ago";
-    } else {
-      difference = Math.floor(
-        milliSecondsSinceLastActivatedAt / (30 * 7 * 24 * 60 * 60 * 1000)
-      );
-      unit = "months ago";
-      if (difference === 1) unit = "month ago";
+  const elapsedTimeSinceLastActiveText = (): string => {
+    const duration = tab.durationSinceLastActivatedAt;
+    if (duration.inDays >= 30) {
+      const elapsedMonths = Math.floor(duration.inDays / 30);
+      return `${elapsedMonths} ${elapsedMonths === 1 ? "month" : "months"} ago`;
+    }
+    if (duration.inDays >= 7) {
+      const elapsedWeeks = Math.floor(duration.inDays / 7);
+      return `${elapsedWeeks} ${elapsedWeeks === 1 ? "week" : "weeks"} ago`;
+    }
+    if (duration.inDays >= 1) {
+      return `${duration.inDays} ${duration.inDays === 1 ? "day" : "days"} ago`;
+    }
+    if (duration.inHours >= 1) {
+      return `${duration.inHours} ${
+        duration.inHours === 1 ? "hour" : "hours"
+      } ago`;
+    }
+    if (duration.inMinutes >= 1) {
+      return `${duration.inMinutes} ${
+        duration.inMinutes === 1 ? "minute" : "minutes"
+      } ago`;
+    }
+    if (duration.inSeconds >= 1) {
+      return `${duration.inSeconds} ${
+        duration.inSeconds === 1 ? "second" : "seconds"
+      } ago`;
     }
 
-    sinceLastActivatedAt = `${difference} ${unit}`;
-  }
+    return "";
+  };
+  const elapsedTimeText = elapsedTimeSinceLastActiveText();
 
   const closeTab = useCloseTab();
   const onClickDeleteButton = () => closeTab(tab.id);
@@ -168,11 +159,9 @@ const TabItem = (props: TabItemProps) => {
               >
                 {tab.originUrl}
               </span>
-              {sinceLastActivatedAt !== "" && <span>・</span>}
-              {sinceLastActivatedAt !== "" && (
-                <span style={{ whiteSpace: "nowrap" }}>
-                  {sinceLastActivatedAt}
-                </span>
+              {elapsedTimeText !== "" && <span>・</span>}
+              {elapsedTimeText !== "" && (
+                <span style={{ whiteSpace: "nowrap" }}>{elapsedTimeText}</span>
               )}
             </span>
           }

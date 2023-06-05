@@ -1,3 +1,4 @@
+import { Duration } from "./Duration";
 import { TabId } from "./TabId";
 import { WindowId } from "./WindowId";
 import { Windows } from "./Windows";
@@ -45,11 +46,13 @@ export class Tab {
     return this._lastActivatedAt || null;
   }
 
-  get milliSecondsSinceLastActivatedAt(): number | null {
-    if (!this._lastActivatedAt) return null;
+  get durationSinceLastActivatedAt(): Duration {
+    if (!this._lastActivatedAt) return Duration.zero();
 
     const currentTime = new Date();
-    return currentTime.getTime() - this._lastActivatedAt.getTime();
+    return new Duration({
+      milliseconds: currentTime.getTime() - this._lastActivatedAt.getTime(),
+    });
   }
 
   updateLastActivatedAt(lastActivatedAt: Date): Tab {

@@ -6,9 +6,9 @@ export class Duration {
   static readonly MILLISECONDS_PER_MINUTE =
     this.MILLISECONDS_PER_SECOND * this.SECONDS_PER_MINUTE;
   static readonly MILLISECONDS_PER_HOUR =
-    this.MILLISECONDS_PER_SECOND * this.MINUTES_PER_HOUR;
+    this.MILLISECONDS_PER_MINUTE * this.MINUTES_PER_HOUR;
   static readonly MILLISECONDS_PER_DAY =
-    this.MILLISECONDS_PER_SECOND * this.HOURS_PER_DAY;
+    this.MILLISECONDS_PER_HOUR * this.HOURS_PER_DAY;
 
   private _milliseconds: number;
 
@@ -31,6 +31,10 @@ export class Duration {
       minutes * Duration.MILLISECONDS_PER_MINUTE +
       hours * Duration.MILLISECONDS_PER_HOUR +
       days * Duration.MILLISECONDS_PER_DAY;
+  }
+
+  static zero(): Duration {
+    return new Duration({});
   }
 
   get inDays(): number {
