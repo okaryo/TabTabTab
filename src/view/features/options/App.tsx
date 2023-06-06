@@ -4,10 +4,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React from "react";
 
-import Settings from "./Settings";
 import ThemeProvider from "../../components/ThemeProvider";
 import { ThemeContext } from "../../contexts/Theme";
 import { useTheme } from "../../hooks/useTheme";
+
+import Settings from "./Settings";
 
 export default function App() {
   return (
@@ -15,11 +16,7 @@ export default function App() {
       <ThemeProvider>
         <AppBar position="static" color="primary">
           <Toolbar>
-            <Typography
-              variant="h6"
-              component="h1"
-              sx={{ flexGrow: 1 }}
-            >
+            <Typography variant="h6" component="h1" sx={{ flexGrow: 1 }}>
               Settings
             </Typography>
           </Toolbar>

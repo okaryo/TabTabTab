@@ -4,14 +4,14 @@ import React, { useState, useEffect } from "react";
 
 import { PopupSize } from "../../../../model/settings/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
+import ThemeProvider from "../../../components/ThemeProvider";
 import { ThemeContext } from "../../../contexts/Theme";
-import { WindowsContext } from "../contexts/Windows";
 import { useTheme } from "../../../hooks/useTheme";
+import { WindowsContext } from "../contexts/Windows";
 import { useWindows } from "../hooks/useWindows";
 
 import Header from "./Header";
 import TabList from "./TabList";
-import ThemeProvider from "../../../components/ThemeProvider";
 import WindowTabs from "./WindowTabs";
 
 export default function App() {
