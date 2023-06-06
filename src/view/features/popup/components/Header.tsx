@@ -7,8 +7,8 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import React, { useContext } from "react";
 
-import { navigateToOptionsPage } from "../../../repository/SettingsRepository";
-import { ThemeContext } from "../contexts/Theme";
+import { navigateToOptionsPage } from "../../../../repository/SettingsRepository";
+import { ThemeContext } from "../../../contexts/Theme";
 import { useToggleTheme } from "../hooks/useToggleTheme";
 
 const Header = () => {

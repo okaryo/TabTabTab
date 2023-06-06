@@ -10,11 +10,11 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 
-import { Tab } from "../../../model/Tab";
+import { Tab } from "../../../../model/Tab";
 import {
   bookmarkTab,
   screenshotVisibleArea,
-} from "../../../repository/TabsRepository";
+} from "../../../../repository/TabsRepository";
 import { usePinTab } from "../hooks/usePinTab";
 
 type TabActionMenuProps = {

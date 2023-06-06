@@ -10,11 +10,11 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 
-import { PopupSize } from "../../model/settings/PopupSize";
+import { PopupSize } from "../../../model/settings/PopupSize";
 import {
   getPopupSizeSetting,
   updatePopupSizeSetting,
-} from "../../repository/SettingsRepository";
+} from "../../../repository/SettingsRepository";
 
 type SettingForm = {
   height: string;

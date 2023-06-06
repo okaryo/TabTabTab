@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
-import { GroupedTabs } from "../../../model/GroupedTabs";
+import { GroupedTabs } from "../../../../model/GroupedTabs";
 
 import TabItem from "./TabItem";
 

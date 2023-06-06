@@ -2,8 +2,8 @@ const path = require("path");
 
 module.exports = {
   entry: {
-    popup: path.join(__dirname, "src/view/popup/index.tsx"),
-    options: path.join(__dirname, "src/view/options/index.tsx"),
+    popup: path.join(__dirname, "src/view/features/popup/index.tsx"),
+    options: path.join(__dirname, "src/view/features/options/index.tsx"),
     background: path.join(__dirname, "src/background/index.ts"),
   },
   output: {

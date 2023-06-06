@@ -1,7 +1,7 @@
 import { useCallback, useContext } from "react";
 
-import { TabId } from "../../../model/TabId";
-import { removeTab } from "../../../repository/TabsRepository";
+import { TabId } from "../../../../model/TabId";
+import { removeTab } from "../../../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/Windows";
 
 export const useCloseTab = (): ((tabId: TabId) => Promise<void>) => {

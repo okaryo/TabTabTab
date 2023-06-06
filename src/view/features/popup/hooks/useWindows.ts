@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Windows } from "../../../model/Windows";
-import { getWindows } from "../../../repository/WindowsRepository";
+import { Windows } from "../../../../model/Windows";
+import { getWindows } from "../../../../repository/WindowsRepository";
 
 export const useWindows = () => {
   const [windows, setState] = useState(Windows.empty());

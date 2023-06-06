@@ -1,7 +1,7 @@
 import { useCallback, useContext } from "react";
 
-import { Tab } from "../../../model/Tab";
-import { pinTab as pin } from "../../../repository/TabsRepository";
+import { Tab } from "../../../../model/Tab";
+import { pinTab as pin } from "../../../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/Windows";
 
 export const usePinTab = (): ((tab: Tab) => Promise<void>) => {

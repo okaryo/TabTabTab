@@ -12,7 +12,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
-import { PinnedTabs } from "../../../model/PinnedTabs";
+import { PinnedTabs } from "../../../../model/PinnedTabs";
 
 import TabItem from "./TabItem";
 

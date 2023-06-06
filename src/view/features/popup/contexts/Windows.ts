@@ -1,6 +1,6 @@
 import { createContext } from "react";
 
-import { Windows } from "../../../model/Windows";
+import { Windows } from "../../../../model/Windows";
 
 type WindowsContextType = {
   windows: Windows;

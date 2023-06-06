@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { getTheme } from "../../../repository/ThemeRepository";
+import { getTheme } from "../../repository/ThemeRepository";
 
 type Theme = "light" | "dark";
 

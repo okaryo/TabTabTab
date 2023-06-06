@@ -15,11 +15,11 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 
-import { TabCleaner, DurationUnit } from "../../model/settings/TabCleaner";
+import { TabCleaner, DurationUnit } from "../../../model/settings/TabCleaner";
 import {
   getTabCleanerSetting,
   updateTabCleanerSetting,
-} from "../../repository/SettingsRepository";
+} from "../../../repository/SettingsRepository";
 
 type SettingForm = {
   isEnabled: boolean;

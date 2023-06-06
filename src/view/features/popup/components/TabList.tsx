@@ -1,10 +1,10 @@
 import List from "@mui/material/List";
 import React, { useContext } from "react";
 
-import { GroupedTabs } from "../../../model/GroupedTabs";
-import { PinnedTabs } from "../../../model/PinnedTabs";
-import { Tab } from "../../../model/Tab";
-import { Tabs } from "../../../model/Tabs";
+import { GroupedTabs } from "../../../../model/GroupedTabs";
+import { PinnedTabs } from "../../../../model/PinnedTabs";
+import { Tab } from "../../../../model/Tab";
+import { Tabs } from "../../../../model/Tabs";
 import { WindowsContext } from "../contexts/Windows";
 
 import GroupedTabList from "./GroupedTabList";

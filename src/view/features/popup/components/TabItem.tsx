@@ -8,8 +8,8 @@ import { SxProps } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
 
-import { Tab } from "../../../model/Tab";
-import { focusTab } from "../../../repository/TabsRepository";
+import { Tab } from "../../../../model/Tab";
+import { focusTab } from "../../../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/Windows";
 import { useCloseTab } from "../hooks/useCloseTab";
 
