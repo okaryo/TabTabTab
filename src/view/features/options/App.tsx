@@ -19,18 +19,6 @@ export default function App() {
         <Container sx={{ p: 2 }} style={{ maxWidth: "680px" }}>
           <Settings />
         </Container>
-
-        <style>
-          {`
-          html, body {
-            padding: 0;
-            margin: 0;
-          }
-          * {
-            box-sizing: border-box;
-          }
-        `}{" "}
-        </style>
       </ThemeProvider>
     </ThemeContext.Provider>
   );
