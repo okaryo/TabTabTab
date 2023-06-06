@@ -4,11 +4,14 @@ import React, { useState, useEffect } from "react";
 
 import { PopupSize } from "../../../model/settings/PopupSize";
 import { getPopupSizeSetting } from "../../../repository/SettingsRepository";
+import { ThemeContext } from "../contexts/Theme";
 import { WindowsContext } from "../contexts/Windows";
+import { useTheme } from "../hooks/useTheme";
 import { useWindows } from "../hooks/useWindows";
 
 import Header from "./Header";
 import TabList from "./TabList";
+import ThemeProvider from "./ThemeProvider";
 import WindowTabs from "./WindowTabs";
 
 export default function App() {
@@ -26,24 +29,28 @@ export default function App() {
   const [selectedIndex, setSelectedIndex] = useState(0);
 
   return (
-    <WindowsContext.Provider value={useWindows()}>
-      <Box
-        style={{
-          maxHeight: popupSizeState.height,
-          width: popupSizeState.width,
-          overflowY: "auto",
-        }}
-      >
-        <CssBaseline />
-        <Box>
-          <Header />
-          <WindowTabs
-            selectedIndex={selectedIndex}
-            onSelectIndex={setSelectedIndex}
-          />
-          <TabList selectedWindowIndex={selectedIndex} />
-        </Box>
-      </Box>
-    </WindowsContext.Provider>
+    <ThemeContext.Provider value={useTheme()}>
+      <ThemeProvider>
+        <WindowsContext.Provider value={useWindows()}>
+          <Box
+            style={{
+              maxHeight: popupSizeState.height,
+              width: popupSizeState.width,
+              overflowY: "auto",
+            }}
+          >
+            <CssBaseline />
+            <Box>
+              <Header />
+              <WindowTabs
+                selectedIndex={selectedIndex}
+                onSelectIndex={setSelectedIndex}
+              />
+              <TabList selectedWindowIndex={selectedIndex} />
+            </Box>
+          </Box>
+        </WindowsContext.Provider>
+      </ThemeProvider>
+    </ThemeContext.Provider>
   );
 }

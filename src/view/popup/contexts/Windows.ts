@@ -7,10 +7,8 @@ type WindowsContextType = {
   setWindows: React.Dispatch<React.SetStateAction<Windows>>;
 };
 
-const initialState: WindowsContextType = {
+export const WindowsContext = createContext<WindowsContextType>({
   windows: Windows.empty(),
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setWindows: () => {},
-};
-
-export const WindowsContext = createContext<WindowsContextType>(initialState);
+});

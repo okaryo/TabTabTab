@@ -7,11 +7,17 @@ export type TabCleanerSettingStoredData = {
     durationUnit: DurationUnit;
   };
 };
+
 export type PopupSizeSettingStoredData = {
   popup_size_setting: {
     height: number;
     width: number;
   };
+};
+
+type Theme = "light" | "dark";
+export type ThemeStoredData = {
+  theme: Theme;
 };
 
 type DateString = string;
@@ -25,6 +31,7 @@ export type LastActivatedAtStoredData = {
 export class ChromeLocalStorage {
   static readonly TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
   static readonly POPUP_SIZE_SETTING_KEY = "popup_size_setting";
+  static readonly THEME_KEY = "theme";
 }
 
 export class ChromeSessionStorage {
