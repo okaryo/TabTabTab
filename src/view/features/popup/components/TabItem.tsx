@@ -8,6 +8,7 @@ import { SxProps } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
 
+import t from "../../../../i18n/Translations";
 import { Tab } from "../../../../model/Tab";
 import { focusTab } from "../../../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/Windows";
@@ -33,29 +34,38 @@ const TabItem = (props: TabItemProps) => {
     const duration = tab.durationSinceLastActivatedAt;
     if (duration.inDays >= 30) {
       const elapsedMonths = Math.floor(duration.inDays / 30);
-      return `${elapsedMonths} ${elapsedMonths === 1 ? "month" : "months"} ago`;
+      return t.elapsedTime(
+        elapsedMonths,
+        elapsedMonths === 1 ? t.month : t.months
+      );
     }
     if (duration.inDays >= 7) {
       const elapsedWeeks = Math.floor(duration.inDays / 7);
-      return `${elapsedWeeks} ${elapsedWeeks === 1 ? "week" : "weeks"} ago`;
+      return t.elapsedTime(elapsedWeeks, elapsedWeeks === 1 ? t.week : t.weeks);
     }
     if (duration.inDays >= 1) {
-      return `${duration.inDays} ${duration.inDays === 1 ? "day" : "days"} ago`;
+      return t.elapsedTime(
+        duration.inDays,
+        duration.inDays === 1 ? t.day : t.days
+      );
     }
     if (duration.inHours >= 1) {
-      return `${duration.inHours} ${
-        duration.inHours === 1 ? "hour" : "hours"
-      } ago`;
+      return t.elapsedTime(
+        duration.inHours,
+        duration.inHours === 1 ? t.hour : t.hours
+      );
     }
     if (duration.inMinutes >= 1) {
-      return `${duration.inMinutes} ${
-        duration.inMinutes === 1 ? "minute" : "minutes"
-      } ago`;
+      return t.elapsedTime(
+        duration.inMinutes,
+        duration.inMinutes === 1 ? t.min : t.mins
+      );
     }
     if (duration.inSeconds >= 1) {
-      return `${duration.inSeconds} ${
-        duration.inSeconds === 1 ? "second" : "seconds"
-      } ago`;
+      return t.elapsedTime(
+        duration.inSeconds,
+        duration.inSeconds === 1 ? t.sec : t.secs
+      );
     }
 
     return "";
@@ -139,7 +149,7 @@ const TabItem = (props: TabItemProps) => {
               </span>
               {tab.hasDuplicatedTabs(windows) && (
                 <Chip
-                  label="Duplicated"
+                  label={t.duplicated}
                   size="small"
                   variant="outlined"
                   color="warning"

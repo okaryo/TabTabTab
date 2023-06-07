@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
 import React, { useContext } from "react";
 
+import t from "../../../../i18n/Translations";
 import { WindowsContext } from "../contexts/Windows";
 
 import WindowTab from "./WindowTab";
@@ -23,7 +24,7 @@ const WindowTabs = (props: WindowTabsProps) => {
     return (
       <WindowTab
         key={window.id.value}
-        label={`Window${index + 1}`}
+        label={`${t.window}${index + 1}`}
         tabCount={window.tabCount}
       />
     );
@@ -38,7 +39,7 @@ const WindowTabs = (props: WindowTabsProps) => {
         scrollButtons={false}
       >
         <WindowTab
-          label="CurrentWindow"
+          label={t.currentWindow}
           tabCount={windows.currentWindow?.tabCount ?? 0}
         />
         {unfocusedWindows}

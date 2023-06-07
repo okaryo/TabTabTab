@@ -1,8 +1,10 @@
 {
   "manifest_version": 3,
-  "name": "TabTabTab",
+  "name": "__MSG_app_name__",
+  "short_name": "__MSG_app_name_short__",
+  "description": "__MSG_app_desc__",
+  "default_locale": "en",
   "version": "2.6.0",
-  "description": "This chrome extension makes it easier to manage your open tabs.",
 
   "action": {
     "default_title": "TabTabTab",

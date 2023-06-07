@@ -1,7 +1,7 @@
 /* eslint @typescript-eslint/no-misused-promises: 0 */
 
 import BookmarkIcon from "@mui/icons-material/Bookmark";
-import LinkIcon from "@mui/icons-material/Link";
+import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -10,6 +10,7 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
 
+import t from "../../../../i18n/Translations";
 import { Tab } from "../../../../model/Tab";
 import {
   bookmarkTab,
@@ -38,24 +39,24 @@ const TabActionMenu = (props: TabActionMenuProps) => {
 
   const menus: ActionMenu[] = [
     {
-      label: "Copy URL",
-      icon: <LinkIcon fontSize="small" />,
+      label: t.copyUrl,
+      icon: <ContentCopyIcon fontSize="small" />,
       action: () => navigator.clipboard.writeText(tab.url),
     },
     {
-      label: "Bookmark",
+      label: t.bookmark,
       icon: <BookmarkIcon fontSize="small" />,
       action: () => bookmarkTab(tab.title, tab.url),
     },
     {
-      label: "Pin",
+      label: t.pin,
       icon: <PushPinIcon fontSize="small" />,
       action: () => pinTab(tab),
     },
   ];
   if (tab.isFocused) {
     menus.push({
-      label: "Screenshot Visible Area",
+      label: t.screenshotVisibleArea,
       icon: <PhotoCameraIcon fontSize="small" />,
       action: () => {
         screenshotVisibleArea(tab.windowId, (dataUrl) => {

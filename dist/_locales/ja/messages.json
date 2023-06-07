@@ -1,0 +1,90 @@
+{
+  "app_name": {
+    "message": "TabTabTab - タブマネージャー",
+    "description": "The name of the application. Shown in the web store."
+  },
+  "app_name_short": {
+    "message": "TabTabTab",
+    "description": "The short name of the application. Shown at the top of the dropdown menu."
+  },
+  "app_desc": {
+    "message": "ブラウザのタブ管理を便利にする拡張機能です。",
+    "description": "The short description of the application. Shown in the web store."
+  },
+  "window": {
+    "message": "ウィンドウ",
+    "description": ""
+  },
+  "current_window": {
+    "message": "現在のウィンドウ",
+    "description": ""
+  },
+  "pinned": {
+    "message": "固定タブ",
+    "description": ""
+  },
+  "month": {
+    "message": "ヶ月",
+    "description": ""
+  },
+  "months": {
+    "message": "ヶ月",
+    "description": ""
+  },
+  "day": {
+    "message": "日",
+    "description": ""
+  },
+  "days": {
+    "message": "日",
+    "description": ""
+  },
+  "hour": {
+    "message": "時間",
+    "description": ""
+  },
+  "hours": {
+    "message": "時間",
+    "description": ""
+  },
+  "min": {
+    "message": "分",
+    "description": ""
+  },
+  "mins": {
+    "message": "分",
+    "description": ""
+  },
+  "sec": {
+    "message": "秒",
+    "description": ""
+  },
+  "secs": {
+    "message": "秒",
+    "description": ""
+  },
+  "ago": {
+    "message": "前",
+    "description": ""
+  },
+  "bookmark": {
+    "message": "ブックマーク",
+    "description": ""
+  },
+  "copy_url": {
+    "message": "リンクをコピー",
+    "description": ""
+  },
+  "pin": {
+    "message": "固定",
+    "description": ""
+  },
+  "screenshot_visible_area": {
+    "message": "表示範囲をスクリーンショット",
+    "description": ""
+  },
+  "duplicated": {
+    "message": "重複",
+    "description": ""
+  }
+}

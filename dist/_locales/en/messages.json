@@ -1,0 +1,90 @@
+{
+  "app_name": {
+    "message": "TabTabTab - Tab Manager",
+    "description": "The name of the application. Shown in the web store."
+  },
+  "app_name_short": {
+    "message": "TabTabTab",
+    "description": "The short name of the application. Shown at the top of the dropdown menu."
+  },
+  "app_desc": {
+    "message": "This chrome extension makes it easier to manage your open tabs.",
+    "description": "The short description of the application. Shown in the web store."
+  },
+  "window": {
+    "message": "Window",
+    "description": ""
+  },
+  "current_window": {
+    "message": "CurrentWindow",
+    "description": ""
+  },
+  "pinned": {
+    "message": "Pinned",
+    "description": ""
+  },
+  "month": {
+    "message": "month",
+    "description": ""
+  },
+  "months": {
+    "message": "months",
+    "description": ""
+  },
+  "day": {
+    "message": "day",
+    "description": ""
+  },
+  "days": {
+    "message": "days",
+    "description": ""
+  },
+  "hour": {
+    "message": "hour",
+    "description": ""
+  },
+  "hours": {
+    "message": "hours",
+    "description": ""
+  },
+  "min": {
+    "message": "min",
+    "description": ""
+  },
+  "mins": {
+    "message": "mins",
+    "description": ""
+  },
+  "sec": {
+    "message": "sec",
+    "description": ""
+  },
+  "secs": {
+    "message": "secs",
+    "description": ""
+  },
+  "ago": {
+    "message": "ago",
+    "description": ""
+  },
+  "bookmark": {
+    "message": "Bookmark",
+    "description": ""
+  },
+  "copyUrl": {
+    "message": "Copy URL",
+    "description": ""
+  },
+  "pin": {
+    "message": "Pin",
+    "description": ""
+  },
+  "screenshot_visible_area": {
+    "message": "Screenshot Visible Area",
+    "description": ""
+  },
+  "duplicated": {
+    "message": "Duplicated",
+    "description": ""
+  }
+}

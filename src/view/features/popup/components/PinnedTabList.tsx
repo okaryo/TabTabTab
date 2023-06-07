@@ -12,6 +12,7 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
+import t from "../../../../i18n/Translations";
 import { PinnedTabs } from "../../../../model/PinnedTabs";
 
 import TabItem from "./TabItem";
@@ -51,7 +52,7 @@ const PinnedTabList = (props: PinnedTabListProps) => {
               <ListItemText
                 primary={
                   <Typography variant="h6" component="h6">
-                    Pinned
+                    {t.pinned}
                   </Typography>
                 }
               />
