@@ -86,5 +86,81 @@
   "duplicated": {
     "message": "重複",
     "description": ""
+  },
+  "tab_cleaner_header": {
+    "message": "タブの自動整理",
+    "description": ""
+  },
+  "tab_cleaner_description": {
+    "message": "この設定を有効にすると、最後にアクティブになってから設定した期間を過ぎると自動でタブが閉じられます。",
+    "description": ""
+  },
+  "duration": {
+    "message": "期間",
+    "description": ""
+  },
+  "unit": {
+    "message": "単位",
+    "description": ""
+  },
+  "duration_unit_day": {
+    "message": "日",
+    "description": ""
+  },
+  "duration_unit_hour": {
+    "message": "時間",
+    "description": ""
+  },
+  "popup_size_header": {
+    "message": "ポップアップサイズ",
+    "description": ""
+  },
+  "popup_size_description": {
+    "message": "高さ: 200~600px, 幅: 400~800px の範囲で指定してください。",
+    "description": ""
+  },
+  "height": {
+    "message": "高さ",
+    "description": ""
+  },
+  "width": {
+    "message": "幅",
+    "description": ""
+  },
+  "save": {
+    "message": "保存",
+    "description": ""
+  },
+  "saving": {
+    "message": "保存中",
+    "description": ""
+  },
+  "saved_successfully": {
+    "message": "保存しました",
+    "description": ""
+  },
+  "saved_error": {
+    "message": "保存に失敗しました。再度お試しください。",
+    "description": ""
+  },
+  "popup_size_validation_error_value_format": {
+    "message": "整数値を入力してください。",
+    "description": ""
+  },
+  "popup_size_validation_error_value_range": {
+    "message": "高さ: 200~600px, 幅: 400~800px の範囲で入力してください。",
+    "description": ""
+  },
+  "tab_cleaner_validation_error_value_format": {
+    "message": "1以上の整数値を入力してください。",
+    "description": ""
+  },
+  "tab_cleaner_error_on_save": {
+    "message": "エラーを修正してください。",
+    "description": ""
+  },
+  "source_code": {
+    "message": "ソースコード",
+    "description": ""
   }
 }

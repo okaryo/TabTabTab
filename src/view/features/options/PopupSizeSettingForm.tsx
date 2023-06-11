@@ -10,6 +10,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 
+import t from "../../../i18n/Translations";
 import { PopupSize } from "../../../model/settings/PopupSize";
 import {
   getPopupSizeSetting,
@@ -72,7 +73,7 @@ const PopupSizeSettingForm = () => {
       setSubmittionState({
         isLoading: false,
         isError: true,
-        errorMessage: "Input an integer.",
+        errorMessage: t.popupSizeValidationErrorValueFormat,
       });
       return;
     }
@@ -85,7 +86,7 @@ const PopupSizeSettingForm = () => {
       setSubmittionState({
         isLoading: false,
         isError: true,
-        errorMessage: `The height should be set to a value between ${MIN_HEIGHT} and ${MAX_HEIGHT}, and the width should be set to a value between ${MIN_WIDTH} and ${MAX_WIDTH}.`,
+        errorMessage: t.popupSizeValidationErrorValueRange,
       });
       return;
     }
@@ -104,7 +105,7 @@ const PopupSizeSettingForm = () => {
       setSubmittionState({
         isLoading: false,
         isError: true,
-        errorMessage: "Failed to save the setting. Please try again.",
+        errorMessage: t.savedError,
       });
     }
   };
@@ -116,7 +117,7 @@ const PopupSizeSettingForm = () => {
           sx={{ p: 0 }}
           title={
             <Typography variant="subtitle1" component="h3">
-              Popup window size
+              {t.popupSizeHeader}
             </Typography>
           }
           subheader={
@@ -125,7 +126,7 @@ const PopupSizeSettingForm = () => {
               component="p"
               style={{ color: "grey" }}
             >
-              {`Height: ${MIN_HEIGHT}-${MAX_HEIGHT}px, Width: ${MIN_WIDTH}-${MAX_WIDTH}px required.`}
+              {t.popupSizeDescription}
             </Typography>
           }
         />
@@ -140,14 +141,14 @@ const PopupSizeSettingForm = () => {
                   value={settingState.height}
                   variant="outlined"
                   size="small"
-                  label="Height"
+                  label={t.height}
                   onChange={onChangeHeight}
                 />
                 <TextField
                   value={settingState.width}
                   variant="outlined"
                   size="small"
-                  label="Width"
+                  label={t.width}
                   onChange={onChangeWidth}
                 />
               </Stack>
@@ -159,7 +160,7 @@ const PopupSizeSettingForm = () => {
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={onSave}
             >
-              {submittionState.isLoading ? "Saving..." : "Save"}
+              {submittionState.isLoading ? `${t.saving}...` : t.save}
             </Button>
             <FormHelperText style={{ marginTop: "4px" }}>
               {submittionState.errorMessage}
@@ -168,7 +169,7 @@ const PopupSizeSettingForm = () => {
               open={isOpenSnackBarState}
               onClose={() => setIsOpenSnackBarState(false)}
               autoHideDuration={3000}
-              message="Setting successfully saved."
+              message={t.savedSuccessfully}
             />
           </Stack>
         </FormControl>

@@ -77,6 +77,63 @@ class Translations {
   get duplicated() {
     return chrome.i18n.getMessage("duplicated");
   }
+  get tabCleanerHeader() {
+    return chrome.i18n.getMessage("tab_cleaner_header");
+  }
+  get tabCleanerDescription() {
+    return chrome.i18n.getMessage("tab_cleaner_description");
+  }
+  get duration() {
+    return chrome.i18n.getMessage("duration");
+  }
+  get unit() {
+    return chrome.i18n.getMessage("unit");
+  }
+  get durationUnitDay() {
+    return chrome.i18n.getMessage("duration_unit_day");
+  }
+  get durationUnitHour() {
+    return chrome.i18n.getMessage("duration_unit_hour");
+  }
+  get popupSizeHeader() {
+    return chrome.i18n.getMessage("popup_size_header");
+  }
+  get popupSizeDescription() {
+    return chrome.i18n.getMessage("popup_size_description");
+  }
+  get height() {
+    return chrome.i18n.getMessage("height");
+  }
+  get width() {
+    return chrome.i18n.getMessage("width");
+  }
+  get save() {
+    return chrome.i18n.getMessage("save");
+  }
+  get saving() {
+    return chrome.i18n.getMessage("saving");
+  }
+  get savedSuccessfully() {
+    return chrome.i18n.getMessage("saved_successfully");
+  }
+  get savedError() {
+    return chrome.i18n.getMessage("saved_error");
+  }
+  get popupSizeValidationErrorValueFormat() {
+    return chrome.i18n.getMessage("popup_size_validation_error_value_format");
+  }
+  get popupSizeValidationErrorValueRange() {
+    return chrome.i18n.getMessage("popup_size_validation_error_value_range");
+  }
+  get tabCleanerValidationErrorValueFormat() {
+    return chrome.i18n.getMessage("tab_cleaner_validation_error_value_format");
+  }
+  get tabCleanerErrorOnSave() {
+    return chrome.i18n.getMessage("tab_cleaner_error_on_save");
+  }
+  get sourceCode() {
+    return chrome.i18n.getMessage("source_code");
+  }
 }
 
 const t = new Translations();

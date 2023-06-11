@@ -86,5 +86,81 @@
   "duplicated": {
     "message": "Duplicated",
     "description": ""
+  },
+  "tab_cleaner_header": {
+    "message": "Clean up unused tabs automatically",
+    "description": ""
+  },
+  "tab_cleaner_description": {
+    "message": "By enabling this setting, tabs will automatically close once the set duration has passed since they were last active.",
+    "description": ""
+  },
+  "duration": {
+    "message": "Duration",
+    "description": ""
+  },
+  "unit": {
+    "message": "Unit",
+    "description": ""
+  },
+  "duration_unit_day": {
+    "message": "Day",
+    "description": ""
+  },
+  "duration_unit_hour": {
+    "message": "Hour",
+    "description": ""
+  },
+  "popup_size_header": {
+    "message": "Popup window size",
+    "description": ""
+  },
+  "popup_size_description": {
+    "message": "Height: 200-600px, Width: 400-800px required.",
+    "description": ""
+  },
+  "height": {
+    "message": "Height",
+    "description": ""
+  },
+  "width": {
+    "message": "Width",
+    "description": ""
+  },
+  "save": {
+    "message": "Save",
+    "description": ""
+  },
+  "saving": {
+    "message": "Saving",
+    "description": ""
+  },
+  "saved_successfully": {
+    "message": "Setting successfully saved.",
+    "description": ""
+  },
+  "saved_error": {
+    "message": "Failed to save the setting. Please try again.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_format": {
+    "message": "Input an integer.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_range": {
+    "message": "The height should be set to a value between 200 and 600, and the width should be set to a value between 400 and 800.",
+    "description": ""
+  },
+  "tab_cleaner_validation_error_value_format": {
+    "message": "Input a positive integer.",
+    "description": ""
+  },
+  "tab_cleaner_error_on_save": {
+    "message": "Please fix the error.",
+    "description": ""
+  },
+  "source_code": {
+    "message": "Source Code",
+    "description": ""
   }
 }

@@ -15,6 +15,7 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 
+import t from "../../../i18n/Translations";
 import { TabCleaner, DurationUnit } from "../../../model/settings/TabCleaner";
 import {
   getTabCleanerSetting,
@@ -62,11 +63,11 @@ const TabCleanerSettingForm = () => {
   }, []);
 
   const validateDurationValue = (value: string): DurationErrorState => {
-    if (!Number.isInteger(Number(value))) {
-      return { isError: true, errorMessage: "Input an integer." };
-    }
-    if (Number(value) <= 0) {
-      return { isError: true, errorMessage: "Input a positive integer." };
+    if (!Number.isInteger(Number(value)) || Number(value) <= 0) {
+      return {
+        isError: true,
+        errorMessage: t.tabCleanerValidationErrorValueFormat,
+      };
     }
 
     return { isError: false, errorMessage: "" };
@@ -98,7 +99,7 @@ const TabCleanerSettingForm = () => {
       setSubmittionState({
         isLoading: false,
         isError: true,
-        errorMessage: "Please fix the error.",
+        errorMessage: t.tabCleanerErrorOnSave,
       });
       return;
     }
@@ -121,7 +122,7 @@ const TabCleanerSettingForm = () => {
       setSubmittionState({
         isLoading: false,
         isError: true,
-        errorMessage: "Failed to save the setting. Please try again.",
+        errorMessage: t.savedError,
       });
     }
   };
@@ -133,7 +134,7 @@ const TabCleanerSettingForm = () => {
           sx={{ p: 0 }}
           title={
             <Typography variant="subtitle1" component="h3">
-              Clean up unused tabs automatically
+              {t.tabCleanerHeader}
             </Typography>
           }
         />
@@ -154,9 +155,7 @@ const TabCleanerSettingForm = () => {
                       component="p"
                       style={{ color: "grey" }}
                     >
-                      By enabling this setting, tabs will automatically close
-                      once the set duration has passed since they were last
-                      active.
+                      {t.tabCleanerDescription}
                     </Typography>
                   </Stack>
                 }
@@ -167,7 +166,7 @@ const TabCleanerSettingForm = () => {
                 value={settingState.duration}
                 variant="outlined"
                 size="small"
-                label="Duration"
+                label={t.duration}
                 disabled={!settingState.isEnabled}
                 onChange={onChangeDuration}
                 error={durationErrorState.isError}
@@ -178,15 +177,15 @@ const TabCleanerSettingForm = () => {
                 sx={{ minWidth: 120 }}
                 disabled={!settingState.isEnabled}
               >
-                <InputLabel id="demo-simple-select-label">Unit</InputLabel>
+                <InputLabel id="demo-simple-select-label">{t.unit}</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   value={settingState.durationUnit}
-                  label={"Unit"}
+                  label={t.unit}
                   onChange={onChangeDurationUnit}
                 >
-                  <MenuItem value={"day"}>Day</MenuItem>
-                  <MenuItem value={"hour"}>Hour</MenuItem>
+                  <MenuItem value={"day"}>{t.durationUnitDay}</MenuItem>
+                  <MenuItem value={"hour"}>{t.durationUnitHour}</MenuItem>
                 </Select>
               </FormControl>
             </Stack>
@@ -197,7 +196,7 @@ const TabCleanerSettingForm = () => {
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={onSave}
             >
-              {submittionState.isLoading ? "Saving..." : "Save"}
+              {submittionState.isLoading ? `${t.saving}...` : t.save}
             </Button>
             <FormHelperText style={{ marginTop: "4px" }}>
               {submittionState.errorMessage}
@@ -206,7 +205,7 @@ const TabCleanerSettingForm = () => {
               open={isOpenSnackBarState}
               onClose={() => setIsOpenSnackBarState(false)}
               autoHideDuration={3000}
-              message="Setting successfully saved."
+              message={t.savedSuccessfully}
             />
           </Stack>
         </FormControl>

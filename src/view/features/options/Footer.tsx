@@ -5,6 +5,8 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import React from "react";
 
+import t from "../../../i18n/Translations";
+
 const Footer = () => {
   return (
     <Box
@@ -24,7 +26,7 @@ const Footer = () => {
       >
         <Stack direction="row">
           <GitHubIcon sx={{ mr: 1 }} />
-          <Typography>Source Code</Typography>
+          <Typography>{t.sourceCode}</Typography>
         </Stack>
       </Link>
       <Typography
