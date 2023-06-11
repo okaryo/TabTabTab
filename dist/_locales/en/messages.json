@@ -8,7 +8,7 @@
     "description": "The short name of the application. Shown at the top of the dropdown menu."
   },
   "app_desc": {
-    "message": "This chrome extension makes it easier to manage your open tabs.",
+    "message": "This extension supports your browsing by improving tab management.",
     "description": "The short description of the application. Shown in the web store."
   },
   "window": {

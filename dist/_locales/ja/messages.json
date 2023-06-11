@@ -8,7 +8,7 @@
     "description": "The short name of the application. Shown at the top of the dropdown menu."
   },
   "app_desc": {
-    "message": "ブラウザのタブ管理を便利にする拡張機能です。",
+    "message": "タブ管理を便利にすることでブラウジング体験を向上する拡張です。",
     "description": "The short description of the application. Shown in the web store."
   },
   "window": {

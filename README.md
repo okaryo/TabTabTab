@@ -2,7 +2,7 @@
 
 ## TabTabTab
 
-TabTabTab is an innovative solution for tab management. With this extension, your browsing environment becomes organized and your productivity skyrockets. Free yourself from tab chaos and allow your focus to center on your important tasks. Give TabTabTab a try to enhance your digital lifestyle!
+TabTabTab is a Chrome extension that supports your browsing by improving tab management.
 
 [👉 ChromeWebStore](https://chrome.google.com/webstore/detail/tabtabtab/hfmnidllojimehmfjkclnadpebibhgoi)
 
