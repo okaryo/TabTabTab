@@ -159,8 +159,36 @@
     "message": "Please fix the error.",
     "description": ""
   },
-  "source_code": {
+  "settings": {
+    "message": "Settings",
+    "description": ""
+  },
+  "feedback": {
+    "message": "Feedback",
+    "description": ""
+  },
+  "bug_report_and_feature_request_title": {
+    "message": "Bug Report & Feature Request",
+    "description": ""
+  },
+  "bug_report_and_feature_request_description": {
+    "message": "If you encounter any bugs while using TabTabTab, or have suggestions for feature requests, please feel free to create an issue on GitHub.",
+    "description": ""
+  },
+  "store_review_title": {
+    "message": "Store Review",
+    "description": ""
+  },
+  "store_review_description": {
+    "message": "If you find TabTabTab helpful, we would greatly appreciate it if you could leave us a review on the ChromeWebStore! Your voice greatly contributes to the development of TabTabTab.",
+    "description": ""
+  },
+  "source_code_title": {
     "message": "Source Code",
+    "description": ""
+  },
+  "source_code_description": {
+    "message": "The code for TabTabTab is open source and publicly available. It is carefully managed to prevent any illicit programming, ensuring the extension is developed safely.",
     "description": ""
   }
 }

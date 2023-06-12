@@ -131,8 +131,29 @@ class Translations {
   get tabCleanerErrorOnSave() {
     return chrome.i18n.getMessage("tab_cleaner_error_on_save");
   }
-  get sourceCode() {
-    return chrome.i18n.getMessage("source_code");
+  get settings() {
+    return chrome.i18n.getMessage("settings");
+  }
+  get feedback() {
+    return chrome.i18n.getMessage("feedback");
+  }
+  get bugReportAndFeatureRequestTitle() {
+    return chrome.i18n.getMessage("bug_report_and_feature_request_title");
+  }
+  get bugReportAndFeatureRequestDescription() {
+    return chrome.i18n.getMessage("bug_report_and_feature_request_description");
+  }
+  get storeReviewTitle() {
+    return chrome.i18n.getMessage("store_review_title");
+  }
+  get storeReviewDescription() {
+    return chrome.i18n.getMessage("store_review_description");
+  }
+  get sourceCodeTitle() {
+    return chrome.i18n.getMessage("source_code_title");
+  }
+  get sourceCodeDescription() {
+    return chrome.i18n.getMessage("source_code_description");
   }
 }
 

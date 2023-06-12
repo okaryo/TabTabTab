@@ -159,8 +159,36 @@
     "message": "エラーを修正してください。",
     "description": ""
   },
-  "source_code": {
+  "settings": {
+    "message": "設定",
+    "description": ""
+  },
+  "feedback": {
+    "message": "フィードバック",
+    "description": ""
+  },
+  "bug_report_and_feature_request_title": {
+    "message": "バグ報告&機能要望",
+    "description": ""
+  },
+  "bug_report_and_feature_request_description": {
+    "message": "TabTabTabを使っていてバグを見つけたり、機能改善の要望がありましたらGitHubにてお気軽にイシューを作成ください。",
+    "description": ""
+  },
+  "store_review_title": {
+    "message": "ストアのレビュー",
+    "description": ""
+  },
+  "store_review_description": {
+    "message": "TabTabTabが役立つと思ったらぜひChromeストアでレビューをお願いします！あなたの声がTabTabTabの発展に大きく寄与します！",
+    "description": ""
+  },
+  "source_code_title": {
     "message": "ソースコード",
+    "description": ""
+  },
+  "source_code_description": {
+    "message": "TabTabTabのコードは公開されたオープンソースです。不正なプログラムが入らないよう管理されており、拡張機能が安全に開発されています。",
     "description": ""
   }
 }
