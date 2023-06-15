@@ -21,11 +21,10 @@ import { usePinTab } from "../hooks/usePinTab";
 type TabActionMenuProps = {
   tab: Tab;
   isOpenMenu: boolean;
-  anchorPostion: AnchorPosition;
+  anchorElement: HTMLElement;
   onCloseMenu: () => void;
   onMenuActionCompleted: () => void;
 };
-type AnchorPosition = { top: number; left: number } | null;
 type ActionMenu = {
   label: string;
   icon: React.ReactNode;
@@ -33,7 +32,7 @@ type ActionMenu = {
 };
 
 const TabActionMenu = (props: TabActionMenuProps) => {
-  const { tab, isOpenMenu, anchorPostion, onCloseMenu, onMenuActionCompleted } =
+  const { tab, isOpenMenu, anchorElement, onCloseMenu, onMenuActionCompleted } =
     props;
   const pinTab = usePinTab();
 
@@ -80,8 +79,7 @@ const TabActionMenu = (props: TabActionMenuProps) => {
       id={`tab-action-menu-${tab.id.value}`}
       open={isOpenMenu}
       onClose={onCloseMenu}
-      anchorReference="anchorPosition"
-      anchorPosition={anchorPostion}
+      anchorEl={anchorElement}
     >
       {menus.map((menu) => (
         <MenuItem

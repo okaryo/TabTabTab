@@ -1,9 +1,12 @@
 import Clear from "@mui/icons-material/Clear";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Chip from "@mui/material/Chip";
+import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
+import Stack from "@mui/material/Stack";
 import { SxProps } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
@@ -17,11 +20,11 @@ import { useCloseTab } from "../hooks/useCloseTab";
 import TabActionMenu from "./TabActionMenu";
 import TabFavicon from "./TabFavicon";
 
+
 type TabItemProps = {
   tab: Tab;
   sx?: SxProps;
 };
-type AnchorPosition = { top: number; left: number } | null;
 
 const TabItem = (props: TabItemProps) => {
   const { tab, sx } = props;
@@ -75,8 +78,8 @@ const TabItem = (props: TabItemProps) => {
   const closeTab = useCloseTab();
   const onClickDeleteButton = () => closeTab(tab.id);
 
-  const [menuAnchorPosition, setMenuAnchorPosition] =
-    useState<AnchorPosition | null>(null);
+  const [menuAnchorElement, setMenuAnchorElement] =
+    useState<HTMLElement | null>(null);
   const [isMenuActionCompleted, setIsMenuActionCompleted] = useState(false);
   useEffect(() => {
     if (isMenuActionCompleted) {
@@ -87,30 +90,33 @@ const TabItem = (props: TabItemProps) => {
       return () => clearTimeout(timer);
     }
   }, [isMenuActionCompleted]);
-  const onRightClick = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    setMenuAnchorPosition({ top: event.clientY, left: event.clientX });
+  const onClickTabActionMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setMenuAnchorElement(event.currentTarget);
   };
-  const onCloseMenu = () => setMenuAnchorPosition(null);
+  const onCloseMenu = () => setMenuAnchorElement(null);
   const onMenuActionCompleted = () => setIsMenuActionCompleted(true);
 
   return (
     <ListItem
       secondaryAction={
         shouldShowCloseButton && (
-          <IconButton
-            edge="end"
-            aria-label="delete"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={onClickDeleteButton}
-          >
-            <Clear />
-          </IconButton>
+          <Stack direction="row">
+            <IconButton edge="start" onClick={onClickTabActionMenu}>
+              <MoreVertIcon />
+            </IconButton>
+            <Divider orientation="vertical" variant="middle" flexItem />
+            <IconButton
+              edge="end"
+              // eslint-disable-next-line @typescript-eslint/no-misused-promises
+              onClick={onClickDeleteButton}
+            >
+              <Clear />
+            </IconButton>
+          </Stack>
         )
       }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onContextMenu={onRightClick}
       disablePadding
     >
       <ListItemButton
@@ -179,8 +185,8 @@ const TabItem = (props: TabItemProps) => {
       </ListItemButton>
       <TabActionMenu
         tab={tab}
-        isOpenMenu={Boolean(menuAnchorPosition)}
-        anchorPostion={menuAnchorPosition}
+        isOpenMenu={Boolean(menuAnchorElement)}
+        anchorElement={menuAnchorElement}
         onCloseMenu={onCloseMenu}
         onMenuActionCompleted={onMenuActionCompleted}
       />
