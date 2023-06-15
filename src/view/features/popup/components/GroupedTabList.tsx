@@ -26,7 +26,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   const toggleOpenStatus = () => setIsOpen(!isOpen);
 
   const tabComponents = tabs.map((tab) => {
-    return <TabItem key={tab.id.value} tab={tab} sx={{ width: 395 }} />;
+    return <TabItem key={tab.id.value} tab={tab} />;
   });
 
   let groupedTabLabel;

@@ -7,7 +7,6 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
-import { SxProps } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -22,11 +21,10 @@ import TabFavicon from "./TabFavicon";
 
 type TabItemProps = {
   tab: Tab;
-  sx?: SxProps;
 };
 
 const TabItem = (props: TabItemProps) => {
-  const { tab, sx } = props;
+  const { tab } = props;
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab.id);
   const [isHovered, setIsHovered] = React.useState(false);
@@ -124,7 +122,7 @@ const TabItem = (props: TabItemProps) => {
       disablePadding
     >
       <ListItemButton
-        sx={{ width: "100%", pt: 0, pb: 0, ...sx }}
+        sx={{ width: "100%", pt: 0, pb: 0 }}
         color="info"
         selected={tab.isFocused}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
