@@ -97,6 +97,11 @@ const TabItem = (props: TabItemProps) => {
 
   return (
     <ListItem
+      sx={{
+        "& .MuiListItemButton-root": {
+          pr: shouldShowCloseButton ? 11 : null,
+        },
+      }}
       secondaryAction={
         shouldShowCloseButton && (
           <Stack direction="row">
