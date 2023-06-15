@@ -20,7 +20,6 @@ import { useCloseTab } from "../hooks/useCloseTab";
 import TabActionMenu from "./TabActionMenu";
 import TabFavicon from "./TabFavicon";
 
-
 type TabItemProps = {
   tab: Tab;
   sx?: SxProps;
