@@ -67,6 +67,14 @@
     "message": "avant",
     "description": ""
   },
+  "other_operations": {
+    "message": "Autres opérations",
+    "description": ""
+  },
+  "close": {
+    "message": "Fermer",
+    "description": ""
+  },
   "bookmark": {
     "message": "Signet",
     "description": ""
