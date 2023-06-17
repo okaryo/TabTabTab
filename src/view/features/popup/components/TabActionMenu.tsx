@@ -1,9 +1,11 @@
 /* eslint @typescript-eslint/no-misused-promises: 0 */
 
+import { Book } from "@mui/icons-material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PushPinIcon from "@mui/icons-material/PushPin";
+import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
@@ -25,7 +27,7 @@ type TabActionMenuProps = {
   onCloseMenu: () => void;
   onMenuActionCompleted: () => void;
 };
-type ActionMenu = {
+type ActionMenuProps = {
   label: string;
   icon: React.ReactNode;
   action: () => void;
@@ -36,38 +38,56 @@ const TabActionMenu = (props: TabActionMenuProps) => {
     props;
   const pinTab = usePinTab();
 
-  const menus: ActionMenu[] = [
-    {
-      label: t.copyUrl,
-      icon: <ContentCopyIcon fontSize="small" />,
-      action: () => navigator.clipboard.writeText(tab.url),
-    },
-    {
-      label: t.bookmark,
-      icon: <BookmarkIcon fontSize="small" />,
-      action: () => bookmarkTab(tab.title, tab.url),
-    },
-    {
-      label: t.pin,
-      icon: <PushPinIcon fontSize="small" />,
-      action: () => pinTab(tab),
-    },
+  const ActionMenu = (props: ActionMenuProps) => {
+    const { label, icon, action } = props;
+    return (
+      <MenuItem
+        onClick={() => onClickMenu(action)}
+        style={{ minHeight: "24px" }}
+      >
+        <ListItemIcon>{icon}</ListItemIcon>
+        <ListItemText>{label}</ListItemText>
+      </MenuItem>
+    );
+  };
+
+  const menus = [
+    <ActionMenu
+      key={t.copyUrl}
+      label={t.copyUrl}
+      icon={<ContentCopyIcon fontSize="small" />}
+      action={() => navigator.clipboard.writeText(tab.url)}
+    />,
+    <ActionMenu
+      key={t.bookmark}
+      label={t.bookmark}
+      icon={<BookmarkIcon fontSize="small" />}
+      action={() => bookmarkTab(tab.title, tab.url)}
+    />,
+    <ActionMenu
+      key={t.pin}
+      label={t.pin}
+      icon={<PushPinIcon fontSize="small" />}
+      action={() => pinTab(tab)}
+    />,
+    tab.isFocused && <Divider key="divider" />,
+    tab.isFocused && (
+      <ActionMenu
+        key={t.screenshotVisibleArea}
+        label={t.screenshotVisibleArea}
+        icon={<PhotoCameraIcon fontSize="small" />}
+        action={() => {
+          screenshotVisibleArea(tab.windowId, (dataUrl) => {
+            const link = document.createElement("a");
+            link.href = dataUrl;
+            link.download = `${tab.title}.png`;
+            link.click();
+            link.remove();
+          });
+        }}
+      />
+    ),
   ];
-  if (tab.isFocused) {
-    menus.push({
-      label: t.screenshotVisibleArea,
-      icon: <PhotoCameraIcon fontSize="small" />,
-      action: () => {
-        screenshotVisibleArea(tab.windowId, (dataUrl) => {
-          const link = document.createElement("a");
-          link.href = dataUrl;
-          link.download = `${tab.title}.png`;
-          link.click();
-          link.remove();
-        });
-      },
-    });
-  }
   const onClickMenu = (action: () => void) => {
     action();
     onCloseMenu();
@@ -81,16 +101,7 @@ const TabActionMenu = (props: TabActionMenuProps) => {
       onClose={onCloseMenu}
       anchorEl={anchorElement}
     >
-      {menus.map((menu) => (
-        <MenuItem
-          key={menu.label}
-          onClick={() => onClickMenu(menu.action)}
-          style={{ minHeight: "24px" }}
-        >
-          <ListItemIcon>{menu.icon}</ListItemIcon>
-          <ListItemText>{menu.label}</ListItemText>
-        </MenuItem>
-      ))}
+      {menus}
     </Menu>
   );
 };
