@@ -1,0 +1,194 @@
+{
+  "app_name": {
+    "message": "TabTabTab - Gestionnaire d'Onglets",
+    "description": "The name of the application. Shown in the web store."
+  },
+  "app_name_short": {
+    "message": "TabTabTab",
+    "description": "The short name of the application. Shown at the top of the dropdown menu."
+  },
+  "app_desc": {
+    "message": "Cette extension facilite votre navigation en améliorant la gestion des onglets.",
+    "description": "The short description of the application. Shown in the web store."
+  },
+  "window": {
+    "message": "Fenêtre",
+    "description": ""
+  },
+  "current_window": {
+    "message": "Fenêtre actuelle",
+    "description": ""
+  },
+  "pinned": {
+    "message": "Epinglé",
+    "description": ""
+  },
+  "month": {
+    "message": "mois",
+    "description": ""
+  },
+  "months": {
+    "message": "mois",
+    "description": ""
+  },
+  "day": {
+    "message": "jour",
+    "description": ""
+  },
+  "days": {
+    "message": "jours",
+    "description": ""
+  },
+  "hour": {
+    "message": "heure",
+    "description": ""
+  },
+  "hours": {
+    "message": "heures",
+    "description": ""
+  },
+  "min": {
+    "message": "min",
+    "description": ""
+  },
+  "mins": {
+    "message": "mins",
+    "description": ""
+  },
+  "sec": {
+    "message": "sec",
+    "description": ""
+  },
+  "secs": {
+    "message": "secs",
+    "description": ""
+  },
+  "ago": {
+    "message": "avant",
+    "description": ""
+  },
+  "bookmark": {
+    "message": "Signet",
+    "description": ""
+  },
+  "copyUrl": {
+    "message": "Copier l'URL",
+    "description": ""
+  },
+  "pin": {
+    "message": "Epingler",
+    "description": ""
+  },
+  "screenshot_visible_area": {
+    "message": "Zone visible de la capture d'écran",
+    "description": ""
+  },
+  "duplicated": {
+    "message": "Duppliqué",
+    "description": ""
+  },
+  "tab_cleaner_header": {
+    "message": "Nettoyer automatiquement les onglets non utilisés",
+    "description": ""
+  },
+  "tab_cleaner_description": {
+    "message": "En activant ce paramètre, les onglets se fermeront automatiquement une fois la durée définie écoulée depuis votre dernière activité.",
+    "description": ""
+  },
+  "duration": {
+    "message": "Durée",
+    "description": ""
+  },
+  "unit": {
+    "message": "Unité",
+    "description": ""
+  },
+  "duration_unit_day": {
+    "message": "Jour",
+    "description": ""
+  },
+  "duration_unit_hour": {
+    "message": "Heure",
+    "description": ""
+  },
+  "popup_size_header": {
+    "message": "Taille de la fenêtre contextuelle",
+    "description": ""
+  },
+  "popup_size_description": {
+    "message": "Hauteur: 200-600px, Largeur: 400-800px requis.",
+    "description": ""
+  },
+  "height": {
+    "message": "Hauteur",
+    "description": ""
+  },
+  "width": {
+    "message": "Largeur",
+    "description": ""
+  },
+  "save": {
+    "message": "Sauvegarder",
+    "description": ""
+  },
+  "saving": {
+    "message": "Sauvegarde en cours",
+    "description": ""
+  },
+  "saved_successfully": {
+    "message": "Paramètre sauvegardé avec succès.",
+    "description": ""
+  },
+  "saved_error": {
+    "message": "Echec de l'enregistrement du paramètre. Veuillez réessayer.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_format": {
+    "message": "Saisir un nombre entier.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_range": {
+    "message": "La hauteur doit être définie sur une valeur comprise entre 200 et 600, et la largeur doit être définie sur une valeur comprise entre 400 et 800.",
+    "description": ""
+  },
+  "tab_cleaner_validation_error_value_format": {
+    "message": "Saisir un nombre entier positif.",
+    "description": ""
+  },
+  "tab_cleaner_error_on_save": {
+    "message": "Veuillez corriger l'erreur.",
+    "description": ""
+  },
+  "settings": {
+    "message": "Paramètres",
+    "description": ""
+  },
+  "feedback": {
+    "message": "Retours",
+    "description": ""
+  },
+  "bug_report_and_feature_request_title": {
+    "message": "Rapport de Bug & Demande de Fonctionnalité",
+    "description": ""
+  },
+  "bug_report_and_feature_request_description": {
+    "message": "Si vous rencontrez des bugs lors de l'utilisation de TabTabTab, ou si vous avez des suggestions pour des demandes de fonctionnalités, n'hésitez pas à créer une issue sur GitHub.",
+    "description": ""
+  },
+  "store_review_title": {
+    "message": "Avis sur l'Extension",
+    "description": ""
+  },
+  "store_review_description": {
+    "message": "Si vous trouvez TabTabTab utile, nous vous serions reconnaissants de bien vouloir nous laisser un avis sur le ChromeWebStore ! Votre voix contribue grandement au développement de TabTabTab.",
+    "description": ""
+  },
+  "source_code_title": {
+    "message": "Code Source",
+    "description": ""
+  },
+  "source_code_description": {
+    "message": "Le code de TabTabTab est open source et accessible au public. Il est soigneusement géré pour empêcher toute programmation illicite, garantissant que l'extension puisse être développée en toute sécurité.",
+    "description": ""
+  }
+}
