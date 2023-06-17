@@ -1,6 +1,5 @@
 /* eslint @typescript-eslint/no-misused-promises: 0 */
 
-import { Book } from "@mui/icons-material";
 import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";

@@ -62,6 +62,12 @@ class Translations {
   get ago() {
     return chrome.i18n.getMessage("ago");
   }
+  get otherOperations() {
+    return chrome.i18n.getMessage("other_operations");
+  }
+  get close() {
+    return chrome.i18n.getMessage("close");
+  }
   get bookmark() {
     return chrome.i18n.getMessage("bookmark");
   }

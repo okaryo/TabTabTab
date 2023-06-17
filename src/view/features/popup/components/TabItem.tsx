@@ -7,6 +7,7 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -103,17 +104,21 @@ const TabItem = (props: TabItemProps) => {
       secondaryAction={
         shouldShowCloseButton && (
           <Stack direction="row">
-            <IconButton edge="start" onClick={onClickTabActionMenu}>
-              <MoreVertIcon />
-            </IconButton>
+            <Tooltip title={t.otherOperations}>
+              <IconButton edge="start" onClick={onClickTabActionMenu}>
+                <MoreVertIcon />
+              </IconButton>
+            </Tooltip>
             <Divider orientation="vertical" variant="middle" flexItem />
-            <IconButton
-              edge="end"
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
-              onClick={onClickDeleteButton}
-            >
-              <Clear />
-            </IconButton>
+            <Tooltip title={t.close}>
+              <IconButton
+                edge="end"
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                onClick={onClickDeleteButton}
+              >
+                <Clear />
+              </IconButton>
+            </Tooltip>
           </Stack>
         )
       }
