@@ -34,7 +34,7 @@ const TabList = (props: TabListProps) => {
       return <GroupedTabList key={tab.name} tabs={tab} />;
     }
 
-    return <TabItem key={(tab as Tab).id.value} tab={tab as Tab} sx={{}} />;
+    return <TabItem key={(tab as Tab).id.value} tab={tab as Tab} />;
   });
 
   return (

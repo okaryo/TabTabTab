@@ -67,11 +67,19 @@
     "message": "ago",
     "description": ""
   },
+  "other_operations": {
+    "message": "Other Operations",
+    "description": ""
+  },
+  "close": {
+    "message": "Close",
+    "description": ""
+  },
   "bookmark": {
     "message": "Bookmark",
     "description": ""
   },
-  "copyUrl": {
+  "copy_url": {
     "message": "Copy URL",
     "description": ""
   },

@@ -1,10 +1,13 @@
 import Clear from "@mui/icons-material/Clear";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Chip from "@mui/material/Chip";
+import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
-import { SxProps } from "@mui/material/styles";
+import Stack from "@mui/material/Stack";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
 
@@ -19,12 +22,10 @@ import TabFavicon from "./TabFavicon";
 
 type TabItemProps = {
   tab: Tab;
-  sx?: SxProps;
 };
-type AnchorPosition = { top: number; left: number } | null;
 
 const TabItem = (props: TabItemProps) => {
-  const { tab, sx } = props;
+  const { tab } = props;
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab.id);
   const [isHovered, setIsHovered] = React.useState(false);
@@ -75,8 +76,8 @@ const TabItem = (props: TabItemProps) => {
   const closeTab = useCloseTab();
   const onClickDeleteButton = () => closeTab(tab.id);
 
-  const [menuAnchorPosition, setMenuAnchorPosition] =
-    useState<AnchorPosition | null>(null);
+  const [menuAnchorElement, setMenuAnchorElement] =
+    useState<HTMLElement | null>(null);
   const [isMenuActionCompleted, setIsMenuActionCompleted] = useState(false);
   useEffect(() => {
     if (isMenuActionCompleted) {
@@ -87,34 +88,46 @@ const TabItem = (props: TabItemProps) => {
       return () => clearTimeout(timer);
     }
   }, [isMenuActionCompleted]);
-  const onRightClick = (event: React.MouseEvent<HTMLElement>) => {
-    event.preventDefault();
-    setMenuAnchorPosition({ top: event.clientY, left: event.clientX });
+  const onClickTabActionMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setMenuAnchorElement(event.currentTarget);
   };
-  const onCloseMenu = () => setMenuAnchorPosition(null);
+  const onCloseMenu = () => setMenuAnchorElement(null);
   const onMenuActionCompleted = () => setIsMenuActionCompleted(true);
 
   return (
     <ListItem
+      sx={{
+        "& .MuiListItemButton-root": {
+          pr: shouldShowCloseButton ? 11 : null,
+        },
+      }}
       secondaryAction={
         shouldShowCloseButton && (
-          <IconButton
-            edge="end"
-            aria-label="delete"
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
-            onClick={onClickDeleteButton}
-          >
-            <Clear />
-          </IconButton>
+          <Stack direction="row">
+            <Tooltip title={t.otherOperations}>
+              <IconButton edge="start" onClick={onClickTabActionMenu}>
+                <MoreVertIcon />
+              </IconButton>
+            </Tooltip>
+            <Divider orientation="vertical" variant="middle" flexItem />
+            <Tooltip title={t.close}>
+              <IconButton
+                edge="end"
+                // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                onClick={onClickDeleteButton}
+              >
+                <Clear />
+              </IconButton>
+            </Tooltip>
+          </Stack>
         )
       }
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
-      onContextMenu={onRightClick}
       disablePadding
     >
       <ListItemButton
-        sx={{ width: "100%", pt: 0, pb: 0, ...sx }}
+        sx={{ width: "100%", pt: 0, pb: 0 }}
         color="info"
         selected={tab.isFocused}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
@@ -179,8 +192,8 @@ const TabItem = (props: TabItemProps) => {
       </ListItemButton>
       <TabActionMenu
         tab={tab}
-        isOpenMenu={Boolean(menuAnchorPosition)}
-        anchorPostion={menuAnchorPosition}
+        isOpenMenu={Boolean(menuAnchorElement)}
+        anchorElement={menuAnchorElement}
         onCloseMenu={onCloseMenu}
         onMenuActionCompleted={onMenuActionCompleted}
       />

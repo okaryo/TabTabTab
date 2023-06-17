@@ -27,7 +27,7 @@ const PinnedTabList = (props: PinnedTabListProps) => {
   const toggleOpenStatus = () => setIsOpen(!isOpen);
 
   const tabComponents = tabs.map((tab) => {
-    return <TabItem key={tab.id.value} tab={tab} sx={{ pl: 3, width: 395 }} />;
+    return <TabItem key={tab.id.value} tab={tab} />;
   });
 
   return (
