@@ -10,7 +10,8 @@
     "lint": "eslint './src/**/*.{js,ts,jsx,tsx}'",
     "lint:fix": "eslint --fix './src/**/*.{js,ts,jsx,tsx}'",
     "format": "prettier './src/**/*.{js,ts,jsx,tsx}' --check",
-    "format:fix": "prettier './src/**/*.{js,ts,jsx,tsx}' --write"
+    "format:fix": "prettier './src/**/*.{js,ts,jsx,tsx}' --write",
+    "locale-lint": "chromex-locale-lint --localesDir dist/_locales"
   },
   "author": "okaryo",
   "license": "MIT",
@@ -21,6 +22,7 @@
     "@types/react-dom": "^18.2.4",
     "@typescript-eslint/eslint-plugin": "^5.59.11",
     "@typescript-eslint/parser": "^5.59.11",
+    "chromex-locale-lint": "^0.0.1",
     "eslint": "^8.42.0",
     "eslint-plugin-autofix": "^1.1.0",
     "eslint-plugin-import": "^2.27.5",
