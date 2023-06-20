@@ -40,11 +40,11 @@
     "description": ""
   },
   "hour": {
-    "message": "h",
+    "message": "godz.",
     "description": ""
   },
   "hours": {
-    "message": "h",
+    "message": "godz.",
     "description": ""
   },
   "min": {
@@ -56,11 +56,11 @@
     "description": ""
   },
   "sec": {
-    "message": "s",
+    "message": "sek.",
     "description": ""
   },
   "secs": {
-    "message": "s",
+    "message": "sek.",
     "description": ""
   },
   "ago": {
