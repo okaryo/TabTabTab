@@ -1,0 +1,202 @@
+{
+  "app_name": {
+    "message": "TabTabTab - Menedżer kart",
+    "description": "Nazwa aplikacji. Wyświetlana w web store."
+  },
+  "app_name_short": {
+    "message": "TabTabTab",
+    "description": "Skrócona nazwa aplikacji. Wyświetlana w górnej części menu rozwijanego."
+  },
+  "app_desc": {
+    "message": "To rozszerzenie usprawnia przeglądanie stron poprzez lepsze zarządzanie kartami.",
+    "description": "Krótki opis aplikacji. Wyświetlany w web store."
+  },
+  "window": {
+    "message": "Okno",
+    "description": ""
+  },
+  "current_window": {
+    "message": "Bieżące Okno",
+    "description": ""
+  },
+  "pinned": {
+    "message": "Przypięty",
+    "description": ""
+  },
+  "month": {
+    "message": "mies.",
+    "description": ""
+  },
+  "months": {
+    "message": "mies.",
+    "description": ""
+  },
+  "day": {
+    "message": "dzień",
+    "description": ""
+  },
+  "days": {
+    "message": "dni",
+    "description": ""
+  },
+  "hour": {
+    "message": "godz.",
+    "description": ""
+  },
+  "hours": {
+    "message": "godz.",
+    "description": ""
+  },
+  "min": {
+    "message": "min",
+    "description": ""
+  },
+  "mins": {
+    "message": "min",
+    "description": ""
+  },
+  "sec": {
+    "message": "sek.",
+    "description": ""
+  },
+  "secs": {
+    "message": "sek.",
+    "description": ""
+  },
+  "ago": {
+    "message": "temu",
+    "description": ""
+  },
+  "other_operations": {
+    "message": "Inne Operacje",
+    "description": ""
+  },
+  "close": {
+    "message": "Zamknij",
+    "description": ""
+  },
+  "bookmark": {
+    "message": "Dodaj do Zakładek",
+    "description": ""
+  },
+  "copy_url": {
+    "message": "Skopiuj URL",
+    "description": ""
+  },
+  "pin": {
+    "message": "Przypnij",
+    "description": ""
+  },
+  "screenshot_visible_area": {
+    "message": "Zrzut Ekranu Widocznego Obszaru",
+    "description": ""
+  },
+  "duplicated": {
+    "message": "Zduplikowany",
+    "description": ""
+  },
+  "tab_cleaner_header": {
+    "message": "Automatyczne zamykanie nieużywanych kart",
+    "description": ""
+  },
+  "tab_cleaner_description": {
+    "message": "Włączenie tego ustawienia powoduje automatyczne zamykanie kart po upływie ustawionego czasu od ich ostatniej aktywności.",
+    "description": ""
+  },
+  "duration": {
+    "message": "Czas trwania",
+    "description": ""
+  },
+  "unit": {
+    "message": "Jednostka",
+    "description": ""
+  },
+  "duration_unit_day": {
+    "message": "Dzień",
+    "description": ""
+  },
+  "duration_unit_hour": {
+    "message": "Godzina",
+    "description": ""
+  },
+  "popup_size_header": {
+    "message": "Rozmiar okna pop-up",
+    "description": ""
+  },
+  "popup_size_description": {
+    "message": "Wymagania: wysokość: 200-600px, szerokość: 400-800px.",
+    "description": ""
+  },
+  "height": {
+    "message": "Wysokość",
+    "description": ""
+  },
+  "width": {
+    "message": "Szerokość",
+    "description": ""
+  },
+  "save": {
+    "message": "Zapisz",
+    "description": ""
+  },
+  "saving": {
+    "message": "Zapisywanie",
+    "description": ""
+  },
+  "saved_successfully": {
+    "message": "Ustawienie zostało pomyślnie zapisane.",
+    "description": ""
+  },
+  "saved_error": {
+    "message": "Nie udało się zapisać tego ustawienia. Spróbuj ponownie.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_format": {
+    "message": "Wprowadź liczbę całkowitą.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_range": {
+    "message": "Wysokość powinna być ustawiona jako wartość pomiędzy 200 a 600, a szerokość powinna być ustawiona jako wartość pomiędzy 400 a 800.",
+    "description": ""
+  },
+  "tab_cleaner_validation_error_value_format": {
+    "message": "Wprowadź dodatnią liczbę całkowitą.",
+    "description": ""
+  },
+  "tab_cleaner_error_on_save": {
+    "message": "Proszę napraw ten błąd.",
+    "description": ""
+  },
+  "settings": {
+    "message": "Ustawienia",
+    "description": ""
+  },
+  "feedback": {
+    "message": "Informacja Zwrotna",
+    "description": ""
+  },
+  "bug_report_and_feature_request_title": {
+    "message": "Zgłoszenie Błędu & Wniosek o Funkcję",
+    "description": ""
+  },
+  "bug_report_and_feature_request_description": {
+    "message": "Jeśli podczas korzystania z TabTabTab zauważysz jakieś błędy lub masz sugestie dotyczące funkcjonalności, możesz utworzyć zgłoszenie w serwisie GitHub.",
+    "description": ""
+  },
+  "store_review_title": {
+    "message": "Opinie",
+    "description": ""
+  },
+  "store_review_description": {
+    "message": "Jeśli uważasz, że TabTabTab jest pomocny - napisz nam swoją opinię w ChromeWebStore! Będziemy Ci za to bardzo wdzięczni. Twój głos w znacznym stopniu przyczynia się do rozwoju TabTabTab.",
+    "description": ""
+  },
+  "source_code_title": {
+    "message": "Kod Źródłowy",
+    "description": ""
+  },
+  "source_code_description": {
+    "message": "Kod źródłowy TabTabTab jest otwarty i publicznie dostępny (open source). Jest też starannie zarządzany, aby nie dopuścić do jakiegokolwiek niedozwolonego oprogramowania, zapewniając tym samym bezpieczny rozwój rozszerzenia.",
+    "description": ""
+  }
+}
