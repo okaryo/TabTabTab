@@ -67,6 +67,14 @@
     "message": "前",
     "description": ""
   },
+  "search_tabs": {
+    "message": "タブを検索",
+    "description": ""
+  },
+  "no_results_found": {
+    "message": "結果が見つかりません",
+    "description": ""
+  },
   "bookmark": {
     "message": "ブックマーク",
     "description": ""

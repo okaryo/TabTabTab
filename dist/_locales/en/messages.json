@@ -67,6 +67,14 @@
     "message": "ago",
     "description": ""
   },
+  "search_tabs": {
+    "message": "Search Tabs",
+    "description": ""
+  },
+  "no_results_found": {
+    "message": "No Results Found",
+    "description": ""
+  },
   "bookmark": {
     "message": "Bookmark",
     "description": ""
