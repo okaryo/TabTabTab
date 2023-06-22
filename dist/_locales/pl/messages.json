@@ -67,6 +67,14 @@
     "message": "temu",
     "description": ""
   },
+  "search_tabs": {
+    "message": "Szukaj zakładek",
+    "description": ""
+  },
+  "no_results_found": {
+    "message": "Nie znaleziono wyników",
+    "description": ""
+  },
   "bookmark": {
     "message": "Dodaj do Zakładek",
     "description": ""

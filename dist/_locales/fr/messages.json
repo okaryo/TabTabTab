@@ -67,6 +67,14 @@
     "message": "avant",
     "description": ""
   },
+  "search_tabs": {
+    "message": "Rechercher des onglets",
+    "description": ""
+  },
+  "no_results_found": {
+    "message": "Aucun résultat trouvé",
+    "description": ""
+  },
   "bookmark": {
     "message": "Signet",
     "description": ""

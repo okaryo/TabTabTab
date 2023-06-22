@@ -62,11 +62,11 @@ class Translations {
   get ago() {
     return chrome.i18n.getMessage("ago");
   }
-  get otherOperations() {
-    return chrome.i18n.getMessage("other_operations");
+  get searchTabs() {
+    return chrome.i18n.getMessage("search_tabs");
   }
-  get close() {
-    return chrome.i18n.getMessage("close");
+  get noResultsFound() {
+    return chrome.i18n.getMessage("no_results_found");
   }
   get bookmark() {
     return chrome.i18n.getMessage("bookmark");

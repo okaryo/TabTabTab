@@ -138,6 +138,16 @@ export class Windows {
     );
   }
 
+  findTabsByTitleOrUrl(value: string): Tab[] {
+    value = value.toLowerCase();
+    return this.allTabs.filter((tab) => {
+      return (
+        tab.title.toLowerCase().includes(value) ||
+        tab.url.toLowerCase().includes(value)
+      );
+    });
+  }
+
   private findWindowBy(windowId: WindowId): Window | null {
     const window = this._values.find((value) => windowId.equalTo(value.id));
     return window === undefined ? null : window;

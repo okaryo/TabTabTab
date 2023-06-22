@@ -1,20 +1,20 @@
 import Box from "@mui/material/Box";
 import CssBaseline from "@mui/material/CssBaseline";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 
 import { PopupSize } from "../../../../model/settings/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
 import ThemeProvider from "../../../components/ThemeProvider";
 import { ThemeContext } from "../../../contexts/Theme";
 import { useTheme } from "../../../hooks/useTheme";
+import { Page, PageContext } from "../contexts/Page";
 import { WindowsContext } from "../contexts/Windows";
 import { useWindows } from "../hooks/useWindows";
 
-import Header from "./Header";
-import TabList from "./TabList";
-import WindowTabs from "./WindowTabs";
+import Home from "./Home";
+import Search from "./Search";
 
-export default function App() {
+const Provider = ({ children }: { children: React.ReactNode }) => {
   const [popupSizeState, setPopupSizeState] = useState<PopupSize>(
     PopupSize.default()
   );
@@ -25,8 +25,7 @@ export default function App() {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initState();
   }, []);
-
-  const [selectedIndex, setSelectedIndex] = useState(0);
+  const [page, setPage] = useState<Page>("home");
 
   return (
     <ThemeContext.Provider value={useTheme()}>
@@ -39,18 +38,32 @@ export default function App() {
               overflowY: "auto",
             }}
           >
-            <CssBaseline />
-            <Box>
-              <Header />
-              <WindowTabs
-                selectedIndex={selectedIndex}
-                onSelectIndex={setSelectedIndex}
-              />
-              <TabList selectedWindowIndex={selectedIndex} />
-            </Box>
+            <PageContext.Provider value={{ page, setPage }}>
+              {children}
+            </PageContext.Provider>
           </Box>
         </WindowsContext.Provider>
       </ThemeProvider>
     </ThemeContext.Provider>
+  );
+};
+
+const BasePage = () => {
+  const { page } = useContext(PageContext);
+
+  return (
+    <>
+      <CssBaseline />
+      {page === "home" && <Home />}
+      {page === "search" && <Search />}
+    </>
+  );
+};
+
+export default function App() {
+  return (
+    <Provider>
+      <BasePage />
+    </Provider>
   );
 }
