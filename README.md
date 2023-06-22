@@ -14,6 +14,7 @@ TabTabTab is a Chrome extension that supports your browsing by improving tab man
 * Basic tab operations like bookmarking, URL copying, and pinning with a right-click
 * Capture screenshots of your active tab's visible area via right-click menu
 * Close tabs
+* Search tabs
 * Move to selected tab
 * Automatic clean up of tabs that have not been used for a certain period (ON/OFF and duration can be set from the settings page)
 * Dark mode
