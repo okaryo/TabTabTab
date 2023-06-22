@@ -1,5 +1,6 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
@@ -10,10 +11,12 @@ import React, { useContext } from "react";
 import { navigateToOptionsPage } from "../../../../repository/SettingsRepository";
 import { ThemeContext } from "../../../contexts/Theme";
 import { useToggleTheme } from "../../../hooks/useToggleTheme";
+import { useNavigatePage } from "../hooks/useNavigatePage";
 
 const Header = () => {
   const { theme } = useContext(ThemeContext);
   const toggleTheme = useToggleTheme();
+  const navigatePage = useNavigatePage();
 
   return (
     <AppBar position="static" color="primary">
@@ -26,6 +29,9 @@ const Header = () => {
         >
           TabTabTab
         </Typography>
+        <IconButton onClick={() => navigatePage("search")} color="inherit">
+          <SearchIcon />
+        </IconButton>
         <IconButton
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
