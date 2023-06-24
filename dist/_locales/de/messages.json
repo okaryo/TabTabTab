@@ -1,0 +1,202 @@
+{
+  "app_name": {
+    "message": "TabTabTab - Tab Manager",
+    "description": "Der Name der Anwendung. Wird im Webstore angezeigt."
+  },
+  "app_name_short": {
+    "message": "TabTabTab",
+    "description": "Der Kurzname der Anwendung. Wird am oberen Rand des Dropdown-Menüs angezeigt."
+  },
+  "app_desc": {
+    "message": "Diese Erweiterung unterstützt Sie beim Surfen, indem sie die Verwaltung der Tabs verbessert.",
+    "description": "Die Kurzbeschreibung der Anwendung. Angezeigt im WebStore."
+  },
+  "window": {
+    "message": "Fenster",
+    "description": ""
+  },
+  "current_window": {
+    "message": "Aktuelles Fenster",
+    "description": ""
+  },
+  "pinned": {
+    "message": "Angepinnt",
+    "description": ""
+  },
+  "month": {
+    "message": "Monat",
+    "description": ""
+  },
+  "months": {
+    "message": "Monate",
+    "description": ""
+  },
+  "day": {
+    "message": "Tag",
+    "description": ""
+  },
+  "days": {
+    "message": "Tage",
+    "description": ""
+  },
+  "hour": {
+    "message": "Stunde",
+    "description": ""
+  },
+  "hours": {
+    "message": "Stunden",
+    "description": ""
+  },
+  "min": {
+    "message": "Minute",
+    "description": ""
+  },
+  "mins": {
+    "message": "Minuten",
+    "description": ""
+  },
+  "sec": {
+    "message": "Sekunde",
+    "description": ""
+  },
+  "secs": {
+    "message": "Sekunden",
+    "description": ""
+  },
+  "ago": {
+    "message": "her",
+    "description": ""
+  },
+  "search_tabs": {
+    "message": "Suche Tab(s)",
+    "description": ""
+  },
+  "no_results_found": {
+    "message": "Kein Ergebnis gefunden",
+    "description": ""
+  },
+  "bookmark": {
+    "message": "Lesezeichen",
+    "description": ""
+  },
+  "copy_url": {
+    "message": "Kopiere URL",
+    "description": ""
+  },
+  "pin": {
+    "message": "Anpinnen",
+    "description": ""
+  },
+  "screenshot_visible_area": {
+    "message": "Screenshot sichtbarer Bereich",
+    "description": ""
+  },
+  "duplicated": {
+    "message": "Doppelt",
+    "description": ""
+  },
+  "tab_cleaner_header": {
+    "message": "Ungenutzte Tabs automatisch bereinigen",
+    "description": ""
+  },
+  "tab_cleaner_description": {
+    "message": "Wenn Sie diese Einstellung aktivieren, werden die Tabs automatisch geschlossen, sobald die eingestellte Zeitspanne seit ihrer letzten Aktivierung verstrichen ist.",
+    "description": ""
+  },
+  "duration": {
+    "message": "Dauer",
+    "description": ""
+  },
+  "unit": {
+    "message": "Einheit",
+    "description": ""
+  },
+  "duration_unit_day": {
+    "message": "Tag",
+    "description": ""
+  },
+  "duration_unit_hour": {
+    "message": "Stunden",
+    "description": ""
+  },
+  "popup_size_header": {
+    "message": "Popup-Fenstergröße",
+    "description": ""
+  },
+  "popup_size_description": {
+    "message": "Höhe: 200-600px, Breite: 400-800px erforderlich.",
+    "description": ""
+  },
+  "height": {
+    "message": "Höhe",
+    "description": ""
+  },
+  "width": {
+    "message": "Breite",
+    "description": ""
+  },
+  "save": {
+    "message": "Speichern",
+    "description": ""
+  },
+  "saving": {
+    "message": "gespeichert",
+    "description": ""
+  },
+  "saved_successfully": {
+    "message": "Einstellungen erfolgreich gespeichert.",
+    "description": ""
+  },
+  "saved_error": {
+    "message": "Die Einstellung konnte nicht gespeichert werden. Bitte versuchen Sie es erneut.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_format": {
+    "message": "Eine ganze Zahl eingeben.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_range": {
+    "message": "Die Höhe sollte auf einen Wert zwischen 200 und 600 und die Breite auf einen Wert zwischen 400 und 800 eingestellt werden.",
+    "description": ""
+  },
+  "tab_cleaner_validation_error_value_format": {
+    "message": "Eingabe einer positiven ganzen Zahl.",
+    "description": ""
+  },
+  "tab_cleaner_error_on_save": {
+    "message": "Bitte korrigieren Sie den Fehler.",
+    "description": ""
+  },
+  "settings": {
+    "message": "Einstellungen",
+    "description": ""
+  },
+  "feedback": {
+    "message": "Feedback",
+    "description": ""
+  },
+  "bug_report_and_feature_request_title": {
+    "message": "Fehlerbericht & Feature-Anfrage",
+    "description": ""
+  },
+  "bug_report_and_feature_request_description": {
+    "message": "Wenn Sie bei der Verwendung von TabTabTab auf Fehler stoßen oder Vorschläge für neue Funktionen haben, können Sie einen Eintrag auf GitHub erstellen.",
+    "description": ""
+  },
+  "store_review_title": {
+    "message": "Bewertung abgeben.",
+    "description": ""
+  },
+  "store_review_description": {
+    "message": "Wenn Sie TabTabTab hilfreich finden, würden wir uns sehr freuen, wenn Sie uns eine Bewertung im Chrome WebStore hinterlassen würden! Ihre Stimme trägt wesentlich zur Entwicklung von TabTabTab bei.",
+    "description": ""
+  },
+  "source_code_title": {
+    "message": "Quellcode",
+    "description": ""
+  },
+  "source_code_description": {
+    "message": "Der Code für TabTabTab ist quelloffen und öffentlich zugänglich. Er wird sorgfältig verwaltet, um jegliche unerlaubte Programmierung zu verhindern und sicherzustellen, dass die Erweiterung sicher entwickelt wird.",
+    "description": ""
+  }
+}
