@@ -1,6 +1,6 @@
 {
   "name": "TabTabTab",
-  "version": "2.7.1",
+  "version": "2.7.2",
   "description": "This chrome extension makes it easier to manage your open tabs.",
   "scripts": {
     "build": "webpack --config webpack.prod.js",
