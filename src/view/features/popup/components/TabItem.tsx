@@ -11,7 +11,11 @@ import Typography from "@mui/material/Typography";
 import React, { useContext, useEffect, useState } from "react";
 
 import t from "../../../../i18n/Translations";
-import { Tab } from "../../../../model/Tab";
+import {
+  Tab,
+  durationSinceLastActivatedAt,
+  hasDuplicatedTabs,
+} from "../../../../model/Tab";
 import { focusTab } from "../../../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/Windows";
 import { useCloseTab } from "../hooks/useCloseTab";
@@ -31,7 +35,7 @@ const TabItem = (props: TabItemProps) => {
   const shouldShowCloseButton = tab.isFocused || isHovered;
 
   const elapsedTimeSinceLastActiveText = (): string => {
-    const duration = tab.durationSinceLastActivatedAt;
+    const duration = durationSinceLastActivatedAt(tab);
     if (duration.inDays >= 30) {
       const elapsedMonths = Math.floor(duration.inDays / 30);
       return t.elapsedTime(
@@ -155,7 +159,7 @@ const TabItem = (props: TabItemProps) => {
               >
                 {tab.title}
               </span>
-              {tab.hasDuplicatedTabs(windows) && (
+              {hasDuplicatedTabs(windows, tab) && (
                 <Chip
                   label={t.duplicated}
                   size="small"
@@ -175,7 +179,7 @@ const TabItem = (props: TabItemProps) => {
                   textOverflow: "ellipsis",
                 }}
               >
-                {tab.originUrl}
+                {tab.url.origin}
               </span>
               {elapsedTimeText !== "" && <span>・</span>}
               {elapsedTimeText !== "" && (

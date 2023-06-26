@@ -29,42 +29,46 @@ describe("#tabs", () => {
     const actual = new Window(
       new WindowId(1),
       new Tabs([
-        new Tab(
-          new TabId(1),
-          new WindowId(1),
-          "title1",
-          new URL("https://example.com/path"),
-          "https://favicon.com",
-          false
-        ),
-        new Tab(
-          new TabId(2),
-          new WindowId(1),
-          "title2",
-          new URL("https://example.com/path"),
-          "https://favicon.com",
-          false
-        ),
+        {
+          id: new TabId(1),
+          windowId: new WindowId(1),
+          title: "title1",
+          url: new URL("https://example.com/path"),
+          favIconUrl: "https://favicon.com",
+          isFocused: false,
+          isAudioPlaying: false,
+        },
+        {
+          id: new TabId(2),
+          windowId: new WindowId(1),
+          title: "title2",
+          url: new URL("https://example.com/path"),
+          favIconUrl: "https://favicon.com",
+          isFocused: false,
+          isAudioPlaying: false,
+        },
       ]),
       false
     ).tabs;
     const expected = new Tabs([
-      new Tab(
-        new TabId(1),
-        new WindowId(1),
-        "title1",
-        new URL("https://example.com/path"),
-        "https://favicon.com",
-        false
-      ),
-      new Tab(
-        new TabId(2),
-        new WindowId(1),
-        "title2",
-        new URL("https://example.com/path"),
-        "https://favicon.com",
-        false
-      ),
+      {
+        id: new TabId(1),
+        windowId: new WindowId(1),
+        title: "title1",
+        url: new URL("https://example.com/path"),
+        favIconUrl: "https://favicon.com",
+        isFocused: false,
+        isAudioPlaying: false,
+      },
+      {
+        id: new TabId(2),
+        windowId: new WindowId(1),
+        title: "title2",
+        url: new URL("https://example.com/path"),
+        favIconUrl: "https://favicon.com",
+        isFocused: false,
+        isAudioPlaying: false,
+      },
     ]);
     expect(actual).toStrictEqual(expected);
   });
@@ -91,22 +95,24 @@ describe("#tabCount", () => {
     const actual = new Window(
       new WindowId(1),
       new Tabs([
-        new Tab(
-          new TabId(1),
-          new WindowId(1),
-          "title1",
-          new URL("https://example.com/path"),
-          "https://favicon.com",
-          false
-        ),
-        new Tab(
-          new TabId(2),
-          new WindowId(1),
-          "title2",
-          new URL("https://example.com/path"),
-          "https://favicon.com",
-          false
-        ),
+        {
+          id: new TabId(1),
+          windowId: new WindowId(1),
+          title: "title1",
+          url: new URL("https://example.com/path"),
+          favIconUrl: "https://favicon.com",
+          isFocused: false,
+          isAudioPlaying: false,
+        },
+        {
+          id: new TabId(2),
+          windowId: new WindowId(1),
+          title: "title2",
+          url: new URL("https://example.com/path"),
+          favIconUrl: "https://favicon.com",
+          isFocused: false,
+          isAudioPlaying: false,
+        },
       ]),
       false
     ).tabCount;

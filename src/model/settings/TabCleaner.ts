@@ -23,7 +23,7 @@ export class TabCleaner {
 
   shouldCleanUp(tab: Tab, currentDateTime: Date): boolean {
     const lastActivatedAt = tab.lastActivatedAt;
-    if (lastActivatedAt === null) return;
+    if (!lastActivatedAt) return;
 
     const cleanUpDate = new Date(lastActivatedAt.getTime());
     if (this.durationUnit === "day") {

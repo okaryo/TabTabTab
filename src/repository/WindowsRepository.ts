@@ -1,6 +1,5 @@
 import { GroupedColor } from "../model/GroupedColor";
 import { GroupId } from "../model/GroupId";
-import { Tab } from "../model/Tab";
 import { TabId } from "../model/TabId";
 import { Window } from "../model/Window";
 import { WindowId } from "../model/WindowId";
@@ -24,14 +23,15 @@ const getCurrentWindow = async (): Promise<Window> => {
   const windowId = new WindowId(currentWindowTabs[0].windowId);
   let currentWindow = Window.initializeBy(windowId, true);
   for (const tab of currentWindowTabs) {
-    const newTab = new Tab(
-      new TabId(tab.id),
+    const newTab = {
+      id: new TabId(tab.id),
       windowId,
-      tab.title,
-      new URL(tab.url),
-      tab.favIconUrl,
-      tab.highlighted
-    );
+      title: tab.title,
+      url: new URL(tab.url),
+      favIconUrl: tab.favIconUrl,
+      isFocused: tab.highlighted,
+      isAudioPlaying: tab.audible,
+    };
 
     if (tab.pinned) {
       currentWindow = currentWindow.addPinnedTab(newTab);
@@ -58,14 +58,15 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
   let windows = Windows.empty();
   for (const tab of unfocusedWindowTabs) {
     const windowId = new WindowId(tab.windowId);
-    const newTab = new Tab(
-      new TabId(tab.id),
+    const newTab = {
+      id: new TabId(tab.id),
       windowId,
-      tab.title,
-      new URL(tab.url),
-      tab.favIconUrl,
-      tab.highlighted
-    );
+      title: tab.title,
+      url: new URL(tab.url),
+      favIconUrl: tab.favIconUrl,
+      isFocused: tab.highlighted,
+      isAudioPlaying: tab.audible,
+    };
 
     if (tab.pinned) {
       windows = windows.addPinnedTab(windowId, false, newTab);
