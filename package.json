@@ -9,8 +9,8 @@
     "test": "jest",
     "lint": "eslint './src/**/*.{js,ts,jsx,tsx}'",
     "lint:fix": "eslint --fix './src/**/*.{js,ts,jsx,tsx}'",
-    "format": "prettier './src/**/*.{js,ts,jsx,tsx}' --check",
-    "format:fix": "prettier './src/**/*.{js,ts,jsx,tsx}' --write",
+    "format": "prettier './src/**/*.{js,ts,jsx,tsx}' './test/**/*.{js,ts,jsx,tsx}' --check",
+    "format:fix": "prettier './src/**/*.{js,ts,jsx,tsx}' './test/**/*.{js,ts,jsx,tsx}' --write",
     "locale-lint": "chromex-locale-lint --localesDir dist/_locales"
   },
   "author": "okaryo",
