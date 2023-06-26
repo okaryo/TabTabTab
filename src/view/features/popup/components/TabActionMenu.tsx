@@ -55,13 +55,13 @@ const TabActionMenu = (props: TabActionMenuProps) => {
       key={t.copyUrl}
       label={t.copyUrl}
       icon={<ContentCopyIcon fontSize="small" />}
-      action={() => navigator.clipboard.writeText(tab.url)}
+      action={() => navigator.clipboard.writeText(tab.url.href)}
     />,
     <ActionMenu
       key={t.bookmark}
       label={t.bookmark}
       icon={<BookmarkIcon fontSize="small" />}
-      action={() => bookmarkTab(tab.title, tab.url)}
+      action={() => bookmarkTab(tab.title, tab.url.href)}
     />,
     <ActionMenu
       key={t.pin}

@@ -83,7 +83,7 @@ export class Tabs {
 
   findTabBy(tabId: TabId): Tab | null {
     for (const value of this._values) {
-      if (value instanceof Tab) {
+      if (this.isTab(value)) {
         if (value.id.equalTo(tabId)) {
           return value;
         }
@@ -98,7 +98,7 @@ export class Tabs {
 
   updateTab(tab: Tab): Tabs {
     const tabs = this._values.map((value) => {
-      if (value instanceof Tab) return value.id.equalTo(tab.id) ? tab : value;
+      if (this.isTab(value)) return value.id.equalTo(tab.id) ? tab : value;
       return value.updateTab(tab);
     });
     return new Tabs(tabs);
@@ -114,7 +114,7 @@ export class Tabs {
       });
     } else {
       tabs = this._values.filter((value) => {
-        if (value instanceof Tab) return !value.id.equalTo(tabId);
+        if (this.isTab(value)) return !value.id.equalTo(tabId);
         return true;
       });
     }
@@ -123,7 +123,7 @@ export class Tabs {
 
   private findNormalTabBy(tabId: TabId): Tab | null {
     const tab = this._values.find((value) => {
-      if (value instanceof Tab) return value.id.equalTo(tabId);
+      if (this.isTab(value)) return value.id.equalTo(tabId);
       return false;
     }) as Tab | undefined;
     return tab === undefined ? null : tab;
@@ -152,5 +152,9 @@ export class Tabs {
 
   private isNestedTabs(value: Tabable): value is NestedTabs {
     return value instanceof GroupedTabs || value instanceof PinnedTabs;
+  }
+
+  private isTab(value: Tabable): value is Tab {
+    return !this.isNestedTabs(value);
   }
 }

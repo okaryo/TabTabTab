@@ -2,7 +2,7 @@ import { GroupedColor } from "./GroupedColor";
 import { GroupedTabs } from "./GroupedTabs";
 import { GroupId } from "./GroupId";
 import { PinnedTabs } from "./PinnedTabs";
-import { Tab } from "./Tab";
+import { Tab, updateLastActivatedAt } from "./Tab";
 import { TabId } from "./TabId";
 import { Tabs } from "./Tabs";
 import { Window } from "./Window";
@@ -118,7 +118,7 @@ export class Windows {
     if (tab === null) return this;
 
     const newWindows = this._values.map((value) =>
-      value.updateTab(tab.updateLastActivatedAt(lastActivatedAt))
+      value.updateTab(updateLastActivatedAt(tab, lastActivatedAt))
     );
     return new Windows(newWindows);
   }
@@ -143,7 +143,7 @@ export class Windows {
     return this.allTabs.filter((tab) => {
       return (
         tab.title.toLowerCase().includes(value) ||
-        tab.url.toLowerCase().includes(value)
+        tab.url.href.toLowerCase().includes(value)
       );
     });
   }
