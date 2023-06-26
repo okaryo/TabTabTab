@@ -1,5 +1,6 @@
 import Clear from "@mui/icons-material/Clear";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -159,6 +160,7 @@ const TabItem = (props: TabItemProps) => {
               >
                 {tab.title}
               </span>
+              {tab.isAudioPlaying && <VolumeUpIcon fontSize="small" />}
               {hasDuplicatedTabs(windows, tab) && (
                 <Chip
                   label={t.duplicated}
