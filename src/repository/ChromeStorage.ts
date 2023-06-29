@@ -15,6 +15,10 @@ export type PopupSizeSettingStoredData = {
   };
 };
 
+export type PopupElementScaleSettingStoredData = {
+  popup_element_scale: number;
+};
+
 type Theme = "light" | "dark";
 export type ThemeStoredData = {
   theme: Theme;
@@ -31,6 +35,7 @@ export type LastActivatedAtStoredData = {
 export class ChromeLocalStorage {
   static readonly TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
   static readonly POPUP_SIZE_SETTING_KEY = "popup_size_setting";
+  static readonly POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
   static readonly THEME_KEY = "theme";
 }
 
