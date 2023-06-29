@@ -47,7 +47,7 @@ const PinnedTabList = (props: PinnedTabListProps) => {
           }
           disablePadding
         >
-          <ListItemButton onClick={toggleOpenStatus} sx={{ height: 56 }}>
+          <ListItemButton onClick={toggleOpenStatus}>
             <Stack direction="row" spacing={1} alignItems="center">
               <ListItemText
                 primary={

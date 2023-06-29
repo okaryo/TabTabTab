@@ -70,7 +70,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
           }
           disablePadding
         >
-          <ListItemButton onClick={toggleOpenStatus} sx={{ height: 56 }}>
+          <ListItemButton onClick={toggleOpenStatus}>
             {groupedTabLabel}
           </ListItemButton>
         </ListItem>
