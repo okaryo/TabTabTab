@@ -60,9 +60,11 @@ export const getPopupElementScaleSetting = async (): Promise<number> => {
   return popup_element_scale;
 };
 
-export const updatePopupElementScaleSetting = (scale: number): Promise<void> => {
+export const updatePopupElementScaleSetting = (
+  scale: number
+): Promise<void> => {
   return chrome.storage.local.set({
-    [ChromeLocalStorage.POPUP_ELEMENT_SCALE_SETTING_KEY]: scale
+    [ChromeLocalStorage.POPUP_ELEMENT_SCALE_SETTING_KEY]: scale,
   });
 };
 
