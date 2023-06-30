@@ -4,9 +4,9 @@ import React, { useState, useEffect, useContext } from "react";
 
 import { PopupSize } from "../../../../model/settings/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
-import ThemeProvider from "../../../components/ThemeProvider";
 import { ThemeContext } from "../../../contexts/Theme";
 import { useTheme } from "../../../hooks/useTheme";
+import PopupThemeProvider from "../components/ThemeProvider";
 import { Page, PageContext } from "../contexts/Page";
 import { WindowsContext } from "../contexts/Windows";
 import { useWindows } from "../hooks/useWindows";
@@ -29,7 +29,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
 
   return (
     <ThemeContext.Provider value={useTheme()}>
-      <ThemeProvider>
+      <PopupThemeProvider>
         <WindowsContext.Provider value={useWindows()}>
           <Box
             style={{
@@ -43,7 +43,7 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
             </PageContext.Provider>
           </Box>
         </WindowsContext.Provider>
-      </ThemeProvider>
+      </PopupThemeProvider>
     </ThemeContext.Provider>
   );
 };
