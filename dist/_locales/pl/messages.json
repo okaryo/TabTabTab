@@ -127,6 +127,26 @@
     "message": "Wymagania: wysokość: 200-600px, szerokość: 400-800px.",
     "description": ""
   },
+  "popup_element_scale_header": {
+    "message": "Skalowanie elementów popupu",
+    "description": ""
+  },
+  "popup_element_scale_description": {
+    "message": "Dostosuj rozmiar elementów, takich jak czcionki i ikony w popupie, do 50~150% ich domyślnego rozmiaru.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_format": {
+    "message": "Wprowadź liczbę całkowitą.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_range": {
+    "message": "Wprowadź wartość w zakresie od 50 do 150.",
+    "description": ""
+  },
+  "scale": {
+    "message": "Skala",
+    "description": ""
+  },
   "height": {
     "message": "Wysokość",
     "description": ""

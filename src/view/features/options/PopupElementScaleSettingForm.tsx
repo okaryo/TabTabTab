@@ -12,32 +12,22 @@ import Typography from "@mui/material/Typography";
 import React, { useEffect, useState } from "react";
 
 import t from "../../../i18n/Translations";
-import { PopupSize } from "../../../model/settings/PopupSize";
 import {
-  getPopupSizeSetting,
-  updatePopupSizeSetting,
+  getPopupElementScaleSetting,
+  updatePopupElementScaleSetting,
 } from "../../../repository/SettingsRepository";
 
-type SettingForm = {
-  height: string;
-  width: string;
-};
 type SubmittionState = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
 };
 
-const PopupSizeSettingForm = () => {
-  const MIN_HEIGHT = 200;
-  const MAX_HEIGHT = 600;
-  const MIN_WIDTH = 400;
-  const MAX_WIDTH = 800;
+const PopupFontAndIconScaleSettingForm = () => {
+  const MIN_SCALE = 50;
+  const MAX_SCALE = 150;
 
-  const [settingState, setSettingState] = useState<SettingForm>({
-    height: "500",
-    width: "500",
-  });
+  const [settingState, setSettingState] = useState("100");
   const [submittionState, setSubmittionState] = useState<SubmittionState>({
     isLoading: false,
     isError: false,
@@ -47,55 +37,41 @@ const PopupSizeSettingForm = () => {
 
   useEffect(() => {
     const setSetting = async () => {
-      const setting = await getPopupSizeSetting();
-      setSettingState({
-        height: setting.height.toString(),
-        width: setting.width.toString(),
-      });
+      const scale = await getPopupElementScaleSetting();
+      setSettingState(scale.toString());
     };
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     setSetting();
   }, []);
 
-  const onChangeHeight = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChangeScale = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
-    setSettingState({ ...settingState, height: value });
-  };
-  const onChangeWidth = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const value = event.target.value;
-    setSettingState({ ...settingState, width: value });
+    setSettingState(value);
   };
 
   const onSave = async () => {
     setSubmittionState({ isLoading: false, isError: false, errorMessage: "" });
 
-    const { height, width } = settingState;
-    if (!Number.isInteger(Number(height)) || !Number.isInteger(Number(width))) {
+    if (!Number.isInteger(Number(settingState))) {
       setSubmittionState({
         isLoading: false,
         isError: true,
-        errorMessage: t.popupSizeValidationErrorValueFormat,
+        errorMessage: t.popupElementScaleValidationErrorValueFormat,
       });
       return;
     }
-    if (
-      MIN_HEIGHT > Number(height) ||
-      Number(height) > MAX_HEIGHT ||
-      MIN_WIDTH > Number(width) ||
-      Number(width) > MAX_WIDTH
-    ) {
+    if (MIN_SCALE > Number(settingState) || Number(settingState) > MAX_SCALE) {
       setSubmittionState({
         isLoading: false,
         isError: true,
-        errorMessage: t.popupSizeValidationErrorValueRange,
+        errorMessage: t.popupElementScaleValidationErrorValueRange,
       });
       return;
     }
 
     try {
       setSubmittionState({ isLoading: true, isError: false, errorMessage: "" });
-      const setting = new PopupSize(Number(height), Number(width));
-      await updatePopupSizeSetting(setting);
+      await updatePopupElementScaleSetting(Number(settingState));
       setSubmittionState({
         isLoading: false,
         isError: false,
@@ -118,7 +94,7 @@ const PopupSizeSettingForm = () => {
           sx={{ p: 0 }}
           title={
             <Typography variant="subtitle1" component="h3">
-              {t.popupSizeHeader}
+              {t.popupElementScaleHeader}
             </Typography>
           }
           subheader={
@@ -127,7 +103,7 @@ const PopupSizeSettingForm = () => {
               component="p"
               style={{ color: "grey" }}
             >
-              {t.popupSizeDescription}
+              {t.popupElementScaleDescription}
             </Typography>
           }
         />
@@ -139,28 +115,15 @@ const PopupSizeSettingForm = () => {
             <Box>
               <Stack direction="row" spacing={2}>
                 <TextField
-                  value={settingState.height}
-                  variant="outlined"
+                  value={settingState}
                   size="small"
-                  label={t.height}
+                  label={t.scale}
                   InputProps={{
                     endAdornment: (
-                      <InputAdornment position="end">px</InputAdornment>
+                      <InputAdornment position="end">%</InputAdornment>
                     ),
                   }}
-                  onChange={onChangeHeight}
-                />
-                <TextField
-                  value={settingState.width}
-                  variant="outlined"
-                  size="small"
-                  label={t.width}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">px</InputAdornment>
-                    ),
-                  }}
-                  onChange={onChangeWidth}
+                  onChange={onChangeScale}
                 />
               </Stack>
             </Box>
@@ -189,4 +152,4 @@ const PopupSizeSettingForm = () => {
   );
 };
 
-export default PopupSizeSettingForm;
+export default PopupFontAndIconScaleSettingForm;

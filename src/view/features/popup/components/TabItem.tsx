@@ -141,14 +141,12 @@ const TabItem = (props: TabItemProps) => {
         <ListItemText
           primary={
             <Typography
-              variant="subtitle1"
+              variant="subtitle2"
               component="p"
               sx={{
                 display: "flex",
                 alignItems: "center",
                 gap: "4px",
-                letterSpacing: 0,
-                fontSize: 14,
               }}
             >
               <span
