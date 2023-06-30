@@ -4,6 +4,7 @@ import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import FormControl from "@mui/material/FormControl";
 import FormHelperText from "@mui/material/FormHelperText";
+import InputAdornment from "@mui/material/InputAdornment";
 import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
@@ -142,6 +143,11 @@ const PopupSizeSettingForm = () => {
                   variant="outlined"
                   size="small"
                   label={t.height}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">px</InputAdornment>
+                    ),
+                  }}
                   onChange={onChangeHeight}
                 />
                 <TextField
@@ -149,6 +155,11 @@ const PopupSizeSettingForm = () => {
                   variant="outlined"
                   size="small"
                   label={t.width}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">px</InputAdornment>
+                    ),
+                  }}
                   onChange={onChangeWidth}
                 />
               </Stack>
