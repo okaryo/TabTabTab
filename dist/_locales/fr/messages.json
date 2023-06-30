@@ -127,6 +127,26 @@
     "message": "Hauteur: 200-600px, Largeur: 400-800px requis.",
     "description": ""
   },
+  "popup_element_scale_header": {
+    "message": "Échelle des éléments du popup",
+    "description": ""
+  },
+  "popup_element_scale_description": {
+    "message": "Ajustez la taille des éléments tels que les polices et les icônes dans le popup entre 50~150% de leur taille par défaut.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_format": {
+    "message": "Entrez un nombre entier.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_range": {
+    "message": "Entrez une valeur dans la plage de 50 à 150.",
+    "description": ""
+  },
+  "scale": {
+    "message": "Échelle",
+    "description": ""
+  },
   "height": {
     "message": "Hauteur",
     "description": ""

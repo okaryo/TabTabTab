@@ -127,6 +127,26 @@
     "message": "高さ: 200~600px, 幅: 400~800px の範囲で指定してください。",
     "description": ""
   },
+  "popup_element_scale_header": {
+    "message": "ポップアップ要素のスケール",
+    "description": ""
+  },
+  "popup_element_scale_description": {
+    "message": "フォントやアイコンなどのポップアップ内の要素サイズをデフォルトサイズに対する50~150%の範囲で調整します。",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_format": {
+    "message": "整数値を入力してください。",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_range": {
+    "message": "50~150の範囲の値を入力してください。",
+    "description": ""
+  },
+  "scale": {
+    "message": "スケール",
+    "description": ""
+  },
   "height": {
     "message": "高さ",
     "description": ""

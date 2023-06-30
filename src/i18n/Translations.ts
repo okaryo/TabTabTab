@@ -114,6 +114,9 @@ class Translations {
   get width() {
     return chrome.i18n.getMessage("width");
   }
+  get scale() {
+    return chrome.i18n.getMessage("scale");
+  }
   get save() {
     return chrome.i18n.getMessage("save");
   }
@@ -137,6 +140,22 @@ class Translations {
   }
   get tabCleanerErrorOnSave() {
     return chrome.i18n.getMessage("tab_cleaner_error_on_save");
+  }
+  get popupElementScaleHeader() {
+    return chrome.i18n.getMessage("popup_element_scale_header");
+  }
+  get popupElementScaleDescription() {
+    return chrome.i18n.getMessage("popup_element_scale_description");
+  }
+  get popupElementScaleValidationErrorValueFormat() {
+    return chrome.i18n.getMessage(
+      "popup_element_scale_validation_error_value_format"
+    );
+  }
+  get popupElementScaleValidationErrorValueRange() {
+    return chrome.i18n.getMessage(
+      "popup_element_scale_validation_error_value_range"
+    );
   }
   get settings() {
     return chrome.i18n.getMessage("settings");

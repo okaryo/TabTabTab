@@ -127,6 +127,26 @@
     "message": "Höhe: 200-600px, Breite: 400-800px erforderlich.",
     "description": ""
   },
+  "popup_element_scale_header": {
+    "message": "Popup Element Skalierung",
+    "description": ""
+  },
+  "popup_element_scale_description": {
+    "message": "Passen Sie die Größe von Elementen wie Schriften und Symbolen im Popup zwischen 50~150% ihrer Standardgröße an.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_format": {
+    "message": "Eine ganze Zahl eingeben.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_range": {
+    "message": "Geben Sie einen Wert im Bereich von 50 bis 150 ein.",
+    "description": ""
+  },
+  "scale": {
+    "message": "Skalierung",
+    "description": ""
+  },
   "height": {
     "message": "Höhe",
     "description": ""

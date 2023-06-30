@@ -127,6 +127,26 @@
     "message": "Height: 200-600px, Width: 400-800px required.",
     "description": ""
   },
+  "popup_element_scale_header": {
+    "message": "Popup element scale",
+    "description": ""
+  },
+  "popup_element_scale_description": {
+    "message": "Adjust the size of elements such as fonts and icons in the popup between 50~150% of their default size.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_format": {
+    "message": "Input an integer.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_range": {
+    "message": "Input a value within the range of 50 to 150.",
+    "description": ""
+  },
+  "scale": {
+    "message": "Scale",
+    "description": ""
+  },
   "height": {
     "message": "Height",
     "description": ""
