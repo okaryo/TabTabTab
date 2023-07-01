@@ -32,12 +32,13 @@ const Feedback = () => {
       {feedbacks.map((feedback, index) => {
         return (
           <Link
+            key={index}
             href={feedback.link}
             underline="none"
             target="_blank"
             rel="noopener noreferrer"
           >
-            <Card key={index} sx={{ p: 2 }}>
+            <Card sx={{ p: 2 }}>
               <CardHeader
                 sx={{ p: 0 }}
                 title={
