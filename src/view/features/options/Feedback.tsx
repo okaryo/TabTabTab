@@ -59,9 +59,6 @@ const Feedback = () => {
                   </Typography>
                 }
               />
-              {/* <CardContent>
-          {feedback.description}
-        </CardContent> */}
             </Card>
           </Link>
         );
