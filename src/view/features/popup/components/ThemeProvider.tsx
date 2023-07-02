@@ -23,8 +23,6 @@ const PopupThemeProvider = (props: ThemeProviderProps) => {
     initState();
   }, []);
 
-  console.log(scale);
-
   const themePalette = useMemo(() => {
     const defaultTheme = createTheme();
 
