@@ -26,6 +26,12 @@
   "background" : {
     "service_worker" : "js/background.js"
   },
+  "commands": {
+    "_execute_action": {
+      "suggested_key": "Alt+Shift+T",
+      "description": "Open TabTabTab popup"
+    }
+  },
   "options_page": "options.html",
   "icons": {
     "16": "tabtabtab16.png",
