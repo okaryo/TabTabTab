@@ -1,4 +1,5 @@
 /* eslint @typescript-eslint/no-floating-promises: 0 */
+import { addKeyboardShortcutsListener } from "./KeyboardShortcuts";
 import {
   addListenerOnTabActivated,
   addListenerOnTabClosed,
@@ -11,3 +12,6 @@ addListenerOnTabClosed();
 
 // TabCleanerScheduler
 activateTabCleanerScheduler();
+
+// KeyboardShortcuts
+addKeyboardShortcutsListener();
