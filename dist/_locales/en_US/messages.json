@@ -1,0 +1,222 @@
+{
+  "app_name": {
+    "message": "TabTabTab - Tab Manager",
+    "description": "The name of the application. Shown in the web store."
+  },
+  "app_name_short": {
+    "message": "TabTabTab",
+    "description": "The short name of the application. Shown at the top of the dropdown menu."
+  },
+  "app_desc": {
+    "message": "This extension supports your browsing by improving tab management.",
+    "description": "The short description of the application. Shown in the web store."
+  },
+  "window": {
+    "message": "Window",
+    "description": ""
+  },
+  "current_window": {
+    "message": "CurrentWindow",
+    "description": ""
+  },
+  "pinned": {
+    "message": "Pinned",
+    "description": ""
+  },
+  "month": {
+    "message": "month",
+    "description": ""
+  },
+  "months": {
+    "message": "months",
+    "description": ""
+  },
+  "day": {
+    "message": "day",
+    "description": ""
+  },
+  "days": {
+    "message": "days",
+    "description": ""
+  },
+  "hour": {
+    "message": "hour",
+    "description": ""
+  },
+  "hours": {
+    "message": "hours",
+    "description": ""
+  },
+  "min": {
+    "message": "min",
+    "description": ""
+  },
+  "mins": {
+    "message": "mins",
+    "description": ""
+  },
+  "sec": {
+    "message": "sec",
+    "description": ""
+  },
+  "secs": {
+    "message": "secs",
+    "description": ""
+  },
+  "ago": {
+    "message": "ago",
+    "description": ""
+  },
+  "search_tabs": {
+    "message": "Search Tabs",
+    "description": ""
+  },
+  "no_results_found": {
+    "message": "No Results Found",
+    "description": ""
+  },
+  "bookmark": {
+    "message": "Bookmark",
+    "description": ""
+  },
+  "copy_url": {
+    "message": "Copy URL",
+    "description": ""
+  },
+  "pin": {
+    "message": "Pin",
+    "description": ""
+  },
+  "screenshot_visible_area": {
+    "message": "Screenshot Visible Area",
+    "description": ""
+  },
+  "duplicated": {
+    "message": "Duplicated",
+    "description": ""
+  },
+  "tab_cleaner_header": {
+    "message": "Clean up unused tabs automatically",
+    "description": ""
+  },
+  "tab_cleaner_description": {
+    "message": "By enabling this setting, tabs will automatically close once the set duration has passed since they were last active.",
+    "description": ""
+  },
+  "duration": {
+    "message": "Duration",
+    "description": ""
+  },
+  "unit": {
+    "message": "Unit",
+    "description": ""
+  },
+  "duration_unit_day": {
+    "message": "Day",
+    "description": ""
+  },
+  "duration_unit_hour": {
+    "message": "Hour",
+    "description": ""
+  },
+  "popup_size_header": {
+    "message": "Popup window size",
+    "description": ""
+  },
+  "popup_size_description": {
+    "message": "Height: 200-600px, Width: 400-800px required.",
+    "description": ""
+  },
+  "popup_element_scale_header": {
+    "message": "Popup element scale",
+    "description": ""
+  },
+  "popup_element_scale_description": {
+    "message": "Adjust the size of elements such as fonts and icons in the popup between 50~150% of their default size.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_format": {
+    "message": "Input an integer.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_range": {
+    "message": "Input a value within the range of 50 to 150.",
+    "description": ""
+  },
+  "scale": {
+    "message": "Scale",
+    "description": ""
+  },
+  "height": {
+    "message": "Height",
+    "description": ""
+  },
+  "width": {
+    "message": "Width",
+    "description": ""
+  },
+  "save": {
+    "message": "Save",
+    "description": ""
+  },
+  "saving": {
+    "message": "Saving",
+    "description": ""
+  },
+  "saved_successfully": {
+    "message": "Setting successfully saved.",
+    "description": ""
+  },
+  "saved_error": {
+    "message": "Failed to save the setting. Please try again.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_format": {
+    "message": "Input an integer.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_range": {
+    "message": "The height should be set to a value between 200 and 600, and the width should be set to a value between 400 and 800.",
+    "description": ""
+  },
+  "tab_cleaner_validation_error_value_format": {
+    "message": "Input a positive integer.",
+    "description": ""
+  },
+  "tab_cleaner_error_on_save": {
+    "message": "Please fix the error.",
+    "description": ""
+  },
+  "settings": {
+    "message": "Settings",
+    "description": ""
+  },
+  "feedback": {
+    "message": "Feedback",
+    "description": ""
+  },
+  "bug_report_and_feature_request_title": {
+    "message": "Bug Report & Feature Request",
+    "description": ""
+  },
+  "bug_report_and_feature_request_description": {
+    "message": "If you encounter any bugs while using TabTabTab, or have suggestions for feature requests, please feel free to create an issue on GitHub.",
+    "description": ""
+  },
+  "store_review_title": {
+    "message": "Store Review",
+    "description": ""
+  },
+  "store_review_description": {
+    "message": "If you find TabTabTab helpful, we would greatly appreciate it if you could leave us a review on the ChromeWebStore! Your voice greatly contributes to the development of TabTabTab.",
+    "description": ""
+  },
+  "source_code_title": {
+    "message": "Source Code",
+    "description": ""
+  },
+  "source_code_description": {
+    "message": "The code for TabTabTab is open source and publicly available. It is carefully managed to prevent any illicit programming, ensuring the extension is developed safely.",
+    "description": ""
+  }
+}
