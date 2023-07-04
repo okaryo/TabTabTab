@@ -11,7 +11,6 @@ const WindowTab = (props: WindowTabProps) => {
   const { label, tabCount, ...other } = props;
   return (
     <Tab
-      sx={{ p: 1.5 }}
       style={{ textTransform: "none" }}
       label={label}
       {...other}
