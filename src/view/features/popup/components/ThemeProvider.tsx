@@ -25,6 +25,9 @@ const PopupThemeProvider = (props: ThemeProviderProps) => {
 
   const themePalette = useMemo(() => {
     const defaultTheme = createTheme();
+    const defaultTabMinHeight = 48;
+    const defaultTabsMinHeight = 48;
+    const defaultToolbarMinHeight = 56;
 
     return createTheme({
       palette: {
@@ -32,6 +35,29 @@ const PopupThemeProvider = (props: ThemeProviderProps) => {
       },
       typography: {
         fontSize: defaultTheme.typography.fontSize * (scale / 100),
+      },
+      components: {
+        MuiTab: {
+          styleOverrides: {
+            root: {
+              minHeight: defaultTabMinHeight * (scale / 100),
+            },
+          },
+        },
+        MuiTabs: {
+          styleOverrides: {
+            root: {
+              minHeight: defaultTabsMinHeight * (scale / 100),
+            },
+          },
+        },
+        MuiToolbar: {
+          styleOverrides: {
+            root: {
+              minHeight: defaultToolbarMinHeight * (scale / 100),
+            },
+          },
+        },
       },
     });
   }, [theme, scale]);

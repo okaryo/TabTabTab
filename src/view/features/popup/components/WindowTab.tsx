@@ -11,7 +11,7 @@ const WindowTab = (props: WindowTabProps) => {
   const { label, tabCount, ...other } = props;
   return (
     <Tab
-      style={{ textTransform: "none", minHeight: "auto", padding: 12 }}
+      style={{ textTransform: "none" }}
       label={label}
       {...other}
       icon={<Chip label={tabCount} size="small" color="info" />}

@@ -41,9 +41,9 @@ const GroupedTabList = (props: GroupedTabListProps) => {
       <Typography
         variant="h6"
         component="h6"
+        sx={{ px: 1.25, py: 0.25 }}
         style={{
           display: "inline-block",
-          padding: "2px 10px",
           borderRadius: "8px",
           backgroundColor: `${props.tabs.colorCode}`,
         }}
