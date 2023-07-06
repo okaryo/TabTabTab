@@ -51,7 +51,7 @@ const PinnedTabList = (props: PinnedTabListProps) => {
             <Stack direction="row" spacing={1} alignItems="center">
               <ListItemText
                 primary={
-                  <Typography variant="h6" component="h6">
+                  <Typography variant="subtitle1" component="h6">
                     {t.pinned}
                   </Typography>
                 }
