@@ -39,7 +39,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   } else {
     groupedTabLabel = (
       <Typography
-        variant="h6"
+        variant="subtitle1"
         component="h6"
         sx={{ px: 1.25, py: 0.25 }}
         style={{
