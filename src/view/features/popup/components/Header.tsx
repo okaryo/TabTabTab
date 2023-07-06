@@ -4,34 +4,41 @@ import SearchIcon from "@mui/icons-material/Search";
 import SettingsIcon from "@mui/icons-material/Settings";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
+import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import React, { useContext } from "react";
+import React, { Dispatch, SetStateAction, useContext } from "react";
 
+import t from "../../../../i18n/Translations";
 import { navigateToOptionsPage } from "../../../../repository/SettingsRepository";
 import { ThemeContext } from "../../../contexts/Theme";
 import { useToggleTheme } from "../../../hooks/useToggleTheme";
-import { useNavigatePage } from "../hooks/useNavigatePage";
 
-const Header = () => {
+const Header = (props: { onChange: Dispatch<SetStateAction<string>> }) => {
   const { theme } = useContext(ThemeContext);
   const toggleTheme = useToggleTheme();
-  const navigatePage = useNavigatePage();
+  const onHoge = (event: React.ChangeEvent<HTMLInputElement>) => {
+    props.onChange(event.target.value);
+  };
 
   return (
     <AppBar position="static" color="primary">
       <Toolbar>
-        <Typography
-          style={{ color: "white" }}
-          variant="h6"
-          component="h1"
-          sx={{ flexGrow: 1 }}
-        >
-          TabTabTab
-        </Typography>
-        <IconButton onClick={() => navigatePage("search")} color="inherit">
-          <SearchIcon />
-        </IconButton>
+        <TextField
+          sx={{ mr: 2 }}
+          placeholder={t.searchTabs}
+          variant="standard"
+          onChange={onHoge}
+          autoFocus
+          fullWidth
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position="start">
+                <SearchIcon />
+              </InputAdornment>
+            ),
+          }}
+        />
         <IconButton
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
