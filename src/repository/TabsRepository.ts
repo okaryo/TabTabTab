@@ -21,7 +21,7 @@ export const removeTab = async (tabId: TabId) => {
 
 export const udpateLastActivatedAtOfTab = async (tabId: TabId) => {
   let { last_activated_at } = (await chrome.storage.session.get(
-    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY
+    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
   )) as LastActivatedAtStoredData;
   if (last_activated_at === undefined) last_activated_at = {};
 
@@ -33,7 +33,7 @@ export const udpateLastActivatedAtOfTab = async (tabId: TabId) => {
 
 export const deleteLastActivatedAtOfTab = async (tabId: TabId) => {
   const { last_activated_at } = (await chrome.storage.session.get(
-    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY
+    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
   )) as LastActivatedAtStoredData;
   delete last_activated_at[tabId.value];
   await chrome.storage.session.set({
@@ -51,9 +51,9 @@ export const pinTab = async (tabId: TabId) => {
 
 export const screenshotVisibleArea = (
   windowId: WindowId,
-  callback: (dataUrl: string) => void
+  callback: (dataUrl: string) => void,
 ) => {
   chrome.tabs.captureVisibleTab(windowId.value, { format: "png" }, (dataUrl) =>
-    callback(dataUrl)
+    callback(dataUrl),
   );
 };

@@ -74,7 +74,7 @@ export class Windows {
     tab: Tab,
     groupId: GroupId,
     groupName: string,
-    color: GroupedColor
+    color: GroupedColor,
   ): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
@@ -82,7 +82,7 @@ export class Windows {
       const newWindow = new Window(
         windowId,
         new Tabs([groupedTabs]),
-        isFocused
+        isFocused,
       );
       return this.add(newWindow);
     }
@@ -118,7 +118,7 @@ export class Windows {
     if (tab === null) return this;
 
     const newWindows = this._values.map((value) =>
-      value.updateTab(updateLastActivatedAt(tab, lastActivatedAt))
+      value.updateTab(updateLastActivatedAt(tab, lastActivatedAt)),
     );
     return new Windows(newWindows);
   }
@@ -134,7 +134,7 @@ export class Windows {
     return newWindows.addPinnedTab(
       targetWindow.id,
       targetWindow.isFocused,
-      tab
+      tab,
     );
   }
 

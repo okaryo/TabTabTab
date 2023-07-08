@@ -13,7 +13,7 @@ export const useCloseTab = (): ((tabId: TabId) => Promise<void>) => {
       const newWindows = windows.removeTabBy(tabId);
       setWindows(newWindows);
     },
-    [windows, setWindows]
+    [windows, setWindows],
   );
 
   return closeTab;

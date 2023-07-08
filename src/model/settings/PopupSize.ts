@@ -1,5 +1,8 @@
 export class PopupSize {
-  constructor(public height: number, public width: number) {}
+  constructor(
+    public height: number,
+    public width: number,
+  ) {}
 
   static default(): PopupSize {
     return new PopupSize(500, 400);

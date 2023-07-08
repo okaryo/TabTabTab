@@ -109,7 +109,7 @@ const TabCleanerSettingForm = () => {
       const setting = new TabCleaner(
         settingState.isEnabled,
         Number(settingState.duration),
-        settingState.durationUnit
+        settingState.durationUnit,
       );
       await updateTabCleanerSetting(setting);
       setSubmittionState({

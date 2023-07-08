@@ -6,7 +6,7 @@ export class TabCleaner {
   constructor(
     public isEnabled: boolean,
     public duration: number,
-    public durationUnit: DurationUnit
+    public durationUnit: DurationUnit,
   ) {}
 
   updateIsEnabled(isEnabled: boolean): TabCleaner {

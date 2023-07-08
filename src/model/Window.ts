@@ -9,7 +9,7 @@ export class Window {
   constructor(
     private _id: WindowId,
     private _tabs: Tabs,
-    private _isFocused: boolean
+    private _isFocused: boolean,
   ) {}
 
   static initializeBy(windowId: WindowId, isFocused = false): Window {
@@ -49,7 +49,7 @@ export class Window {
     groupId: GroupId,
     groupName: string,
     color: GroupedColor,
-    tab: Tab
+    tab: Tab,
   ): Window {
     const newTabs = this._tabs.addGroupedTabBy(groupId, groupName, color, tab);
     return new Window(this._id, newTabs, this._isFocused);

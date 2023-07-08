@@ -43,7 +43,7 @@ const getCurrentWindow = async (): Promise<Window> => {
         groupId,
         group.title,
         groupColor,
-        newTab
+        newTab,
       );
     } else {
       currentWindow = currentWindow.addTab(newTab);
@@ -80,7 +80,7 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
         newTab,
         groupId,
         group.title,
-        groupColor
+        groupColor,
       );
     } else {
       windows = windows.addTab(windowId, false, newTab);
@@ -90,11 +90,11 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
 };
 
 const applyLastActivatedAtOfTabInWindows = async (
-  windows: Windows
+  windows: Windows,
 ): Promise<Windows> => {
   let newWindows = windows;
   const { last_activated_at } = (await chrome.storage.session.get(
-    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY
+    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
   )) as LastActivatedAtStoredData;
   if (!last_activated_at || Object.keys(last_activated_at).length === 0)
     return windows;
@@ -102,7 +102,7 @@ const applyLastActivatedAtOfTabInWindows = async (
   for (const [tabId, dateString] of Object.entries(last_activated_at)) {
     newWindows = newWindows.updateLastActivatedAtOfTabBy(
       new TabId(Number(tabId)),
-      new Date(dateString)
+      new Date(dateString),
     );
   }
   return newWindows;

@@ -32,14 +32,14 @@ export const updateLastActivatedAt = (tab: Tab, lastActivatedAt: Date): Tab => {
 
 export const hasDuplicatedTabs = (
   windows: Windows,
-  targetTab: Tab
+  targetTab: Tab,
 ): boolean => {
   return windows.values.some((window) => {
     return window.flatTabs.some(
       (tab) =>
         !targetTab.id.equalTo(tab.id) &&
         targetTab.title === tab.title &&
-        targetTab.url.href === tab.url.href
+        targetTab.url.href === tab.url.href,
     );
   });
 };

@@ -42,7 +42,7 @@ const TabItem = (props: TabItemProps) => {
       const elapsedMonths = Math.floor(duration.inDays / 30);
       return t.elapsedTime(
         elapsedMonths,
-        elapsedMonths === 1 ? t.month : t.months
+        elapsedMonths === 1 ? t.month : t.months,
       );
     }
     if (duration.inDays >= 7) {
@@ -52,25 +52,25 @@ const TabItem = (props: TabItemProps) => {
     if (duration.inDays >= 1) {
       return t.elapsedTime(
         duration.inDays,
-        duration.inDays === 1 ? t.day : t.days
+        duration.inDays === 1 ? t.day : t.days,
       );
     }
     if (duration.inHours >= 1) {
       return t.elapsedTime(
         duration.inHours,
-        duration.inHours === 1 ? t.hour : t.hours
+        duration.inHours === 1 ? t.hour : t.hours,
       );
     }
     if (duration.inMinutes >= 1) {
       return t.elapsedTime(
         duration.inMinutes,
-        duration.inMinutes === 1 ? t.min : t.mins
+        duration.inMinutes === 1 ? t.min : t.mins,
       );
     }
     if (duration.inSeconds >= 1) {
       return t.elapsedTime(
         duration.inSeconds,
-        duration.inSeconds === 1 ? t.sec : t.secs
+        duration.inSeconds === 1 ? t.sec : t.secs,
       );
     }
 

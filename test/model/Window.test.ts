@@ -48,7 +48,7 @@ describe("#tabs", () => {
           isAudioPlaying: false,
         },
       ]),
-      false
+      false,
     ).tabs;
     const expected = new Tabs([
       {
@@ -114,7 +114,7 @@ describe("#tabCount", () => {
           isAudioPlaying: false,
         },
       ]),
-      false
+      false,
     ).tabCount;
     const expected = 2;
     expect(actual).toBe(expected);
@@ -138,7 +138,7 @@ describe("#removeTabBy", () => {
           buildTab(3),
           buildTab(4),
         ]),
-        false
+        false,
       ).removeTabBy(new TabId(1));
       const expected = new Window(
         new WindowId(1),
@@ -149,7 +149,7 @@ describe("#removeTabBy", () => {
           buildTab(3),
           buildTab(4),
         ]),
-        false
+        false,
       );
       expect(actual).toStrictEqual(expected);
     });
@@ -167,7 +167,7 @@ describe("#removeTabBy", () => {
           buildTab(3),
           buildTab(4),
         ]),
-        false
+        false,
       ).removeTabBy(new TabId(3));
       const expected = new Window(
         new WindowId(1),
@@ -178,7 +178,7 @@ describe("#removeTabBy", () => {
           ]),
           buildTab(4),
         ]),
-        false
+        false,
       );
       expect(actual).toStrictEqual(expected);
     });

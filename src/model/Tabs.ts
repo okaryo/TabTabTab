@@ -52,7 +52,7 @@ export class Tabs {
     groupId: GroupId,
     groupName: string,
     color: GroupedColor,
-    tab: Tab
+    tab: Tab,
   ): Tabs {
     const groupedTabs = this.findGroupedTabsBy(groupId);
     if (groupedTabs === null) {
@@ -131,17 +131,17 @@ export class Tabs {
 
   private findGroupedTabsBy(groupId: GroupId): GroupedTabs | null {
     const groupedTabsList = this._values.filter(
-      (value) => value instanceof GroupedTabs
+      (value) => value instanceof GroupedTabs,
     ) as GroupedTabs[];
     const groupedTabs = groupedTabsList.find((tabs) =>
-      tabs.id.equalTo(groupId)
+      tabs.id.equalTo(groupId),
     );
     return groupedTabs === undefined ? null : groupedTabs;
   }
 
   private findPinnedTabs(): PinnedTabs | null {
     const pinnedTabs = this._values.find(
-      (value) => value instanceof PinnedTabs
+      (value) => value instanceof PinnedTabs,
     ) as PinnedTabs | undefined;
     return pinnedTabs === undefined ? null : pinnedTabs;
   }

@@ -25,7 +25,7 @@ const Header = (props: HeaderProps) => {
 
   const onClickTab = (
     _: React.SyntheticEvent,
-    page: "settings" | "feedback"
+    page: "settings" | "feedback",
   ) => {
     setPage(page);
   };

@@ -13,7 +13,7 @@ export const usePinTab = (): ((tab: Tab) => Promise<void>) => {
       const newWindows = windows.pinTab(tab);
       setWindows(newWindows);
     },
-    [windows, setWindows]
+    [windows, setWindows],
   );
 
   return pinTab;

@@ -14,7 +14,7 @@ import Home from "./Home";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   const [popupSizeState, setPopupSizeState] = useState<PopupSize>(
-    PopupSize.default()
+    PopupSize.default(),
   );
   useEffect(() => {
     const initState = async () => {

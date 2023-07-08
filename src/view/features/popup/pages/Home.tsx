@@ -20,12 +20,12 @@ const Home = () => {
     if (event.key === "ArrowDown") {
       const maxIndex = tabs.length - 1;
       setSelectedTabIndex((oldIndex) =>
-        oldIndex === maxIndex ? oldIndex : oldIndex + 1
+        oldIndex === maxIndex ? oldIndex : oldIndex + 1,
       );
     } else if (event.key === "ArrowUp") {
       const minIndex = 0;
       setSelectedTabIndex((oldIndex) =>
-        oldIndex === minIndex ? oldIndex : oldIndex - 1
+        oldIndex === minIndex ? oldIndex : oldIndex - 1,
       );
     } else if (event.key === "Enter") {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises

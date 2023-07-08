@@ -13,7 +13,7 @@ export const useToggleTheme = (): ((theme: Theme) => Promise<void>) => {
       await updateTheme(theme);
       setTheme(theme);
     },
-    [setTheme]
+    [setTheme],
   );
 
   return toggleTheme;

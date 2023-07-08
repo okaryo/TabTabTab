@@ -149,12 +149,12 @@ class Translations {
   }
   get popupElementScaleValidationErrorValueFormat() {
     return chrome.i18n.getMessage(
-      "popup_element_scale_validation_error_value_format"
+      "popup_element_scale_validation_error_value_format",
     );
   }
   get popupElementScaleValidationErrorValueRange() {
     return chrome.i18n.getMessage(
-      "popup_element_scale_validation_error_value_range"
+      "popup_element_scale_validation_error_value_range",
     );
   }
   get settings() {

@@ -9,7 +9,7 @@ export class GroupedTabs implements NestedTabs {
     private _id: GroupId,
     private _name: string,
     private _color: GroupedColor,
-    private _values: Tab[]
+    private _values: Tab[],
   ) {}
 
   get id(): GroupId {
