@@ -26,10 +26,11 @@ import TabFavicon from "./TabFavicon";
 
 type TabItemProps = {
   tab: Tab;
+  selected?: boolean;
 };
 
 const TabItem = (props: TabItemProps) => {
-  const { tab } = props;
+  const { tab, selected } = props;
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab.id);
   const [isHovered, setIsHovered] = React.useState(false);
@@ -129,7 +130,7 @@ const TabItem = (props: TabItemProps) => {
       <ListItemButton
         sx={{ width: "100%", pt: 0, pb: 0 }}
         color="info"
-        selected={tab.isFocused}
+        selected={tab.isFocused || selected}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={onTapTabItem}
       >

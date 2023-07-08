@@ -7,18 +7,23 @@ import IconButton from "@mui/material/IconButton";
 import InputAdornment from "@mui/material/InputAdornment";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
-import React, { Dispatch, SetStateAction, useContext } from "react";
+import React, { useContext } from "react";
 
 import t from "../../../../i18n/Translations";
 import { navigateToOptionsPage } from "../../../../repository/SettingsRepository";
 import { ThemeContext } from "../../../contexts/Theme";
 import { useToggleTheme } from "../../../hooks/useToggleTheme";
 
-const Header = (props: { onChange: Dispatch<SetStateAction<string>> }) => {
+type HeaderProps = {
+  onChangeSearchText: (value: string) => void;
+};
+
+const Header = (props: HeaderProps) => {
+  const { onChangeSearchText } = props;
   const { theme } = useContext(ThemeContext);
   const toggleTheme = useToggleTheme();
-  const onHoge = (event: React.ChangeEvent<HTMLInputElement>) => {
-    props.onChange(event.target.value);
+  const onInputSearchField = (event: React.ChangeEvent<HTMLInputElement>) => {
+    onChangeSearchText(event.target.value);
   };
 
   return (
@@ -28,7 +33,7 @@ const Header = (props: { onChange: Dispatch<SetStateAction<string>> }) => {
           sx={{ mr: 2 }}
           placeholder={t.searchTabs}
           variant="standard"
-          onChange={onHoge}
+          onChange={onInputSearchField}
           autoFocus
           fullWidth
           InputProps={{
