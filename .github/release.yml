@@ -1,14 +1,14 @@
 changelog:
   categories:
-    - title: 🎉 Feature
+    - title: 🎉 Features
       labels:
         - enhancement
-    - title: 🐛 Bug Fix
+    - title: 🐛 Bug Fixs
       labels:
         - bug
-    - title: 🛠 Development
+    - title: 🏠 Maintenance
       labels:
-        - development
+        - maintenance
     - title: 📝 Documentation
       labels:
         - documentation
