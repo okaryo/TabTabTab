@@ -22,51 +22,51 @@
     "description": ""
   },
   "pinned": {
-    "message": "Pinned",
+    "message": "고정됨",
     "description": ""
   },
   "month": {
-    "message": "month",
+    "message": "개월",
     "description": ""
   },
   "months": {
-    "message": "months",
+    "message": "개월",
     "description": ""
   },
   "day": {
-    "message": "day",
+    "message": "일",
     "description": ""
   },
   "days": {
-    "message": "days",
+    "message": "일",
     "description": ""
   },
   "hour": {
-    "message": "hour",
+    "message": "시간",
     "description": ""
   },
   "hours": {
-    "message": "hours",
+    "message": "시간",
     "description": ""
   },
   "min": {
-    "message": "min",
+    "message": "분",
     "description": ""
   },
   "mins": {
-    "message": "mins",
+    "message": "분",
     "description": ""
   },
   "sec": {
-    "message": "sec",
+    "message": "초",
     "description": ""
   },
   "secs": {
-    "message": "secs",
+    "message": "초",
     "description": ""
   },
   "ago": {
-    "message": "ago",
+    "message": "전",
     "description": ""
   },
   "search_tabs": {
@@ -74,7 +74,7 @@
     "description": ""
   },
   "no_results_found": {
-    "message": "No Results Found",
+    "message": "결과 없음",
     "description": ""
   },
   "bookmark": {
@@ -90,11 +90,11 @@
     "description": ""
   },
   "screenshot_visible_area": {
-    "message": "Screenshot Visible Area",
+    "message": "보이는 영역 캡쳐",
     "description": ""
   },
   "duplicated": {
-    "message": "Duplicated",
+    "message": "중복됨",
     "description": ""
   },
   "tab_cleaner_header": {
