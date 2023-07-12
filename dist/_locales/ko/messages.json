@@ -224,7 +224,9 @@
     "description": ""
   },
   "source_code_description": {
-    "message": "TabTabTab은 오픈 소스 프로젝트이고, 소스 코드는 GitHub에 공개되어 있습니다. 안전한 확장 프로그램을 위해 어떤 불법적인 프로그래밍도 하지 않습니다.",
+    "message": "The code for TabTabTab is open source and publicly available. It is carefully managed to prevent any illicit programming, ensuring the extension is developed safely.",
+    "modified_message": "TabTabTab is an open source project, and the source code is publicly available on GitHub. It is carefully managed to prevent any illicit programming, ensuring the extension is developed safely.",
+    "message": "TabTabTab은 오픈 소스 프로젝트이고, 소스 코드는 GitHub에 공개되어 있습니다. 안전한 확장 프로그램을 제공하기 위해 어떤 불법적인 프로그래밍도 하지 않습니다.",
     "description": ""
   }
 }
