@@ -151,6 +151,7 @@ const TabItem = (props: TabItemProps) => {
               }}
             >
               <span
+                title={tab.title}
                 style={{
                   overflow: "hidden",
                   whiteSpace: "nowrap",
