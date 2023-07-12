@@ -27,6 +27,16 @@ const Home = () => {
       setSelectedTabIndex((oldIndex) =>
         oldIndex === minIndex ? oldIndex : oldIndex - 1,
       );
+    } else if (event.key === "ArrowRight") {
+      const maxWindowIndex = windows.length - 1;
+      setSelectedWindowIndex((oldIndex) =>
+        oldIndex === maxWindowIndex ? 0 : oldIndex + 1,
+      );
+    } else if (event.key === "ArrowLeft") {
+      const minWindowIndex = 0;
+      setSelectedWindowIndex((oldIndex) =>
+        oldIndex === minWindowIndex ? windows.length - 1 : oldIndex - 1,
+      );
     } else if (event.key === "Enter") {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       focusTab(tabs[selectedTabIndex].id);
