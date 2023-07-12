@@ -1,0 +1,230 @@
+{
+  "app_name": {
+    "message": "TabTabTab - Tab Manager",
+    "description": "The name of the application. Shown in the web store."
+  },
+  "app_name_short": {
+    "message": "TabTabTab",
+    "description": "The short name of the application. Shown at the top of the dropdown menu."
+  },
+  "app_desc": {
+    "message": "브라우저 탭 관리를 도와주는 확장 프로그램입니다.",
+    "description": "The short description of the application. Shown in the web store."
+  },
+  "window": {
+    "message": "Window",
+    "description": ""
+  },
+  "current_window": {
+    "message": "CurrentWindow",
+    "modified_message": "Opening Tabs",
+    "message": "열린 탭",
+    "description": ""
+  },
+  "pinned": {
+    "message": "Pinned",
+    "description": ""
+  },
+  "month": {
+    "message": "month",
+    "description": ""
+  },
+  "months": {
+    "message": "months",
+    "description": ""
+  },
+  "day": {
+    "message": "day",
+    "description": ""
+  },
+  "days": {
+    "message": "days",
+    "description": ""
+  },
+  "hour": {
+    "message": "hour",
+    "description": ""
+  },
+  "hours": {
+    "message": "hours",
+    "description": ""
+  },
+  "min": {
+    "message": "min",
+    "description": ""
+  },
+  "mins": {
+    "message": "mins",
+    "description": ""
+  },
+  "sec": {
+    "message": "sec",
+    "description": ""
+  },
+  "secs": {
+    "message": "secs",
+    "description": ""
+  },
+  "ago": {
+    "message": "ago",
+    "description": ""
+  },
+  "search_tabs": {
+    "message": "탭 검색",
+    "description": ""
+  },
+  "no_results_found": {
+    "message": "No Results Found",
+    "description": ""
+  },
+  "bookmark": {
+    "message": "북마크",
+    "description": ""
+  },
+  "copy_url": {
+    "message": "URL 복사",
+    "description": ""
+  },
+  "pin": {
+    "message": "핀 고정",
+    "description": ""
+  },
+  "screenshot_visible_area": {
+    "message": "Screenshot Visible Area",
+    "description": ""
+  },
+  "duplicated": {
+    "message": "Duplicated",
+    "description": ""
+  },
+  "tab_cleaner_header": {
+    "message": "사용하지 않는 탭 자동 종료",
+    "description": ""
+  },
+  "tab_cleaner_description": {
+    "message": "이 설정을 활성화하면, 일정 기간 이상 사용하지 않은 탭들이 자동으로 종료됩니다.",
+    "description": ""
+  },
+  "duration": {
+    "message": "기간",
+    "description": ""
+  },
+  "unit": {
+    "message": "단위",
+    "description": ""
+  },
+  "duration_unit_day": {
+    "message": "일",
+    "description": ""
+  },
+  "duration_unit_hour": {
+    "message": "시간",
+    "description": ""
+  },
+  "popup_size_header": {
+    "message": "팝업 창 크기 조절",
+    "description": ""
+  },
+  "popup_size_description": {
+    "message": "높이 범위: 200-600px, 너비 범위: 400-800px.",
+    "description": ""
+  },
+  "popup_element_scale_header": {
+    "message": "Popup element scale",
+    "modified_message": "Adjust the size for font and icons",
+    "message": "텍스트 및 아이콘 크기 조절",
+    "description": ""
+  },
+  "popup_element_scale_description": {
+    "message": "팝업 창 내 글씨와 아이콘의 크기를 조절합니다. 50-150% 사이 값을 입력하세요.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_format": {
+    "message": "정수 값을 입력하세요.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_range": {
+    "message": "50-150% 사이의 값을 입력하세요.",
+    "description": ""
+  },
+  "scale": {
+    "message": "비율",
+    "description": ""
+  },
+  "height": {
+    "message": "높이",
+    "description": ""
+  },
+  "width": {
+    "message": "너비",
+    "description": ""
+  },
+  "save": {
+    "message": "저장",
+    "description": ""
+  },
+  "saving": {
+    "message": "저장 중",
+    "description": ""
+  },
+  "saved_successfully": {
+    "message": "성공적으로 저장했습니다.",
+    "description": ""
+  },
+  "saved_error": {
+    "message": "설정 값을 저장하지 못했습니다. 다시 시도해주세요.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_format": {
+    "message": "정수 값을 입력하세요.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_range": {
+    "message": "높이는 200px에서 600px 사이, 너비는 400px에서 800px 사이 값을 입력해야 합니다.",
+    "description": ""
+  },
+  "tab_cleaner_validation_error_value_format": {
+    "message": "Input a positive integer.",
+    "modified_message": "Input a natural number.",
+    "message": "자연수를 입력하세요.",
+    "description": ""
+  },
+  "tab_cleaner_error_on_save": {
+    "message": "Please fix the error.",
+    "description": ""
+  },
+  "settings": {
+    "message": "Settings",
+    "description": ""
+  },
+  "feedback": {
+    "message": "Feedback",
+    "description": ""
+  },
+  "bug_report_and_feature_request_title": {
+    "message": "Bug Report & Feature Request",
+    "modified_message": "Bug Report & New Feature Request",
+    "message": "버그 제보 & 신규 기능 요청",
+    "description": ""
+  },
+  "bug_report_and_feature_request_description": {
+    "message": "사용 중에 발견한 버그를 제보하거나 신규 기능을 요청하고 싶은 경우, GitHub에 이슈를 생성해주세요.",
+    "description": ""
+  },
+  "store_review_title": {
+    "message": "스토어 리뷰",
+    "description": ""
+  },
+  "store_review_description": {
+    "message": "TabTabTab이 마음에 들었다면 Chrome 웹 스토어에 리뷰를 남겨주세요! 여러분의 리뷰는 개발에 큰 도움이 됩니다.",
+    "description": ""
+  },
+  "source_code_title": {
+    "message": "소스 코드",
+    "description": ""
+  },
+  "source_code_description": {
+    "message": "TabTabTab은 오픈 소스 프로젝트이고, 소스 코드는 GitHub에 공개되어 있습니다. 안전한 확장 프로그램을 위해 어떤 불법적인 프로그래밍도 하지 않습니다.",
+    "description": ""
+  }
+}
