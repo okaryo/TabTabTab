@@ -16,9 +16,7 @@
     "description": ""
   },
   "current_window": {
-    "message": "CurrentWindow",
-    "modified_message": "Opening Tabs",
-    "message": "열린 탭",
+    "message": "현재 창",
     "description": ""
   },
   "pinned": {
@@ -130,8 +128,6 @@
     "description": ""
   },
   "popup_element_scale_header": {
-    "message": "Popup element scale",
-    "modified_message": "Adjust the size for font and icons",
     "message": "텍스트 및 아이콘 크기 조절",
     "description": ""
   },
@@ -184,13 +180,11 @@
     "description": ""
   },
   "tab_cleaner_validation_error_value_format": {
-    "message": "Input a positive integer.",
-    "modified_message": "Input a natural number.",
     "message": "자연수를 입력하세요.",
     "description": ""
   },
   "tab_cleaner_error_on_save": {
-    "message": "Please fix the error.",
+    "message": "에러를 수정하세요.",
     "description": ""
   },
   "settings": {
@@ -202,8 +196,6 @@
     "description": ""
   },
   "bug_report_and_feature_request_title": {
-    "message": "Bug Report & Feature Request",
-    "modified_message": "Bug Report & New Feature Request",
     "message": "버그 제보 & 신규 기능 요청",
     "description": ""
   },
@@ -224,8 +216,6 @@
     "description": ""
   },
   "source_code_description": {
-    "message": "The code for TabTabTab is open source and publicly available. It is carefully managed to prevent any illicit programming, ensuring the extension is developed safely.",
-    "modified_message": "TabTabTab is an open source project, and the source code is publicly available on GitHub. It is carefully managed to prevent any illicit programming, ensuring the extension is developed safely.",
     "message": "TabTabTab은 오픈 소스 프로젝트이고, 소스 코드는 GitHub에 공개되어 있습니다. 안전한 확장 프로그램을 제공하기 위해 어떤 불법적인 프로그래밍도 하지 않습니다.",
     "description": ""
   }
