@@ -3,6 +3,8 @@
   "extends": ["config:base"],
   "schedule": ["every weekend"],
   "labels": ["maintenance"],
+  "timezone": "Asia/Tokyo",
   "automerge": false,
-  "dependencyDashboard": false
+  "dependencyDashboard": false,
+  "branchConcurrentLimit": 0
 }
