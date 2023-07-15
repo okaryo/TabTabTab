@@ -12,7 +12,7 @@
     "description": "The short description of the application. Shown in the web store."
   },
   "window": {
-    "message": "Window",
+    "message": "창",
     "description": ""
   },
   "current_window": {
