@@ -20,15 +20,16 @@ const SearchResult = (props: SearchResultProps) => {
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
+      const minIndex = 0;
+      const maxIndex = tabs.length - 1;
+
       if (event.key === "ArrowDown") {
-        const maxIndex = tabs.length - 1;
         setSelectedTabIndex((oldIndex) =>
-          oldIndex === maxIndex ? maxIndex : oldIndex + 1,
+          oldIndex === maxIndex ? minIndex : oldIndex + 1,
         );
       } else if (event.key === "ArrowUp") {
-        const minIndex = 0;
         setSelectedTabIndex((oldIndex) =>
-          oldIndex === minIndex ? 0 : oldIndex - 1,
+          oldIndex === minIndex ? maxIndex : oldIndex - 1,
         );
       } else if (event.key === "Enter") {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
