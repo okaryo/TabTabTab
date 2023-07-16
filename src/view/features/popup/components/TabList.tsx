@@ -28,7 +28,7 @@ const TabList = (props: TabListProps) => {
 
   const tabsComponent = tabs.map((tab) => {
     if (tab instanceof PinnedTabs) {
-      return <PinnedTabList key={tab.toString()} tabs={tab} />;
+      return <PinnedTabList key="pinned" tabs={tab} />;
     }
     if (tab instanceof GroupedTabs) {
       return <GroupedTabList key={tab.name} tabs={tab} />;
