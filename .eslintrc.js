@@ -20,8 +20,9 @@ module.exports = {
     project: "./tsconfig.json",
   },
   rules: {
-    "no-trailing-spaces": ["error"],
+    "no-trailing-spaces": "error",
     "no-multi-spaces": "error",
+    "no-console": "error",
     "@typescript-eslint/no-unsafe-return": "warn",
     "import/order": [
       "warn",
