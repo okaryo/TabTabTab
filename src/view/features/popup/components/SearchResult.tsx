@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 
 import t from "../../../../i18n/Translations";
 import { focusTab } from "../../../../repository/TabsRepository";
@@ -36,13 +36,29 @@ const SearchResult = (props: SearchResultProps) => {
         focusTab(tabs[selectedTabIndex].id);
       }
     };
-
     document.addEventListener("keydown", onKeyDown);
 
     return () => {
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [selectedTabIndex, tabs]);
+
+  const containerRef = useRef<HTMLUListElement>(null);
+  const selectedItemRef = useRef<HTMLLIElement>(null);
+  useEffect(() => {
+    if (selectedItemRef.current) {
+      const windowHeight = window.innerHeight;
+      const selectedItem = selectedItemRef.current;
+      const { top, bottom } = selectedItem.getBoundingClientRect();
+
+      if (top < 0 || bottom > windowHeight) {
+        selectedItem.scrollIntoView({
+          behavior: "smooth",
+          block: "nearest",
+        });
+      }
+    }
+  }, [selectedTabIndex]);
 
   return (
     <>
@@ -59,8 +75,8 @@ const SearchResult = (props: SearchResultProps) => {
       )}
       {tabs.length > 0 && (
         <List
-          // onKeyDown={onKeyDown}
-          sx={{ width: "100%", bgcolor: "background.paper" }}
+          ref={containerRef}
+          sx={{ width: "100%", bgcolor: "background.paper", overflowY: "auto" }}
           disablePadding
         >
           {tabs.map((tab, i) => (
@@ -68,6 +84,7 @@ const SearchResult = (props: SearchResultProps) => {
               key={tab.id.value}
               tab={tab}
               selected={selectedTabIndex === i}
+              ref={i === selectedTabIndex ? selectedItemRef : null}
             />
           ))}
         </List>
