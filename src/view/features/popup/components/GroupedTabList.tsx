@@ -2,6 +2,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
+import Chip from "@mui/material/Chip";
 import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -86,6 +87,11 @@ const GroupedTabList = (props: GroupedTabListProps) => {
         >
           <ListItemButton onClick={toggleCollapsedStatus}>
             {groupedTabLabel}
+            <Chip
+              sx={{ ml: 1, backgroundColor: props.tabs.colorCode }}
+              label={tabs.length}
+              size="small"
+            />
           </ListItemButton>
         </ListItem>
         <Collapse in={!collapsed} timeout="auto" unmountOnExit>
