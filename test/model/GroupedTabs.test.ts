@@ -11,6 +11,7 @@ describe("#id", () => {
       new GroupId(1),
       "name",
       new GroupedColor("red"),
+      false,
       [],
     ).id;
     const expected = new GroupId(1);
@@ -24,6 +25,7 @@ describe("#name", () => {
       new GroupId(1),
       "name",
       new GroupedColor("red"),
+      false,
       [],
     ).name;
     const expected = "name";
@@ -37,6 +39,7 @@ describe("#colorCode", () => {
       new GroupId(1),
       "name",
       new GroupedColor("red"),
+      false,
       [],
     ).colorCode;
     const expected = "#F28B82";
@@ -51,6 +54,7 @@ describe("#length", () => {
         new GroupId(1),
         "name",
         new GroupedColor("red"),
+        false,
         [],
       ).length;
       const expected = 0;
@@ -64,6 +68,7 @@ describe("#length", () => {
         new GroupId(1),
         "name",
         new GroupedColor("red"),
+        false,
         [
           {
             id: new TabId(1),
@@ -89,6 +94,7 @@ describe("#isEmpty", () => {
         new GroupId(1),
         "name",
         new GroupedColor("red"),
+        false,
         [],
       ).isEmpty;
       expect(actual).toBeTruthy;
@@ -101,6 +107,7 @@ describe("#isEmpty", () => {
         new GroupId(1),
         "name",
         new GroupedColor("red"),
+        false,
         [
           {
             id: new TabId(1),
@@ -124,6 +131,7 @@ describe("#add", () => {
       new GroupId(1),
       "name",
       new GroupedColor("red"),
+      false,
       [],
     ).add({
       id: new TabId(1),
@@ -138,6 +146,7 @@ describe("#add", () => {
       new GroupId(1),
       "name",
       new GroupedColor("red"),
+      false,
       [
         {
           id: new TabId(1),
@@ -161,6 +170,7 @@ describe("#map", () => {
         new GroupId(1),
         "name",
         new GroupedColor("red"),
+        false,
         [
           {
             id: new TabId(1),
@@ -186,6 +196,7 @@ describe("#removeTabBy", () => {
         new GroupId(1),
         "name",
         new GroupedColor("red"),
+        false,
         [
           {
             id: new TabId(1),
@@ -202,6 +213,7 @@ describe("#removeTabBy", () => {
         new GroupId(1),
         "name",
         new GroupedColor("red"),
+        false,
         [],
       );
       expect(actual).toStrictEqual(expected);
@@ -214,6 +226,7 @@ describe("#removeTabBy", () => {
         new GroupId(1),
         "name",
         new GroupedColor("red"),
+        false,
         [
           {
             id: new TabId(1),
@@ -230,6 +243,7 @@ describe("#removeTabBy", () => {
         new GroupId(1),
         "name",
         new GroupedColor("red"),
+        false,
         [
           {
             id: new TabId(1),

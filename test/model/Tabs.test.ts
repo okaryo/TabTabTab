@@ -282,7 +282,7 @@ describe("#addGroupedTabBy", () => {
           isFocused: false,
           isAudioPlaying: false,
         },
-      ]).addGroupedTabBy(new GroupId(1), "groupName", new GroupedColor("red"), {
+      ]).addGroupedTabBy(new GroupId(1), "groupName", new GroupedColor("red"), false, {
         id: new TabId(3),
         windowId: new WindowId(1),
         title: "title3",
@@ -310,7 +310,7 @@ describe("#addGroupedTabBy", () => {
           isFocused: false,
           isAudioPlaying: false,
         },
-        new GroupedTabs(new GroupId(1), "groupName", new GroupedColor("red"), [
+        new GroupedTabs(new GroupId(1), "groupName", new GroupedColor("red"), false, [
           {
             id: new TabId(3),
             windowId: new WindowId(1),
@@ -347,7 +347,7 @@ describe("#addGroupedTabBy", () => {
           isFocused: false,
           isAudioPlaying: false,
         },
-        new GroupedTabs(new GroupId(1), "groupName", new GroupedColor("red"), [
+        new GroupedTabs(new GroupId(1), "groupName", new GroupedColor("red"), false, [
           {
             id: new TabId(3),
             windowId: new WindowId(1),
@@ -358,7 +358,7 @@ describe("#addGroupedTabBy", () => {
             isAudioPlaying: false,
           },
         ]),
-      ]).addGroupedTabBy(new GroupId(1), "groupName", new GroupedColor("red"), {
+      ]).addGroupedTabBy(new GroupId(1), "groupName", new GroupedColor("red"), false, {
         id: new TabId(4),
         windowId: new WindowId(1),
         title: "title4",
@@ -386,7 +386,7 @@ describe("#addGroupedTabBy", () => {
           isFocused: false,
           isAudioPlaying: false,
         },
-        new GroupedTabs(new GroupId(1), "groupName", new GroupedColor("red"), [
+        new GroupedTabs(new GroupId(1), "groupName", new GroupedColor("red"), false, [
           {
             id: new TabId(3),
             windowId: new WindowId(1),

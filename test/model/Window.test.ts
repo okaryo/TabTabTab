@@ -131,7 +131,7 @@ describe("#removeTabBy", () => {
       const actual = new Window(
         new WindowId(1),
         new Tabs([
-          new GroupedTabs(new GroupId(1), "name", new GroupedColor("red"), [
+          new GroupedTabs(new GroupId(1), "name", new GroupedColor("red"), false, [
             buildTab(1),
             buildTab(2),
           ]),
@@ -143,7 +143,7 @@ describe("#removeTabBy", () => {
       const expected = new Window(
         new WindowId(1),
         new Tabs([
-          new GroupedTabs(new GroupId(1), "name", new GroupedColor("red"), [
+          new GroupedTabs(new GroupId(1), "name", new GroupedColor("red"), false, [
             buildTab(2),
           ]),
           buildTab(3),
@@ -160,7 +160,7 @@ describe("#removeTabBy", () => {
       const actual = new Window(
         new WindowId(1),
         new Tabs([
-          new GroupedTabs(new GroupId(1), "name", new GroupedColor("red"), [
+          new GroupedTabs(new GroupId(1), "name", new GroupedColor("red"), false, [
             buildTab(1),
             buildTab(2),
           ]),
@@ -172,7 +172,7 @@ describe("#removeTabBy", () => {
       const expected = new Window(
         new WindowId(1),
         new Tabs([
-          new GroupedTabs(new GroupId(1), "name", new GroupedColor("red"), [
+          new GroupedTabs(new GroupId(1), "name", new GroupedColor("red"), false, [
             buildTab(1),
             buildTab(2),
           ]),

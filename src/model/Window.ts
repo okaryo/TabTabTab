@@ -49,9 +49,10 @@ export class Window {
     groupId: GroupId,
     groupName: string,
     color: GroupedColor,
+    collapsed: boolean,
     tab: Tab,
   ): Window {
-    const newTabs = this._tabs.addGroupedTabBy(groupId, groupName, color, tab);
+    const newTabs = this._tabs.addGroupedTabBy(groupId, groupName, color, collapsed, tab);
     return new Window(this._id, newTabs, this._isFocused);
   }
 
