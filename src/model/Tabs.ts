@@ -52,11 +52,14 @@ export class Tabs {
     groupId: GroupId,
     groupName: string,
     color: GroupedColor,
+    collapsed: boolean,
     tab: Tab,
   ): Tabs {
     const groupedTabs = this.findGroupedTabsBy(groupId);
     if (groupedTabs === null) {
-      const newTabable = new GroupedTabs(groupId, groupName, color, [tab]);
+      const newTabable = new GroupedTabs(groupId, groupName, color, collapsed, [
+        tab,
+      ]);
       return this.add(newTabable);
     }
 

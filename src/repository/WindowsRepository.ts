@@ -43,6 +43,7 @@ const getCurrentWindow = async (): Promise<Window> => {
         groupId,
         group.title,
         groupColor,
+        group.collapsed,
         newTab,
       );
     } else {
@@ -80,6 +81,7 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
         newTab,
         groupId,
         group.title,
+        group.collapsed,
         groupColor,
       );
     } else {

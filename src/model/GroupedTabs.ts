@@ -6,61 +6,62 @@ import { TabId } from "./TabId";
 
 export class GroupedTabs implements NestedTabs {
   constructor(
-    private _id: GroupId,
-    private _name: string,
-    private _color: GroupedColor,
-    private _values: Tab[],
+    public id: GroupId,
+    public name: string,
+    public color: GroupedColor,
+    public collapsed: boolean,
+    public values: Tab[],
   ) {}
 
-  get id(): GroupId {
-    return this._id;
-  }
-
-  get name(): string {
-    return this._name;
-  }
-
   get colorCode(): string {
-    return this._color.code;
+    return this.color.code;
   }
 
   get length(): number {
-    return this._values.length;
+    return this.values.length;
   }
 
   get isEmpty(): boolean {
     return this.length === 0;
   }
 
-  get values(): Tab[] {
-    return this._values;
-  }
-
   add(tab: Tab): GroupedTabs {
-    return new GroupedTabs(this._id, this._name, this._color, [
-      ...this._values,
+    return new GroupedTabs(this.id, this.name, this.color, this.collapsed, [
+      ...this.values,
       tab,
     ]);
   }
 
   findTabBy(tabId: TabId): Tab | null {
-    const tab = this._values.find((value) => value.id.equalTo(tabId));
+    const tab = this.values.find((value) => value.id.equalTo(tabId));
     return tab === undefined ? null : tab;
   }
 
   updateTab(tab: Tab): GroupedTabs {
-    const tabs = this._values.map((value) => {
+    const tabs = this.values.map((value) => {
       return value.id.equalTo(tab.id) ? tab : value;
     });
-    return new GroupedTabs(this._id, this._name, this._color, tabs);
+    return new GroupedTabs(
+      this.id,
+      this.name,
+      this.color,
+      this.collapsed,
+      tabs,
+    );
   }
 
   map<T>(callback: (value: Tab) => T): T[] {
-    return this._values.map<T>((value) => callback(value));
+    return this.values.map<T>((value) => callback(value));
   }
 
   removeTabBy(tabId: TabId): GroupedTabs {
-    const tabs = this._values.filter((value) => !value.id.equalTo(tabId));
-    return new GroupedTabs(this._id, this._name, this._color, tabs);
+    const tabs = this.values.filter((value) => !value.id.equalTo(tabId));
+    return new GroupedTabs(
+      this.id,
+      this.name,
+      this.color,
+      this.collapsed,
+      tabs,
+    );
   }
 }
