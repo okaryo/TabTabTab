@@ -28,6 +28,7 @@ const PopupThemeProvider = (props: ThemeProviderProps) => {
     const defaultTabMinHeight = 48;
     const defaultTabsMinHeight = 48;
     const defaultToolbarMinHeight = 56;
+    const defaultChipHeight = 22;
 
     return createTheme({
       palette: {
@@ -55,6 +56,13 @@ const PopupThemeProvider = (props: ThemeProviderProps) => {
           styleOverrides: {
             root: {
               minHeight: defaultToolbarMinHeight * (scale / 100),
+            },
+          },
+        },
+        MuiChip: {
+          styleOverrides: {
+            root: {
+              height: defaultChipHeight * (scale / 100),
             },
           },
         },
