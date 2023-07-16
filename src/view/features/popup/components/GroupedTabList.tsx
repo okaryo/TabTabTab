@@ -22,7 +22,7 @@ type GroupedTabListProps = {
 
 const GroupedTabList = (props: GroupedTabListProps) => {
   const { tabs } = props;
-  const [isOpen, setIsOpen] = useState(false);
+  const [isOpen, setIsOpen] = useState(!tabs.collapsed);
   const toggleOpenStatus = () => setIsOpen(!isOpen);
 
   const tabComponents = tabs.map((tab) => {
