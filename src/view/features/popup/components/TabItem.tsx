@@ -9,7 +9,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import React, { useContext, useEffect, useState } from "react";
+import React, { forwardRef, useContext, useEffect, useState } from "react";
 
 import t from "../../../../i18n/Translations";
 import {
@@ -29,7 +29,7 @@ type TabItemProps = {
   selected?: boolean;
 };
 
-const TabItem = (props: TabItemProps) => {
+const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const { tab, selected } = props;
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab.id);
@@ -101,6 +101,7 @@ const TabItem = (props: TabItemProps) => {
 
   return (
     <ListItem
+      ref={ref}
       sx={{
         "& .MuiListItemButton-root": {
           pr: shouldShowCloseButton ? 11 : null,
@@ -200,6 +201,6 @@ const TabItem = (props: TabItemProps) => {
       />
     </ListItem>
   );
-};
+});
 
 export default TabItem;
