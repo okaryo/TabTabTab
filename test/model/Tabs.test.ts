@@ -282,15 +282,21 @@ describe("#addGroupedTabBy", () => {
           isFocused: false,
           isAudioPlaying: false,
         },
-      ]).addGroupedTabBy(new GroupId(1), "groupName", new GroupedColor("red"), false, {
-        id: new TabId(3),
-        windowId: new WindowId(1),
-        title: "title3",
-        url: new URL("https://example.com/path"),
-        favIconUrl: "https://favicon.com",
-        isFocused: false,
-        isAudioPlaying: false,
-      });
+      ]).addGroupedTabBy(
+        new GroupId(1),
+        "groupName",
+        new GroupedColor("red"),
+        false,
+        {
+          id: new TabId(3),
+          windowId: new WindowId(1),
+          title: "title3",
+          url: new URL("https://example.com/path"),
+          favIconUrl: "https://favicon.com",
+          isFocused: false,
+          isAudioPlaying: false,
+        },
+      );
       const expected = new Tabs([
         {
           id: new TabId(1),
@@ -310,17 +316,23 @@ describe("#addGroupedTabBy", () => {
           isFocused: false,
           isAudioPlaying: false,
         },
-        new GroupedTabs(new GroupId(1), "groupName", new GroupedColor("red"), false, [
-          {
-            id: new TabId(3),
-            windowId: new WindowId(1),
-            title: "title3",
-            url: new URL("https://example.com/path"),
-            favIconUrl: "https://favicon.com",
-            isFocused: false,
-            isAudioPlaying: false,
-          },
-        ]),
+        new GroupedTabs(
+          new GroupId(1),
+          "groupName",
+          new GroupedColor("red"),
+          false,
+          [
+            {
+              id: new TabId(3),
+              windowId: new WindowId(1),
+              title: "title3",
+              url: new URL("https://example.com/path"),
+              favIconUrl: "https://favicon.com",
+              isFocused: false,
+              isAudioPlaying: false,
+            },
+          ],
+        ),
       ]);
       expect(actual).toStrictEqual(expected);
     });
@@ -347,26 +359,38 @@ describe("#addGroupedTabBy", () => {
           isFocused: false,
           isAudioPlaying: false,
         },
-        new GroupedTabs(new GroupId(1), "groupName", new GroupedColor("red"), false, [
-          {
-            id: new TabId(3),
-            windowId: new WindowId(1),
-            title: "title3",
-            url: new URL("https://example.com/path"),
-            favIconUrl: "https://favicon.com",
-            isFocused: false,
-            isAudioPlaying: false,
-          },
-        ]),
-      ]).addGroupedTabBy(new GroupId(1), "groupName", new GroupedColor("red"), false, {
-        id: new TabId(4),
-        windowId: new WindowId(1),
-        title: "title4",
-        url: new URL("https://example.com/path"),
-        favIconUrl: "https://favicon.com",
-        isFocused: false,
-        isAudioPlaying: false,
-      });
+        new GroupedTabs(
+          new GroupId(1),
+          "groupName",
+          new GroupedColor("red"),
+          false,
+          [
+            {
+              id: new TabId(3),
+              windowId: new WindowId(1),
+              title: "title3",
+              url: new URL("https://example.com/path"),
+              favIconUrl: "https://favicon.com",
+              isFocused: false,
+              isAudioPlaying: false,
+            },
+          ],
+        ),
+      ]).addGroupedTabBy(
+        new GroupId(1),
+        "groupName",
+        new GroupedColor("red"),
+        false,
+        {
+          id: new TabId(4),
+          windowId: new WindowId(1),
+          title: "title4",
+          url: new URL("https://example.com/path"),
+          favIconUrl: "https://favicon.com",
+          isFocused: false,
+          isAudioPlaying: false,
+        },
+      );
       const expected = new Tabs([
         {
           id: new TabId(1),
@@ -386,26 +410,32 @@ describe("#addGroupedTabBy", () => {
           isFocused: false,
           isAudioPlaying: false,
         },
-        new GroupedTabs(new GroupId(1), "groupName", new GroupedColor("red"), false, [
-          {
-            id: new TabId(3),
-            windowId: new WindowId(1),
-            title: "title3",
-            url: new URL("https://example.com/path"),
-            favIconUrl: "https://favicon.com",
-            isFocused: false,
-            isAudioPlaying: false,
-          },
-          {
-            id: new TabId(4),
-            windowId: new WindowId(1),
-            title: "title4",
-            url: new URL("https://example.com/path"),
-            favIconUrl: "https://favicon.com",
-            isFocused: false,
-            isAudioPlaying: false,
-          },
-        ]),
+        new GroupedTabs(
+          new GroupId(1),
+          "groupName",
+          new GroupedColor("red"),
+          false,
+          [
+            {
+              id: new TabId(3),
+              windowId: new WindowId(1),
+              title: "title3",
+              url: new URL("https://example.com/path"),
+              favIconUrl: "https://favicon.com",
+              isFocused: false,
+              isAudioPlaying: false,
+            },
+            {
+              id: new TabId(4),
+              windowId: new WindowId(1),
+              title: "title4",
+              url: new URL("https://example.com/path"),
+              favIconUrl: "https://favicon.com",
+              isFocused: false,
+              isAudioPlaying: false,
+            },
+          ],
+        ),
       ]);
       expect(actual).toStrictEqual(expected);
     });

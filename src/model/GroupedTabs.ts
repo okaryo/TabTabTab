@@ -41,7 +41,13 @@ export class GroupedTabs implements NestedTabs {
     const tabs = this.values.map((value) => {
       return value.id.equalTo(tab.id) ? tab : value;
     });
-    return new GroupedTabs(this.id, this.name, this.color, this.collapsed, tabs);
+    return new GroupedTabs(
+      this.id,
+      this.name,
+      this.color,
+      this.collapsed,
+      tabs,
+    );
   }
 
   map<T>(callback: (value: Tab) => T): T[] {
@@ -50,6 +56,12 @@ export class GroupedTabs implements NestedTabs {
 
   removeTabBy(tabId: TabId): GroupedTabs {
     const tabs = this.values.filter((value) => !value.id.equalTo(tabId));
-    return new GroupedTabs(this.id, this.name, this.color, this.collapsed, tabs);
+    return new GroupedTabs(
+      this.id,
+      this.name,
+      this.color,
+      this.collapsed,
+      tabs,
+    );
   }
 }

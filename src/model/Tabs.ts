@@ -57,7 +57,9 @@ export class Tabs {
   ): Tabs {
     const groupedTabs = this.findGroupedTabsBy(groupId);
     if (groupedTabs === null) {
-      const newTabable = new GroupedTabs(groupId, groupName, color, collapsed, [tab]);
+      const newTabable = new GroupedTabs(groupId, groupName, color, collapsed, [
+        tab,
+      ]);
       return this.add(newTabable);
     }
 

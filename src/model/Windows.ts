@@ -79,7 +79,13 @@ export class Windows {
   ): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
-      const groupedTabs = new GroupedTabs(groupId, groupName, color, collapsed, [tab]);
+      const groupedTabs = new GroupedTabs(
+        groupId,
+        groupName,
+        color,
+        collapsed,
+        [tab],
+      );
       const newWindow = new Window(
         windowId,
         new Tabs([groupedTabs]),
@@ -88,7 +94,13 @@ export class Windows {
       return this.add(newWindow);
     }
 
-    const newWindow = window.addGroupedTab(groupId, groupName, color, collapsed, tab);
+    const newWindow = window.addGroupedTab(
+      groupId,
+      groupName,
+      color,
+      collapsed,
+      tab,
+    );
     const newWindows = this.map((window) => {
       return window.id.equalTo(newWindow.id) ? newWindow : window;
     });

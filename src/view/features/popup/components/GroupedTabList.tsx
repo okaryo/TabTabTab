@@ -13,6 +13,10 @@ import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
 import { GroupedTabs } from "../../../../model/GroupedTabs";
+import {
+  collapseTabGroup,
+  expandTabGroup,
+} from "../../../../repository/TabGroupRepository";
 
 import TabItem from "./TabItem";
 
@@ -22,8 +26,18 @@ type GroupedTabListProps = {
 
 const GroupedTabList = (props: GroupedTabListProps) => {
   const { tabs } = props;
-  const [isOpen, setIsOpen] = useState(!tabs.collapsed);
-  const toggleOpenStatus = () => setIsOpen(!isOpen);
+  const [collapsed, setCollapsed] = useState(tabs.collapsed);
+  const toggleCollapsedStatus = () => {
+    const newCollapsed = !collapsed;
+    if (newCollapsed) {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      collapseTabGroup(tabs.id);
+    } else {
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      expandTabGroup(tabs.id);
+    }
+    setCollapsed(newCollapsed);
+  };
 
   const tabComponents = tabs.map((tab) => {
     return <TabItem key={tab.id.value} tab={tab} />;
@@ -64,17 +78,17 @@ const GroupedTabList = (props: GroupedTabListProps) => {
       <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
         <ListItem
           secondaryAction={
-            <IconButton edge="end" onClick={toggleOpenStatus}>
-              {isOpen ? <ExpandLess /> : <ExpandMore />}
+            <IconButton edge="end" onClick={toggleCollapsedStatus}>
+              {collapsed ? <ExpandMore /> : <ExpandLess />}
             </IconButton>
           }
           disablePadding
         >
-          <ListItemButton onClick={toggleOpenStatus}>
+          <ListItemButton onClick={toggleCollapsedStatus}>
             {groupedTabLabel}
           </ListItemButton>
         </ListItem>
-        <Collapse in={isOpen} timeout="auto" unmountOnExit>
+        <Collapse in={!collapsed} timeout="auto" unmountOnExit>
           <List disablePadding>{tabComponents}</List>
         </Collapse>
       </List>
