@@ -28,10 +28,6 @@
       "matchPackagePrefixes": ["@mui"]
     },
     {
-      "groupName": "webpack",
-      "matchPackagePrefixes": ["webpack"]
-    },
-    {
       "groupName": "types",
       "matchPackagePrefixes": ["@types/"]
     },

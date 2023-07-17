@@ -32,10 +32,7 @@
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
     "typescript": "^5.1.6",
-    "vite": "^4.4.4",
-    "webpack": "^5.88.1",
-    "webpack-cli": "^5.1.4",
-    "webpack-merge": "^5.9.0"
+    "vite": "^4.4.4"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
