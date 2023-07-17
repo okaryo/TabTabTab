@@ -1,4 +1,3 @@
-import CircleIcon from "@mui/icons-material/Circle";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
@@ -8,7 +7,6 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
@@ -44,30 +42,6 @@ const GroupedTabList = (props: GroupedTabListProps) => {
     return <TabItem key={tab.id.value} tab={tab} />;
   });
 
-  let groupedTabLabel;
-  if (props.tabs.name === "") {
-    groupedTabLabel = (
-      <ListItemIcon sx={{ flexGrow: 1 }}>
-        <CircleIcon sx={{ color: `${props.tabs.colorCode}` }} />
-      </ListItemIcon>
-    );
-  } else {
-    groupedTabLabel = (
-      <Typography
-        variant="subtitle1"
-        component="h6"
-        sx={{ px: 1.25, py: 0.25 }}
-        style={{
-          display: "inline-block",
-          borderRadius: "8px",
-          backgroundColor: `${props.tabs.colorCode}`,
-        }}
-      >
-        {props.tabs.name}
-      </Typography>
-    );
-  }
-
   return (
     <Stack direction="row">
       <Box
@@ -86,12 +60,27 @@ const GroupedTabList = (props: GroupedTabListProps) => {
           disablePadding
         >
           <ListItemButton onClick={toggleCollapsedStatus}>
-            {groupedTabLabel}
-            <Chip
-              sx={{ ml: 1, backgroundColor: props.tabs.colorCode }}
-              label={tabs.length}
-              size="small"
-            />
+            <Stack direction="row" spacing={1} alignItems="center">
+              {tabs.name !== "" && (
+                <Typography
+                  variant="subtitle1"
+                  component="h6"
+                  sx={{ px: 1.25, py: 0.25 }}
+                  style={{
+                    display: "inline-block",
+                    borderRadius: "8px",
+                    backgroundColor: `${tabs.colorCode}`,
+                  }}
+                >
+                  {tabs.name}
+                </Typography>
+              )}
+              <Chip
+                sx={{ backgroundColor: props.tabs.colorCode }}
+                label={tabs.length}
+                size="small"
+              />
+            </Stack>
           </ListItemButton>
         </ListItem>
         <Collapse in={!collapsed} timeout="auto" unmountOnExit>
