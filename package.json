@@ -3,9 +3,8 @@
   "version": "2.14.0",
   "description": "This chrome extension makes it easier to manage your open tabs.",
   "scripts": {
-    "build": "webpack --config webpack.prod.js",
-    "dev": "webpack --config webpack.dev.js",
-    "watch": "webpack -w --config webpack.dev.js",
+    "build": "vite build",
+    "dev": "vite dev",
     "test": "jest",
     "lint": "eslint './src/**/*.{js,ts,jsx,tsx}'",
     "lint:fix": "eslint --fix './src/**/*.{js,ts,jsx,tsx}'",
@@ -22,6 +21,7 @@
     "@types/react-dom": "^18.2.6",
     "@typescript-eslint/eslint-plugin": "^6.0.0",
     "@typescript-eslint/parser": "^6.0.0",
+    "@vitejs/plugin-react": "^4.0.3",
     "chromex-locale-lint": "^0.0.2",
     "eslint": "^8.44.0",
     "eslint-plugin-autofix": "^1.1.0",
@@ -32,6 +32,7 @@
     "ts-jest": "^29.1.0",
     "ts-loader": "^9.4.3",
     "typescript": "^5.1.6",
+    "vite": "^4.4.4",
     "webpack": "^5.88.1",
     "webpack-cli": "^5.1.4",
     "webpack-merge": "^5.9.0"
