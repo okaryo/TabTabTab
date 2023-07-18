@@ -28,8 +28,8 @@
       "matchPackagePrefixes": ["@mui"]
     },
     {
-      "groupName": "webpack",
-      "matchPackagePrefixes": ["webpack"]
+      "groupName": "vite",
+      "matchPackagePrefixes": ["vite", "@vitejs/"]
     },
     {
       "groupName": "types",
