@@ -8,6 +8,7 @@ import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
@@ -24,6 +25,7 @@ type GroupedTabListProps = {
 };
 
 const GroupedTabList = (props: GroupedTabListProps) => {
+  const theme = useTheme();
   const { tabs } = props;
   const [collapsed, setCollapsed] = useState(tabs.collapsed);
   const toggleCollapsedStatus = () => {
@@ -70,13 +72,17 @@ const GroupedTabList = (props: GroupedTabListProps) => {
                     display: "inline-block",
                     borderRadius: "8px",
                     backgroundColor: `${tabs.colorCode}`,
+                    color: theme.palette.getContrastText(tabs.colorCode),
                   }}
                 >
                   {tabs.name}
                 </Typography>
               )}
               <Chip
-                sx={{ backgroundColor: props.tabs.colorCode }}
+                sx={{
+                  backgroundColor: props.tabs.colorCode,
+                  color: theme.palette.getContrastText(tabs.colorCode),
+                }}
                 label={tabs.length}
                 size="small"
               />
