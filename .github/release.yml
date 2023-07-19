@@ -2,7 +2,10 @@ changelog:
   categories:
     - title: 🎉 Features
       labels:
-        - enhancement
+        - faeture
+    - title: ✨ Refinements
+      labels:
+        - refinement
     - title: 🐛 Bug Fixes
       labels:
         - bug
