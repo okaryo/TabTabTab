@@ -34,6 +34,15 @@ const PopupThemeProvider = (props: ThemeProviderProps) => {
       palette: {
         mode: theme,
       },
+      breakpoints: {
+        values: {
+          xs: 0,
+          sm: 10000,
+          md: 10000,
+          lg: 10000,
+          xl: 10000,
+        },
+      },
       typography: {
         fontSize: defaultTheme.typography.fontSize * (scale / 100),
       },
