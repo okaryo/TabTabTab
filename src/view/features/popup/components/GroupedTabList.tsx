@@ -25,8 +25,8 @@ type GroupedTabListProps = {
 };
 
 const GroupedTabList = (props: GroupedTabListProps) => {
-  const theme = useTheme();
   const { tabs } = props;
+  const theme = useTheme();
   const [collapsed, setCollapsed] = useState(tabs.collapsed);
   const toggleCollapsedStatus = () => {
     const newCollapsed = !collapsed;
