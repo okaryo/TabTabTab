@@ -45,7 +45,7 @@ const WindowTabs = (props: WindowTabsProps) => {
   const unfocusedWindows = windows.unfocusedWindows.map((window, index) => {
     return (
       <WindowTab
-        key={window.id.value}
+        key={window.id}
         label={`${t.window}${index + 1}`}
         tabCount={window.tabCount}
       />

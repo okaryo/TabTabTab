@@ -1,8 +1,5 @@
 import { GroupedColor } from "../model/GroupedColor";
-import { GroupId } from "../model/GroupId";
-import { TabId } from "../model/TabId";
 import { Window } from "../model/Window";
-import { WindowId } from "../model/WindowId";
 import { Windows } from "../model/Windows";
 
 import {
@@ -20,11 +17,12 @@ export const getWindows = async (): Promise<Windows> => {
 const getCurrentWindow = async (): Promise<Window> => {
   const currentWindowTabs = await chrome.tabs.query({ currentWindow: true });
 
-  const windowId = new WindowId(currentWindowTabs[0].windowId);
+  const windowId = currentWindowTabs[0].windowId;
   let currentWindow = Window.initializeBy(windowId, true);
   for (const tab of currentWindowTabs) {
     const newTab = {
-      id: new TabId(tab.id),
+      id: tab.id,
+      groupId: tab.groupId,
       windowId,
       title: tab.title,
       url: new URL(tab.url),
@@ -36,8 +34,8 @@ const getCurrentWindow = async (): Promise<Window> => {
     if (tab.pinned) {
       currentWindow = currentWindow.addPinnedTab(newTab);
     } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
-      const groupId = new GroupId(tab.groupId);
-      const group = await chrome.tabGroups.get(groupId.value);
+      const groupId = tab.groupId;
+      const group = await chrome.tabGroups.get(groupId);
       const groupColor = new GroupedColor(group.color);
       currentWindow = currentWindow.addGroupedTab(
         groupId,
@@ -58,9 +56,10 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
 
   let windows = Windows.empty();
   for (const tab of unfocusedWindowTabs) {
-    const windowId = new WindowId(tab.windowId);
+    const windowId = tab.windowId;
     const newTab = {
-      id: new TabId(tab.id),
+      id: tab.id,
+      groupId: tab.groupId,
       windowId,
       title: tab.title,
       url: new URL(tab.url),
@@ -72,8 +71,8 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
     if (tab.pinned) {
       windows = windows.addPinnedTab(windowId, false, newTab);
     } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
-      const groupId = new GroupId(tab.groupId);
-      const group = await chrome.tabGroups.get(groupId.value);
+      const groupId = tab.groupId;
+      const group = await chrome.tabGroups.get(groupId);
       const groupColor = new GroupedColor(group.color);
       windows = windows.addGroupedTab(
         windowId,
@@ -103,7 +102,7 @@ const applyLastActivatedAtOfTabInWindows = async (
 
   for (const [tabId, dateString] of Object.entries(last_activated_at)) {
     newWindows = newWindows.updateLastActivatedAtOfTabBy(
-      new TabId(Number(tabId)),
+      Number(tabId),
       new Date(dateString),
     );
   }

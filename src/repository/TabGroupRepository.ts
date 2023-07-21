@@ -1,9 +1,7 @@
-import { GroupId } from "../model/GroupId";
-
-export const collapseTabGroup = async (groupId: GroupId): Promise<void> => {
-  await chrome.tabGroups.update(groupId.value, { collapsed: true });
+export const collapseTabGroup = async (groupId: number): Promise<void> => {
+  await chrome.tabGroups.update(groupId, { collapsed: true });
 };
 
-export const expandTabGroup = async (groupId: GroupId): Promise<void> => {
-  await chrome.tabGroups.update(groupId.value, { collapsed: false });
+export const expandTabGroup = async (groupId: number): Promise<void> => {
+  await chrome.tabGroups.update(groupId, { collapsed: false });
 };

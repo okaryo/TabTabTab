@@ -1,11 +1,10 @@
 import { Duration } from "./Duration";
-import { TabId } from "./TabId";
-import { WindowId } from "./WindowId";
 import { Windows } from "./Windows";
 
 export type Tab = {
-  id: TabId;
-  windowId: WindowId;
+  id: number;
+  groupId?: number;
+  windowId?: number;
   title: string;
   url: URL;
   favIconUrl: string;
@@ -37,7 +36,7 @@ export const hasDuplicatedTabs = (
   return windows.values.some((window) => {
     return window.flatTabs.some(
       (tab) =>
-        !targetTab.id.equalTo(tab.id) &&
+        targetTab.id !== tab.id &&
         targetTab.title === tab.title &&
         targetTab.url.href === tab.url.href,
     );

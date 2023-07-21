@@ -1,12 +1,10 @@
 import { GroupedColor } from "./GroupedColor";
-import { GroupId } from "./GroupId";
 import { NestedTabs } from "./NestedTabs";
 import { Tab } from "./Tab";
-import { TabId } from "./TabId";
 
 export class GroupedTabs implements NestedTabs {
   constructor(
-    public id: GroupId,
+    public id: number,
     public name: string,
     public color: GroupedColor,
     public collapsed: boolean,
@@ -32,14 +30,14 @@ export class GroupedTabs implements NestedTabs {
     ]);
   }
 
-  findTabBy(tabId: TabId): Tab | null {
-    const tab = this.values.find((value) => value.id.equalTo(tabId));
+  findTabBy(tabId: number): Tab | null {
+    const tab = this.values.find((value) => value.id === tabId);
     return tab === undefined ? null : tab;
   }
 
   updateTab(tab: Tab): GroupedTabs {
     const tabs = this.values.map((value) => {
-      return value.id.equalTo(tab.id) ? tab : value;
+      return value.id === tab.id ? tab : value;
     });
     return new GroupedTabs(
       this.id,
@@ -54,8 +52,8 @@ export class GroupedTabs implements NestedTabs {
     return this.values.map<T>((value) => callback(value));
   }
 
-  removeTabBy(tabId: TabId): GroupedTabs {
-    const tabs = this.values.filter((value) => !value.id.equalTo(tabId));
+  removeTabBy(tabId: number): GroupedTabs {
+    const tabs = this.values.filter((value) => value.id !== tabId);
     return new GroupedTabs(
       this.id,
       this.name,

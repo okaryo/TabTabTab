@@ -1,12 +1,9 @@
 import { GroupedColor } from "./GroupedColor";
 import { GroupedTabs } from "./GroupedTabs";
-import { GroupId } from "./GroupId";
 import { PinnedTabs } from "./PinnedTabs";
 import { Tab, updateLastActivatedAt } from "./Tab";
-import { TabId } from "./TabId";
 import { Tabs } from "./Tabs";
 import { Window } from "./Window";
-import { WindowId } from "./WindowId";
 
 export class Windows {
   constructor(private _values: Window[]) {}
@@ -54,7 +51,7 @@ export class Windows {
     return this._values.map<T>((value, index) => callback(value, index));
   }
 
-  addTab(windowId: WindowId, isFocused: boolean, tab: Tab): Windows {
+  addTab(windowId: number, isFocused: boolean, tab: Tab): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
       const newWindow = new Window(windowId, new Tabs([tab]), isFocused);
@@ -63,16 +60,16 @@ export class Windows {
 
     const newWindow = window.addTab(tab);
     const newWindows = this.map((window) => {
-      return window.id.equalTo(newWindow.id) ? newWindow : window;
+      return window.id === newWindow.id ? newWindow : window;
     });
     return new Windows(newWindows);
   }
 
   addGroupedTab(
-    windowId: WindowId,
+    windowId: number,
     isFocused: boolean,
     tab: Tab,
-    groupId: GroupId,
+    groupId: number,
     groupName: string,
     collapsed: boolean,
     color: GroupedColor,
@@ -102,12 +99,12 @@ export class Windows {
       tab,
     );
     const newWindows = this.map((window) => {
-      return window.id.equalTo(newWindow.id) ? newWindow : window;
+      return window.id === newWindow.id ? newWindow : window;
     });
     return new Windows(newWindows);
   }
 
-  addPinnedTab(windowId: WindowId, isFocused: boolean, tab: Tab): Windows {
+  addPinnedTab(windowId: number, isFocused: boolean, tab: Tab): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
       const pinnedTabs = new PinnedTabs([tab]);
@@ -117,12 +114,12 @@ export class Windows {
 
     const newWindow = window.addPinnedTab(tab);
     const newWindows = this.map((window) => {
-      return window.id.equalTo(newWindow.id) ? newWindow : window;
+      return window.id === newWindow.id ? newWindow : window;
     });
     return new Windows(newWindows);
   }
 
-  updateLastActivatedAtOfTabBy(tabId: TabId, lastActivatedAt: Date): Windows {
+  updateLastActivatedAtOfTabBy(tabId: number, lastActivatedAt: Date): Windows {
     let tab: Tab = null;
     for (const window of this._values) {
       tab = window.findTabBy(tabId);
@@ -136,7 +133,7 @@ export class Windows {
     return new Windows(newWindows);
   }
 
-  removeTabBy(tabId: TabId): Windows {
+  removeTabBy(tabId: number): Windows {
     const newWindows = this._values.map((value) => value.removeTabBy(tabId));
     return new Windows(newWindows);
   }
@@ -161,8 +158,8 @@ export class Windows {
     });
   }
 
-  private findWindowBy(windowId: WindowId): Window | null {
-    const window = this._values.find((value) => windowId.equalTo(value.id));
+  private findWindowBy(windowId: number): Window | null {
+    const window = this._values.find((value) => windowId === value.id);
     return window === undefined ? null : window;
   }
 }

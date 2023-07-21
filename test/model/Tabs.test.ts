@@ -1,11 +1,8 @@
 import { GroupedColor } from "../../src/model/GroupedColor";
 import { GroupedTabs } from "../../src/model/GroupedTabs";
-import { GroupId } from "../../src/model/GroupId";
 import { PinnedTabs } from "../../src/model/PinnedTabs";
 import { Tab } from "../../src/model/Tab";
-import { TabId } from "../../src/model/TabId";
 import { Tabs } from "../../src/model/Tabs";
-import { WindowId } from "../../src/model/WindowId";
 
 describe("#empty", () => {
   it("should generate empty Tabs", () => {
@@ -20,8 +17,8 @@ describe("#values", () => {
     it("should return tabs array", () => {
       const actual = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -29,8 +26,8 @@ describe("#values", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -40,8 +37,8 @@ describe("#values", () => {
       ]).values;
       const expected = [
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -49,8 +46,8 @@ describe("#values", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -76,8 +73,8 @@ describe("#pinnedTabs", () => {
     it("should return PinnedTabs", () => {
       const actual = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -85,8 +82,8 @@ describe("#pinnedTabs", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -95,8 +92,8 @@ describe("#pinnedTabs", () => {
         },
         new PinnedTabs([
           {
-            id: new TabId(3),
-            windowId: new WindowId(1),
+            id: 3,
+            windowId: 1,
             title: "title3",
             url: new URL("https://example.com/path"),
             favIconUrl: "https://favicon.com",
@@ -107,8 +104,8 @@ describe("#pinnedTabs", () => {
       ]).pinnedTabs;
       const expected = new PinnedTabs([
         {
-          id: new TabId(3),
-          windowId: new WindowId(1),
+          id: 3,
+          windowId: 1,
           title: "title3",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -124,8 +121,8 @@ describe("#pinnedTabs", () => {
     it("should return empty PinnedTabs", () => {
       const actual = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -133,8 +130,8 @@ describe("#pinnedTabs", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -153,8 +150,8 @@ describe("#totalTabCount", () => {
     it("should return 3", () => {
       const actual = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -162,8 +159,8 @@ describe("#totalTabCount", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -172,8 +169,8 @@ describe("#totalTabCount", () => {
         },
         new PinnedTabs([
           {
-            id: new TabId(3),
-            windowId: new WindowId(1),
+            id: 3,
+            windowId: 1,
             title: "title1",
             url: new URL("https://example.com/path"),
             favIconUrl: "https://favicon.com",
@@ -192,8 +189,8 @@ describe("#add", () => {
   it("should add tab", () => {
     const actual = new Tabs([
       {
-        id: new TabId(1),
-        windowId: new WindowId(1),
+        id: 1,
+        windowId: 1,
         title: "title1",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -201,8 +198,8 @@ describe("#add", () => {
         isAudioPlaying: false,
       },
     ]).add({
-      id: new TabId(2),
-      windowId: new WindowId(1),
+      id: 2,
+      windowId: 1,
       title: "title2",
       url: new URL("https://example.com/path"),
       favIconUrl: "https://favicon.com",
@@ -211,8 +208,8 @@ describe("#add", () => {
     });
     const expected = new Tabs([
       {
-        id: new TabId(1),
-        windowId: new WindowId(1),
+        id: 1,
+        windowId: 1,
         title: "title1",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -220,8 +217,8 @@ describe("#add", () => {
         isAudioPlaying: false,
       },
       {
-        id: new TabId(2),
-        windowId: new WindowId(1),
+        id: 2,
+        windowId: 1,
         title: "title2",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -237,8 +234,8 @@ describe("#map", () => {
   it("should return title array", () => {
     const actual = new Tabs([
       {
-        id: new TabId(1),
-        windowId: new WindowId(1),
+        id: 1,
+        windowId: 1,
         title: "title1",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -246,8 +243,8 @@ describe("#map", () => {
         isAudioPlaying: false,
       },
       {
-        id: new TabId(2),
-        windowId: new WindowId(1),
+        id: 2,
+        windowId: 1,
         title: "title2",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -265,8 +262,8 @@ describe("#addGroupedTabBy", () => {
     it("should add new GroupedTab", () => {
       const actual = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -274,8 +271,8 @@ describe("#addGroupedTabBy", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -283,13 +280,13 @@ describe("#addGroupedTabBy", () => {
           isAudioPlaying: false,
         },
       ]).addGroupedTabBy(
-        new GroupId(1),
+        1,
         "groupName",
         new GroupedColor("red"),
         false,
         {
-          id: new TabId(3),
-          windowId: new WindowId(1),
+          id: 3,
+          windowId: 1,
           title: "title3",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -299,8 +296,8 @@ describe("#addGroupedTabBy", () => {
       );
       const expected = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -308,8 +305,8 @@ describe("#addGroupedTabBy", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -317,14 +314,14 @@ describe("#addGroupedTabBy", () => {
           isAudioPlaying: false,
         },
         new GroupedTabs(
-          new GroupId(1),
+          1,
           "groupName",
           new GroupedColor("red"),
           false,
           [
             {
-              id: new TabId(3),
-              windowId: new WindowId(1),
+              id: 3,
+              windowId: 1,
               title: "title3",
               url: new URL("https://example.com/path"),
               favIconUrl: "https://favicon.com",
@@ -342,8 +339,8 @@ describe("#addGroupedTabBy", () => {
     it("should add tab to GroupedTab", () => {
       const actual = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -351,8 +348,8 @@ describe("#addGroupedTabBy", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -360,14 +357,14 @@ describe("#addGroupedTabBy", () => {
           isAudioPlaying: false,
         },
         new GroupedTabs(
-          new GroupId(1),
+          1,
           "groupName",
           new GroupedColor("red"),
           false,
           [
             {
-              id: new TabId(3),
-              windowId: new WindowId(1),
+              id: 3,
+              windowId: 1,
               title: "title3",
               url: new URL("https://example.com/path"),
               favIconUrl: "https://favicon.com",
@@ -377,13 +374,13 @@ describe("#addGroupedTabBy", () => {
           ],
         ),
       ]).addGroupedTabBy(
-        new GroupId(1),
+        1,
         "groupName",
         new GroupedColor("red"),
         false,
         {
-          id: new TabId(4),
-          windowId: new WindowId(1),
+          id: 4,
+          windowId: 1,
           title: "title4",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -393,8 +390,8 @@ describe("#addGroupedTabBy", () => {
       );
       const expected = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -402,8 +399,8 @@ describe("#addGroupedTabBy", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -411,14 +408,14 @@ describe("#addGroupedTabBy", () => {
           isAudioPlaying: false,
         },
         new GroupedTabs(
-          new GroupId(1),
+          1,
           "groupName",
           new GroupedColor("red"),
           false,
           [
             {
-              id: new TabId(3),
-              windowId: new WindowId(1),
+              id: 3,
+              windowId: 1,
               title: "title3",
               url: new URL("https://example.com/path"),
               favIconUrl: "https://favicon.com",
@@ -426,8 +423,8 @@ describe("#addGroupedTabBy", () => {
               isAudioPlaying: false,
             },
             {
-              id: new TabId(4),
-              windowId: new WindowId(1),
+              id: 4,
+              windowId: 1,
               title: "title4",
               url: new URL("https://example.com/path"),
               favIconUrl: "https://favicon.com",
@@ -447,8 +444,8 @@ describe("#addPinnedTab", () => {
     it("should add new PinnedTab", () => {
       const actual = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -456,8 +453,8 @@ describe("#addPinnedTab", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -465,8 +462,8 @@ describe("#addPinnedTab", () => {
           isAudioPlaying: false,
         },
       ]).addPinnedTab({
-        id: new TabId(3),
-        windowId: new WindowId(1),
+        id: 3,
+        windowId: 1,
         title: "title3",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -475,8 +472,8 @@ describe("#addPinnedTab", () => {
       });
       const expected = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -484,8 +481,8 @@ describe("#addPinnedTab", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -494,8 +491,8 @@ describe("#addPinnedTab", () => {
         },
         new PinnedTabs([
           {
-            id: new TabId(3),
-            windowId: new WindowId(1),
+            id: 3,
+            windowId: 1,
             title: "title3",
             url: new URL("https://example.com/path"),
             favIconUrl: "https://favicon.com",
@@ -512,8 +509,8 @@ describe("#addPinnedTab", () => {
     it("should add tab to PinnedTab", () => {
       const actual = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -521,8 +518,8 @@ describe("#addPinnedTab", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -531,8 +528,8 @@ describe("#addPinnedTab", () => {
         },
         new PinnedTabs([
           {
-            id: new TabId(3),
-            windowId: new WindowId(1),
+            id: 3,
+            windowId: 1,
             title: "title3",
             url: new URL("https://example.com/path"),
             favIconUrl: "https://favicon.com",
@@ -541,8 +538,8 @@ describe("#addPinnedTab", () => {
           },
         ]),
       ]).addPinnedTab({
-        id: new TabId(4),
-        windowId: new WindowId(1),
+        id: 4,
+        windowId: 1,
         title: "title4",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -551,8 +548,8 @@ describe("#addPinnedTab", () => {
       });
       const expected = new Tabs([
         {
-          id: new TabId(1),
-          windowId: new WindowId(1),
+          id: 1,
+          windowId: 1,
           title: "title1",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -560,8 +557,8 @@ describe("#addPinnedTab", () => {
           isAudioPlaying: false,
         },
         {
-          id: new TabId(2),
-          windowId: new WindowId(1),
+          id: 2,
+          windowId: 1,
           title: "title2",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -570,8 +567,8 @@ describe("#addPinnedTab", () => {
         },
         new PinnedTabs([
           {
-            id: new TabId(3),
-            windowId: new WindowId(1),
+            id: 3,
+            windowId: 1,
             title: "title3",
             url: new URL("https://example.com/path"),
             favIconUrl: "https://favicon.com",
@@ -579,8 +576,8 @@ describe("#addPinnedTab", () => {
             isAudioPlaying: false,
           },
           {
-            id: new TabId(4),
-            windowId: new WindowId(1),
+            id: 4,
+            windowId: 1,
             title: "title4",
             url: new URL("https://example.com/path"),
             favIconUrl: "https://favicon.com",
@@ -598,8 +595,8 @@ describe("#removeTabBy", () => {
   it("should remove target tab", () => {
     const actual = new Tabs([
       {
-        id: new TabId(1),
-        windowId: new WindowId(1),
+        id: 1,
+        windowId: 1,
         title: "title1",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -607,8 +604,8 @@ describe("#removeTabBy", () => {
         isAudioPlaying: false,
       },
       {
-        id: new TabId(2),
-        windowId: new WindowId(1),
+        id: 2,
+        windowId: 1,
         title: "title2",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -617,8 +614,8 @@ describe("#removeTabBy", () => {
       },
       new PinnedTabs([
         {
-          id: new TabId(3),
-          windowId: new WindowId(1),
+          id: 3,
+          windowId: 1,
           title: "title3",
           url: new URL("https://example.com/path"),
           favIconUrl: "https://favicon.com",
@@ -626,11 +623,11 @@ describe("#removeTabBy", () => {
           isAudioPlaying: false,
         },
       ]),
-    ]).removeTabBy(new TabId(3));
+    ]).removeTabBy(3);
     const expected = new Tabs([
       {
-        id: new TabId(1),
-        windowId: new WindowId(1),
+        id: 1,
+        windowId: 1,
         title: "title1",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",
@@ -638,8 +635,8 @@ describe("#removeTabBy", () => {
         isAudioPlaying: false,
       },
       {
-        id: new TabId(2),
-        windowId: new WindowId(1),
+        id: 2,
+        windowId: 1,
         title: "title2",
         url: new URL("https://example.com/path"),
         favIconUrl: "https://favicon.com",

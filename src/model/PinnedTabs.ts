@@ -1,6 +1,5 @@
 import { NestedTabs } from "./NestedTabs";
 import { Tab } from "./Tab";
-import { TabId } from "./TabId";
 
 export class PinnedTabs implements NestedTabs {
   constructor(private _values: Tab[]) {}
@@ -25,20 +24,20 @@ export class PinnedTabs implements NestedTabs {
     return new PinnedTabs([...this._values, tab]);
   }
 
-  findTabBy(tabId: TabId): Tab | null {
-    const tab = this._values.find((value) => value.id.equalTo(tabId));
+  findTabBy(tabId: number): Tab | null {
+    const tab = this._values.find((value) => value.id === tabId);
     return tab === undefined ? null : tab;
   }
 
   updateTab(tab: Tab): PinnedTabs {
     const tabs = this._values.map((value) => {
-      return value.id.equalTo(tab.id) ? tab : value;
+      return value.id === tab.id ? tab : value;
     });
     return new PinnedTabs(tabs);
   }
 
-  removeTabBy(tabId: TabId): PinnedTabs {
-    const tabs = this._values.filter((value) => !value.id.equalTo(tabId));
+  removeTabBy(tabId: number): PinnedTabs {
+    const tabs = this._values.filter((value) => value.id !== tabId);
     return new PinnedTabs(tabs);
   }
 

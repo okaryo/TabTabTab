@@ -41,7 +41,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   };
 
   const tabComponents = tabs.map((tab) => {
-    return <TabItem key={tab.id.value} tab={tab} />;
+    return <TabItem key={tab.id} tab={tab} />;
   });
 
   return (

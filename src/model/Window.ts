@@ -1,22 +1,19 @@
 import { GroupedColor } from "./GroupedColor";
-import { GroupId } from "./GroupId";
 import { Tab } from "./Tab";
-import { TabId } from "./TabId";
 import { Tabs } from "./Tabs";
-import { WindowId } from "./WindowId";
 
 export class Window {
   constructor(
-    private _id: WindowId,
+    private _id: number,
     private _tabs: Tabs,
     private _isFocused: boolean,
   ) {}
 
-  static initializeBy(windowId: WindowId, isFocused = false): Window {
+  static initializeBy(windowId: number, isFocused = false): Window {
     return new Window(windowId, Tabs.empty(), isFocused);
   }
 
-  get id(): WindowId {
+  get id(): number {
     return this._id;
   }
 
@@ -46,7 +43,7 @@ export class Window {
   }
 
   addGroupedTab(
-    groupId: GroupId,
+    groupId: number,
     groupName: string,
     color: GroupedColor,
     collapsed: boolean,
@@ -62,7 +59,7 @@ export class Window {
     return new Window(this._id, newTabs, this._isFocused);
   }
 
-  findTabBy(tabId: TabId): Tab | null {
+  findTabBy(tabId: number): Tab | null {
     return this._tabs.findTabBy(tabId);
   }
 
@@ -71,7 +68,7 @@ export class Window {
     return new Window(this._id, newTabs, this._isFocused);
   }
 
-  removeTabBy(tabId: TabId): Window {
+  removeTabBy(tabId: number): Window {
     const newTabs = this._tabs.removeTabBy(tabId);
     return new Window(this._id, newTabs, this._isFocused);
   }

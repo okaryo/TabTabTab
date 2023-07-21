@@ -81,7 +81,7 @@ const SearchResult = (props: SearchResultProps) => {
         >
           {tabs.map((tab, i) => (
             <TabItem
-              key={tab.id.value}
+              key={tab.id}
               tab={tab}
               selected={selectedTabIndex === i}
               ref={i === selectedTabIndex ? selectedItemRef : null}
