@@ -9,7 +9,7 @@ type ColorType =
   | "cyan"
   | "orange";
 
-export class GroupedColor {
+export class GroupColor {
   constructor(private _color: ColorType) {}
 
   get code(): string {

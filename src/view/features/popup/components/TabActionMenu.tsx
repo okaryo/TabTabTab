@@ -69,8 +69,8 @@ const TabActionMenu = (props: TabActionMenuProps) => {
       icon={<PushPinIcon fontSize="small" />}
       action={() => pinTab(tab)}
     />,
-    tab.isFocused && <Divider key="divider" />,
-    tab.isFocused && (
+    tab.highlighted && <Divider key="divider" />,
+    tab.highlighted && (
       <ActionMenu
         key={t.screenshotVisibleArea}
         label={t.screenshotVisibleArea}
@@ -95,7 +95,7 @@ const TabActionMenu = (props: TabActionMenuProps) => {
 
   return (
     <Menu
-      id={`tab-action-menu-${tab.id.value}`}
+      id={`tab-action-menu-${tab.id}`}
       open={isOpenMenu}
       onClose={onCloseMenu}
       anchorEl={anchorElement}

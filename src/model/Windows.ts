@@ -1,12 +1,9 @@
-import { GroupedColor } from "./GroupedColor";
-import { GroupedTabs } from "./GroupedTabs";
-import { GroupId } from "./GroupId";
+import { GroupColor } from "./GroupColor";
 import { PinnedTabs } from "./PinnedTabs";
 import { Tab, updateLastActivatedAt } from "./Tab";
-import { TabId } from "./TabId";
+import { TabGroup } from "./TabGroup";
 import { Tabs } from "./Tabs";
-import { Window } from "./Window";
-import { WindowId } from "./WindowId";
+import { Window, addGroupedTabToWindow, addPinnedTabToWindow } from "./Window";
 
 export class Windows {
   constructor(private _values: Window[]) {}
@@ -28,16 +25,16 @@ export class Windows {
   }
 
   get focusedWindowTabs(): Tabs {
-    const focusedWindow = this._values.find((value) => value.isFocused);
+    const focusedWindow = this._values.find((value) => value.focused);
     return focusedWindow === undefined ? Tabs.empty() : focusedWindow.tabs;
   }
 
   get currentWindow(): Window {
-    return this._values.find((value) => value.isFocused);
+    return this._values.find((value) => value.focused);
   }
 
   get unfocusedWindows(): Windows {
-    const unfocusedWindows = this._values.filter((value) => !value.isFocused);
+    const unfocusedWindows = this._values.filter((value) => !value.focused);
     return new Windows(unfocusedWindows);
   }
 
@@ -54,47 +51,48 @@ export class Windows {
     return this._values.map<T>((value, index) => callback(value, index));
   }
 
-  addTab(windowId: WindowId, isFocused: boolean, tab: Tab): Windows {
+  addTab(windowId: number, focused: boolean, tab: Tab): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
-      const newWindow = new Window(windowId, new Tabs([tab]), isFocused);
+      const newWindow = {
+        id: windowId,
+        tabs: new Tabs([tab]),
+        focused,
+      };
       return this.add(newWindow);
     }
 
-    const newWindow = window.addTab(tab);
+    const newWindow = { ...window, tabs: window.tabs.add(tab) };
     const newWindows = this.map((window) => {
-      return window.id.equalTo(newWindow.id) ? newWindow : window;
+      return window.id === newWindow.id ? newWindow : window;
     });
     return new Windows(newWindows);
   }
 
   addGroupedTab(
-    windowId: WindowId,
-    isFocused: boolean,
+    windowId: number,
+    focused: boolean,
     tab: Tab,
-    groupId: GroupId,
+    groupId: number,
     groupName: string,
     collapsed: boolean,
-    color: GroupedColor,
+    color: GroupColor,
   ): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
-      const groupedTabs = new GroupedTabs(
-        groupId,
-        groupName,
-        color,
-        collapsed,
-        [tab],
-      );
-      const newWindow = new Window(
-        windowId,
-        new Tabs([groupedTabs]),
-        isFocused,
-      );
+      const groupedTabs = new TabGroup(groupId, groupName, color, collapsed, [
+        tab,
+      ]);
+      const newWindow = {
+        id: windowId,
+        tabs: new Tabs([groupedTabs]),
+        focused,
+      };
       return this.add(newWindow);
     }
 
-    const newWindow = window.addGroupedTab(
+    const newWindow = addGroupedTabToWindow(
+      window,
       groupId,
       groupName,
       color,
@@ -102,53 +100,60 @@ export class Windows {
       tab,
     );
     const newWindows = this.map((window) => {
-      return window.id.equalTo(newWindow.id) ? newWindow : window;
+      return window.id === newWindow.id ? newWindow : window;
     });
     return new Windows(newWindows);
   }
 
-  addPinnedTab(windowId: WindowId, isFocused: boolean, tab: Tab): Windows {
+  addPinnedTab(windowId: number, focused: boolean, tab: Tab): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
       const pinnedTabs = new PinnedTabs([tab]);
-      const newWindow = new Window(windowId, new Tabs([pinnedTabs]), isFocused);
+      const newWindow = {
+        id: windowId,
+        tabs: new Tabs([pinnedTabs]),
+        focused,
+      };
       return this.add(newWindow);
     }
 
-    const newWindow = window.addPinnedTab(tab);
+    const newWindow = addPinnedTabToWindow(window, tab);
     const newWindows = this.map((window) => {
-      return window.id.equalTo(newWindow.id) ? newWindow : window;
+      return window.id === newWindow.id ? newWindow : window;
     });
     return new Windows(newWindows);
   }
 
-  updateLastActivatedAtOfTabBy(tabId: TabId, lastActivatedAt: Date): Windows {
+  updateLastActivatedAtOfTabBy(tabId: number, lastActivatedAt: Date): Windows {
     let tab: Tab = null;
     for (const window of this._values) {
-      tab = window.findTabBy(tabId);
+      tab = window.tabs.findTabBy(tabId);
       if (tab !== null) break;
     }
     if (tab === null) return this;
 
-    const newWindows = this._values.map((value) =>
-      value.updateTab(updateLastActivatedAt(tab, lastActivatedAt)),
-    );
+    const newWindows = this._values.map((window) => {
+      return {
+        ...window,
+        tabs: window.tabs.updateTab(
+          updateLastActivatedAt(tab, lastActivatedAt),
+        ),
+      };
+    });
     return new Windows(newWindows);
   }
 
-  removeTabBy(tabId: TabId): Windows {
-    const newWindows = this._values.map((value) => value.removeTabBy(tabId));
+  removeTabBy(tabId: number): Windows {
+    const newWindows = this._values.map((window) => {
+      return { ...window, tabs: window.tabs.removeTabBy(tabId) };
+    });
     return new Windows(newWindows);
   }
 
   pinTab(tab: Tab): Windows {
     const targetWindow = this.findWindowBy(tab.windowId);
     const newWindows = this.removeTabBy(tab.id);
-    return newWindows.addPinnedTab(
-      targetWindow.id,
-      targetWindow.isFocused,
-      tab,
-    );
+    return newWindows.addPinnedTab(targetWindow.id, targetWindow.focused, tab);
   }
 
   findTabsByTitleOrUrl(value: string): Tab[] {
@@ -161,8 +166,8 @@ export class Windows {
     });
   }
 
-  private findWindowBy(windowId: WindowId): Window | null {
-    const window = this._values.find((value) => windowId.equalTo(value.id));
+  private findWindowBy(windowId: number): Window | null {
+    const window = this._values.find((value) => windowId === value.id);
     return window === undefined ? null : window;
   }
 }

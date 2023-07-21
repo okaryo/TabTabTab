@@ -1,10 +1,8 @@
-import { GroupedColor } from "./GroupedColor";
-import { GroupedTabs } from "./GroupedTabs";
-import { GroupId } from "./GroupId";
+import { GroupColor } from "./GroupColor";
 import { NestedTabs } from "./NestedTabs";
 import { PinnedTabs } from "./PinnedTabs";
 import { Tab } from "./Tab";
-import { TabId } from "./TabId";
+import { TabGroup } from "./TabGroup";
 
 type Tabable = Tab | NestedTabs;
 
@@ -34,7 +32,7 @@ export class Tabs {
   get flatTabs(): Tab[] {
     return this._values
       .map((value) => {
-        if (this.isNestedTabs(value)) return value.values;
+        if (this.isNestedTabs(value)) return value.tabs;
         return value;
       })
       .flat();
@@ -49,22 +47,22 @@ export class Tabs {
   }
 
   addGroupedTabBy(
-    groupId: GroupId,
+    groupId: number,
     groupName: string,
-    color: GroupedColor,
+    color: GroupColor,
     collapsed: boolean,
     tab: Tab,
   ): Tabs {
     const groupedTabs = this.findGroupedTabsBy(groupId);
     if (groupedTabs === null) {
-      const newTabable = new GroupedTabs(groupId, groupName, color, collapsed, [
+      const newTabable = new TabGroup(groupId, groupName, color, collapsed, [
         tab,
       ]);
       return this.add(newTabable);
     }
 
     const newTabs = this._values.map((value) => {
-      return value instanceof GroupedTabs && groupedTabs.id === value.id
+      return value instanceof TabGroup && groupedTabs.id === value.id
         ? groupedTabs.add(tab)
         : value;
     });
@@ -84,10 +82,10 @@ export class Tabs {
     return new Tabs(newTabs);
   }
 
-  findTabBy(tabId: TabId): Tab | null {
+  findTabBy(tabId: number): Tab | null {
     for (const value of this._values) {
       if (this.isTab(value)) {
-        if (value.id.equalTo(tabId)) {
+        if (value.id === tabId) {
           return value;
         }
       } else {
@@ -101,13 +99,13 @@ export class Tabs {
 
   updateTab(tab: Tab): Tabs {
     const tabs = this._values.map((value) => {
-      if (this.isTab(value)) return value.id.equalTo(tab.id) ? tab : value;
+      if (this.isTab(value)) return value.id === tab.id ? tab : value;
       return value.updateTab(tab);
     });
     return new Tabs(tabs);
   }
 
-  removeTabBy(tabId: TabId): Tabs {
+  removeTabBy(tabId: number): Tabs {
     const tab = this.findNormalTabBy(tabId);
     let tabs: Tabable[];
     if (tab === null) {
@@ -117,27 +115,27 @@ export class Tabs {
       });
     } else {
       tabs = this._values.filter((value) => {
-        if (this.isTab(value)) return !value.id.equalTo(tabId);
+        if (this.isTab(value)) return value.id !== tabId;
         return true;
       });
     }
     return new Tabs(this.removeEmtpyNestedTab(tabs));
   }
 
-  private findNormalTabBy(tabId: TabId): Tab | null {
+  private findNormalTabBy(tabId: number): Tab | null {
     const tab = this._values.find((value) => {
-      if (this.isTab(value)) return value.id.equalTo(tabId);
+      if (this.isTab(value)) return value.id === tabId;
       return false;
     }) as Tab | undefined;
     return tab === undefined ? null : tab;
   }
 
-  private findGroupedTabsBy(groupId: GroupId): GroupedTabs | null {
+  private findGroupedTabsBy(groupId: number): TabGroup | null {
     const groupedTabsList = this._values.filter(
-      (value) => value instanceof GroupedTabs,
-    ) as GroupedTabs[];
-    const groupedTabs = groupedTabsList.find((tabs) =>
-      tabs.id.equalTo(groupId),
+      (value) => value instanceof TabGroup,
+    ) as TabGroup[];
+    const groupedTabs = groupedTabsList.find(
+      (tabGroup) => tabGroup.id === groupId,
     );
     return groupedTabs === undefined ? null : groupedTabs;
   }
@@ -154,7 +152,7 @@ export class Tabs {
   }
 
   private isNestedTabs(value: Tabable): value is NestedTabs {
-    return value instanceof GroupedTabs || value instanceof PinnedTabs;
+    return value instanceof TabGroup || value instanceof PinnedTabs;
   }
 
   private isTab(value: Tabable): value is Tab {

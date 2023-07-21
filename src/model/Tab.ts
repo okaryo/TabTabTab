@@ -1,16 +1,15 @@
 import { Duration } from "./Duration";
-import { TabId } from "./TabId";
-import { WindowId } from "./WindowId";
 import { Windows } from "./Windows";
 
 export type Tab = {
-  id: TabId;
-  windowId: WindowId;
+  id: number;
+  groupId?: number;
+  windowId?: number;
   title: string;
   url: URL;
-  favIconUrl: string;
-  isFocused: boolean;
-  isAudioPlaying: boolean;
+  favIconUrl: URL;
+  highlighted: boolean;
+  audible: boolean;
   lastActivatedAt?: Date;
 };
 
@@ -35,9 +34,9 @@ export const hasDuplicatedTabs = (
   targetTab: Tab,
 ): boolean => {
   return windows.values.some((window) => {
-    return window.flatTabs.some(
+    return window.tabs.flatTabs.some(
       (tab) =>
-        !targetTab.id.equalTo(tab.id) &&
+        targetTab.id !== tab.id &&
         targetTab.title === tab.title &&
         targetTab.url.href === tab.url.href,
     );

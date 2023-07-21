@@ -1,13 +1,12 @@
 import { Tab } from "./Tab";
-import { TabId } from "./TabId";
 
 export interface NestedTabs {
   length: number;
   isEmpty: boolean;
-  values: Tab[];
+  tabs: Tab[];
   add(tab: Tab): NestedTabs;
-  findTabBy(tabId: TabId): Tab | null;
+  findTabBy(tabId: number): Tab | null;
   updateTab(tab: Tab): NestedTabs;
-  removeTabBy(tabId: TabId): NestedTabs;
+  removeTabBy(tabId: number): NestedTabs;
   map<T>(callbak: (value: Tab) => T): T[];
 }

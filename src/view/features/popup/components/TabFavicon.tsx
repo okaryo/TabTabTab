@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import React from "react";
 
 type TabFaviconProps = {
-  url: string;
+  url: URL;
   shouldShowCheckIcon: boolean;
   style?: React.CSSProperties;
 };
@@ -28,8 +28,8 @@ const TabFavicon = (props: TabFaviconProps) => {
   if (
     url !== null &&
     url !== undefined &&
-    url !== "" &&
-    (url.startsWith("https") || url.startsWith("http"))
+    url.href !== "" &&
+    (url.protocol === "https:" || url.protocol === "http:")
   ) {
     return (
       <Box
@@ -39,7 +39,7 @@ const TabFavicon = (props: TabFaviconProps) => {
           height: 20,
           width: 20,
         }}
-        src={url}
+        src={url.href}
       />
     );
   }

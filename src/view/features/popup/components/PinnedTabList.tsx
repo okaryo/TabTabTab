@@ -28,7 +28,7 @@ const PinnedTabList = (props: PinnedTabListProps) => {
   const toggleCollapsedStatus = () => setCollapsed(!collapsed);
 
   const tabComponents = tabs.map((tab) => {
-    return <TabItem key={tab.id.value} tab={tab} />;
+    return <TabItem key={tab.id} tab={tab} />;
   });
 
   return (

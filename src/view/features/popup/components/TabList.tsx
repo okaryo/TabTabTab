@@ -1,9 +1,9 @@
 import List from "@mui/material/List";
 import React, { useContext } from "react";
 
-import { GroupedTabs } from "../../../../model/GroupedTabs";
 import { PinnedTabs } from "../../../../model/PinnedTabs";
 import { Tab } from "../../../../model/Tab";
+import { TabGroup } from "../../../../model/TabGroup";
 import { Tabs } from "../../../../model/Tabs";
 import { WindowsContext } from "../contexts/Windows";
 
@@ -30,11 +30,11 @@ const TabList = (props: TabListProps) => {
     if (tab instanceof PinnedTabs) {
       return <PinnedTabList key="pinned" tabs={tab} />;
     }
-    if (tab instanceof GroupedTabs) {
+    if (tab instanceof TabGroup) {
       return <GroupedTabList key={tab.name} tabs={tab} />;
     }
 
-    return <TabItem key={(tab as Tab).id.value} tab={tab as Tab} />;
+    return <TabItem key={(tab as Tab).id} tab={tab as Tab} />;
   });
 
   return (
