@@ -1,10 +1,6 @@
 import { GroupedColor } from "../model/GroupedColor";
 import { Tabs } from "../model/Tabs";
-import {
-  Window,
-  addGroupedTabToWindow,
-  addPinnedTabToWindow,
-} from "../model/Window";
+import { Window } from "../model/Window";
 import { Windows } from "../model/Windows";
 
 import {
@@ -20,44 +16,40 @@ export const getWindows = async (): Promise<Windows> => {
 };
 
 const getCurrentWindow = async (): Promise<Window> => {
-  const currentWindowTabs = await chrome.tabs.query({ currentWindow: true });
+  const currentWindow = await chrome.windows.getCurrent();
 
-  const windowId = currentWindowTabs[0].windowId;
-  let currentWindow = { id: windowId, tabs: new Tabs([]), focused: true };
-  for (const tab of currentWindowTabs) {
-    const newTab = {
+  let parsedTabs = new Tabs([]);
+  for (const tab of currentWindow.tabs) {
+    const parsedTab = {
       id: tab.id,
       groupId: tab.groupId,
-      windowId,
+      windowId: tab.windowId,
       title: tab.title,
       url: new URL(tab.url),
-      favIconUrl: tab.favIconUrl,
+      favIconUrl: new URL(tab.favIconUrl),
       isFocused: tab.highlighted,
       isAudioPlaying: tab.audible,
     };
 
     if (tab.pinned) {
-      currentWindow = addPinnedTabToWindow(currentWindow, newTab);
+      parsedTabs = parsedTabs.add(parsedTab);
     } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
       const groupId = tab.groupId;
       const group = await chrome.tabGroups.get(groupId);
       const groupColor = new GroupedColor(group.color);
-      currentWindow = addGroupedTabToWindow(
-        currentWindow,
+      parsedTabs = parsedTabs.addGroupedTabBy(
         groupId,
         group.title,
         groupColor,
         group.collapsed,
-        newTab,
+        parsedTab,
       );
     } else {
-      currentWindow = {
-        ...currentWindow,
-        tabs: currentWindow.tabs.add(newTab),
-      };
+      parsedTabs = parsedTabs.add(parsedTab);
     }
   }
-  return currentWindow;
+
+  return { id: currentWindow.id, tabs: parsedTabs, focused: true };
 };
 
 const getUnfocusedWindows = async (): Promise<Windows> => {
@@ -72,7 +64,7 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
       windowId,
       title: tab.title,
       url: new URL(tab.url),
-      favIconUrl: tab.favIconUrl,
+      favIconUrl: new URL(tab.favIconUrl),
       isFocused: tab.highlighted,
       isAudioPlaying: tab.audible,
     };
