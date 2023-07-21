@@ -3,7 +3,7 @@ import { Tab } from "./Tab";
 export interface NestedTabs {
   length: number;
   isEmpty: boolean;
-  values: Tab[];
+  tabs: Tab[];
   add(tab: Tab): NestedTabs;
   findTabBy(tabId: number): Tab | null;
   updateTab(tab: Tab): NestedTabs;

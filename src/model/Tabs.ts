@@ -1,8 +1,8 @@
-import { GroupedColor } from "./GroupedColor";
-import { GroupedTabs } from "./GroupedTabs";
+import { GroupColor } from "./GroupColor";
 import { NestedTabs } from "./NestedTabs";
 import { PinnedTabs } from "./PinnedTabs";
 import { Tab } from "./Tab";
+import { TabGroup } from "./TabGroup";
 
 type Tabable = Tab | NestedTabs;
 
@@ -32,7 +32,7 @@ export class Tabs {
   get flatTabs(): Tab[] {
     return this._values
       .map((value) => {
-        if (this.isNestedTabs(value)) return value.values;
+        if (this.isNestedTabs(value)) return value.tabs;
         return value;
       })
       .flat();
@@ -49,20 +49,20 @@ export class Tabs {
   addGroupedTabBy(
     groupId: number,
     groupName: string,
-    color: GroupedColor,
+    color: GroupColor,
     collapsed: boolean,
     tab: Tab,
   ): Tabs {
     const groupedTabs = this.findGroupedTabsBy(groupId);
     if (groupedTabs === null) {
-      const newTabable = new GroupedTabs(groupId, groupName, color, collapsed, [
+      const newTabable = new TabGroup(groupId, groupName, color, collapsed, [
         tab,
       ]);
       return this.add(newTabable);
     }
 
     const newTabs = this._values.map((value) => {
-      return value instanceof GroupedTabs && groupedTabs.id === value.id
+      return value instanceof TabGroup && groupedTabs.id === value.id
         ? groupedTabs.add(tab)
         : value;
     });
@@ -130,10 +130,10 @@ export class Tabs {
     return tab === undefined ? null : tab;
   }
 
-  private findGroupedTabsBy(groupId: number): GroupedTabs | null {
+  private findGroupedTabsBy(groupId: number): TabGroup | null {
     const groupedTabsList = this._values.filter(
-      (value) => value instanceof GroupedTabs,
-    ) as GroupedTabs[];
+      (value) => value instanceof TabGroup,
+    ) as TabGroup[];
     const groupedTabs = groupedTabsList.find(
       (tabGroup) => tabGroup.id === groupId,
     );
@@ -152,7 +152,7 @@ export class Tabs {
   }
 
   private isNestedTabs(value: Tabable): value is NestedTabs {
-    return value instanceof GroupedTabs || value instanceof PinnedTabs;
+    return value instanceof TabGroup || value instanceof PinnedTabs;
   }
 
   private isTab(value: Tabable): value is Tab {

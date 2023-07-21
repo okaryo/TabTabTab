@@ -1,7 +1,7 @@
-import { GroupedColor } from "./GroupedColor";
-import { GroupedTabs } from "./GroupedTabs";
+import { GroupColor } from "./GroupColor";
 import { PinnedTabs } from "./PinnedTabs";
 import { Tab, updateLastActivatedAt } from "./Tab";
+import { TabGroup } from "./TabGroup";
 import { Tabs } from "./Tabs";
 import { Window, addGroupedTabToWindow, addPinnedTabToWindow } from "./Window";
 
@@ -76,17 +76,13 @@ export class Windows {
     groupId: number,
     groupName: string,
     collapsed: boolean,
-    color: GroupedColor,
+    color: GroupColor,
   ): Windows {
     const window = this.findWindowBy(windowId);
     if (window === null) {
-      const groupedTabs = new GroupedTabs(
-        groupId,
-        groupName,
-        color,
-        collapsed,
-        [tab],
-      );
+      const groupedTabs = new TabGroup(groupId, groupName, color, collapsed, [
+        tab,
+      ]);
       const newWindow = {
         id: windowId,
         tabs: new Tabs([groupedTabs]),

@@ -1,5 +1,5 @@
-import { GroupedColor } from "../../src/model/GroupedColor";
-import { GroupedTabs } from "../../src/model/GroupedTabs";
+import { GroupColor } from "../../src/model/GroupColor";
+import { TabGroup } from "../../src/model/TabGroup";
 import { PinnedTabs } from "../../src/model/PinnedTabs";
 import { Tab } from "../../src/model/Tab";
 import { Tabs } from "../../src/model/Tabs";
@@ -279,7 +279,7 @@ describe("#addGroupedTabBy", () => {
           highlighted: false,
           audible: false,
         },
-      ]).addGroupedTabBy(1, "groupName", new GroupedColor("red"), false, {
+      ]).addGroupedTabBy(1, "groupName", new GroupColor("red"), false, {
         id: 3,
         windowId: 1,
         title: "title3",
@@ -307,7 +307,7 @@ describe("#addGroupedTabBy", () => {
           highlighted: false,
           audible: false,
         },
-        new GroupedTabs(1, "groupName", new GroupedColor("red"), false, [
+        new TabGroup(1, "groupName", new GroupColor("red"), false, [
           {
             id: 3,
             windowId: 1,
@@ -344,7 +344,7 @@ describe("#addGroupedTabBy", () => {
           highlighted: false,
           audible: false,
         },
-        new GroupedTabs(1, "groupName", new GroupedColor("red"), false, [
+        new TabGroup(1, "groupName", new GroupColor("red"), false, [
           {
             id: 3,
             windowId: 1,
@@ -355,7 +355,7 @@ describe("#addGroupedTabBy", () => {
             audible: false,
           },
         ]),
-      ]).addGroupedTabBy(1, "groupName", new GroupedColor("red"), false, {
+      ]).addGroupedTabBy(1, "groupName", new GroupColor("red"), false, {
         id: 4,
         windowId: 1,
         title: "title4",
@@ -383,7 +383,7 @@ describe("#addGroupedTabBy", () => {
           highlighted: false,
           audible: false,
         },
-        new GroupedTabs(1, "groupName", new GroupedColor("red"), false, [
+        new TabGroup(1, "groupName", new GroupColor("red"), false, [
           {
             id: 3,
             windowId: 1,

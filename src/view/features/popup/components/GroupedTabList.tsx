@@ -12,7 +12,7 @@ import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
-import { GroupedTabs } from "../../../../model/GroupedTabs";
+import { TabGroup } from "../../../../model/TabGroup";
 import {
   collapseTabGroup,
   expandTabGroup,
@@ -21,7 +21,7 @@ import {
 import TabItem from "./TabItem";
 
 type GroupedTabListProps = {
-  tabs: GroupedTabs;
+  tabs: TabGroup;
 };
 
 const GroupedTabList = (props: GroupedTabListProps) => {

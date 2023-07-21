@@ -1,4 +1,4 @@
-import { GroupedColor } from "../model/GroupedColor";
+import { GroupColor } from "../model/GroupColor";
 import { Tabs } from "../model/Tabs";
 import { Window } from "../model/Window";
 import { Windows } from "../model/Windows";
@@ -36,7 +36,7 @@ const getCurrentWindow = async (): Promise<Window> => {
     } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
       const groupId = tab.groupId;
       const group = await chrome.tabGroups.get(groupId);
-      const groupColor = new GroupedColor(group.color);
+      const groupColor = new GroupColor(group.color);
       parsedTabs = parsedTabs.addGroupedTabBy(
         groupId,
         group.title,
@@ -74,7 +74,7 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
     } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
       const groupId = tab.groupId;
       const group = await chrome.tabGroups.get(groupId);
-      const groupColor = new GroupedColor(group.color);
+      const groupColor = new GroupColor(group.color);
       windows = windows.addGroupedTab(
         windowId,
         false,

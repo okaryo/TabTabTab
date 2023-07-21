@@ -1,4 +1,4 @@
-import { GroupedColor } from "./GroupedColor";
+import { GroupColor } from "./GroupColor";
 import { Tab } from "./Tab";
 import { Tabs } from "./Tabs";
 
@@ -34,7 +34,7 @@ export const addGroupedTabToWindow = (
   window: Window,
   groupId: number,
   groupName: string,
-  color: GroupedColor,
+  color: GroupColor,
   collapsed: boolean,
   tab: Tab,
 ): Window => {
