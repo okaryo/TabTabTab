@@ -34,7 +34,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab.id);
   const [isHovered, setIsHovered] = React.useState(false);
-  const shouldShowCloseButton = tab.isFocused || isHovered;
+  const shouldShowCloseButton = tab.highlighted || isHovered;
 
   const elapsedTimeSinceLastActiveText = (): string => {
     const duration = durationSinceLastActivatedAt(tab);
@@ -131,7 +131,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
       <ListItemButton
         sx={{ width: "100%", pt: 0, pb: 0 }}
         color="info"
-        selected={tab.isFocused || selected}
+        selected={tab.highlighted || selected}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={onTapTabItem}
       >
@@ -161,7 +161,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
               >
                 {tab.title}
               </span>
-              {tab.isAudioPlaying && <VolumeUpIcon fontSize="small" />}
+              {tab.audible && <VolumeUpIcon fontSize="small" />}
               {hasDuplicatedTabs(windows, tab) && (
                 <Chip
                   label={t.duplicated}

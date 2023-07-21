@@ -8,8 +8,8 @@ export type Tab = {
   title: string;
   url: URL;
   favIconUrl: URL;
-  isFocused: boolean;
-  isAudioPlaying: boolean;
+  highlighted: boolean;
+  audible: boolean;
   lastActivatedAt?: Date;
 };
 

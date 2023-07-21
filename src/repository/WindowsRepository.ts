@@ -27,8 +27,8 @@ const getCurrentWindow = async (): Promise<Window> => {
       title: tab.title,
       url: new URL(tab.url),
       favIconUrl: new URL(tab.favIconUrl),
-      isFocused: tab.highlighted,
-      isAudioPlaying: tab.audible,
+      highlighted: tab.highlighted,
+      audible: tab.audible,
     };
 
     if (tab.pinned) {
@@ -65,8 +65,8 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
       title: tab.title,
       url: new URL(tab.url),
       favIconUrl: new URL(tab.favIconUrl),
-      isFocused: tab.highlighted,
-      isAudioPlaying: tab.audible,
+      highlighted: tab.highlighted,
+      audible: tab.audible,
     };
 
     if (tab.pinned) {
