@@ -34,7 +34,7 @@ export const hasDuplicatedTabs = (
   targetTab: Tab,
 ): boolean => {
   return windows.values.some((window) => {
-    return window.flatTabs.some(
+    return window.tabs.flatTabs.some(
       (tab) =>
         targetTab.id !== tab.id &&
         targetTab.title === tab.title &&

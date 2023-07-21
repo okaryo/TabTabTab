@@ -47,7 +47,7 @@ const WindowTabs = (props: WindowTabsProps) => {
       <WindowTab
         key={window.id}
         label={`${t.window}${index + 1}`}
-        tabCount={window.tabCount}
+        tabCount={window.tabs.values.length}
       />
     );
   });
@@ -62,7 +62,7 @@ const WindowTabs = (props: WindowTabsProps) => {
       >
         <WindowTab
           label={t.currentWindow}
-          tabCount={windows.currentWindow?.tabCount ?? 0}
+          tabCount={windows.currentWindow?.tabs.values.length ?? 0}
         />
         {unfocusedWindows}
       </Tabs>
