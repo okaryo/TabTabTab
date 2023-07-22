@@ -5,6 +5,7 @@
   "labels": ["maintenance"],
   "timezone": "Asia/Tokyo",
   "automerge": false,
+  "rangeStrategy": "bump",
   "dependencyDashboard": false,
   "branchConcurrentLimit": 0,
   "prHourlyLimit": 0,
