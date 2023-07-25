@@ -7,7 +7,7 @@ export type Tab = {
   windowId?: number;
   title: string;
   url: URL;
-  favIconUrl: URL;
+  favIconUrl?: URL;
   highlighted: boolean;
   audible: boolean;
   lastActivatedAt?: Date;
