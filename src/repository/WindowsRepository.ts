@@ -16,7 +16,7 @@ export const getWindows = async (): Promise<Windows> => {
 };
 
 const getCurrentWindow = async (): Promise<Window> => {
-  const currentWindow = await chrome.windows.getCurrent();
+  const currentWindow = await chrome.windows.getCurrent({ populate: true });
 
   let parsedTabs = new Tabs([]);
   for (const tab of currentWindow.tabs) {
@@ -25,14 +25,18 @@ const getCurrentWindow = async (): Promise<Window> => {
       groupId: tab.groupId,
       windowId: tab.windowId,
       title: tab.title,
-      url: new URL(tab.url),
-      favIconUrl: new URL(tab.favIconUrl),
+      url:
+        tab.url && tab.url !== "" ? new URL(tab.url) : new URL(tab.pendingUrl),
+      favIconUrl:
+        tab.favIconUrl && tab.favIconUrl !== ""
+          ? new URL(tab.favIconUrl)
+          : null,
       highlighted: tab.highlighted,
       audible: tab.audible,
     };
 
     if (tab.pinned) {
-      parsedTabs = parsedTabs.add(parsedTab);
+      parsedTabs = parsedTabs.addPinnedTab(parsedTab);
     } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
       const groupId = tab.groupId;
       const group = await chrome.tabGroups.get(groupId);
@@ -63,8 +67,12 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
       groupId: tab.groupId,
       windowId,
       title: tab.title,
-      url: new URL(tab.url),
-      favIconUrl: new URL(tab.favIconUrl),
+      url:
+        tab.url && tab.url !== "" ? new URL(tab.url) : new URL(tab.pendingUrl),
+      favIconUrl:
+        tab.favIconUrl && tab.favIconUrl !== ""
+          ? new URL(tab.favIconUrl)
+          : null,
       highlighted: tab.highlighted,
       audible: tab.audible,
     };
