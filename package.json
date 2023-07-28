@@ -31,7 +31,7 @@
     "prettier": "^3.0.0",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6",
-    "vite": "^4.4.6"
+    "vite": "^4.4.7"
   },
   "dependencies": {
     "@emotion/react": "^11.11.1",
