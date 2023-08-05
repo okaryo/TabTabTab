@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
 import Typography from "@mui/material/Typography";
-import React, { useContext, useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import t from "../../../../i18n/Translations";
 import { focusTab } from "../../../../repository/TabsRepository";

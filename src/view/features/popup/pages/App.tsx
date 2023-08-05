@@ -1,5 +1,4 @@
 import CssBaseline from "@mui/material/CssBaseline";
-import React from "react";
 
 import { ThemeContext } from "../../../contexts/Theme";
 import { useTheme } from "../../../hooks/useTheme";

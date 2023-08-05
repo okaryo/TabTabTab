@@ -1,7 +1,6 @@
 import { ThemeProvider as MaterialThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import { useContext, useMemo } from "react";
-import React from "react";
 
 import { ThemeContext } from "../contexts/Theme";
 

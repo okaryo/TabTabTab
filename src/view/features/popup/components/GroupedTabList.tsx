@@ -10,7 +10,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import { TabGroup } from "../../../../model/TabGroup";
 import {

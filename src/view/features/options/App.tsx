@@ -1,6 +1,6 @@
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import ThemeProvider from "../../components/ThemeProvider";
 import { ThemeContext } from "../../contexts/Theme";

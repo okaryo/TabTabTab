@@ -9,7 +9,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import React, { forwardRef, useContext, useEffect, useState } from "react";
+import { forwardRef, useContext, useEffect, useState } from "react";
 
 import t from "../../../../i18n/Translations";
 import {
@@ -33,7 +33,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const { tab, selected } = props;
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab.id);
-  const [isHovered, setIsHovered] = React.useState(false);
+  const [isHovered, setIsHovered] = useState(false);
   const shouldShowCloseButton = tab.highlighted || isHovered;
 
   const elapsedTimeSinceLastActiveText = (): string => {

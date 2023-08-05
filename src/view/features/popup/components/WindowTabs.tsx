@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
 import Tabs from "@mui/material/Tabs";
-import React, { Dispatch, useContext, useEffect } from "react";
+import { Dispatch, useContext, useEffect } from "react";
 
 import t from "../../../../i18n/Translations";
 import { WindowsContext } from "../contexts/Windows";

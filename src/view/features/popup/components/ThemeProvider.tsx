@@ -1,7 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import { useContext, useEffect, useMemo, useState } from "react";
-import React from "react";
 
 import { getPopupElementScaleSetting } from "../../../../repository/SettingsRepository";
 import { ThemeContext } from "../../../contexts/Theme";

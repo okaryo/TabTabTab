@@ -19,7 +19,7 @@ import {
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import List from "@mui/material/List";
-import React, { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 
 import { PinnedTabs } from "../../../../model/PinnedTabs";
 import { Tab } from "../../../../model/Tab";

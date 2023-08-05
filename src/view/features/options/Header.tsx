@@ -7,7 +7,7 @@ import Tab from "@mui/material/Tab";
 import Tabs from "@mui/material/Tabs";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import t from "../../../i18n/Translations";
 import { ThemeContext } from "../../contexts/Theme";

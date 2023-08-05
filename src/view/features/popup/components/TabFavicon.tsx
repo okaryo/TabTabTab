@@ -1,7 +1,6 @@
 import DoneIcon from "@mui/icons-material/Done";
 import TabIcon from "@mui/icons-material/Tab";
 import Box from "@mui/material/Box";
-import React from "react";
 
 type TabFaviconProps = {
   url: URL;
