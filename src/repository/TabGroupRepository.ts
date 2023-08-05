@@ -5,3 +5,17 @@ export const collapseTabGroup = async (groupId: number): Promise<void> => {
 export const expandTabGroup = async (groupId: number): Promise<void> => {
   await chrome.tabGroups.update(groupId, { collapsed: false });
 };
+
+export const addTabToTabGroup = async (
+  tabId: number,
+  groupId: number,
+): Promise<void> => {
+  await chrome.tabs.group({ tabIds: tabId, groupId });
+};
+
+export const moveTabGroup = async (
+  groupId: number,
+  index: number,
+): Promise<void> => {
+  await chrome.tabGroups.move(groupId, { index });
+};
