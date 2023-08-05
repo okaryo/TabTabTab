@@ -9,7 +9,6 @@
   "dependencyDashboard": false,
   "branchConcurrentLimit": 0,
   "prHourlyLimit": 0,
-  "prConcurrentLimit": 5,
   "packageRules": [
     {
       "groupName": "react",

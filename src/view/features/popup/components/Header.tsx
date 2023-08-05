@@ -7,7 +7,7 @@ import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
-import React, { useContext } from "react";
+import { useContext } from "react";
 
 import t from "../../../../i18n/Translations";
 import { navigateToOptionsPage } from "../../../../repository/SettingsRepository";

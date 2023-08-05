@@ -11,7 +11,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import React, { useState } from "react";
+import { useState } from "react";
 
 import t from "../../../../i18n/Translations";
 import { Tab } from "../../../../model/Tab";

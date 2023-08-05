@@ -4,7 +4,6 @@ import CardHeader from "@mui/material/CardHeader";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import React from "react";
 
 import t from "../../../i18n/Translations";
 

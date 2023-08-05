@@ -1,5 +1,5 @@
 import Box from "@mui/material/Box";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { PopupSize } from "../../../../model/settings/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";

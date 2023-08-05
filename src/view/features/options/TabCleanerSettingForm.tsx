@@ -13,7 +13,7 @@ import Snackbar from "@mui/material/Snackbar";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import t from "../../../i18n/Translations";
 import { TabCleaner, DurationUnit } from "../../../model/settings/TabCleaner";
