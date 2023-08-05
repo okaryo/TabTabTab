@@ -21,7 +21,7 @@
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
-    "@vitejs/plugin-react": "^4.0.3",
+    "@vitejs/plugin-react": "^4.0.4",
     "chromex-locale-lint": "^0.0.2",
     "eslint": "^8.46.0",
     "eslint-plugin-autofix": "^1.1.0",
@@ -31,7 +31,7 @@
     "prettier": "^3.0.1",
     "ts-jest": "^29.1.1",
     "typescript": "^5.1.6",
-    "vite": "^4.4.7"
+    "vite": "^4.4.8"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.0.8",
