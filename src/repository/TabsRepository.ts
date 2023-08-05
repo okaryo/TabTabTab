@@ -54,3 +54,12 @@ export const screenshotVisibleArea = (
     callback(dataUrl),
   );
 };
+
+export const moveTab = async (tabId: number, index: number) => {
+  await chrome.tabs.move(tabId, { index });
+};
+
+export const moveTabOutOfGroup = async (tabId: number, index: number) => {
+  await chrome.tabs.ungroup(tabId);
+  await chrome.tabs.move(tabId, { index });
+};

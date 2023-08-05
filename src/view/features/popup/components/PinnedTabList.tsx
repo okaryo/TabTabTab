@@ -14,25 +14,22 @@ import Typography from "@mui/material/Typography";
 import React, { useState } from "react";
 
 import t from "../../../../i18n/Translations";
-import { PinnedTabs } from "../../../../model/PinnedTabs";
+import { Tab } from "../../../../model/Tab";
 
 import TabItem from "./TabItem";
 
 type PinnedTabListProps = {
-  tabs: PinnedTabs;
+  tabs: Tab[];
 };
 
 const PinnedTabList = (props: PinnedTabListProps) => {
   const { tabs } = props;
   const [collapsed, setCollapsed] = useState(true);
   const toggleCollapsedStatus = () => setCollapsed(!collapsed);
-
-  const tabComponents = tabs.map((tab) => {
-    return <TabItem key={tab.id} tab={tab} />;
-  });
+  const id = "pinned";
 
   return (
-    <Stack direction="row">
+    <Stack id={id} direction="row">
       <Box
         style={{
           borderRight: "5px solid #818181",
@@ -40,30 +37,36 @@ const PinnedTabList = (props: PinnedTabListProps) => {
         }}
       />
       <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
-        <ListItem
-          secondaryAction={
-            <IconButton edge="end" onClick={toggleCollapsedStatus}>
-              {collapsed ? <ExpandMore /> : <ExpandLess />}
-            </IconButton>
-          }
-          disablePadding
-        >
-          <ListItemButton onClick={toggleCollapsedStatus}>
-            <Stack direction="row" spacing={1} alignItems="center">
-              <PushPin fontSize="small" />
-              <ListItemText
-                primary={
-                  <Typography variant="subtitle1" component="h6">
-                    {t.pinned}
-                  </Typography>
-                }
-              />
-              <Chip label={tabs.length} size="small" color="info" />
-            </Stack>
-          </ListItemButton>
-        </ListItem>
+        <Stack>
+          <ListItem
+            secondaryAction={
+              <IconButton edge="end" onClick={toggleCollapsedStatus}>
+                {collapsed ? <ExpandMore /> : <ExpandLess />}
+              </IconButton>
+            }
+            disablePadding
+          >
+            <ListItemButton onClick={toggleCollapsedStatus}>
+              <Stack direction="row" spacing={1} alignItems="center">
+                <PushPin fontSize="small" />
+                <ListItemText
+                  primary={
+                    <Typography variant="subtitle1" component="h6">
+                      {t.pinned}
+                    </Typography>
+                  }
+                />
+                <Chip label={tabs.length} size="small" color="info" />
+              </Stack>
+            </ListItemButton>
+          </ListItem>
+        </Stack>
         <Collapse in={!collapsed} timeout="auto" unmountOnExit>
-          <List disablePadding>{tabComponents}</List>
+          <List disablePadding>
+            {tabs.map((tab) => (
+              <TabItem tab={tab} />
+            ))}
+          </List>
         </Collapse>
       </List>
     </Stack>

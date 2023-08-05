@@ -19,81 +19,88 @@ import {
 } from "../../../../repository/TabGroupRepository";
 
 import TabItem from "./TabItem";
+import { SortableItem } from "./TabList";
 
 type GroupedTabListProps = {
-  tabs: TabGroup;
+  tabGroup: TabGroup;
 };
 
 const GroupedTabList = (props: GroupedTabListProps) => {
-  const { tabs } = props;
+  const { tabGroup } = props;
   const theme = useTheme();
-  const [collapsed, setCollapsed] = useState(tabs.collapsed);
+  const [collapsed, setCollapsed] = useState(tabGroup.collapsed);
   const toggleCollapsedStatus = () => {
     const newCollapsed = !collapsed;
     if (newCollapsed) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      collapseTabGroup(tabs.id);
+      collapseTabGroup(tabGroup.id);
     } else {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
-      expandTabGroup(tabs.id);
+      expandTabGroup(tabGroup.id);
     }
     setCollapsed(newCollapsed);
   };
 
-  const tabComponents = tabs.map((tab) => {
-    return <TabItem key={tab.id} tab={tab} />;
-  });
-
   return (
-    <Stack direction="row">
-      <Box
-        style={{
-          borderRight: `5px solid ${props.tabs.colorCode}`,
-          borderRadius: "0 5px 5px 0",
-        }}
-      />
-      <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
-        <ListItem
-          secondaryAction={
-            <IconButton edge="end" onClick={toggleCollapsedStatus}>
-              {collapsed ? <ExpandMore /> : <ExpandLess />}
-            </IconButton>
-          }
-          disablePadding
-        >
-          <ListItemButton onClick={toggleCollapsedStatus}>
-            <Stack direction="row" spacing={1} alignItems="center">
-              {tabs.name !== "" && (
-                <Typography
-                  variant="subtitle1"
-                  component="h6"
-                  sx={{ px: 1.25, py: 0.25 }}
-                  style={{
-                    display: "inline-block",
-                    borderRadius: "8px",
-                    backgroundColor: `${tabs.colorCode}`,
-                    color: theme.palette.getContrastText(tabs.colorCode),
-                  }}
-                >
-                  {tabs.name}
-                </Typography>
-              )}
-              <Chip
-                sx={{
-                  backgroundColor: props.tabs.colorCode,
-                  color: theme.palette.getContrastText(tabs.colorCode),
-                }}
-                label={tabs.length}
-                size="small"
-              />
-            </Stack>
-          </ListItemButton>
-        </ListItem>
-        <Collapse in={!collapsed} timeout="auto" unmountOnExit>
-          <List disablePadding>{tabComponents}</List>
-        </Collapse>
-      </List>
-    </Stack>
+    <SortableItem id={tabGroup.id.toString()}>
+      <Stack direction="row">
+        <Box
+          style={{
+            borderRight: `5px solid ${tabGroup.colorCode}`,
+            borderRadius: "0 5px 5px 0",
+          }}
+        />
+        <List sx={{ width: "100%" }} disablePadding>
+          <Stack>
+            <ListItem
+              secondaryAction={
+                <IconButton edge="end" onClick={toggleCollapsedStatus}>
+                  {collapsed ? <ExpandMore /> : <ExpandLess />}
+                </IconButton>
+              }
+              disablePadding
+            >
+              <ListItemButton onClick={toggleCollapsedStatus}>
+                <Stack direction="row" spacing={1} alignItems="center">
+                  {tabGroup.name !== "" && (
+                    <Typography
+                      variant="subtitle1"
+                      component="h6"
+                      sx={{ px: 1.25, py: 0.25 }}
+                      style={{
+                        display: "inline-block",
+                        borderRadius: "8px",
+                        backgroundColor: `${tabGroup.colorCode}`,
+                        color: theme.palette.getContrastText(
+                          tabGroup.colorCode,
+                        ),
+                      }}
+                    >
+                      {tabGroup.name}
+                    </Typography>
+                  )}
+                  <Chip
+                    sx={{
+                      backgroundColor: props.tabGroup.colorCode,
+                      color: theme.palette.getContrastText(tabGroup.colorCode),
+                    }}
+                    label={tabGroup.length}
+                    size="small"
+                  />
+                </Stack>
+              </ListItemButton>
+            </ListItem>
+          </Stack>
+          <Collapse in={!collapsed} timeout="auto" unmountOnExit>
+            <List disablePadding>
+              {tabGroup.tabs.map((tab) => (
+                <TabItem tab={tab} />
+              ))}
+            </List>
+          </Collapse>
+        </List>
+      </Stack>
+    </SortableItem>
   );
 };
 

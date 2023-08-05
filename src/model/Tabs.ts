@@ -4,7 +4,7 @@ import { PinnedTabs } from "./PinnedTabs";
 import { Tab } from "./Tab";
 import { TabGroup } from "./TabGroup";
 
-type Tabable = Tab | NestedTabs;
+export type Tabable = Tab | NestedTabs;
 
 export class Tabs {
   constructor(private _values: Tabable[]) {}
