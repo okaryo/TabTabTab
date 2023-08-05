@@ -33,6 +33,7 @@ const getCurrentWindow = async (): Promise<Window> => {
           : null,
       highlighted: tab.highlighted,
       audible: tab.audible,
+      pinned: tab.pinned,
     };
 
     if (tab.pinned) {
@@ -75,6 +76,7 @@ const getUnfocusedWindows = async (): Promise<Windows> => {
           : null,
       highlighted: tab.highlighted,
       audible: tab.audible,
+      pinned: tab.pinned,
     };
 
     if (tab.pinned) {
