@@ -15,9 +15,9 @@
   "author": "okaryo",
   "license": "MIT",
   "devDependencies": {
-    "@types/chrome": "^0.0.242",
+    "@types/chrome": "^0.0.243",
     "@types/jest": "^29.5.3",
-    "@types/react": "^18.2.17",
+    "@types/react": "^18.2.18",
     "@types/react-dom": "^18.2.7",
     "@typescript-eslint/eslint-plugin": "^6.2.1",
     "@typescript-eslint/parser": "^6.2.1",
