@@ -37,6 +37,10 @@
       "matchPackagePrefixes": ["@types/"]
     },
     {
+      "groupName": "dnd-kit",
+      "matchPackagePrefixes": ["@dnd-kit/"]
+    },
+    {
       "matchUpdateTypes": ["minor", "patch"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true
