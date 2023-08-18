@@ -1,7 +1,7 @@
 {
   "name": "TabTabTab",
-  "version": "2.16.1",
   "description": "This chrome extension makes it easier to manage your open tabs.",
+  "private": true,
   "scripts": {
     "dev": "vite build --watch --mode development",
     "build": "vite build",
