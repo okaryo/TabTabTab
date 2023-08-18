@@ -98,6 +98,15 @@ const TabActionMenu = (props: TabActionMenuProps) => {
       open={isOpenMenu}
       onClose={onCloseMenu}
       anchorEl={anchorElement}
+      slotProps={{
+        paper: () => {
+          return {
+            style: {
+              maxHeight: "calc(100% - 24px)",
+            },
+          };
+        },
+      }}
     >
       {menus}
     </Menu>
