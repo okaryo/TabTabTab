@@ -10,7 +10,6 @@ export type Tab = {
   favIconUrl?: URL;
   highlighted: boolean;
   audible: boolean;
-  pinned: boolean;
   lastActivatedAt?: Date;
 };
 
