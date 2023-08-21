@@ -1,10 +1,10 @@
 import { useCallback, useEffect, useState } from "react";
 
-import { Windows } from "../../../../model/Windows";
+import { Window } from "../../../../model/Window";
 import { getWindows } from "../../../../repository/WindowsRepository";
 
 export const useWindows = () => {
-  const [windows, setState] = useState(Windows.empty());
+  const [windows, setState] = useState([]);
 
   useEffect(() => {
     const initState = async () => {
@@ -14,7 +14,7 @@ export const useWindows = () => {
     initState();
   }, []);
 
-  const setWindows = useCallback((windows: Windows) => {
+  const setWindows = useCallback((windows: Window[]) => {
     setState(windows);
   }, []);
 

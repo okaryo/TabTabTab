@@ -1,14 +1,14 @@
 import { createContext } from "react";
 
-import { Windows } from "../../../../model/Windows";
+import { Window } from "../../../../model/Window";
 
 type WindowsContextType = {
-  windows: Windows;
-  setWindows: React.Dispatch<React.SetStateAction<Windows>>;
+  windows: Window[];
+  setWindows: React.Dispatch<React.SetStateAction<Window[]>>;
 };
 
 export const WindowsContext = createContext<WindowsContextType>({
-  windows: Windows.empty(),
+  windows: [],
   // eslint-disable-next-line @typescript-eslint/no-empty-function
   setWindows: () => {},
 });

@@ -1,5 +1,5 @@
 import { Duration } from "./Duration";
-import { Windows } from "./Windows";
+import { Window, isTabContainer } from "./Window";
 
 export type Tab = {
   id: number;
@@ -30,15 +30,19 @@ export const updateLastActivatedAt = (tab: Tab, lastActivatedAt: Date): Tab => {
 };
 
 export const hasDuplicatedTabs = (
-  windows: Windows,
+  windows: Window[],
   targetTab: Tab,
 ): boolean => {
-  return windows.values.some((window) => {
-    return window.tabs.flatTabs.some(
-      (tab) =>
-        targetTab.id !== tab.id &&
-        targetTab.title === tab.title &&
-        targetTab.url.href === tab.url.href,
-    );
+  const isDupulicated = (a: Tab, b: Tab): boolean => {
+    return a.id !== b.id && a.title === b.title && a.url.href === b.url.href;
+  };
+
+  return windows.some((window) => {
+    return window.children.some((child) => {
+      if (isTabContainer(child)) {
+        return child.children.some((tab) => isDupulicated(tab, targetTab));
+      }
+      return isDupulicated(child, targetTab);
+    });
   });
 };

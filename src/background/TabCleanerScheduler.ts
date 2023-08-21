@@ -1,3 +1,4 @@
+import { flatTabsInWindows } from "../model/Window";
 import { getTabCleanerSetting } from "../repository/SettingsRepository";
 import { removeTab } from "../repository/TabsRepository";
 import { getWindows } from "../repository/WindowsRepository";
@@ -17,7 +18,7 @@ export const activateTabCleanerScheduler = async () => {
     const tabCleanerSetting = await getTabCleanerSetting();
     if (!tabCleanerSetting.isEnabled) return;
 
-    for (const tab of windows.allTabs) {
+    for (const tab of flatTabsInWindows(windows)) {
       if (tabCleanerSetting.shouldCleanUp(tab, new Date())) {
         await removeTab(tab.id);
       }

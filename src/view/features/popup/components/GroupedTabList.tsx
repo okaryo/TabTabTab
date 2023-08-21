@@ -12,7 +12,7 @@ import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
 
-import { TabGroup } from "../../../../model/TabGroup";
+import { TabGroup } from "../../../../model/TabContainer";
 import {
   collapseTabGroup,
   expandTabGroup,
@@ -46,7 +46,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
       <Stack direction="row">
         <Box
           style={{
-            borderRight: `5px solid ${tabGroup.colorCode}`,
+            borderRight: `5px solid ${tabGroup.color.code}`,
             borderRadius: "0 5px 5px 0",
           }}
         />
@@ -70,9 +70,9 @@ const GroupedTabList = (props: GroupedTabListProps) => {
                       style={{
                         display: "inline-block",
                         borderRadius: "8px",
-                        backgroundColor: `${tabGroup.colorCode}`,
+                        backgroundColor: `${tabGroup.color.code}`,
                         color: theme.palette.getContrastText(
-                          tabGroup.colorCode,
+                          tabGroup.color.code,
                         ),
                       }}
                     >
@@ -81,10 +81,10 @@ const GroupedTabList = (props: GroupedTabListProps) => {
                   )}
                   <Chip
                     sx={{
-                      backgroundColor: props.tabGroup.colorCode,
-                      color: theme.palette.getContrastText(tabGroup.colorCode),
+                      backgroundColor: props.tabGroup.color.code,
+                      color: theme.palette.getContrastText(tabGroup.color.code),
                     }}
-                    label={tabGroup.length}
+                    label={tabGroup.children.length}
                     size="small"
                   />
                 </Stack>
@@ -93,7 +93,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
           </Stack>
           <Collapse in={!collapsed} timeout="auto" unmountOnExit>
             <List disablePadding>
-              {tabGroup.tabs.map((tab) => (
+              {tabGroup.children.map((tab) => (
                 <TabItem tab={tab} />
               ))}
             </List>

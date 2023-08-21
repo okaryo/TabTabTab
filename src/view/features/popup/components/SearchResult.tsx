@@ -4,6 +4,7 @@ import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import t from "../../../../i18n/Translations";
+import { findTabsByTitleOrUrl } from "../../../../model/Window";
 import { focusTab } from "../../../../repository/TabsRepository";
 import TabItem from "../components/TabItem";
 import { WindowsContext } from "../contexts/Windows";
@@ -15,7 +16,7 @@ type SearchResultProps = {
 const SearchResult = (props: SearchResultProps) => {
   const { searchText } = props;
   const { windows } = useContext(WindowsContext);
-  const tabs = windows.findTabsByTitleOrUrl(searchText);
+  const tabs = findTabsByTitleOrUrl(windows, searchText);
 
   const [selectedTabIndex, setSelectedTabIndex] = useState(0);
   useEffect(() => {

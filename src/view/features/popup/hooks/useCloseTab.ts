@@ -1,18 +1,19 @@
 import { useCallback, useContext } from "react";
 
 import { removeTab } from "../../../../repository/TabsRepository";
+import { getWindows } from "../../../../repository/WindowsRepository";
 import { WindowsContext } from "../contexts/Windows";
 
 export const useCloseTab = (): ((tabId: number) => Promise<void>) => {
-  const { windows, setWindows } = useContext(WindowsContext);
+  const { setWindows } = useContext(WindowsContext);
 
   const closeTab = useCallback(
     async (tabId: number) => {
       await removeTab(tabId);
-      const newWindows = windows.removeTabBy(tabId);
+      const newWindows = await getWindows();
       setWindows(newWindows);
     },
-    [windows, setWindows],
+    [setWindows],
   );
 
   return closeTab;

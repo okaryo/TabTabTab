@@ -21,10 +21,9 @@ import { CSS } from "@dnd-kit/utilities";
 import List from "@mui/material/List";
 import { useContext, useEffect, useMemo, useState } from "react";
 
-import { PinnedTabs } from "../../../../model/PinnedTabs";
 import { Tab } from "../../../../model/Tab";
-import { TabGroup } from "../../../../model/TabGroup";
-import { Tabs } from "../../../../model/Tabs";
+import { TabGroup, isPinned, isTabGroup } from "../../../../model/TabContainer";
+import { WindowChild, isTabContainer } from "../../../../model/Window";
 import { WindowsContext } from "../contexts/Windows";
 import { useAddTabToTabGroup } from "../hooks/useAddTabToTabGroup";
 import { useMoveTab } from "../hooks/useMoveTab";
@@ -125,46 +124,49 @@ const TabList = (props: TabListProps) => {
   const { selectedWindowIndex } = props;
   const { windows } = useContext(WindowsContext);
 
-  let tabs = Tabs.empty();
+  let tabs: WindowChild[] = [];
   if (selectedWindowIndex === 0) {
-    tabs = windows.focusedWindowTabs;
+    const currentWindow = windows.find((window) => window.focused);
+    tabs = currentWindow ? currentWindow.children : [];
   } else {
-    tabs = windows.unfocusedWindows.values[selectedWindowIndex - 1].tabs;
+    tabs = windows[selectedWindowIndex].children;
   }
 
   const [activeId, setActiveId] = useState<string>(null);
 
-  const nodesFromTabs = (tabs: Tabs): ChildNode[] => {
-    return tabs.map<ChildNode>((tabable) => {
-      if (tabable instanceof PinnedTabs) {
-        return {
-          id: "pinned",
-          type: "pinned",
-          nodes: tabable.tabs.map<TabNode>((tab) => {
-            return {
-              id: tab.id.toString(),
-              type: "tab",
-              tab: tab,
-            };
-          }),
-        };
-      }
-      if (tabable instanceof TabGroup) {
-        return {
-          id: tabable.id.toString(),
-          type: "tabGroup",
-          tabGroup: tabable,
-          nodes: tabable.tabs.map<TabNode>((tab) => {
-            return {
-              id: tab.id.toString(),
-              type: "tab",
-              tab: tab,
-            };
-          }),
-        };
+  const nodesFromTabs = (children: WindowChild[]): ChildNode[] => {
+    return children.map<ChildNode>((child) => {
+      if (isTabContainer(child)) {
+        if (isPinned(child)) {
+          return {
+            id: "pinned",
+            type: "pinned",
+            nodes: child.children.map<TabNode>((tab) => {
+              return {
+                id: tab.id.toString(),
+                type: "tab",
+                tab: tab,
+              };
+            }),
+          };
+        }
+        if (isTabGroup(child)) {
+          return {
+            id: child.id.toString(),
+            type: "tabGroup",
+            tabGroup: child,
+            nodes: child.children.map<TabNode>((tab) => {
+              return {
+                id: tab.id.toString(),
+                type: "tab",
+                tab: tab,
+              };
+            }),
+          };
+        }
       }
 
-      const tab = tabable as Tab;
+      const tab = child as Tab;
       return {
         id: tab.id.toString(),
         type: "tab",
@@ -175,10 +177,13 @@ const TabList = (props: TabListProps) => {
 
   const [nodes, setNodes] = useState(nodesFromTabs(tabs));
   useEffect(() => {
-    const tabs =
-      selectedWindowIndex === 0
-        ? windows.focusedWindowTabs
-        : windows.unfocusedWindows.values[selectedWindowIndex - 1].tabs;
+    let tabs: WindowChild[] = [];
+    if (selectedWindowIndex === 0) {
+      const currentWindow = windows.find((window) => window.focused);
+      tabs = currentWindow ? currentWindow.children : [];
+    } else {
+      tabs = windows[selectedWindowIndex].children;
+    }
     setNodes(nodesFromTabs(tabs));
   }, [windows, selectedWindowIndex]);
 
