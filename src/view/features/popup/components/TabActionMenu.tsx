@@ -17,6 +17,7 @@ import {
   screenshotVisibleArea,
 } from "../../../../repository/TabsRepository";
 import { usePinTab } from "../hooks/usePinTab";
+import { useUnpinTab } from "../hooks/useUnpinTab";
 
 type TabActionMenuProps = {
   tab: Tab;
@@ -35,6 +36,7 @@ const TabActionMenu = (props: TabActionMenuProps) => {
   const { tab, isOpenMenu, anchorElement, onCloseMenu, onMenuActionCompleted } =
     props;
   const pinTab = usePinTab();
+  const unpinTab = useUnpinTab();
 
   const ActionMenu = (props: ActionMenuProps) => {
     const { label, icon, action } = props;
@@ -62,12 +64,22 @@ const TabActionMenu = (props: TabActionMenuProps) => {
       icon={<BookmarkIcon fontSize="small" />}
       action={() => bookmarkTab(tab.title, tab.url.href)}
     />,
-    <ActionMenu
-      key={t.pin}
-      label={t.pin}
-      icon={<PushPinIcon fontSize="small" />}
-      action={() => pinTab(tab)}
-    />,
+    tab.pinned && (
+      <ActionMenu
+        key={t.unpin}
+        label={t.unpin}
+        icon={<PushPinIcon fontSize="small" />}
+        action={() => unpinTab(tab.id)}
+      />
+    ),
+    !tab.pinned && (
+      <ActionMenu
+        key={t.pin}
+        label={t.pin}
+        icon={<PushPinIcon fontSize="small" />}
+        action={() => pinTab(tab.id)}
+      />
+    ),
     tab.highlighted && <Divider key="divider" />,
     tab.highlighted && (
       <ActionMenu

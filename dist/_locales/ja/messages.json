@@ -87,6 +87,10 @@
     "message": "固定",
     "description": ""
   },
+  "unpin": {
+    "message": "固定を解除",
+    "description": ""
+  },
   "screenshot_visible_area": {
     "message": "表示範囲をスクリーンショット",
     "description": ""

@@ -87,6 +87,10 @@
     "message": "Pin",
     "description": ""
   },
+  "unpin": {
+    "message": "Unpin",
+    "description": ""
+  },
   "screenshot_visible_area": {
     "message": "Screenshot Visible Area",
     "description": ""
