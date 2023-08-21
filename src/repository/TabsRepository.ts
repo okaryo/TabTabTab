@@ -46,6 +46,10 @@ export const pinTab = async (tabId: number) => {
   await chrome.tabs.update(tabId, { pinned: true });
 };
 
+export const unpinTab = async (tabId: number) => {
+  await chrome.tabs.update(tabId, { pinned: false });
+};
+
 export const screenshotVisibleArea = (
   windowId: number,
   callback: (dataUrl: string) => void,
