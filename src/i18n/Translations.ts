@@ -78,6 +78,9 @@ class Translations {
   get pin() {
     return chrome.i18n.getMessage("pin");
   }
+  get unpin() {
+    return chrome.i18n.getMessage("unpin");
+  }
   get screenshotVisibleArea() {
     return chrome.i18n.getMessage("screenshot_visible_area");
   }

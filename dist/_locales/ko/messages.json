@@ -87,6 +87,10 @@
     "message": "핀 고정",
     "description": ""
   },
+  "unpin": {
+    "message": "고정 해제",
+    "description": ""
+  },
   "screenshot_visible_area": {
     "message": "보이는 영역 캡쳐",
     "description": ""

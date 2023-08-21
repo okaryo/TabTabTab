@@ -87,6 +87,10 @@
     "message": "Epingler",
     "description": ""
   },
+  "unpin": {
+    "message": "Détacher",
+    "description": ""
+  },
   "screenshot_visible_area": {
     "message": "Zone visible de la capture d'écran",
     "description": ""

@@ -87,6 +87,10 @@
     "message": "Przypnij",
     "description": ""
   },
+  "unpin": {
+    "message": "Odepnij",
+    "description": ""
+  },
   "screenshot_visible_area": {
     "message": "Zrzut Ekranu Widocznego Obszaru",
     "description": ""
