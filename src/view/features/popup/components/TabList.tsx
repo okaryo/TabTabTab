@@ -130,7 +130,10 @@ const TabList = (props: TabListProps) => {
     tabs = currentWindow ? currentWindow.children : [];
   } else {
     const unfocusedWindows = windows.filter((window) => !window.focused);
-    tabs = unfocusedWindows.length > 0 ? unfocusedWindows[selectedWindowIndex - 1].children : [];
+    tabs =
+      unfocusedWindows.length > 0
+        ? unfocusedWindows[selectedWindowIndex - 1].children
+        : [];
   }
 
   const [activeId, setActiveId] = useState<string>(null);
@@ -184,7 +187,10 @@ const TabList = (props: TabListProps) => {
       tabs = currentWindow ? currentWindow.children : [];
     } else {
       const unfocusedWindows = windows.filter((window) => !window.focused);
-      tabs = unfocusedWindows.length > 0 ? unfocusedWindows[selectedWindowIndex - 1].children : [];
+      tabs =
+        unfocusedWindows.length > 0
+          ? unfocusedWindows[selectedWindowIndex - 1].children
+          : [];
     }
     setNodes(nodesFromTabs(tabs));
   }, [windows, selectedWindowIndex]);
