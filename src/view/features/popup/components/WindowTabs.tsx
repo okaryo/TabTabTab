@@ -3,6 +3,7 @@ import Tabs from "@mui/material/Tabs";
 import { Dispatch, useContext, useEffect } from "react";
 
 import t from "../../../../i18n/Translations";
+import { flatTabsInWindow } from "../../../../model/Window";
 import { WindowsContext } from "../contexts/Windows";
 
 import WindowTab from "./WindowTab";
@@ -42,12 +43,14 @@ const WindowTabs = (props: WindowTabsProps) => {
     onSelectIndex(newValue);
   };
 
-  const unfocusedWindows = windows.unfocusedWindows.map((window, index) => {
+  const currentWindow = windows.find((window) => window.focused);
+  const unfocusedWindows = windows.filter((window) => !window.focused);
+  const unfocusedWindowTabs = unfocusedWindows.map((window, index) => {
     return (
       <WindowTab
         key={window.id}
         label={`${t.window}${index + 1}`}
-        tabCount={window.tabs.totalTabCount}
+        tabCount={flatTabsInWindow(window).length ?? 0}
       />
     );
   });
@@ -62,9 +65,9 @@ const WindowTabs = (props: WindowTabsProps) => {
       >
         <WindowTab
           label={t.currentWindow}
-          tabCount={windows.currentWindow?.tabs.totalTabCount ?? 0}
+          tabCount={currentWindow ? flatTabsInWindow(currentWindow).length : 0}
         />
-        {unfocusedWindows}
+        {unfocusedWindowTabs}
       </Tabs>
     </Box>
   );

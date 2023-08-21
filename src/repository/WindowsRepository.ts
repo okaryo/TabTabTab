@@ -1,118 +1,128 @@
 import { GroupColor } from "../model/GroupColor";
-import { Tabs } from "../model/Tabs";
-import { Window } from "../model/Window";
-import { Windows } from "../model/Windows";
+import { isPinned, isTabGroup } from "../model/TabContainer";
+import {
+  Window,
+  findPinned,
+  findTabGroup,
+  isTabContainer,
+  updateLastActivatedAtOfTab,
+} from "../model/Window";
 
 import {
   ChromeSessionStorage,
   LastActivatedAtStoredData,
 } from "./ChromeStorage";
 
-export const getWindows = async (): Promise<Windows> => {
-  const currentWindow = await getCurrentWindow();
-  const unfocusedWindows = await getUnfocusedWindows();
-  const windows = new Windows([currentWindow, ...unfocusedWindows.values]);
-  return applyLastActivatedAtOfTabInWindows(windows);
+export const getWindows = async (): Promise<Window[]> => {
+  const currentWindow = await chrome.windows.getCurrent();
+  return applyLastActivatedAtOfTabInWindows(await windows(currentWindow.id));
 };
 
-const getCurrentWindow = async (): Promise<Window> => {
-  const currentWindow = await chrome.windows.getCurrent({ populate: true });
+const windows = async (currentWindowId: number): Promise<Window[]> => {
+  const windows = await chrome.windows.getAll({ populate: true });
 
-  let parsedTabs = new Tabs([]);
-  for (const tab of currentWindow.tabs) {
-    const parsedTab = {
-      id: tab.id,
-      groupId: tab.groupId,
-      windowId: tab.windowId,
-      title: tab.title,
-      url:
-        tab.url && tab.url !== "" ? new URL(tab.url) : new URL(tab.pendingUrl),
-      favIconUrl:
-        tab.favIconUrl && tab.favIconUrl !== ""
-          ? new URL(tab.favIconUrl)
-          : null,
-      highlighted: tab.highlighted,
-      audible: tab.audible,
-      pinned: tab.pinned,
+  const parsedWindows: Window[] = [];
+  for (const window of windows) {
+    const parsedWindow: Window = {
+      id: window.id,
+      focused: window.id === currentWindowId,
+      state: window.state,
+      type: window.type,
+      children: [],
     };
 
-    if (tab.pinned) {
-      parsedTabs = parsedTabs.addPinnedTab(parsedTab);
-    } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
-      const groupId = tab.groupId;
-      const group = await chrome.tabGroups.get(groupId);
-      const groupColor = new GroupColor(group.color);
-      parsedTabs = parsedTabs.addGroupedTabBy(
-        groupId,
-        group.title,
-        groupColor,
-        group.collapsed,
-        parsedTab,
-      );
-    } else {
-      parsedTabs = parsedTabs.add(parsedTab);
+    for (const tab of window.tabs) {
+      const parsedTab = {
+        id: tab.id,
+        groupId: tab.groupId,
+        windowId: tab.windowId,
+        title: tab.title,
+        url:
+          tab.url && tab.url !== ""
+            ? new URL(tab.url)
+            : new URL(tab.pendingUrl),
+        favIconUrl:
+          tab.favIconUrl && tab.favIconUrl !== ""
+            ? new URL(tab.favIconUrl)
+            : null,
+        highlighted: tab.highlighted,
+        audible: tab.audible,
+        pinned: tab.pinned,
+      };
+
+      if (tab.pinned) {
+        const pinned = findPinned(parsedWindow);
+        if (pinned) {
+          parsedWindow.children = parsedWindow.children.map((child) => {
+            if (isTabContainer(child) && isPinned(child)) {
+              return {
+                ...child,
+                children: [...child.children, parsedTab],
+              };
+            }
+            return child;
+          });
+        } else {
+          const newPinned = {
+            id: "pinned",
+            children: [parsedTab],
+          };
+          parsedWindow.children.push(newPinned);
+        }
+      } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
+        const groupId = tab.groupId;
+        const tabGroup = findTabGroup(parsedWindow, groupId);
+        if (tabGroup) {
+          parsedWindow.children = parsedWindow.children.map((child) => {
+            if (
+              isTabContainer(child) &&
+              isTabGroup(child) &&
+              child.id === groupId
+            ) {
+              return {
+                ...child,
+                children: [...child.children, parsedTab],
+              };
+            }
+            return child;
+          });
+        } else {
+          const group = await chrome.tabGroups.get(groupId);
+          const groupColor = new GroupColor(group.color);
+          const newTabGroup = {
+            id: groupId,
+            name: group.title,
+            color: groupColor,
+            collapsed: group.collapsed,
+            children: [parsedTab],
+          };
+          parsedWindow.children.push(newTabGroup);
+        }
+      } else {
+        parsedWindow.children.push(parsedTab);
+      }
     }
+
+    parsedWindows.push(parsedWindow);
   }
 
-  return { id: currentWindow.id, tabs: parsedTabs, focused: true };
-};
-
-const getUnfocusedWindows = async (): Promise<Windows> => {
-  const unfocusedWindowTabs = await chrome.tabs.query({ currentWindow: false });
-
-  let windows = Windows.empty();
-  for (const tab of unfocusedWindowTabs) {
-    const windowId = tab.windowId;
-    const newTab = {
-      id: tab.id,
-      groupId: tab.groupId,
-      windowId,
-      title: tab.title,
-      url:
-        tab.url && tab.url !== "" ? new URL(tab.url) : new URL(tab.pendingUrl),
-      favIconUrl:
-        tab.favIconUrl && tab.favIconUrl !== ""
-          ? new URL(tab.favIconUrl)
-          : null,
-      highlighted: tab.highlighted,
-      audible: tab.audible,
-      pinned: tab.pinned,
-    };
-
-    if (tab.pinned) {
-      windows = windows.addPinnedTab(windowId, false, newTab);
-    } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
-      const groupId = tab.groupId;
-      const group = await chrome.tabGroups.get(groupId);
-      const groupColor = new GroupColor(group.color);
-      windows = windows.addGroupedTab(
-        windowId,
-        false,
-        newTab,
-        groupId,
-        group.title,
-        group.collapsed,
-        groupColor,
-      );
-    } else {
-      windows = windows.addTab(windowId, false, newTab);
-    }
-  }
-  return windows;
+  return parsedWindows;
 };
 
 const applyLastActivatedAtOfTabInWindows = async (
-  windows: Windows,
-): Promise<Windows> => {
-  let newWindows = windows;
+  windows: Window[],
+): Promise<Window[]> => {
+  let newWindows = [...windows];
   const { last_activated_at } = (await chrome.storage.session.get(
     ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
   )) as LastActivatedAtStoredData;
-  if (!last_activated_at || Object.keys(last_activated_at).length === 0)
-    return windows;
+  if (!last_activated_at || Object.keys(last_activated_at).length === 0) {
+    return newWindows;
+  }
 
   for (const [tabId, dateString] of Object.entries(last_activated_at)) {
-    newWindows = newWindows.updateLastActivatedAtOfTabBy(
+    newWindows = updateLastActivatedAtOfTab(
+      newWindows,
       Number(tabId),
       new Date(dateString),
     );
