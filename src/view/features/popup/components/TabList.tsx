@@ -129,7 +129,8 @@ const TabList = (props: TabListProps) => {
     const currentWindow = windows.find((window) => window.focused);
     tabs = currentWindow ? currentWindow.children : [];
   } else {
-    tabs = windows[selectedWindowIndex].children;
+    const unfocusedWindows = windows.filter((window) => !window.focused);
+    tabs = unfocusedWindows.length > 0 ? unfocusedWindows[selectedWindowIndex - 1].children : [];
   }
 
   const [activeId, setActiveId] = useState<string>(null);
@@ -182,7 +183,8 @@ const TabList = (props: TabListProps) => {
       const currentWindow = windows.find((window) => window.focused);
       tabs = currentWindow ? currentWindow.children : [];
     } else {
-      tabs = windows[selectedWindowIndex].children;
+      const unfocusedWindows = windows.filter((window) => !window.focused);
+      tabs = unfocusedWindows.length > 0 ? unfocusedWindows[selectedWindowIndex - 1].children : [];
     }
     setNodes(nodesFromTabs(tabs));
   }, [windows, selectedWindowIndex]);
@@ -268,7 +270,7 @@ const TabList = (props: TabListProps) => {
     if (!destCurrentData) {
       if (dest.node.type === "pinned") {
         const sourceTab = (source.node as TabNode).tab;
-        pinTab(sourceTab);
+        pinTab(sourceTab.id);
       }
       if (dest.node.type === "tabGroup") {
         const sourceTab = (source.node as TabNode).tab;
@@ -307,7 +309,7 @@ const TabList = (props: TabListProps) => {
         }
         if (destElementData.containerId === "pinned") {
           const sourceTab = (source.node as TabNode).tab;
-          pinTab(sourceTab);
+          pinTab(sourceTab.id);
         }
         if (destElementData.containerId === "tabGroup") {
           const sourceTab = (source.node as TabNode).tab;
@@ -331,7 +333,7 @@ const TabList = (props: TabListProps) => {
           moveTabOutOfGroup((source.node as TabNode).tab.id, dest.indexInAll);
         }
         if (destElementData.containerId === "pinned") {
-          pinTab((source.node as TabNode).tab);
+          pinTab((source.node as TabNode).tab.id);
         }
         if (destElementData.containerId === "tabGroup") {
           addTabToTabGroup(
