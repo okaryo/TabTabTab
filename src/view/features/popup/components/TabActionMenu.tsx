@@ -17,7 +17,7 @@ import {
   screenshotVisibleArea,
 } from "../../../../repository/TabsRepository";
 import { usePinTab } from "../hooks/usePinTab";
-import { useUnpinTab } from "../hooks/useUnpintab";
+import { useUnpinTab } from "../hooks/useUnpinTab";
 
 type TabActionMenuProps = {
   tab: Tab;
