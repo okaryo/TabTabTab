@@ -69,7 +69,7 @@ const TabActionMenu = (props: TabActionMenuProps) => {
         key={t.unpin}
         label={t.unpin}
         icon={<PushPinIcon fontSize="small" />}
-        action={() => unpinTab(tab)}
+        action={() => unpinTab(tab.id)}
       />
     ),
     !tab.pinned && (
@@ -77,7 +77,7 @@ const TabActionMenu = (props: TabActionMenuProps) => {
         key={t.pin}
         label={t.pin}
         icon={<PushPinIcon fontSize="small" />}
-        action={() => pinTab(tab)}
+        action={() => pinTab(tab.id)}
       />
     ),
     tab.highlighted && <Divider key="divider" />,
