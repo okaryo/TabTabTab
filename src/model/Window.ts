@@ -4,6 +4,7 @@ import {
   TabContainer,
   TabGroup,
   isPinned,
+  isTabContainer,
   isTabGroup,
 } from "./TabContainer";
 
@@ -111,12 +112,6 @@ export const findTabsByTitleOrUrl = (
       tab.url.href.toLowerCase().includes(value)
     );
   });
-};
-
-export const isTabContainer = (
-  value: TabContainer | Tab,
-): value is TabContainer => {
-  return "children" in value;
 };
 
 export const hasDuplicatedTabs = (

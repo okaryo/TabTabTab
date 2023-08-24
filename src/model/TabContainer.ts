@@ -16,6 +16,12 @@ export type TabGroup = TabContainer & {
   collapsed: boolean;
 };
 
+export const isTabContainer = (
+  value: TabContainer | Tab,
+): value is TabContainer => {
+  return "id" in value && "children" in value;
+};
+
 export const isPinned = (container: TabContainer): container is Pinned => {
   return (
     "children" in container && "id" in container && container.id === "pinned"
