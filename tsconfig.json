@@ -10,7 +10,7 @@
     "outDir": "dist/js",
     "sourceMap": true,
     "target": "es5",
-    "types": ["vitest/globals"]
+    "types": ["chrome", "react", "react-dom", "vitest/globals"]
   },
   "include": ["src/**/*", "test/**/*"],
   "exclude": ["node_modules"]
