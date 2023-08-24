@@ -1,5 +1,4 @@
 import { GroupColor } from "../../src/model/GroupColor";
-import { describe, expect, test } from "vitest";
 
 describe("#code", () => {
   describe("when color is grey", () => {
