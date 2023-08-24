@@ -1,75 +1,28 @@
+/* eslint @typescript-eslint/no-unsafe-argument: 0, @typescript-eslint/no-explicit-any: 0 */
 import { GroupColor } from "../../src/model/GroupColor";
 
 describe("#code", () => {
-  describe("when color is grey", () => {
-    test("should return corresponding color code", () => {
-      const actual = new GroupColor("grey").code;
-      const expected = "#BDC1C6";
-      expect(actual).toBe(expected);
-    });
-  });
+  it.each([
+    { color: "grey", expected: "#BDC1C6" },
+    { color: "blue", expected: "#8AB4F8" },
+    { color: "red", expected: "#F28B82" },
+    { color: "yellow", expected: "#FDD663" },
+    { color: "green", expected: "#81C995" },
+    { color: "pink", expected: "#F98BCB" },
+    { color: "purple", expected: "#D7AEFB" },
+    { color: "cyan", expected: "#78D9EC" },
+    { color: "orange", expected: "#FBAD70" },
+    { color: "invalid", expected: "error", isError: true },
+  ])(
+    `case %#: when color is $color, it should return $expected`,
+    ({ color, expected, isError }) => {
+      if (isError) {
+        expect(() => new GroupColor(color as any)).toThrowError();
+        return;
+      }
 
-  describe("when color is blue", () => {
-    test("should return corresponding color code", () => {
-      const actual = new GroupColor("blue").code;
-      const expected = "#8AB4F8";
+      const actual = new GroupColor(color as any).code;
       expect(actual).toBe(expected);
-    });
-  });
-
-  describe("when color is red", () => {
-    test("should return corresponding color code", () => {
-      const actual = new GroupColor("red").code;
-      const expected = "#F28B82";
-      expect(actual).toBe(expected);
-    });
-  });
-
-  describe("when color is yellow", () => {
-    test("should return corresponding color code", () => {
-      const actual = new GroupColor("yellow").code;
-      const expected = "#FDD663";
-      expect(actual).toBe(expected);
-    });
-  });
-
-  describe("when color is green", () => {
-    test("should return corresponding color code", () => {
-      const actual = new GroupColor("green").code;
-      const expected = "#81C995";
-      expect(actual).toBe(expected);
-    });
-  });
-
-  describe("when color is pink", () => {
-    test("should return corresponding color code", () => {
-      const actual = new GroupColor("pink").code;
-      const expected = "#F98BCB";
-      expect(actual).toBe(expected);
-    });
-  });
-
-  describe("when color is purple", () => {
-    test("should return corresponding color code", () => {
-      const actual = new GroupColor("purple").code;
-      const expected = "#D7AEFB";
-      expect(actual).toBe(expected);
-    });
-  });
-
-  describe("when color is cyan", () => {
-    test("should return corresponding color code", () => {
-      const actual = new GroupColor("cyan").code;
-      const expected = "#78D9EC";
-      expect(actual).toBe(expected);
-    });
-  });
-
-  describe("when color is orange", () => {
-    test("should return corresponding color code", () => {
-      const actual = new GroupColor("orange").code;
-      const expected = "#FBAD70";
-      expect(actual).toBe(expected);
-    });
-  });
+    },
+  );
 });

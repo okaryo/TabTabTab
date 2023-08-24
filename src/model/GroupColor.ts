@@ -10,7 +10,24 @@ type ColorType =
   | "orange";
 
 export class GroupColor {
-  constructor(private _color: ColorType) {}
+  constructor(private _color: ColorType) {
+    if (
+      ![
+        "grey",
+        "blue",
+        "red",
+        "yellow",
+        "green",
+        "pink",
+        "purple",
+        "cyan",
+        "orange",
+      ].includes(_color)
+    ) {
+      throw new Error("invalid color");
+    }
+    this._color = _color;
+  }
 
   get code(): string {
     switch (this._color) {
