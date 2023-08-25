@@ -20,7 +20,7 @@ TabTabTab is a Chrome extension that supports your browsing by improving tab man
 * Automatic cleanup of tabs that haven't been used for a certain period (toggle on/off and set duration from the settings page)
 * Dark mode
 
-### ScreenShot
+### ScreenShots
 
 ![ScreenShot1](https://github.com/okaryo/TabTabTab/assets/44517313/060de80f-fe48-4ae8-9474-3511da33aac4)
 ![ScreenShot2](https://github.com/okaryo/TabTabTab/assets/44517313/42a6db7f-5795-4f32-bf52-44dbd5a2e4bb)
