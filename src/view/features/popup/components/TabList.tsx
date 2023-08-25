@@ -22,8 +22,13 @@ import List from "@mui/material/List";
 import { useContext, useEffect, useMemo, useState } from "react";
 
 import { Tab } from "../../../../model/Tab";
-import { TabGroup, isPinned, isTabGroup } from "../../../../model/TabContainer";
-import { WindowChild, isTabContainer } from "../../../../model/Window";
+import {
+  TabGroup,
+  isPinned,
+  isTabContainer,
+  isTabGroup,
+} from "../../../../model/TabContainer";
+import { WindowChild } from "../../../../model/Window";
 import { WindowsContext } from "../contexts/Windows";
 import { useAddTabToTabGroup } from "../hooks/useAddTabToTabGroup";
 import { useMoveTab } from "../hooks/useMoveTab";

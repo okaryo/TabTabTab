@@ -4,6 +4,7 @@ import {
   TabContainer,
   TabGroup,
   isPinned,
+  isTabContainer,
   isTabGroup,
 } from "./TabContainer";
 
@@ -113,8 +114,20 @@ export const findTabsByTitleOrUrl = (
   });
 };
 
-export const isTabContainer = (
-  value: TabContainer | Tab,
-): value is TabContainer => {
-  return "children" in value;
+export const hasDuplicatedTabs = (
+  windows: Window[],
+  targetTab: Tab,
+): boolean => {
+  const isDupulicated = (a: Tab, b: Tab): boolean => {
+    return a.id !== b.id && a.title === b.title && a.url.href === b.url.href;
+  };
+
+  return windows.some((window) => {
+    return window.children.some((child) => {
+      if (isTabContainer(child)) {
+        return child.children.some((tab) => isDupulicated(tab, targetTab));
+      }
+      return isDupulicated(child, targetTab);
+    });
+  });
 };

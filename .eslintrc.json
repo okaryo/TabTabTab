@@ -1,25 +1,25 @@
-module.exports = {
-  root: true,
-  env: {
-    es6: true,
-    node: true,
+{
+  "root": true,
+  "env": {
+    "es6": true,
+    "node": true
   },
-  parser: "@typescript-eslint/parser",
-  plugins: [
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
     "@typescript-eslint",
     "autofix",
-    "import",
+    "import"
   ],
-  extends: [
+  "extends": [
     "eslint:recommended",
     "plugin:@typescript-eslint/recommended",
     "plugin:@typescript-eslint/recommended-requiring-type-checking",
-    "plugin:react-hooks/recommended",
+    "plugin:react-hooks/recommended"
   ],
-  parserOptions: {
-    project: "./tsconfig.json",
+  "parserOptions": {
+    "project": "./tsconfig.json"
   },
-  rules: {
+  "rules": {
     "no-trailing-spaces": "error",
     "no-multi-spaces": "error",
     "no-console": "error",
@@ -30,8 +30,11 @@ module.exports = {
         "groups": ["builtin", "external", "internal", "parent", "sibling", "index", "object", "type"],
         "newlines-between": "always",
         "pathGroupsExcludedImportTypes": ["builtin"],
-        "alphabetize": { "order": "asc", "caseInsensitive": true },
+        "alphabetize": {
+          "order": "asc",
+          "caseInsensitive": true
+        }
       }
     ]
-  },
+  }
 }

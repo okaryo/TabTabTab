@@ -12,11 +12,8 @@ import Typography from "@mui/material/Typography";
 import { forwardRef, useContext, useEffect, useState } from "react";
 
 import t from "../../../../i18n/Translations";
-import {
-  Tab,
-  durationSinceLastActivatedAt,
-  hasDuplicatedTabs,
-} from "../../../../model/Tab";
+import { Tab, durationSinceLastActivatedAt } from "../../../../model/Tab";
+import { hasDuplicatedTabs } from "../../../../model/Window";
 import { focusTab } from "../../../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/Windows";
 import { useCloseTab } from "../hooks/useCloseTab";

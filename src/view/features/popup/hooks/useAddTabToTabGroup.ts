@@ -12,7 +12,6 @@ export const useAddTabToTabGroup = (): ((
 
   const callback = useCallback(
     async (tabId: number, groupId: number) => {
-      await chrome.tabs.group({ tabIds: tabId, groupId });
       await addTabToTabGroup(tabId, groupId);
       const newWindows = await getWindows();
       setWindows(newWindows);

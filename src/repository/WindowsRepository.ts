@@ -1,10 +1,9 @@
 import { GroupColor } from "../model/GroupColor";
-import { isPinned, isTabGroup } from "../model/TabContainer";
+import { isPinned, isTabContainer, isTabGroup } from "../model/TabContainer";
 import {
   Window,
   findPinned,
   findTabGroup,
-  isTabContainer,
   updateLastActivatedAtOfTab,
 } from "../model/Window";
 
