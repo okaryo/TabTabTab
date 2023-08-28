@@ -1,5 +1,5 @@
 import { GroupColor } from "../model/GroupColor";
-import { isPinned, isTabContainer, isTabGroup } from "../model/TabContainer";
+import { Pinned, isPinned, isTabGroup } from "../model/TabContainer";
 import {
   Window,
   findPinned,
@@ -53,7 +53,7 @@ const windows = async (currentWindowId: number): Promise<Window[]> => {
         const pinned = findPinned(parsedWindow);
         if (pinned) {
           parsedWindow.children = parsedWindow.children.map((child) => {
-            if (isTabContainer(child) && isPinned(child)) {
+            if (isPinned(child)) {
               return {
                 ...child,
                 children: [...child.children, parsedTab],
@@ -62,7 +62,7 @@ const windows = async (currentWindowId: number): Promise<Window[]> => {
             return child;
           });
         } else {
-          const newPinned = {
+          const newPinned: Pinned = {
             id: "pinned",
             children: [parsedTab],
           };
@@ -73,11 +73,7 @@ const windows = async (currentWindowId: number): Promise<Window[]> => {
         const tabGroup = findTabGroup(parsedWindow, groupId);
         if (tabGroup) {
           parsedWindow.children = parsedWindow.children.map((child) => {
-            if (
-              isTabContainer(child) &&
-              isTabGroup(child) &&
-              child.id === groupId
-            ) {
+            if (isTabGroup(child) && child.id === groupId) {
               return {
                 ...child,
                 children: [...child.children, parsedTab],

@@ -1,7 +1,8 @@
 import { Duration } from "./Duration";
 
+export type TabId = number;
 export type Tab = {
-  id: number;
+  id: TabId;
   groupId?: number;
   windowId?: number;
   title: string;

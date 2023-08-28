@@ -19,16 +19,21 @@ import {
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import List from "@mui/material/List";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 
 import { Tab } from "../../../../model/Tab";
 import {
   TabGroup,
   isPinned,
-  isTabContainer,
+  isTab,
   isTabGroup,
 } from "../../../../model/TabContainer";
-import { WindowChild } from "../../../../model/Window";
+import {
+  Window,
+  WindowChild,
+  findWindowChild,
+  indexOfWindowChild,
+} from "../../../../model/Window";
 import { WindowsContext } from "../contexts/Windows";
 import { useAddTabToTabGroup } from "../hooks/useAddTabToTabGroup";
 import { useMoveTab } from "../hooks/useMoveTab";
@@ -39,29 +44,6 @@ import { useMoveTabOutOfGroup } from "../hooks/useTabOutOfTabGroup";
 import GroupedTabList from "./GroupedTabList";
 import PinnedTabList from "./PinnedTabList";
 import TabItem from "./TabItem";
-
-type ContainerNodeType = "root" | "pinned" | "tabGroup";
-// type DroppableNodeType = "root" | "tabGroup";
-type NodeType = ContainerNodeType | "tab";
-type Node<T extends NodeType> = {
-  id: string;
-  type: T;
-};
-type TabNode = Node<"tab"> & {
-  tab: Tab;
-};
-type ContainerNode<
-  T extends ContainerNodeType,
-  U extends ChildNode,
-> = Node<T> & {
-  nodes: U[];
-};
-type PinnedNode = ContainerNode<"pinned", TabNode>;
-type TabGroupNode = ContainerNode<"tabGroup", TabNode> & {
-  tabGroup: TabGroup;
-};
-type ChildNode = PinnedNode | TabGroupNode | TabNode;
-type RootNode = ContainerNode<"root", ChildNode>;
 
 type TabListProps = {
   selectedWindowIndex: number;
@@ -95,151 +77,36 @@ export const SortableItem = (props: SortableItemProps) => {
   );
 };
 
-export const findNodeById = (
-  id: string,
-  nodes: Node<NodeType>[],
-): { node: Node<NodeType>; indexInAll: number } | null => {
-  let indexInAll = 0;
-  for (const node of nodes) {
-    if (node.id === id) {
-      return { node, indexInAll };
-    }
-    if (isContainerNode(node)) {
-      for (const childNode of node.nodes) {
-        if (childNode.id === id) {
-          return { node: childNode, indexInAll };
-        }
-        indexInAll++;
-      }
-    }
-
-    if (!isContainerNode(node)) indexInAll++;
+const convertToElement = (child: WindowChild) => {
+  if (isPinned(child)) {
+    return <PinnedTabList tabs={child.children} />;
+  }
+  if (isTabGroup(child)) {
+    return <GroupedTabList tabGroup={child} />;
   }
 
-  return null;
+  const tab = child as Tab;
+  return (
+    <SortableItem key={tab.id} id={tab.id.toString()}>
+      <TabItem tab={tab} />
+    </SortableItem>
+  );
 };
 
-export const isContainerNode = (
-  node: Node<NodeType>,
-): node is ContainerNode<ContainerNodeType, ChildNode> => {
-  return ["root", "pinned", "tabGroup"].includes(node.type);
+const selectedWindow = (windows: Window[], selectedIndex: number): Window => {
+  if (selectedIndex === 0) {
+    return windows.find((window) => window.focused);
+  } else {
+    return windows.filter((window) => !window.focused)[selectedIndex - 1];
+  }
 };
 
 const TabList = (props: TabListProps) => {
   const { selectedWindowIndex } = props;
   const { windows } = useContext(WindowsContext);
-
-  let tabs: WindowChild[] = [];
-  if (selectedWindowIndex === 0) {
-    const currentWindow = windows.find((window) => window.focused);
-    tabs = currentWindow ? currentWindow.children : [];
-  } else {
-    const unfocusedWindows = windows.filter((window) => !window.focused);
-    tabs =
-      unfocusedWindows.length > 0
-        ? unfocusedWindows[selectedWindowIndex - 1].children
-        : [];
-  }
+  const window = selectedWindow(windows, selectedWindowIndex);
 
   const [activeId, setActiveId] = useState<string>(null);
-
-  const nodesFromTabs = (children: WindowChild[]): ChildNode[] => {
-    return children.map<ChildNode>((child) => {
-      if (isTabContainer(child)) {
-        if (isPinned(child)) {
-          return {
-            id: "pinned",
-            type: "pinned",
-            nodes: child.children.map<TabNode>((tab) => {
-              return {
-                id: tab.id.toString(),
-                type: "tab",
-                tab: tab,
-              };
-            }),
-          };
-        }
-        if (isTabGroup(child)) {
-          return {
-            id: child.id.toString(),
-            type: "tabGroup",
-            tabGroup: child,
-            nodes: child.children.map<TabNode>((tab) => {
-              return {
-                id: tab.id.toString(),
-                type: "tab",
-                tab: tab,
-              };
-            }),
-          };
-        }
-      }
-
-      const tab = child as Tab;
-      return {
-        id: tab.id.toString(),
-        type: "tab",
-        tab: tab,
-      };
-    });
-  };
-
-  const [nodes, setNodes] = useState(nodesFromTabs(tabs));
-  useEffect(() => {
-    let tabs: WindowChild[] = [];
-    if (selectedWindowIndex === 0) {
-      const currentWindow = windows.find((window) => window.focused);
-      tabs = currentWindow ? currentWindow.children : [];
-    } else {
-      const unfocusedWindows = windows.filter((window) => !window.focused);
-      tabs =
-        unfocusedWindows.length > 0
-          ? unfocusedWindows[selectedWindowIndex - 1].children
-          : [];
-    }
-    setNodes(nodesFromTabs(tabs));
-  }, [windows, selectedWindowIndex]);
-
-  const rootNode: RootNode = {
-    id: "root",
-    type: "root",
-    nodes: nodes,
-  };
-
-  const convertNodeToElement = (node: Node<NodeType>) => {
-    if (node.type === "root") {
-      const rootNode = node as RootNode;
-      const children = rootNode.nodes.map((childNode) => {
-        return convertNodeToElement(childNode);
-      });
-      return (
-        <SortableContext
-          id="root"
-          items={rootNode.nodes.map((node) => node.id.toString())}
-          strategy={verticalListSortingStrategy}
-        >
-          {children}
-        </SortableContext>
-      );
-    }
-
-    if (node.type === "pinned") {
-      const pinnedNode = node as PinnedNode;
-      return <PinnedTabList tabs={pinnedNode.nodes.map((node) => node.tab)} />;
-    }
-
-    if (node.type === "tabGroup") {
-      const tabGroupNode = node as TabGroupNode;
-      return <GroupedTabList tabGroup={tabGroupNode.tabGroup} />;
-    }
-
-    const tabNode = node as TabNode;
-    return (
-      <SortableItem key={tabNode.id} id={tabNode.id.toString()}>
-        <TabItem tab={tabNode.tab} />
-      </SortableItem>
-    );
-  };
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -273,84 +140,86 @@ const TabList = (props: TabListProps) => {
 
     if (!over) return;
 
-    const source = findNodeById(active.id.toString(), nodes);
-    const dest = findNodeById(over.id.toString(), nodes);
+    const source = findWindowChild(
+      window,
+      active.id === "pinned" ? active.id : Number(active.id),
+    );
+    const dest = findWindowChild(
+      window,
+      over.id === "pinned" ? over.id : Number(over.id),
+    );
     if (!source || !dest) return;
 
-    const destCurrentData = over.data.current;
-    if (!destCurrentData) {
-      if (dest.node.type === "pinned") {
-        const sourceTab = (source.node as TabNode).tab;
-        pinTab(sourceTab.id);
-      }
-      if (dest.node.type === "tabGroup") {
-        const sourceTab = (source.node as TabNode).tab;
-        const destTabGroup = (dest.node as TabGroupNode).tabGroup;
-        addTabToTabGroup(sourceTab.id, destTabGroup.id);
-      }
+    const sourceData = (active.data.current as SortableData).sortable;
+    const destData = (over.data.current as SortableData).sortable;
 
-      return;
-    }
+    const sourceIsInRoot = sourceData.containerId === "root";
+    const sourceIsInPinned = sourceData.containerId === "pinned";
+    const sourceIsInTabGroup =
+      findWindowChild(window, Number(sourceData.containerId)) &&
+      isTabGroup(findWindowChild(window, Number(sourceData.containerId)));
+    const destIsInRoot = destData.containerId === "root";
+    const destIsInPinned = destData.containerId === "pinned";
+    const destIsInTabGroup =
+      findWindowChild(window, Number(destData.containerId)) &&
+      isTabGroup(findWindowChild(window, Number(destData.containerId)));
 
-    const sourceElementData = (active.data.current as SortableData).sortable;
-    const destElementData = (over.data.current as SortableData).sortable;
-
-    // FIXME: refactor codes
-    if (source.node.type === "tabGroup") {
-      if (destElementData.containerId === "root") {
-        const currentIndex = source.indexInAll;
-        const tabGroupNode = source.node as TabGroupNode;
+    if (isTabGroup(source)) {
+      if (destIsInRoot) {
+        const currentIndex = indexOfWindowChild(window, source.id);
+        const destIndex = indexOfWindowChild(window, dest.id);
         const targetIndex =
-          currentIndex < dest.indexInAll
-            ? dest.indexInAll - tabGroupNode.nodes.length + 1
-            : dest.indexInAll;
-        moveGroupTab(tabGroupNode.tabGroup.id, targetIndex);
+          currentIndex < destIndex
+            ? destIndex - source.children.length + 1
+            : destIndex;
+        moveGroupTab(source.id, targetIndex);
       }
     }
 
-    if (source.node.type === "tab") {
-      if (sourceElementData.containerId === "root") {
-        if (destElementData.containerId === "root") {
-          const currentIndex = source.indexInAll;
+    if (isTab(source)) {
+      if (sourceIsInRoot) {
+        if (destIsInRoot) {
+          const currentIndex = indexOfWindowChild(window, source.id);
           const targetIndex =
-            currentIndex < dest.indexInAll && dest.node.type === "tabGroup"
-              ? dest.indexInAll + (dest.node as TabGroupNode).nodes.length - 1
-              : dest.indexInAll;
-          moveTab((source.node as TabNode).tab.id, targetIndex);
+            currentIndex < indexOfWindowChild(window, dest.id) &&
+            isTabGroup(dest)
+              ? indexOfWindowChild(window, dest.id) + dest.children.length - 1
+              : indexOfWindowChild(window, dest.id);
+          moveTab(source.id, targetIndex);
         }
-        if (destElementData.containerId === "pinned") {
-          const sourceTab = (source.node as TabNode).tab;
-          pinTab(sourceTab.id);
+        if (destIsInPinned) {
+          pinTab(source.id);
         }
-        if (destElementData.containerId === "tabGroup") {
-          const sourceTab = (source.node as TabNode).tab;
-          const destTabGroup = (dest.node as TabGroupNode).tabGroup;
-          addTabToTabGroup(sourceTab.id, destTabGroup.id);
-        }
-      }
-      if (sourceElementData.containerId === "pinned") {
-        if (destElementData.containerId === "root") {
-          moveTab((source.node as TabNode).tab.id, dest.indexInAll);
-        }
-        if (destElementData.containerId === "pinned") {
-          moveTab((source.node as TabNode).tab.id, dest.indexInAll);
-        }
-        if (destElementData.containerId === "tabGroup") {
-          moveTab((source.node as TabNode).tab.id, dest.indexInAll);
+        if (destIsInTabGroup) {
+          const destTabGroup = findWindowChild(
+            window,
+            Number(destData.containerId),
+          ) as TabGroup;
+          addTabToTabGroup(source.id, destTabGroup.id);
         }
       }
-      if (sourceElementData.containerId === "tabGroup") {
-        if (destElementData.containerId === "root") {
-          moveTabOutOfGroup((source.node as TabNode).tab.id, dest.indexInAll);
+
+      if (sourceIsInPinned) {
+        if (destIsInRoot) {
+          moveTab(source.id, indexOfWindowChild(window, dest.id));
         }
-        if (destElementData.containerId === "pinned") {
-          pinTab((source.node as TabNode).tab.id);
+        if (destIsInPinned) {
+          moveTab(source.id, indexOfWindowChild(window, dest.id));
         }
-        if (destElementData.containerId === "tabGroup") {
-          addTabToTabGroup(
-            (source.node as TabNode).tab.id,
-            (dest.node as TabGroupNode).tabGroup.id,
-          );
+        if (destIsInTabGroup) {
+          moveTab(source.id, indexOfWindowChild(window, dest.id));
+        }
+      }
+
+      if (sourceIsInTabGroup) {
+        if (destIsInRoot) {
+          moveTabOutOfGroup(source.id, indexOfWindowChild(window, dest.id));
+        }
+        if (destIsInPinned) {
+          pinTab(source.id);
+        }
+        if (destIsInTabGroup) {
+          addTabToTabGroup(source.id, Number(destData.containerId));
         }
       }
     }
@@ -361,11 +230,14 @@ const TabList = (props: TabListProps) => {
   const getDragOverlay = useMemo(() => {
     if (!activeId) return null;
 
-    const source = findNodeById(activeId, nodes);
+    const source = findWindowChild(
+      window,
+      activeId === "pinned" ? activeId : Number(activeId),
+    );
     if (!source) return null;
 
-    return convertNodeToElement(source.node);
-  }, [activeId, nodes, convertNodeToElement]);
+    return convertToElement(source);
+  }, [activeId]);
 
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
@@ -375,8 +247,18 @@ const TabList = (props: TabListProps) => {
         onDragStart={handleOnDragStart}
         onDragEnd={handleOnDragEnd}
       >
-        {convertNodeToElement(rootNode)}
-        <DragOverlay>{getDragOverlay}</DragOverlay>
+        {window && (
+          <>
+            <SortableContext
+              id="root"
+              items={window.children.map((child) => child.id.toString())}
+              strategy={verticalListSortingStrategy}
+            >
+              {window.children.map((child) => convertToElement(child))}
+            </SortableContext>
+            <DragOverlay>{getDragOverlay}</DragOverlay>
+          </>
+        )}
       </DndContext>
     </List>
   );
