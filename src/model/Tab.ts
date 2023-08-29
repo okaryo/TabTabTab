@@ -22,10 +22,3 @@ export const durationSinceLastActivatedAt = (tab: Tab): Duration => {
     milliseconds: currentTime.getTime() - tab.lastActivatedAt.getTime(),
   });
 };
-
-export const updateLastActivatedAt = (tab: Tab, lastActivatedAt: Date): Tab => {
-  return {
-    ...tab,
-    lastActivatedAt,
-  };
-};
