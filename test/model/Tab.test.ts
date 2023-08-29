@@ -4,6 +4,7 @@ import {
   durationSinceLastActivatedAt,
   updateLastActivatedAt,
 } from "../../src/model/Tab";
+import { mockTab } from "../factory/TabFactory";
 
 describe("#durationSinceLastActivatedAt", () => {
   describe("when lastActivatedAt is present", () => {
@@ -61,15 +62,7 @@ describe("#durationSinceLastActivatedAt", () => {
 
   describe("when lastActivatedAt is invalid", () => {
     it("returns zero when lastActivatedAt is undefined", () => {
-      const tab: Tab = {
-        id: 1,
-        title: "title",
-        url: new URL("https://example.com"),
-        highlighted: false,
-        audible: false,
-        pinned: false,
-      };
-
+      const tab: Tab = mockTab({ lastActivatedAt: undefined });
       const actual = durationSinceLastActivatedAt(tab);
 
       expect(actual).toEqual(Duration.zero());
@@ -80,17 +73,8 @@ describe("#durationSinceLastActivatedAt", () => {
 describe("#updateLastActivatedAt", () => {
   it("returns a new Tab with lastActivatedAt", () => {
     const previousLastActivatedAt = new Date(2023, 8, 15);
-    const tab: Tab = {
-      id: 1,
-      title: "title",
-      url: new URL("https://example.com"),
-      highlighted: false,
-      audible: false,
-      pinned: false,
-      lastActivatedAt: previousLastActivatedAt,
-    };
+    const tab = mockTab({ lastActivatedAt: previousLastActivatedAt });
     const lastActivatedAt = new Date(2023, 8, 20);
-
     const actual = updateLastActivatedAt(tab, lastActivatedAt);
 
     expect(actual).toEqual({
