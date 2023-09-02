@@ -10,11 +10,14 @@ import {
   DragStartEvent,
   DndContext,
   DragEndEvent,
+  DragOverEvent,
+  MeasuringStrategy,
 } from "@dnd-kit/core";
 import {
   SortableData,
   SortableContext,
   verticalListSortingStrategy,
+  arrayMove,
 } from "@dnd-kit/sortable";
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
@@ -103,9 +106,9 @@ const selectedWindow = (windows: Window[], selectedIndex: number): Window => {
 
 const TabList = (props: TabListProps) => {
   const { selectedWindowIndex } = props;
-  const { windows } = useContext(WindowsContext);
+  const { windows, setWindows } = useContext(WindowsContext);
   const window = selectedWindow(windows, selectedWindowIndex);
-
+  const [windowsBeforeDrag, setWidnowsBeforeDrag] = useState<Window[]>(null);
   const [activeId, setActiveId] = useState<string>(null);
 
   const sensors = useSensors(
@@ -127,14 +130,24 @@ const TabList = (props: TabListProps) => {
   const addTabToTabGroup = useAddTabToTabGroup();
   const moveTabOutOfGroup = useMoveTabOutOfGroup();
 
-  const handleOnDragStart = (event: DragStartEvent) => {
+  const onDragCancel = () => {
+    if (windowsBeforeDrag) {
+      setWindows(windowsBeforeDrag)
+    }
+
+    setActiveId(null);
+    setWidnowsBeforeDrag(null)
+  }
+
+  const onDragStart = (event: DragStartEvent) => {
     const { active } = event;
 
     setActiveId(active.id.toString());
+    setWidnowsBeforeDrag(windows);
   };
 
-  const handleOnDragEnd = (
-    event: DragEndEvent & { data: { current: SortableData } },
+  const onDragOver = (
+    event: DragOverEvent & { data: { current: SortableData } },
   ) => {
     const { active, over } = event;
 
@@ -148,6 +161,42 @@ const TabList = (props: TabListProps) => {
       window,
       over.id === "pinned" ? over.id : Number(over.id),
     );
+
+    if (!source || !dest) return;
+
+    const currentIndex = window.children.findIndex((child) => child.id === source.id);
+    const destIndex = window.children.findIndex((child) => child.id === dest.id);
+    const children = arrayMove(window.children, currentIndex, destIndex);
+    const newWindows = windows.map((childWindow) => {
+      if (childWindow.id === window.id) {
+        return {
+          ...childWindow,
+          children,
+        };
+      }
+      return childWindow;
+    })
+
+    setWindows(newWindows);
+  };
+
+  const onDragEnd = (
+    event: DragEndEvent & { data: { current: SortableData } },
+  ) => {
+    const { active, over } = event;
+
+    if (!over) return;
+
+    const windowBeforeDrag = selectedWindow(windowsBeforeDrag, selectedWindowIndex);
+    const source = findWindowChild(
+      windowBeforeDrag,
+      active.id === "pinned" ? active.id : Number(active.id),
+    );
+    const dest = findWindowChild(
+      window,
+      over.id === "pinned" ? over.id : Number(over.id),
+    );
+
     if (!source || !dest) return;
 
     const sourceData = (active.data.current as SortableData).sortable;
@@ -156,35 +205,31 @@ const TabList = (props: TabListProps) => {
     const sourceIsInRoot = sourceData.containerId === "root";
     const sourceIsInPinned = sourceData.containerId === "pinned";
     const sourceIsInTabGroup =
-      findWindowChild(window, Number(sourceData.containerId)) &&
-      isTabGroup(findWindowChild(window, Number(sourceData.containerId)));
+      findWindowChild(windowBeforeDrag, Number(sourceData.containerId)) &&
+      isTabGroup(findWindowChild(windowBeforeDrag, Number(sourceData.containerId)));
     const destIsInRoot = destData.containerId === "root";
     const destIsInPinned = destData.containerId === "pinned";
     const destIsInTabGroup =
-      findWindowChild(window, Number(destData.containerId)) &&
-      isTabGroup(findWindowChild(window, Number(destData.containerId)));
+      findWindowChild(windowBeforeDrag, Number(destData.containerId)) &&
+      isTabGroup(findWindowChild(windowBeforeDrag, Number(destData.containerId)));
 
     if (isTabGroup(source)) {
       if (destIsInRoot) {
-        const currentIndex = indexOfWindowChild(window, source.id);
         const destIndex = indexOfWindowChild(window, dest.id);
-        const targetIndex =
-          currentIndex < destIndex
-            ? destIndex - source.children.length + 1
-            : destIndex;
-        moveGroupTab(source.id, targetIndex);
+        moveGroupTab(source.id, destIndex);
       }
     }
 
     if (isTab(source)) {
       if (sourceIsInRoot) {
         if (destIsInRoot) {
-          const currentIndex = indexOfWindowChild(window, source.id);
+          const currentIndex = indexOfWindowChild(windowBeforeDrag, source.id);
+          const destIndex = indexOfWindowChild(window, dest.id);
           const targetIndex =
-            currentIndex < indexOfWindowChild(window, dest.id) &&
+            currentIndex < destIndex &&
             isTabGroup(dest)
-              ? indexOfWindowChild(window, dest.id) + dest.children.length - 1
-              : indexOfWindowChild(window, dest.id);
+              ? destIndex + dest.children.length - 1
+              : destIndex;
           moveTab(source.id, targetIndex);
         }
         if (destIsInPinned) {
@@ -192,7 +237,7 @@ const TabList = (props: TabListProps) => {
         }
         if (destIsInTabGroup) {
           const destTabGroup = findWindowChild(
-            window,
+            windowBeforeDrag,
             Number(destData.containerId),
           ) as TabGroup;
           addTabToTabGroup(source.id, destTabGroup.id);
@@ -230,6 +275,7 @@ const TabList = (props: TabListProps) => {
   const getDragOverlay = useMemo(() => {
     if (!activeId) return null;
 
+    const window = selectedWindow(windows, selectedWindowIndex);
     const source = findWindowChild(
       window,
       activeId === "pinned" ? activeId : Number(activeId),
@@ -244,8 +290,15 @@ const TabList = (props: TabListProps) => {
       <DndContext
         sensors={sensors}
         collisionDetection={closestCorners}
-        onDragStart={handleOnDragStart}
-        onDragEnd={handleOnDragEnd}
+        onDragCancel={onDragCancel}
+        onDragStart={onDragStart}
+        onDragOver={onDragOver}
+        onDragEnd={onDragEnd}
+        measuring={{
+          droppable: {
+            strategy: MeasuringStrategy.Always,
+          },
+        }}
       >
         {window && (
           <>
