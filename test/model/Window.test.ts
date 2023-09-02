@@ -275,6 +275,72 @@ describe("#findTabGroup", () => {
   });
 });
 
+describe("#indexOfWindowChild", () => {
+  describe("when window is empty", () => {
+    it("should return -1", () => {
+      const window = mockWindow({ id: 1, children: [] });
+      expect(indexOfWindowChild(window, 1)).toEqual(-1);
+    });
+  });
+
+  describe("when window is not empty", () => {
+    describe("when tab is found", () => {
+      it("should return index", () => {
+        const tab1 = mockTab({ id: 1 });
+        const tab2 = mockTab({ id: 2 });
+        const window = mockWindow({ id: 1, children: [tab1, tab2] });
+
+        expect(indexOfWindowChild(window, 2)).toEqual(1);
+      });
+    });
+
+    describe("when tab is not found", () => {
+      it("should return -1", () => {
+        const tab = mockTab({ id: 1 });
+        const window = mockWindow({ id: 1, children: [tab] });
+
+        expect(indexOfWindowChild(window, 2)).toEqual(-1);
+      });
+    });
+
+    describe("when container is included", () => {
+      it("should return index", () => {
+        const tab1 = mockTab({ id: 1 });
+        const tab2 = mockTab({ id: 2 });
+        const tab3 = mockTab({ id: 3 });
+        const tab4 = mockTab({ id: 4 });
+        const tab5 = mockTab({ id: 5 });
+        const tab6 = mockTab({ id: 6 });
+        const pinned = mockPinned({ id: "pinned", children: [tab2] });
+        const tabGroup1 = mockTabGroup({ id: 10, children: [tab3, tab4] });
+        const tabGroup2 = mockTabGroup({ id: 11, children: [tab5, tab6] });
+        const window = mockWindow({
+          id: 100,
+          children: [tab1, pinned, tabGroup1, tabGroup2],
+        });
+
+        expect(indexOfWindowChild(window, 11)).toEqual(4);
+      });
+    });
+
+    describe("when target container index is 0", () => {
+      it("should return 0", () => {
+        const tab1 = mockTab({ id: 1 });
+        const tab2 = mockTab({ id: 2 });
+        const tab3 = mockTab({ id: 3 });
+        const tab4 = mockTab({ id: 4 });
+        const tabGroup = mockTabGroup({ id: 10, children: [tab1, tab2] });
+        const window = mockWindow({
+          id: 100,
+          children: [tabGroup, tab3, tab4],
+        });
+
+        expect(indexOfWindowChild(window, 10)).toEqual(0);
+      });
+    });
+  });
+});
+
 describe("#updateLastActivatedAtOfTab", () => {
   it("should update lastActivatedAt of tab", () => {
     const tab1 = mockTab({ id: 1, lastActivatedAt: new Date(2023, 8, 20) });

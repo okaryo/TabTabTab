@@ -63,21 +63,6 @@ export const findWindowChild = (
   return flatTabsInWindow(window).find((tab) => tab.id === id);
 };
 
-export const indexOfWindowChild = (
-  window: Window,
-  id: WindowChildId,
-): number => {
-  const index = flatTabsInWindow(window).findIndex((tab) => tab.id === id);
-  if (index >= 0) return index;
-
-  const containerIndex = window.children.findIndex((child) => child.id === id);
-  if (containerIndex === -1 || containerIndex === 0) return containerIndex;
-
-  return window.children.slice(0, containerIndex - 1).reduce((sum, child) => {
-    return isTabContainer(child) ? sum + child.children.length : sum + 1;
-  }, 0);
-};
-
 export const findTab = (window: Window, tabId: number): Tab | undefined => {
   return flatTabsInWindow(window).find((tab) => tab.id === tabId);
 };
@@ -95,6 +80,22 @@ export const findTabGroup = (
     return isTabGroup(child) && child.id === groupId;
   });
   return tabGroup as TabGroup | undefined;
+};
+
+export const indexOfWindowChild = (
+  window: Window,
+  id: WindowChildId,
+): number => {
+  const index = flatTabsInWindow(window).findIndex((tab) => tab.id === id);
+  if (index >= 0) return index;
+
+
+  const containerIndex = window.children.findIndex((child) => child.id === id);
+  if (containerIndex === -1 || containerIndex === 0) return containerIndex;
+
+  return window.children.slice(0, containerIndex).reduce((sum, child) => {
+    return isTabContainer(child) ? sum + child.children.length : sum + 1;
+  }, 0);
 };
 
 export const updateLastActivatedAtOfTab = (
