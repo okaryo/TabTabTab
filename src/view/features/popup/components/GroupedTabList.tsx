@@ -50,7 +50,10 @@ const GroupedTabList = (props: GroupedTabListProps) => {
             borderRadius: "0 5px 5px 0",
           }}
         />
-        <List sx={{ width: "100%" }} disablePadding>
+        <List
+          sx={{ width: "100%", bgcolor: "background.paper" }}
+          disablePadding
+        >
           <Stack>
             <ListItem
               secondaryAction={

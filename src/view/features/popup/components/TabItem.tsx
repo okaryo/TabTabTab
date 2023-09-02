@@ -103,6 +103,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
         "& .MuiListItemButton-root": {
           pr: shouldShowCloseButton ? 11 : null,
         },
+        bgcolor: "background.paper",
       }}
       secondaryAction={
         shouldShowCloseButton && (

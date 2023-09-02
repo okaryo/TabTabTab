@@ -53,6 +53,7 @@ type TabListProps = {
 };
 type SortableItemProps = {
   id: string;
+  isDragOverLay?: boolean;
   style?: React.CSSProperties;
   children: React.ReactNode;
 };
@@ -70,7 +71,7 @@ export const SortableItem = (props: SortableItemProps) => {
       {...listeners}
       style={{
         ...style,
-        visibility: active?.id === id ? "hidden" : "visible",
+        opacity: active?.id === id ? 0.5 : 1,
         transform: CSS.Transform.toString(transform),
         transition: transition,
       }}
