@@ -132,12 +132,12 @@ const TabList = (props: TabListProps) => {
 
   const onDragCancel = () => {
     if (windowsBeforeDrag) {
-      setWindows(windowsBeforeDrag)
+      setWindows(windowsBeforeDrag);
     }
 
     setActiveId(null);
-    setWidnowsBeforeDrag(null)
-  }
+    setWidnowsBeforeDrag(null);
+  };
 
   const onDragStart = (event: DragStartEvent) => {
     const { active } = event;
@@ -164,8 +164,12 @@ const TabList = (props: TabListProps) => {
 
     if (!source || !dest) return;
 
-    const currentIndex = window.children.findIndex((child) => child.id === source.id);
-    const destIndex = window.children.findIndex((child) => child.id === dest.id);
+    const currentIndex = window.children.findIndex(
+      (child) => child.id === source.id,
+    );
+    const destIndex = window.children.findIndex(
+      (child) => child.id === dest.id,
+    );
     const children = arrayMove(window.children, currentIndex, destIndex);
     const newWindows = windows.map((childWindow) => {
       if (childWindow.id === window.id) {
@@ -175,7 +179,7 @@ const TabList = (props: TabListProps) => {
         };
       }
       return childWindow;
-    })
+    });
 
     setWindows(newWindows);
   };
@@ -187,7 +191,10 @@ const TabList = (props: TabListProps) => {
 
     if (!over) return;
 
-    const windowBeforeDrag = selectedWindow(windowsBeforeDrag, selectedWindowIndex);
+    const windowBeforeDrag = selectedWindow(
+      windowsBeforeDrag,
+      selectedWindowIndex,
+    );
     const source = findWindowChild(
       windowBeforeDrag,
       active.id === "pinned" ? active.id : Number(active.id),
@@ -206,12 +213,16 @@ const TabList = (props: TabListProps) => {
     const sourceIsInPinned = sourceData.containerId === "pinned";
     const sourceIsInTabGroup =
       findWindowChild(windowBeforeDrag, Number(sourceData.containerId)) &&
-      isTabGroup(findWindowChild(windowBeforeDrag, Number(sourceData.containerId)));
+      isTabGroup(
+        findWindowChild(windowBeforeDrag, Number(sourceData.containerId)),
+      );
     const destIsInRoot = destData.containerId === "root";
     const destIsInPinned = destData.containerId === "pinned";
     const destIsInTabGroup =
       findWindowChild(windowBeforeDrag, Number(destData.containerId)) &&
-      isTabGroup(findWindowChild(windowBeforeDrag, Number(destData.containerId)));
+      isTabGroup(
+        findWindowChild(windowBeforeDrag, Number(destData.containerId)),
+      );
 
     if (isTabGroup(source)) {
       if (destIsInRoot) {
@@ -226,8 +237,7 @@ const TabList = (props: TabListProps) => {
           const currentIndex = indexOfWindowChild(windowBeforeDrag, source.id);
           const destIndex = indexOfWindowChild(window, dest.id);
           const targetIndex =
-            currentIndex < destIndex &&
-            isTabGroup(dest)
+            currentIndex < destIndex && isTabGroup(dest)
               ? destIndex + dest.children.length - 1
               : destIndex;
           moveTab(source.id, targetIndex);

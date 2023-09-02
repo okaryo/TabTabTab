@@ -89,7 +89,6 @@ export const indexOfWindowChild = (
   const index = flatTabsInWindow(window).findIndex((tab) => tab.id === id);
   if (index >= 0) return index;
 
-
   const containerIndex = window.children.findIndex((child) => child.id === id);
   if (containerIndex === -1 || containerIndex === 0) return containerIndex;
 
