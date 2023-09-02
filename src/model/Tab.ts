@@ -1,7 +1,8 @@
 import { Duration } from "./Duration";
 
+export type TabId = number;
 export type Tab = {
-  id: number;
+  id: TabId;
   groupId?: number;
   windowId?: number;
   title: string;
@@ -20,11 +21,4 @@ export const durationSinceLastActivatedAt = (tab: Tab): Duration => {
   return new Duration({
     milliseconds: currentTime.getTime() - tab.lastActivatedAt.getTime(),
   });
-};
-
-export const updateLastActivatedAt = (tab: Tab, lastActivatedAt: Date): Tab => {
-  return {
-    ...tab,
-    lastActivatedAt,
-  };
 };

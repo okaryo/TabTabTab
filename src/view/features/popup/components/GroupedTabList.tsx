@@ -10,13 +10,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
 
 import { TabGroup } from "../../../../model/TabContainer";
-import {
-  collapseTabGroup,
-  expandTabGroup,
-} from "../../../../repository/TabGroupRepository";
+import { useCollapseTabGroup } from "../hooks/useCollapseTabGroup";
+import { useExpandTabGroup } from "../hooks/useExpandTabGroup";
 
 import TabItem from "./TabItem";
 import { SortableItem } from "./TabList";
@@ -28,9 +25,10 @@ type GroupedTabListProps = {
 const GroupedTabList = (props: GroupedTabListProps) => {
   const { tabGroup } = props;
   const theme = useTheme();
-  const [collapsed, setCollapsed] = useState(tabGroup.collapsed);
+  const collapseTabGroup = useCollapseTabGroup();
+  const expandTabGroup = useExpandTabGroup();
   const toggleCollapsedStatus = () => {
-    const newCollapsed = !collapsed;
+    const newCollapsed = !tabGroup.collapsed;
     if (newCollapsed) {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       collapseTabGroup(tabGroup.id);
@@ -38,7 +36,6 @@ const GroupedTabList = (props: GroupedTabListProps) => {
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       expandTabGroup(tabGroup.id);
     }
-    setCollapsed(newCollapsed);
   };
 
   return (
@@ -50,12 +47,15 @@ const GroupedTabList = (props: GroupedTabListProps) => {
             borderRadius: "0 5px 5px 0",
           }}
         />
-        <List sx={{ width: "100%" }} disablePadding>
+        <List
+          sx={{ width: "100%", bgcolor: "background.paper" }}
+          disablePadding
+        >
           <Stack>
             <ListItem
               secondaryAction={
                 <IconButton edge="end" onClick={toggleCollapsedStatus}>
-                  {collapsed ? <ExpandMore /> : <ExpandLess />}
+                  {tabGroup.collapsed ? <ExpandMore /> : <ExpandLess />}
                 </IconButton>
               }
               disablePadding
@@ -91,7 +91,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
               </ListItemButton>
             </ListItem>
           </Stack>
-          <Collapse in={!collapsed} timeout="auto" unmountOnExit>
+          <Collapse in={!tabGroup.collapsed} timeout="auto" unmountOnExit>
             <List disablePadding>
               {tabGroup.children.map((tab) => (
                 <TabItem tab={tab} />

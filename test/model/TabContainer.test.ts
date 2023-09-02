@@ -1,10 +1,54 @@
+/* eslint @typescript-eslint/no-unsafe-argument: 0, @typescript-eslint/no-explicit-any: 0 */
 import { GroupColor } from "../../src/model/GroupColor";
 import {
-  TabContainer,
   isPinned,
+  isTab,
   isTabContainer,
   isTabGroup,
 } from "../../src/model/TabContainer";
+
+describe("#isTab", () => {
+  it.each([
+    { params: { id: "pinned", children: [] }, expected: false },
+    { params: { id: "pinned" }, expected: false },
+    {
+      params: {
+        id: 10000,
+        name: "group",
+        color: new GroupColor("red"),
+        collapsed: true,
+        children: [],
+      },
+      expected: false,
+    },
+    {
+      params: {
+        id: 10000,
+        name: "group",
+        color: new GroupColor("red"),
+        collapsed: true,
+      },
+      expected: false,
+    },
+    {
+      params: {
+        id: 10000,
+        title: "tab",
+        url: new URL("https://example.com"),
+        favIconUrl: new URL("https://example.com/favicon.ico"),
+        highlighted: true,
+        audible: true,
+        pinned: true,
+      },
+      expected: true,
+    },
+  ])(
+    `case %#: when params is $params, it should return $expected`,
+    ({ params, expected }) => {
+      expect(isTab(params as any)).toBe(expected);
+    },
+  );
+});
 
 describe("#isTabContainer", () => {
   it.each([
@@ -29,10 +73,22 @@ describe("#isTabContainer", () => {
       },
       expected: false,
     },
+    {
+      params: {
+        id: 10000,
+        title: "tab",
+        url: new URL("https://example.com"),
+        favIconUrl: new URL("https://example.com/favicon.ico"),
+        highlighted: true,
+        audible: true,
+        pinned: true,
+      },
+      expected: false,
+    },
   ])(
     `case %#: when params is $params, it should return $expected`,
     ({ params, expected }) => {
-      expect(isTabContainer(params as TabContainer)).toBe(expected);
+      expect(isTabContainer(params as any)).toBe(expected);
     },
   );
 });
@@ -60,10 +116,22 @@ describe("#isPinned", () => {
       },
       expected: false,
     },
+    {
+      params: {
+        id: 10000,
+        title: "tab",
+        url: new URL("https://example.com"),
+        favIconUrl: new URL("https://example.com/favicon.ico"),
+        highlighted: true,
+        audible: true,
+        pinned: true,
+      },
+      expected: false,
+    },
   ])(
     `case %#: when params is $params, it should return $expected`,
     ({ params, expected }) => {
-      expect(isPinned(params as TabContainer)).toBe(expected);
+      expect(isPinned(params as any)).toBe(expected);
     },
   );
 });
@@ -91,10 +159,22 @@ describe("#isTabGroup", () => {
       },
       expected: false,
     },
+    {
+      params: {
+        id: 10000,
+        title: "tab",
+        url: new URL("https://example.com"),
+        favIconUrl: new URL("https://example.com/favicon.ico"),
+        highlighted: true,
+        audible: true,
+        pinned: true,
+      },
+      expected: false,
+    },
   ])(
     `case %#: when params is $params, it should return $expected`,
     ({ params, expected }) => {
-      expect(isTabGroup(params as TabContainer)).toBe(expected);
+      expect(isTabGroup(params as any)).toBe(expected);
     },
   );
 });

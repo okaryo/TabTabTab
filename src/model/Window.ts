@@ -1,7 +1,8 @@
-import { Tab } from "./Tab";
+import { Tab, TabId } from "./Tab";
 import {
   Pinned,
   TabContainer,
+  TabContainerId,
   TabGroup,
   isPinned,
   isTabContainer,
@@ -15,6 +16,7 @@ type WindowState =
   | "fullscreen"
   | "locked-fullscreen";
 type WindowType = "normal" | "popup" | "panel" | "app" | "devtools";
+type WindowChildId = TabContainerId | TabId;
 export type WindowChild = TabContainer | Tab;
 export type Window = {
   id: number;
@@ -46,14 +48,27 @@ export const findWindow = (
   return windows.find((window) => window.id === windowId);
 };
 
+export const findWindowChild = (
+  window: Window,
+  id: WindowChildId,
+): WindowChild | undefined => {
+  const child = window.children.find((child) => {
+    if (isTabContainer(child)) {
+      return child.id === id;
+    }
+    return child.id === id;
+  });
+  if (child) return child;
+
+  return flatTabsInWindow(window).find((tab) => tab.id === id);
+};
+
 export const findTab = (window: Window, tabId: number): Tab | undefined => {
   return flatTabsInWindow(window).find((tab) => tab.id === tabId);
 };
 
 export const findPinned = (window: Window): Pinned | undefined => {
-  const pinned = window.children.find(
-    (child) => isTabContainer(child) && isPinned(child),
-  );
+  const pinned = window.children.find((child) => isPinned(child));
   return pinned as Pinned | undefined;
 };
 
@@ -62,9 +77,24 @@ export const findTabGroup = (
   groupId: number,
 ): TabGroup | undefined => {
   const tabGroup = window.children.find((child) => {
-    return isTabContainer(child) && isTabGroup(child) && child.id === groupId;
+    return isTabGroup(child) && child.id === groupId;
   });
   return tabGroup as TabGroup | undefined;
+};
+
+export const indexOfWindowChild = (
+  window: Window,
+  id: WindowChildId,
+): number => {
+  const index = flatTabsInWindow(window).findIndex((tab) => tab.id === id);
+  if (index >= 0) return index;
+
+  const containerIndex = window.children.findIndex((child) => child.id === id);
+  if (containerIndex === -1 || containerIndex === 0) return containerIndex;
+
+  return window.children.slice(0, containerIndex).reduce((sum, child) => {
+    return isTabContainer(child) ? sum + child.children.length : sum + 1;
+  }, 0);
 };
 
 export const updateLastActivatedAtOfTab = (
