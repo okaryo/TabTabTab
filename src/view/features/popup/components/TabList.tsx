@@ -81,22 +81,6 @@ export const SortableItem = (props: SortableItemProps) => {
   );
 };
 
-const convertToElement = (child: WindowChild) => {
-  if (isPinned(child)) {
-    return <PinnedTabList tabs={child.children} />;
-  }
-  if (isTabGroup(child)) {
-    return <GroupedTabList tabGroup={child} />;
-  }
-
-  const tab = child as Tab;
-  return (
-    <SortableItem key={tab.id} id={tab.id.toString()}>
-      <TabItem tab={tab} />
-    </SortableItem>
-  );
-};
-
 const selectedWindow = (windows: Window[], selectedIndex: number): Window => {
   if (selectedIndex === 0) {
     return windows.find((window) => window.focused);
@@ -111,6 +95,7 @@ const TabList = (props: TabListProps) => {
   const window = selectedWindow(windows, selectedWindowIndex);
   const [windowsBeforeDrag, setWidnowsBeforeDrag] = useState<Window[]>(null);
   const [activeId, setActiveId] = useState<string>(null);
+  const [pinnedCollapsed, setPinnedCollapsed] = useState(true);
 
   const sensors = useSensors(
     useSensor(MouseSensor, {
@@ -130,6 +115,28 @@ const TabList = (props: TabListProps) => {
   const pinTab = usePinTab();
   const addTabToTabGroup = useAddTabToTabGroup();
   const moveTabOutOfGroup = useMoveTabOutOfGroup();
+
+  const convertToElement = (child: WindowChild) => {
+    if (isPinned(child)) {
+      return (
+        <PinnedTabList
+          pinned={child}
+          collapsed={pinnedCollapsed}
+          toggleCollapsed={() => setPinnedCollapsed(!pinnedCollapsed)}
+        />
+      );
+    }
+    if (isTabGroup(child)) {
+      return <GroupedTabList tabGroup={child} />;
+    }
+
+    const tab = child as Tab;
+    return (
+      <SortableItem key={tab.id} id={tab.id.toString()}>
+        <TabItem tab={tab} />
+      </SortableItem>
+    );
+  };
 
   const onDragCancel = () => {
     if (windowsBeforeDrag) {
