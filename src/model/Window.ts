@@ -5,6 +5,7 @@ import {
   TabContainerId,
   TabGroup,
   isPinned,
+  isTab,
   isTabContainer,
   isTabGroup,
 } from "./TabContainer";
@@ -16,10 +17,11 @@ type WindowState =
   | "fullscreen"
   | "locked-fullscreen";
 type WindowType = "normal" | "popup" | "panel" | "app" | "devtools";
+type WindowId = number;
 type WindowChildId = TabContainerId | TabId;
 export type WindowChild = TabContainer | Tab;
 export type Window = {
-  id: number;
+  id: WindowId;
   focused: boolean;
   state?: WindowState;
   type?: WindowType;
@@ -160,4 +162,85 @@ export const hasDuplicatedTabs = (
       return isDupulicated(child, targetTab);
     });
   });
+};
+
+export const moveTabOrTabGroup = (
+  window: Window,
+  id: TabId ,
+  destContainerId: WindowId | TabContainerId,
+  destIndex: number,
+): Window => {
+  const target = findWindowChild(window, id);
+  if (!target) return window;
+
+  if (isTab(target)) {
+    return moveTab(window, target, destContainerId, destIndex);
+  }
+
+  if (isTabGroup(target)) {
+    return moveTabGroup(window, target, destIndex);
+  }
+
+  return window;
+};
+
+const moveTab = (
+  window: Window,
+  tab: Tab,
+  destContainerId: WindowId | TabContainerId,
+  destIndex: number,
+): Window => {
+  const newWindow = { ...window };
+
+  let sourceContainer: TabContainer | Window = newWindow;
+  for (const child of newWindow.children) {
+    if (
+      isTabContainer(child) &&
+      child.children.some((childTab) => childTab.id === tab.id)
+    ) {
+      sourceContainer = child;
+      break;
+    }
+  }
+
+  const sourceIndex = sourceContainer.children.findIndex(
+    (t) => t.id === tab.id,
+  );
+  if (sourceIndex === -1) return window;
+  sourceContainer.children.splice(sourceIndex, 1);
+
+  const destContainer =
+    destContainerId === window.id
+      ? newWindow
+      : (newWindow.children.find(
+          (child) => isTabContainer(child) && child.id === destContainerId,
+        ) as TabContainer);
+
+  if (destContainerId === "pinned") {
+    tab.pinned = true;
+  } else if (tab.pinned) {
+    tab.pinned = false;
+  }
+
+  destContainer.children.splice(destIndex, 0, tab);
+
+  return newWindow;
+};
+
+const moveTabGroup = (
+  window: Window,
+  tabGroup: TabGroup,
+  destIndex: number,
+): Window => {
+  const children = [...window.children];
+  const currentIndex = children.findIndex((child) => child.id === tabGroup.id);
+  if (currentIndex === -1) return window;
+
+  children.splice(currentIndex, 1);
+  children.splice(destIndex, 0, tabGroup);
+
+  return {
+    ...window,
+    children,
+  };
 };
