@@ -12,7 +12,7 @@ changelog:
     - title: 🌏 Translations
       labels:
         - translation
-    - title: 🏠 Maintenance
+    - title: 🏠 Maintenances
       labels:
         - maintenance
     - title: 📝 Documentation
