@@ -43,6 +43,21 @@ export const flatTabsInWindow = (window: Window): Tab[] => {
     .flat();
 };
 
+export const findParentContainer = (
+  window: Window,
+  id: WindowChildId,
+): Window | TabContainer | undefined => {
+  const isUnderWindow = window.children.find((child) => child.id === id);
+  if (isUnderWindow) return window;
+
+  const containers = window.children.filter((child) =>
+    isTabContainer(child),
+  ) as TabContainer[];
+  return containers.find((container) =>
+    container.children.some((child) => child.id === id),
+  );
+};
+
 export const findWindow = (
   windows: Window[],
   windowId: number,
@@ -166,7 +181,7 @@ export const hasDuplicatedTabs = (
 
 export const moveTabOrTabGroup = (
   window: Window,
-  id: TabId ,
+  id: TabId,
   destContainerId: WindowId | TabContainerId,
   destIndex: number,
 ): Window => {
@@ -190,7 +205,7 @@ const moveTab = (
   destContainerId: WindowId | TabContainerId,
   destIndex: number,
 ): Window => {
-  const newWindow = { ...window };
+  const newWindow = copyWindow(window);
 
   let sourceContainer: TabContainer | Window = newWindow;
   for (const child of newWindow.children) {
@@ -204,7 +219,7 @@ const moveTab = (
   }
 
   const sourceIndex = sourceContainer.children.findIndex(
-    (t) => t.id === tab.id,
+    (child) => child.id === tab.id,
   );
   if (sourceIndex === -1) return window;
   sourceContainer.children.splice(sourceIndex, 1);
@@ -238,6 +253,23 @@ const moveTabGroup = (
 
   children.splice(currentIndex, 1);
   children.splice(destIndex, 0, tabGroup);
+
+  return {
+    ...window,
+    children,
+  };
+};
+
+const copyWindow = (window: Window): Window => {
+  const children = window.children.map((child) => {
+    if (isTabContainer(child)) {
+      return {
+        ...child,
+        children: [...child.children],
+      };
+    }
+    return child;
+  });
 
   return {
     ...window,
