@@ -63,8 +63,7 @@ type SortableItemProps = {
 
 export const SortableItem = (props: SortableItemProps) => {
   const { id, style, children } = props;
-
-  const { attributes, listeners, setNodeRef, transform, transition } =
+  const { active, attributes, listeners, setNodeRef, transform, transition } =
     useSortable({ id });
 
   return (
@@ -74,6 +73,7 @@ export const SortableItem = (props: SortableItemProps) => {
       {...listeners}
       style={{
         ...style,
+        opacity: active?.id === id ? 0.5 : 1,
         transform: CSS.Transform.toString(transform),
         transition: transition,
       }}
@@ -360,19 +360,11 @@ const TabList = (props: TabListProps) => {
     if (!source) return null;
 
     if (isTabGroup(source)) {
-      return (
-        <div style={{ opacity: 0.5 }}>
-          <GroupedTabList tabGroup={source} />;
-        </div>
-      );
+      return <GroupedTabList tabGroup={source} />;
     }
 
     const tab = source as Tab;
-    return (
-      <div style={{ opacity: 0.5 }}>
-        <TabItem tab={tab} />
-      </div>
-    );
+    return <TabItem tab={tab} />;
   }, [activeId]);
 
   return (
