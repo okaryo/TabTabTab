@@ -129,7 +129,11 @@ const TabList = (props: TabListProps) => {
       );
     }
     if (isTabGroup(child)) {
-      return <GroupedTabList tabGroup={child} />;
+      return (
+        <SortableItem key={child.id} id={child.id.toString()}>
+          <GroupedTabList tabGroup={child} />
+        </SortableItem>
+      );
     }
 
     const tab = child as Tab;

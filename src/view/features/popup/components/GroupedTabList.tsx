@@ -1,6 +1,5 @@
 import {
   SortableContext,
-  useSortable,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import ExpandLess from "@mui/icons-material/ExpandLess";
@@ -29,7 +28,6 @@ type GroupedTabListProps = {
 
 const GroupedTabList = (props: GroupedTabListProps) => {
   const { tabGroup } = props;
-  const { setNodeRef } = useSortable({ id: tabGroup.id.toString() });
   const theme = useTheme();
   const collapseTabGroup = useCollapseTabGroup();
   const expandTabGroup = useExpandTabGroup();
@@ -45,7 +43,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   };
 
   return (
-    <Stack id={tabGroup.id.toString()} ref={setNodeRef} direction="row">
+    <Stack id={tabGroup.id.toString()} direction="row">
       <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
         <Stack direction="row">
           <Box
