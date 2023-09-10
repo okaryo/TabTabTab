@@ -1,3 +1,8 @@
+import {
+  SortableContext,
+  useSortable,
+  verticalListSortingStrategy,
+} from "@dnd-kit/sortable";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
@@ -24,6 +29,7 @@ type GroupedTabListProps = {
 
 const GroupedTabList = (props: GroupedTabListProps) => {
   const { tabGroup } = props;
+  const { setNodeRef } = useSortable({ id: tabGroup.id.toString() });
   const theme = useTheme();
   const collapseTabGroup = useCollapseTabGroup();
   const expandTabGroup = useExpandTabGroup();
@@ -39,19 +45,16 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   };
 
   return (
-    <SortableItem id={tabGroup.id.toString()}>
-      <Stack direction="row">
-        <Box
-          style={{
-            borderRight: `5px solid ${tabGroup.color.code}`,
-            borderRadius: "0 5px 5px 0",
-          }}
-        />
-        <List
-          sx={{ width: "100%", bgcolor: "background.paper" }}
-          disablePadding
-        >
-          <Stack>
+    <Stack id={tabGroup.id.toString()} ref={setNodeRef} direction="row">
+      <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
+        <Stack direction="row">
+          <Box
+            style={{
+              borderRight: `5px solid ${tabGroup.color.code}`,
+              borderRadius: "0 5px 5px 0",
+            }}
+          />
+          <Stack sx={{ width: "calc(100% - 5px)" }}>
             <ListItem
               secondaryAction={
                 <IconButton edge="end" onClick={toggleCollapsedStatus}>
@@ -90,17 +93,25 @@ const GroupedTabList = (props: GroupedTabListProps) => {
                 </Stack>
               </ListItemButton>
             </ListItem>
+            <Collapse in={!tabGroup.collapsed} timeout="auto" unmountOnExit>
+              <List disablePadding>
+                <SortableContext
+                  id={tabGroup.id.toString()}
+                  items={tabGroup.children.map((child) => child.id.toString())}
+                  strategy={verticalListSortingStrategy}
+                >
+                  {tabGroup.children.map((tab) => (
+                    <SortableItem key={tab.id} id={tab.id.toString()}>
+                      <TabItem tab={tab} />
+                    </SortableItem>
+                  ))}
+                </SortableContext>
+              </List>
+            </Collapse>
           </Stack>
-          <Collapse in={!tabGroup.collapsed} timeout="auto" unmountOnExit>
-            <List disablePadding>
-              {tabGroup.children.map((tab) => (
-                <TabItem tab={tab} />
-              ))}
-            </List>
-          </Collapse>
-        </List>
-      </Stack>
-    </SortableItem>
+        </Stack>
+      </List>
+    </Stack>
   );
 };
 

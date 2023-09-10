@@ -291,7 +291,10 @@ const TabList = (props: TabListProps) => {
       }
 
       if (isTabGroup(sourceContainer)) {
-        // comming soon...
+        if (!sourceContainer.collapsed) {
+          await addTabToTabGroup(source.id, sourceContainer.id);
+          await moveTab(source.id, 0);
+        }
       }
     }
 
@@ -312,11 +315,9 @@ const TabList = (props: TabListProps) => {
           await moveTab(source.id, destIndex);
         }
         if (destIsInTabGroup) {
-          const destTabGroup = findWindowChild(
-            windowBeforeDrag,
-            destContainer.id,
-          ) as TabGroup;
-          addTabToTabGroup(source.id, destTabGroup.id);
+          const destIndex = indexOfWindowChild(window, dest.id);
+          await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
+          await moveTab(source.id, destIndex);
         }
       }
 
@@ -329,7 +330,8 @@ const TabList = (props: TabListProps) => {
           moveTab(source.id, indexOfWindowChild(window, dest.id));
         }
         if (destIsInTabGroup) {
-          moveTab(source.id, indexOfWindowChild(window, dest.id));
+          await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
+          await moveTab(source.id, indexOfWindowChild(window, dest.id));
         }
       }
 
@@ -341,7 +343,9 @@ const TabList = (props: TabListProps) => {
           pinTab(source.id);
         }
         if (destIsInTabGroup) {
-          addTabToTabGroup(source.id, Number(destContainer.id));
+          const destIndex = indexOfWindowChild(window, dest.id);
+          await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
+          await moveTab(source.id, destIndex);
         }
       }
     }
