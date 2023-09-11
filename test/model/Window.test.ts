@@ -1,5 +1,6 @@
 /* eslint @typescript-eslint/no-unsafe-argument: 0, @typescript-eslint/no-explicit-any: 0 */
 import {
+  findParentContainer,
   findPinned,
   findTab,
   findTabGroup,
@@ -95,6 +96,49 @@ describe("#flatTabsInWindow", () => {
           ...tabs2,
           ...tabs3,
         ]);
+      });
+    });
+  });
+});
+
+describe("#findParentContainer", () => {
+  describe("when window is empty", () => {
+    it("should return undefined", () => {
+      const window = mockWindow({ id: 100, children: [] });
+
+      expect(findParentContainer(window, 1)).toBeUndefined();
+    });
+  });
+
+  describe("when window is not empty", () => {
+    describe("when parent is Window", () => {
+      it("should return window", () => {
+        const tab = mockTab({ id: 1 });
+        const window = mockWindow({ id: 100, children: [tab] });
+
+        expect(findParentContainer(window, 1)).toEqual(window);
+      });
+    });
+
+    describe("when parent is Pinned", () => {
+      it("should return Pinned", () => {
+        const tab1 = mockTab({ id: 1 });
+        const tab2 = mockTab({ id: 2 });
+        const pinned = mockPinned({ id: "pinned", children: [tab1] });
+        const window = mockWindow({ id: 100, children: [pinned, tab2] });
+
+        expect(findParentContainer(window, 1)).toEqual(pinned);
+      });
+    });
+
+    describe("when parent is TabGroup", () => {
+      it("should return TabGroup", () => {
+        const tab1 = mockTab({ id: 1 });
+        const tab2 = mockTab({ id: 2 });
+        const tabGroup = mockTabGroup({ id: 10, children: [tab1] });
+        const window = mockWindow({ id: 100, children: [tabGroup, tab2] });
+
+        expect(findParentContainer(window, 1)).toEqual(tabGroup);
       });
     });
   });
