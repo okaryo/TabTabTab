@@ -1,4 +1,6 @@
+/* eslint @typescript-eslint/no-unsafe-argument: 0, @typescript-eslint/no-explicit-any: 0 */
 import {
+  findParentContainer,
   findPinned,
   findTab,
   findTabGroup,
@@ -9,6 +11,7 @@ import {
   flatTabsInWindows,
   hasDuplicatedTabs,
   indexOfWindowChild,
+  moveTabOrTabGroup,
   updateLastActivatedAtOfTab,
 } from "../../src/model/Window";
 import { mockPinned, mockTabGroup } from "../factory/TabContainerFactory";
@@ -93,6 +96,49 @@ describe("#flatTabsInWindow", () => {
           ...tabs2,
           ...tabs3,
         ]);
+      });
+    });
+  });
+});
+
+describe("#findParentContainer", () => {
+  describe("when window is empty", () => {
+    it("should return undefined", () => {
+      const window = mockWindow({ id: 100, children: [] });
+
+      expect(findParentContainer(window, 1)).toBeUndefined();
+    });
+  });
+
+  describe("when window is not empty", () => {
+    describe("when parent is Window", () => {
+      it("should return window", () => {
+        const tab = mockTab({ id: 1 });
+        const window = mockWindow({ id: 100, children: [tab] });
+
+        expect(findParentContainer(window, 1)).toEqual(window);
+      });
+    });
+
+    describe("when parent is Pinned", () => {
+      it("should return Pinned", () => {
+        const tab1 = mockTab({ id: 1 });
+        const tab2 = mockTab({ id: 2 });
+        const pinned = mockPinned({ id: "pinned", children: [tab1] });
+        const window = mockWindow({ id: 100, children: [pinned, tab2] });
+
+        expect(findParentContainer(window, 1)).toEqual(pinned);
+      });
+    });
+
+    describe("when parent is TabGroup", () => {
+      it("should return TabGroup", () => {
+        const tab1 = mockTab({ id: 1 });
+        const tab2 = mockTab({ id: 2 });
+        const tabGroup = mockTabGroup({ id: 10, children: [tab1] });
+        const window = mockWindow({ id: 100, children: [tabGroup, tab2] });
+
+        expect(findParentContainer(window, 1)).toEqual(tabGroup);
       });
     });
   });
@@ -420,6 +466,308 @@ describe("#hasDuplicatedTabs", () => {
       const window = mockWindow({ id: 1, children: [tab1, tab2] });
 
       expect(hasDuplicatedTabs([window], tab1)).toBeFalsy();
+    });
+  });
+});
+
+describe("#moveTabOrTabGroup", () => {
+  describe("when source item is Tab", () => {
+    describe("when source item is under Window", () => {
+      describe("when destination is under Window", () => {
+        it("should move to specified index under Window", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const window = mockWindow({
+            id: 100,
+            children: [tab1, tab2, tab3, tab4, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 3, 100, 4);
+          const expected = mockWindow({
+            id: 100,
+            children: [tab1, tab2, tab4, tab5, tab3],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+
+      describe("when destination is under Pinned", () => {
+        it("should move to specified index under Pinned", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+          const window = mockWindow({
+            id: 100,
+            children: [pinned, tab3, tab4, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 3, "pinned", 1);
+          const expected = mockWindow({
+            id: 100,
+            children: [{ ...pinned, children: [tab1, tab3, tab2] }, tab4, tab5],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+
+      describe("when destination is under TabGroup", () => {
+        it("should move to specified index under TabGroup", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const tabGroup = mockTabGroup({ id: 10, children: [tab1, tab2] });
+          const window = mockWindow({
+            id: 100,
+            children: [tab3, tab4, tabGroup, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 3, 10, 1);
+          const expected = mockWindow({
+            id: 100,
+            children: [
+              tab4,
+              { ...tabGroup, children: [tab1, tab3, tab2] },
+              tab5,
+            ],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+    });
+
+    describe("when source item is under Pinned", () => {
+      describe("when destination is under Window", () => {
+        it("should move to specified index from Pinned directyly under Window", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+          const window = mockWindow({
+            id: 100,
+            children: [pinned, tab3, tab4, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 2, 100, 2);
+          const expected = mockWindow({
+            id: 100,
+            children: [{ ...pinned, children: [tab1] }, tab3, tab2, tab4, tab5],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+
+      describe("when destination is under Pinned", () => {
+        it("should reorder under the same Pinned", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+          const window = mockWindow({
+            id: 100,
+            children: [pinned, tab3, tab4, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 2, "pinned", 0);
+          const expected = mockWindow({
+            id: 100,
+            children: [{ ...pinned, children: [tab2, tab1] }, tab3, tab4, tab5],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+
+      describe("when destination is under TabGroup", () => {
+        it("should move to specified index under TabGroup", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+          const tabGroup = mockTabGroup({ id: 10, children: [tab3, tab4] });
+          const window = mockWindow({
+            id: 100,
+            children: [pinned, tabGroup, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 2, 10, 1);
+          const expected = mockWindow({
+            id: 100,
+            children: [
+              { ...pinned, children: [tab1] },
+              { ...tabGroup, children: [tab3, tab2, tab4] },
+              tab5,
+            ],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+    });
+
+    describe("when source item is under TabGroup", () => {
+      describe("when destination is under Window", () => {
+        it("should move to specified index from TabGroup directyly under Window", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const tabGroup = mockTabGroup({ id: 10, children: [tab3, tab4] });
+          const window = mockWindow({
+            id: 100,
+            children: [tab1, tab2, tabGroup, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 3, 100, 1);
+          const expected = mockWindow({
+            id: 100,
+            children: [
+              tab1,
+              tab3,
+              tab2,
+              { ...tabGroup, children: [tab4] },
+              tab5,
+            ],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+
+      describe("when destination is under Pinned", () => {
+        it("should move to specified index under Pinned", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const pinned = mockPinned({ id: "pinned", children: [tab1] });
+          const tabGroup = mockTabGroup({ id: 10, children: [tab3, tab4] });
+          const window = mockWindow({
+            id: 100,
+            children: [pinned, tab2, tabGroup, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 3, "pinned", 0);
+          const expected = mockWindow({
+            id: 100,
+            children: [
+              { ...pinned, children: [tab3, tab1] },
+              tab2,
+              { ...tabGroup, children: [tab4] },
+              tab5,
+            ],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+
+      describe("when destination is under the same TabGroup", () => {
+        it("should reorder under the same TabGroup", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const pinned = mockPinned({ id: "pinned", children: [tab1] });
+          const tabGroup = mockTabGroup({ id: 10, children: [tab3, tab4] });
+          const window = mockWindow({
+            id: 100,
+            children: [pinned, tab2, tabGroup, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 3, 10, 1);
+          const expected = mockWindow({
+            id: 100,
+            children: [
+              pinned,
+              tab2,
+              { ...tabGroup, children: [tab4, tab3] },
+              tab5,
+            ],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+
+      describe("when destination is under the other TabGroup", () => {
+        it("should move to specified index under the other TabGroup", () => {
+          const tab1 = mockTab({ id: 1 });
+          const tab2 = mockTab({ id: 2 });
+          const tab3 = mockTab({ id: 3 });
+          const tab4 = mockTab({ id: 4 });
+          const tab5 = mockTab({ id: 5 });
+          const tabGroup1 = mockTabGroup({ id: 10, children: [tab1, tab2] });
+          const tabGroup2 = mockTabGroup({ id: 11, children: [tab3, tab4] });
+          const window = mockWindow({
+            id: 100,
+            children: [tabGroup1, tabGroup2, tab5],
+          });
+
+          const actual = moveTabOrTabGroup(window, 3, 10, 1);
+          const expected = mockWindow({
+            id: 100,
+            children: [
+              { ...tabGroup1, children: [tab1, tab3, tab2] },
+              { ...tabGroup2, children: [tab4] },
+              tab5,
+            ],
+          });
+          expect(actual).toEqual(expected);
+        });
+      });
+    });
+  });
+
+  describe("when source item is Pinned", () => {
+    it("should return original window", () => {
+      const tab1 = mockTab({ id: 1 });
+      const tab2 = mockTab({ id: 2 });
+      const tab3 = mockTab({ id: 3 });
+      const tab4 = mockTab({ id: 4 });
+      const tab5 = mockTab({ id: 5 });
+      const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+      const window = mockWindow({
+        id: 100,
+        children: [pinned, tab3, tab4, tab5],
+      });
+
+      const actual = moveTabOrTabGroup(window, "pinned" as any, 100, 3);
+      const expected = window;
+      expect(actual).toEqual(expected);
+    });
+  });
+
+  describe("when source item is TabGorup", () => {
+    it("should return reordered window", () => {
+      const tab1 = mockTab({ id: 1 });
+      const tab2 = mockTab({ id: 2 });
+      const tab3 = mockTab({ id: 3 });
+      const tab4 = mockTab({ id: 4 });
+      const tab5 = mockTab({ id: 5 });
+      const tabGroup = mockTabGroup({ id: 10, children: [tab1, tab2] });
+      const window = mockWindow({
+        id: 100,
+        children: [tab3, tabGroup, tab4, tab5],
+      });
+
+      const actual = moveTabOrTabGroup(window, 10, 100, 3);
+      const expected = mockWindow({
+        id: 100,
+        children: [tab3, tab4, tab5, tabGroup],
+      });
+      expect(actual).toEqual(expected);
     });
   });
 });

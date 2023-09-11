@@ -1,3 +1,4 @@
+import { useDroppable } from "@dnd-kit/core";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PushPin from "@mui/icons-material/PushPin";
@@ -11,25 +12,24 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
 
 import t from "../../../../i18n/Translations";
-import { Tab } from "../../../../model/Tab";
+import { Pinned } from "../../../../model/TabContainer";
 
-import TabItem from "./TabItem";
-
-type PinnedTabListProps = {
-  tabs: Tab[];
+type PinnedContainerProps = {
+  children: React.ReactNode;
+  pinned: Pinned;
+  collapsed: boolean;
+  toggleCollapsed: () => void;
 };
 
-const PinnedTabList = (props: PinnedTabListProps) => {
-  const { tabs } = props;
-  const [collapsed, setCollapsed] = useState(true);
-  const toggleCollapsedStatus = () => setCollapsed(!collapsed);
-  const id = "pinned";
+const PinnedContainer = (props: PinnedContainerProps) => {
+  const { children, pinned, collapsed, toggleCollapsed } = props;
+  const { over, setNodeRef } = useDroppable({ id: pinned.id });
+  const isOver = over && over.id === pinned.id;
 
   return (
-    <Stack id={id} direction="row">
+    <Stack ref={setNodeRef} direction="row">
       <Box
         style={{
           borderRight: "5px solid #818181",
@@ -39,14 +39,17 @@ const PinnedTabList = (props: PinnedTabListProps) => {
       <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
         <Stack>
           <ListItem
+            sx={{
+              bgcolor: isOver ? "primary.main" : undefined,
+            }}
             secondaryAction={
-              <IconButton edge="end" onClick={toggleCollapsedStatus}>
+              <IconButton edge="end" onClick={toggleCollapsed}>
                 {collapsed ? <ExpandMore /> : <ExpandLess />}
               </IconButton>
             }
             disablePadding
           >
-            <ListItemButton onClick={toggleCollapsedStatus}>
+            <ListItemButton onClick={toggleCollapsed}>
               <Stack direction="row" spacing={1} alignItems="center">
                 <PushPin fontSize="small" />
                 <ListItemText
@@ -56,21 +59,21 @@ const PinnedTabList = (props: PinnedTabListProps) => {
                     </Typography>
                   }
                 />
-                <Chip label={tabs.length} size="small" color="info" />
+                <Chip
+                  label={pinned.children.length}
+                  size="small"
+                  color="info"
+                />
               </Stack>
             </ListItemButton>
           </ListItem>
         </Stack>
         <Collapse in={!collapsed} timeout="auto" unmountOnExit>
-          <List disablePadding>
-            {tabs.map((tab) => (
-              <TabItem tab={tab} />
-            ))}
-          </List>
+          <List disablePadding>{children}</List>
         </Collapse>
       </List>
     </Stack>
   );
 };
 
-export default PinnedTabList;
+export default PinnedContainer;

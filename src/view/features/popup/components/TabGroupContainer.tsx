@@ -15,15 +15,13 @@ import { TabGroup } from "../../../../model/TabContainer";
 import { useCollapseTabGroup } from "../hooks/useCollapseTabGroup";
 import { useExpandTabGroup } from "../hooks/useExpandTabGroup";
 
-import TabItem from "./TabItem";
-import { SortableItem } from "./TabList";
-
-type GroupedTabListProps = {
+type TabGroupContainerProps = {
+  children: React.ReactNode;
   tabGroup: TabGroup;
 };
 
-const GroupedTabList = (props: GroupedTabListProps) => {
-  const { tabGroup } = props;
+const TabGroupContainer = (props: TabGroupContainerProps) => {
+  const { children, tabGroup } = props;
   const theme = useTheme();
   const collapseTabGroup = useCollapseTabGroup();
   const expandTabGroup = useExpandTabGroup();
@@ -39,19 +37,16 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   };
 
   return (
-    <SortableItem id={tabGroup.id.toString()}>
-      <Stack direction="row">
-        <Box
-          style={{
-            borderRight: `5px solid ${tabGroup.color.code}`,
-            borderRadius: "0 5px 5px 0",
-          }}
-        />
-        <List
-          sx={{ width: "100%", bgcolor: "background.paper" }}
-          disablePadding
-        >
-          <Stack>
+    <Stack direction="row">
+      <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
+        <Stack direction="row">
+          <Box
+            style={{
+              borderRight: `5px solid ${tabGroup.color.code}`,
+              borderRadius: "0 5px 5px 0",
+            }}
+          />
+          <Stack sx={{ width: "calc(100% - 5px)" }}>
             <ListItem
               secondaryAction={
                 <IconButton edge="end" onClick={toggleCollapsedStatus}>
@@ -90,18 +85,14 @@ const GroupedTabList = (props: GroupedTabListProps) => {
                 </Stack>
               </ListItemButton>
             </ListItem>
+            <Collapse in={!tabGroup.collapsed} timeout="auto" unmountOnExit>
+              <List disablePadding>{children}</List>
+            </Collapse>
           </Stack>
-          <Collapse in={!tabGroup.collapsed} timeout="auto" unmountOnExit>
-            <List disablePadding>
-              {tabGroup.children.map((tab) => (
-                <TabItem tab={tab} />
-              ))}
-            </List>
-          </Collapse>
-        </List>
-      </Stack>
-    </SortableItem>
+        </Stack>
+      </List>
+    </Stack>
   );
 };
 
-export default GroupedTabList;
+export default TabGroupContainer;

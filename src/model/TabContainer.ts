@@ -1,16 +1,20 @@
 import { GroupColor } from "./GroupColor";
 import { Tab } from "./Tab";
 
-export type TabContainerId = number | "pinned";
+export type TabContainerId = TabGroupId | PinnedId;
 export type TabContainer = {
   id: TabContainerId;
   children: Tab[];
 };
+
+type PinnedId = "pinned";
 export type Pinned = TabContainer & {
-  id: "pinned";
+  id: PinnedId;
 };
+
+export type TabGroupId = number;
 export type TabGroup = TabContainer & {
-  id: number;
+  id: TabGroupId;
   name: string;
   color: GroupColor;
   collapsed: boolean;
