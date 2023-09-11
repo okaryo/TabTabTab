@@ -1,8 +1,4 @@
 import { useDroppable } from "@dnd-kit/core";
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import PushPin from "@mui/icons-material/PushPin";
@@ -20,21 +16,20 @@ import Typography from "@mui/material/Typography";
 import t from "../../../../i18n/Translations";
 import { Pinned } from "../../../../model/TabContainer";
 
-import TabItem from "./TabItem";
-import { SortableItem } from "./TabList";
-
-type PinnedTabListProps = {
+type PinnedContainerProps = {
+  children: React.ReactNode;
   pinned: Pinned;
   collapsed: boolean;
   toggleCollapsed: () => void;
 };
 
-const PinnedTabList = (props: PinnedTabListProps) => {
-  const { pinned, collapsed, toggleCollapsed } = props;
-  const { isOver, setNodeRef } = useDroppable({ id: pinned.id });
+const PinnedContainer = (props: PinnedContainerProps) => {
+  const { children, pinned, collapsed, toggleCollapsed } = props;
+  const { over, setNodeRef } = useDroppable({ id: pinned.id });
+  const isOver = over && over.id === pinned.id;
 
   return (
-    <Stack id={pinned.id} ref={setNodeRef} direction="row">
+    <Stack ref={setNodeRef} direction="row">
       <Box
         style={{
           borderRight: "5px solid #818181",
@@ -74,23 +69,11 @@ const PinnedTabList = (props: PinnedTabListProps) => {
           </ListItem>
         </Stack>
         <Collapse in={!collapsed} timeout="auto" unmountOnExit>
-          <List disablePadding>
-            <SortableContext
-              id={pinned.id}
-              items={pinned.children.map((child) => child.id.toString())}
-              strategy={verticalListSortingStrategy}
-            >
-              {pinned.children.map((tab) => (
-                <SortableItem key={tab.id} id={tab.id.toString()}>
-                  <TabItem tab={tab} />
-                </SortableItem>
-              ))}
-            </SortableContext>
-          </List>
+          <List disablePadding>{children}</List>
         </Collapse>
       </List>
     </Stack>
   );
 };
 
-export default PinnedTabList;
+export default PinnedContainer;
