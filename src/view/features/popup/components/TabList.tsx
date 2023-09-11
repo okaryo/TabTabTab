@@ -47,9 +47,9 @@ import { useMoveTabGroup } from "../hooks/useMoveTabGroup";
 import { usePinTab } from "../hooks/usePinTab";
 import { useMoveTabOutOfGroup } from "../hooks/useTabOutOfTabGroup";
 
-import GroupedTabList from "./GroupedTabList";
 import PinnedContainer from "./PinnedContainer";
 import SortableTabs from "./SortableTabs";
+import TabGroupContainer from "./TabGroupContainer";
 import TabItem from "./TabItem";
 
 type TabListProps = {
@@ -127,14 +127,16 @@ const TabList = (props: TabListProps) => {
           collapsed={pinnedCollapsed}
           toggleCollapsed={() => setPinnedCollapsed(!pinnedCollapsed)}
         >
-          <SortableTabs id={child.id.toString()} tabs={child.children} />
+          <SortableTabs id={child.id} tabs={child.children} />
         </PinnedContainer>
       );
     }
     if (isTabGroup(child)) {
       return (
         <SortableItem key={child.id} id={child.id.toString()}>
-          <GroupedTabList tabGroup={child} />
+          <TabGroupContainer tabGroup={child}>
+            <SortableTabs id={child.id.toString()} tabs={child.children} />
+          </TabGroupContainer>
         </SortableItem>
       );
     }
@@ -371,7 +373,11 @@ const TabList = (props: TabListProps) => {
     if (!source) return null;
 
     if (isTabGroup(source)) {
-      return <GroupedTabList tabGroup={source} />;
+      return (
+        <TabGroupContainer tabGroup={source}>
+          <SortableTabs id={source.id.toString()} tabs={source.children} />
+        </TabGroupContainer>
+      );
     }
 
     const tab = source as Tab;

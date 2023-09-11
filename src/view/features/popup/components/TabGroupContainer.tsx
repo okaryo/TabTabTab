@@ -1,7 +1,3 @@
-import {
-  SortableContext,
-  verticalListSortingStrategy,
-} from "@dnd-kit/sortable";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
@@ -19,15 +15,13 @@ import { TabGroup } from "../../../../model/TabContainer";
 import { useCollapseTabGroup } from "../hooks/useCollapseTabGroup";
 import { useExpandTabGroup } from "../hooks/useExpandTabGroup";
 
-import TabItem from "./TabItem";
-import { SortableItem } from "./TabList";
-
-type GroupedTabListProps = {
+type TabGroupContainerProps = {
+  children: React.ReactNode;
   tabGroup: TabGroup;
 };
 
-const GroupedTabList = (props: GroupedTabListProps) => {
-  const { tabGroup } = props;
+const TabGroupContainer = (props: TabGroupContainerProps) => {
+  const { children, tabGroup } = props;
   const theme = useTheme();
   const collapseTabGroup = useCollapseTabGroup();
   const expandTabGroup = useExpandTabGroup();
@@ -43,7 +37,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   };
 
   return (
-    <Stack id={tabGroup.id.toString()} direction="row">
+    <Stack direction="row">
       <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
         <Stack direction="row">
           <Box
@@ -92,19 +86,7 @@ const GroupedTabList = (props: GroupedTabListProps) => {
               </ListItemButton>
             </ListItem>
             <Collapse in={!tabGroup.collapsed} timeout="auto" unmountOnExit>
-              <List disablePadding>
-                <SortableContext
-                  id={tabGroup.id.toString()}
-                  items={tabGroup.children.map((child) => child.id.toString())}
-                  strategy={verticalListSortingStrategy}
-                >
-                  {tabGroup.children.map((tab) => (
-                    <SortableItem key={tab.id} id={tab.id.toString()}>
-                      <TabItem tab={tab} />
-                    </SortableItem>
-                  ))}
-                </SortableContext>
-              </List>
+              <List disablePadding>{children}</List>
             </Collapse>
           </Stack>
         </Stack>
@@ -113,4 +95,4 @@ const GroupedTabList = (props: GroupedTabListProps) => {
   );
 };
 
-export default GroupedTabList;
+export default TabGroupContainer;
