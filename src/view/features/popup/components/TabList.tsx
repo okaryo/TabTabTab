@@ -84,18 +84,10 @@ export const SortableItem = (props: SortableItemProps) => {
   );
 };
 
-const selectedWindow = (windows: Window[], selectedIndex: number): Window => {
-  if (selectedIndex === 0) {
-    return windows.find((window) => window.focused);
-  } else {
-    return windows.filter((window) => !window.focused)[selectedIndex - 1];
-  }
-};
-
 const TabList = (props: TabListProps) => {
   const { selectedWindowIndex } = props;
   const { windows, setWindows } = useContext(WindowsContext);
-  const window = selectedWindow(windows, selectedWindowIndex);
+  const window = windows[selectedWindowIndex];
   const [windowsBeforeDrag, setWidnowsBeforeDrag] = useState<Window[]>(null);
   const [activeId, setActiveId] = useState<string>(null);
   const [pinnedCollapsed, setPinnedCollapsed] = useState(true);
@@ -242,10 +234,7 @@ const TabList = (props: TabListProps) => {
 
     if (!over) return;
 
-    const windowBeforeDrag = selectedWindow(
-      windowsBeforeDrag,
-      selectedWindowIndex,
-    );
+    const windowBeforeDrag = windowsBeforeDrag[selectedWindowIndex];
     const source = findWindowChild(
       windowBeforeDrag,
       active.id === "pinned" ? active.id : Number(active.id),
@@ -365,7 +354,7 @@ const TabList = (props: TabListProps) => {
   const getDragOverlay = useMemo(() => {
     if (!activeId) return null;
 
-    const window = selectedWindow(windows, selectedWindowIndex);
+    const window = windows[selectedWindowIndex];
     const source = findWindowChild(
       window,
       activeId === "pinned" ? activeId : Number(activeId),

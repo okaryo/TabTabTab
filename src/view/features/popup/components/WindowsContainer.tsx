@@ -10,7 +10,7 @@ const WindowsContainer = () => {
   const [selectedWindowIndex, setSelectedWindowIndex] = useState(0);
 
   useEffect(() => {
-    if (selectedWindowIndex >= windows.length - 1) {
+    if (selectedWindowIndex >= windows.length) {
       setSelectedWindowIndex(0);
     }
   }, [windows.length, selectedWindowIndex]);

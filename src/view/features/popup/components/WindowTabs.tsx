@@ -43,18 +43,6 @@ const WindowTabs = (props: WindowTabsProps) => {
     onSelectIndex(newValue);
   };
 
-  const currentWindow = windows.find((window) => window.focused);
-  const unfocusedWindows = windows.filter((window) => !window.focused);
-  const unfocusedWindowTabs = unfocusedWindows.map((window, index) => {
-    return (
-      <WindowTab
-        key={window.id}
-        label={`${t.window}${index + 1}`}
-        tabCount={flatTabsInWindow(window).length ?? 0}
-      />
-    );
-  });
-
   return (
     <Box sx={{ borderBottom: 1, borderColor: "divider" }}>
       <Tabs
@@ -63,11 +51,13 @@ const WindowTabs = (props: WindowTabsProps) => {
         variant="scrollable"
         scrollButtons={false}
       >
-        <WindowTab
-          label={t.currentWindow}
-          tabCount={currentWindow ? flatTabsInWindow(currentWindow).length : 0}
-        />
-        {unfocusedWindowTabs}
+        {windows.map((window, index) => (
+          <WindowTab
+            key={window.id}
+            label={window.focused ? t.currentWindow : `${t.window}${index}`}
+            tabCount={flatTabsInWindow(window).length}
+          />
+        ))}
       </Tabs>
     </Box>
   );
