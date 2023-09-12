@@ -18,8 +18,6 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-import { useSortable } from "@dnd-kit/sortable";
-import { CSS } from "@dnd-kit/utilities";
 import List from "@mui/material/List";
 import { useContext, useMemo, useState } from "react";
 
@@ -48,40 +46,13 @@ import { usePinTab } from "../hooks/usePinTab";
 import { useMoveTabOutOfGroup } from "../hooks/useTabOutOfTabGroup";
 
 import PinnedContainer from "./PinnedContainer";
+import SortableItem from "./SortableItem";
 import SortableTabs from "./SortableTabs";
 import TabGroupContainer from "./TabGroupContainer";
 import TabItem from "./TabItem";
 
 type TabListProps = {
   selectedWindowIndex: number;
-};
-type SortableItemProps = {
-  id: string;
-  isDragOverLay?: boolean;
-  style?: React.CSSProperties;
-  children: React.ReactNode;
-};
-
-export const SortableItem = (props: SortableItemProps) => {
-  const { id, style, children } = props;
-  const { active, attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id });
-
-  return (
-    <div
-      ref={setNodeRef}
-      {...attributes}
-      {...listeners}
-      style={{
-        ...style,
-        opacity: active?.id === id ? 0.5 : 1,
-        transform: CSS.Transform.toString(transform),
-        transition: transition,
-      }}
-    >
-      {children}
-    </div>
-  );
 };
 
 const TabList = (props: TabListProps) => {
