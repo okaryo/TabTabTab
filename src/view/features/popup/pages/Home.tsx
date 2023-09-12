@@ -5,11 +5,9 @@ import { PopupSize } from "../../../../model/settings/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
 import Header from "../components/Header";
 import SearchResult from "../components/SearchResult";
-import TabList from "../components/TabList";
-import WindowTabs from "../components/WindowTabs";
+import WindowsContainer from "../components/WindowsContainer";
 
 const Home = () => {
-  const [selectedWindowIndex, setSelectedWindowIndex] = useState(0);
   const [searchText, setSearchText] = useState("");
   const [popupSizeState, setPopupSizeState] = useState<PopupSize>(
     PopupSize.default(),
@@ -36,15 +34,7 @@ const Home = () => {
     >
       <Header onChangeSearchText={onChangeSearchText} />
       {searchText.length > 0 && <SearchResult searchText={searchText} />}
-      {searchText.length === 0 && (
-        <>
-          <WindowTabs
-            selectedIndex={selectedWindowIndex}
-            onSelectIndex={setSelectedWindowIndex}
-          />
-          <TabList selectedWindowIndex={selectedWindowIndex} />
-        </>
-      )}
+      {searchText.length === 0 && <WindowsContainer />}
     </Box>
   );
 };
