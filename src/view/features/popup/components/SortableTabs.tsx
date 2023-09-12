@@ -5,8 +5,8 @@ import {
 
 import { Tab } from "../../../../model/Tab";
 
+import SortableItem from "./SortableItem";
 import TabItem from "./TabItem";
-import { SortableItem } from "./TabList";
 
 type SortableTabsProps = {
   id: string;
