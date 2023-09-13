@@ -158,6 +158,8 @@ const TabList = (props: TabListProps) => {
 
       let destIndex: number;
       if (isPinned(destContainer)) {
+        if (isTabGroup(source)) return;
+
         destIndex = pinnedCollapsed ? destContainer.children.length : 0;
         newWindow = moveTabOrTabGroup(
           window,
