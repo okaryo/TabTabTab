@@ -55,7 +55,10 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
               }
               disablePadding
             >
-              <ListItemButton onClick={toggleCollapsedStatus}>
+              <ListItemButton
+                onClick={toggleCollapsedStatus}
+                style={{ cursor: "inherit" }}
+              >
                 <Stack direction="row" spacing={1} alignItems="center">
                   {tabGroup.name !== "" && (
                     <Typography

@@ -128,6 +128,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     >
       <ListItemButton
         sx={{ width: "100%", pt: 0, pb: 0 }}
+        style={{ cursor: "inherit" }}
         color="info"
         selected={tab.highlighted || selected}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
