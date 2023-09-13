@@ -1,8 +1,10 @@
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Collapse from "@mui/material/Collapse";
+import grey from "@mui/material/colors/grey";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -10,6 +12,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useState } from "react";
 
 import { TabGroup } from "../../../../model/TabContainer";
 import { useCollapseTabGroup } from "../hooks/useCollapseTabGroup";
@@ -35,6 +38,7 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
       expandTabGroup(tabGroup.id);
     }
   };
+  const [isHovered, setIsHovered] = useState(false);
 
   return (
     <Stack direction="row">
@@ -54,8 +58,22 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                 </IconButton>
               }
               disablePadding
+              onMouseEnter={() => setIsHovered(true)}
+              onMouseLeave={() => setIsHovered(false)}
             >
-              <ListItemButton onClick={toggleCollapsedStatus}>
+              <ListItemButton
+                onClick={toggleCollapsedStatus}
+                style={{ cursor: "inherit" }}
+              >
+                {isHovered && (
+                  <DragIndicatorIcon
+                    sx={{ color: grey[400] }}
+                    style={{
+                      position: "absolute",
+                      left: 0,
+                    }}
+                  />
+                )}
                 <Stack direction="row" spacing={1} alignItems="center">
                   {tabGroup.name !== "" && (
                     <Typography

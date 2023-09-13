@@ -9,8 +9,15 @@ type SortableItemProps = {
 
 const SortableItem = (props: SortableItemProps) => {
   const { id, style, children } = props;
-  const { active, attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id });
+  const {
+    active,
+    attributes,
+    listeners,
+    isDragging,
+    setNodeRef,
+    transform,
+    transition,
+  } = useSortable({ id });
 
   return (
     <div
@@ -19,6 +26,7 @@ const SortableItem = (props: SortableItemProps) => {
       {...listeners}
       style={{
         ...style,
+        cursor: isDragging ? "grabbing" : "pointer",
         opacity: active?.id === id ? 0.5 : 1,
         transform: CSS.Transform.toString(transform),
         transition: transition,

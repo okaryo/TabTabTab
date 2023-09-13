@@ -1,7 +1,9 @@
 import Clear from "@mui/icons-material/Clear";
+import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import Chip from "@mui/material/Chip";
+import grey from "@mui/material/colors/grey";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
@@ -128,11 +130,21 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     >
       <ListItemButton
         sx={{ width: "100%", pt: 0, pb: 0 }}
+        style={{ cursor: "inherit" }}
         color="info"
         selected={tab.highlighted || selected}
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={onTapTabItem}
       >
+        {isHovered && (
+          <DragIndicatorIcon
+            sx={{ color: grey[400] }}
+            style={{
+              position: "absolute",
+              left: 0,
+            }}
+          />
+        )}
         <TabFavicon
           url={tab.favIconUrl}
           shouldShowCheckIcon={isMenuActionCompleted}

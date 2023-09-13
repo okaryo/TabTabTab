@@ -334,15 +334,21 @@ const TabList = (props: TabListProps) => {
 
     if (isTabGroup(source)) {
       return (
-        <TabGroupContainer tabGroup={source}>
-          <SortableTabs id={source.id.toString()} tabs={source.children} />
-        </TabGroupContainer>
+        <div style={{ cursor: "grabbing" }}>
+          <TabGroupContainer tabGroup={source}>
+            <SortableTabs id={source.id.toString()} tabs={source.children} />
+          </TabGroupContainer>
+        </div>
       );
     }
 
     const tab = source as Tab;
-    return <TabItem tab={tab} />;
-  }, [activeId]);
+    return (
+      <div style={{ cursor: "grabbing" }}>
+        <TabItem tab={tab} />
+      </div>
+    );
+  }, [activeId, selectedWindowIndex, windows]);
 
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
