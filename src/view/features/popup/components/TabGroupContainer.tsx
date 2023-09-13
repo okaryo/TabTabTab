@@ -1,10 +1,12 @@
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Collapse from "@mui/material/Collapse";
 import grey from "@mui/material/colors/grey";
+import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -17,6 +19,8 @@ import { useState } from "react";
 import { TabGroup } from "../../../../model/TabContainer";
 import { useCollapseTabGroup } from "../hooks/useCollapseTabGroup";
 import { useExpandTabGroup } from "../hooks/useExpandTabGroup";
+
+import TabGroupActionMenu from "./TabGroupActionMenu";
 
 type TabGroupContainerProps = {
   children: React.ReactNode;
@@ -40,6 +44,13 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
   };
   const [isHovered, setIsHovered] = useState(false);
 
+  const [menuAnchorElement, setMenuAnchorElement] =
+    useState<HTMLElement | null>(null);
+  const onClickTabGroupActionMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setMenuAnchorElement(event.currentTarget);
+  };
+  const onCloseMenu = () => setMenuAnchorElement(null);
+
   return (
     <Stack direction="row">
       <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
@@ -53,9 +64,20 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
           <Stack sx={{ width: "calc(100% - 5px)" }}>
             <ListItem
               secondaryAction={
-                <IconButton edge="end" onClick={toggleCollapsedStatus}>
-                  {tabGroup.collapsed ? <ExpandMore /> : <ExpandLess />}
-                </IconButton>
+                isHovered && (
+                  <Stack direction="row">
+                    <IconButton
+                      edge="start"
+                      onClick={onClickTabGroupActionMenu}
+                    >
+                      <MoreVertIcon />
+                    </IconButton>
+                    <Divider orientation="vertical" variant="middle" flexItem />
+                    <IconButton edge="end" onClick={toggleCollapsedStatus}>
+                      {tabGroup.collapsed ? <ExpandMore /> : <ExpandLess />}
+                    </IconButton>
+                  </Stack>
+                )
               }
               disablePadding
               onMouseEnter={() => setIsHovered(true)}
@@ -102,6 +124,12 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                   />
                 </Stack>
               </ListItemButton>
+              <TabGroupActionMenu
+                tabGroup={tabGroup}
+                isOpenMenu={Boolean(menuAnchorElement)}
+                anchorElement={menuAnchorElement}
+                onCloseMenu={onCloseMenu}
+              />
             </ListItem>
             <Collapse in={!tabGroup.collapsed} timeout="auto" unmountOnExit>
               <List disablePadding>{children}</List>
