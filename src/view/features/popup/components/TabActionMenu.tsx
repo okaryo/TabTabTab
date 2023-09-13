@@ -106,7 +106,6 @@ const TabActionMenu = (props: TabActionMenuProps) => {
 
   return (
     <Menu
-      id={`tab-action-menu-${tab.id}`}
       open={isOpenMenu}
       onClose={onCloseMenu}
       anchorEl={anchorElement}
