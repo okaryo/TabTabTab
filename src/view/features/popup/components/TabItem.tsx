@@ -33,7 +33,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab.id);
   const [isHovered, setIsHovered] = useState(false);
-  const shouldShowCloseButton = tab.highlighted || isHovered;
+  const shouldShowActions = tab.highlighted || isHovered;
 
   const elapsedTimeSinceLastActiveText = (): string => {
     const duration = durationSinceLastActivatedAt(tab);
@@ -103,12 +103,12 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
       ref={ref}
       sx={{
         "& .MuiListItemButton-root": {
-          pr: shouldShowCloseButton ? 11 : null,
+          pr: shouldShowActions ? 11 : null,
         },
         bgcolor: "background.paper",
       }}
       secondaryAction={
-        shouldShowCloseButton && (
+        shouldShowActions && (
           <Stack direction="row">
             <IconButton edge="start" onClick={onClickTabActionMenu}>
               <MoreVertIcon />

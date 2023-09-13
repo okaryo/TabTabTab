@@ -95,6 +95,14 @@
     "message": "表示範囲をスクリーンショット",
     "description": ""
   },
+  "ungrup": {
+    "message": "グループを解除",
+    "description": ""
+  },
+  "close_group": {
+    "message": "グループを閉じる",
+    "description": ""
+  },
   "duplicated": {
     "message": "重複",
     "description": ""

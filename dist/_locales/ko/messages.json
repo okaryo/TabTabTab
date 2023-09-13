@@ -95,6 +95,14 @@
     "message": "보이는 영역 캡쳐",
     "description": ""
   },
+  "ungrup": {
+    "message": "그룹 해제",
+    "description": ""
+  },
+  "close_group": {
+    "message": "그룹 닫기",
+    "description": ""
+  },
   "duplicated": {
     "message": "중복됨",
     "description": ""

@@ -95,6 +95,14 @@
     "message": "Zone visible de la capture d'écran",
     "description": ""
   },
+  "ungrup": {
+    "message": "Dégrouper",
+    "description": ""
+  },
+  "close_group": {
+    "message": "Fermer le groupe",
+    "description": ""
+  },
   "duplicated": {
     "message": "Duppliqué",
     "description": ""
