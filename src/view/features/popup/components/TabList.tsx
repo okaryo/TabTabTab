@@ -348,7 +348,7 @@ const TabList = (props: TabListProps) => {
         <TabItem tab={tab} />
       </div>
     );
-  }, [activeId]);
+  }, [activeId, selectedWindowIndex, windows]);
 
   return (
     <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
