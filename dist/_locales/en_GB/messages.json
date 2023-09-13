@@ -95,6 +95,14 @@
     "message": "Screenshot Visible Area",
     "description": ""
   },
+  "ungrup": {
+    "message": "Ungroup",
+    "description": ""
+  },
+  "close_group": {
+    "message": "Close Group",
+    "description": ""
+  },
   "duplicated": {
     "message": "Duplicated",
     "description": ""

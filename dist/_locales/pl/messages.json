@@ -95,6 +95,14 @@
     "message": "Zrzut Ekranu Widocznego Obszaru",
     "description": ""
   },
+  "ungrup": {
+    "message": "Rozgrupuj",
+    "description": ""
+  },
+  "close_group": {
+    "message": "Zamknij grupę",
+    "description": ""
+  },
   "duplicated": {
     "message": "Zduplikowany",
     "description": ""

@@ -84,6 +84,12 @@ class Translations {
   get screenshotVisibleArea() {
     return chrome.i18n.getMessage("screenshot_visible_area");
   }
+  get ungroup() {
+    return chrome.i18n.getMessage("ungroup");
+  }
+  get closeGroup() {
+    return chrome.i18n.getMessage("close_group");
+  }
   get duplicated() {
     return chrome.i18n.getMessage("duplicated");
   }
