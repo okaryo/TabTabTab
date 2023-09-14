@@ -45,13 +45,13 @@ const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
   const menus = [
     <ActionMenu
       key={t.ungroup}
-      label={"Ungroup"}
+      label={t.ungroup}
       icon={<CropFreeIcon fontSize="small" />}
       action={() => ungroup(tabGroup)}
     />,
     <ActionMenu
       key={t.closeGroup}
-      label={"Close Group"}
+      label={t.closeGroup}
       icon={<HighlightOffIcon fontSize="small" />}
       action={() => closeTabGroup(tabGroup)}
     />,
