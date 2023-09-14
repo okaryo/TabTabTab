@@ -20,7 +20,7 @@ import { focusTab } from "../../../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/Windows";
 import { useCloseTab } from "../hooks/useCloseTab";
 
-import TabActionMenu from "./TabActionMenu";
+import ActionMenu from "./ActionMenu";
 import TabFavicon from "./TabFavicon";
 
 type TabItemProps = {
@@ -202,8 +202,8 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
           }
         />
       </ListItemButton>
-      <TabActionMenu
-        tab={tab}
+      <ActionMenu
+        target={tab}
         isOpenMenu={Boolean(menuAnchorElement)}
         anchorElement={menuAnchorElement}
         onCloseMenu={onCloseMenu}
