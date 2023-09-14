@@ -95,12 +95,20 @@
     "message": "보이는 영역 캡쳐",
     "description": ""
   },
-  "ungrup": {
+  "ungroup": {
     "message": "그룹 해제",
     "description": ""
   },
   "close_group": {
     "message": "그룹 닫기",
+    "description": ""
+  },
+  "unpin_all": {
+    "message": "모두 고정 해제",
+    "description": ""
+  },
+  "close_all": {
+    "message": "모두 닫기",
     "description": ""
   },
   "duplicated": {

@@ -95,12 +95,20 @@
     "message": "表示範囲をスクリーンショット",
     "description": ""
   },
-  "ungrup": {
+  "ungroup": {
     "message": "グループを解除",
     "description": ""
   },
   "close_group": {
     "message": "グループを閉じる",
+    "description": ""
+  },
+  "unpin_all": {
+    "message": "全ての固定を解除",
+    "description": ""
+  },
+  "close_all": {
+    "message": "タブを全て閉じる",
     "description": ""
   },
   "duplicated": {

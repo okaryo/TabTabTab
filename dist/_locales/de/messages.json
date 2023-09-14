@@ -95,12 +95,20 @@
     "message": "Screenshot sichtbarer Bereich",
     "description": ""
   },
-  "ungrup": {
+  "ungroup": {
     "message": "Gruppierung aufheben",
     "description": ""
   },
   "close_group": {
     "message": "Gruppe schließen",
+    "description": ""
+  },
+  "unpin_all": {
+    "message": "Alle lösen",
+    "description": ""
+  },
+  "close_all": {
+    "message": "Alle schließen",
     "description": ""
   },
   "duplicated": {

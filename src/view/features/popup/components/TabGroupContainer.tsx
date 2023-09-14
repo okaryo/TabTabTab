@@ -20,7 +20,7 @@ import { TabGroup } from "../../../../model/TabContainer";
 import { useCollapseTabGroup } from "../hooks/useCollapseTabGroup";
 import { useExpandTabGroup } from "../hooks/useExpandTabGroup";
 
-import TabGroupActionMenu from "./TabGroupActionMenu";
+import ActionMenu from "./ActionMenu";
 
 type TabGroupContainerProps = {
   children: React.ReactNode;
@@ -64,20 +64,26 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
           <Stack sx={{ width: "calc(100% - 5px)" }}>
             <ListItem
               secondaryAction={
-                isHovered && (
-                  <Stack direction="row">
-                    <IconButton
-                      edge="start"
-                      onClick={onClickTabGroupActionMenu}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
-                    <Divider orientation="vertical" variant="middle" flexItem />
-                    <IconButton edge="end" onClick={toggleCollapsedStatus}>
-                      {tabGroup.collapsed ? <ExpandMore /> : <ExpandLess />}
-                    </IconButton>
-                  </Stack>
-                )
+                <Stack direction="row">
+                  {isHovered && (
+                    <>
+                      <IconButton
+                        edge="start"
+                        onClick={onClickTabGroupActionMenu}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                      <Divider
+                        orientation="vertical"
+                        variant="middle"
+                        flexItem
+                      />
+                    </>
+                  )}
+                  <IconButton edge="end" onClick={toggleCollapsedStatus}>
+                    {tabGroup.collapsed ? <ExpandMore /> : <ExpandLess />}
+                  </IconButton>
+                </Stack>
               }
               disablePadding
               onMouseEnter={() => setIsHovered(true)}
@@ -124,8 +130,8 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                   />
                 </Stack>
               </ListItemButton>
-              <TabGroupActionMenu
-                tabGroup={tabGroup}
+              <ActionMenu
+                target={tabGroup}
                 isOpenMenu={Boolean(menuAnchorElement)}
                 anchorElement={menuAnchorElement}
                 onCloseMenu={onCloseMenu}

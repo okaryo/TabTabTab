@@ -1,3 +1,5 @@
+import { Tab } from "../model/Tab";
+
 import {
   ChromeSessionStorage,
   LastActivatedAtStoredData,
@@ -66,4 +68,15 @@ export const moveTab = async (tabId: number, index: number) => {
 export const moveTabOutOfGroup = async (tabId: number, index: number) => {
   await chrome.tabs.ungroup(tabId);
   await chrome.tabs.move(tabId, { index });
+};
+
+export const unpinAllTabs = async (tabs: Tab[]) => {
+  for (const tab of tabs) {
+    await unpinTab(tab.id);
+  }
+};
+
+export const closeAllTabs = async (tabs: Tab[]) => {
+  const ids = tabs.map((tab) => tab.id);
+  await chrome.tabs.remove(ids);
 };
