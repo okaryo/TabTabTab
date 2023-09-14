@@ -90,6 +90,12 @@ class Translations {
   get closeGroup() {
     return chrome.i18n.getMessage("close_group");
   }
+  get unpinAll() {
+    return chrome.i18n.getMessage("unpin_all");
+  }
+  get closeAll() {
+    return chrome.i18n.getMessage("close_all");
+  }
   get duplicated() {
     return chrome.i18n.getMessage("duplicated");
   }

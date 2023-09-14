@@ -103,6 +103,14 @@
     "message": "Close Group",
     "description": ""
   },
+  "unpin_all": {
+    "message": "Unpin All",
+    "description": ""
+  },
+  "close_all": {
+    "message": "Close All",
+    "description": ""
+  },
   "duplicated": {
     "message": "Duplicated",
     "description": ""
