@@ -36,7 +36,7 @@ const PinnedContainer = (props: PinnedContainerProps) => {
   const [isHovered, setIsHovered] = useState(false);
   const [menuAnchorElement, setMenuAnchorElement] =
     useState<HTMLElement | null>(null);
-  const onClickTabGroupActionMenu = (event: React.MouseEvent<HTMLElement>) => {
+  const onClickPinnedActionMenu = (event: React.MouseEvent<HTMLElement>) => {
     setMenuAnchorElement(event.currentTarget);
   };
   const onCloseMenu = () => setMenuAnchorElement(null);
@@ -61,7 +61,7 @@ const PinnedContainer = (props: PinnedContainerProps) => {
                   <>
                     <IconButton
                       edge="start"
-                      onClick={onClickTabGroupActionMenu}
+                      onClick={onClickPinnedActionMenu}
                     >
                       <MoreVertIcon />
                     </IconButton>
