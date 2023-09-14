@@ -64,20 +64,26 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
           <Stack sx={{ width: "calc(100% - 5px)" }}>
             <ListItem
               secondaryAction={
-                isHovered && (
-                  <Stack direction="row">
-                    <IconButton
-                      edge="start"
-                      onClick={onClickTabGroupActionMenu}
-                    >
-                      <MoreVertIcon />
-                    </IconButton>
-                    <Divider orientation="vertical" variant="middle" flexItem />
-                    <IconButton edge="end" onClick={toggleCollapsedStatus}>
-                      {tabGroup.collapsed ? <ExpandMore /> : <ExpandLess />}
-                    </IconButton>
-                  </Stack>
-                )
+                <Stack direction="row">
+                  {isHovered && (
+                    <>
+                      <IconButton
+                        edge="start"
+                        onClick={onClickTabGroupActionMenu}
+                      >
+                        <MoreVertIcon />
+                      </IconButton>
+                      <Divider
+                        orientation="vertical"
+                        variant="middle"
+                        flexItem
+                      />
+                    </>
+                  )}
+                  <IconButton edge="end" onClick={toggleCollapsedStatus}>
+                    {tabGroup.collapsed ? <ExpandMore /> : <ExpandLess />}
+                  </IconButton>
+                </Stack>
               }
               disablePadding
               onMouseEnter={() => setIsHovered(true)}
