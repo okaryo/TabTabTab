@@ -1,28 +1,28 @@
 /* eslint @typescript-eslint/no-floating-promises: 0 */
 import {
   deleteLastActivatedAtOfTab,
-  udpateLastActivatedAtOfTab,
+  updateLastActivatedAtOfTab,
 } from "../repository/TabsRepository";
 
 export const addListenerOnTabActivated = () => {
   chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo;
-    udpateLastActivatedAtOfTab(tabId);
+    updateLastActivatedAtOfTab(tabId);
   });
   chrome.tabs.onAttached.addListener((tabId) => {
-    udpateLastActivatedAtOfTab(tabId);
+    updateLastActivatedAtOfTab(tabId);
   });
   chrome.tabs.onHighlighted.addListener((highlightInfo) => {
     const { tabIds } = highlightInfo;
     for (const tabId of tabIds) {
-      udpateLastActivatedAtOfTab(tabId);
+      updateLastActivatedAtOfTab(tabId);
     }
   });
   chrome.tabs.onMoved.addListener((tabId) => {
-    udpateLastActivatedAtOfTab(tabId);
+    updateLastActivatedAtOfTab(tabId);
   });
   chrome.tabs.onUpdated.addListener((tabId) => {
-    udpateLastActivatedAtOfTab(tabId);
+    updateLastActivatedAtOfTab(tabId);
   });
 };
 

@@ -22,7 +22,7 @@ type SettingForm = {
   height: string;
   width: string;
 };
-type SubmittionState = {
+type SubmissionState = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
@@ -38,7 +38,7 @@ const PopupSizeSettingForm = () => {
     height: "500",
     width: "500",
   });
-  const [submittionState, setSubmittionState] = useState<SubmittionState>({
+  const [submissionState, setSubmissionState] = useState<SubmissionState>({
     isLoading: false,
     isError: false,
     errorMessage: "",
@@ -67,11 +67,11 @@ const PopupSizeSettingForm = () => {
   };
 
   const onSave = async () => {
-    setSubmittionState({ isLoading: false, isError: false, errorMessage: "" });
+    setSubmissionState({ isLoading: false, isError: false, errorMessage: "" });
 
     const { height, width } = settingState;
     if (!Number.isInteger(Number(height)) || !Number.isInteger(Number(width))) {
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: true,
         errorMessage: t.popupSizeValidationErrorValueFormat,
@@ -84,7 +84,7 @@ const PopupSizeSettingForm = () => {
       MIN_WIDTH > Number(width) ||
       Number(width) > MAX_WIDTH
     ) {
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: true,
         errorMessage: t.popupSizeValidationErrorValueRange,
@@ -93,17 +93,17 @@ const PopupSizeSettingForm = () => {
     }
 
     try {
-      setSubmittionState({ isLoading: true, isError: false, errorMessage: "" });
+      setSubmissionState({ isLoading: true, isError: false, errorMessage: "" });
       const setting = new PopupSize(Number(height), Number(width));
       await updatePopupSizeSetting(setting);
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: false,
         errorMessage: "",
       });
       setIsOpenSnackBarState(true);
     } catch (e) {
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: true,
         errorMessage: t.savedError,
@@ -132,7 +132,7 @@ const PopupSizeSettingForm = () => {
           }
         />
         <FormControl
-          error={submittionState.isError}
+          error={submissionState.isError}
           sx={{ width: "100%", pt: 1 }}
         >
           <Stack spacing={2}>
@@ -166,15 +166,15 @@ const PopupSizeSettingForm = () => {
             </Box>
             <Button
               variant="contained"
-              disabled={submittionState.isLoading}
+              disabled={submissionState.isLoading}
               sx={{ textTransform: "none" }}
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={onSave}
             >
-              {submittionState.isLoading ? `${t.saving}...` : t.save}
+              {submissionState.isLoading ? `${t.saving}...` : t.save}
             </Button>
             <FormHelperText style={{ marginTop: "4px" }}>
-              {submittionState.errorMessage}
+              {submissionState.errorMessage}
             </FormHelperText>
             <Snackbar
               open={isOpenSnackBarState}

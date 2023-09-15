@@ -18,7 +18,7 @@ export const removeTab = async (tabId: number) => {
   await chrome.tabs.remove(tabId);
 };
 
-export const udpateLastActivatedAtOfTab = async (tabId: number) => {
+export const updateLastActivatedAtOfTab = async (tabId: number) => {
   let { last_activated_at } = (await chrome.storage.session.get(
     ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
   )) as LastActivatedAtStoredData;

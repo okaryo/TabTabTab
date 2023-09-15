@@ -17,7 +17,7 @@ import {
   updatePopupElementScaleSetting,
 } from "../../../repository/SettingsRepository";
 
-type SubmittionState = {
+type SubmissionState = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
@@ -28,7 +28,7 @@ const PopupFontAndIconScaleSettingForm = () => {
   const MAX_SCALE = 150;
 
   const [settingState, setSettingState] = useState("100");
-  const [submittionState, setSubmittionState] = useState<SubmittionState>({
+  const [submissionState, setSubmissionState] = useState<SubmissionState>({
     isLoading: false,
     isError: false,
     errorMessage: "",
@@ -50,10 +50,10 @@ const PopupFontAndIconScaleSettingForm = () => {
   };
 
   const onSave = async () => {
-    setSubmittionState({ isLoading: false, isError: false, errorMessage: "" });
+    setSubmissionState({ isLoading: false, isError: false, errorMessage: "" });
 
     if (!Number.isInteger(Number(settingState))) {
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: true,
         errorMessage: t.popupElementScaleValidationErrorValueFormat,
@@ -61,7 +61,7 @@ const PopupFontAndIconScaleSettingForm = () => {
       return;
     }
     if (MIN_SCALE > Number(settingState) || Number(settingState) > MAX_SCALE) {
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: true,
         errorMessage: t.popupElementScaleValidationErrorValueRange,
@@ -70,16 +70,16 @@ const PopupFontAndIconScaleSettingForm = () => {
     }
 
     try {
-      setSubmittionState({ isLoading: true, isError: false, errorMessage: "" });
+      setSubmissionState({ isLoading: true, isError: false, errorMessage: "" });
       await updatePopupElementScaleSetting(Number(settingState));
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: false,
         errorMessage: "",
       });
       setIsOpenSnackBarState(true);
     } catch (e) {
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: true,
         errorMessage: t.savedError,
@@ -108,7 +108,7 @@ const PopupFontAndIconScaleSettingForm = () => {
           }
         />
         <FormControl
-          error={submittionState.isError}
+          error={submissionState.isError}
           sx={{ width: "100%", pt: 1 }}
         >
           <Stack spacing={2}>
@@ -129,15 +129,15 @@ const PopupFontAndIconScaleSettingForm = () => {
             </Box>
             <Button
               variant="contained"
-              disabled={submittionState.isLoading}
+              disabled={submissionState.isLoading}
               sx={{ textTransform: "none" }}
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={onSave}
             >
-              {submittionState.isLoading ? `${t.saving}...` : t.save}
+              {submissionState.isLoading ? `${t.saving}...` : t.save}
             </Button>
             <FormHelperText style={{ marginTop: "4px" }}>
-              {submittionState.errorMessage}
+              {submissionState.errorMessage}
             </FormHelperText>
             <Snackbar
               open={isOpenSnackBarState}
