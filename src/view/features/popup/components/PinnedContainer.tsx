@@ -59,10 +59,7 @@ const PinnedContainer = (props: PinnedContainerProps) => {
               <Stack direction="row">
                 {isHovered && (
                   <>
-                    <IconButton
-                      edge="start"
-                      onClick={onClickPinnedActionMenu}
-                    >
+                    <IconButton edge="start" onClick={onClickPinnedActionMenu}>
                       <MoreVertIcon />
                     </IconButton>
                     <Divider orientation="vertical" variant="middle" flexItem />
