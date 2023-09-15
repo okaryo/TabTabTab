@@ -59,7 +59,7 @@ const TabList = (props: TabListProps) => {
   const { selectedWindowIndex } = props;
   const { windows, setWindows } = useContext(WindowsContext);
   const window = windows[selectedWindowIndex];
-  const [windowsBeforeDrag, setWidnowsBeforeDrag] = useState<Window[]>(null);
+  const [windowsBeforeDrag, setWindowsBeforeDrag] = useState<Window[]>(null);
   const [activeId, setActiveId] = useState<string>(null);
   const [pinnedCollapsed, setPinnedCollapsed] = useState(true);
 
@@ -118,14 +118,14 @@ const TabList = (props: TabListProps) => {
     }
 
     setActiveId(null);
-    setWidnowsBeforeDrag(null);
+    setWindowsBeforeDrag(null);
   };
 
   const onDragStart = (event: DragStartEvent) => {
     const { active } = event;
 
     setActiveId(active.id.toString());
-    setWidnowsBeforeDrag(windows);
+    setWindowsBeforeDrag(windows);
   };
 
   const onDragOver = (

@@ -7,7 +7,7 @@ import { WindowsContext } from "../contexts/Windows";
 export const useCloseTab = (): ((tabId: number) => Promise<void>) => {
   const { setWindows } = useContext(WindowsContext);
 
-  const closeTab = useCallback(
+  const callback = useCallback(
     async (tabId: number) => {
       await removeTab(tabId);
       const newWindows = await getWindows();
@@ -16,5 +16,5 @@ export const useCloseTab = (): ((tabId: number) => Promise<void>) => {
     [setWindows],
   );
 
-  return closeTab;
+  return callback;
 };

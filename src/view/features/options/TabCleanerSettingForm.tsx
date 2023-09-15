@@ -27,12 +27,12 @@ type SettingForm = {
   duration: string;
   durationUnit: DurationUnit;
 };
-type SubmittionState = {
+type SubmissionState = {
   isLoading: boolean;
   isError: boolean;
   errorMessage: string;
 };
-type DurationErrorState = Omit<SubmittionState, "isLoading">;
+type DurationErrorState = Omit<SubmissionState, "isLoading">;
 
 const TabCleanerSettingForm = () => {
   const [settingState, setSettingState] = useState<SettingForm>({
@@ -42,7 +42,7 @@ const TabCleanerSettingForm = () => {
   });
   const [durationErrorState, setDurationErrorState] =
     useState<DurationErrorState>({ isError: false, errorMessage: "" });
-  const [submittionState, setSubmittionState] = useState<SubmittionState>({
+  const [submissionState, setSubmissionState] = useState<SubmissionState>({
     isLoading: false,
     isError: false,
     errorMessage: "",
@@ -91,12 +91,12 @@ const TabCleanerSettingForm = () => {
   };
 
   const onSave = async () => {
-    setSubmittionState({ isLoading: false, isError: false, errorMessage: "" });
+    setSubmissionState({ isLoading: false, isError: false, errorMessage: "" });
 
     const durationErrorState = validateDurationValue(settingState.duration);
     if (durationErrorState.isError) {
       setDurationErrorState(durationErrorState);
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: true,
         errorMessage: t.tabCleanerErrorOnSave,
@@ -105,21 +105,21 @@ const TabCleanerSettingForm = () => {
     }
 
     try {
-      setSubmittionState({ isLoading: true, isError: false, errorMessage: "" });
+      setSubmissionState({ isLoading: true, isError: false, errorMessage: "" });
       const setting = new TabCleaner(
         settingState.isEnabled,
         Number(settingState.duration),
         settingState.durationUnit,
       );
       await updateTabCleanerSetting(setting);
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: false,
         errorMessage: "",
       });
       setIsOpenSnackBarState(true);
     } catch (e) {
-      setSubmittionState({
+      setSubmissionState({
         isLoading: false,
         isError: true,
         errorMessage: t.savedError,
@@ -138,7 +138,7 @@ const TabCleanerSettingForm = () => {
             </Typography>
           }
         />
-        <FormControl error={submittionState.isError} sx={{ width: "100%" }}>
+        <FormControl error={submissionState.isError} sx={{ width: "100%" }}>
           <Stack spacing={2}>
             <Box>
               <FormControlLabel
@@ -191,15 +191,15 @@ const TabCleanerSettingForm = () => {
             </Stack>
             <Button
               variant="contained"
-              disabled={submittionState.isLoading}
+              disabled={submissionState.isLoading}
               sx={{ textTransform: "none" }}
               // eslint-disable-next-line @typescript-eslint/no-misused-promises
               onClick={onSave}
             >
-              {submittionState.isLoading ? `${t.saving}...` : t.save}
+              {submissionState.isLoading ? `${t.saving}...` : t.save}
             </Button>
             <FormHelperText style={{ marginTop: "4px" }}>
-              {submittionState.errorMessage}
+              {submissionState.errorMessage}
             </FormHelperText>
             <Snackbar
               open={isOpenSnackBarState}

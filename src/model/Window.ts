@@ -165,16 +165,16 @@ export const hasDuplicatedTabs = (
   windows: Window[],
   targetTab: Tab,
 ): boolean => {
-  const isDupulicated = (a: Tab, b: Tab): boolean => {
+  const isDuplicated = (a: Tab, b: Tab): boolean => {
     return a.id !== b.id && a.title === b.title && a.url.href === b.url.href;
   };
 
   return windows.some((window) => {
     return window.children.some((child) => {
       if (isTabContainer(child)) {
-        return child.children.some((tab) => isDupulicated(tab, targetTab));
+        return child.children.some((tab) => isDuplicated(tab, targetTab));
       }
-      return isDupulicated(child, targetTab);
+      return isDuplicated(child, targetTab);
     });
   });
 };
