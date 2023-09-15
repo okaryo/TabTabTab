@@ -182,7 +182,7 @@ const TabList = (props: TabListProps) => {
       const destIndex = destContainer?.children.findIndex(
         (child) => child.id === dest.id,
       );
-      if (!destContainer || !destIndex) return;
+      if (!destContainer || destIndex === -1) return;
 
       newWindow = moveTabOrTabGroup(
         window,
