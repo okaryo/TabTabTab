@@ -6,21 +6,22 @@ TabTabTab is a Chrome extension that supports your browsing by improving tab man
 
 [👉 ChromeWebStore](https://chrome.google.com/webstore/detail/tabtabtab/hfmnidllojimehmfjkclnadpebibhgoi)
 
-### Features
+### 🌟 Key Features
 
-* Display a list of open windows and tabs (also supports grouped tabs)
-* Rearrange tabs via drag & drop
-* Show elapsed time since the last active tab
-* Display duplicated tabs
-* Basic tab operations like bookmarking, URL copying, pinning, etc.
-* Capture screenshots of the active tab's visible area
-* Navigate to selected tabs
-* Search for tabs
-* Close tabs
-* Automatic cleanup of tabs that haven't been used for a certain period (toggle on/off and set duration from the settings page)
-* Dark mode
+* Comprehensive Tab Overview: View all your windows and tabs, including those grouped, in one unified list.
+* Flexible Drag & Drop: Organize your tabs freely - be it pinned, grouped, or standalone.
 
-### ScreenShots
+### ✨ Additional Features
+
+* Duplicate Tab Alert: Avoid clutter with automated alerts for duplicate tabs.
+* Time Tracking: Keep track of how long it's been since you last accessed a tab.
+Essential Tab Operations: Bookmarking, URL copying, pinning, and more.
+* Screenshot Tool: Quickly capture the active tab's visible area.
+* Efficient Navigation & Search: Jump to or find your desired tabs in seconds.
+* Automatic Cleanup: Auto-remove tabs you haven't accessed based on your preferences.
+* Dark Mode: Switch to a darker, more focused look whenever you wish.
+
+### 👀 ScreenShots
 
 ![ScreenShot1](https://github.com/okaryo/TabTabTab/assets/44517313/060de80f-fe48-4ae8-9474-3511da33aac4)
 ![ScreenShot2](https://github.com/okaryo/TabTabTab/assets/44517313/42a6db7f-5795-4f32-bf52-44dbd5a2e4bb)
