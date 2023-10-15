@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import { useTheme } from "@mui/material/styles";
 import Tabs from "@mui/material/Tabs";
 import { Dispatch, useContext, useEffect } from "react";
 
@@ -16,6 +17,7 @@ type WindowTabsProps = {
 const WindowTabs = (props: WindowTabsProps) => {
   const { selectedIndex, onSelectIndex } = props;
   const { windows } = useContext(WindowsContext);
+  const theme = useTheme();
 
   useEffect(() => {
     const onKeyDown = (event: KeyboardEvent) => {
@@ -49,7 +51,36 @@ const WindowTabs = (props: WindowTabsProps) => {
         value={selectedIndex}
         onChange={onChange}
         variant="scrollable"
-        scrollButtons={false}
+        scrollButtons="auto"
+        allowScrollButtonsMobile
+        sx={{
+          position: "relative",
+          display: "flex",
+          alignItems: "center",
+
+          "& .MuiTabScrollButton-horizontal": {
+            position: "absolute",
+            height: 28,
+            width: 28,
+            bgcolor: "background.paper",
+            boxShadow: theme.shadows[4],
+            borderRadius: "50%",
+            border: `1px solid ${theme.palette.divider}`,
+            opacity: 1,
+            zIndex: 10,
+          },
+          "& .MuiTabScrollButton-horizontal:first-child": {
+            left: 0,
+            ml: 0.5,
+          },
+          "& .MuiTabScrollButton-horizontal:last-child": {
+            right: 0,
+            mr: 0.5,
+          },
+          "& .Mui-disabled": {
+            opacity: 0,
+          },
+        }}
       >
         {windows.map((window, index) => (
           <WindowTab
