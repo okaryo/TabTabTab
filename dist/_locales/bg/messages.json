@@ -1,0 +1,242 @@
+{
+  "app_name": {
+    "message": "TabTabTab - Мениджър на раздели",
+    "description": "Името на приложението. Показано в магазина."
+  },
+  "app_name_short": {
+    "message": "TabTabTab",
+    "description": "Кратко име на приложението. Показано най-отгоре в падащото меню."
+  },
+  "app_desc": {
+    "message": "Разширението подобрява сърфирането, като дава възможност за управление на разделите в браузъра.",
+    "description": "Кратко описание на приложението. Показано в онлайн магазина."
+  },
+  "window": {
+    "message": "Прозорец",
+    "description": ""
+  },
+  "current_window": {
+    "message": "Текущ Прозорец",
+    "description": ""
+  },
+  "pinned": {
+    "message": "Закачени",
+    "description": ""
+  },
+  "month": {
+    "message": "месец",
+    "description": ""
+  },
+  "months": {
+    "message": "месеци",
+    "description": ""
+  },
+  "day": {
+    "message": "ден",
+    "description": ""
+  },
+  "days": {
+    "message": "дни",
+    "description": ""
+  },
+  "hour": {
+    "message": "час",
+    "description": ""
+  },
+  "hours": {
+    "message": "часа",
+    "description": ""
+  },
+  "min": {
+    "message": "мин",
+    "description": ""
+  },
+  "mins": {
+    "message": "мин",
+    "description": ""
+  },
+  "sec": {
+    "message": "сек",
+    "description": ""
+  },
+  "secs": {
+    "message": "сек",
+    "description": ""
+  },
+  "ago": {
+    "message": "преди",
+    "description": ""
+  },
+  "search_tabs": {
+    "message": "Търси Раздели",
+    "description": ""
+  },
+  "no_results_found": {
+    "message": "Няма намерени резултати",
+    "description": ""
+  },
+  "bookmark": {
+    "message": "Отметка",
+    "description": ""
+  },
+  "copy_url": {
+    "message": "Копирай линк",
+    "description": ""
+  },
+  "pin": {
+    "message": "Закачи",
+    "description": ""
+  },
+  "unpin": {
+    "message": "Откачи",
+    "description": ""
+  },
+  "screenshot_visible_area": {
+    "message": "Снимай видимата област",
+    "description": ""
+  },
+  "ungroup": {
+    "message": "Премахни от групата",
+    "description": ""
+  },
+  "close_group": {
+    "message": "Затвори групата",
+    "description": ""
+  },
+  "unpin_all": {
+    "message": "Откачи всички",
+    "description": ""
+  },
+  "close_all": {
+    "message": "Затвори всички",
+    "description": ""
+  },
+  "duplicated": {
+    "message": "Копирано",
+    "description": ""
+  },
+  "tab_cleaner_header": {
+    "message": "Почисти автоматично неизползваните раздели",
+    "description": ""
+  },
+  "tab_cleaner_description": {
+    "message": "Включвайки тази опция, разделите автоматично ще се затварят, тогава когато времето за активност изтече.",
+    "description": ""
+  },
+  "duration": {
+    "message": "Продължителност",
+    "description": ""
+  },
+  "unit": {
+    "message": "Мерна единица",
+    "description": ""
+  },
+  "duration_unit_day": {
+    "message": "Ден",
+    "description": ""
+  },
+  "duration_unit_hour": {
+    "message": "Час",
+    "description": ""
+  },
+  "popup_size_header": {
+    "message": "Размер на изкачащия прозорец",
+    "description": ""
+  },
+  "popup_size_description": {
+    "message": "Височина: 200-600px, Ширина: 400-800px задължително.",
+    "description": ""
+  },
+  "popup_element_scale_header": {
+    "message": "Скала за размера на изкачащия прозорец",
+    "description": ""
+  },
+  "popup_element_scale_description": {
+    "message": "Коригирайте размерът на елементите (шрифтове, иконки) в изскачащия прозорец между 50-150% от размера им по подразбиране.",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_format": {
+    "message": "Въведете число!",
+    "description": ""
+  },
+  "popup_element_scale_validation_error_value_range": {
+    "message": "Въведете числена стойност от 50 до 150.",
+    "description": ""
+  },
+  "scale": {
+    "message": "Скала",
+    "description": ""
+  },
+  "height": {
+    "message": "Височина",
+    "description": ""
+  },
+  "width": {
+    "message": "Ширина",
+    "description": ""
+  },
+  "save": {
+    "message": "Запази",
+    "description": ""
+  },
+  "saving": {
+    "message": "Запазване",
+    "description": ""
+  },
+  "saved_successfully": {
+    "message": "Промените са запазени.",
+    "description": ""
+  },
+  "saved_error": {
+    "message": "Промените не са запазени. Моля опитайте отново.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_format": {
+    "message": "Въведете число.",
+    "description": ""
+  },
+  "popup_size_validation_error_value_range": {
+    "message": "Стойността на височината трябва да бъде зададена между 200 и 600, а стойността на ширината трябва да бъде зададена между 400 и 800.",
+    "description": ""
+  },
+  "tab_cleaner_validation_error_value_format": {
+    "message": "Въведете положително число.",
+    "description": ""
+  },
+  "tab_cleaner_error_on_save": {
+    "message": "Моля, поправете грешката.",
+    "description": ""
+  },
+  "settings": {
+    "message": "Настройки",
+    "description": ""
+  },
+  "feedback": {
+    "message": "Обратна връзка",
+    "description": ""
+  },
+  "bug_report_and_feature_request_title": {
+    "message": "Докладване на бъг & Заявка за подобрение",
+    "description": ""
+  },
+  "bug_report_and_feature_request_description": {
+    "message": "Ако попаднете на бъг, докато използвате TabTabTab или имате предложение за подобрение, не се колебайте да отворите `Issue` в Github.",
+    "description": ""
+  },
+  "store_review_title": {
+    "message": "Преглед в магазина",
+    "description": ""
+  },
+  "store_review_description": {
+    "message": "Ако намирате TabTabTab за полезен, ще сме много благодарни, ако ни оставите отзив в ChromeWebStore! Вашият глас значително допринася за развитието на TabTabTab.",
+    "description": ""
+  },
+  "source_code_title": {
+    "message": "Програмен код",
+    "description": ""
+  },
+  "source_code_description": {
+    "message": "TabTabTab е софтуерен продукт с публично достъпен отворен код. Той се управлява внимателно, за да се предотвратят всякакви незаконни действия, гарантиращи сигурна и безопасна работа с приложението.",
+    "description": ""
+  }
+}
