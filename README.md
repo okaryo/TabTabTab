@@ -1,10 +1,24 @@
-[![Test and Lint](https://github.com/okaryo/TabTabTab/actions/workflows/test-and-lint.yml/badge.svg)](https://github.com/okaryo/TabTabTab/actions/workflows/test-and-lint.yml)
+<div align="center">
+    <img alt="TabTabTab"
+         src="https://github.com/okaryo/TabTabTab/assets/44517313/e7a1645c-2bc6-4fbd-a8b9-f78bdb71115b"
+         width="640px" />
+</div>
 
-## TabTabTab
+<div align="center">
+
+[![CI][ci-badge]][ci-url]
+[![ChromeWebStore][chrome-web-store-badge]][chrome-web-store-url]
+[![ChromeWebStoreUsers][chrome-web-store-users-badge]][chrome-web-store-url]
+
+[ci-badge]: https://github.com/okaryo/TabTabTab/actions/workflows/test-and-lint.yml/badge.svg
+[ci-url]: https://github.com/okaryo/TabTabTab/actions/workflows/test-and-lint.yml
+[chrome-web-store-badge]: https://img.shields.io/chrome-web-store/v/hfmnidllojimehmfjkclnadpebibhgoi
+[chrome-web-store-url]: https://chrome.google.com/webstore/detail/tabtabtab-tab-manager/hfmnidllojimehmfjkclnadpebibhgoi
+[chrome-web-store-users-badge]: https://img.shields.io/chrome-web-store/users/hfmnidllojimehmfjkclnadpebibhgoi
+
+</div>
 
 TabTabTab is a Chrome extension that supports your browsing by improving tab management.
-
-[👉 ChromeWebStore](https://chrome.google.com/webstore/detail/tabtabtab/hfmnidllojimehmfjkclnadpebibhgoi)
 
 ### 🌟 Key Features
 
