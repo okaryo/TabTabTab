@@ -1,10 +1,11 @@
 import { Duration } from "./Duration";
+import { WindowId } from "./Window";
 
 export type TabId = number;
 export type Tab = {
   id: TabId;
   groupId?: number;
-  windowId?: number;
+  windowId?: WindowId;
   title: string;
   url: URL;
   favIconUrl?: URL;
