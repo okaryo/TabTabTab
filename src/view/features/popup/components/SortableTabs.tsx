@@ -10,11 +10,12 @@ import TabItem from "./TabItem";
 
 type SortableTabsProps = {
   id: string;
+  parentType: "tabGroup" | "pinned";
   tabs: Tab[];
 };
 
 const SortableTabs = (props: SortableTabsProps) => {
-  const { id, tabs } = props;
+  const { id, parentType, tabs } = props;
 
   return (
     <SortableContext
@@ -23,7 +24,11 @@ const SortableTabs = (props: SortableTabsProps) => {
       strategy={verticalListSortingStrategy}
     >
       {tabs.map((tab) => (
-        <SortableItem key={tab.id} id={tab.id.toString()}>
+        <SortableItem
+          key={tab.id}
+          id={tab.id.toString()}
+          data={{ type: "tab", parentType: parentType, windowId: tab.windowId }}
+        >
           <TabItem tab={tab} />
         </SortableItem>
       ))}

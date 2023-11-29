@@ -35,15 +35,27 @@ const TabList = (props: TabListProps) => {
           collapsed={pinnedCollapsed}
           toggleCollapsed={() => setPinnedCollapsed(!pinnedCollapsed)}
         >
-          <SortableTabs id={child.id} tabs={child.children} />
+          <SortableTabs
+            id={child.id}
+            parentType="pinned"
+            tabs={child.children}
+          />
         </PinnedContainer>
       );
     }
     if (isTabGroup(child)) {
       return (
-        <SortableItem key={child.id} id={child.id.toString()}>
+        <SortableItem
+          key={child.id}
+          id={child.id.toString()}
+          data={{ type: "tabGroup", parentType: "window", windowId: window.id }}
+        >
           <TabGroupContainer tabGroup={child}>
-            <SortableTabs id={child.id.toString()} tabs={child.children} />
+            <SortableTabs
+              id={child.id.toString()}
+              parentType="tabGroup"
+              tabs={child.children}
+            />
           </TabGroupContainer>
         </SortableItem>
       );
@@ -51,7 +63,11 @@ const TabList = (props: TabListProps) => {
 
     const tab = child as Tab;
     return (
-      <SortableItem key={tab.id} id={tab.id.toString()}>
+      <SortableItem
+        key={tab.id}
+        id={tab.id.toString()}
+        data={{ type: "tab", parentType: "window", windowId: window.id }}
+      >
         <TabItem tab={tab} />
       </SortableItem>
     );

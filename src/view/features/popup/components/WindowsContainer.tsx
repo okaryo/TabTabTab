@@ -1,6 +1,8 @@
 /* eslint @typescript-eslint/no-floating-promises: 0, @typescript-eslint/no-misused-promises: 0 */
 
 import {
+  Active,
+  CollisionDetection,
   DndContext,
   DragEndEvent,
   DragOverEvent,
@@ -8,13 +10,14 @@ import {
   DragStartEvent,
   MeasuringStrategy,
   MouseSensor,
+  Over,
   TouchSensor,
-  closestCorners,
+  pointerWithin,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
 import { SortableData } from "@dnd-kit/sortable";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 
 import { Tab } from "../../../../model/Tab";
 import {
@@ -36,6 +39,8 @@ import { WindowsContext } from "../contexts/Windows";
 import { useAddTabToTabGroup } from "../hooks/useAddTabToTabGroup";
 import { useMoveTab } from "../hooks/useMoveTab";
 import { useMoveTabGroup } from "../hooks/useMoveTabGroup";
+import { useMoveTabGroupToOtherWindow } from "../hooks/useMoveTabGroupToOtherWindow";
+import { useMoveTabToOtherWindow } from "../hooks/useMoveTabToOtherWindow";
 import { usePinTab } from "../hooks/usePinTab";
 import { useMoveTabOutOfGroup } from "../hooks/useTabOutOfTabGroup";
 
@@ -50,7 +55,8 @@ const WindowsContainer = () => {
   const [selectedWindowIndex, setSelectedWindowIndex] = useState(0);
   const window = windows[selectedWindowIndex];
   const [windowsBeforeDrag, setWindowsBeforeDrag] = useState<Window[]>(null);
-  const [activeId, setActiveId] = useState<string>(null);
+  const [activeItem, setActiveItem] = useState<Active>(null);
+  const [overItem, setOverItem] = useState<Over>(null);
   const [pinnedCollapsed, setPinnedCollapsed] = useState(true);
 
   useEffect(() => {
@@ -77,29 +83,31 @@ const WindowsContainer = () => {
   const pinTab = usePinTab();
   const addTabToTabGroup = useAddTabToTabGroup();
   const moveTabOutOfGroup = useMoveTabOutOfGroup();
+  const moveTabToOtherWindow = useMoveTabToOtherWindow();
+  const moveTabGroupToOtherWindow = useMoveTabGroupToOtherWindow();
 
   const onDragCancel = () => {
     if (windowsBeforeDrag) {
       setWindows(windowsBeforeDrag);
     }
 
-    setActiveId(null);
+    setActiveItem(null);
+    setOverItem(null);
     setWindowsBeforeDrag(null);
   };
 
   const onDragStart = (event: DragStartEvent) => {
     const { active } = event;
 
-    setActiveId(active.id.toString());
+    setActiveItem(active);
     setWindowsBeforeDrag(windows);
   };
 
-  const onDragOver = (
-    event: DragOverEvent & { data: { current: SortableData } },
-  ) => {
+  const onDragOver = (event: DragOverEvent) => {
     const { active, over } = event;
-
     if (!over) return;
+
+    setOverItem(over);
 
     const source = findWindowChild(
       window,
@@ -170,8 +178,21 @@ const WindowsContainer = () => {
     event: DragEndEvent & { data: { current: SortableData } },
   ) => {
     const { active, over } = event;
-
     if (!over) return;
+
+    if (over.data.current?.type === "window") {
+      if (active.data.current?.type === "tabGroup") {
+        moveTabGroupToOtherWindow(Number(active.id), Number(over.id));
+      }
+      if (active.data.current?.type === "tab") {
+        moveTabToOtherWindow(Number(active.id), Number(over.id));
+      }
+
+      setActiveItem(null);
+      setOverItem(null);
+
+      return;
+    }
 
     const windowBeforeDrag = windowsBeforeDrag[selectedWindowIndex];
     const source = findWindowChild(
@@ -287,24 +308,34 @@ const WindowsContainer = () => {
       }
     }
 
-    setActiveId(null);
+    setActiveItem(null);
+    setOverItem(null);
   };
 
   const getDragOverlay = useMemo(() => {
-    if (!activeId) return null;
+    if (!activeItem) return null;
 
     const window = windows[selectedWindowIndex];
     const source = findWindowChild(
       window,
-      activeId === "pinned" ? activeId : Number(activeId),
+      activeItem.id === "pinned" ? activeItem.id : Number(activeItem.id),
     );
     if (!source) return null;
 
     if (isTabGroup(source)) {
       return (
-        <div style={{ cursor: "grabbing" }}>
+        <div
+          style={{
+            cursor: "grabbing",
+            opacity: overItem?.data?.current?.type === "window" ? "0.5" : "1",
+          }}
+        >
           <TabGroupContainer tabGroup={source}>
-            <SortableTabs id={source.id.toString()} tabs={source.children} />
+            <SortableTabs
+              id={source.id.toString()}
+              parentType="tabGroup"
+              tabs={source.children}
+            />
           </TabGroupContainer>
         </div>
       );
@@ -312,16 +343,33 @@ const WindowsContainer = () => {
 
     const tab = source as Tab;
     return (
-      <div style={{ cursor: "grabbing" }}>
+      <div
+        style={{
+          cursor: "grabbing",
+          opacity: overItem?.data?.current?.type === "window" ? "0.5" : "1",
+        }}
+      >
         <TabItem tab={tab} />
       </div>
     );
-  }, [activeId, selectedWindowIndex, windows]);
+  }, [activeItem, overItem, selectedWindowIndex, windows]);
+
+  const collisionDetectionStrategy: CollisionDetection = useCallback(
+    (args) => {
+      return pointerWithin({
+        ...args,
+        droppableContainers: args.droppableContainers.filter((container) => {
+          return container.id.toString() !== window.id.toString();
+        }),
+      });
+    },
+    [window],
+  );
 
   return (
     <DndContext
       sensors={sensors}
-      collisionDetection={closestCorners}
+      collisionDetection={collisionDetectionStrategy}
       onDragCancel={onDragCancel}
       onDragStart={onDragStart}
       onDragOver={onDragOver}
