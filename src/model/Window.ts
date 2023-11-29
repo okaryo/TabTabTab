@@ -17,7 +17,7 @@ type WindowState =
   | "fullscreen"
   | "locked-fullscreen";
 type WindowType = "normal" | "popup" | "panel" | "app" | "devtools";
-type WindowId = number;
+export type WindowId = number;
 type WindowChildId = TabContainerId | TabId;
 export type WindowChild = TabContainer | Tab;
 export type Window = {

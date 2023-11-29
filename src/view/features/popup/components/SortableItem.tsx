@@ -1,14 +1,21 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 
+import { WindowId } from "../../../../model/Window";
+
 type SortableItemProps = {
   id: string;
+  data: {
+    type: "window" | "tabGroup" | "tab";
+    parentType: "window" | "tabGroup" | "pinned";
+    windowId: WindowId;
+  };
   style?: React.CSSProperties;
   children: React.ReactNode;
 };
 
 const SortableItem = (props: SortableItemProps) => {
-  const { id, style, children } = props;
+  const { id, data, style, children } = props;
   const {
     active,
     attributes,
@@ -17,7 +24,10 @@ const SortableItem = (props: SortableItemProps) => {
     setNodeRef,
     transform,
     transition,
-  } = useSortable({ id });
+  } = useSortable({
+    id,
+    data,
+  });
 
   return (
     <div

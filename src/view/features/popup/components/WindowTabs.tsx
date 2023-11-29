@@ -84,6 +84,7 @@ const WindowTabs = (props: WindowTabsProps) => {
       >
         {windows.map((window, index) => (
           <WindowTab
+            id={window.id}
             key={window.id}
             label={window.focused ? t.currentWindow : `${t.window}${index}`}
             tabCount={flatTabsInWindow(window).length}
