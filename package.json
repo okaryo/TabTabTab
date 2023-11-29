@@ -15,9 +15,9 @@
   "author": "okaryo",
   "license": "MIT",
   "devDependencies": {
-    "@types/chrome": "^0.0.251",
-    "@types/react": "^18.2.37",
-    "@types/react-dom": "^18.2.15",
+    "@types/chrome": "^0.0.253",
+    "@types/react": "^18.2.39",
+    "@types/react-dom": "^18.2.17",
     "@typescript-eslint/eslint-plugin": "^6.10.0",
     "@typescript-eslint/parser": "^6.10.0",
     "@vitejs/plugin-react": "^4.1.1",
