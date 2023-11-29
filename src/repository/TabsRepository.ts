@@ -1,4 +1,5 @@
-import { Tab } from "../model/Tab";
+import { Tab, TabId } from "../model/Tab";
+import { WindowId } from "../model/Window";
 
 import {
   ChromeSessionStorage,
@@ -68,6 +69,13 @@ export const moveTab = async (tabId: number, index: number) => {
 export const moveTabOutOfGroup = async (tabId: number, index: number) => {
   await chrome.tabs.ungroup(tabId);
   await chrome.tabs.move(tabId, { index });
+};
+
+export const moveTabToOtherWindow = async (
+  tabId: TabId,
+  windowId: WindowId,
+) => {
+  await chrome.tabs.move(tabId, { windowId, index: -1 });
 };
 
 export const unpinAllTabs = async (tabs: Tab[]) => {

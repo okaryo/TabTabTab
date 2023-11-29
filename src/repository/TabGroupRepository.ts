@@ -1,4 +1,5 @@
 import { TabGroup } from "../model/TabContainer";
+import { WindowId } from "../model/Window";
 
 export const collapseTabGroup = async (groupId: number): Promise<void> => {
   await chrome.tabGroups.update(groupId, { collapsed: true });
@@ -20,6 +21,13 @@ export const moveTabGroup = async (
   index: number,
 ): Promise<void> => {
   await chrome.tabGroups.move(groupId, { index });
+};
+
+export const moveTabGroupToOtherWindow = async (
+  groupId: number,
+  windowId: WindowId,
+) => {
+  await chrome.tabGroups.move(groupId, { windowId, index: -1 });
 };
 
 export const ungroup = async (tabGroup: TabGroup) => {
