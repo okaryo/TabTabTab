@@ -30,6 +30,10 @@ export const moveTabGroupToOtherWindow = async (
   await chrome.tabGroups.move(groupId, { windowId, index: -1 });
 };
 
+export const updateTabGroupTitle = async (groupId: number, title: string) => {
+  await chrome.tabGroups.update(groupId, { title });
+};
+
 export const ungroup = async (tabGroup: TabGroup) => {
   const ids = tabGroup.children.map((tab) => tab.id);
   await chrome.tabs.ungroup(ids);
