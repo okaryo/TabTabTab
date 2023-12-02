@@ -1,3 +1,4 @@
+import { GroupColor } from "../model/GroupColor";
 import { TabGroup } from "../model/TabContainer";
 import { WindowId } from "../model/Window";
 
@@ -32,6 +33,13 @@ export const moveTabGroupToOtherWindow = async (
 
 export const updateTabGroupTitle = async (groupId: number, title: string) => {
   await chrome.tabGroups.update(groupId, { title });
+};
+
+export const updateTabGroupColor = async (
+  groupId: number,
+  color: GroupColor,
+) => {
+  await chrome.tabGroups.update(groupId, { color: color.value });
 };
 
 export const ungroup = async (tabGroup: TabGroup) => {
