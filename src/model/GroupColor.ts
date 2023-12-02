@@ -10,27 +10,29 @@ type ColorType =
   | "orange";
 
 export class GroupColor {
-  constructor(private _color: ColorType) {
-    if (
-      ![
-        "grey",
-        "blue",
-        "red",
-        "yellow",
-        "green",
-        "pink",
-        "purple",
-        "cyan",
-        "orange",
-      ].includes(_color)
-    ) {
+  constructor(public value: ColorType) {
+    if (!GroupColor.values.includes(value)) {
       throw new Error("invalid color");
     }
-    this._color = _color;
+    this.value = value;
+  }
+
+  static get values(): ColorType[] {
+    return [
+      "grey",
+      "blue",
+      "red",
+      "yellow",
+      "green",
+      "pink",
+      "purple",
+      "cyan",
+      "orange",
+    ];
   }
 
   get code(): string {
-    switch (this._color) {
+    switch (this.value) {
       case "grey":
         return "#BDC1C6";
       case "blue":
