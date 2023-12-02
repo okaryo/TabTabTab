@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-floating-promises */
 
+import CircleIcon from "@mui/icons-material/Circle";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -13,15 +14,18 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
+import Radio from "@mui/material/Radio";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useEffect, useRef, useState } from "react";
 
+import { GroupColor } from "../../../../model/GroupColor";
 import { TabGroup } from "../../../../model/TabContainer";
 import { useCollapseTabGroup } from "../hooks/useCollapseTabGroup";
 import { useExpandTabGroup } from "../hooks/useExpandTabGroup";
+import { useUpdateTabGroupColor } from "../hooks/useUpdateTabGroupColor";
 import { useUpdateTabGroupTitle } from "../hooks/useUpdateTabGroupTitle";
 
 import ActionMenu from "./ActionMenu";
@@ -43,6 +47,7 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
   const collapseTabGroup = useCollapseTabGroup();
   const expandTabGroup = useExpandTabGroup();
   const updateTabGroupTitle = useUpdateTabGroupTitle();
+  const updateTabGroupColor = useUpdateTabGroupColor();
 
   const toggleCollapsedStatus = () => {
     if (editMode) {
@@ -78,6 +83,28 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
     setMenuAnchorElement(event.currentTarget);
   };
   const onCloseMenu = () => setMenuAnchorElement(null);
+
+  const GroupColorRadio = (props: { color: GroupColor }) => {
+    const { color } = props;
+
+    return (
+      <Radio
+        sx={{
+          p: 0,
+          color: color.code,
+          "&.Mui-checked": {
+            color: color.code,
+          },
+        }}
+        checked={tabGroup.color.value === color.value}
+        icon={<CircleIcon sx={{ color: color.code }} />}
+        onClick={(event) => {
+          event.stopPropagation();
+          updateTabGroupColor(tabGroup.id, color);
+        }}
+      />
+    );
+  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -145,44 +172,63 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                     }}
                   />
                 )}
-                <Stack direction="row" spacing={1} alignItems="center">
-                  {(tabGroup.name !== "" || editMode) && (
-                    <Typography
-                      variant="subtitle1"
-                      component="h6"
-                      sx={{ px: 1.25, py: 0.25 }}
-                      style={{
-                        display: "inline-block",
-                        borderRadius: "8px",
-                        backgroundColor: `${tabGroup.color.code}`,
+                <Stack spacing={1}>
+                  <Stack direction="row" spacing={1} alignItems="center">
+                    {(tabGroup.name !== "" || editMode) && (
+                      <Typography
+                        variant="subtitle1"
+                        component="h6"
+                        sx={{ px: 1.25, py: 0.25 }}
+                        style={{
+                          display: "inline-block",
+                          borderRadius: "8px",
+                          backgroundColor: `${tabGroup.color.code}`,
+                          color: theme.palette.getContrastText(
+                            tabGroup.color.code,
+                          ),
+                        }}
+                        onClick={onClickGroupTitleToEditMode}
+                      >
+                        {!editMode && <>{tabGroup.name}</>}
+                        {editMode && (
+                          <TextField
+                            variant="standard"
+                            size="small"
+                            value={groupName}
+                            onChange={onChangeGroupTitleField}
+                            autoFocus
+                          />
+                        )}
+                      </Typography>
+                    )}
+                    <Chip
+                      sx={{
+                        backgroundColor: props.tabGroup.color.code,
                         color: theme.palette.getContrastText(
                           tabGroup.color.code,
                         ),
                       }}
+                      label={tabGroup.children.length}
+                      size="small"
+                      clickable={false}
                       onClick={onClickGroupTitleToEditMode}
+                    />
+                  </Stack>
+                  {editMode && (
+                    <Stack
+                      direction="row"
+                      spacing={0.5}
+                      alignItems="center"
+                      justifyContent="flex-start"
                     >
-                      {!editMode && <>{tabGroup.name}</>}
-                      {editMode && (
-                        <TextField
-                          variant="standard"
-                          size="small"
-                          value={groupName}
-                          onChange={onChangeGroupTitleField}
-                          autoFocus
+                      {GroupColor.values.map((color) => (
+                        <GroupColorRadio
+                          key={color}
+                          color={new GroupColor(color)}
                         />
-                      )}
-                    </Typography>
+                      ))}
+                    </Stack>
                   )}
-                  <Chip
-                    sx={{
-                      backgroundColor: props.tabGroup.color.code,
-                      color: theme.palette.getContrastText(tabGroup.color.code),
-                    }}
-                    label={tabGroup.children.length}
-                    size="small"
-                    clickable={false}
-                    onClick={onClickGroupTitleToEditMode}
-                  />
                 </Stack>
               </ListItemButton>
               <ActionMenu
