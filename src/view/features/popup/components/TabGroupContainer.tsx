@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-floating-promises */
+
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -13,12 +15,14 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
 import { TabGroup } from "../../../../model/TabContainer";
 import { useCollapseTabGroup } from "../hooks/useCollapseTabGroup";
 import { useExpandTabGroup } from "../hooks/useExpandTabGroup";
+import { useUpdateTabGroupTitle } from "../hooks/useUpdateTabGroupTitle";
 
 import ActionMenu from "./ActionMenu";
 
@@ -29,20 +33,44 @@ type TabGroupContainerProps = {
 
 const TabGroupContainer = (props: TabGroupContainerProps) => {
   const { children, tabGroup } = props;
+
+  const editGroupFormRef = useRef<HTMLDivElement>(null);
+  const [groupName, setGroupName] = useState(tabGroup.name);
+  const [editMode, setEditMode] = useState(false);
+  const [isHovered, setIsHovered] = useState(false);
+
   const theme = useTheme();
   const collapseTabGroup = useCollapseTabGroup();
   const expandTabGroup = useExpandTabGroup();
+  const updateTabGroupTitle = useUpdateTabGroupTitle();
+
   const toggleCollapsedStatus = () => {
+    if (editMode) {
+      setEditMode(false);
+      return;
+    }
+
     const newCollapsed = !tabGroup.collapsed;
     if (newCollapsed) {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       collapseTabGroup(tabGroup.id);
     } else {
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
       expandTabGroup(tabGroup.id);
     }
   };
-  const [isHovered, setIsHovered] = useState(false);
+
+  const onClickGroupTitleToEditMode = (
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
+    event.stopPropagation();
+    setEditMode(true);
+  };
+
+  const onChangeGroupTitleField = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setGroupName(event.target.value);
+    updateTabGroupTitle(tabGroup.id, event.target.value);
+  };
 
   const [menuAnchorElement, setMenuAnchorElement] =
     useState<HTMLElement | null>(null);
@@ -50,6 +78,20 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
     setMenuAnchorElement(event.currentTarget);
   };
   const onCloseMenu = () => setMenuAnchorElement(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        editGroupFormRef.current &&
+        !editGroupFormRef.current.contains(event.target as Node)
+      ) {
+        setEditMode(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [editGroupFormRef]);
 
   return (
     <Stack direction="row">
@@ -90,8 +132,9 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
               onMouseLeave={() => setIsHovered(false)}
             >
               <ListItemButton
-                onClick={toggleCollapsedStatus}
+                ref={editGroupFormRef}
                 style={{ cursor: "inherit" }}
+                onClick={toggleCollapsedStatus}
               >
                 {isHovered && (
                   <DragIndicatorIcon
@@ -103,7 +146,7 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                   />
                 )}
                 <Stack direction="row" spacing={1} alignItems="center">
-                  {tabGroup.name !== "" && (
+                  {(tabGroup.name !== "" || editMode) && (
                     <Typography
                       variant="subtitle1"
                       component="h6"
@@ -116,8 +159,18 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                           tabGroup.color.code,
                         ),
                       }}
+                      onClick={onClickGroupTitleToEditMode}
                     >
-                      {tabGroup.name}
+                      {!editMode && <>{tabGroup.name}</>}
+                      {editMode && (
+                        <TextField
+                          variant="standard"
+                          size="small"
+                          value={groupName}
+                          onChange={onChangeGroupTitleField}
+                          autoFocus
+                        />
+                      )}
                     </Typography>
                   )}
                   <Chip
@@ -127,6 +180,8 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                     }}
                     label={tabGroup.children.length}
                     size="small"
+                    clickable={false}
+                    onClick={onClickGroupTitleToEditMode}
                   />
                 </Stack>
               </ListItemButton>
