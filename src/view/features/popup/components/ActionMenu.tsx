@@ -4,6 +4,7 @@ import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import Divider from "@mui/material/Divider";
@@ -25,9 +26,11 @@ import {
   bookmarkTab,
   screenshotVisibleArea,
 } from "../../../../repository/TabsRepository";
+import { useAddTabToNewGroup } from "../hooks/useAddTabToNewGroup";
 import { useCloseAllTabs } from "../hooks/useCloseAllTabs";
 import { useCloseTabGroup } from "../hooks/useCloseTabGroup";
 import { usePinTab } from "../hooks/usePinTab";
+import { useRemoveFromTabGroup } from "../hooks/useRemoteFromTabGroup";
 import { useUngroup } from "../hooks/useUngroup";
 import { useUnpinAllTabs } from "../hooks/useUnpinAllTabs";
 import { useUnpinTab } from "../hooks/useUnpinTab";
@@ -71,6 +74,8 @@ const ActionMenu = (props: ActionMenuProps) => {
   const closeAllTabs = useCloseAllTabs();
   const ungroup = useUngroup();
   const closeTabGroup = useCloseTabGroup();
+  const addTabToNewGroup = useAddTabToNewGroup();
+  const removeFromTabGroup = useRemoveFromTabGroup();
 
   const onClickMenu = (action: () => void) => {
     action();
@@ -113,6 +118,24 @@ const ActionMenu = (props: ActionMenuProps) => {
           label={t.pin}
           icon={<PushPinIcon fontSize="small" />}
           action={() => pinTab(tab.id)}
+          onClickMenu={onClickMenu}
+        />
+      ),
+      tab.groupId && (
+        <ActionMenuItem
+          key={t.removeFromGroup}
+          label={t.removeFromGroup}
+          icon={<CropFreeIcon fontSize="small" />}
+          action={() => removeFromTabGroup(tab.id)}
+          onClickMenu={onClickMenu}
+        />
+      ),
+      !tab.groupId && (
+        <ActionMenuItem
+          key={t.addToNewGroup}
+          label={t.addToNewGroup}
+          icon={<LibraryAddIcon fontSize="small" />}
+          action={() => addTabToNewGroup(tab.id)}
           onClickMenu={onClickMenu}
         />
       ),
@@ -188,6 +211,9 @@ const ActionMenu = (props: ActionMenuProps) => {
             },
           };
         },
+      }}
+      MenuListProps={{
+        dense: true,
       }}
     >
       {menus}
