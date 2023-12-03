@@ -66,6 +66,14 @@ export const moveTab = async (tabId: number, index: number) => {
   await chrome.tabs.move(tabId, { index });
 };
 
+export const addToNewGroup = async (tabId: number) => {
+  await chrome.tabs.group({ tabIds: [tabId] });
+};
+
+export const removeFromGroup = async (tabId: number) => {
+  await chrome.tabs.ungroup(tabId);
+};
+
 export const moveTabOutOfGroup = async (tabId: number, index: number) => {
   await chrome.tabs.ungroup(tabId);
   await chrome.tabs.move(tabId, { index });

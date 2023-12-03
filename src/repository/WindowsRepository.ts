@@ -33,8 +33,12 @@ const windows = async (currentWindowId: number): Promise<Window[]> => {
     for (const tab of window.tabs) {
       const parsedTab = {
         id: tab.id,
-        groupId: tab.groupId,
-        windowId: tab.windowId,
+        groupId:
+          tab.groupId === chrome.tabGroups.TAB_GROUP_ID_NONE
+            ? null
+            : tab.groupId,
+        windowId:
+          tab.windowId === chrome.windows.WINDOW_ID_NONE ? null : tab.windowId,
         title: tab.title,
         url:
           tab.url && tab.url !== ""
