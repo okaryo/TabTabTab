@@ -91,6 +91,14 @@
     "message": "Odepnij",
     "description": ""
   },
+  "add_to_new_group": {
+    "message": "Dodaj do nowej grupy",
+    "description": ""
+  },
+  "remove_from_group": {
+    "message": "Usuń z grupy",
+    "description": ""
+  },
   "screenshot_visible_area": {
     "message": "Zrzut Ekranu Widocznego Obszaru",
     "description": ""

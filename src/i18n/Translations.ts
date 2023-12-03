@@ -81,6 +81,12 @@ class Translations {
   get unpin() {
     return chrome.i18n.getMessage("unpin");
   }
+  get addToNewGroup() {
+    return chrome.i18n.getMessage("add_to_new_group");
+  }
+  get removeFromGroup() {
+    return chrome.i18n.getMessage("remove_from_group");
+  }
   get screenshotVisibleArea() {
     return chrome.i18n.getMessage("screenshot_visible_area");
   }

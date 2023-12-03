@@ -91,6 +91,14 @@
     "message": "Откачи",
     "description": ""
   },
+  "add_to_new_group": {
+    "message": "Добавяне към нова група",
+    "description": ""
+  },
+  "remove_from_group": {
+    "message": "Премахване от група",
+    "description": ""
+  },
   "screenshot_visible_area": {
     "message": "Снимай видимата област",
     "description": ""
