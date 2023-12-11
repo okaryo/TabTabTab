@@ -9,10 +9,10 @@
     "default_title": "TabTabTab",
     "default_popup": "popup.html",
     "default_icon": {
-      "16": "tabtabtab16.png",
-      "32": "tabtabtab32.png",
-      "48": "tabtabtab48.png",
-      "128": "tabtabtab128.png"
+      "16": "icon_16.png",
+      "32": "icon_32.png",
+      "48": "icon_48.png",
+      "128": "icon_128.png"
     }
   },
   "permissions": [
@@ -35,10 +35,10 @@
   },
   "options_page": "options.html",
   "icons": {
-    "16": "tabtabtab16.png",
-    "32": "tabtabtab32.png",
-    "48": "tabtabtab48.png",
-    "128": "tabtabtab128.png"
+    "16": "icon_16.png",
+    "32": "icon_32.png",
+    "48": "icon_48.png",
+    "128": "icon_128.png"
   },
   "web_accessible_resources": [
     {
