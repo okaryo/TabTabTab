@@ -7,6 +7,7 @@ import { WindowsContext } from "../contexts/Windows";
 import { useWindows } from "../hooks/useWindows";
 
 import Home from "./Home";
+import { useEffect } from "react";
 
 const Provider = ({ children }: { children: React.ReactNode }) => {
   return (
@@ -30,6 +31,16 @@ const BasePage = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    chrome.windows.onFocusChanged.addListener((windowId) => {
+      if (windowId === chrome.windows.WINDOW_ID_NONE) {
+        return;
+      }
+
+      window.close();
+    });
+  }, []);
+
   return (
     <Provider>
       <BasePage />
