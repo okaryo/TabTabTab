@@ -32,7 +32,7 @@
       "matchPackagePrefixes": ["vite", "@vitejs/"]
     },
     {
-      "groupName": "@types",
+      "groupName": "types",
       "matchPackagePrefixes": ["@types/"]
     },
     {
