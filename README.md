@@ -1,6 +1,6 @@
 <div align="center">
     <img alt="TabTabTab"
-         src="https://github.com/okaryo/TabTabTab/assets/44517313/e7a1645c-2bc6-4fbd-a8b9-f78bdb71115b"
+         src="./docs/header.png"
          width="640px" />
 </div>
 
@@ -37,7 +37,7 @@ Essential Tab Operations: Bookmarking, URL copying, pinning, and more.
 
 ### 👀 ScreenShots
 
-![ScreenShot1](https://github.com/okaryo/TabTabTab/assets/44517313/060de80f-fe48-4ae8-9474-3511da33aac4)
-![ScreenShot2](https://github.com/okaryo/TabTabTab/assets/44517313/42a6db7f-5795-4f32-bf52-44dbd5a2e4bb)
-![ScreenShot3](https://github.com/okaryo/TabTabTab/assets/44517313/ab7c7464-8320-4208-bd55-904b646d98e8)
-![ScreenShot4](https://github.com/okaryo/TabTabTab/assets/44517313/d73d8850-c095-4b84-973b-df92c84b47ee)
+![ScreenShot1](./docs/screenshot1.png)
+![ScreenShot2](./docs/screenshot2.png)
+![ScreenShot3](./docs/screenshot3.png)
+![ScreenShot4](./docs/screenshot4.png)
