@@ -1,4 +1,5 @@
 import CssBaseline from "@mui/material/CssBaseline";
+import { useEffect } from "react";
 
 import { ThemeContext } from "../../../contexts/Theme";
 import { useTheme } from "../../../hooks/useTheme";
@@ -30,6 +31,16 @@ const BasePage = () => {
 };
 
 export default function App() {
+  useEffect(() => {
+    chrome.windows.onFocusChanged.addListener((windowId) => {
+      if (windowId === chrome.windows.WINDOW_ID_NONE) {
+        return;
+      }
+
+      window.close();
+    });
+  }, []);
+
   return (
     <Provider>
       <BasePage />
