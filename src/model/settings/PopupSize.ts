@@ -5,7 +5,7 @@ export class PopupSize {
   ) {}
 
   static default(): PopupSize {
-    return new PopupSize(500, 400);
+    return new PopupSize(600, 400);
   }
 
   updateHeight(value: number): PopupSize {
