@@ -75,6 +75,10 @@
     "message": "결과 없음",
     "description": ""
   },
+  "recent_active_tabs_header": {
+    "message": "최근 활동 탭",
+    "description": "Recently active tab headings to display in search results"
+  },
   "bookmark": {
     "message": "북마크",
     "description": ""

@@ -29,7 +29,11 @@ const RecentActiveTabs = (props: RecentActiveTabsProps) => {
     <List
       sx={{ width: "100%", bgcolor: "background.paper", overflowY: "auto" }}
       disablePadding
-      subheader={<ListSubheader component="div">Recent Tabs</ListSubheader>}
+      subheader={
+        <ListSubheader component="div">
+          {t.recentActiveTabsHeader}
+        </ListSubheader>
+      }
     >
       {recentActiveTabs.map((tab) => (
         <TabItem

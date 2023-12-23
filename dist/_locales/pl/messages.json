@@ -75,6 +75,10 @@
     "message": "Nie znaleziono wyników",
     "description": ""
   },
+  "recent_active_tabs_header": {
+    "message": "Ostatnio aktywne karty",
+    "description": "Recently active tab headings to display in search results"
+  },
   "bookmark": {
     "message": "Dodaj do Zakładek",
     "description": ""

@@ -75,6 +75,10 @@
     "message": "結果が見つかりません",
     "description": ""
   },
+  "recent_active_tabs_header": {
+    "message": "最近のタブ",
+    "description": "Recently active tab headings to display in search results"
+  },
   "bookmark": {
     "message": "ブックマーク",
     "description": ""

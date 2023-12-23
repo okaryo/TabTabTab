@@ -75,6 +75,10 @@
     "message": "Aucun résultat trouvé",
     "description": ""
   },
+  "recent_active_tabs_header": {
+    "message": "Onglets récents",
+    "description": "Recently active tab headings to display in search results"
+  },
   "bookmark": {
     "message": "Signet",
     "description": ""
