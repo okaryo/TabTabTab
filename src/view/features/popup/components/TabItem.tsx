@@ -26,14 +26,21 @@ import TabFavicon from "./TabFavicon";
 type TabItemProps = {
   tab: Tab;
   selected?: boolean;
+  showDragIndicatorIcon?: boolean;
+  showActions?: boolean;
 };
 
 const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
-  const { tab, selected } = props;
+  const {
+    tab,
+    selected,
+    showDragIndicatorIcon = true,
+    showActions = true,
+  } = props;
   const { windows } = useContext(WindowsContext);
-  const onTapTabItem = () => focusTab(tab.id);
+  const onTapTabItem = () => focusTab(tab);
   const [isHovered, setIsHovered] = useState(false);
-  const shouldShowActions = tab.highlighted || isHovered;
+  const shouldShowActions = showActions && (tab.highlighted || isHovered);
 
   const elapsedTimeSinceLastActiveText = (): string => {
     const duration = durationSinceLastActivatedAt(tab);
@@ -136,7 +143,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={onTapTabItem}
       >
-        {isHovered && (
+        {showDragIndicatorIcon && isHovered && (
           <DragIndicatorIcon
             sx={{ color: grey[400] }}
             style={{
