@@ -79,10 +79,6 @@
     "message": "Kürzlich Tabs",
     "description": "Recently active tab headings to display in search results"
   },
-  "bookmark": {
-    "message": "Lesezeichen",
-    "description": ""
-  },
   "copy_url": {
     "message": "Kopiere URL",
     "description": ""

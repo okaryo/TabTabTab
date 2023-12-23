@@ -79,10 +79,6 @@
     "message": "最近のタブ",
     "description": "Recently active tab headings to display in search results"
   },
-  "bookmark": {
-    "message": "ブックマーク",
-    "description": ""
-  },
   "copy_url": {
     "message": "リンクをコピー",
     "description": ""
