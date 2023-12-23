@@ -28,6 +28,7 @@ type TabItemProps = {
   selected?: boolean;
   showDragIndicatorIcon?: boolean;
   showActions?: boolean;
+  showDuplicatedChip?: boolean;
 };
 
 const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
@@ -36,6 +37,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     selected,
     showDragIndicatorIcon = true,
     showActions = true,
+    showDuplicatedChip = true,
   } = props;
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab);
@@ -179,7 +181,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
                 {tab.title}
               </span>
               {tab.audible && <VolumeUpIcon fontSize="small" />}
-              {hasDuplicatedTabs(windows, tab) && (
+              {showDuplicatedChip && hasDuplicatedTabs(windows, tab) && (
                 <Chip
                   label={t.duplicated}
                   size="small"

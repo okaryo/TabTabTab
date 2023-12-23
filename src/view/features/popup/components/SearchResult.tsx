@@ -42,6 +42,7 @@ const RecentActiveTabs = (props: RecentActiveTabsProps) => {
           selected={false}
           showDragIndicatorIcon={false}
           showActions={false}
+          showDuplicatedChip={false}
         />
       ))}
     </List>
