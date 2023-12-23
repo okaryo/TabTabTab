@@ -79,10 +79,6 @@
     "message": "Recent Tabs",
     "description": "Recently active tab headings to display in search results"
   },
-  "bookmark": {
-    "message": "Bookmark",
-    "description": ""
-  },
   "copy_url": {
     "message": "Copy URL",
     "description": ""

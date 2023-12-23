@@ -18,7 +18,6 @@
   "permissions": [
     "alarms",
     "activeTab",
-    "bookmarks",
     "tabGroups",
     "tabs",
     "storage"

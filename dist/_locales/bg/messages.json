@@ -79,10 +79,6 @@
     "message": "Скорошни раздели",
     "description": "Recently active tab headings to display in search results"
   },
-  "bookmark": {
-    "message": "Отметка",
-    "description": ""
-  },
   "copy_url": {
     "message": "Копирай линк",
     "description": ""

@@ -79,10 +79,6 @@
     "message": "Ostatnio aktywne karty",
     "description": "Recently active tab headings to display in search results"
   },
-  "bookmark": {
-    "message": "Dodaj do Zakładek",
-    "description": ""
-  },
   "copy_url": {
     "message": "Skopiuj URL",
     "description": ""

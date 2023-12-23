@@ -1,6 +1,5 @@
 /* eslint @typescript-eslint/no-misused-promises: 0 */
 
-import BookmarkIcon from "@mui/icons-material/Bookmark";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -22,10 +21,7 @@ import {
   isTab,
   isTabGroup,
 } from "../../../../model/TabContainer";
-import {
-  bookmarkTab,
-  screenshotVisibleArea,
-} from "../../../../repository/TabsRepository";
+import { screenshotVisibleArea } from "../../../../repository/TabsRepository";
 import { useAddTabToNewGroup } from "../hooks/useAddTabToNewGroup";
 import { useCloseAllTabs } from "../hooks/useCloseAllTabs";
 import { useCloseTabGroup } from "../hooks/useCloseTabGroup";
@@ -94,13 +90,6 @@ const ActionMenu = (props: ActionMenuProps) => {
         label={t.copyUrl}
         icon={<ContentCopyIcon fontSize="small" />}
         action={() => navigator.clipboard.writeText(tab.url.href)}
-        onClickMenu={onClickMenu}
-      />,
-      <ActionMenuItem
-        key={t.bookmark}
-        label={t.bookmark}
-        icon={<BookmarkIcon fontSize="small" />}
-        action={() => bookmarkTab(tab.title, tab.url.href)}
         onClickMenu={onClickMenu}
       />,
       tab.pinned && (

@@ -79,10 +79,6 @@
     "message": "최근 활동 탭",
     "description": "Recently active tab headings to display in search results"
   },
-  "bookmark": {
-    "message": "북마크",
-    "description": ""
-  },
   "copy_url": {
     "message": "URL 복사",
     "description": ""

@@ -72,9 +72,6 @@ class Translations {
   get recentActiveTabsHeader() {
     return chrome.i18n.getMessage("recent_active_tabs_header");
   }
-  get bookmark() {
-    return chrome.i18n.getMessage("bookmark");
-  }
   get copyUrl() {
     return chrome.i18n.getMessage("copy_url");
   }
