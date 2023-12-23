@@ -3,15 +3,15 @@ import { TabCleaner } from "../model/settings/TabCleaner";
 
 import {
   ChromeLocalStorage,
-  PopupElementScaleSettingStoredData,
-  PopupSizeSettingStoredData,
-  TabCleanerSettingStoredData,
+  PopupElementScaleSettingStorageObject,
+  PopupSizeSettingStorageObject,
+  TabCleanerSettingStorageObject,
 } from "./ChromeStorage";
 
 export const getTabCleanerSetting = async (): Promise<TabCleaner> => {
   const { tab_cleaner_setting } = (await chrome.storage.local.get(
     ChromeLocalStorage.TAB_CLEANER_SETTING_KEY,
-  )) as TabCleanerSettingStoredData;
+  )) as TabCleanerSettingStorageObject;
   if (!tab_cleaner_setting) return new TabCleaner(false, 5, "day");
 
   return new TabCleaner(
@@ -36,7 +36,7 @@ export const updateTabCleanerSetting = (
 export const getPopupSizeSetting = async (): Promise<PopupSize> => {
   const { popup_size_setting } = (await chrome.storage.local.get(
     ChromeLocalStorage.POPUP_SIZE_SETTING_KEY,
-  )) as PopupSizeSettingStoredData;
+  )) as PopupSizeSettingStorageObject;
   if (!popup_size_setting) return PopupSize.default();
 
   return new PopupSize(popup_size_setting.height, popup_size_setting.width);
@@ -54,7 +54,7 @@ export const updatePopupSizeSetting = (PopupSize: PopupSize): Promise<void> => {
 export const getPopupElementScaleSetting = async (): Promise<number> => {
   const { popup_element_scale } = (await chrome.storage.local.get(
     ChromeLocalStorage.POPUP_ELEMENT_SCALE_SETTING_KEY,
-  )) as PopupElementScaleSettingStoredData;
+  )) as PopupElementScaleSettingStorageObject;
   if (!popup_element_scale) return 80;
 
   return popup_element_scale;

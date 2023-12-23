@@ -1,16 +1,52 @@
 import Box from "@mui/material/Box";
+import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
+import ListSubheader from "@mui/material/ListSubheader";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import t from "../../../../i18n/Translations";
+import { Tab } from "../../../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../../../model/Window";
-import { focusTab } from "../../../../repository/TabsRepository";
+import {
+  focusTab,
+  getRecentActiveTabs,
+} from "../../../../repository/TabsRepository";
 import TabItem from "../components/TabItem";
 import { WindowsContext } from "../contexts/Windows";
 
 type SearchResultProps = {
   searchText: string;
+};
+type RecentActiveTabsProps = {
+  recentActiveTabs: Tab[];
+};
+
+const RecentActiveTabs = (props: RecentActiveTabsProps) => {
+  const { recentActiveTabs } = props;
+
+  return (
+    <List
+      sx={{ width: "100%", bgcolor: "background.paper", overflowY: "auto" }}
+      disablePadding
+      subheader={
+        <ListSubheader component="div">
+          {t.recentActiveTabsHeader}
+        </ListSubheader>
+      }
+    >
+      {recentActiveTabs.map((tab) => (
+        <TabItem
+          key={tab.id}
+          tab={tab}
+          selected={false}
+          showDragIndicatorIcon={false}
+          showActions={false}
+          showDuplicatedChip={false}
+        />
+      ))}
+    </List>
+  );
 };
 
 const SearchResult = (props: SearchResultProps) => {
@@ -34,7 +70,7 @@ const SearchResult = (props: SearchResultProps) => {
         );
       } else if (event.key === "Enter") {
         // eslint-disable-next-line @typescript-eslint/no-floating-promises
-        focusTab(tabs[selectedTabIndex].id);
+        focusTab(tabs[selectedTabIndex]);
       }
     };
     document.addEventListener("keydown", onKeyDown);
@@ -43,6 +79,16 @@ const SearchResult = (props: SearchResultProps) => {
       document.removeEventListener("keydown", onKeyDown);
     };
   }, [selectedTabIndex, tabs]);
+
+  const [recentActiveTabs, setRecentActiveTabs] = useState<Tab[]>(null);
+  useEffect(() => {
+    const initializeState = async () => {
+      const tabs = await getRecentActiveTabs();
+      setRecentActiveTabs(tabs);
+    };
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    initializeState();
+  }, []);
 
   const containerRef = useRef<HTMLUListElement>(null);
   const selectedItemRef = useRef<HTMLLIElement>(null);
@@ -83,12 +129,19 @@ const SearchResult = (props: SearchResultProps) => {
           {tabs.map((tab, i) => (
             <TabItem
               key={tab.id}
-              tab={tab}
-              selected={selectedTabIndex === i}
               ref={i === selectedTabIndex ? selectedItemRef : null}
+              tab={{ ...tab, highlighted: false }}
+              selected={selectedTabIndex === i}
+              showDragIndicatorIcon={false}
             />
           ))}
         </List>
+      )}
+      {recentActiveTabs && recentActiveTabs.length > 0 && (
+        <>
+          <Divider />
+          <RecentActiveTabs recentActiveTabs={recentActiveTabs} />
+        </>
       )}
     </>
   );

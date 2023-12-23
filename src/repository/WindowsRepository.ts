@@ -9,7 +9,7 @@ import {
 
 import {
   ChromeSessionStorage,
-  LastActivatedAtStoredData,
+  LastActivatedAtStorageObject,
 } from "./ChromeStorage";
 
 export const getWindows = async (): Promise<Window[]> => {
@@ -114,7 +114,7 @@ const applyLastActivatedAtOfTabInWindows = async (
   let newWindows = [...windows];
   const { last_activated_at } = (await chrome.storage.session.get(
     ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
-  )) as LastActivatedAtStoredData;
+  )) as LastActivatedAtStorageObject;
   if (!last_activated_at || Object.keys(last_activated_at).length === 0) {
     return newWindows;
   }

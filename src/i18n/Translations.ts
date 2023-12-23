@@ -69,6 +69,9 @@ class Translations {
   get noResultsFound() {
     return chrome.i18n.getMessage("no_results_found");
   }
+  get recentActiveTabsHeader() {
+    return chrome.i18n.getMessage("recent_active_tabs_header");
+  }
   get bookmark() {
     return chrome.i18n.getMessage("bookmark");
   }

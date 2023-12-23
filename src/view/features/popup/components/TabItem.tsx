@@ -26,14 +26,23 @@ import TabFavicon from "./TabFavicon";
 type TabItemProps = {
   tab: Tab;
   selected?: boolean;
+  showDragIndicatorIcon?: boolean;
+  showActions?: boolean;
+  showDuplicatedChip?: boolean;
 };
 
 const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
-  const { tab, selected } = props;
+  const {
+    tab,
+    selected,
+    showDragIndicatorIcon = true,
+    showActions = true,
+    showDuplicatedChip = true,
+  } = props;
   const { windows } = useContext(WindowsContext);
-  const onTapTabItem = () => focusTab(tab.id);
+  const onTapTabItem = () => focusTab(tab);
   const [isHovered, setIsHovered] = useState(false);
-  const shouldShowActions = tab.highlighted || isHovered;
+  const shouldShowActions = showActions && (tab.highlighted || isHovered);
 
   const elapsedTimeSinceLastActiveText = (): string => {
     const duration = durationSinceLastActivatedAt(tab);
@@ -136,7 +145,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
         // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={onTapTabItem}
       >
-        {isHovered && (
+        {showDragIndicatorIcon && isHovered && (
           <DragIndicatorIcon
             sx={{ color: grey[400] }}
             style={{
@@ -172,7 +181,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
                 {tab.title}
               </span>
               {tab.audible && <VolumeUpIcon fontSize="small" />}
-              {hasDuplicatedTabs(windows, tab) && (
+              {showDuplicatedChip && hasDuplicatedTabs(windows, tab) && (
                 <Chip
                   label={t.duplicated}
                   size="small"
