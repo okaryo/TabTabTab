@@ -8,72 +8,72 @@
     "description": "The short name of the application. Shown at the top of the dropdown menu."
   },
   "app_desc": {
-    "message": "This extension supports your browsing by improving tab management.",
+    "message": "Supports your browsing by improving tab management.",
     "description": "The short description of the application. Shown in the web store."
   },
   "window": {
     "message": "Window",
-    "description": ""
+    "description": "Used as a heading for window tabs in the popup. For example, it is used as 'Window1', 'Window2', etc."
   },
   "current_window": {
     "message": "CurrentWindow",
-    "description": ""
+    "description": "Used as a heading within the popup to indicate the current window in the window tabs section."
   },
   "pinned": {
     "message": "Pinned",
-    "description": ""
+    "description": "Used as a heading for grouping and displaying pinned tabs together."
   },
   "month": {
     "message": "month",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 month ago'."
   },
   "months": {
     "message": "months",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
   "day": {
     "message": "day",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
   },
   "days": {
     "message": "days",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 days ago'."
   },
   "hour": {
     "message": "hour",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 hour ago'."
   },
   "hours": {
     "message": "hours",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 hours ago'."
   },
   "min": {
     "message": "min",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 min ago'."
   },
   "mins": {
     "message": "mins",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
   },
   "sec": {
     "message": "sec",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 sec ago'."
   },
   "secs": {
     "message": "secs",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 secs ago'."
   },
   "ago": {
     "message": "ago",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
   },
   "search_tabs": {
     "message": "Search Tabs",
-    "description": ""
+    "description": "Displayed as a placeholder in the tab search form."
   },
   "no_results_found": {
     "message": "No Results Found",
-    "description": ""
+    "description": "Displayed when no results are found during a tab search."
   },
   "recent_active_tabs_header": {
     "message": "Recent Tabs",
@@ -81,170 +81,170 @@
   },
   "copy_url": {
     "message": "Copy URL",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "pin": {
     "message": "Pin",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "unpin": {
     "message": "Unpin",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "add_to_new_group": {
     "message": "Add To New Group",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "remove_from_group": {
     "message": "Remove From Group",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "screenshot_visible_area": {
     "message": "Screenshot Visible Area",
-    "description": ""
+    "description": "Displayed within the action menu for highlighted tab."
   },
   "ungroup": {
     "message": "Ungroup",
-    "description": ""
+    "description": "Displayed within the action menu for tab group."
   },
   "close_group": {
     "message": "Close Group",
-    "description": ""
+    "description": "Displayed within the action menu for tab group."
   },
   "unpin_all": {
     "message": "Unpin All",
-    "description": ""
+    "description": "Displayed within the action menu for pinned."
   },
   "close_all": {
     "message": "Close All",
-    "description": ""
+    "description": "Displayed within the action menu for pinned."
   },
   "duplicated": {
     "message": "Duplicated",
-    "description": ""
+    "description": "Displayed next to the tab title if the same tab exists across the entire window."
   },
   "tab_cleaner_header": {
     "message": "Clean up unused tabs automatically",
-    "description": ""
+    "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
   },
   "tab_cleaner_description": {
     "message": "By enabling this setting, tabs will automatically close once the set duration has passed since they were last active.",
-    "description": ""
+    "description": "Description for the feature that automatically closes tabs that have not been used for a specified period of time."
   },
   "duration": {
     "message": "Duration",
-    "description": ""
+    "description": "Heading for the input form to set the duration for automatically closing tabs that have been inactive for a specified period."
   },
   "unit": {
     "message": "Unit",
-    "description": ""
+    "description": "Heading for the unit input form used in the feature for automatically closing tabs after a specified period of inactivity."
   },
   "duration_unit_day": {
     "message": "Day",
-    "description": ""
+    "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
   "duration_unit_hour": {
     "message": "Hour",
-    "description": ""
+    "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
   "popup_size_header": {
     "message": "Popup window size",
-    "description": ""
+    "description": "Heading for the popup size settings."
   },
   "popup_size_description": {
     "message": "Height: 200-600px, Width: 400-800px required.",
-    "description": ""
+    "description": "Notes or cautionary advice regarding the settings for the popup size."
   },
   "popup_element_scale_header": {
     "message": "Popup element scale",
-    "description": ""
+    "description": "Heading for the settings to adjust the scale of elements within the popup."
   },
   "popup_element_scale_description": {
     "message": "Adjust the size of elements such as fonts and icons in the popup between 50~150% of their default size.",
-    "description": ""
+    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
   },
   "popup_element_scale_validation_error_value_format": {
     "message": "Input an integer.",
-    "description": ""
+    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
   "popup_element_scale_validation_error_value_range": {
     "message": "Input a value within the range of 50 to 150.",
-    "description": ""
+    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
   "scale": {
     "message": "Scale",
-    "description": ""
+    "description": "Heading for the input form to adjust the scale of elements within the popup."
   },
   "height": {
     "message": "Height",
-    "description": ""
+    "description": "Heading for the height input form in the popup size settings."
   },
   "width": {
     "message": "Width",
-    "description": ""
+    "description": "Heading for the width input form in the popup size settings."
   },
   "save": {
     "message": "Save",
-    "description": ""
+    "description": "Text for the save button in the settings form."
   },
   "saving": {
     "message": "Saving",
-    "description": ""
+    "description": "Text displayed on the save button in the settings form when saving is in progress."
   },
   "saved_successfully": {
     "message": "Setting successfully saved.",
-    "description": ""
+    "description": "Message displayed in a toast notification when settings are successfully saved in the settings form."
   },
   "saved_error": {
     "message": "Failed to save the setting. Please try again.",
-    "description": ""
+    "description": "Message displayed in a toast notification when settings fail to save in the settings form."
   },
   "popup_size_validation_error_value_format": {
     "message": "Input an integer.",
-    "description": ""
+    "description": "Error message displayed for validation issues in the popup size settings."
   },
   "popup_size_validation_error_value_range": {
     "message": "The height should be set to a value between 200 and 600, and the width should be set to a value between 400 and 800.",
-    "description": ""
+    "description": "Error message displayed for validation issues in the popup size settings."
   },
   "tab_cleaner_validation_error_value_format": {
     "message": "Input a positive integer.",
-    "description": ""
+    "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
   },
   "tab_cleaner_error_on_save": {
     "message": "Please fix the error.",
-    "description": ""
+    "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
   "settings": {
     "message": "Settings",
-    "description": ""
+    "description": "Heading for the settings page."
   },
   "feedback": {
     "message": "Feedback",
-    "description": ""
+    "description": "Heading for the feedback page."
   },
   "bug_report_and_feature_request_title": {
     "message": "Bug Report & Feature Request",
-    "description": ""
+    "description": "Heading for the section covering bug reports and feature requests."
   },
   "bug_report_and_feature_request_description": {
     "message": "If you encounter any bugs while using TabTabTab, or have suggestions for feature requests, please feel free to create an issue on GitHub.",
-    "description": ""
+    "description": "Description for the section dedicated to submitting bug reports and feature requests."
   },
   "store_review_title": {
     "message": "Store Review",
-    "description": ""
+    "description": "Heading for the store reviews section."
   },
   "store_review_description": {
     "message": "If you find TabTabTab helpful, we would greatly appreciate it if you could leave us a review on the ChromeWebStore! Your voice greatly contributes to the development of TabTabTab.",
-    "description": ""
+    "description": "Description for the section regarding store reviews."
   },
   "source_code_title": {
     "message": "Source Code",
-    "description": ""
+    "description": "Heading for the source code section."
   },
   "source_code_description": {
     "message": "The code for TabTabTab is open source and publicly available. It is carefully managed to prevent any illicit programming, ensuring the extension is developed safely.",
-    "description": ""
+    "description": "Description for the section related to the source code."
   }
 }

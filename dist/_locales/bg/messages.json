@@ -1,79 +1,79 @@
 {
   "app_name": {
     "message": "TabTabTab - All In One Tab Manager",
-    "description": "Името на приложението. Показано в магазина."
+    "description": "The name of the application. Shown in the web store."
   },
   "app_name_short": {
     "message": "TabTabTab",
-    "description": "Кратко име на приложението. Показано най-отгоре в падащото меню."
+    "description": "The short name of the application. Shown at the top of the dropdown menu."
   },
   "app_desc": {
     "message": "Разширението подобрява сърфирането, като дава възможност за управление на разделите в браузъра.",
-    "description": "Кратко описание на приложението. Показано в онлайн магазина."
+    "description": "The short description of the application. Shown in the web store."
   },
   "window": {
     "message": "Прозорец",
-    "description": ""
+    "description": "Used as a heading for window tabs in the popup. For example, it is used as 'Window1', 'Window2', etc."
   },
   "current_window": {
     "message": "Текущ Прозорец",
-    "description": ""
+    "description": "Used as a heading within the popup to indicate the current window in the window tabs section."
   },
   "pinned": {
     "message": "Закачени",
-    "description": ""
+    "description": "Used as a heading for grouping and displaying pinned tabs together."
   },
   "month": {
     "message": "месец",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 month ago'."
   },
   "months": {
     "message": "месеци",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
   "day": {
     "message": "ден",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
   },
   "days": {
     "message": "дни",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 days ago'."
   },
   "hour": {
     "message": "час",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 hour ago'."
   },
   "hours": {
     "message": "часа",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 hours ago'."
   },
   "min": {
     "message": "мин",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 min ago'."
   },
   "mins": {
     "message": "мин",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
   },
   "sec": {
     "message": "сек",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 sec ago'."
   },
   "secs": {
     "message": "сек",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 secs ago'."
   },
   "ago": {
     "message": "преди",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
   },
   "search_tabs": {
     "message": "Търси Раздели",
-    "description": ""
+    "description": "Displayed as a placeholder in the tab search form."
   },
   "no_results_found": {
     "message": "Няма намерени резултати",
-    "description": ""
+    "description": "Displayed when no results are found during a tab search."
   },
   "recent_active_tabs_header": {
     "message": "Скорошни раздели",
@@ -81,170 +81,170 @@
   },
   "copy_url": {
     "message": "Копирай линк",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "pin": {
     "message": "Закачи",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "unpin": {
     "message": "Откачи",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "add_to_new_group": {
     "message": "Добавяне към нова група",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "remove_from_group": {
     "message": "Премахване от група",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "screenshot_visible_area": {
     "message": "Снимай видимата област",
-    "description": ""
+    "description": "Displayed within the action menu for highlighted tab."
   },
   "ungroup": {
     "message": "Премахни от групата",
-    "description": ""
+    "description": "Displayed within the action menu for tab group."
   },
   "close_group": {
     "message": "Затвори групата",
-    "description": ""
+    "description": "Displayed within the action menu for tab group."
   },
   "unpin_all": {
     "message": "Откачи всички",
-    "description": ""
+    "description": "Displayed within the action menu for pinned."
   },
   "close_all": {
     "message": "Затвори всички",
-    "description": ""
+    "description": "Displayed within the action menu for pinned."
   },
   "duplicated": {
     "message": "Копирано",
-    "description": ""
+    "description": "Displayed next to the tab title if the same tab exists across the entire window."
   },
   "tab_cleaner_header": {
     "message": "Почисти автоматично неизползваните раздели",
-    "description": ""
+    "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
   },
   "tab_cleaner_description": {
     "message": "Включвайки тази опция, разделите автоматично ще се затварят, тогава когато времето за активност изтече.",
-    "description": ""
+    "description": "Description for the feature that automatically closes tabs that have not been used for a specified period of time."
   },
   "duration": {
     "message": "Продължителност",
-    "description": ""
+    "description": "Heading for the input form to set the duration for automatically closing tabs that have been inactive for a specified period."
   },
   "unit": {
     "message": "Мерна единица",
-    "description": ""
+    "description": "Heading for the unit input form used in the feature for automatically closing tabs after a specified period of inactivity."
   },
   "duration_unit_day": {
     "message": "Ден",
-    "description": ""
+    "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
   "duration_unit_hour": {
     "message": "Час",
-    "description": ""
+    "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
   "popup_size_header": {
     "message": "Размер на изкачащия прозорец",
-    "description": ""
+    "description": "Heading for the popup size settings."
   },
   "popup_size_description": {
     "message": "Височина: 200-600px, Ширина: 400-800px задължително.",
-    "description": ""
+    "description": "Notes or cautionary advice regarding the settings for the popup size."
   },
   "popup_element_scale_header": {
     "message": "Скала за размера на изкачащия прозорец",
-    "description": ""
+    "description": "Heading for the settings to adjust the scale of elements within the popup."
   },
   "popup_element_scale_description": {
     "message": "Коригирайте размерът на елементите (шрифтове, иконки) в изскачащия прозорец между 50-150% от размера им по подразбиране.",
-    "description": ""
+    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
   },
   "popup_element_scale_validation_error_value_format": {
     "message": "Въведете число!",
-    "description": ""
+    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
   "popup_element_scale_validation_error_value_range": {
     "message": "Въведете числена стойност от 50 до 150.",
-    "description": ""
+    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
   "scale": {
     "message": "Скала",
-    "description": ""
+    "description": "Heading for the input form to adjust the scale of elements within the popup."
   },
   "height": {
     "message": "Височина",
-    "description": ""
+    "description": "Heading for the height input form in the popup size settings."
   },
   "width": {
     "message": "Ширина",
-    "description": ""
+    "description": "Heading for the width input form in the popup size settings."
   },
   "save": {
     "message": "Запази",
-    "description": ""
+    "description": "Text for the save button in the settings form."
   },
   "saving": {
     "message": "Запазване",
-    "description": ""
+    "description": "Text displayed on the save button in the settings form when saving is in progress."
   },
   "saved_successfully": {
     "message": "Промените са запазени.",
-    "description": ""
+    "description": "Message displayed in a toast notification when settings are successfully saved in the settings form."
   },
   "saved_error": {
     "message": "Промените не са запазени. Моля опитайте отново.",
-    "description": ""
+    "description": "Message displayed in a toast notification when settings fail to save in the settings form."
   },
   "popup_size_validation_error_value_format": {
     "message": "Въведете число.",
-    "description": ""
+    "description": "Error message displayed for validation issues in the popup size settings."
   },
   "popup_size_validation_error_value_range": {
     "message": "Стойността на височината трябва да бъде зададена между 200 и 600, а стойността на ширината трябва да бъде зададена между 400 и 800.",
-    "description": ""
+    "description": "Error message displayed for validation issues in the popup size settings."
   },
   "tab_cleaner_validation_error_value_format": {
     "message": "Въведете положително число.",
-    "description": ""
+    "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
   },
   "tab_cleaner_error_on_save": {
     "message": "Моля, поправете грешката.",
-    "description": ""
+    "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
   "settings": {
     "message": "Настройки",
-    "description": ""
+    "description": "Heading for the settings page."
   },
   "feedback": {
     "message": "Обратна връзка",
-    "description": ""
+    "description": "Heading for the feedback page."
   },
   "bug_report_and_feature_request_title": {
     "message": "Докладване на бъг & Заявка за подобрение",
-    "description": ""
+    "description": "Heading for the section covering bug reports and feature requests."
   },
   "bug_report_and_feature_request_description": {
     "message": "Ако попаднете на бъг, докато използвате TabTabTab или имате предложение за подобрение, не се колебайте да отворите `Issue` в Github.",
-    "description": ""
+    "description": "Description for the section dedicated to submitting bug reports and feature requests."
   },
   "store_review_title": {
     "message": "Преглед в магазина",
-    "description": ""
+    "description": "Heading for the store reviews section."
   },
   "store_review_description": {
     "message": "Ако намирате TabTabTab за полезен, ще сме много благодарни, ако ни оставите отзив в ChromeWebStore! Вашият глас значително допринася за развитието на TabTabTab.",
-    "description": ""
+    "description": "Description for the section regarding store reviews."
   },
   "source_code_title": {
     "message": "Програмен код",
-    "description": ""
+    "description": "Heading for the source code section."
   },
   "source_code_description": {
     "message": "TabTabTab е софтуерен продукт с публично достъпен отворен код. Той се управлява внимателно, за да се предотвратят всякакви незаконни действия, гарантиращи сигурна и безопасна работа с приложението.",
-    "description": ""
+    "description": "Description for the section related to the source code."
   }
 }

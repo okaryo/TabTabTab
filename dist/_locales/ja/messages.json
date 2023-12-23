@@ -13,67 +13,67 @@
   },
   "window": {
     "message": "ウィンドウ",
-    "description": ""
+    "description": "Used as a heading for window tabs in the popup. For example, it is used as 'Window1', 'Window2', etc."
   },
   "current_window": {
     "message": "現在のウィンドウ",
-    "description": ""
+    "description": "Used as a heading within the popup to indicate the current window in the window tabs section."
   },
   "pinned": {
     "message": "固定タブ",
-    "description": ""
+    "description": "Used as a heading for grouping and displaying pinned tabs together."
   },
   "month": {
     "message": "ヶ月",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 month ago'."
   },
   "months": {
     "message": "ヶ月",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
   "day": {
     "message": "日",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
   },
   "days": {
     "message": "日",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 days ago'."
   },
   "hour": {
     "message": "時間",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 hour ago'."
   },
   "hours": {
     "message": "時間",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 hours ago'."
   },
   "min": {
     "message": "分",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 min ago'."
   },
   "mins": {
     "message": "分",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
   },
   "sec": {
     "message": "秒",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 sec ago'."
   },
   "secs": {
     "message": "秒",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 secs ago'."
   },
   "ago": {
     "message": "前",
-    "description": ""
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
   },
   "search_tabs": {
     "message": "タブを検索",
-    "description": ""
+    "description": "Displayed as a placeholder in the tab search form."
   },
   "no_results_found": {
     "message": "結果が見つかりません",
-    "description": ""
+    "description": "Displayed when no results are found during a tab search."
   },
   "recent_active_tabs_header": {
     "message": "最近のタブ",
@@ -81,170 +81,170 @@
   },
   "copy_url": {
     "message": "リンクをコピー",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "pin": {
     "message": "固定",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "unpin": {
     "message": "固定を解除",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "add_to_new_group": {
     "message": "新しいグループに追加",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "remove_from_group": {
     "message": "グループから削除",
-    "description": ""
+    "description": "Displayed within the action menu for tabs."
   },
   "screenshot_visible_area": {
     "message": "表示範囲をスクリーンショット",
-    "description": ""
+    "description": "Displayed within the action menu for highlighted tab."
   },
   "ungroup": {
     "message": "グループを解除",
-    "description": ""
+    "description": "Displayed within the action menu for tab group."
   },
   "close_group": {
     "message": "グループを閉じる",
-    "description": ""
+    "description": "Displayed within the action menu for tab group."
   },
   "unpin_all": {
     "message": "全ての固定を解除",
-    "description": ""
+    "description": "Displayed within the action menu for pinned."
   },
   "close_all": {
     "message": "タブを全て閉じる",
-    "description": ""
+    "description": "Displayed within the action menu for pinned."
   },
   "duplicated": {
     "message": "重複",
-    "description": ""
+    "description": "Displayed next to the tab title if the same tab exists across the entire window."
   },
   "tab_cleaner_header": {
     "message": "タブの自動整理",
-    "description": ""
+    "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
   },
   "tab_cleaner_description": {
     "message": "この設定を有効にすると、最後にアクティブになってから設定した期間を過ぎると自動でタブが閉じられます。",
-    "description": ""
+    "description": "Description for the feature that automatically closes tabs that have not been used for a specified period of time."
   },
   "duration": {
     "message": "期間",
-    "description": ""
+    "description": "Heading for the input form to set the duration for automatically closing tabs that have been inactive for a specified period."
   },
   "unit": {
     "message": "単位",
-    "description": ""
+    "description": "Heading for the unit input form used in the feature for automatically closing tabs after a specified period of inactivity."
   },
   "duration_unit_day": {
     "message": "日",
-    "description": ""
+    "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
   "duration_unit_hour": {
     "message": "時間",
-    "description": ""
+    "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
   "popup_size_header": {
     "message": "ポップアップサイズ",
-    "description": ""
+    "description": "Heading for the popup size settings."
   },
   "popup_size_description": {
     "message": "高さ: 200~600px, 幅: 400~800px の範囲で指定してください。",
-    "description": ""
+    "description": "Notes or cautionary advice regarding the settings for the popup size."
   },
   "popup_element_scale_header": {
     "message": "ポップアップ要素のスケール",
-    "description": ""
+    "description": "Heading for the settings to adjust the scale of elements within the popup."
   },
   "popup_element_scale_description": {
     "message": "フォントやアイコンなどのポップアップ内の要素サイズをデフォルトサイズに対する50~150%の範囲で調整します。",
-    "description": ""
+    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
   },
   "popup_element_scale_validation_error_value_format": {
     "message": "整数値を入力してください。",
-    "description": ""
+    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
   "popup_element_scale_validation_error_value_range": {
     "message": "50~150の範囲の値を入力してください。",
-    "description": ""
+    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
   "scale": {
     "message": "スケール",
-    "description": ""
+    "description": "Heading for the input form to adjust the scale of elements within the popup."
   },
   "height": {
     "message": "高さ",
-    "description": ""
+    "description": "Heading for the height input form in the popup size settings."
   },
   "width": {
     "message": "幅",
-    "description": ""
+    "description": "Heading for the width input form in the popup size settings."
   },
   "save": {
     "message": "保存",
-    "description": ""
+    "description": "Text for the save button in the settings form."
   },
   "saving": {
     "message": "保存中",
-    "description": ""
+    "description": "Text displayed on the save button in the settings form when saving is in progress."
   },
   "saved_successfully": {
     "message": "保存しました",
-    "description": ""
+    "description": "Message displayed in a toast notification when settings are successfully saved in the settings form."
   },
   "saved_error": {
     "message": "保存に失敗しました。再度お試しください。",
-    "description": ""
+    "description": "Message displayed in a toast notification when settings fail to save in the settings form."
   },
   "popup_size_validation_error_value_format": {
     "message": "整数値を入力してください。",
-    "description": ""
+    "description": "Error message displayed for validation issues in the popup size settings."
   },
   "popup_size_validation_error_value_range": {
     "message": "高さ: 200~600px, 幅: 400~800px の範囲で入力してください。",
-    "description": ""
+    "description": "Error message displayed for validation issues in the popup size settings."
   },
   "tab_cleaner_validation_error_value_format": {
     "message": "1以上の整数値を入力してください。",
-    "description": ""
+    "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
   },
   "tab_cleaner_error_on_save": {
     "message": "エラーを修正してください。",
-    "description": ""
+    "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
   "settings": {
     "message": "設定",
-    "description": ""
+    "description": "Heading for the settings page."
   },
   "feedback": {
     "message": "フィードバック",
-    "description": ""
+    "description": "Heading for the feedback page."
   },
   "bug_report_and_feature_request_title": {
     "message": "バグ報告&機能要望",
-    "description": ""
+    "description": "Heading for the section covering bug reports and feature requests."
   },
   "bug_report_and_feature_request_description": {
     "message": "TabTabTabを使っていてバグを見つけたり、機能改善の要望がありましたらGitHubにてお気軽にイシューを作成ください。",
-    "description": ""
+    "description": "Description for the section dedicated to submitting bug reports and feature requests."
   },
   "store_review_title": {
     "message": "ストアのレビュー",
-    "description": ""
+    "description": "Heading for the store reviews section."
   },
   "store_review_description": {
     "message": "TabTabTabが役立つと思ったらぜひChromeストアでレビューをお願いします！あなたの声がTabTabTabの発展に大きく寄与します！",
-    "description": ""
+    "description": "Description for the section regarding store reviews."
   },
   "source_code_title": {
     "message": "ソースコード",
-    "description": ""
+    "description": "Heading for the source code section."
   },
   "source_code_description": {
     "message": "TabTabTabのコードは公開されたオープンソースです。不正なプログラムが入らないよう管理されており、拡張機能が安全に開発されています。",
-    "description": ""
+    "description": "Description for the section related to the source code."
   }
 }
