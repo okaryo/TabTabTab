@@ -1,4 +1,4 @@
-import RateReviewIcon from "@mui/icons-material/RateReview";
+import ForumIcon from "@mui/icons-material/Forum";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import { Divider, Stack } from "@mui/material";
@@ -48,7 +48,7 @@ export default function App() {
                   <ListItemIcon>
                     {page === "Overview" && <ViewColumnIcon />}
                     {page === "Settings" && <SettingsIcon />}
-                    {page === "Feedback" && <RateReviewIcon />}
+                    {page === "Feedback" && <ForumIcon />}
                   </ListItemIcon>
                   <ListItemText primary={page} />
                 </ListItemButton>

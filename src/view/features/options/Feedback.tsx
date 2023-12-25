@@ -1,4 +1,6 @@
-import LaunchIcon from "@mui/icons-material/Launch";
+import BugReportIcon from "@mui/icons-material/BugReport";
+import GitHubIcon from "@mui/icons-material/GitHub";
+import RateReviewIcon from "@mui/icons-material/RateReview";
 import Card from "@mui/material/Card";
 import CardActionArea from "@mui/material/CardActionArea";
 import CardHeader from "@mui/material/CardHeader";
@@ -14,16 +16,19 @@ const Feedback = () => {
       title: t.bugReportAndFeatureRequestTitle,
       description: t.bugReportAndFeatureRequestDescription,
       link: "https://github.com/okaryo/TabTabTab/issues",
+      icon: <BugReportIcon fontSize="small" />,
     },
     {
       title: t.storeReviewTitle,
       description: t.storeReviewDescription,
       link: "https://chrome.google.com/webstore/detail/tabtabtab/hfmnidllojimehmfjkclnadpebibhgoi",
+      icon: <RateReviewIcon fontSize="small" />,
     },
     {
       title: t.sourceCodeTitle,
       description: t.sourceCodeDescription,
       link: "https://github.com/okaryo/TabTabTab",
+      icon: <GitHubIcon fontSize="small" />,
     },
   ];
 
@@ -44,10 +49,10 @@ const Feedback = () => {
                   sx={{ p: 0 }}
                   title={
                     <Stack direction="row" alignItems="center" spacing={1}>
+                      {feedback.icon}
                       <Typography variant="subtitle1" component="h3">
                         {feedback.title}
                       </Typography>
-                      <LaunchIcon fontSize="small" />
                     </Stack>
                   }
                   subheader={
