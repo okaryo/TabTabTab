@@ -17,7 +17,7 @@ import t from "../../../../i18n/Translations";
 import { Tab, durationSinceLastActivatedAt } from "../../../../model/Tab";
 import { hasDuplicatedTabs } from "../../../../model/Window";
 import { focusTab } from "../../../../repository/TabsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../../../contexts/Windows";
 import { useCloseTab } from "../hooks/useCloseTab";
 
 import ActionMenu from "./ActionMenu";

@@ -35,7 +35,7 @@ import {
   moveTabOrTabGroup,
 } from "../../../../model/Window";
 import { unpinTab } from "../../../../repository/TabsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../../../contexts/Windows";
 import { useAddTabToTabGroup } from "../hooks/useAddTabToTabGroup";
 import { useMoveTab } from "../hooks/useMoveTab";
 import { useMoveTabGroup } from "../hooks/useMoveTabGroup";

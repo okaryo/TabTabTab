@@ -5,7 +5,7 @@ import { Dispatch, useContext, useEffect } from "react";
 
 import t from "../../../../i18n/Translations";
 import { flatTabsInWindow } from "../../../../model/Window";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../../../contexts/Windows";
 
 import WindowTab from "./WindowTab";
 
