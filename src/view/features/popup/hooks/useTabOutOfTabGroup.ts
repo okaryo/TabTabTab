@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 
 import { moveTabOutOfGroup } from "../../../../repository/TabsRepository";
 import { getWindows } from "../../../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../../../contexts/Windows";
 
 export const useMoveTabOutOfGroup = (): ((
   tabId: number,

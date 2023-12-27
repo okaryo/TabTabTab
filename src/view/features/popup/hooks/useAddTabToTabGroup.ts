@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 
 import { addTabToTabGroup } from "../../../../repository/TabGroupRepository";
 import { getWindows } from "../../../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../../../contexts/Windows";
 
 export const useAddTabToTabGroup = (): ((
   tabId: number,

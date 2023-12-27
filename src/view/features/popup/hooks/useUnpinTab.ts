@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 
 import { unpinTab } from "../../../../repository/TabsRepository";
 import { getWindows } from "../../../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../../../contexts/Windows";
 
 export const useUnpinTab = (): ((id: number) => Promise<void>) => {
   const { setWindows } = useContext(WindowsContext);

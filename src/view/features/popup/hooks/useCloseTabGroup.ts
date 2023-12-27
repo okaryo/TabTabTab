@@ -3,7 +3,7 @@ import { useCallback, useContext } from "react";
 import { TabGroup } from "../../../../model/TabContainer";
 import { closeTabGroup } from "../../../../repository/TabGroupRepository";
 import { getWindows } from "../../../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../../../contexts/Windows";
 
 export const useCloseTabGroup = (): ((tabGroup: TabGroup) => Promise<void>) => {
   const { setWindows } = useContext(WindowsContext);
