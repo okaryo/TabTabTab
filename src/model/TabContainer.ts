@@ -7,7 +7,8 @@ export type TabContainer = {
   children: Tab[];
 };
 
-type PinnedId = "pinned";
+// PinnedId format is `pinned-${windowId}`.
+type PinnedId = string;
 export type Pinned = TabContainer & {
   id: PinnedId;
 };
@@ -19,6 +20,12 @@ export type TabGroup = TabContainer & {
   color: GroupColor;
   collapsed: boolean;
 };
+
+export const generatePinnedId = (windowId: number) => `pinned-${windowId}`;
+
+export const isPinnedId = (value: string | number): value is PinnedId => {
+  return typeof value === "string" && value.startsWith("pinned");
+}
 
 export const isTab = (value: TabContainer | Tab): value is Tab => {
   return (
@@ -36,7 +43,7 @@ export const isTabContainer = (
 };
 
 export const isPinned = (value: TabContainer | Tab): value is Pinned => {
-  return isTabContainer(value) && value.id === "pinned";
+  return isTabContainer(value) && isPinnedId(value.id);
 };
 
 export const isTabGroup = (value: TabContainer | Tab): value is TabGroup => {

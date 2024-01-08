@@ -1,5 +1,5 @@
 import { GroupColor } from "../model/GroupColor";
-import { Pinned, isPinned, isTabGroup } from "../model/TabContainer";
+import { Pinned, generatePinnedId, isPinned, isTabGroup } from "../model/TabContainer";
 import {
   Window,
   findPinned,
@@ -67,7 +67,7 @@ const windows = async (currentWindowId: number): Promise<Window[]> => {
           });
         } else {
           const newPinned: Pinned = {
-            id: "pinned",
+            id: generatePinnedId(window.id),
             children: [parsedTab],
           };
           parsedWindow.children.push(newPinned);
