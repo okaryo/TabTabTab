@@ -6,13 +6,14 @@ import { WindowsContext } from "../../../contexts/Windows";
 
 export const useMoveTab = (): ((
   tabId: number,
+  windowId: number,
   index: number,
 ) => Promise<void>) => {
   const { setWindows } = useContext(WindowsContext);
 
   const callback = useCallback(
-    async (tabId: number, index: number) => {
-      await moveTab(tabId, index);
+    async (tabId: number, windowId: number, index: number) => {
+      await moveTab(tabId, windowId, index);
       const newWindows = await getWindows();
       setWindows(newWindows);
     },
