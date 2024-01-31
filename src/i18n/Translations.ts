@@ -105,6 +105,9 @@ class Translations {
   get duplicated() {
     return chrome.i18n.getMessage("duplicated");
   }
+  get resolveDuplicates() {
+    return chrome.i18n.getMessage("resolve_duplicates");
+  }
   get tabCleanerHeader() {
     return chrome.i18n.getMessage("tab_cleaner_header");
   }

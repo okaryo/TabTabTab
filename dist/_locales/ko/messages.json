@@ -123,6 +123,10 @@
     "message": "중복됨",
     "description": "Displayed next to the tab title if the same tab exists across the entire window."
   },
+  "resolve_duplicates": {
+    "message": "중복 해결",
+    "description": "Text displayed on hover over the duplicate chip next to the tab, an action to resolve duplicate tabs."
+  },
   "tab_cleaner_header": {
     "message": "사용하지 않는 탭 자동 종료",
     "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
