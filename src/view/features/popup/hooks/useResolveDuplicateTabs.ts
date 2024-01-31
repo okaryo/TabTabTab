@@ -12,7 +12,9 @@ export const useResolveDuplicateTabs = (): ((tab: Tab) => Promise<void>) => {
   const callback = useCallback(
     async (tab: Tab) => {
       const allTabs = flatTabsInWindows(windows);
-      const duplicateTabs = allTabs.filter((t) => isSamePageTabs(t, tab));
+      const duplicateTabs = allTabs.filter(
+        (t) => t.id !== tab.id && isSamePageTabs(t, tab),
+      );
       const duplicateTabIds = duplicateTabs.map((t) => t.id);
       await removeTabs(duplicateTabIds);
       const newWindows = await getWindows();

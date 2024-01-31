@@ -165,7 +165,8 @@ export const hasDuplicatedTabs = (
   windows: Window[],
   targetTab: Tab,
 ): boolean => {
-  const isDuplicated = (a: Tab, b: Tab): boolean => isSamePageTabs(a, b);
+  const isDuplicated = (a: Tab, b: Tab) =>
+    a.id !== b.id && isSamePageTabs(a, b);
 
   return windows.some((window) => {
     return window.children.some((child) => {
