@@ -18,7 +18,7 @@ export const useResolveDuplicateTabs = (): ((tab: Tab) => Promise<void>) => {
           tab.title === t.title &&
           tab.url.href === t.url.href
         );
-      })
+      });
       const duplicateTabIds = duplicateTabs.map((t) => t.id);
       await removeTabs(duplicateTabIds);
       const newWindows = await getWindows();
