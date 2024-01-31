@@ -123,6 +123,10 @@
     "message": "Zduplikowany",
     "description": "Displayed next to the tab title if the same tab exists across the entire window."
   },
+  "resolve_duplicates": {
+    "message": "Rozwiąż Duplikaty",
+    "description": "Text displayed on hover over the duplicate chip next to the tab, an action to resolve duplicate tabs."
+  },
   "tab_cleaner_header": {
     "message": "Automatyczne zamykanie nieużywanych kart",
     "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."

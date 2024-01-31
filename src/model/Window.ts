@@ -1,4 +1,4 @@
-import { Tab, TabId } from "./Tab";
+import { Tab, TabId, isSamePageTabs } from "./Tab";
 import {
   Pinned,
   TabContainer,
@@ -165,9 +165,8 @@ export const hasDuplicatedTabs = (
   windows: Window[],
   targetTab: Tab,
 ): boolean => {
-  const isDuplicated = (a: Tab, b: Tab): boolean => {
-    return a.id !== b.id && a.title === b.title && a.url.href === b.url.href;
-  };
+  const isDuplicated = (a: Tab, b: Tab) =>
+    a.id !== b.id && isSamePageTabs(a, b);
 
   return windows.some((window) => {
     return window.children.some((child) => {

@@ -23,3 +23,7 @@ export const durationSinceLastActivatedAt = (tab: Tab): Duration => {
     milliseconds: currentTime.getTime() - tab.lastActivatedAt.getTime(),
   });
 };
+
+export const isSamePageTabs = (tab1: Tab, tab2: Tab): boolean => {
+  return tab1.title === tab2.title && tab1.url.href === tab2.url.href;
+};
