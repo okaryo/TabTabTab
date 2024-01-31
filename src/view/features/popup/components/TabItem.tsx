@@ -201,7 +201,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
                   textOverflow: "ellipsis",
                 }}
               >
-                {tab.url.origin}
+                {tab.url.host}
               </span>
               {elapsedTimeText !== "" && <span>・</span>}
               {elapsedTimeText !== "" && (
