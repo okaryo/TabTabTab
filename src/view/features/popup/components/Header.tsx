@@ -1,7 +1,7 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import SearchIcon from "@mui/icons-material/Search";
-import SettingsIcon from "@mui/icons-material/Settings";
+import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
@@ -80,7 +80,7 @@ const Header = (props: HeaderProps) => {
           {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
         </IconButton>
         <IconButton onClick={() => navigateToOptionsPage()} color="inherit">
-          <SettingsIcon />
+          <SpaceDashboardIcon />
         </IconButton>
       </Toolbar>
     </AppBar>
