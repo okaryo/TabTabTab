@@ -18,6 +18,7 @@ import { useState } from "react";
 
 import t from "../../../../i18n/Translations";
 import { Pinned } from "../../../../model/TabContainer";
+import { WindowId } from "../../../../model/Window";
 
 import ActionMenu from "./ActionMenu";
 
@@ -26,11 +27,22 @@ type PinnedContainerProps = {
   pinned: Pinned;
   collapsed: boolean;
   toggleCollapsed: () => void;
+  data: {
+    type: "window" | "tabGroup" | "pinned" | "tab";
+    parentType: "window" | "tabGroup" | "pinned";
+    windowId: WindowId;
+  };
 };
 
 const PinnedContainer = (props: PinnedContainerProps) => {
-  const { children, pinned, collapsed, toggleCollapsed } = props;
-  const { over, setNodeRef } = useDroppable({ id: pinned.id });
+  const { children, pinned, collapsed, toggleCollapsed, data } = props;
+  const { over, setNodeRef } = useDroppable({
+    id: pinned.id,
+    data: {
+      ...data,
+      collapsed,
+    },
+  });
   const isOver = over && over.id === pinned.id;
 
   const [isHovered, setIsHovered] = useState(false);

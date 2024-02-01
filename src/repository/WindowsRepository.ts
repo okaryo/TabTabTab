@@ -1,5 +1,10 @@
 import { GroupColor } from "../model/GroupColor";
-import { Pinned, generatePinnedId, isPinned, isTabGroup } from "../model/TabContainer";
+import {
+  Pinned,
+  generatePinnedId,
+  isPinned,
+  isTabGroup,
+} from "../model/TabContainer";
 import {
   Window,
   findPinned,

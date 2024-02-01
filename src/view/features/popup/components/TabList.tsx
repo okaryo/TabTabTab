@@ -3,7 +3,7 @@ import {
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
 import List from "@mui/material/List";
-import { useContext } from "react";
+import { memo, useContext, useState } from "react";
 
 import { Tab } from "../../../../model/Tab";
 import { isPinned, isTabGroup } from "../../../../model/TabContainer";
@@ -18,14 +18,13 @@ import TabItem from "./TabItem";
 
 type TabListProps = {
   selectedWindowIndex: number;
-  pinnedCollapsed: boolean;
-  setPinnedCollapsed: (collapsed: boolean) => void;
 };
 
-const TabList = (props: TabListProps) => {
-  const { selectedWindowIndex, pinnedCollapsed, setPinnedCollapsed } = props;
+const TabList = memo((props: TabListProps) => {
+  const { selectedWindowIndex } = props;
   const { windows } = useContext(WindowsContext);
   const window = windows[selectedWindowIndex];
+  const [pinnedCollapsed, setPinnedCollapsed] = useState(true);
 
   const convertToElement = (child: WindowChild) => {
     if (isPinned(child)) {
@@ -34,10 +33,12 @@ const TabList = (props: TabListProps) => {
           pinned={child}
           collapsed={pinnedCollapsed}
           toggleCollapsed={() => setPinnedCollapsed(!pinnedCollapsed)}
+          data={{ type: "pinned", parentType: "window", windowId: window.id }}
         >
           <SortableTabs
             id={child.id}
             parentType="pinned"
+            windowId={window.id}
             tabs={child.children}
           />
         </PinnedContainer>
@@ -54,6 +55,7 @@ const TabList = (props: TabListProps) => {
             <SortableTabs
               id={child.id.toString()}
               parentType="tabGroup"
+              windowId={window.id}
               tabs={child.children}
             />
           </TabGroupContainer>
@@ -86,6 +88,6 @@ const TabList = (props: TabListProps) => {
       )}
     </List>
   );
-};
+});
 
 export default TabList;

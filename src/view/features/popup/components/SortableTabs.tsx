@@ -11,11 +11,12 @@ import TabItem from "./TabItem";
 type SortableTabsProps = {
   id: string;
   parentType: "tabGroup" | "pinned";
+  windowId: number;
   tabs: Tab[];
 };
 
 const SortableTabs = (props: SortableTabsProps) => {
-  const { id, parentType, tabs } = props;
+  const { id, parentType, windowId, tabs } = props;
 
   return (
     <SortableContext
@@ -27,7 +28,7 @@ const SortableTabs = (props: SortableTabsProps) => {
         <SortableItem
           key={tab.id}
           id={tab.id.toString()}
-          data={{ type: "tab", parentType: parentType, windowId: tab.windowId }}
+          data={{ type: "tab", parentType: parentType, windowId }}
         >
           <TabItem tab={tab} />
         </SortableItem>

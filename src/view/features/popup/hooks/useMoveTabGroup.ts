@@ -6,13 +6,20 @@ import { WindowsContext } from "../../../contexts/Windows";
 
 export const useMoveTabGroup = (): ((
   groupId: number,
+  currentWindowId: number,
+  destWindowId: number,
   index: number,
 ) => Promise<void>) => {
   const { setWindows } = useContext(WindowsContext);
 
   const callback = useCallback(
-    async (groupId: number, index: number) => {
-      await moveTabGroup(groupId, index);
+    async (
+      groupId: number,
+      currentWindowId: number,
+      destWindowId: number,
+      index: number,
+    ) => {
+      await moveTabGroup(groupId, currentWindowId, destWindowId, index);
       const newWindows = await getWindows();
       setWindows(newWindows);
     },

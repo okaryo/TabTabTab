@@ -66,8 +66,12 @@ export const screenshotVisibleArea = (
   );
 };
 
-export const moveTab = async (tabId: number, index: number) => {
-  await chrome.tabs.move(tabId, { index });
+export const moveTab = async (
+  tabId: number,
+  windowId: number,
+  index: number,
+) => {
+  await chrome.tabs.move(tabId, { windowId, index });
 };
 
 export const addToNewGroup = async (tabId: number) => {
@@ -78,9 +82,13 @@ export const removeFromGroup = async (tabId: number) => {
   await chrome.tabs.ungroup(tabId);
 };
 
-export const moveTabOutOfGroup = async (tabId: number, index: number) => {
+export const moveTabOutOfGroup = async (
+  tabId: number,
+  windowId: number,
+  index: number,
+) => {
   await chrome.tabs.ungroup(tabId);
-  await chrome.tabs.move(tabId, { index });
+  await chrome.tabs.move(tabId, { windowId, index });
 };
 
 export const moveTabToOtherWindow = async (

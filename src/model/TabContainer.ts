@@ -25,7 +25,7 @@ export const generatePinnedId = (windowId: number) => `pinned-${windowId}`;
 
 export const isPinnedId = (value: string | number): value is PinnedId => {
   return typeof value === "string" && value.startsWith("pinned");
-}
+};
 
 export const isTab = (value: TabContainer | Tab): value is Tab => {
   return (

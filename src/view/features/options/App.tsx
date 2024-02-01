@@ -19,6 +19,7 @@ import Feedback from "./Feedback";
 import Header from "./Header";
 import Overview from "./Overview";
 import Settings from "./Settings";
+import WindowsProvider from "./WindowsProvider";
 
 type Page = "Overview" | "Settings" | "Feedback";
 
@@ -57,19 +58,21 @@ export default function App() {
           </List>
           <Divider orientation="vertical" flexItem />
 
-          <Container sx={{ p: 2 }}>
-            {currentPage === "Overview" && <Overview />}
-            {currentPage === "Settings" && (
-              <Container maxWidth="md">
-                <Settings />
-              </Container>
-            )}
-            {currentPage === "Feedback" && (
-              <Container maxWidth="md">
-                <Feedback />
-              </Container>
-            )}
-          </Container>
+          {currentPage === "Overview" && (
+            <WindowsProvider>
+              <Overview />
+            </WindowsProvider>
+          )}
+          {currentPage === "Settings" && (
+            <Container sx={{ p: 2 }} maxWidth="md">
+              <Settings />
+            </Container>
+          )}
+          {currentPage === "Feedback" && (
+            <Container sx={{ p: 2 }} maxWidth="md">
+              <Feedback />
+            </Container>
+          )}
         </Stack>
       </ThemeProvider>
     </ThemeContext.Provider>
