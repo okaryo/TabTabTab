@@ -19,6 +19,7 @@ import { hasDuplicatedTabs } from "../../../../model/Window";
 import { focusTab } from "../../../../repository/TabsRepository";
 import { WindowsContext } from "../../../contexts/Windows";
 import { useCloseTab } from "../hooks/useCloseTab";
+import { useResolveDuplicateTabs } from "../hooks/useResolveDuplicateTabs";
 
 import ActionMenu from "./ActionMenu";
 import TabFavicon from "./TabFavicon";
@@ -107,6 +108,16 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const onCloseMenu = () => setMenuAnchorElement(null);
   const onMenuActionCompleted = () => setIsMenuActionCompleted(true);
 
+  const [isDuplicatedChipHovered, setIsDuplicatedChipHovered] = useState(false);
+  const resolveDuplicateTabs = useResolveDuplicateTabs();
+  const onClickResolveDuplicatesChip = (
+    event: React.MouseEvent<HTMLElement>,
+  ) => {
+    event.stopPropagation();
+    // eslint-disable-next-line @typescript-eslint/no-floating-promises
+    resolveDuplicateTabs(tab);
+  };
+
   return (
     <ListItem
       ref={ref}
@@ -183,11 +194,18 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
               {tab.audible && <VolumeUpIcon fontSize="small" />}
               {showDuplicatedChip && hasDuplicatedTabs(windows, tab) && (
                 <Chip
-                  label={t.duplicated}
+                  label={
+                    isDuplicatedChipHovered ? t.resolveDuplicates : t.duplicated
+                  }
                   size="small"
                   variant="outlined"
                   color="warning"
                   component="span"
+                  onMouseEnter={() => setIsDuplicatedChipHovered(true)}
+                  onMouseLeave={() => setIsDuplicatedChipHovered(false)}
+                  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+                  onClick={onClickResolveDuplicatesChip}
+                  clickable
                 />
               )}
             </Typography>
@@ -201,7 +219,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
                   textOverflow: "ellipsis",
                 }}
               >
-                {tab.url.origin}
+                {tab.url.host}
               </span>
               {elapsedTimeText !== "" && <span>・</span>}
               {elapsedTimeText !== "" && (

@@ -123,6 +123,10 @@
     "message": "Копирано",
     "description": "Displayed next to the tab title if the same tab exists across the entire window."
   },
+  "resolve_duplicates": {
+    "message": "Разрешаване на дубликати",
+    "description": "Text displayed on hover over the duplicate chip next to the tab, an action to resolve duplicate tabs."
+  },
   "tab_cleaner_header": {
     "message": "Почисти автоматично неизползваните раздели",
     "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
