@@ -36,7 +36,8 @@ export default function App() {
           <List
             sx={{
               height: "calc(100vh - 64px)",
-              width: 240,
+              width: 200,
+              flexShrink: 0,
             }}
           >
             {["Overview", "Settings", "Feedback"].map((page: Page) => (

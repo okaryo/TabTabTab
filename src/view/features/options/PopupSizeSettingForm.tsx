@@ -112,80 +112,74 @@ const PopupSizeSettingForm = () => {
   };
 
   return (
-    <Box>
-      <Card sx={{ p: 2 }}>
-        <CardHeader
-          sx={{ p: 0 }}
-          title={
-            <Typography variant="subtitle1" component="h3">
-              {t.popupSizeHeader}
-            </Typography>
-          }
-          subheader={
-            <Typography
-              variant="caption"
-              component="p"
-              style={{ color: "grey" }}
-            >
-              {t.popupSizeDescription}
-            </Typography>
-          }
-        />
-        <FormControl
-          error={submissionState.isError}
-          sx={{ width: "100%", pt: 1 }}
-        >
-          <Stack spacing={2}>
-            <Box>
-              <Stack direction="row" spacing={2}>
-                <TextField
-                  value={settingState.height}
-                  variant="outlined"
-                  size="small"
-                  label={t.height}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">px</InputAdornment>
-                    ),
-                  }}
-                  onChange={onChangeHeight}
-                />
-                <TextField
-                  value={settingState.width}
-                  variant="outlined"
-                  size="small"
-                  label={t.width}
-                  InputProps={{
-                    endAdornment: (
-                      <InputAdornment position="end">px</InputAdornment>
-                    ),
-                  }}
-                  onChange={onChangeWidth}
-                />
-              </Stack>
-            </Box>
-            <Button
-              variant="contained"
-              disabled={submissionState.isLoading}
-              sx={{ textTransform: "none" }}
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
-              onClick={onSave}
-            >
-              {submissionState.isLoading ? `${t.saving}...` : t.save}
-            </Button>
-            <FormHelperText style={{ marginTop: "4px" }}>
-              {submissionState.errorMessage}
-            </FormHelperText>
-            <Snackbar
-              open={isOpenSnackBarState}
-              onClose={() => setIsOpenSnackBarState(false)}
-              autoHideDuration={3000}
-              message={t.savedSuccessfully}
-            />
-          </Stack>
-        </FormControl>
-      </Card>
-    </Box>
+    <Card sx={{ p: 2 }} variant="outlined">
+      <CardHeader
+        sx={{ p: 0 }}
+        title={
+          <Typography variant="subtitle1" component="h3">
+            {t.popupSizeHeader}
+          </Typography>
+        }
+        subheader={
+          <Typography variant="caption" component="p" style={{ color: "grey" }}>
+            {t.popupSizeDescription}
+          </Typography>
+        }
+      />
+      <FormControl
+        error={submissionState.isError}
+        sx={{ width: "100%", pt: 1 }}
+      >
+        <Stack spacing={2}>
+          <Box>
+            <Stack direction="row" spacing={2}>
+              <TextField
+                value={settingState.height}
+                variant="outlined"
+                size="small"
+                label={t.height}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">px</InputAdornment>
+                  ),
+                }}
+                onChange={onChangeHeight}
+              />
+              <TextField
+                value={settingState.width}
+                variant="outlined"
+                size="small"
+                label={t.width}
+                InputProps={{
+                  endAdornment: (
+                    <InputAdornment position="end">px</InputAdornment>
+                  ),
+                }}
+                onChange={onChangeWidth}
+              />
+            </Stack>
+          </Box>
+          <Button
+            variant="contained"
+            disabled={submissionState.isLoading}
+            sx={{ textTransform: "none" }}
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onClick={onSave}
+          >
+            {submissionState.isLoading ? `${t.saving}...` : t.save}
+          </Button>
+          <FormHelperText style={{ marginTop: "4px" }}>
+            {submissionState.errorMessage}
+          </FormHelperText>
+          <Snackbar
+            open={isOpenSnackBarState}
+            onClose={() => setIsOpenSnackBarState(false)}
+            autoHideDuration={3000}
+            message={t.savedSuccessfully}
+          />
+        </Stack>
+      </FormControl>
+    </Card>
   );
 };
 

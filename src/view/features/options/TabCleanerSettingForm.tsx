@@ -128,89 +128,87 @@ const TabCleanerSettingForm = () => {
   };
 
   return (
-    <Box>
-      <Card sx={{ p: 2 }}>
-        <CardHeader
-          sx={{ p: 0 }}
-          title={
-            <Typography variant="subtitle1" component="h3">
-              {t.tabCleanerHeader}
-            </Typography>
-          }
-        />
-        <FormControl error={submissionState.isError} sx={{ width: "100%" }}>
-          <Stack spacing={2}>
-            <Box>
-              <FormControlLabel
-                control={
-                  <Checkbox
-                    checked={settingState.isEnabled}
-                    onChange={onChangeIsEnabled}
-                  />
-                }
-                label={
-                  <Stack>
-                    <Typography
-                      variant="caption"
-                      component="p"
-                      style={{ color: "grey" }}
-                    >
-                      {t.tabCleanerDescription}
-                    </Typography>
-                  </Stack>
-                }
-              />
-            </Box>
-            <Stack direction="row" spacing={2}>
-              <TextField
-                value={settingState.duration}
-                variant="outlined"
-                size="small"
-                label={t.duration}
-                disabled={!settingState.isEnabled}
-                onChange={onChangeDuration}
-                error={durationErrorState.isError}
-                helperText={durationErrorState.errorMessage}
-              />
-              <FormControl
-                size="small"
-                sx={{ minWidth: 120 }}
-                disabled={!settingState.isEnabled}
-              >
-                <InputLabel id="demo-simple-select-label">{t.unit}</InputLabel>
-                <Select
-                  labelId="demo-simple-select-label"
-                  value={settingState.durationUnit}
-                  label={t.unit}
-                  onChange={onChangeDurationUnit}
-                >
-                  <MenuItem value={"day"}>{t.durationUnitDay}</MenuItem>
-                  <MenuItem value={"hour"}>{t.durationUnitHour}</MenuItem>
-                </Select>
-              </FormControl>
-            </Stack>
-            <Button
-              variant="contained"
-              disabled={submissionState.isLoading}
-              sx={{ textTransform: "none" }}
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
-              onClick={onSave}
-            >
-              {submissionState.isLoading ? `${t.saving}...` : t.save}
-            </Button>
-            <FormHelperText style={{ marginTop: "4px" }}>
-              {submissionState.errorMessage}
-            </FormHelperText>
-            <Snackbar
-              open={isOpenSnackBarState}
-              onClose={() => setIsOpenSnackBarState(false)}
-              autoHideDuration={3000}
-              message={t.savedSuccessfully}
+    <Card sx={{ p: 2 }} variant="outlined">
+      <CardHeader
+        sx={{ p: 0 }}
+        title={
+          <Typography variant="subtitle1" component="h3">
+            {t.tabCleanerHeader}
+          </Typography>
+        }
+      />
+      <FormControl error={submissionState.isError} sx={{ width: "100%" }}>
+        <Stack spacing={2}>
+          <Box>
+            <FormControlLabel
+              control={
+                <Checkbox
+                  checked={settingState.isEnabled}
+                  onChange={onChangeIsEnabled}
+                />
+              }
+              label={
+                <Stack>
+                  <Typography
+                    variant="caption"
+                    component="p"
+                    style={{ color: "grey" }}
+                  >
+                    {t.tabCleanerDescription}
+                  </Typography>
+                </Stack>
+              }
             />
+          </Box>
+          <Stack direction="row" spacing={2}>
+            <TextField
+              value={settingState.duration}
+              variant="outlined"
+              size="small"
+              label={t.duration}
+              disabled={!settingState.isEnabled}
+              onChange={onChangeDuration}
+              error={durationErrorState.isError}
+              helperText={durationErrorState.errorMessage}
+            />
+            <FormControl
+              size="small"
+              sx={{ minWidth: 120 }}
+              disabled={!settingState.isEnabled}
+            >
+              <InputLabel id="demo-simple-select-label">{t.unit}</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                value={settingState.durationUnit}
+                label={t.unit}
+                onChange={onChangeDurationUnit}
+              >
+                <MenuItem value={"day"}>{t.durationUnitDay}</MenuItem>
+                <MenuItem value={"hour"}>{t.durationUnitHour}</MenuItem>
+              </Select>
+            </FormControl>
           </Stack>
-        </FormControl>
-      </Card>
-    </Box>
+          <Button
+            variant="contained"
+            disabled={submissionState.isLoading}
+            sx={{ textTransform: "none" }}
+            // eslint-disable-next-line @typescript-eslint/no-misused-promises
+            onClick={onSave}
+          >
+            {submissionState.isLoading ? `${t.saving}...` : t.save}
+          </Button>
+          <FormHelperText style={{ marginTop: "4px" }}>
+            {submissionState.errorMessage}
+          </FormHelperText>
+          <Snackbar
+            open={isOpenSnackBarState}
+            onClose={() => setIsOpenSnackBarState(false)}
+            autoHideDuration={3000}
+            message={t.savedSuccessfully}
+          />
+        </Stack>
+      </FormControl>
+    </Card>
   );
 };
 

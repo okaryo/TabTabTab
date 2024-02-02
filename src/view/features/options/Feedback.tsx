@@ -44,7 +44,7 @@ const Feedback = () => {
               target="_blank"
               rel="noopener noreferrer"
             >
-              <Card sx={{ p: 2 }}>
+              <Card sx={{ p: 2 }} variant="outlined">
                 <CardHeader
                   sx={{ p: 0 }}
                   title={
