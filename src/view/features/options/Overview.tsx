@@ -1,4 +1,5 @@
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -30,9 +31,23 @@ const WindowColumn = (props: WindowColumnProps) => {
   const onCloseMenu = () => setMenuAnchorElement(null);
 
   return (
-    <Paper variant="outlined" sx={{ width: 420, flexGrow: 1 }}>
-      <Stack direction="row" alignItems="center" justifyContent="space-between">
-        <Stack direction="row" spacing={1} alignItems="center" sx={{ p: 2 }}>
+    <Paper
+      variant="outlined"
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        flexShrink: 0,
+        width: 420,
+        overflow: "hidden",
+      }}
+    >
+      <Stack
+        direction="row"
+        alignItems="center"
+        justifyContent="space-between"
+        sx={{ px: 2, py: 1 }}
+      >
+        <Stack direction="row" spacing={1} alignItems="center">
           <Typography variant="h6">
             {index === 0 ? t.currentWindow : `${t.window}${index}`}
           </Typography>
@@ -53,7 +68,9 @@ const WindowColumn = (props: WindowColumnProps) => {
         onCloseMenu={onCloseMenu}
       />
       <Divider />
-      <TabList key={window.id} selectedWindowIndex={index} />
+      <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
+        <TabList key={window.id} selectedWindowIndex={index} />
+      </Box>
     </Paper>
   );
 };
@@ -68,6 +85,7 @@ const Overview = () => {
       sx={{
         p: 2,
         overflowY: "hidden",
+        height: "calc(100vh - 64px)",
       }}
     >
       <DragAndDropContext>
