@@ -11,6 +11,9 @@ class Translations {
   get currentWindow() {
     return chrome.i18n.getMessage("current_window");
   }
+  get closeWindow() {
+    return chrome.i18n.getMessage("close_window");
+  }
 
   // Grouped Tabs
   get pinned() {

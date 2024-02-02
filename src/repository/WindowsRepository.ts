@@ -22,6 +22,10 @@ export const getWindows = async (): Promise<Window[]> => {
   return applyLastActivatedAtOfTabInWindows(await windows(currentWindow.id));
 };
 
+export const closeWindow = async (id: number): Promise<void> => {
+  await chrome.windows.remove(id);
+};
+
 const windows = async (currentWindowId: number): Promise<Window[]> => {
   const windows = await chrome.windows.getAll({ populate: true });
 

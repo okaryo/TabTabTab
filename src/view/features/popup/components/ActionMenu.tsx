@@ -1,5 +1,6 @@
 /* eslint @typescript-eslint/no-misused-promises: 0 */
 
+import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -16,7 +17,9 @@ import React from "react";
 import t from "../../../../i18n/Translations";
 import { Tab } from "../../../../model/Tab";
 import { Pinned, TabGroup } from "../../../../model/TabContainer";
+import { Window } from "../../../../model/Window";
 import { screenshotVisibleArea } from "../../../../repository/TabsRepository";
+import { useCloseWindow } from "../../options/hooks/useCloseWindow";
 import { useAddTabToNewGroup } from "../hooks/useAddTabToNewGroup";
 import { useCloseAllTabs } from "../hooks/useCloseAllTabs";
 import { useCloseTabGroup } from "../hooks/useCloseTabGroup";
@@ -50,6 +53,9 @@ type PinnedActionMenuProps = Omit<ActionMenuProps, "items"> & {
 };
 type TabGroupActionMenuProps = Omit<ActionMenuProps, "items"> & {
   tabGroup: TabGroup;
+};
+type WindowActionMenuProps = Omit<ActionMenuProps, "items"> & {
+  window: Window;
 };
 type ActionMenuItemProps = {
   label: string;
@@ -182,6 +188,29 @@ export const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
       label: t.closeGroup,
       icon: <HighlightOffIcon fontSize="small" />,
       action: () => closeTabGroup(tabGroup),
+    },
+  ];
+
+  return (
+    <ActionMenu
+      items={items}
+      isOpenMenu={isOpenMenu}
+      anchorElement={anchorElement}
+      onCloseMenu={onCloseMenu}
+    />
+  );
+};
+
+export const WindowActionMenu = (props: WindowActionMenuProps) => {
+  const { window, isOpenMenu, anchorElement, onCloseMenu } = props;
+
+  const closeWindow = useCloseWindow();
+  const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.closeWindow,
+      icon: <CancelPresentationIcon fontSize="small" />,
+      action: () => closeWindow(window.id),
     },
   ];
 
