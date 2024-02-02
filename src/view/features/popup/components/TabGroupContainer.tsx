@@ -28,7 +28,7 @@ import { useExpandTabGroup } from "../hooks/useExpandTabGroup";
 import { useUpdateTabGroupColor } from "../hooks/useUpdateTabGroupColor";
 import { useUpdateTabGroupTitle } from "../hooks/useUpdateTabGroupTitle";
 
-import ActionMenu from "./ActionMenu";
+import { TabGroupActionMenu } from "./ActionMenu";
 
 type TabGroupContainerProps = {
   children: React.ReactNode;
@@ -231,8 +231,8 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                   )}
                 </Stack>
               </ListItemButton>
-              <ActionMenu
-                target={tabGroup}
+              <TabGroupActionMenu
+                tabGroup={tabGroup}
                 isOpenMenu={Boolean(menuAnchorElement)}
                 anchorElement={menuAnchorElement}
                 onCloseMenu={onCloseMenu}

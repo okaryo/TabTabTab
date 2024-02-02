@@ -15,12 +15,7 @@ import React from "react";
 
 import t from "../../../../i18n/Translations";
 import { Tab } from "../../../../model/Tab";
-import {
-  TabContainer,
-  isPinned,
-  isTab,
-  isTabGroup,
-} from "../../../../model/TabContainer";
+import { Pinned, TabGroup } from "../../../../model/TabContainer";
 import { screenshotVisibleArea } from "../../../../repository/TabsRepository";
 import { useAddTabToNewGroup } from "../hooks/useAddTabToNewGroup";
 import { useCloseAllTabs } from "../hooks/useCloseAllTabs";
@@ -31,161 +26,182 @@ import { useUngroup } from "../hooks/useUngroup";
 import { useUnpinAllTabs } from "../hooks/useUnpinAllTabs";
 import { useUnpinTab } from "../hooks/useUnpinTab";
 
+type ActionMenuItemAttrs =
+  | {
+      type: "Divider";
+    }
+  | {
+      type: "MenuItem";
+      label: string;
+      icon: React.ReactNode;
+      action: () => void;
+    };
 type ActionMenuProps = {
-  target: TabContainer | Tab;
+  items: ActionMenuItemAttrs[];
   isOpenMenu: boolean;
   anchorElement: HTMLElement;
   onCloseMenu: () => void;
-  onMenuActionCompleted?: () => void;
+};
+type TabItemActionMenuProps = Omit<ActionMenuProps, "items"> & {
+  tab: Tab;
+};
+type PinnedActionMenuProps = Omit<ActionMenuProps, "items"> & {
+  pinned: Pinned;
+};
+type TabGroupActionMenuProps = Omit<ActionMenuProps, "items"> & {
+  tabGroup: TabGroup;
 };
 type ActionMenuItemProps = {
   label: string;
   icon: React.ReactNode;
-  action: () => void;
-  onClickMenu: (action: () => void) => void;
+  onClickMenu: () => void;
 };
 
 const ActionMenuItem = (props: ActionMenuItemProps) => {
-  const { label, icon, action, onClickMenu } = props;
+  const { label, icon, onClickMenu } = props;
 
   return (
-    <MenuItem onClick={() => onClickMenu(action)} style={{ minHeight: "24px" }}>
+    <MenuItem onClick={onClickMenu} style={{ minHeight: "24px" }}>
       <ListItemIcon>{icon}</ListItemIcon>
       <ListItemText>{label}</ListItemText>
     </MenuItem>
   );
 };
 
-const ActionMenu = (props: ActionMenuProps) => {
-  const {
-    target,
-    isOpenMenu,
-    anchorElement,
-    onCloseMenu,
-    onMenuActionCompleted,
-  } = props;
+export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
+  const { tab, isOpenMenu, anchorElement, onCloseMenu } = props;
+
   const pinTab = usePinTab();
   const unpinTab = useUnpinTab();
-  const unpinAllTabs = useUnpinAllTabs();
-  const closeAllTabs = useCloseAllTabs();
-  const ungroup = useUngroup();
-  const closeTabGroup = useCloseTabGroup();
   const addTabToNewGroup = useAddTabToNewGroup();
   const removeFromTabGroup = useRemoveFromTabGroup();
+  const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.copyUrl,
+      icon: <ContentCopyIcon fontSize="small" />,
+      action: () => navigator.clipboard.writeText(tab.url.href),
+    },
+    tab.pinned && {
+      type: "MenuItem",
+      label: t.unpin,
+      icon: <PushPinIcon fontSize="small" />,
+      action: () => unpinTab(tab.id),
+    },
+    !tab.pinned && {
+      type: "MenuItem",
+      label: t.pin,
+      icon: <PushPinIcon fontSize="small" />,
+      action: () => pinTab(tab.id),
+    },
+    tab.groupId && {
+      type: "MenuItem",
+      label: t.removeFromGroup,
+      icon: <CropFreeIcon fontSize="small" />,
+      action: () => removeFromTabGroup(tab.id),
+    },
+    !tab.groupId && {
+      type: "MenuItem",
+      label: t.addToNewGroup,
+      icon: <LibraryAddIcon fontSize="small" />,
+      action: () => addTabToNewGroup(tab.id),
+    },
+    tab.highlighted && {
+      type: "Divider",
+    },
+    tab.highlighted && {
+      type: "MenuItem",
+      label: t.screenshotVisibleArea,
+      icon: <PhotoCameraIcon fontSize="small" />,
+      action: () => {
+        screenshotVisibleArea(tab.windowId, (dataUrl) => {
+          const link = document.createElement("a");
+          link.href = dataUrl;
+          link.download = `${tab.title}.png`;
+          link.click();
+          link.remove();
+        });
+      },
+    },
+  ];
+
+  return (
+    <ActionMenu
+      items={items}
+      isOpenMenu={isOpenMenu}
+      anchorElement={anchorElement}
+      onCloseMenu={onCloseMenu}
+    />
+  );
+};
+
+export const PinnedActionMenu = (props: PinnedActionMenuProps) => {
+  const { pinned, isOpenMenu, anchorElement, onCloseMenu } = props;
+
+  const unpinAllTabs = useUnpinAllTabs();
+  const closeAllTabs = useCloseAllTabs();
+  const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.unpinAll,
+      icon: <PushPinIcon fontSize="small" />,
+      action: () => unpinAllTabs(pinned.children),
+    },
+    {
+      type: "MenuItem",
+      label: t.closeAll,
+      icon: <HighlightOffIcon fontSize="small" />,
+      action: () => closeAllTabs(pinned.children),
+    },
+  ];
+
+  return (
+    <ActionMenu
+      items={items}
+      isOpenMenu={isOpenMenu}
+      anchorElement={anchorElement}
+      onCloseMenu={onCloseMenu}
+    />
+  );
+};
+
+export const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
+  const { tabGroup, isOpenMenu, anchorElement, onCloseMenu } = props;
+
+  const ungroup = useUngroup();
+  const closeTabGroup = useCloseTabGroup();
+  const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.ungroup,
+      icon: <CropFreeIcon fontSize="small" />,
+      action: () => ungroup(tabGroup),
+    },
+    {
+      type: "MenuItem",
+      label: t.closeGroup,
+      icon: <HighlightOffIcon fontSize="small" />,
+      action: () => closeTabGroup(tabGroup),
+    },
+  ];
+
+  return (
+    <ActionMenu
+      items={items}
+      isOpenMenu={isOpenMenu}
+      anchorElement={anchorElement}
+      onCloseMenu={onCloseMenu}
+    />
+  );
+};
+
+const ActionMenu = (props: ActionMenuProps) => {
+  const { items, isOpenMenu, anchorElement, onCloseMenu } = props;
 
   const onClickMenu = (action: () => void) => {
     action();
     onCloseMenu();
-    if (onMenuActionCompleted) {
-      onMenuActionCompleted();
-    }
   };
-
-  let menus: JSX.Element[];
-  if (isTab(target)) {
-    const tab = target;
-    menus = [
-      <ActionMenuItem
-        key={t.copyUrl}
-        label={t.copyUrl}
-        icon={<ContentCopyIcon fontSize="small" />}
-        action={() => navigator.clipboard.writeText(tab.url.href)}
-        onClickMenu={onClickMenu}
-      />,
-      tab.pinned && (
-        <ActionMenuItem
-          key={t.unpin}
-          label={t.unpin}
-          icon={<PushPinIcon fontSize="small" />}
-          action={() => unpinTab(tab.id)}
-          onClickMenu={onClickMenu}
-        />
-      ),
-      !tab.pinned && (
-        <ActionMenuItem
-          key={t.pin}
-          label={t.pin}
-          icon={<PushPinIcon fontSize="small" />}
-          action={() => pinTab(tab.id)}
-          onClickMenu={onClickMenu}
-        />
-      ),
-      tab.groupId && (
-        <ActionMenuItem
-          key={t.removeFromGroup}
-          label={t.removeFromGroup}
-          icon={<CropFreeIcon fontSize="small" />}
-          action={() => removeFromTabGroup(tab.id)}
-          onClickMenu={onClickMenu}
-        />
-      ),
-      !tab.groupId && (
-        <ActionMenuItem
-          key={t.addToNewGroup}
-          label={t.addToNewGroup}
-          icon={<LibraryAddIcon fontSize="small" />}
-          action={() => addTabToNewGroup(tab.id)}
-          onClickMenu={onClickMenu}
-        />
-      ),
-      tab.highlighted && <Divider key="divider" />,
-      tab.highlighted && (
-        <ActionMenuItem
-          key={t.screenshotVisibleArea}
-          label={t.screenshotVisibleArea}
-          icon={<PhotoCameraIcon fontSize="small" />}
-          action={() => {
-            screenshotVisibleArea(tab.windowId, (dataUrl) => {
-              const link = document.createElement("a");
-              link.href = dataUrl;
-              link.download = `${tab.title}.png`;
-              link.click();
-              link.remove();
-            });
-          }}
-          onClickMenu={onClickMenu}
-        />
-      ),
-    ];
-  }
-  if (isPinned(target)) {
-    const pinned = target;
-    menus = [
-      <ActionMenuItem
-        key={t.unpinAll}
-        label={t.unpinAll}
-        icon={<PushPinIcon fontSize="small" />}
-        action={() => unpinAllTabs(pinned.children)}
-        onClickMenu={onClickMenu}
-      />,
-      <ActionMenuItem
-        key={t.closeAll}
-        label={t.closeAll}
-        icon={<HighlightOffIcon fontSize="small" />}
-        action={() => closeAllTabs(pinned.children)}
-        onClickMenu={onClickMenu}
-      />,
-    ];
-  }
-  if (isTabGroup(target)) {
-    const tabGroup = target;
-    menus = [
-      <ActionMenuItem
-        key={t.ungroup}
-        label={t.ungroup}
-        icon={<CropFreeIcon fontSize="small" />}
-        action={() => ungroup(tabGroup)}
-        onClickMenu={onClickMenu}
-      />,
-      <ActionMenuItem
-        key={t.closeGroup}
-        label={t.closeGroup}
-        icon={<HighlightOffIcon fontSize="small" />}
-        action={() => closeTabGroup(tabGroup)}
-        onClickMenu={onClickMenu}
-      />,
-    ];
-  }
 
   return (
     <Menu
@@ -205,9 +221,18 @@ const ActionMenu = (props: ActionMenuProps) => {
         dense: true,
       }}
     >
-      {menus}
+      {items.filter(Boolean).map((item, index) => {
+        if (item.type === "Divider") return <Divider key={index} />;
+
+        return (
+          <ActionMenuItem
+            key={item.label}
+            label={item.label}
+            icon={item.icon}
+            onClickMenu={() => onClickMenu(item.action)}
+          />
+        );
+      })}
     </Menu>
   );
 };
-
-export default ActionMenu;

@@ -1,28 +1,13 @@
-import DoneIcon from "@mui/icons-material/Done";
 import TabIcon from "@mui/icons-material/Tab";
 import Box from "@mui/material/Box";
 
 type TabFaviconProps = {
   url: URL;
-  shouldShowCheckIcon: boolean;
   style?: React.CSSProperties;
 };
 
 const TabFavicon = (props: TabFaviconProps) => {
-  const { url, shouldShowCheckIcon, style } = props;
-
-  if (shouldShowCheckIcon) {
-    return (
-      <DoneIcon
-        style={{ ...style }}
-        sx={{
-          height: 20,
-          width: 20,
-          color: "success.main",
-        }}
-      />
-    );
-  }
+  const { url, style } = props;
 
   if (
     url !== null &&

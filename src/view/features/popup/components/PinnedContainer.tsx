@@ -20,7 +20,7 @@ import t from "../../../../i18n/Translations";
 import { Pinned } from "../../../../model/TabContainer";
 import { WindowId } from "../../../../model/Window";
 
-import ActionMenu from "./ActionMenu";
+import { PinnedActionMenu } from "./ActionMenu";
 
 type PinnedContainerProps = {
   children: React.ReactNode;
@@ -103,8 +103,8 @@ const PinnedContainer = (props: PinnedContainerProps) => {
                 />
               </Stack>
             </ListItemButton>
-            <ActionMenu
-              target={pinned}
+            <PinnedActionMenu
+              pinned={pinned}
               isOpenMenu={Boolean(menuAnchorElement)}
               anchorElement={menuAnchorElement}
               onCloseMenu={onCloseMenu}

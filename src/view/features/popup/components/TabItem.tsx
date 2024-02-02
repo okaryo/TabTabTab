@@ -11,7 +11,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { forwardRef, useContext, useEffect, useState } from "react";
+import { forwardRef, useContext, useState } from "react";
 
 import t from "../../../../i18n/Translations";
 import { Tab, durationSinceLastActivatedAt } from "../../../../model/Tab";
@@ -21,7 +21,7 @@ import { WindowsContext } from "../../../contexts/Windows";
 import { useCloseTab } from "../hooks/useCloseTab";
 import { useResolveDuplicateTabs } from "../hooks/useResolveDuplicateTabs";
 
-import ActionMenu from "./ActionMenu";
+import { TabItemActionMenu } from "./ActionMenu";
 import TabFavicon from "./TabFavicon";
 
 type TabItemProps = {
@@ -92,21 +92,10 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
 
   const [menuAnchorElement, setMenuAnchorElement] =
     useState<HTMLElement | null>(null);
-  const [isMenuActionCompleted, setIsMenuActionCompleted] = useState(false);
-  useEffect(() => {
-    if (isMenuActionCompleted) {
-      const timer = setTimeout(() => {
-        setIsMenuActionCompleted(false);
-      }, 3000);
-
-      return () => clearTimeout(timer);
-    }
-  }, [isMenuActionCompleted]);
   const onClickTabActionMenu = (event: React.MouseEvent<HTMLElement>) => {
     setMenuAnchorElement(event.currentTarget);
   };
   const onCloseMenu = () => setMenuAnchorElement(null);
-  const onMenuActionCompleted = () => setIsMenuActionCompleted(true);
 
   const [isDuplicatedChipHovered, setIsDuplicatedChipHovered] = useState(false);
   const resolveDuplicateTabs = useResolveDuplicateTabs();
@@ -165,11 +154,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
             }}
           />
         )}
-        <TabFavicon
-          url={tab.favIconUrl}
-          shouldShowCheckIcon={isMenuActionCompleted}
-          style={{ marginRight: "20px" }}
-        />
+        <TabFavicon url={tab.favIconUrl} style={{ marginRight: "20px" }} />
         <ListItemText
           primary={
             <Typography
@@ -229,12 +214,11 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
           }
         />
       </ListItemButton>
-      <ActionMenu
-        target={tab}
+      <TabItemActionMenu
+        tab={tab}
         isOpenMenu={Boolean(menuAnchorElement)}
         anchorElement={menuAnchorElement}
         onCloseMenu={onCloseMenu}
-        onMenuActionCompleted={onMenuActionCompleted}
       />
     </ListItem>
   );
