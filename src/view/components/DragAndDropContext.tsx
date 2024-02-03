@@ -24,11 +24,11 @@ import { useCallback, useContext, useMemo, useState } from "react";
 
 import { Tab } from "../../model/Tab";
 import {
-  TabContainer,
   TabGroup,
   isPinned,
   isPinnedId,
   isTab,
+  isTabContainer,
   isTabGroup,
 } from "../../model/TabContainer";
 import {
@@ -50,9 +50,10 @@ import { useMoveTab } from "../features/popup/hooks/useMoveTab";
 import { useMoveTabGroup } from "../features/popup/hooks/useMoveTabGroup";
 import { useMoveTabGroupToOtherWindow } from "../features/popup/hooks/useMoveTabGroupToOtherWindow";
 import { useMoveTabToOtherWindow } from "../features/popup/hooks/useMoveTabToOtherWindow";
-import { usePinTab } from "../features/popup/hooks/usePinTab";
 import { useMoveTabOutOfGroup } from "../features/popup/hooks/useTabOutOfTabGroup";
 import { useUnpinTab } from "../features/popup/hooks/useUnpinTab";
+import { useMoveTabFromPinnedToPinned } from "../hooks/useMoveTabFromPinnedToPinned";
+import { useMoveTabFromRootToPinned } from "../hooks/useMoveTabFromRootToPinned";
 
 type DragAndDropContextProps = {
   children: React.ReactNode;
@@ -86,12 +87,13 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
 
   const moveTabGroup = useMoveTabGroup();
   const moveTab = useMoveTab();
-  const pinTab = usePinTab();
   const unpinTab = useUnpinTab();
   const addTabToTabGroup = useAddTabToTabGroup();
   const moveTabOutOfGroup = useMoveTabOutOfGroup();
   const moveTabToOtherWindow = useMoveTabToOtherWindow();
   const moveTabGroupToOtherWindow = useMoveTabGroupToOtherWindow();
+  const moveTabFromRootToPinned = useMoveTabFromRootToPinned();
+  const moveTabFromPinnedToPinned = useMoveTabFromPinnedToPinned();
   const addWindowWithTab = useAddWindowWithTab();
   const addWindowWithTabGroup = useAddWindowWithTabGroup();
 
@@ -273,7 +275,6 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
 
     if (!source || !dest) return;
 
-    const isOverContainerHeader = over.data.current?.sortable === undefined;
     const sourceContainerBeforeDrag = findParentContainer(
       windowsBeforeDrag,
       source.id,
@@ -281,12 +282,12 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
     const destContainer = findParentContainer(windows, dest.id);
 
     const sourceIsInRoot = sourceContainerBeforeDrag.id === sourceWindow.id;
-    const sourceIsInPinned = sourceContainerBeforeDrag.id === "pinned";
+    const sourceIsInPinned = isPinnedId(sourceContainerBeforeDrag.id);
     const sourceIsInTabGroup =
       findWindowChild(sourceWindow, sourceContainerBeforeDrag.id) &&
       isTabGroup(findWindowChild(sourceWindow, sourceContainerBeforeDrag.id));
     const destIsInRoot = destContainer.id === destWindow.id;
-    const destIsInPinned = destContainer.id === "pinned";
+    const destIsInPinned = isPinnedId(destContainer.id);
     const destIsInTabGroup =
       findWindowChild(destWindow, destContainer.id) &&
       isTabGroup(findWindowChild(destWindow, destContainer.id));
@@ -294,49 +295,44 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
     if (isTabGroup(source)) {
       if (destIsInRoot) {
         const destIndex = indexOfWindowChild(destWindow, dest.id);
-        moveTabGroup(source.id, sourceWindow.id, destWindow.id, destIndex);
+        await moveTabGroup(
+          source.id,
+          sourceWindow.id,
+          destWindow.id,
+          destIndex,
+        );
       }
     }
 
-    if (isTab(source) && isOverContainerHeader) {
-      const destContainer = findWindowChild(
-        destWindow,
-        dest.id,
-      ) as TabContainer;
-
-      if (isPinned(destContainer)) {
-        const pinnedCollapsed = over.data.current?.collapsed;
-        if (pinnedCollapsed) {
-          await pinTab(source.id);
-        } else {
-          await pinTab(source.id);
-          await moveTab(source.id, destWindow.id, 0);
-        }
-      }
-
-      if (isTabGroup(destContainer)) {
-        if (!destContainer.collapsed) {
-          await addTabToTabGroup(source.id, destContainer.id);
-          await moveTab(source.id, destWindow.id, 0);
-        }
-      }
-    }
-
-    if (isTab(source) && !isOverContainerHeader) {
+    if (isTab(source)) {
       if (sourceIsInRoot) {
-        if (destIsInRoot) {
+        if (destIsInRoot && !isTabContainer(dest)) {
           const currentIndex = indexOfWindowChild(sourceWindow, source.id);
           const destIndex = indexOfWindowChild(destWindow, dest.id);
           const targetIndex =
             currentIndex < destIndex && isTabGroup(dest)
               ? destIndex + dest.children.length - 1
               : destIndex;
-          moveTab(source.id, destWindow.id, targetIndex);
+          await moveTab(source.id, destWindow.id, targetIndex);
+        }
+        // When dropping on tab container header
+        if (destIsInRoot && isTabContainer(dest)) {
+          if (isPinned(dest)) {
+            const pinnedCollapsed = over.data.current?.collapsed;
+            const destIndex = pinnedCollapsed ? dest.children.length : 0;
+            await moveTabFromRootToPinned(source.id, destWindow.id, destIndex);
+          }
+          if (isTabGroup(dest)) {
+            const destIndex = dest.collapsed
+              ? indexOfWindowChild(destWindow, dest.children[-1].id)
+              : indexOfWindowChild(destWindow, dest.children[0].id);
+            await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
+            await moveTab(source.id, destWindow.id, destIndex);
+          }
         }
         if (destIsInPinned) {
           const destIndex = indexOfWindowChild(destWindow, dest.id);
-          await pinTab(source.id);
-          await moveTab(source.id, destWindow.id, destIndex);
+          await moveTabFromRootToPinned(source.id, destWindow.id, destIndex);
         }
         if (destIsInTabGroup) {
           const destIndex = indexOfWindowChild(destWindow, dest.id);
@@ -346,44 +342,73 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       }
 
       if (sourceIsInPinned) {
-        if (destIsInRoot) {
-          unpinTab(source.id);
-          moveTab(
-            source.id,
-            destWindow.id,
-            indexOfWindowChild(destWindow, dest.id),
-          );
+        const destIndex = indexOfWindowChild(destWindow, dest.id);
+
+        if (destIsInRoot && !isTabContainer(dest)) {
+          await unpinTab(source.id);
+          await moveTab(source.id, destWindow.id, destIndex);
+        }
+        // When dropping on tab container header
+        if (destIsInRoot && isTabContainer(dest)) {
+          if (isPinned(dest)) {
+            const pinnedCollapsed = over.data.current?.collapsed;
+            await moveTabFromPinnedToPinned(
+              source.id,
+              sourceWindow.id,
+              destWindow.id,
+              pinnedCollapsed ? dest.children.length : 0,
+            );
+          }
+          if (isTabGroup(dest)) {
+            const index = dest.collapsed
+              ? indexOfWindowChild(destWindow, dest.children[-1].id)
+              : indexOfWindowChild(destWindow, dest.children[0].id);
+            await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
+            await moveTab(source.id, destWindow.id, index);
+          }
         }
         if (destIsInPinned) {
-          moveTab(
+          await moveTabFromPinnedToPinned(
             source.id,
+            sourceWindow.id,
             destWindow.id,
-            indexOfWindowChild(destWindow, dest.id),
+            destIndex,
           );
         }
         if (destIsInTabGroup) {
           await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
-          await moveTab(
-            source.id,
-            destWindow.id,
-            indexOfWindowChild(destWindow, dest.id),
-          );
+          await moveTab(source.id, destWindow.id, destIndex);
         }
       }
 
       if (sourceIsInTabGroup) {
-        if (destIsInRoot) {
-          moveTabOutOfGroup(
-            source.id,
-            destWindow.id,
-            indexOfWindowChild(destWindow, dest.id),
-          );
+        const destIndex = indexOfWindowChild(destWindow, dest.id);
+
+        if (destIsInRoot && !isTabContainer(dest)) {
+          await moveTabOutOfGroup(source.id, destWindow.id, destIndex);
+        }
+        // When dropping on tab container header
+        if (destIsInRoot && isTabContainer(dest)) {
+          if (isPinned(dest)) {
+            const pinnedCollapsed = over.data.current?.collapsed;
+            await moveTabFromRootToPinned(
+              source.id,
+              destWindow.id,
+              pinnedCollapsed ? dest.children.length : 0,
+            );
+          }
+          if (isTabGroup(dest)) {
+            const index = dest.collapsed
+              ? indexOfWindowChild(destWindow, dest.children[-1].id)
+              : indexOfWindowChild(destWindow, dest.children[0].id);
+            await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
+            await moveTab(source.id, destWindow.id, index);
+          }
         }
         if (destIsInPinned) {
-          pinTab(source.id);
+          await moveTabFromRootToPinned(source.id, destWindow.id, destIndex);
         }
         if (destIsInTabGroup) {
-          const destIndex = indexOfWindowChild(destWindow, dest.id);
           await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
           await moveTab(source.id, destWindow.id, destIndex);
         }
