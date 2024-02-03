@@ -131,8 +131,9 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
 
       if (!over) return;
 
+      setOverItem(over);
+
       if (active.id === over.id) {
-        setOverItem(over);
         return;
       }
 
@@ -156,7 +157,6 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
           destWindowId,
           destWindow.children.length,
         );
-        setOverItem(over);
         setWindows(newWindows);
         return;
       }
@@ -191,7 +191,6 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
         destContainer.id,
         destIndex,
       );
-      setOverItem(over);
       setWindows(newWindows);
     },
     [windows, setWindows],
