@@ -1,9 +1,9 @@
-name: Test and Lint
+name: CI
 
 on: push
 
 jobs:
-  test_and_lint:
+  ci:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4

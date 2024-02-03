@@ -10,8 +10,8 @@
 [![ChromeWebStore][chrome-web-store-badge]][chrome-web-store-url]
 [![ChromeWebStoreUsers][chrome-web-store-users-badge]][chrome-web-store-url]
 
-[ci-badge]: https://github.com/okaryo/TabTabTab/actions/workflows/test-and-lint.yml/badge.svg
-[ci-url]: https://github.com/okaryo/TabTabTab/actions/workflows/test-and-lint.yml
+[ci-badge]: https://github.com/okaryo/TabTabTab/actions/workflows/ci.yml/badge.svg
+[ci-url]: https://github.com/okaryo/TabTabTab/actions/workflows/ci.yml
 [chrome-web-store-badge]: https://img.shields.io/chrome-web-store/v/hfmnidllojimehmfjkclnadpebibhgoi
 [chrome-web-store-url]: https://chrome.google.com/webstore/detail/tabtabtab-tab-manager/hfmnidllojimehmfjkclnadpebibhgoi
 [chrome-web-store-users-badge]: https://img.shields.io/chrome-web-store/users/hfmnidllojimehmfjkclnadpebibhgoi
