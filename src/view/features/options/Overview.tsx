@@ -17,7 +17,8 @@ import { useContext, useState } from "react";
 import t from "../../../i18n/Translations";
 import { Window, flatTabsInWindow } from "../../../model/Window";
 import DragAndDropContext, {
-  DROPPABLE_EMPTY_WINDOW_CONTAINER_ID,
+  DROPPABLE_EMPTY_WINDOW_COLUMN_ID,
+  DROPPABLE_WINDOW_COLUMN_ID_PREFIX,
 } from "../../components/DragAndDropContext";
 import { WindowsContext } from "../../contexts/Windows";
 import { WindowActionMenu } from "../popup/components/ActionMenu";
@@ -78,16 +79,28 @@ const WindowColumn = (props: WindowColumnProps) => {
         onCloseMenu={onCloseMenu}
       />
       <Divider />
-      <Box sx={{ flexGrow: 1, overflowY: "auto" }}>
-        <TabList key={window.id} selectedWindowIndex={index} />
-      </Box>
+      <DroppableTabList window={window} index={index} />
     </Paper>
+  );
+};
+
+const DroppableTabList = (props: WindowColumnProps) => {
+  const { window, index } = props;
+
+  const { setNodeRef } = useDroppable({
+    id: `${DROPPABLE_WINDOW_COLUMN_ID_PREFIX}${window.id}`,
+  });
+
+  return (
+    <Box ref={setNodeRef} sx={{ flexGrow: 1, overflowY: "auto" }}>
+      <TabList key={window.id} selectedWindowIndex={index} />
+    </Box>
   );
 };
 
 const DroppableEmptyWindowColumn = () => {
   const { setNodeRef, isOver } = useDroppable({
-    id: DROPPABLE_EMPTY_WINDOW_CONTAINER_ID,
+    id: DROPPABLE_EMPTY_WINDOW_COLUMN_ID,
   });
   const addWindow = useAddWindow();
 

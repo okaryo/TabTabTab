@@ -58,7 +58,8 @@ type DragAndDropContextProps = {
   children: React.ReactNode;
 };
 
-export const DROPPABLE_EMPTY_WINDOW_CONTAINER_ID = "empty-window";
+export const DROPPABLE_EMPTY_WINDOW_COLUMN_ID = "DROPPABLE_EMPTY_WINDOW_COLUMN";
+export const DROPPABLE_WINDOW_COLUMN_ID_PREFIX = "DROPPABLE_WINDOW_COLUMN/";
 
 const DragAndDropContext = (props: DragAndDropContextProps) => {
   const { children } = props;
@@ -83,7 +84,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
     }),
   );
 
-  const moveGroupTab = useMoveTabGroup();
+  const moveTabGroup = useMoveTabGroup();
   const moveTab = useMoveTab();
   const pinTab = usePinTab();
   const unpinTab = useUnpinTab();
@@ -126,8 +127,34 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       const { active, over } = event;
 
       if (!over) return;
+
       if (active.id === over.id) {
         setOverItem(over);
+        return;
+      }
+
+      if (over.id.toString().startsWith(DROPPABLE_WINDOW_COLUMN_ID_PREFIX)) {
+        const destWindowId = Number(
+          over.id
+            .toString()
+            .substring(DROPPABLE_WINDOW_COLUMN_ID_PREFIX.length),
+        );
+        const destWindow = findWindow(windows, destWindowId);
+        const sourceWindow = findWindow(windows, active.data.current?.windowId);
+        const source = findWindowChild(
+          windows,
+          isPinnedId(active.id) ? active.id : Number(active.id),
+        );
+        const newWindows = moveTabOrTabGroup(
+          windows,
+          Number(source.id),
+          sourceWindow.id,
+          destWindowId,
+          destWindowId,
+          destWindow.children.length,
+        );
+        setOverItem(over);
+        setWindows(newWindows);
         return;
       }
 
@@ -200,7 +227,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       return;
     }
 
-    if (over.id === DROPPABLE_EMPTY_WINDOW_CONTAINER_ID) {
+    if (over.id === DROPPABLE_EMPTY_WINDOW_COLUMN_ID) {
       if (active.data.current?.type === "tabGroup") {
         const tabGroup = findWindowChild(windowsBeforeDrag, Number(active.id));
         if (tabGroup && isTabGroup(tabGroup)) {
@@ -209,6 +236,23 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       }
       if (active.data.current?.type === "tab") {
         addWindowWithTab(Number(active.id));
+      }
+
+      resetState();
+
+      return;
+    }
+
+    if (over.id.toString().startsWith(DROPPABLE_WINDOW_COLUMN_ID_PREFIX)) {
+      const destWindowId = Number(
+        over.id.toString().substring(DROPPABLE_WINDOW_COLUMN_ID_PREFIX.length),
+      );
+
+      if (active.data.current?.type === "tabGroup") {
+        moveTabGroup(Number(active.id), originWindowId, destWindowId, -1);
+      }
+      if (active.data.current?.type === "tab") {
+        moveTab(Number(active.id), destWindowId, -1);
       }
 
       resetState();
@@ -250,7 +294,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
     if (isTabGroup(source)) {
       if (destIsInRoot) {
         const destIndex = indexOfWindowChild(destWindow, dest.id);
-        moveGroupTab(source.id, sourceWindow.id, destWindow.id, destIndex);
+        moveTabGroup(source.id, sourceWindow.id, destWindow.id, destIndex);
       }
     }
 
