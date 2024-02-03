@@ -1,12 +1,14 @@
 import { GroupColor } from "../model/GroupColor";
 import {
   Pinned,
+  TabGroup,
   generatePinnedId,
   isPinned,
   isTabGroup,
 } from "../model/TabContainer";
 import {
   Window,
+  WindowId,
   findPinned,
   findTabGroup,
   updateLastActivatedAtOfTab,
@@ -20,6 +22,26 @@ import {
 export const getWindows = async (): Promise<Window[]> => {
   const currentWindow = await chrome.windows.getCurrent();
   return applyLastActivatedAtOfTabInWindows(await windows(currentWindow.id));
+};
+
+export const addWindow = async (): Promise<WindowId> => {
+  const window = await chrome.windows.create({ focused: false });
+  return window.id;
+};
+
+export const addWindowWithTab = async (tabId: number): Promise<void> => {
+  await chrome.windows.create({ tabId, focused: false });
+};
+
+export const addWindowWithTabGroup = async (
+  tabGroup: TabGroup,
+): Promise<void> => {
+  const window = await chrome.windows.create({ focused: false });
+  await chrome.tabGroups.move(tabGroup.id, { windowId: window.id, index: -1 });
+
+  // Remove the new tab created when the window is opened
+  const emptyTab = window.tabs[0];
+  await chrome.tabs.remove(emptyTab.id);
 };
 
 export const closeWindow = async (id: number): Promise<void> => {

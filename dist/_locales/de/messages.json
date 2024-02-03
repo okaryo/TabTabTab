@@ -19,6 +19,10 @@
     "message": "Aktuelles Fenster",
     "description": "Used as a heading within the popup to indicate the current window in the window tabs section."
   },
+  "add_window": {
+    "message": "Fenster hinzufügen",
+    "description": "Text used to display the action for adding a window"
+  },
   "close_window": {
     "message": "Fenster schließen",
     "description": "Text used to display the action for closing a window"

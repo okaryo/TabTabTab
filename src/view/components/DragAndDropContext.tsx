@@ -40,6 +40,8 @@ import {
   moveTabOrTabGroup,
 } from "../../model/Window";
 import { WindowsContext } from "../contexts/Windows";
+import { useAddWindowWithTab } from "../features/options/hooks/useAddWindowWithTab";
+import { useAddWindowWithTabGroup } from "../features/options/hooks/useAddWindowWithTabGroup";
 import SortableTabs from "../features/popup/components/SortableTabs";
 import TabGroupContainer from "../features/popup/components/TabGroupContainer";
 import TabItem from "../features/popup/components/TabItem";
@@ -55,6 +57,8 @@ import { useUnpinTab } from "../features/popup/hooks/useUnpinTab";
 type DragAndDropContextProps = {
   children: React.ReactNode;
 };
+
+export const DROPPABLE_EMPTY_WINDOW_CONTAINER_ID = "empty-window";
 
 const DragAndDropContext = (props: DragAndDropContextProps) => {
   const { children } = props;
@@ -87,6 +91,8 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
   const moveTabOutOfGroup = useMoveTabOutOfGroup();
   const moveTabToOtherWindow = useMoveTabToOtherWindow();
   const moveTabGroupToOtherWindow = useMoveTabGroupToOtherWindow();
+  const addWindowWithTab = useAddWindowWithTab();
+  const addWindowWithTabGroup = useAddWindowWithTabGroup();
 
   const onDragCancel = () => {
     if (windowsBeforeDrag) {
@@ -187,6 +193,22 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       }
       if (active.data.current?.type === "tab") {
         moveTabToOtherWindow(Number(active.id), Number(over.id));
+      }
+
+      resetState();
+
+      return;
+    }
+
+    if (over.id === DROPPABLE_EMPTY_WINDOW_CONTAINER_ID) {
+      if (active.data.current?.type === "tabGroup") {
+        const tabGroup = findWindowChild(windowsBeforeDrag, Number(active.id));
+        if (tabGroup && isTabGroup(tabGroup)) {
+          addWindowWithTabGroup(tabGroup);
+        }
+      }
+      if (active.data.current?.type === "tab") {
+        addWindowWithTab(Number(active.id));
       }
 
       resetState();
@@ -330,7 +352,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
   const collisionDetectionStrategy: CollisionDetection = useCallback(
     (args: {
       active: Active & { data: { current: { windowId?: number } } };
-      collisionRect: ClientRect;
+      collisionRect: DOMRect;
       droppableRects: RectMap;
       droppableContainers: DroppableContainer[];
       pointerCoordinates: Coordinates | null;

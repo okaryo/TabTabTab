@@ -1,6 +1,12 @@
+/* eslint @typescript-eslint/no-misused-promises: 0 */
+
+import { useDroppable } from "@dnd-kit/core";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
+import Card from "@mui/material/Card";
+import CardActionArea from "@mui/material/CardActionArea";
 import Chip from "@mui/material/Chip";
+import { blue } from "@mui/material/colors";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
@@ -10,10 +16,14 @@ import { useContext, useState } from "react";
 
 import t from "../../../i18n/Translations";
 import { Window, flatTabsInWindow } from "../../../model/Window";
-import DragAndDropContext from "../../components/DragAndDropContext";
+import DragAndDropContext, {
+  DROPPABLE_EMPTY_WINDOW_CONTAINER_ID,
+} from "../../components/DragAndDropContext";
 import { WindowsContext } from "../../contexts/Windows";
 import { WindowActionMenu } from "../popup/components/ActionMenu";
 import TabList from "../popup/components/TabList";
+
+import { useAddWindow } from "./hooks/useAddWindow.";
 
 type WindowColumnProps = {
   window: Window;
@@ -75,6 +85,39 @@ const WindowColumn = (props: WindowColumnProps) => {
   );
 };
 
+const DroppableEmptyWindowColumn = () => {
+  const { setNodeRef, isOver } = useDroppable({
+    id: DROPPABLE_EMPTY_WINDOW_CONTAINER_ID,
+  });
+  const addWindow = useAddWindow();
+
+  return (
+    <Card
+      ref={setNodeRef}
+      variant="outlined"
+      raised={true}
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        flexShrink: 0,
+        width: 420,
+        overflow: "hidden",
+        borderStyle: isOver ? "solid" : "dashed",
+        backgroundColor: isOver ? blue[100] : "background.paper",
+      }}
+    >
+      <CardActionArea
+        sx={{ height: "100%", width: "100%", textAlign: "center" }}
+        onClick={addWindow}
+      >
+        <Typography variant="subtitle1" sx={{ color: "text.disabled" }}>
+          {t.addWindow}
+        </Typography>
+      </CardActionArea>
+    </Card>
+  );
+};
+
 const Overview = () => {
   const { windows } = useContext(WindowsContext);
 
@@ -92,6 +135,7 @@ const Overview = () => {
         {windows.map((window, index) => (
           <WindowColumn key={window.id} window={window} index={index} />
         ))}
+        <DroppableEmptyWindowColumn />
       </DragAndDropContext>
     </Stack>
   );
