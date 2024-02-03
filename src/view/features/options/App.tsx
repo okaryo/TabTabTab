@@ -15,11 +15,11 @@ import ThemeProvider from "../../components/ThemeProvider";
 import { ThemeContext } from "../../contexts/Theme";
 import { useTheme } from "../../hooks/useTheme";
 
-import Feedback from "./Feedback";
-import Header from "./Header";
-import Overview from "./Overview";
-import Settings from "./Settings";
-import WindowsProvider from "./WindowsProvider";
+import Header from "./components/Header";
+import WindowsProvider from "./components/WindowsProvider";
+import Feedback from "./pages/Feedback";
+import Overview from "./pages/Overview";
+import Settings from "./pages/Settings";
 
 type Page = "Overview" | "Settings" | "Feedback";
 

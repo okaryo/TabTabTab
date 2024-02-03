@@ -42,18 +42,19 @@ import {
 import { WindowsContext } from "../contexts/Windows";
 import { useAddWindowWithTab } from "../features/options/hooks/useAddWindowWithTab";
 import { useAddWindowWithTabGroup } from "../features/options/hooks/useAddWindowWithTabGroup";
-import SortableTabs from "../features/popup/components/SortableTabs";
-import TabGroupContainer from "../features/popup/components/TabGroupContainer";
-import TabItem from "../features/popup/components/TabItem";
-import { useAddTabToTabGroup } from "../features/popup/hooks/useAddTabToTabGroup";
-import { useMoveTab } from "../features/popup/hooks/useMoveTab";
-import { useMoveTabGroup } from "../features/popup/hooks/useMoveTabGroup";
-import { useMoveTabGroupToOtherWindow } from "../features/popup/hooks/useMoveTabGroupToOtherWindow";
-import { useMoveTabToOtherWindow } from "../features/popup/hooks/useMoveTabToOtherWindow";
-import { useMoveTabOutOfGroup } from "../features/popup/hooks/useTabOutOfTabGroup";
-import { useUnpinTab } from "../features/popup/hooks/useUnpinTab";
+import { useAddTabToTabGroup } from "../hooks/useAddTabToTabGroup";
+import { useMoveTab } from "../hooks/useMoveTab";
 import { useMoveTabFromPinnedToPinned } from "../hooks/useMoveTabFromPinnedToPinned";
 import { useMoveTabFromRootToPinned } from "../hooks/useMoveTabFromRootToPinned";
+import { useMoveTabGroup } from "../hooks/useMoveTabGroup";
+import { useMoveTabGroupToOtherWindow } from "../hooks/useMoveTabGroupToOtherWindow";
+import { useMoveTabToOtherWindow } from "../hooks/useMoveTabToOtherWindow";
+import { useMoveTabOutOfGroup } from "../hooks/useTabOutOfTabGroup";
+import { useUnpinTab } from "../hooks/useUnpinTab";
+
+import SortableTabs from "./SortableTabs";
+import TabGroupContainer from "./TabGroupContainer";
+import TabItem from "./TabItem";
 
 type DragAndDropContextProps = {
   children: React.ReactNode;
@@ -326,7 +327,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
             const destIndex = dest.collapsed
               ? indexOfWindowChild(destWindow, dest.children[-1].id)
               : indexOfWindowChild(destWindow, dest.children[0].id);
-            await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
+            await addTabToTabGroup(source.id, dest.id);
             await moveTab(source.id, destWindow.id, destIndex);
           }
         }
@@ -363,7 +364,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
             const index = dest.collapsed
               ? indexOfWindowChild(destWindow, dest.children[-1].id)
               : indexOfWindowChild(destWindow, dest.children[0].id);
-            await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
+            await addTabToTabGroup(source.id, dest.id);
             await moveTab(source.id, destWindow.id, index);
           }
         }
@@ -401,7 +402,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
             const index = dest.collapsed
               ? indexOfWindowChild(destWindow, dest.children[-1].id)
               : indexOfWindowChild(destWindow, dest.children[0].id);
-            await addTabToTabGroup(source.id, (destContainer as TabGroup).id);
+            await addTabToTabGroup(source.id, dest.id);
             await moveTab(source.id, destWindow.id, index);
           }
         }

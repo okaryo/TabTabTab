@@ -12,8 +12,8 @@ import {
   focusTab,
   getRecentActiveTabs,
 } from "../../../../repository/TabsRepository";
+import TabItem from "../../../components/TabItem";
 import { WindowsContext } from "../../../contexts/Windows";
-import TabItem from "../components/TabItem";
 
 type SearchResultProps = {
   searchText: string;
