@@ -39,7 +39,7 @@ export const addWindowWithTabGroup = async (
   const window = await chrome.windows.create({ focused: false });
   await chrome.tabGroups.move(tabGroup.id, { windowId: window.id, index: -1 });
 
-  // Remove the new tab created when the window is opened
+  // NOTE: Remove the new tab created when the window is opened
   const emptyTab = window.tabs[0];
   await chrome.tabs.remove(emptyTab.id);
 };

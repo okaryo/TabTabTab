@@ -7,7 +7,7 @@ export type TabContainer = {
   children: Tab[];
 };
 
-// PinnedId format is `pinned-${windowId}`.
+// NOTE: PinnedId format is `pinned-${windowId}`.
 type PinnedId = string;
 export type Pinned = TabContainer & {
   id: PinnedId;

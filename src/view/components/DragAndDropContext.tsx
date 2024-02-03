@@ -315,7 +315,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
               : destIndex;
           await moveTab(source.id, destWindow.id, targetIndex);
         }
-        // When dropping on tab container header
+        // NOTE: When dropping on tab container header
         if (destIsInRoot && isTabContainer(dest)) {
           if (isPinned(dest)) {
             const pinnedCollapsed = over.data.current?.collapsed;
@@ -348,7 +348,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
           await unpinTab(source.id);
           await moveTab(source.id, destWindow.id, destIndex);
         }
-        // When dropping on tab container header
+        // NOTE: When dropping on tab container header
         if (destIsInRoot && isTabContainer(dest)) {
           if (isPinned(dest)) {
             const pinnedCollapsed = over.data.current?.collapsed;
@@ -387,7 +387,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
         if (destIsInRoot && !isTabContainer(dest)) {
           await moveTabOutOfGroup(source.id, destWindow.id, destIndex);
         }
-        // When dropping on tab container header
+        // NOTE: When dropping on tab container header
         if (destIsInRoot && isTabContainer(dest)) {
           if (isPinned(dest)) {
             const pinnedCollapsed = over.data.current?.collapsed;
