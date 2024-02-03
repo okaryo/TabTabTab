@@ -16,21 +16,21 @@
   "author": "okaryo",
   "license": "MIT",
   "devDependencies": {
-    "@types/chrome": "^0.0.258",
-    "@types/react": "^18.2.48",
+    "@types/chrome": "^0.0.260",
+    "@types/react": "^18.2.51",
     "@types/react-dom": "^18.2.18",
-    "@typescript-eslint/eslint-plugin": "^6.15.0",
-    "@typescript-eslint/parser": "^6.15.0",
+    "@typescript-eslint/eslint-plugin": "^6.20.0",
+    "@typescript-eslint/parser": "^6.20.0",
     "@vitejs/plugin-react": "^4.2.1",
     "chromex-locale-lint": "^0.0.3",
     "eslint": "^8.56.0",
     "eslint-plugin-autofix": "^1.1.0",
     "eslint-plugin-import": "^2.29.1",
     "eslint-plugin-react-hooks": "^4.6.0",
-    "prettier": "^3.1.1",
+    "prettier": "^3.2.4",
     "typescript": "^5.3.3",
     "vite": "^5.0.12",
-    "vitest": "^1.2.1"
+    "vitest": "^1.2.2"
   },
   "dependencies": {
     "@dnd-kit/core": "^6.1.0",
