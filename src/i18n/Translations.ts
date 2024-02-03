@@ -11,6 +11,12 @@ class Translations {
   get currentWindow() {
     return chrome.i18n.getMessage("current_window");
   }
+  get addWindow() {
+    return chrome.i18n.getMessage("add_window");
+  }
+  get closeWindow() {
+    return chrome.i18n.getMessage("close_window");
+  }
 
   // Grouped Tabs
   get pinned() {

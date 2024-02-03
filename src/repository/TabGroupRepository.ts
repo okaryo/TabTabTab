@@ -19,9 +19,15 @@ export const addTabToTabGroup = async (
 
 export const moveTabGroup = async (
   groupId: number,
+  currentWindowId: number,
+  destWindowId: number,
   index: number,
 ): Promise<void> => {
-  await chrome.tabGroups.move(groupId, { index });
+  // NOTE: If moving within the same Window, passing the windowId will result in an error.
+  await chrome.tabGroups.move(groupId, {
+    index,
+    windowId: currentWindowId === destWindowId ? null : destWindowId,
+  });
 };
 
 export const moveTabGroupToOtherWindow = async (

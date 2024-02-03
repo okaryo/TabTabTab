@@ -5,6 +5,7 @@ import {
   TabContainerId,
   TabGroup,
   isPinned,
+  isPinnedId,
   isTab,
   isTabContainer,
   isTabGroup,
@@ -34,28 +35,31 @@ export const flatTabsInWindows = (windows: Window[]): Tab[] => {
 
 export const flatTabsInWindow = (window: Window): Tab[] => {
   return window.children
-    .map((child) => {
-      if (isTabContainer(child)) {
-        return child.children;
-      }
-      return child;
-    })
+    .map((child) => (isTabContainer(child) ? child.children : child))
     .flat();
 };
 
 export const findParentContainer = (
-  window: Window,
+  container: Window | Window[],
   id: WindowChildId,
 ): Window | TabContainer | undefined => {
-  const isUnderWindow = window.children.find((child) => child.id === id);
-  if (isUnderWindow) return window;
+  const findParent = (windows: Window[]) => {
+    for (const window of windows) {
+      const isUnderWindow = window.children.find((child) => child.id === id);
+      if (isUnderWindow) return window;
 
-  const containers = window.children.filter((child) =>
-    isTabContainer(child),
-  ) as TabContainer[];
-  return containers.find((container) =>
-    container.children.some((child) => child.id === id),
-  );
+      const containers = window.children.filter((child) =>
+        isTabContainer(child),
+      ) as TabContainer[];
+      const foundContainer = containers.find((container) =>
+        container.children.some((child) => child.id === id),
+      );
+      if (foundContainer) return foundContainer;
+    }
+    return undefined;
+  };
+
+  return findParent(Array.isArray(container) ? container : [container]);
 };
 
 export const findWindow = (
@@ -66,18 +70,22 @@ export const findWindow = (
 };
 
 export const findWindowChild = (
-  window: Window,
+  container: Window | Window[],
   id: WindowChildId,
 ): WindowChild | undefined => {
-  const child = window.children.find((child) => {
-    if (isTabContainer(child)) {
-      return child.id === id;
-    }
-    return child.id === id;
-  });
-  if (child) return child;
+  const findChild = (windows: Window[]) => {
+    for (const window of windows) {
+      const child = window.children.find((child) => child.id === id);
+      if (child) return child;
 
-  return flatTabsInWindow(window).find((tab) => tab.id === id);
+      const foundTab = flatTabsInWindow(window).find((tab) => tab.id === id);
+      if (foundTab) return foundTab;
+    }
+
+    return undefined;
+  };
+
+  return findChild(Array.isArray(container) ? container : [container]);
 };
 
 export const findTab = (window: Window, tabId: number): Tab | undefined => {
@@ -179,35 +187,53 @@ export const hasDuplicatedTabs = (
 };
 
 export const moveTabOrTabGroup = (
-  window: Window,
-  id: TabId,
+  windows: Window[],
+  sourceId: TabId,
+  sourceWindowId: WindowId,
+  destWindowId: WindowId,
   destContainerId: WindowId | TabContainerId,
   destIndex: number,
-): Window => {
-  const target = findWindowChild(window, id);
-  if (!target) return window;
+): Window[] => {
+  const target = findWindowChild(windows, sourceId);
+  if (!target) return windows;
 
   if (isTab(target)) {
-    return moveTab(window, target, destContainerId, destIndex);
+    return moveTab(
+      windows,
+      target,
+      sourceWindowId,
+      destWindowId,
+      destContainerId,
+      destIndex,
+    );
   }
 
   if (isTabGroup(target)) {
-    return moveTabGroup(window, target, destIndex);
+    return moveTabGroup(
+      windows,
+      target,
+      sourceWindowId,
+      destWindowId,
+      destIndex,
+    );
   }
 
-  return window;
+  return windows;
 };
 
 const moveTab = (
-  window: Window,
+  windows: Window[],
   tab: Tab,
+  sourceWindowId: WindowId,
+  destWindowId: WindowId,
   destContainerId: WindowId | TabContainerId,
-  destIndex: number,
-): Window => {
-  const newWindow = copyWindow(window);
+  destIndexInParentContainer: number,
+): Window[] => {
+  const newWindows = windows.map((window) => copyWindow(window));
+  const sourceWindow = findWindow(newWindows, sourceWindowId);
 
-  let sourceContainer: TabContainer | Window = newWindow;
-  for (const child of newWindow.children) {
+  let sourceContainer: TabContainer | Window = sourceWindow;
+  for (const child of sourceWindow.children) {
     if (
       isTabContainer(child) &&
       child.children.some((childTab) => childTab.id === tab.id)
@@ -220,43 +246,50 @@ const moveTab = (
   const sourceIndex = sourceContainer.children.findIndex(
     (child) => child.id === tab.id,
   );
-  if (sourceIndex === -1) return window;
+  if (sourceIndex === -1) return windows;
   sourceContainer.children.splice(sourceIndex, 1);
 
+  const destWindow = findWindow(newWindows, destWindowId);
   const destContainer =
-    destContainerId === window.id
-      ? newWindow
-      : (newWindow.children.find(
+    destContainerId === destWindowId
+      ? destWindow
+      : (destWindow.children.find(
           (child) => isTabContainer(child) && child.id === destContainerId,
         ) as TabContainer);
 
-  if (destContainerId === "pinned") {
+  if (isPinnedId(destContainerId)) {
     tab.pinned = true;
   } else if (tab.pinned) {
     tab.pinned = false;
   }
 
-  destContainer.children.splice(destIndex, 0, tab);
+  destContainer.children.splice(destIndexInParentContainer, 0, tab);
 
-  return newWindow;
+  return newWindows;
 };
 
 const moveTabGroup = (
-  window: Window,
+  windows: Window[],
   tabGroup: TabGroup,
+  sourceWindowId: WindowId,
+  destWindowId: WindowId,
   destIndex: number,
-): Window => {
-  const children = [...window.children];
-  const currentIndex = children.findIndex((child) => child.id === tabGroup.id);
-  if (currentIndex === -1) return window;
+): Window[] => {
+  const newWindows = windows.map((window) => copyWindow(window));
+  const sourceWindow = findWindow(newWindows, sourceWindowId);
 
-  children.splice(currentIndex, 1);
-  children.splice(destIndex, 0, tabGroup);
+  const sourceChildren = [...sourceWindow.children];
+  const currentIndex = sourceChildren.findIndex(
+    (child) => child.id === tabGroup.id,
+  );
+  if (currentIndex === -1) return windows;
 
-  return {
-    ...window,
-    children,
-  };
+  sourceWindow.children.splice(currentIndex, 1);
+
+  const destWindow = findWindow(newWindows, destWindowId);
+  destWindow.children.splice(destIndex, 0, tabGroup);
+
+  return newWindows;
 };
 
 const copyWindow = (window: Window): Window => {

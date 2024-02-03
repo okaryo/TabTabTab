@@ -19,6 +19,14 @@
     "message": "現在のウィンドウ",
     "description": "Used as a heading within the popup to indicate the current window in the window tabs section."
   },
+  "add_window": {
+    "message": "ウィンドウを追加",
+    "description": "Text used to display the action for adding a window"
+  },
+  "close_window": {
+    "message": "ウィンドウを閉じる",
+    "description": "Text used to display the action for closing a window"
+  },
   "pinned": {
     "message": "固定タブ",
     "description": "Used as a heading for grouping and displaying pinned tabs together."

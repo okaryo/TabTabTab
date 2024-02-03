@@ -19,6 +19,14 @@
     "message": "Bieżące Okno",
     "description": "Used as a heading within the popup to indicate the current window in the window tabs section."
   },
+  "add_window": {
+    "message": "Dodaj okno",
+    "description": "Text used to display the action for adding a window"
+  },
+  "close_window": {
+    "message": "Zamknij okno",
+    "description": "Text used to display the action for closing a window"
+  },
   "pinned": {
     "message": "Przypięty",
     "description": "Used as a heading for grouping and displaying pinned tabs together."

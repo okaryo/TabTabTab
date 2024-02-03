@@ -485,11 +485,13 @@ describe("#moveTabOrTabGroup", () => {
             children: [tab1, tab2, tab3, tab4, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 3, 100, 4);
-          const expected = mockWindow({
-            id: 100,
-            children: [tab1, tab2, tab4, tab5, tab3],
-          });
+          const actual = moveTabOrTabGroup([window], 3, 100, 100, 100, 4);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [tab1, tab2, tab4, tab5, tab3],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -507,11 +509,17 @@ describe("#moveTabOrTabGroup", () => {
             children: [pinned, tab3, tab4, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 3, "pinned", 1);
-          const expected = mockWindow({
-            id: 100,
-            children: [{ ...pinned, children: [tab1, tab3, tab2] }, tab4, tab5],
-          });
+          const actual = moveTabOrTabGroup([window], 3, 100, 100, "pinned", 1);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [
+                { ...pinned, children: [tab1, tab3, tab2] },
+                tab4,
+                tab5,
+              ],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -529,15 +537,17 @@ describe("#moveTabOrTabGroup", () => {
             children: [tab3, tab4, tabGroup, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 3, 10, 1);
-          const expected = mockWindow({
-            id: 100,
-            children: [
-              tab4,
-              { ...tabGroup, children: [tab1, tab3, tab2] },
-              tab5,
-            ],
-          });
+          const actual = moveTabOrTabGroup([window], 3, 100, 100, 10, 1);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [
+                tab4,
+                { ...tabGroup, children: [tab1, tab3, tab2] },
+                tab5,
+              ],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -545,7 +555,7 @@ describe("#moveTabOrTabGroup", () => {
 
     describe("when source item is under Pinned", () => {
       describe("when destination is under Window", () => {
-        it("should move to specified index from Pinned directyly under Window", () => {
+        it("should move to specified index from Pinned directly under Window", () => {
           const tab1 = mockTab({ id: 1 });
           const tab2 = mockTab({ id: 2 });
           const tab3 = mockTab({ id: 3 });
@@ -557,11 +567,19 @@ describe("#moveTabOrTabGroup", () => {
             children: [pinned, tab3, tab4, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 2, 100, 2);
-          const expected = mockWindow({
-            id: 100,
-            children: [{ ...pinned, children: [tab1] }, tab3, tab2, tab4, tab5],
-          });
+          const actual = moveTabOrTabGroup([window], 2, 100, 100, 100, 2);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [
+                { ...pinned, children: [tab1] },
+                tab3,
+                tab2,
+                tab4,
+                tab5,
+              ],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -579,11 +597,18 @@ describe("#moveTabOrTabGroup", () => {
             children: [pinned, tab3, tab4, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 2, "pinned", 0);
-          const expected = mockWindow({
-            id: 100,
-            children: [{ ...pinned, children: [tab2, tab1] }, tab3, tab4, tab5],
-          });
+          const actual = moveTabOrTabGroup([window], 2, 100, 100, "pinned", 0);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [
+                { ...pinned, children: [tab2, tab1] },
+                tab3,
+                tab4,
+                tab5,
+              ],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -602,15 +627,17 @@ describe("#moveTabOrTabGroup", () => {
             children: [pinned, tabGroup, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 2, 10, 1);
-          const expected = mockWindow({
-            id: 100,
-            children: [
-              { ...pinned, children: [tab1] },
-              { ...tabGroup, children: [tab3, tab2, tab4] },
-              tab5,
-            ],
-          });
+          const actual = moveTabOrTabGroup([window], 2, 100, 100, 10, 1);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [
+                { ...pinned, children: [tab1] },
+                { ...tabGroup, children: [tab3, tab2, tab4] },
+                tab5,
+              ],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -630,17 +657,19 @@ describe("#moveTabOrTabGroup", () => {
             children: [tab1, tab2, tabGroup, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 3, 100, 1);
-          const expected = mockWindow({
-            id: 100,
-            children: [
-              tab1,
-              tab3,
-              tab2,
-              { ...tabGroup, children: [tab4] },
-              tab5,
-            ],
-          });
+          const actual = moveTabOrTabGroup([window], 3, 100, 100, 100, 1);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [
+                tab1,
+                tab3,
+                tab2,
+                { ...tabGroup, children: [tab4] },
+                tab5,
+              ],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -659,16 +688,18 @@ describe("#moveTabOrTabGroup", () => {
             children: [pinned, tab2, tabGroup, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 3, "pinned", 0);
-          const expected = mockWindow({
-            id: 100,
-            children: [
-              { ...pinned, children: [tab3, tab1] },
-              tab2,
-              { ...tabGroup, children: [tab4] },
-              tab5,
-            ],
-          });
+          const actual = moveTabOrTabGroup([window], 3, 100, 100, "pinned", 0);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [
+                { ...pinned, children: [tab3, tab1] },
+                tab2,
+                { ...tabGroup, children: [tab4] },
+                tab5,
+              ],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -687,16 +718,18 @@ describe("#moveTabOrTabGroup", () => {
             children: [pinned, tab2, tabGroup, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 3, 10, 1);
-          const expected = mockWindow({
-            id: 100,
-            children: [
-              pinned,
-              tab2,
-              { ...tabGroup, children: [tab4, tab3] },
-              tab5,
-            ],
-          });
+          const actual = moveTabOrTabGroup([window], 3, 100, 100, 10, 1);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [
+                pinned,
+                tab2,
+                { ...tabGroup, children: [tab4, tab3] },
+                tab5,
+              ],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -715,15 +748,17 @@ describe("#moveTabOrTabGroup", () => {
             children: [tabGroup1, tabGroup2, tab5],
           });
 
-          const actual = moveTabOrTabGroup(window, 3, 10, 1);
-          const expected = mockWindow({
-            id: 100,
-            children: [
-              { ...tabGroup1, children: [tab1, tab3, tab2] },
-              { ...tabGroup2, children: [tab4] },
-              tab5,
-            ],
-          });
+          const actual = moveTabOrTabGroup([window], 3, 100, 100, 10, 1);
+          const expected = [
+            mockWindow({
+              id: 100,
+              children: [
+                { ...tabGroup1, children: [tab1, tab3, tab2] },
+                { ...tabGroup2, children: [tab4] },
+                tab5,
+              ],
+            }),
+          ];
           expect(actual).toEqual(expected);
         });
       });
@@ -743,13 +778,20 @@ describe("#moveTabOrTabGroup", () => {
         children: [pinned, tab3, tab4, tab5],
       });
 
-      const actual = moveTabOrTabGroup(window, "pinned" as any, 100, 3);
-      const expected = window;
+      const actual = moveTabOrTabGroup(
+        [window],
+        "pinned" as any,
+        100,
+        100,
+        100,
+        3,
+      );
+      const expected = [window];
       expect(actual).toEqual(expected);
     });
   });
 
-  describe("when source item is TabGorup", () => {
+  describe("when source item is TabGroup", () => {
     it("should return reordered window", () => {
       const tab1 = mockTab({ id: 1 });
       const tab2 = mockTab({ id: 2 });
@@ -762,11 +804,13 @@ describe("#moveTabOrTabGroup", () => {
         children: [tab3, tabGroup, tab4, tab5],
       });
 
-      const actual = moveTabOrTabGroup(window, 10, 100, 3);
-      const expected = mockWindow({
-        id: 100,
-        children: [tab3, tab4, tab5, tabGroup],
-      });
+      const actual = moveTabOrTabGroup([window], 10, 100, 100, 100, 3);
+      const expected = [
+        mockWindow({
+          id: 100,
+          children: [tab3, tab4, tab5, tabGroup],
+        }),
+      ];
       expect(actual).toEqual(expected);
     });
   });
