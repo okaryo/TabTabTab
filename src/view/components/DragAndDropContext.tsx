@@ -217,10 +217,14 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
     };
 
     if (over.data.current?.type === "window") {
-      if (active.data.current?.type === "tabGroup") {
+      const isSameWindow = active.data.current?.windowId === over.id;
+      if (isSameWindow) {
+        setWindows(windowsBeforeDrag);
+      }
+      if (!isSameWindow && active.data.current?.type === "tabGroup") {
         moveTabGroupToOtherWindow(Number(active.id), Number(over.id));
       }
-      if (active.data.current?.type === "tab") {
+      if (!isSameWindow && active.data.current?.type === "tab") {
         moveTabToOtherWindow(Number(active.id), Number(over.id));
       }
 
@@ -428,7 +432,6 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       pointerCoordinates: Coordinates | null;
     }) => {
       const { active, droppableContainers, pointerCoordinates } = args;
-      const window = findWindow(windows, active.data.current?.windowId);
 
       const draggedItem = findWindowChild(
         windows,
@@ -452,7 +455,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
                 .toString()
                 .startsWith(DROPPABLE_WINDOW_COLUMN_ID_PREFIX)
             ) {
-              return false;
+              return true;
             }
 
             const containerId = isPinnedId(container.id)
@@ -470,12 +473,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
         }
       }
 
-      return pointerWithin({
-        ...args,
-        droppableContainers: droppableContainers.filter((container) => {
-          return window && container.id.toString() !== window.id.toString();
-        }),
-      });
+      return pointerWithin(args);
     },
     [windows],
   );

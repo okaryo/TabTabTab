@@ -13,22 +13,23 @@ type WindowTabProps = {
 
 const WindowTab = (props: WindowTabProps) => {
   const { id, label, tabCount, ...other } = props;
-  const { isOver, setNodeRef } = useDroppable({
+  const { active, isOver, setNodeRef } = useDroppable({
     id,
     data: {
       type: "window",
     },
   });
+  const droppable = active && isOver && active.data.current?.windowId !== id;
 
   return (
     <Tab
       ref={setNodeRef}
       sx={{
-        bgcolor: isOver ? blue[100] : undefined,
-        borderColor: isOver ? "primary.main" : undefined,
-        borderWidth: isOver ? 1 : undefined,
-        borderStyle: isOver ? "solid" : undefined,
-        color: isOver ? grey[700] : undefined,
+        bgcolor: droppable ? blue[100] : undefined,
+        borderColor: droppable ? "primary.main" : undefined,
+        borderWidth: droppable ? 1 : undefined,
+        borderStyle: droppable ? "solid" : undefined,
+        color: droppable ? grey[700] : undefined,
       }}
       style={{
         textTransform: "none",
