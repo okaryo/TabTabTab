@@ -4,6 +4,7 @@ import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
+import InputIcon from "@mui/icons-material/Input";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PushPinIcon from "@mui/icons-material/PushPin";
@@ -23,6 +24,7 @@ import { useCloseWindow } from "../features/options/hooks/useCloseWindow";
 import { useAddTabToNewGroup } from "../hooks/useAddTabToNewGroup";
 import { useCloseAllTabs } from "../hooks/useCloseAllTabs";
 import { useCloseTabGroup } from "../hooks/useCloseTabGroup";
+import { useMergeWindow } from "../hooks/useMergeWindow";
 import { usePinTab } from "../hooks/usePinTab";
 import { useRemoveFromTabGroup } from "../hooks/useRemoveFromTabGroup";
 import { useUngroup } from "../hooks/useUngroup";
@@ -55,7 +57,8 @@ type TabGroupActionMenuProps = Omit<ActionMenuProps, "items"> & {
   tabGroup: TabGroup;
 };
 type WindowActionMenuProps = Omit<ActionMenuProps, "items"> & {
-  window: Window;
+  windows: Window[];
+  currentIndex: number;
 };
 type ActionMenuItemProps = {
   label: string;
@@ -202,10 +205,31 @@ export const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
 };
 
 export const WindowActionMenu = (props: WindowActionMenuProps) => {
-  const { window, isOpenMenu, anchorElement, onCloseMenu } = props;
+  const { windows, currentIndex, isOpenMenu, anchorElement, onCloseMenu } =
+    props;
+  const window = windows[currentIndex];
+  const isFirstWindow = currentIndex === 0;
+  const isLastWindow = currentIndex === windows.length - 1;
+
+  const mergeWindow = useMergeWindow();
 
   const closeWindow = useCloseWindow();
   const items: ActionMenuItemAttrs[] = [
+    !isLastWindow && {
+      type: "MenuItem",
+      label: "Merge Right",
+      icon: <InputIcon fontSize="small" sx={{ transform: "scaleX(-1)" }} />,
+      action: () => mergeWindow(window.id, windows[currentIndex + 1]),
+    },
+    !isFirstWindow && {
+      type: "MenuItem",
+      label: "Merge Left",
+      icon: <InputIcon fontSize="small" />,
+      action: () => mergeWindow(window.id, windows[currentIndex - 1]),
+    },
+    {
+      type: "Divider",
+    },
     {
       type: "MenuItem",
       label: t.closeWindow,

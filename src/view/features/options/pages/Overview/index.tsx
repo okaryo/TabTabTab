@@ -26,12 +26,17 @@ import { WindowsContext } from "../../../../contexts/Windows";
 import { useAddWindow } from "../../hooks/useAddWindow.";
 
 type WindowColumnProps = {
+  windows: Window[];
+  index: number;
+};
+type TabListProps = {
   window: Window;
   index: number;
 };
 
 const WindowColumn = (props: WindowColumnProps) => {
-  const { window, index } = props;
+  const { windows, index } = props;
+  const window = windows[index];
 
   const [menuAnchorElement, setMenuAnchorElement] =
     useState<HTMLElement | null>(null);
@@ -72,7 +77,8 @@ const WindowColumn = (props: WindowColumnProps) => {
         </IconButton>
       </Stack>
       <WindowActionMenu
-        window={window}
+        windows={windows}
+        currentIndex={index}
         isOpenMenu={Boolean(menuAnchorElement)}
         anchorElement={menuAnchorElement}
         onCloseMenu={onCloseMenu}
@@ -83,7 +89,7 @@ const WindowColumn = (props: WindowColumnProps) => {
   );
 };
 
-const DroppableTabList = (props: WindowColumnProps) => {
+const DroppableTabList = (props: TabListProps) => {
   const { window, index } = props;
 
   const { setNodeRef } = useDroppable({
@@ -145,7 +151,7 @@ const Overview = () => {
     >
       <DragAndDropContext>
         {windows.map((window, index) => (
-          <WindowColumn key={window.id} window={window} index={index} />
+          <WindowColumn key={window.id} windows={windows} index={index} />
         ))}
         <DroppableEmptyWindowColumn />
       </DragAndDropContext>
