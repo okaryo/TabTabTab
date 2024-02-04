@@ -113,7 +113,7 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
       type: "MenuItem",
       label: t.addToNewGroup,
       icon: <LibraryAddIcon fontSize="small" />,
-      action: () => addTabToNewGroup(tab.id),
+      action: () => addTabToNewGroup(tab.id, tab.windowId),
     },
     tab.highlighted && {
       type: "Divider",
