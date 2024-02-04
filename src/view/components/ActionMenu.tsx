@@ -227,7 +227,7 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
       icon: <InputIcon fontSize="small" />,
       action: () => mergeWindow(window.id, windows[currentIndex - 1]),
     },
-    {
+    windows.length > 1 && {
       type: "Divider",
     },
     {
