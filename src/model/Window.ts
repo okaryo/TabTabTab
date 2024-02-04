@@ -197,14 +197,6 @@ export const moveTabOrTabGroup = (
   const target = findWindowChild(windows, sourceId);
   if (!target) return windows;
 
-  // NOTE: Prevent moving elements before the first position if it's a pinned item.
-  if (destIndex === 0) {
-    const destWindow = findWindow(windows, destWindowId);
-    if (destWindow.children.length > 0 && isPinned(destWindow.children[0])) {
-      return windows;
-    }
-  }
-
   if (isTab(target)) {
     return moveTab(
       windows,
@@ -217,6 +209,14 @@ export const moveTabOrTabGroup = (
   }
 
   if (isTabGroup(target)) {
+    // NOTE: Prevent moving tabGroup before the first position if it's a pinned item.
+    if (destIndex === 0) {
+      const destWindow = findWindow(windows, destWindowId);
+      if (destWindow.children.length > 0 && isPinned(destWindow.children[0])) {
+        return windows;
+      }
+    }
+
     return moveTabGroup(
       windows,
       target,
