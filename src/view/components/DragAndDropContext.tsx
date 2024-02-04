@@ -13,6 +13,7 @@ import {
   MouseSensor,
   Over,
   TouchSensor,
+  closestCenter,
   pointerWithin,
   useSensor,
   useSensors,
@@ -20,7 +21,7 @@ import {
 import { RectMap } from "@dnd-kit/core/dist/store/types";
 import { Coordinates } from "@dnd-kit/core/dist/types";
 import { SortableData } from "@dnd-kit/sortable";
-import { useCallback, useContext, useMemo, useState } from "react";
+import { useCallback, useContext, useMemo, useRef, useState } from "react";
 
 import { Tab } from "../../model/Tab";
 import {
@@ -52,7 +53,6 @@ import { useMoveTabToOtherWindow } from "../hooks/useMoveTabToOtherWindow";
 import { useMoveTabOutOfGroup } from "../hooks/useTabOutOfTabGroup";
 import { useUnpinTab } from "../hooks/useUnpinTab";
 
-import SortableTabs from "./SortableTabs";
 import TabGroupContainer from "./TabGroupContainer";
 import TabItem from "./TabItem";
 
@@ -418,6 +418,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
     resetState();
   };
 
+  const lastPointerPosition = useRef<Coordinates>(null);
   const collisionDetectionStrategy: CollisionDetection = useCallback(
     (args: {
       active: Active & { data: { current: { windowId?: number } } };
@@ -426,12 +427,52 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       droppableContainers: DroppableContainer[];
       pointerCoordinates: Coordinates | null;
     }) => {
-      const { active } = args;
+      const { active, droppableContainers, pointerCoordinates } = args;
       const window = findWindow(windows, active.data.current?.windowId);
+
+      const draggedItem = findWindowChild(
+        windows,
+        isPinnedId(active.id) ? active.id : Number(active.id),
+      );
+
+      // NOTE: Ensure that if the dragged item is a TabGroup and it is expanded, items within the group are not considered for dropping.
+      if (isTabGroup(draggedItem) && !draggedItem.collapsed) {
+        const isMovingUpwards =
+          pointerCoordinates &&
+          lastPointerPosition.current &&
+          pointerCoordinates.y <= lastPointerPosition.current.y;
+        lastPointerPosition.current = pointerCoordinates;
+
+        const collisionArgs = {
+          ...args,
+          droppableContainers: droppableContainers.filter((container) => {
+            if (
+              container.id === DROPPABLE_EMPTY_WINDOW_COLUMN_ID ||
+              container.id
+                .toString()
+                .startsWith(DROPPABLE_WINDOW_COLUMN_ID_PREFIX)
+            ) {
+              return false;
+            }
+
+            const containerId = isPinnedId(container.id)
+              ? container.id
+              : Number(container.id);
+            const parentContainer = findParentContainer(windows, containerId);
+            return parentContainer && draggedItem.id !== parentContainer.id;
+          }),
+        };
+        // NOTE: Adjust collision detection for downward movements to be more responsive.
+        if (isMovingUpwards) {
+          return pointerWithin(collisionArgs);
+        } else {
+          return closestCenter(collisionArgs);
+        }
+      }
 
       return pointerWithin({
         ...args,
-        droppableContainers: args.droppableContainers.filter((container) => {
+        droppableContainers: droppableContainers.filter((container) => {
           return window && container.id.toString() !== window.id.toString();
         }),
       });
@@ -457,12 +498,9 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
           }}
         >
           <TabGroupContainer tabGroup={source}>
-            <SortableTabs
-              id={source.id.toString()}
-              parentType="tabGroup"
-              windowId={activeItem.data.current?.windowId}
-              tabs={source.children}
-            />
+            {source.children.map((tab) => (
+              <TabItem key={tab.id} tab={tab} />
+            ))}
           </TabGroupContainer>
         </div>
       );
@@ -491,7 +529,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       onDragEnd={onDragEnd}
       measuring={{
         droppable: {
-          strategy: MeasuringStrategy.Always,
+          strategy: MeasuringStrategy.WhileDragging,
         },
       }}
     >
