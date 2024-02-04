@@ -78,8 +78,8 @@ export const moveTab = async (
   await chrome.tabs.move(tabId, { windowId, index });
 };
 
-export const addToNewGroup = async (tabId: number) => {
-  await chrome.tabs.group({ tabIds: [tabId] });
+export const addToNewGroup = async (tabId: number, windowId: number) => {
+  await chrome.tabs.group({ tabIds: [tabId], createProperties: { windowId } });
 };
 
 export const removeFromGroup = async (tabId: number) => {

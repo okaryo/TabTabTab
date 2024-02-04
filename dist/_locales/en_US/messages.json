@@ -23,6 +23,14 @@
     "message": "Add Window",
     "description": "Text used to display the action for adding a window"
   },
+  "merge_right_window": {
+    "message": "Merge Right",
+    "description": "Text used to display the action for merge a right window"
+  },
+  "merge_left_window": {
+    "message": "Merge Left",
+    "description": "Text used to display the action for merge a left window"
+  },
   "close_window": {
     "message": "Close Window",
     "description": "Text used to display the action for closing a window"
