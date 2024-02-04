@@ -527,7 +527,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       onDragEnd={onDragEnd}
       measuring={{
         droppable: {
-          strategy: MeasuringStrategy.WhileDragging,
+          strategy: MeasuringStrategy.Always,
         },
       }}
     >
