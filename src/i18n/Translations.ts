@@ -14,6 +14,12 @@ class Translations {
   get addWindow() {
     return chrome.i18n.getMessage("add_window");
   }
+  get mergeRightWindow() {
+    return chrome.i18n.getMessage("merge_right_window");
+  }
+  get mergeLeftWindow() {
+    return chrome.i18n.getMessage("merge_left_window");
+  }
   get closeWindow() {
     return chrome.i18n.getMessage("close_window");
   }

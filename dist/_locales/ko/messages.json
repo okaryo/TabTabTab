@@ -23,6 +23,14 @@
     "message": "창 추가",
     "description": "Text used to display the action for adding a window"
   },
+  "merge_right_window": {
+    "message": "오른쪽으로 병합",
+    "description": "Text used to display the action for merge a right window"
+  },
+  "merge_left_window": {
+    "message": "왼쪽으로 병합",
+    "description": "Text used to display the action for merge a left window"
+  },
   "close_window": {
     "message": "창 닫기",
     "description": "Text used to display the action for closing a window"

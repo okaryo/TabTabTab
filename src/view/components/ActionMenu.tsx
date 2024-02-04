@@ -217,13 +217,13 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   const items: ActionMenuItemAttrs[] = [
     !isLastWindow && {
       type: "MenuItem",
-      label: "Merge Right",
+      label: t.mergeRightWindow,
       icon: <InputIcon fontSize="small" sx={{ transform: "scaleX(-1)" }} />,
       action: () => mergeWindow(window.id, windows[currentIndex + 1]),
     },
     !isFirstWindow && {
       type: "MenuItem",
-      label: "Merge Left",
+      label: t.mergeLeftWindow,
       icon: <InputIcon fontSize="small" />,
       action: () => mergeWindow(window.id, windows[currentIndex - 1]),
     },

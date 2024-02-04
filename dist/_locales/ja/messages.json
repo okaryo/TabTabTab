@@ -23,6 +23,14 @@
     "message": "ウィンドウを追加",
     "description": "Text used to display the action for adding a window"
   },
+  "merge_right_window": {
+    "message": "右にマージ",
+    "description": "Text used to display the action for merge a right window"
+  },
+  "merge_left_window": {
+    "message": "左にマージ",
+    "description": "Text used to display the action for merge a left window"
+  },
   "close_window": {
     "message": "ウィンドウを閉じる",
     "description": "Text used to display the action for closing a window"

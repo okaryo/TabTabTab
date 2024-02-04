@@ -23,6 +23,14 @@
     "message": "Fenster hinzufügen",
     "description": "Text used to display the action for adding a window"
   },
+  "merge_right_window": {
+    "message": "Nach rechts zusammenführen",
+    "description": "Text used to display the action for merge a right window"
+  },
+  "merge_left_window": {
+    "message": "Nach links zusammenführen",
+    "description": "Text used to display the action for merge a left window"
+  },
   "close_window": {
     "message": "Fenster schließen",
     "description": "Text used to display the action for closing a window"
