@@ -1,7 +1,19 @@
 import { DurationUnit } from "../model/settings/TabCleaner";
 
+export class ChromeLocalStorage {
+  static readonly TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
+  static readonly POPUP_SIZE_SETTING_KEY = "popup_size_setting";
+  static readonly POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
+  static readonly THEME_KEY = "theme";
+}
+
+export class ChromeSessionStorage {
+  static readonly LAST_ACTIVATED_AT_KEY = "last_activated_at";
+  static readonly RECENT_ACTIVE_TABS_KEY = "recent_active_tabs";
+}
+
 export type TabCleanerSettingStorageObject = {
-  tab_cleaner_setting: {
+  [ChromeLocalStorage.TAB_CLEANER_SETTING_KEY]: {
     isEnabled: boolean;
     duration: number;
     durationUnit: DurationUnit;
@@ -9,19 +21,19 @@ export type TabCleanerSettingStorageObject = {
 };
 
 export type PopupSizeSettingStorageObject = {
-  popup_size_setting: {
+  [ChromeLocalStorage.POPUP_SIZE_SETTING_KEY]: {
     height: number;
     width: number;
   };
 };
 
 export type PopupElementScaleSettingStorageObject = {
-  popup_element_scale: number;
+  [ChromeLocalStorage.POPUP_ELEMENT_SCALE_SETTING_KEY]: number;
 };
 
 type Theme = "light" | "dark";
 export type ThemeStorageObject = {
-  theme: Theme;
+  [ChromeLocalStorage.THEME_KEY]: Theme;
 };
 
 type DateString = string;
@@ -29,7 +41,7 @@ type StoredLastActivatedAt = {
   [tabId: string]: DateString;
 };
 export type LastActivatedAtStorageObject = {
-  last_activated_at: StoredLastActivatedAt;
+  [ChromeSessionStorage.LAST_ACTIVATED_AT_KEY]: StoredLastActivatedAt;
 };
 
 export type SerializedTab = {
@@ -45,17 +57,5 @@ export type SerializedTab = {
   lastActivatedAt: DateString | null;
 };
 export type RecentActiveTabsStorageObject = {
-  recent_active_tabs: SerializedTab[];
+  [ChromeSessionStorage.RECENT_ACTIVE_TABS_KEY]: SerializedTab[];
 };
-
-export class ChromeLocalStorage {
-  static readonly TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
-  static readonly POPUP_SIZE_SETTING_KEY = "popup_size_setting";
-  static readonly POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
-  static readonly THEME_KEY = "theme";
-}
-
-export class ChromeSessionStorage {
-  static readonly LAST_ACTIVATED_AT_KEY = "last_activated_at";
-  static readonly RECENT_ACTIVE_TABS_KEY = "recent_active_tabs";
-}
