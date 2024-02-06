@@ -3,14 +3,15 @@ import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
 
-import t from "../../../../../i18n/Translations";
+import t from "../../i18n/Translations";
+import StoredTabGroupsProvider from "../features/options/components/StoredTabGroupsProvider";
 
-import SavedTabGroups from "./StoredTabGroups";
-import SavedWindows from "./StoredWindows";
+import StoredTabGroups from "./StoredTabGroups";
+import StoredWindows from "./StoredWindows";
 
 type Page = "window" | "tabGroup";
 
-const Restore = () => {
+const RestorePage = () => {
   const [currentPage, setCurrentPage] = useState<Page>("tabGroup");
   const pages = [
     {
@@ -38,10 +39,14 @@ const Restore = () => {
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
-      {currentPage === "window" && <SavedWindows />}
-      {currentPage === "tabGroup" && <SavedTabGroups />}
+      {currentPage === "window" && <StoredWindows />}
+      {currentPage === "tabGroup" && (
+        <StoredTabGroupsProvider>
+          <StoredTabGroups />
+        </StoredTabGroupsProvider>
+      )}
     </Stack>
   );
 };
 
-export default Restore;
+export default RestorePage;

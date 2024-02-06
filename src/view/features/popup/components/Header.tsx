@@ -1,5 +1,7 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import ListIcon from "@mui/icons-material/List";
+import RestoreIcon from "@mui/icons-material/Restore";
 import SearchIcon from "@mui/icons-material/Search";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import AppBar from "@mui/material/AppBar";
@@ -15,6 +17,8 @@ import { ThemeContext } from "../../../contexts/Theme";
 import { useToggleTheme } from "../../../hooks/useToggleTheme";
 
 type HeaderProps = {
+  currentPage: "list" | "restore";
+  onChangePage: (page: "list" | "restore") => void;
   onChangeSearchText: (value: string) => void;
 };
 
@@ -51,7 +55,7 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = (props: HeaderProps) => {
-  const { onChangeSearchText } = props;
+  const { currentPage, onChangePage, onChangeSearchText } = props;
   const { theme } = useContext(ThemeContext);
   const toggleTheme = useToggleTheme();
   const onInputSearchField = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -72,6 +76,15 @@ const Header = (props: HeaderProps) => {
             fullWidth
           />
         </Search>
+        <IconButton
+          // eslint-disable-next-line @typescript-eslint/no-misused-promises
+          onClick={() =>
+            onChangePage(currentPage === "list" ? "restore" : "list")
+          }
+          color="inherit"
+        >
+          {currentPage === "list" ? <RestoreIcon /> : <ListIcon />}
+        </IconButton>
         <IconButton
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}

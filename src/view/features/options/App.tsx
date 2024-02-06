@@ -12,16 +12,15 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 
+import RestorePage from "../../components/RestorePage";
 import ThemeProvider from "../../components/ThemeProvider";
 import { ThemeContext } from "../../contexts/Theme";
 import { useTheme } from "../../hooks/useTheme";
 
 import Header from "./components/Header";
-import StoredTabGroupsProvider from "./components/StoredTabGroupsProvider";
 import WindowsProvider from "./components/WindowsProvider";
 import Feedback from "./pages/Feedback";
 import Overview from "./pages/Overview";
-import Restore from "./pages/Restore";
 import Settings from "./pages/Settings";
 
 export default function App() {
@@ -40,11 +39,9 @@ export default function App() {
       name: "Restore",
       icon: <RestoreIcon />,
       content: (
-        <StoredTabGroupsProvider>
-          <Container sx={{ p: 2 }} maxWidth="md">
-            <Restore />
-          </Container>
-        </StoredTabGroupsProvider>
+        <Container sx={{ p: 2 }} maxWidth="md">
+          <RestorePage />
+        </Container>
       ),
     },
     {

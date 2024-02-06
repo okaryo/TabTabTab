@@ -20,12 +20,13 @@ import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
 
-import t from "../../../../../i18n/Translations";
-import { StoredTabGroup } from "../../../../../model/TabContainer";
-import TabFavicon from "../../../../components/TabFavicon";
-import { StoredTabGroupsContext } from "../../../../contexts/StoredTabGroups";
-import { useRemoveStoredTabGroup } from "../../../../hooks/useRemoveStoredTabGroup";
-import { useRestoreTabGroup } from "../../../../hooks/useRestoreTabGroup";
+import t from "../../i18n/Translations";
+import { StoredTabGroup } from "../../model/TabContainer";
+import { StoredTabGroupsContext } from "../contexts/StoredTabGroups";
+import { useRemoveStoredTabGroup } from "../hooks/useRemoveStoredTabGroup";
+import { useRestoreTabGroup } from "../hooks/useRestoreTabGroup";
+
+import TabFavicon from "./TabFavicon";
 
 type StoredTabGroupAccordionProps = {
   group: StoredTabGroup;
@@ -175,7 +176,7 @@ const StoredTabGroups = () => {
           sx={{ flexGrow: 1 }}
           spacing={2}
         >
-          <RestoreIcon sx={{ fontSize: 128 }} />
+          <RestoreIcon sx={{ fontSize: 96 }} />
           <Typography variant="h5" component="h5">
             {t.noStoredTabGroupHeader}
           </Typography>
