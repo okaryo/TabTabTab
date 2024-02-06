@@ -183,6 +183,22 @@
     "message": "Час",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
+  "options_navigation_all_windows": {
+    "message": "Всички прозорци",
+    "description": "Navigation header for AllWindows Page in options.html"
+  },
+  "options_navigation_restore": {
+    "message": "Възстановяване",
+    "description": "Navigation header for Restore page in options.html"
+  },
+  "options_navigation_settings": {
+    "message": "Настройки",
+    "description": "Navigation header for Settings page in options.html"
+  },
+  "options_navigation_feedback": {
+    "message": "Обратна връзка",
+    "description": "Navigation header for Feedback page in options.html"
+  },
   "popup_size_header": {
     "message": "Размер на изкачащия прозорец",
     "description": "Heading for the popup size settings."

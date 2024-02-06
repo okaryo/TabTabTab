@@ -183,6 +183,22 @@
     "message": "시간",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
+  "options_navigation_all_windows": {
+    "message": "모든 창",
+    "description": "Navigation header for AllWindows Page in options.html"
+  },
+  "options_navigation_restore": {
+    "message": "복원",
+    "description": "Navigation header for Restore page in options.html"
+  },
+  "options_navigation_settings": {
+    "message": "설정",
+    "description": "Navigation header for Settings page in options.html"
+  },
+  "options_navigation_feedback": {
+    "message": "피드백",
+    "description": "Navigation header for Feedback page in options.html"
+  },
   "popup_size_header": {
     "message": "팝업 창 크기 조절",
     "description": "Heading for the popup size settings."
