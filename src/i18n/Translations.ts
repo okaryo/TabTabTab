@@ -28,6 +28,15 @@ class Translations {
   get pinned() {
     return chrome.i18n.getMessage("pinned");
   }
+  get tabGroup() {
+    return chrome.i18n.getMessage("tab_group");
+  }
+  get noStoredTabGroupHeader() {
+    return chrome.i18n.getMessage("no_stored_tab_group_header");
+  }
+  get noStoredTabGroupDescription() {
+    return chrome.i18n.getMessage("no_stored_tab_group_description");
+  }
 
   // Tab
   elapsedTime(time: number, unit: string) {
@@ -101,6 +110,9 @@ class Translations {
   }
   get screenshotVisibleArea() {
     return chrome.i18n.getMessage("screenshot_visible_area");
+  }
+  get saveTabGroup() {
+    return chrome.i18n.getMessage("save_tab_group");
   }
   get ungroup() {
     return chrome.i18n.getMessage("ungroup");

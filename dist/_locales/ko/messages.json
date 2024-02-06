@@ -39,6 +39,18 @@
     "message": "고정됨",
     "description": "Used as a heading for grouping and displaying pinned tabs together."
   },
+  "tab_group": {
+    "message": "그룹",
+    "description": "Used as a heading for Tab Group."
+  },
+  "no_stored_tab_group_header": {
+    "message": "저장된 그룹이 없습니다",
+    "description": "Used to show when stored tab group is empty."
+  },
+  "no_stored_tab_group_description": {
+    "message": "리스트에서 그룹을 저장하면 나중에 쉽게 복원할 수 있습니다.",
+    "description": "Used to show when stored tab group is empty."
+  },
   "month": {
     "message": "개월",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 month ago'."
@@ -118,6 +130,10 @@
   "screenshot_visible_area": {
     "message": "보이는 영역 캡쳐",
     "description": "Displayed within the action menu for highlighted tab."
+  },
+  "save_tab_group": {
+    "message": "그룹 저장",
+    "description": "Displayed within the action menu for tab group."
   },
   "ungroup": {
     "message": "그룹 해제",

@@ -39,6 +39,18 @@
     "message": "固定タブ",
     "description": "Used as a heading for grouping and displaying pinned tabs together."
   },
+  "tab_group": {
+    "message": "グループ",
+    "description": "Used as a heading for Tab Group."
+  },
+  "no_stored_tab_group_header": {
+    "message": "保存されたグループはありません",
+    "description": "Used to show when stored tab group is empty."
+  },
+  "no_stored_tab_group_description": {
+    "message": "リストからグループを保存すると、後で簡単に復元できます。",
+    "description": "Used to show when stored tab group is empty."
+  },
   "month": {
     "message": "ヶ月",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 month ago'."
@@ -118,6 +130,10 @@
   "screenshot_visible_area": {
     "message": "表示範囲をスクリーンショット",
     "description": "Displayed within the action menu for highlighted tab."
+  },
+  "save_tab_group": {
+    "message": "グループを保存",
+    "description": "Displayed within the action menu for tab group."
   },
   "ungroup": {
     "message": "グループを解除",

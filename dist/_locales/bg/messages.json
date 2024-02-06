@@ -39,6 +39,18 @@
     "message": "Закачени",
     "description": "Used as a heading for grouping and displaying pinned tabs together."
   },
+  "tab_group": {
+    "message": "Група",
+    "description": "Used as a heading for Tab Group."
+  },
+  "no_stored_tab_group_header": {
+    "message": "Няма запазени групи",
+    "description": "Used to show when stored tab group is empty."
+  },
+  "no_stored_tab_group_description": {
+    "message": "Ако запазите група от списъка, по-късно можете лесно да я възстановите.",
+    "description": "Used to show when stored tab group is empty."
+  },
   "month": {
     "message": "месец",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 month ago'."
@@ -118,6 +130,10 @@
   "screenshot_visible_area": {
     "message": "Снимай видимата област",
     "description": "Displayed within the action menu for highlighted tab."
+  },
+  "save_tab_group": {
+    "message": "Запази групата",
+    "description": "Displayed within the action menu for tab group."
   },
   "ungroup": {
     "message": "Премахни от групата",
