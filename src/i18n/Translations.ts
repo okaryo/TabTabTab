@@ -150,6 +150,18 @@ class Translations {
   get durationUnitHour() {
     return chrome.i18n.getMessage("duration_unit_hour");
   }
+  get optionsNavigationAllWindows() {
+    return chrome.i18n.getMessage("options_navigation_all_windows");
+  }
+  get optionsNavigationRestore() {
+    return chrome.i18n.getMessage("options_navigation_restore");
+  }
+  get optionsNavigationSettings() {
+    return chrome.i18n.getMessage("options_navigation_settings");
+  }
+  get optionsNavigationFeedback() {
+    return chrome.i18n.getMessage("options_navigation_feedback");
+  }
   get popupSizeHeader() {
     return chrome.i18n.getMessage("popup_size_header");
   }

@@ -12,6 +12,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 
+import t from "../../../i18n/Translations";
 import RestorePage from "../../components/RestorePage";
 import ThemeProvider from "../../components/ThemeProvider";
 import { ThemeContext } from "../../contexts/Theme";
@@ -27,7 +28,7 @@ export default function App() {
   const [currentPage, setPage] = useState(0);
   const pages = [
     {
-      name: "Overview",
+      name: t.optionsNavigationAllWindows,
       icon: <ViewColumnIcon />,
       content: (
         <WindowsProvider>
@@ -36,7 +37,7 @@ export default function App() {
       ),
     },
     {
-      name: "Restore",
+      name: t.optionsNavigationRestore,
       icon: <RestoreIcon />,
       content: (
         <Container sx={{ p: 2 }} maxWidth="md">
@@ -45,7 +46,7 @@ export default function App() {
       ),
     },
     {
-      name: "Settings",
+      name: t.optionsNavigationSettings,
       icon: <SettingsIcon />,
       content: (
         <Container sx={{ p: 2 }} maxWidth="md">
@@ -54,7 +55,7 @@ export default function App() {
       ),
     },
     {
-      name: "Feedback",
+      name: t.optionsNavigationFeedback,
       icon: <ForumIcon />,
       content: (
         <Container sx={{ p: 2 }} maxWidth="md">

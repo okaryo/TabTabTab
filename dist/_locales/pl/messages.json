@@ -183,6 +183,22 @@
     "message": "Godzina",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
+  "options_navigation_all_windows": {
+    "message": "Wszystkie okna",
+    "description": "Navigation header for AllWindows Page in options.html"
+  },
+  "options_navigation_restore": {
+    "message": "Przywróć",
+    "description": "Navigation header for Restore page in options.html"
+  },
+  "options_navigation_settings": {
+    "message": "Ustawienia",
+    "description": "Navigation header for Settings page in options.html"
+  },
+  "options_navigation_feedback": {
+    "message": "Opinie",
+    "description": "Navigation header for Feedback page in options.html"
+  },
   "popup_size_header": {
     "message": "Rozmiar okna pop-up",
     "description": "Heading for the popup size settings."

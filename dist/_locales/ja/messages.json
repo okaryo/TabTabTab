@@ -183,6 +183,22 @@
     "message": "時間",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
+  "options_navigation_all_windows": {
+    "message": "すべてのウィンドウ",
+    "description": "Navigation header for AllWindows Page in options.html"
+  },
+  "options_navigation_restore": {
+    "message": "リストア",
+    "description": "Navigation header for Restore page in options.html"
+  },
+  "options_navigation_settings": {
+    "message": "設定",
+    "description": "Navigation header for Settings page in options.html"
+  },
+  "options_navigation_feedback": {
+    "message": "フィードバック",
+    "description": "Navigation header for Feedback page in options.html"
+  },
   "popup_size_header": {
     "message": "ポップアップサイズ",
     "description": "Heading for the popup size settings."
