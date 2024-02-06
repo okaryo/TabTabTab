@@ -75,7 +75,6 @@ export default function App() {
           <List
             sx={{
               height: "calc(100vh - 64px)",
-              width: 200,
               flexShrink: 0,
             }}
           >
@@ -83,6 +82,7 @@ export default function App() {
               <ListItem disablePadding>
                 <ListItemButton
                   key={page.name}
+                  sx={{ py: 1, pl: 2, pr: 6}}
                   selected={currentPage === index}
                   onClick={() => setPage(index)}
                 >

@@ -196,7 +196,7 @@
     "description": "Navigation header for Settings page in options.html"
   },
   "options_navigation_feedback": {
-    "message": "Settings",
+    "message": "Feedback",
     "description": "Navigation header for Feedback page in options.html"
   },
   "popup_size_header": {
