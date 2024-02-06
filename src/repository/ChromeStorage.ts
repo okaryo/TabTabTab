@@ -5,6 +5,7 @@ export class ChromeLocalStorage {
   static readonly POPUP_SIZE_SETTING_KEY = "popup_size_setting";
   static readonly POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
   static readonly THEME_KEY = "theme";
+  static readonly STORED_TAB_GROUPS_KEY = "stored_tab_groups";
 }
 
 export class ChromeSessionStorage {
@@ -34,6 +35,25 @@ export type PopupElementScaleSettingStorageObject = {
 type Theme = "light" | "dark";
 export type ThemeStorageObject = {
   [ChromeLocalStorage.THEME_KEY]: Theme;
+};
+
+type SerializedStoredTab = {
+  type: "tab";
+  internalUid: string;
+  title: string;
+  url: string;
+  favIconUrl: string | null;
+};
+type SerializedStoredTabGroup = {
+  type: "tabGroup";
+  internalUid: string;
+  storedAt: string;
+  name: string;
+  color: string;
+  children: SerializedStoredTab[];
+};
+export type StoredTabGroupsObject = {
+  [ChromeLocalStorage.STORED_TAB_GROUPS_KEY]: SerializedStoredTabGroup[];
 };
 
 type DateString = string;
