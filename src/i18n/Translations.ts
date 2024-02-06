@@ -1,6 +1,6 @@
 class Translations {
   // config
-  get local() {
+  get locale() {
     return chrome.i18n.getMessage("@@ui_locale");
   }
 
@@ -31,8 +31,8 @@ class Translations {
 
   // Tab
   elapsedTime(time: number, unit: string) {
-    if (this.local === "ja") return `${time}${unit}${this.ago}`;
-    if (this.local === "de") return `${this.ago} ${time} ${unit}`;
+    if (this.locale === "ja") return `${time}${unit}${this.ago}`;
+    if (this.locale === "de") return `${this.ago} ${time} ${unit}`;
 
     return `${time} ${unit} ${this.ago}`;
   }
