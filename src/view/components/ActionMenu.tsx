@@ -8,6 +8,7 @@ import InputIcon from "@mui/icons-material/Input";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PushPinIcon from "@mui/icons-material/PushPin";
+import SyncIcon from "@mui/icons-material/Sync";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -27,6 +28,7 @@ import { useCloseTabGroup } from "../hooks/useCloseTabGroup";
 import { useMergeWindow } from "../hooks/useMergeWindow";
 import { usePinTab } from "../hooks/usePinTab";
 import { useRemoveFromTabGroup } from "../hooks/useRemoveFromTabGroup";
+import { useSaveStoredTabGroup } from "../hooks/useSaveStoredTabGroup";
 import { useUngroup } from "../hooks/useUngroup";
 import { useUnpinAllTabs } from "../hooks/useUnpinAllTabs";
 import { useUnpinTab } from "../hooks/useUnpinTab";
@@ -177,9 +179,17 @@ export const PinnedActionMenu = (props: PinnedActionMenuProps) => {
 export const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
   const { tabGroup, isOpenMenu, anchorElement, onCloseMenu } = props;
 
+  const saveTabGroup = useSaveStoredTabGroup();
   const ungroup = useUngroup();
   const closeTabGroup = useCloseTabGroup();
+
   const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.saveTabGroup,
+      icon: <SyncIcon fontSize="small" />,
+      action: () => saveTabGroup(tabGroup),
+    },
     {
       type: "MenuItem",
       label: t.ungroup,

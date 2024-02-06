@@ -1,5 +1,5 @@
 import { GroupColor } from "./GroupColor";
-import { Tab } from "./Tab";
+import { StoredTab, Tab } from "./Tab";
 
 export type TabContainerId = TabGroupId | PinnedId;
 export type TabContainer = {
@@ -19,6 +19,12 @@ export type TabGroup = TabContainer & {
   name: string;
   color: GroupColor;
   collapsed: boolean;
+};
+export type StoredTabGroup = Pick<TabGroup, "name" | "color"> & {
+  type: "tabGroup";
+  internalUid: string;
+  storedAt: Date;
+  children: StoredTab[];
 };
 
 export const generatePinnedId = (windowId: number) => `pinned-${windowId}`;

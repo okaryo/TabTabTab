@@ -3,13 +3,18 @@ import { useEffect, useState } from "react";
 
 import { PopupSize } from "../../../../model/settings/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
+import RestorePage from "../../../components/RestorePage";
+import StoredTabGroupsProvider from "../../options/components/StoredTabGroupsProvider";
 
 import Header from "./Header";
 import SearchResult from "./SearchResult";
 import WindowsContainer from "./WindowsContainer";
 
+type Page = "list" | "restore";
+
 const Home = () => {
   const [searchText, setSearchText] = useState("");
+  const [currentPage, setCurrentPage] = useState<Page>("list");
   const [popupSizeState, setPopupSizeState] = useState<PopupSize>(
     PopupSize.default(),
   );
@@ -21,9 +26,8 @@ const Home = () => {
     initState();
   }, []);
 
-  const onChangeSearchText = (value: string) => {
-    setSearchText(value);
-  };
+  const onChangeSearchText = (value: string) => setSearchText(value);
+  const onChangePage = (page: Page) => setCurrentPage(page);
 
   return (
     <Box
@@ -33,9 +37,22 @@ const Home = () => {
         overflowY: "auto",
       }}
     >
-      <Header onChangeSearchText={onChangeSearchText} />
+      <Header
+        currentPage={currentPage}
+        onChangePage={onChangePage}
+        onChangeSearchText={onChangeSearchText}
+      />
       {searchText.length > 0 && <SearchResult searchText={searchText} />}
-      {searchText.length === 0 && <WindowsContainer />}
+      {searchText.length === 0 && currentPage === "list" && (
+        <WindowsContainer />
+      )}
+      {searchText.length === 0 && currentPage === "restore" && (
+        <Box sx={{ p: 2 }}>
+          <StoredTabGroupsProvider>
+            <RestorePage />
+          </StoredTabGroupsProvider>
+        </Box>
+      )}
     </Box>
   );
 };

@@ -1,6 +1,6 @@
 class Translations {
   // config
-  get local() {
+  get locale() {
     return chrome.i18n.getMessage("@@ui_locale");
   }
 
@@ -28,11 +28,20 @@ class Translations {
   get pinned() {
     return chrome.i18n.getMessage("pinned");
   }
+  get tabGroup() {
+    return chrome.i18n.getMessage("tab_group");
+  }
+  get noStoredTabGroupHeader() {
+    return chrome.i18n.getMessage("no_stored_tab_group_header");
+  }
+  get noStoredTabGroupDescription() {
+    return chrome.i18n.getMessage("no_stored_tab_group_description");
+  }
 
   // Tab
   elapsedTime(time: number, unit: string) {
-    if (this.local === "ja") return `${time}${unit}${this.ago}`;
-    if (this.local === "de") return `${this.ago} ${time} ${unit}`;
+    if (this.locale === "ja") return `${time}${unit}${this.ago}`;
+    if (this.locale === "de") return `${this.ago} ${time} ${unit}`;
 
     return `${time} ${unit} ${this.ago}`;
   }
@@ -101,6 +110,9 @@ class Translations {
   }
   get screenshotVisibleArea() {
     return chrome.i18n.getMessage("screenshot_visible_area");
+  }
+  get saveTabGroup() {
+    return chrome.i18n.getMessage("save_tab_group");
   }
   get ungroup() {
     return chrome.i18n.getMessage("ungroup");
