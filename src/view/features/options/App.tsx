@@ -1,4 +1,5 @@
 import ForumIcon from "@mui/icons-material/Forum";
+import RestoreIcon from "@mui/icons-material/Restore";
 import SettingsIcon from "@mui/icons-material/Settings";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import { Divider, Stack } from "@mui/material";
@@ -16,15 +17,55 @@ import { ThemeContext } from "../../contexts/Theme";
 import { useTheme } from "../../hooks/useTheme";
 
 import Header from "./components/Header";
+import StoredTabGroupsProvider from "./components/StoredTabGroupsProvider";
 import WindowsProvider from "./components/WindowsProvider";
 import Feedback from "./pages/Feedback";
 import Overview from "./pages/Overview";
+import Restore from "./pages/Restore";
 import Settings from "./pages/Settings";
 
-type Page = "Overview" | "Settings" | "Feedback";
-
 export default function App() {
-  const [currentPage, setPage] = useState<Page>("Overview");
+  const [currentPage, setPage] = useState(0);
+  const pages = [
+    {
+      name: "Overview",
+      icon: <ViewColumnIcon />,
+      content: (
+        <WindowsProvider>
+          <Overview />
+        </WindowsProvider>
+      ),
+    },
+    {
+      name: "Restore",
+      icon: <RestoreIcon />,
+      content: (
+        <StoredTabGroupsProvider>
+          <Container sx={{ p: 2 }} maxWidth="md">
+            <Restore />
+          </Container>
+        </StoredTabGroupsProvider>
+      ),
+    },
+    {
+      name: "Settings",
+      icon: <SettingsIcon />,
+      content: (
+        <Container sx={{ p: 2 }} maxWidth="md">
+          <Settings />
+        </Container>
+      ),
+    },
+    {
+      name: "Feedback",
+      icon: <ForumIcon />,
+      content: (
+        <Container sx={{ p: 2 }} maxWidth="md">
+          <Feedback />
+        </Container>
+      ),
+    },
+  ];
 
   return (
     <ThemeContext.Provider value={useTheme()}>
@@ -40,40 +81,21 @@ export default function App() {
               flexShrink: 0,
             }}
           >
-            {["Overview", "Settings", "Feedback"].map((page: Page) => (
+            {pages.map((page, index) => (
               <ListItem disablePadding>
                 <ListItemButton
-                  key={page}
-                  selected={page === currentPage}
-                  onClick={() => setPage(page)}
+                  key={page.name}
+                  selected={currentPage === index}
+                  onClick={() => setPage(index)}
                 >
-                  <ListItemIcon>
-                    {page === "Overview" && <ViewColumnIcon />}
-                    {page === "Settings" && <SettingsIcon />}
-                    {page === "Feedback" && <ForumIcon />}
-                  </ListItemIcon>
-                  <ListItemText primary={page} />
+                  <ListItemIcon>{page.icon}</ListItemIcon>
+                  <ListItemText primary={page.name} />
                 </ListItemButton>
               </ListItem>
             ))}
           </List>
           <Divider orientation="vertical" flexItem />
-
-          {currentPage === "Overview" && (
-            <WindowsProvider>
-              <Overview />
-            </WindowsProvider>
-          )}
-          {currentPage === "Settings" && (
-            <Container sx={{ p: 2 }} maxWidth="md">
-              <Settings />
-            </Container>
-          )}
-          {currentPage === "Feedback" && (
-            <Container sx={{ p: 2 }} maxWidth="md">
-              <Feedback />
-            </Container>
-          )}
+          {pages[currentPage].content}
         </Stack>
       </ThemeProvider>
     </ThemeContext.Provider>
