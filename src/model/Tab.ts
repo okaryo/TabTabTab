@@ -14,6 +14,10 @@ export type Tab = {
   pinned: boolean;
   lastActivatedAt?: Date;
 };
+export type StoredTab = Pick<Tab, "title" | "url" | "favIconUrl"> & {
+  type: "tab";
+  internalUid: string;
+};
 
 export const durationSinceLastActivatedAt = (tab: Tab): Duration => {
   if (!tab.lastActivatedAt) return Duration.zero();
