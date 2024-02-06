@@ -42,11 +42,13 @@ const Home = () => {
         onChangePage={onChangePage}
         onChangeSearchText={onChangeSearchText}
       />
-      {searchText.length > 0 && <SearchResult searchText={searchText} />}
+      {searchText.length > 0 && currentPage === "list" && (
+        <SearchResult searchText={searchText} />
+      )}
       {searchText.length === 0 && currentPage === "list" && (
         <WindowsContainer />
       )}
-      {searchText.length === 0 && currentPage === "restore" && (
+      {currentPage === "restore" && (
         <Box sx={{ p: 2 }}>
           <StoredTabGroupsProvider>
             <RestorePage />
