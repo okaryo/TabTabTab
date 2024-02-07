@@ -48,7 +48,7 @@
     "description": "Used to show when stored tab group is empty."
   },
   "no_stored_tab_group_description": {
-    "message": "리스트에서 그룹을 저장하면 나중에 쉽게 복원할 수 있습니다.",
+    "message": "목록에서 그룹을 저장하면, 여기에서 복원할 수 있습니다.",
     "description": "Used to show when stored tab group is empty."
   },
   "month": {

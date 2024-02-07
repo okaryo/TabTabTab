@@ -48,7 +48,7 @@
     "description": "Used to show when stored tab group is empty."
   },
   "no_stored_tab_group_description": {
-    "message": "Si vous enregistrez un groupe depuis la liste, vous pourrez le restaurer facilement plus tard.",
+    "message": "Une fois que vous avez enregistré un groupe depuis la liste, vous pouvez le restaurer ici.",
     "description": "Used to show when stored tab group is empty."
   },
   "month": {

@@ -48,7 +48,7 @@
     "description": "Used to show when stored tab group is empty."
   },
   "no_stored_tab_group_description": {
-    "message": "Ако запазите група от списъка, по-късно можете лесно да я възстановите.",
+    "message": "След като запазите група от списъка, можете да я възстановите тук.",
     "description": "Used to show when stored tab group is empty."
   },
   "month": {

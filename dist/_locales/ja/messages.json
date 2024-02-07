@@ -48,7 +48,7 @@
     "description": "Used to show when stored tab group is empty."
   },
   "no_stored_tab_group_description": {
-    "message": "リストからグループを保存すると、後で簡単に復元できます。",
+    "message": "リストからグループを保存すると、ここで復元することができます。",
     "description": "Used to show when stored tab group is empty."
   },
   "month": {
