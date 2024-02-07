@@ -47,7 +47,7 @@ const RestorePage = (props: RestorePageProps) => {
       {currentPage === "window" && <StoredWindows />}
       {currentPage === "tabGroup" && (
         <StoredTabGroupsProvider>
-          <StoredTabGroups />
+          <StoredTabGroups dense={dense} />
         </StoredTabGroupsProvider>
       )}
     </Stack>

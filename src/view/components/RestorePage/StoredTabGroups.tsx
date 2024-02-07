@@ -11,13 +11,13 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
-import ListItemAvatar from "@mui/material/ListItemAvatar";
 import ListItemText from "@mui/material/ListItemText";
+import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import Grid from "@mui/material/Unstable_Grid2";
 import { useContext, useState } from "react";
 
 import t from "../../../i18n/Translations";
@@ -25,12 +25,15 @@ import { StoredTabGroup } from "../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroups";
 import { useRemoveStoredTabGroup } from "../../hooks/useRemoveStoredTabGroup";
 import { useRestoreTabGroup } from "../../hooks/useRestoreTabGroup";
-
 import TabFavicon from "../TabFavicon";
 
+type StoredTabGroupsProps = {
+  dense: boolean;
+};
 type StoredTabGroupAccordionProps = {
   group: StoredTabGroup;
   index: number;
+  dense: boolean;
 };
 
 const OutlinedAccordion = styled((props: AccordionProps) => (
@@ -57,7 +60,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
-  const { group, index } = props;
+  const { group, index, dense } = props;
   const theme = useTheme();
   const [expanded, setExpanded] = useState(index === 0);
   const [isHovered, setIsHovered] = useState(false);
@@ -79,6 +82,7 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
       onChange={() => setExpanded(!expanded)}
     >
       <AccordionSummary
+        sx={{ px: dense ? 1 : 2 }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
@@ -124,35 +128,50 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
           </IconButton>
         </Stack>
       </AccordionSummary>
-      <AccordionDetails>
-        <List disablePadding dense>
+      <AccordionDetails style={{ padding: theme.spacing(dense ? 1 : 2) }}>
+        <Grid container spacing={dense ? 1 : 2}>
           {group.children.map((tab) => (
-            <ListItem key={tab.internalUid}>
-              <ListItemAvatar>
-                <TabFavicon url={tab.favIconUrl} />
-              </ListItemAvatar>
-              <ListItemText
-                sx={{ my: 0.5 }}
-                primary={
-                  <Typography
-                    variant="subtitle2"
-                    component="p"
-                    title={tab.title}
-                  >
-                    {tab.title}
-                  </Typography>
-                }
-                secondary={tab.url.host}
-              />
-            </ListItem>
+            <Grid key={tab.internalUid} xs={6} md={4}>
+              <Paper variant="outlined">
+                <ListItem
+                  sx={{ gap: 2, py: dense ? 0.5 : 1, px: dense ? 1 : 2 }}
+                >
+                  <TabFavicon url={tab.favIconUrl} />
+                  <ListItemText
+                    sx={{ my: 0.5 }}
+                    primary={
+                      <Typography
+                        variant="subtitle2"
+                        component="p"
+                        title={tab.title}
+                        sx={{
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          whiteSpace: "nowrap",
+                        }}
+                      >
+                        {tab.title}
+                      </Typography>
+                    }
+                    secondary={tab.url.host}
+                    secondaryTypographyProps={{
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                      whiteSpace: "nowrap",
+                    }}
+                  />
+                </ListItem>
+              </Paper>
+            </Grid>
           ))}
-        </List>
+        </Grid>
       </AccordionDetails>
     </OutlinedAccordion>
   );
 };
 
-const StoredTabGroups = () => {
+const StoredTabGroups = (props: StoredTabGroupsProps) => {
+  const { dense } = props;
   const { storedTabGroups } = useContext(StoredTabGroupsContext);
   const sortedGroups = storedTabGroups.sort((a, b) =>
     a.storedAt > b.storedAt ? -1 : 1,
@@ -167,6 +186,7 @@ const StoredTabGroups = () => {
               key={group.internalUid}
               group={group}
               index={index}
+              dense={dense}
             />
           ))}
         </Stack>
