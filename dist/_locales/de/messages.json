@@ -48,7 +48,7 @@
     "description": "Used to show when stored tab group is empty."
   },
   "no_stored_tab_group_description": {
-    "message": "Wenn Sie eine Gruppe aus der Liste speichern, können Sie sie später einfach wiederherstellen.",
+    "message": "Sobald Sie eine Gruppe aus der Liste speichern, können Sie sie hier wiederherstellen.",
     "description": "Used to show when stored tab group is empty."
   },
   "month": {
