@@ -160,15 +160,17 @@ const StoredTabGroups = () => {
 
   return (
     <>
-      <Stack>
-        {sortedGroups.map((group, index) => (
-          <StoredTabGroupAccordion
-            key={group.internalUid}
-            group={group}
-            index={index}
-          />
-        ))}
-      </Stack>
+      {sortedGroups.length > 0 && (
+        <Stack>
+          {sortedGroups.map((group, index) => (
+            <StoredTabGroupAccordion
+              key={group.internalUid}
+              group={group}
+              index={index}
+            />
+          ))}
+        </Stack>
+      )}
       {sortedGroups.length === 0 && (
         <Stack
           alignItems="center"
@@ -177,12 +179,18 @@ const StoredTabGroups = () => {
           spacing={2}
         >
           <RestoreIcon sx={{ fontSize: 96 }} />
-          <Typography variant="h5" component="h5">
-            {t.noStoredTabGroupHeader}
-          </Typography>
-          <Typography variant="subtitle1" component="p">
-            {t.noStoredTabGroupDescription}
-          </Typography>
+          <Stack spacing={0.5} alignItems="center" justifyContent="center">
+            <Typography variant="h5" component="h5">
+              {t.noStoredTabGroupHeader}
+            </Typography>
+            <Typography
+              variant="subtitle1"
+              component="p"
+              sx={{ textAlign: "center" }}
+            >
+              {t.noStoredTabGroupDescription}
+            </Typography>
+          </Stack>
         </Stack>
       )}
     </>
