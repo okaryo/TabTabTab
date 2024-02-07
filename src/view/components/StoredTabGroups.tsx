@@ -173,7 +173,7 @@ const StoredTabGroups = () => {
         <Stack
           alignItems="center"
           justifyContent="center"
-          sx={{ flexGrow: 1 }}
+          sx={{ flexGrow: 1, p: 4 }}
           spacing={2}
         >
           <RestoreIcon sx={{ fontSize: 96 }} />

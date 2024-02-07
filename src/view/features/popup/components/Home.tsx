@@ -49,7 +49,7 @@ const Home = () => {
         <WindowsContainer />
       )}
       {currentPage === "restore" && (
-        <Box sx={{ p: 2 }}>
+        <Box sx={{ p: 1 }}>
           <StoredTabGroupsProvider>
             <RestorePage />
           </StoredTabGroupsProvider>
