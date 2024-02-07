@@ -51,7 +51,7 @@ const Home = () => {
       {currentPage === "restore" && (
         <Box sx={{ p: 1 }}>
           <StoredTabGroupsProvider>
-            <RestorePage />
+            <RestorePage dense />
           </StoredTabGroupsProvider>
         </Box>
       )}

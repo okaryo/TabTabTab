@@ -20,13 +20,13 @@ import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
 
-import t from "../../i18n/Translations";
-import { StoredTabGroup } from "../../model/TabContainer";
-import { StoredTabGroupsContext } from "../contexts/StoredTabGroups";
-import { useRemoveStoredTabGroup } from "../hooks/useRemoveStoredTabGroup";
-import { useRestoreTabGroup } from "../hooks/useRestoreTabGroup";
+import t from "../../../i18n/Translations";
+import { StoredTabGroup } from "../../../model/TabContainer";
+import { StoredTabGroupsContext } from "../../contexts/StoredTabGroups";
+import { useRemoveStoredTabGroup } from "../../hooks/useRemoveStoredTabGroup";
+import { useRestoreTabGroup } from "../../hooks/useRestoreTabGroup";
 
-import TabFavicon from "./TabFavicon";
+import TabFavicon from "../TabFavicon";
 
 type StoredTabGroupAccordionProps = {
   group: StoredTabGroup;
