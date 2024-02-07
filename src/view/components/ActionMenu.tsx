@@ -197,6 +197,9 @@ export const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
       action: () => ungroup(tabGroup),
     },
     {
+      type: "Divider",
+    },
+    {
       type: "MenuItem",
       label: t.closeGroup,
       icon: <HighlightOffIcon fontSize="small" />,
