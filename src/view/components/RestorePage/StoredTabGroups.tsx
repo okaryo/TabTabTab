@@ -4,7 +4,7 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
-import RestoreIcon from "@mui/icons-material/Restore";
+import SyncIcon from "@mui/icons-material/Sync";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
@@ -198,7 +198,7 @@ const StoredTabGroups = (props: StoredTabGroupsProps) => {
           sx={{ flexGrow: 1, p: 4 }}
           spacing={2}
         >
-          <RestoreIcon sx={{ fontSize: 96 }} />
+          <SyncIcon sx={{ fontSize: 96 }} />
           <Stack spacing={0.5} alignItems="center" justifyContent="center">
             <Typography variant="h5" component="h5">
               {t.noStoredTabGroupHeader}
@@ -206,7 +206,7 @@ const StoredTabGroups = (props: StoredTabGroupsProps) => {
             <Typography
               variant="subtitle1"
               component="p"
-              sx={{ textAlign: "center" }}
+              sx={{ textAlign: "center", color: "text.secondary" }}
             >
               {t.noStoredTabGroupDescription}
             </Typography>

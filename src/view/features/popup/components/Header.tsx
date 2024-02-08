@@ -1,9 +1,9 @@
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import ListIcon from "@mui/icons-material/List";
-import RestoreIcon from "@mui/icons-material/Restore";
 import SearchIcon from "@mui/icons-material/Search";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
+import SyncIcon from "@mui/icons-material/Sync";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
 import InputBase from "@mui/material/InputBase";
@@ -83,7 +83,7 @@ const Header = (props: HeaderProps) => {
           }
           color="inherit"
         >
-          {currentPage === "list" ? <RestoreIcon /> : <ListIcon />}
+          {currentPage === "list" ? <SyncIcon /> : <ListIcon />}
         </IconButton>
         <IconButton
           // eslint-disable-next-line @typescript-eslint/no-misused-promises
