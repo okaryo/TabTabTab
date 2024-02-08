@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { PopupSize } from "../../../../model/settings/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
 import RestorePage from "../../../components/RestorePage";
-import StoredTabGroupsProvider from "../../options/components/StoredTabGroupsProvider";
+import StoredTabGroupsProvider from "../../../providers/StoredTabGroupsProvider";
 
 import Header from "./Header";
 import SearchResult from "./SearchResult";

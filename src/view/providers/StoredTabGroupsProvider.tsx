@@ -1,5 +1,5 @@
-import { StoredTabGroupsContext } from "../../../contexts/StoredTabGroups";
-import { useStoredTabGroups } from "../../../hooks/useStoredTabGroups";
+import { StoredTabGroupsContext } from "../contexts/StoredTabGroups";
+import { useStoredTabGroups } from "../hooks/useStoredTabGroups";
 
 const StoredTabGroupsProvider = ({
   children,

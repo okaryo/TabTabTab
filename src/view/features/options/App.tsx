@@ -14,9 +14,9 @@ import { useState } from "react";
 
 import t from "../../../i18n/Translations";
 import RestorePage from "../../components/RestorePage";
-import ThemeProvider from "../../components/ThemeProvider";
 import { ThemeContext } from "../../contexts/Theme";
 import { useTheme } from "../../hooks/useTheme";
+import ThemeProvider from "../../providers/ThemeProvider";
 
 import Header from "./components/Header";
 import WindowsProvider from "./components/WindowsProvider";

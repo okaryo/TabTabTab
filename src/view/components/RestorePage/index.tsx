@@ -4,7 +4,7 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
 
 import t from "../../../i18n/Translations";
-import StoredTabGroupsProvider from "../../features/options/components/StoredTabGroupsProvider";
+import StoredTabGroupsProvider from "../../providers/StoredTabGroupsProvider";
 
 import StoredTabGroups from "./StoredTabGroups";
 import StoredWindows from "./StoredWindows";
