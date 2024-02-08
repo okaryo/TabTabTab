@@ -1,6 +1,7 @@
-import { Tab, TabId, isSamePageTabs } from "./Tab";
+import { StoredTab, Tab, TabId, isSamePageTabs } from "./Tab";
 import {
   Pinned,
+  StoredTabContainer,
   TabContainer,
   TabContainerId,
   TabGroup,
@@ -27,6 +28,13 @@ export type Window = {
   state?: WindowState;
   type?: WindowType;
   children: WindowChild[];
+};
+export type StoredWindow = {
+  type: "window";
+  internalUid: string;
+  name: string;
+  storedAt: Date;
+  children: (StoredTabContainer | StoredTab)[];
 };
 
 export const flatTabsInWindows = (windows: Window[]): Tab[] => {
