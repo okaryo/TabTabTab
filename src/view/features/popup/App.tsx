@@ -32,13 +32,15 @@ const BasePage = () => {
 
 export default function App() {
   useEffect(() => {
-    chrome.windows.onFocusChanged.addListener((windowId) => {
-      if (windowId === chrome.windows.WINDOW_ID_NONE) {
-        return;
-      }
+    const closePopupOnOtherWindowFocused = () => {
+      chrome.windows.onFocusChanged.addListener((windowId) => {
+        const isNoWindowFocused = windowId === chrome.windows.WINDOW_ID_NONE;
+        if (isNoWindowFocused) return;
 
-      window.close();
-    });
+        window.close();
+      });
+    };
+    closePopupOnOtherWindowFocused();
   }, []);
 
   return (
