@@ -1,6 +1,7 @@
 /* eslint @typescript-eslint/no-floating-promises: 0 */
 
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
@@ -13,15 +14,17 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
 import { styled, useTheme } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import t from "../../../i18n/Translations";
 import { StoredWindow } from "../../../model/Window";
 import { StoredWindowsContext } from "../../contexts/StoredWindows";
 import { useRemoveStoredWindow } from "../../hooks/useRemoveStoredWindow";
 import { useRestoreWindow } from "../../hooks/useRestoreWindow";
+import { useUpdateStoredWindowName } from "../../hooks/useUpdateStoredWindowName";
 
 import {
   StoredGridTabContainerItem,
@@ -63,17 +66,29 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   const { window, index, dense } = props;
   const theme = useTheme();
+  const editWindowNameFormRef = useRef<HTMLDivElement>(null);
+  const editButtonRef = useRef<HTMLButtonElement>(null);
+  const [windowName, setWindowName] = useState(window.name);
   const [expanded, setExpanded] = useState(index === 0);
+  const [editMode, setEditMode] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const allCount = window.children
-    .map((child) => {
-      if ("children" in child) return child.children;
-      return child;
-    })
+    .map((child) => ("children" in child ? child.children : child))
     .flat().length;
 
+  const updateWindowName = useUpdateStoredWindowName();
   const restoreWindow = useRestoreWindow();
   const removeStoredWindow = useRemoveStoredWindow();
+  const onChangeWindowNameField = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setWindowName(event.target.value);
+    updateWindowName(window.internalUid, event.target.value);
+  };
+  const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setEditMode(!editMode);
+  };
   const onClickRestoreButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     restoreWindow(window);
@@ -83,18 +98,40 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
     removeStoredWindow(window.internalUid);
   };
 
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const clickOutsideEditForm =
+        editWindowNameFormRef.current &&
+        !editWindowNameFormRef.current.contains(event.target as Node);
+      const clickEditButton =
+        editButtonRef.current &&
+        editButtonRef.current.contains(event.target as Node);
+      if (clickOutsideEditForm && !clickEditButton) {
+        setEditMode(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [editWindowNameFormRef]);
+
   return (
     <OutlinedAccordion
       expanded={expanded}
       onChange={() => setExpanded(!expanded)}
     >
       <AccordionSummary
-        sx={{ px: dense ? 1 : 2 }}
+        sx={{
+          px: dense ? 1 : 2,
+          "&.Mui-focusVisible": {
+            backgroundColor: "background.paper",
+          },
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
         <Stack direction="row" spacing={1} alignItems="center">
-          {window.name !== "" && (
+          {!editMode && window.name !== "" && (
             <Typography
               variant="subtitle1"
               component="h6"
@@ -107,11 +144,25 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
               {window.name}
             </Typography>
           )}
+          {editMode && (
+            <TextField
+              ref={editWindowNameFormRef}
+              variant="standard"
+              size="small"
+              value={windowName}
+              onClick={(e) => e.stopPropagation()}
+              onChange={onChangeWindowNameField}
+              autoFocus
+            />
+          )}
           <Chip label={allCount} size="small" color="info" />
         </Stack>
         <Stack direction="row">
           {(expanded || isHovered) && (
             <>
+              <IconButton ref={editButtonRef} onClick={onClickEditButton}>
+                <EditIcon />
+              </IconButton>
               <IconButton onClick={onClickRestoreButton}>
                 <OpenInBrowserIcon />
               </IconButton>

@@ -210,7 +210,6 @@ export const getStoredWindows = async (): Promise<StoredWindow[]> => {
 
 export const saveStoredWindow = async (
   window: Window,
-  name: string,
 ): Promise<StoredWindow[]> => {
   const { stored_windows: storedWindows } = (await chrome.storage.local.get(
     ChromeLocalStorage.STORED_WINDOWS_KEY,
@@ -224,13 +223,14 @@ export const saveStoredWindow = async (
     favIconUrl: tab.favIconUrl?.toString(),
   });
 
+  const currentDateTime = new Date();
   await chrome.storage.local.set({
     [ChromeLocalStorage.STORED_WINDOWS_KEY]: [
       {
         type: "window",
         internalUid: crypto.randomUUID(),
-        storedAt: new Date().toISOString(),
-        name: name,
+        storedAt: currentDateTime.toISOString(),
+        name: currentDateTime.toLocaleDateString(),
         children: window.children.map((child) => {
           if (isPinned(child)) {
             return {
@@ -243,7 +243,7 @@ export const saveStoredWindow = async (
             return {
               type: "tabGroup",
               internalUid: crypto.randomUUID(),
-              storedAt: new Date().toISOString(),
+              storedAt: currentDateTime.toISOString(),
               name: child.name,
               color: child.color.value,
               children: child.children.map((tab) => serializedTab(tab)),
@@ -255,6 +255,26 @@ export const saveStoredWindow = async (
       },
       ...(storedWindows ?? []),
     ],
+  });
+
+  return getStoredWindows();
+};
+
+export const updateStoredWindowName = async (
+  id: string,
+  name: string,
+): Promise<StoredWindow[]> => {
+  const { stored_windows: storedWindows } = (await chrome.storage.local.get(
+    ChromeLocalStorage.STORED_WINDOWS_KEY,
+  )) as StoredWindowsObject;
+
+  await chrome.storage.local.set({
+    [ChromeLocalStorage.STORED_WINDOWS_KEY]: storedWindows.map((window) => {
+      if (window.internalUid === id) {
+        return { ...window, name };
+      }
+      return window;
+    }),
   });
 
   return getStoredWindows();
@@ -290,6 +310,7 @@ export const restoreWindow = async (
             url: tab.url.toString(),
             active: false,
             pinned: true,
+            windowId: window.id,
           }),
         );
         await Promise.all(createPinnedTabPromises);
@@ -297,11 +318,18 @@ export const restoreWindow = async (
       if (child.type === "tabGroup") {
         const tabGroup = child as StoredTabGroup;
         const createTabPromises = tabGroup.children.map((tab) =>
-          chrome.tabs.create({ url: tab.url.toString(), active: false }),
+          chrome.tabs.create({
+            url: tab.url.toString(),
+            active: false,
+            windowId: window.id,
+          }),
         );
         const tabs = await Promise.all(createTabPromises);
         const tabIds = tabs.map((tab) => tab.id);
-        const groupId = await chrome.tabs.group({ tabIds });
+        const groupId = await chrome.tabs.group({
+          tabIds,
+          createProperties: { windowId: window.id },
+        });
         await chrome.tabGroups.update(groupId, {
           title: tabGroup.name,
           color: tabGroup.color.value,

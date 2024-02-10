@@ -70,7 +70,7 @@ export const StoredGridTabContainerItem = (
                   size="small"
                   color={container.type === "pinned" ? "info" : "default"}
                   sx={{
-                    height: 20,
+                    height: 18,
                     backgroundColor: isTabGroup
                       ? container.color.code
                       : undefined,
