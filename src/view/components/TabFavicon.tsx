@@ -4,10 +4,11 @@ import Box from "@mui/material/Box";
 type TabFaviconProps = {
   url: URL;
   style?: React.CSSProperties;
+  size?: number;
 };
 
 const TabFavicon = (props: TabFaviconProps) => {
-  const { url, style } = props;
+  const { url, style, size = 20 } = props;
 
   if (
     url !== null &&
@@ -20,8 +21,8 @@ const TabFavicon = (props: TabFaviconProps) => {
         component="img"
         style={{ ...style }}
         sx={{
-          height: 20,
-          width: 20,
+          height: size,
+          width: size,
         }}
         src={url.href}
       />
@@ -33,8 +34,8 @@ const TabFavicon = (props: TabFaviconProps) => {
       color="disabled"
       style={{ ...style }}
       sx={{
-        height: 20,
-        width: 20,
+        height: size,
+        width: size,
       }}
     />
   );
