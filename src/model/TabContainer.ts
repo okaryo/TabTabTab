@@ -68,3 +68,9 @@ export const isTabGroup = (value: TabContainer | Tab): value is TabGroup => {
     "collapsed" in value
   );
 };
+
+export const isStoredTabGroup = (
+  container: StoredTabContainer,
+): container is StoredTabGroup => {
+  return container.type === "tabGroup";
+};
