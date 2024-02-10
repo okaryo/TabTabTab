@@ -1,6 +1,8 @@
 /* eslint @typescript-eslint/no-floating-promises: 0 */
 
+import CircleIcon from "@mui/icons-material/Circle";
 import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
@@ -11,17 +13,22 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
+import Radio from "@mui/material/Radio";
 import Stack from "@mui/material/Stack";
 import { styled, useTheme } from "@mui/material/styles";
+import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 
 import t from "../../../i18n/Translations";
+import { GroupColor } from "../../../model/GroupColor";
 import { StoredTabGroup } from "../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import { useRemoveStoredTabGroup } from "../../hooks/useRemoveStoredTabGroup";
 import { useRestoreTabGroup } from "../../hooks/useRestoreTabGroup";
+import { useUpdateStoredTabGroupColor } from "../../hooks/useUpdateStoredTabGroupColor";
+import { useUpdateStoredTabGroupName } from "../../hooks/useUpdateStoredTabGroupName";
 
 import { StoredGridTabItem } from "./StoredGridItem";
 
@@ -60,11 +67,19 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
   const { group, index, dense } = props;
   const theme = useTheme();
+  const editTabGroupFormRef = useRef<HTMLDivElement>(null);
+  const editButtonRef = useRef<HTMLButtonElement>(null);
+  const [groupName, setGroupName] = useState(group.name);
+  const [editMode, setEditMode] = useState(false);
   const [expanded, setExpanded] = useState(index === 0);
   const [isHovered, setIsHovered] = useState(false);
 
   const restoreTabGroup = useRestoreTabGroup();
   const removeStoredTabGroup = useRemoveStoredTabGroup();
+  const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setEditMode(!editMode);
+  };
   const onClickRestoreButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     restoreTabGroup(group);
@@ -74,44 +89,127 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
     removeStoredTabGroup(group.internalUid);
   };
 
+  const updateTabGroupName = useUpdateStoredTabGroupName();
+  const updateTabGroupColor = useUpdateStoredTabGroupColor();
+  const onChangeGroupNameField = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    setGroupName(event.target.value);
+    updateTabGroupName(group.internalUid, event.target.value);
+  };
+
+  const GroupColorRadio = (props: { color: GroupColor }) => {
+    const { color } = props;
+
+    return (
+      <Radio
+        sx={{
+          p: 0,
+          color: color.code,
+          "&.Mui-checked": {
+            color: color.code,
+          },
+        }}
+        checked={group.color.value === color.value}
+        icon={<CircleIcon sx={{ color: color.code }} />}
+        onClick={(event) => {
+          event.stopPropagation();
+          updateTabGroupColor(group.internalUid, color);
+        }}
+      />
+    );
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      const clickOutsideEditForm =
+        editTabGroupFormRef.current &&
+        !editTabGroupFormRef.current.contains(event.target as Node);
+      const clickEditButton =
+        editButtonRef.current &&
+        editButtonRef.current.contains(event.target as Node);
+      if (clickOutsideEditForm && !clickEditButton) {
+        setEditMode(false);
+      }
+    };
+    document.addEventListener("mousedown", handleClickOutside);
+
+    return () => document.removeEventListener("mousedown", handleClickOutside);
+  }, [editTabGroupFormRef]);
+
   return (
     <OutlinedAccordion
       expanded={expanded}
       onChange={() => setExpanded(!expanded)}
     >
       <AccordionSummary
-        sx={{ px: dense ? 1 : 2 }}
+        sx={{
+          px: dense ? 1 : 2,
+          "&.Mui-focusVisible": {
+            backgroundColor: "background.paper",
+          },
+        }}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >
-        <Stack direction="row" spacing={1} alignItems="center">
-          {group.name !== "" && (
-            <Typography
-              variant="subtitle1"
-              component="h6"
-              sx={{ px: 1.25, py: 0.25 }}
-              style={{
-                display: "inline-block",
-                borderRadius: "8px",
-                backgroundColor: `${group.color.code}`,
+        <Stack
+          ref={editTabGroupFormRef}
+          spacing={1}
+          onClick={(e) => e.stopPropagation()}
+        >
+          <Stack direction="row" spacing={1} alignItems="center">
+            {(editMode || group.name !== "") && (
+              <Typography
+                variant="subtitle1"
+                component="h6"
+                sx={{ px: 1.25, py: 0.25 }}
+                style={{
+                  display: "inline-block",
+                  borderRadius: "8px",
+                  backgroundColor: `${group.color.code}`,
+                  color: theme.palette.getContrastText(group.color.code),
+                }}
+              >
+                {!editMode && group.name}
+                {editMode && (
+                  <TextField
+                    variant="standard"
+                    size="small"
+                    value={groupName}
+                    onChange={onChangeGroupNameField}
+                    autoFocus
+                  />
+                )}
+              </Typography>
+            )}
+            <Chip
+              sx={{
+                backgroundColor: group.color.code,
                 color: theme.palette.getContrastText(group.color.code),
               }}
+              label={group.children.length}
+              size="small"
+            />
+          </Stack>
+          {editMode && (
+            <Stack
+              direction="row"
+              spacing={0.5}
+              alignItems="center"
+              justifyContent="flex-start"
             >
-              {group.name}
-            </Typography>
+              {GroupColor.values.map((color) => (
+                <GroupColorRadio key={color} color={new GroupColor(color)} />
+              ))}
+            </Stack>
           )}
-          <Chip
-            sx={{
-              backgroundColor: group.color.code,
-              color: theme.palette.getContrastText(group.color.code),
-            }}
-            label={group.children.length}
-            size="small"
-          />
         </Stack>
         <Stack direction="row">
           {(expanded || isHovered) && (
             <>
+              <IconButton ref={editButtonRef} onClick={onClickEditButton}>
+                <EditIcon />
+              </IconButton>
               <IconButton onClick={onClickRestoreButton}>
                 <OpenInBrowserIcon />
               </IconButton>

@@ -150,7 +150,6 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
               variant="standard"
               size="small"
               value={windowName}
-              onClick={(e) => e.stopPropagation()}
               onChange={onChangeWindowNameField}
               autoFocus
             />
