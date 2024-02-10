@@ -39,6 +39,7 @@ const Home = () => {
     >
       <Header
         currentPage={currentPage}
+        searchText={searchText}
         onChangePage={onChangePage}
         onChangeSearchText={onChangeSearchText}
       />

@@ -1,3 +1,4 @@
+import ClearIcon from "@mui/icons-material/Clear";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import ListIcon from "@mui/icons-material/List";
@@ -6,6 +7,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
+import InputAdornment from "@mui/material/InputAdornment";
 import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
@@ -18,6 +20,7 @@ import { useToggleTheme } from "../../../hooks/useToggleTheme";
 
 type HeaderProps = {
   currentPage: "list" | "restore";
+  searchText: string;
   onChangePage: (page: "list" | "restore") => void;
   onChangeSearchText: (value: string) => void;
 };
@@ -55,11 +58,15 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = (props: HeaderProps) => {
-  const { currentPage, onChangePage, onChangeSearchText } = props;
+  const { currentPage, searchText, onChangePage, onChangeSearchText } = props;
   const { theme } = useContext(ThemeContext);
   const toggleTheme = useToggleTheme();
+
   const onInputSearchField = (event: React.ChangeEvent<HTMLInputElement>) => {
     onChangeSearchText(event.target.value);
+  };
+  const onClearSearchText = () => {
+    onChangeSearchText("");
   };
 
   return (
@@ -71,9 +78,19 @@ const Header = (props: HeaderProps) => {
           </SearchIconWrapper>
           <StyledInputBase
             placeholder={t.searchTabs}
+            value={searchText}
             onChange={onInputSearchField}
             autoFocus
             fullWidth
+            endAdornment={
+              searchText && (
+                <InputAdornment sx={{ color: "inherit" }} position="end">
+                  <IconButton color="inherit" onClick={onClearSearchText}>
+                    <ClearIcon />
+                  </IconButton>
+                </InputAdornment>
+              )
+            }
           />
         </Search>
         <IconButton
