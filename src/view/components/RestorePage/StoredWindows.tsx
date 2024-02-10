@@ -21,7 +21,7 @@ import { useContext, useEffect, useRef, useState } from "react";
 
 import t from "../../../i18n/Translations";
 import { StoredWindow } from "../../../model/Window";
-import { StoredWindowsContext } from "../../contexts/StoredWindows";
+import { StoredWindowsContext } from "../../contexts/StoredWindowsContext";
 import { useRemoveStoredWindow } from "../../hooks/useRemoveStoredWindow";
 import { useRestoreWindow } from "../../hooks/useRestoreWindow";
 import { useUpdateStoredWindowName } from "../../hooks/useUpdateStoredWindowName";

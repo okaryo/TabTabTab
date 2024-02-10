@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 
 import { moveTab, pinTab } from "../../repository/TabsRepository";
 import { getWindows } from "../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../contexts/WindowsContext";
 
 export const useMoveTabFromRootToPinned = (): ((
   tabId: number,

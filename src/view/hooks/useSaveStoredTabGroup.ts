@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 
 import { TabGroup } from "../../model/TabContainer";
 import { saveStoredTabGroup } from "../../repository/TabGroupRepository";
-import { StoredTabGroupsContext } from "../contexts/StoredTabGroups";
+import { StoredTabGroupsContext } from "../contexts/StoredTabGroupsContext";
 
 export const useSaveStoredTabGroup = (): ((
   tabGroup: TabGroup,

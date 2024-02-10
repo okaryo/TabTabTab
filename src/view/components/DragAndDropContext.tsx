@@ -40,7 +40,7 @@ import {
   indexOfWindowChild,
   moveTabOrTabGroup,
 } from "../../model/Window";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../contexts/WindowsContext";
 import { useAddWindowWithTab } from "../features/options/hooks/useAddWindowWithTab";
 import { useAddWindowWithTabGroup } from "../features/options/hooks/useAddWindowWithTabGroup";
 import { useAddTabToTabGroup } from "../hooks/useAddTabToTabGroup";

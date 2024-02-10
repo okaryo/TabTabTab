@@ -1,7 +1,7 @@
 import { useCallback, useContext } from "react";
 
 import { removeStoredTabGroup } from "../../repository/TabGroupRepository";
-import { StoredTabGroupsContext } from "../contexts/StoredTabGroups";
+import { StoredTabGroupsContext } from "../contexts/StoredTabGroupsContext";
 
 export const useRemoveStoredTabGroup = (): ((id: string) => Promise<void>) => {
   const { setStoredTabGroups } = useContext(StoredTabGroupsContext);

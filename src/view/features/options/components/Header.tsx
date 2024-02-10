@@ -6,7 +6,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useContext } from "react";
 
-import { ThemeContext } from "../../../contexts/Theme";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 import { useToggleTheme } from "../../../hooks/useToggleTheme";
 
 const Header = () => {

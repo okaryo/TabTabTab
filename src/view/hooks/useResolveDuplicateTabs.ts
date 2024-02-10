@@ -4,7 +4,7 @@ import { Tab, isSamePageTabs } from "../../model/Tab";
 import { flatTabsInWindows } from "../../model/Window";
 import { removeTabs } from "../../repository/TabsRepository";
 import { getWindows } from "../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../contexts/WindowsContext";
 
 export const useResolveDuplicateTabs = (): ((tab: Tab) => Promise<void>) => {
   const { windows, setWindows } = useContext(WindowsContext);

@@ -5,7 +5,7 @@ import {
   addWindowWithTab,
   getWindows,
 } from "../../../../repository/WindowsRepository";
-import { WindowsContext } from "../../../contexts/Windows";
+import { WindowsContext } from "../../../contexts/WindowsContext";
 
 export const useAddWindowWithTab = (): ((tabId: TabId) => Promise<void>) => {
   const { setWindows } = useContext(WindowsContext);

@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 
 import { removeTab } from "../../repository/TabsRepository";
 import { getWindows } from "../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../contexts/WindowsContext";
 
 export const useCloseTab = (): ((tabId: number) => Promise<void>) => {
   const { setWindows } = useContext(WindowsContext);

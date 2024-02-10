@@ -19,7 +19,7 @@ import { useContext, useState } from "react";
 
 import t from "../../../i18n/Translations";
 import { StoredTabGroup } from "../../../model/TabContainer";
-import { StoredTabGroupsContext } from "../../contexts/StoredTabGroups";
+import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import { useRemoveStoredTabGroup } from "../../hooks/useRemoveStoredTabGroup";
 import { useRestoreTabGroup } from "../../hooks/useRestoreTabGroup";
 

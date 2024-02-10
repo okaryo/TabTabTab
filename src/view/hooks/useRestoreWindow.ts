@@ -2,7 +2,7 @@ import { useCallback, useContext } from "react";
 
 import { StoredWindow } from "../../model/Window";
 import { getWindows, restoreWindow } from "../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../contexts/WindowsContext";
 
 export const useRestoreWindow = (): ((
   window: StoredWindow,

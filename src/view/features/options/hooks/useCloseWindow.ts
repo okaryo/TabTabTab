@@ -4,7 +4,7 @@ import {
   closeWindow,
   getWindows,
 } from "../../../../repository/WindowsRepository";
-import { WindowsContext } from "../../../contexts/Windows";
+import { WindowsContext } from "../../../contexts/WindowsContext";
 
 export const useCloseWindow = (): ((id: number) => Promise<void>) => {
   const { setWindows } = useContext(WindowsContext);

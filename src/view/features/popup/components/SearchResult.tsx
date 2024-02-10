@@ -13,7 +13,7 @@ import {
   getRecentActiveTabs,
 } from "../../../../repository/TabsRepository";
 import TabItem from "../../../components/TabItem";
-import { WindowsContext } from "../../../contexts/Windows";
+import { WindowsContext } from "../../../contexts/WindowsContext";
 
 type SearchResultProps = {
   searchText: string;

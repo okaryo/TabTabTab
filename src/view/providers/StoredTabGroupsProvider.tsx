@@ -1,4 +1,4 @@
-import { StoredTabGroupsContext } from "../contexts/StoredTabGroups";
+import { StoredTabGroupsContext } from "../contexts/StoredTabGroupsContext";
 import { useStoredTabGroups } from "../hooks/useStoredTabGroups";
 
 const StoredTabGroupsProvider = ({

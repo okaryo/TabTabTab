@@ -1,4 +1,4 @@
-import { StoredWindowsContext } from "../contexts/StoredWindows";
+import { StoredWindowsContext } from "../contexts/StoredWindowsContext";
 import { useStoredWindows } from "../hooks/useStoredWindows";
 
 const StoredWindowsProvider = ({ children }: { children: React.ReactNode }) => {
