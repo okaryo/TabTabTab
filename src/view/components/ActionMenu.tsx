@@ -29,6 +29,7 @@ import { useMergeWindow } from "../hooks/useMergeWindow";
 import { usePinTab } from "../hooks/usePinTab";
 import { useRemoveFromTabGroup } from "../hooks/useRemoveFromTabGroup";
 import { useSaveStoredTabGroup } from "../hooks/useSaveStoredTabGroup";
+import { useSaveStoredWindow } from "../hooks/useSaveStoredWindow";
 import { useUngroup } from "../hooks/useUngroup";
 import { useUnpinAllTabs } from "../hooks/useUnpinAllTabs";
 import { useUnpinTab } from "../hooks/useUnpinTab";
@@ -159,6 +160,9 @@ export const PinnedActionMenu = (props: PinnedActionMenuProps) => {
       action: () => unpinAllTabs(pinned.children),
     },
     {
+      type: "Divider",
+    },
+    {
       type: "MenuItem",
       label: t.closeAll,
       icon: <HighlightOffIcon fontSize="small" />,
@@ -224,10 +228,17 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   const isFirstWindow = currentIndex === 0;
   const isLastWindow = currentIndex === windows.length - 1;
 
+  const saveWindow = useSaveStoredWindow();
   const mergeWindow = useMergeWindow();
-
   const closeWindow = useCloseWindow();
+
   const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.saveWindow,
+      icon: <SyncIcon fontSize="small" />,
+      action: () => saveWindow(window, `${t.window}${currentIndex}`),
+    },
     !isLastWindow && {
       type: "MenuItem",
       label: t.mergeRightWindow,
@@ -240,7 +251,7 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
       icon: <InputIcon fontSize="small" />,
       action: () => mergeWindow(window.id, windows[currentIndex - 1]),
     },
-    windows.length > 1 && {
+    {
       type: "Divider",
     },
     {

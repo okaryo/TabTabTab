@@ -4,16 +4,13 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
-import RestoreIcon from "@mui/icons-material/Restore";
+import SyncIcon from "@mui/icons-material/Sync";
 import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import ListItem from "@mui/material/ListItem";
-import ListItemText from "@mui/material/ListItemText";
-import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import { styled, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
@@ -25,7 +22,8 @@ import { StoredTabGroup } from "../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroups";
 import { useRemoveStoredTabGroup } from "../../hooks/useRemoveStoredTabGroup";
 import { useRestoreTabGroup } from "../../hooks/useRestoreTabGroup";
-import TabFavicon from "../TabFavicon";
+
+import { StoredGridTabItem } from "./StoredGridItem";
 
 type StoredTabGroupsProps = {
   dense: boolean;
@@ -131,38 +129,13 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
       <AccordionDetails style={{ padding: theme.spacing(dense ? 1 : 2) }}>
         <Grid container spacing={dense ? 1 : 2}>
           {group.children.map((tab) => (
-            <Grid key={tab.internalUid} xs={6} md={4}>
-              <Paper variant="outlined">
-                <ListItem
-                  sx={{ gap: 2, py: dense ? 0.5 : 1, px: dense ? 1 : 2 }}
-                >
-                  <TabFavicon url={tab.favIconUrl} />
-                  <ListItemText
-                    sx={{ my: 0.5 }}
-                    primary={
-                      <Typography
-                        variant="subtitle2"
-                        component="p"
-                        title={tab.title}
-                        sx={{
-                          overflow: "hidden",
-                          textOverflow: "ellipsis",
-                          whiteSpace: "nowrap",
-                        }}
-                      >
-                        {tab.title}
-                      </Typography>
-                    }
-                    secondary={tab.url.host}
-                    secondaryTypographyProps={{
-                      overflow: "hidden",
-                      textOverflow: "ellipsis",
-                      whiteSpace: "nowrap",
-                    }}
-                  />
-                </ListItem>
-              </Paper>
-            </Grid>
+            <StoredGridTabItem
+              key={tab.internalUid}
+              tab={tab}
+              xsSize={6}
+              mdSize={4}
+              dense={dense}
+            />
           ))}
         </Grid>
       </AccordionDetails>
@@ -198,7 +171,7 @@ const StoredTabGroups = (props: StoredTabGroupsProps) => {
           sx={{ flexGrow: 1, p: 4 }}
           spacing={2}
         >
-          <RestoreIcon sx={{ fontSize: 96 }} />
+          <SyncIcon sx={{ fontSize: 96 }} />
           <Stack spacing={0.5} alignItems="center" justifyContent="center">
             <Typography variant="h5" component="h5">
               {t.noStoredTabGroupHeader}
@@ -206,7 +179,7 @@ const StoredTabGroups = (props: StoredTabGroupsProps) => {
             <Typography
               variant="subtitle1"
               component="p"
-              sx={{ textAlign: "center" }}
+              sx={{ textAlign: "center", color: "text.secondary" }}
             >
               {t.noStoredTabGroupDescription}
             </Typography>

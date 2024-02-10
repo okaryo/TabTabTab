@@ -1,6 +1,6 @@
 import ForumIcon from "@mui/icons-material/Forum";
-import RestoreIcon from "@mui/icons-material/Restore";
 import SettingsIcon from "@mui/icons-material/Settings";
+import SyncIcon from "@mui/icons-material/Sync";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import { Divider, Stack } from "@mui/material";
 import Container from "@mui/material/Container";
@@ -14,9 +14,9 @@ import { useState } from "react";
 
 import t from "../../../i18n/Translations";
 import RestorePage from "../../components/RestorePage";
-import ThemeProvider from "../../components/ThemeProvider";
 import { ThemeContext } from "../../contexts/Theme";
 import { useTheme } from "../../hooks/useTheme";
+import ThemeProvider from "../../providers/ThemeProvider";
 
 import Header from "./components/Header";
 import WindowsProvider from "./components/WindowsProvider";
@@ -38,7 +38,7 @@ export default function App() {
     },
     {
       name: t.optionsNavigationRestore,
-      icon: <RestoreIcon />,
+      icon: <SyncIcon />,
       content: (
         <Container sx={{ p: 2 }} maxWidth="md">
           <RestorePage />

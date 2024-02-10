@@ -6,6 +6,20 @@ export type TabContainer = {
   id: TabContainerId;
   children: Tab[];
 };
+export type StoredTabContainer = {
+  type: "pinned" | "tabGroup";
+  internalUid: string;
+  children: StoredTab[];
+};
+export type StoredPinned = StoredTabContainer & {
+  type: "pinned";
+};
+export type StoredTabGroup = StoredTabContainer &
+  Pick<TabGroup, "name" | "color"> & {
+    type: "tabGroup";
+    storedAt: Date;
+  };
+export type StoredTabGroupInWindow = Omit<StoredTabGroup, "storedAt">;
 
 // NOTE: PinnedId format is `pinned-${windowId}`.
 type PinnedId = string;
@@ -19,12 +33,6 @@ export type TabGroup = TabContainer & {
   name: string;
   color: GroupColor;
   collapsed: boolean;
-};
-export type StoredTabGroup = Pick<TabGroup, "name" | "color"> & {
-  type: "tabGroup";
-  internalUid: string;
-  storedAt: Date;
-  children: StoredTab[];
 };
 
 export const generatePinnedId = (windowId: number) => `pinned-${windowId}`;
@@ -59,4 +67,10 @@ export const isTabGroup = (value: TabContainer | Tab): value is TabGroup => {
     "color" in value &&
     "collapsed" in value
   );
+};
+
+export const isStoredTabGroup = (
+  container: StoredTabContainer,
+): container is StoredTabGroup => {
+  return container.type === "tabGroup";
 };

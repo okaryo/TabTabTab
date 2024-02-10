@@ -5,6 +5,7 @@ export class ChromeLocalStorage {
   static readonly POPUP_SIZE_SETTING_KEY = "popup_size_setting";
   static readonly POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
   static readonly THEME_KEY = "theme";
+  static readonly STORED_WINDOWS_KEY = "stored_windows";
   static readonly STORED_TAB_GROUPS_KEY = "stored_tab_groups";
 }
 
@@ -37,20 +38,39 @@ export type ThemeStorageObject = {
   [ChromeLocalStorage.THEME_KEY]: Theme;
 };
 
-type SerializedStoredTab = {
+type SerializedStoredWindow = {
+  type: "window";
+  internalUid: string;
+  name: string;
+  storedAt: string;
+  children: (SerializedStoredTabContainerInWindow | SerializedStoredTab)[];
+};
+type SerializedStoredTabContainerInWindow =
+  | SerializedStoredPinned
+  | Omit<SerializedStoredTabGroup, "storedAt">;
+type SerializedStoredTabContainerBase = {
+  type: "pinned" | "tabGroup";
+  internalUid: string;
+  children: SerializedStoredTab[];
+};
+type SerializedStoredPinned = SerializedStoredTabContainerBase & {
+  type: "pinned";
+};
+type SerializedStoredTabGroup = SerializedStoredTabContainerBase & {
+  type: "tabGroup";
+  storedAt: string;
+  name: string;
+  color: string;
+};
+export type SerializedStoredTab = {
   type: "tab";
   internalUid: string;
   title: string;
   url: string;
   favIconUrl: string | null;
 };
-type SerializedStoredTabGroup = {
-  type: "tabGroup";
-  internalUid: string;
-  storedAt: string;
-  name: string;
-  color: string;
-  children: SerializedStoredTab[];
+export type StoredWindowsObject = {
+  [ChromeLocalStorage.STORED_WINDOWS_KEY]: SerializedStoredWindow[];
 };
 export type StoredTabGroupsObject = {
   [ChromeLocalStorage.STORED_TAB_GROUPS_KEY]: SerializedStoredTabGroup[];

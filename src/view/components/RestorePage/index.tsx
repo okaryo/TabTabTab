@@ -4,7 +4,8 @@ import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
 
 import t from "../../../i18n/Translations";
-import StoredTabGroupsProvider from "../../features/options/components/StoredTabGroupsProvider";
+import StoredTabGroupsProvider from "../../providers/StoredTabGroupsProvider";
+import StoredWindowsProvider from "../../providers/StoredWindowsProvider";
 
 import StoredTabGroups from "./StoredTabGroups";
 import StoredWindows from "./StoredWindows";
@@ -17,7 +18,7 @@ type RestorePageProps = {
 
 const RestorePage = (props: RestorePageProps) => {
   const { dense = false } = props;
-  const [currentPage, setCurrentPage] = useState<Page>("tabGroup");
+  const [currentPage, setCurrentPage] = useState<Page>("window");
   const pages = [
     {
       value: "window",
@@ -44,7 +45,11 @@ const RestorePage = (props: RestorePageProps) => {
           </ToggleButton>
         ))}
       </ToggleButtonGroup>
-      {currentPage === "window" && <StoredWindows />}
+      {currentPage === "window" && (
+        <StoredWindowsProvider>
+          <StoredWindows dense={dense} />
+        </StoredWindowsProvider>
+      )}
       {currentPage === "tabGroup" && (
         <StoredTabGroupsProvider>
           <StoredTabGroups dense={dense} />

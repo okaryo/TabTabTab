@@ -1,12 +1,16 @@
 import { GroupColor } from "../model/GroupColor";
+import { Tab } from "../model/Tab";
 import {
   Pinned,
+  StoredPinned,
+  StoredTabGroup,
   TabGroup,
   generatePinnedId,
   isPinned,
   isTabGroup,
 } from "../model/TabContainer";
 import {
+  StoredWindow,
   Window,
   WindowId,
   findPinned,
@@ -15,8 +19,11 @@ import {
 } from "../model/Window";
 
 import {
+  ChromeLocalStorage,
   ChromeSessionStorage,
   LastActivatedAtStorageObject,
+  SerializedStoredTab,
+  StoredWindowsObject,
 } from "./ChromeStorage";
 
 export const getWindows = async (): Promise<Window[]> => {
@@ -158,4 +165,186 @@ const applyLastActivatedAtOfTabInWindows = async (
     );
   }
   return newWindows;
+};
+
+export const getStoredWindows = async (): Promise<StoredWindow[]> => {
+  const { stored_windows: storedWindows } = (await chrome.storage.local.get(
+    ChromeLocalStorage.STORED_WINDOWS_KEY,
+  )) as StoredWindowsObject;
+  if (!storedWindows) return [];
+
+  const deserializeStoredTab = (tab: SerializedStoredTab) => {
+    return {
+      ...tab,
+      url: new URL(tab.url),
+      favIconUrl: tab.favIconUrl ? new URL(tab.favIconUrl) : null,
+    };
+  };
+
+  return storedWindows.map((window) => {
+    const children = window.children.map((child) => {
+      if (child.type === "pinned") {
+        return {
+          ...child,
+          children: child.children.map((tab) => deserializeStoredTab(tab)),
+        };
+      }
+      if (child.type === "tabGroup") {
+        return {
+          ...child,
+          color: new GroupColor(child.color as GroupColor["value"]),
+          children: child.children.map((tab) => deserializeStoredTab(tab)),
+        };
+      }
+
+      return deserializeStoredTab(child);
+    });
+
+    return {
+      ...window,
+      storedAt: new Date(window.storedAt),
+      children,
+    };
+  });
+};
+
+export const saveStoredWindow = async (
+  window: Window,
+): Promise<StoredWindow[]> => {
+  const { stored_windows: storedWindows } = (await chrome.storage.local.get(
+    ChromeLocalStorage.STORED_WINDOWS_KEY,
+  )) as StoredWindowsObject;
+
+  const serializedTab = (tab: Tab) => ({
+    type: "tab",
+    internalUid: crypto.randomUUID(),
+    title: tab.title,
+    url: tab.url.toString(),
+    favIconUrl: tab.favIconUrl?.toString(),
+  });
+
+  const currentDateTime = new Date();
+  await chrome.storage.local.set({
+    [ChromeLocalStorage.STORED_WINDOWS_KEY]: [
+      {
+        type: "window",
+        internalUid: crypto.randomUUID(),
+        storedAt: currentDateTime.toISOString(),
+        name: currentDateTime.toLocaleDateString(),
+        children: window.children.map((child) => {
+          if (isPinned(child)) {
+            return {
+              type: "pinned",
+              internalUid: crypto.randomUUID(),
+              children: child.children.map((tab) => serializedTab(tab)),
+            };
+          }
+          if (isTabGroup(child)) {
+            return {
+              type: "tabGroup",
+              internalUid: crypto.randomUUID(),
+              storedAt: currentDateTime.toISOString(),
+              name: child.name,
+              color: child.color.value,
+              children: child.children.map((tab) => serializedTab(tab)),
+            };
+          }
+
+          return serializedTab(child as Tab);
+        }),
+      },
+      ...(storedWindows ?? []),
+    ],
+  });
+
+  return getStoredWindows();
+};
+
+export const updateStoredWindowName = async (
+  id: string,
+  name: string,
+): Promise<StoredWindow[]> => {
+  const { stored_windows: storedWindows } = (await chrome.storage.local.get(
+    ChromeLocalStorage.STORED_WINDOWS_KEY,
+  )) as StoredWindowsObject;
+
+  await chrome.storage.local.set({
+    [ChromeLocalStorage.STORED_WINDOWS_KEY]: storedWindows.map((window) => {
+      if (window.internalUid === id) {
+        return { ...window, name };
+      }
+      return window;
+    }),
+  });
+
+  return getStoredWindows();
+};
+
+export const removeStoredWindow = async (
+  id: string,
+): Promise<StoredWindow[]> => {
+  const { stored_windows: storedWindows } = (await chrome.storage.local.get(
+    ChromeLocalStorage.STORED_WINDOWS_KEY,
+  )) as StoredWindowsObject;
+
+  await chrome.storage.local.set({
+    [ChromeLocalStorage.STORED_WINDOWS_KEY]: storedWindows.filter(
+      (group) => group.internalUid !== id,
+    ),
+  });
+
+  return getStoredWindows();
+};
+
+export const restoreWindow = async (
+  storedWindow: StoredWindow,
+): Promise<void> => {
+  const window = await chrome.windows.create({ focused: false });
+
+  for (const child of storedWindow.children) {
+    if ("children" in child) {
+      if (child.type === "pinned") {
+        const pinned = child as StoredPinned;
+        const createPinnedTabPromises = pinned.children.map((tab) =>
+          chrome.tabs.create({
+            url: tab.url.toString(),
+            active: false,
+            pinned: true,
+            windowId: window.id,
+          }),
+        );
+        await Promise.all(createPinnedTabPromises);
+      }
+      if (child.type === "tabGroup") {
+        const tabGroup = child as StoredTabGroup;
+        const createTabPromises = tabGroup.children.map((tab) =>
+          chrome.tabs.create({
+            url: tab.url.toString(),
+            active: false,
+            windowId: window.id,
+          }),
+        );
+        const tabs = await Promise.all(createTabPromises);
+        const tabIds = tabs.map((tab) => tab.id);
+        const groupId = await chrome.tabs.group({
+          tabIds,
+          createProperties: { windowId: window.id },
+        });
+        await chrome.tabGroups.update(groupId, {
+          title: tabGroup.name,
+          color: tabGroup.color.value,
+        });
+      }
+    } else {
+      await chrome.tabs.create({
+        windowId: window.id,
+        url: child.url.toString(),
+        active: false,
+      });
+    }
+  }
+
+  // NOTE: Remove the new tab created when the window is opened
+  const emptyTab = window.tabs[0];
+  await chrome.tabs.remove(emptyTab.id);
 };
