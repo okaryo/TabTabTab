@@ -3,7 +3,7 @@ import { useCallback, useContext } from "react";
 import { GroupColor } from "../../model/GroupColor";
 import { updateTabGroupColor } from "../../repository/TabGroupRepository";
 import { getWindows } from "../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../contexts/WindowsContext";
 
 export const useUpdateTabGroupColor = (): ((
   groupId: number,

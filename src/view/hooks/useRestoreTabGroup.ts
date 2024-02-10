@@ -3,7 +3,7 @@ import { useCallback, useContext } from "react";
 import { StoredTabGroup } from "../../model/TabContainer";
 import { restoreTabGroup } from "../../repository/TabGroupRepository";
 import { getWindows } from "../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../contexts/WindowsContext";
 
 export const useRestoreTabGroup = (): ((
   tabGroup: StoredTabGroup,

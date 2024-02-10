@@ -1,8 +1,8 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { useEffect } from "react";
 
-import { ThemeContext } from "../../contexts/Theme";
-import { WindowsContext } from "../../contexts/Windows";
+import { ThemeContext } from "../../contexts/ThemeContext";
+import { WindowsContext } from "../../contexts/WindowsContext";
 import { useTheme } from "../../hooks/useTheme";
 import { useWindows } from "../../hooks/useWindows";
 

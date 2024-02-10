@@ -1,7 +1,7 @@
 import { useCallback, useContext } from "react";
 
 import { updateTheme } from "../../repository/ThemeRepository";
-import { ThemeContext } from "../contexts/Theme";
+import { ThemeContext } from "../contexts/ThemeContext";
 
 type Theme = "light" | "dark";
 

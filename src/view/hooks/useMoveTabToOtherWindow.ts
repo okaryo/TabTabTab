@@ -4,7 +4,7 @@ import { TabId } from "../../model/Tab";
 import { WindowId } from "../../model/Window";
 import { moveTabToOtherWindow } from "../../repository/TabsRepository";
 import { getWindows } from "../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../contexts/WindowsContext";
 
 export const useMoveTabToOtherWindow = (): ((
   tabId: TabId,

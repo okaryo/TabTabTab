@@ -5,7 +5,7 @@ import { Window } from "../../model/Window";
 import { moveTabGroup } from "../../repository/TabGroupRepository";
 import { moveTab, pinTab } from "../../repository/TabsRepository";
 import { getWindows } from "../../repository/WindowsRepository";
-import { WindowsContext } from "../contexts/Windows";
+import { WindowsContext } from "../contexts/WindowsContext";
 
 export const useMergeWindow = (): ((
   destWindowId: number,

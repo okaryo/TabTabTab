@@ -15,7 +15,7 @@ import { useContext } from "react";
 
 import t from "../../../../i18n/Translations";
 import { navigateToOptionsPage } from "../../../../repository/SettingsRepository";
-import { ThemeContext } from "../../../contexts/Theme";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 import { useToggleTheme } from "../../../hooks/useToggleTheme";
 
 type HeaderProps = {

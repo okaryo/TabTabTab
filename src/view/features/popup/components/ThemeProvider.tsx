@@ -3,7 +3,7 @@ import { createTheme } from "@mui/material/styles";
 import { useContext, useEffect, useMemo, useState } from "react";
 
 import { getPopupElementScaleSetting } from "../../../../repository/SettingsRepository";
-import { ThemeContext } from "../../../contexts/Theme";
+import { ThemeContext } from "../../../contexts/ThemeContext";
 
 type ThemeProviderProps = {
   children: React.ReactNode;

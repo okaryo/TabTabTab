@@ -1,4 +1,4 @@
-import { WindowsContext } from "../../../contexts/Windows";
+import { WindowsContext } from "../../../contexts/WindowsContext";
 import { useWindows } from "../../../hooks/useWindows";
 
 const WindowsProvider = ({ children }: { children: React.ReactNode }) => {

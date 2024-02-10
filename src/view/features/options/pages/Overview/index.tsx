@@ -22,7 +22,7 @@ import DragAndDropContext, {
   DROPPABLE_WINDOW_COLUMN_ID_PREFIX,
 } from "../../../../components/DragAndDropContext";
 import TabList from "../../../../components/TabList";
-import { WindowsContext } from "../../../../contexts/Windows";
+import { WindowsContext } from "../../../../contexts/WindowsContext";
 import { useAddWindow } from "../../hooks/useAddWindow.";
 
 type WindowColumnProps = {

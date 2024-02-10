@@ -1,17 +1,18 @@
 import { useCallback, useContext } from "react";
 
-import { TabGroup } from "../../model/TabContainer";
-import { saveStoredTabGroup } from "../../repository/TabGroupRepository";
+import { GroupColor } from "../../model/GroupColor";
+import { updateStoredTabGroupColor } from "../../repository/TabGroupRepository";
 import { StoredTabGroupsContext } from "../contexts/StoredTabGroupsContext";
 
-export const useSaveStoredTabGroup = (): ((
-  tabGroup: TabGroup,
+export const useUpdateStoredTabGroupColor = (): ((
+  id: string,
+  color: GroupColor,
 ) => Promise<void>) => {
   const { setStoredTabGroups } = useContext(StoredTabGroupsContext);
 
   const callback = useCallback(
-    async (tabGroup: TabGroup) => {
-      const newStoredTabGroups = await saveStoredTabGroup(tabGroup);
+    async (id: string, color: GroupColor) => {
+      const newStoredTabGroups = await updateStoredTabGroupColor(id, color);
       setStoredTabGroups(newStoredTabGroups);
     },
     [setStoredTabGroups],

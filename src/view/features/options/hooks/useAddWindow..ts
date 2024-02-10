@@ -4,7 +4,7 @@ import {
   addWindow,
   getWindows,
 } from "../../../../repository/WindowsRepository";
-import { WindowsContext } from "../../../contexts/Windows";
+import { WindowsContext } from "../../../contexts/WindowsContext";
 
 export const useAddWindow = (): (() => Promise<void>) => {
   const { setWindows } = useContext(WindowsContext);

@@ -5,7 +5,7 @@ import {
   addWindowWithTabGroup,
   getWindows,
 } from "../../../../repository/WindowsRepository";
-import { WindowsContext } from "../../../contexts/Windows";
+import { WindowsContext } from "../../../contexts/WindowsContext";
 
 export const useAddWindowWithTabGroup = (): ((
   tabGroup: TabGroup,
