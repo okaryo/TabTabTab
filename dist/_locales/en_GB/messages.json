@@ -23,6 +23,10 @@
     "message": "Add Window",
     "description": "Text used to display the action for adding a window"
   },
+  "save_window": {
+    "message": "Save Window",
+    "description": "Text used to display the action for save a window"
+  },
   "merge_right_window": {
     "message": "Merge Right",
     "description": "Text used to display the action for merge a right window"
@@ -34,6 +38,14 @@
   "close_window": {
     "message": "Close Window",
     "description": "Text used to display the action for closing a window"
+  },
+  "no_stored_window_header": {
+    "message": "No Saved Windows",
+    "description": "Used to show when stored window is empty."
+  },
+  "no_stored_window_description": {
+    "message": "Once you save a window from the list, you can restore it here.",
+    "description": "Used to show when stored window is empty."
   },
   "pinned": {
     "message": "Pinned",

@@ -23,6 +23,10 @@
     "message": "Dodaj okno",
     "description": "Text used to display the action for adding a window"
   },
+  "save_window": {
+    "message": "Zapisz okno",
+    "description": "Text used to display the action for save a window"
+  },
   "merge_right_window": {
     "message": "Scal z prawą",
     "description": "Text used to display the action for merge a right window"
@@ -34,6 +38,14 @@
   "close_window": {
     "message": "Zamknij okno",
     "description": "Text used to display the action for closing a window"
+  },
+  "no_stored_window_header": {
+    "message": "Brak zapisanych okien",
+    "description": "Used to show when stored window is empty."
+  },
+  "no_stored_window_description": {
+    "message": "Po zapisaniu okna z listy, możesz je tutaj przywrócić.",
+    "description": "Used to show when stored window is empty."
   },
   "pinned": {
     "message": "Przypięty",

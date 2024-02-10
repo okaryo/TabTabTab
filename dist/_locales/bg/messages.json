@@ -23,6 +23,10 @@
     "message": "Добави прозорец",
     "description": "Text used to display the action for adding a window"
   },
+  "save_window": {
+    "message": "Запази прозореца",
+    "description": "Text used to display the action for save a window"
+  },
   "merge_right_window": {
     "message": "Сливане надясно",
     "description": "Text used to display the action for merge a right window"
@@ -34,6 +38,14 @@
   "close_window": {
     "message": "Затвори прозореца",
     "description": "Text used to display the action for closing a window"
+  },
+  "no_stored_window_header": {
+    "message": "Няма запазени прозорци",
+    "description": "Used to show when stored window is empty."
+  },
+  "no_stored_window_description": {
+    "message": "След като запазите прозорец от списъка, можете да го възстановите тук.",
+    "description": "Used to show when stored window is empty."
   },
   "pinned": {
     "message": "Закачени",

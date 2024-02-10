@@ -14,6 +14,9 @@ class Translations {
   get addWindow() {
     return chrome.i18n.getMessage("add_window");
   }
+  get saveWindow() {
+    return chrome.i18n.getMessage("save_window");
+  }
   get mergeRightWindow() {
     return chrome.i18n.getMessage("merge_right_window");
   }
@@ -22,6 +25,12 @@ class Translations {
   }
   get closeWindow() {
     return chrome.i18n.getMessage("close_window");
+  }
+  get noStoredWindowHeader() {
+    return chrome.i18n.getMessage("no_stored_window_header");
+  }
+  get noStoredWindowDescription() {
+    return chrome.i18n.getMessage("no_stored_window_description");
   }
 
   // Grouped Tabs

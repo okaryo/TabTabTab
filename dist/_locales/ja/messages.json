@@ -35,6 +35,14 @@
     "message": "ウィンドウを閉じる",
     "description": "Text used to display the action for closing a window"
   },
+  "no_stored_window_header": {
+    "message": "保存されたウィンドウはありません",
+    "description": "Used to show when stored window is empty."
+  },
+  "no_stored_window_description": {
+    "message": "リストからウィンドウを保存すると、ここで復元することができます。",
+    "description": "Used to show when stored window is empty."
+  },
   "pinned": {
     "message": "固定タブ",
     "description": "Used as a heading for grouping and displaying pinned tabs together."

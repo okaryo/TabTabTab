@@ -23,6 +23,10 @@
     "message": "창 추가",
     "description": "Text used to display the action for adding a window"
   },
+  "save_window": {
+    "message": "창 저장",
+    "description": "Text used to display the action for save a window"
+  },
   "merge_right_window": {
     "message": "오른쪽으로 병합",
     "description": "Text used to display the action for merge a right window"
@@ -34,6 +38,14 @@
   "close_window": {
     "message": "창 닫기",
     "description": "Text used to display the action for closing a window"
+  },
+  "no_stored_window_header": {
+    "message": "저장된 창 없음",
+    "description": "Used to show when stored window is empty."
+  },
+  "no_stored_window_description": {
+    "message": "목록에서 창을 저장하면 여기에서 복원할 수 있습니다.",
+    "description": "Used to show when stored window is empty."
   },
   "pinned": {
     "message": "고정됨",

@@ -23,6 +23,10 @@
     "message": "Ajouter une fenêtre",
     "description": "Text used to display the action for adding a window"
   },
+  "save_window": {
+    "message": "Enregistrer la fenêtre",
+    "description": "Text used to display the action for save a window"
+  },
   "merge_right_window": {
     "message": "Fusionner à droite",
     "description": "Text used to display the action for merge a right window"
@@ -34,6 +38,14 @@
   "close_window": {
     "message": "Fermer la fenêtre",
     "description": "Text used to display the action for closing a window"
+  },
+  "no_stored_window_header": {
+    "message": "Aucune fenêtre enregistrée",
+    "description": "Used to show when stored window is empty."
+  },
+  "no_stored_window_description": {
+    "message": "Une fois que vous avez enregistré une fenêtre de la liste, vous pouvez la restaurer ici.",
+    "description": "Used to show when stored window is empty."
   },
   "pinned": {
     "message": "Epinglé",
