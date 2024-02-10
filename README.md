@@ -24,10 +24,12 @@ TabTabTab is a Chrome extension that supports your browsing by improving tab man
 
 * Comprehensive Tab Overview: View all your windows and tabs, including those grouped, in one unified list.
 * Flexible Drag & Drop: Organize your tabs freely - be it pinned, grouped, or standalone.
+* Window and Group Save & Restore: Quickly save and restore your tab groups and window sessions, ensuring a seamless continuation of your work.
 
 ### ✨ Additional Features
 
-* Duplicate Tab Alert: Avoid clutter with automated alerts for duplicate tabs.
+* Duplicate Tab Alert: Avoid clutter with automated alerts for duplicate tabs. Effortlessly close duplicates to streamline your browsing.
+* Window Merge: Combine multiple browser windows into one with a single click, organizing scattered tabs into a cohesive session.
 * Time Tracking: Keep track of how long it's been since you last accessed a tab.
 Essential Tab Operations: Bookmarking, URL copying, pinning, and more.
 * Screenshot Tool: Quickly capture the active tab's visible area.
@@ -35,7 +37,7 @@ Essential Tab Operations: Bookmarking, URL copying, pinning, and more.
 * Automatic Cleanup: Auto-remove tabs you haven't accessed based on your preferences.
 * Dark Mode: Switch to a darker, more focused look whenever you wish.
 
-### 👀 ScreenShots
+### 👀 ScreenShots(v2.27.0)
 
 ![ScreenShot1](./docs/screenshot1.png)
 ![ScreenShot2](./docs/screenshot2.png)
