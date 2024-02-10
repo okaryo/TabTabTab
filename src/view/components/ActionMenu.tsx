@@ -258,7 +258,7 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
       type: "MenuItem",
       label: t.closeWindow,
       icon: <CancelPresentationIcon fontSize="small" />,
-      action: () => closeWindow(window.id),
+      action: () => closeWindow(window),
     },
   ];
 

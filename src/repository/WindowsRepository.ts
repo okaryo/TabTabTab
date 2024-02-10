@@ -15,6 +15,7 @@ import {
   WindowId,
   findPinned,
   findTabGroup,
+  flatTabsInWindow,
   updateLastActivatedAtOfTab,
 } from "../model/Window";
 
@@ -51,8 +52,19 @@ export const addWindowWithTabGroup = async (
   await chrome.tabs.remove(emptyTab.id);
 };
 
-export const closeWindow = async (id: number): Promise<void> => {
-  await chrome.windows.remove(id);
+export const closeWindow = async (window: Window): Promise<Window[]> => {
+  /*
+    NOTE:
+    The `chrome.windows.remove` operation can be heavy, and sometimes,
+    when retrieving windows immediately after a remove operation,
+    the window supposed to be deleted may still appear.
+    Therefore, to ensure the window is closed reliably, we use `chrome.tabs.remove(tabIds)`.
+  */
+  const allTabs = flatTabsInWindow(window);
+  const tabIds = allTabs.map((tab) => tab.id);
+  await chrome.tabs.remove(tabIds);
+
+  return getWindows();
 };
 
 const windows = async (currentWindowId: number): Promise<Window[]> => {
