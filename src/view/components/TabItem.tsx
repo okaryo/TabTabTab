@@ -105,6 +105,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     event.stopPropagation();
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     resolveDuplicateTabs(tab);
+    setIsDuplicatedChipHovered(false);
   };
 
   return (
