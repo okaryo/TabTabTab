@@ -30,6 +30,11 @@ const RestorePage = (props: RestorePageProps) => {
     },
   ];
 
+  const onChangePage = (_: React.MouseEvent<HTMLElement>, page: Page) => {
+    if (page === null) return;
+    setCurrentPage(page);
+  };
+
   return (
     <Stack sx={{ height: "100%" }} spacing={dense ? 1 : 2}>
       <ToggleButtonGroup
@@ -37,7 +42,7 @@ const RestorePage = (props: RestorePageProps) => {
         exclusive
         value={currentPage}
         color="primary"
-        onChange={(_, value: Page) => setCurrentPage(value)}
+        onChange={onChangePage}
       >
         {pages.map((page) => (
           <ToggleButton value={page.value} style={{ textTransform: "none" }}>
