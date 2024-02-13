@@ -195,6 +195,7 @@ const TabCleanerSettingForm = () => {
             variant="contained"
             disabled={submissionState.isLoading}
             sx={{ textTransform: "none" }}
+            disableElevation
             // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={onSave}
           >
