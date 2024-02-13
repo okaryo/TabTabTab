@@ -23,6 +23,10 @@
     "message": "ウィンドウを追加",
     "description": "Text used to display the action for adding a window"
   },
+  "save_window": {
+    "message": "ウィンドウを保存",
+    "description": "Text used to display the action for save a window"
+  },
   "merge_right_window": {
     "message": "右にマージ",
     "description": "Text used to display the action for merge a right window"
