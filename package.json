@@ -11,7 +11,7 @@
     "lint:fix": "eslint --fix './src/**/*.{js,ts,jsx,tsx}' './test/**/*.{js,ts,jsx,tsx}'",
     "format": "prettier './src/**/*.{js,ts,jsx,tsx}' './test/**/*.{js,ts,jsx,tsx}' --check",
     "format:fix": "prettier './src/**/*.{js,ts,jsx,tsx}' './test/**/*.{js,ts,jsx,tsx}' --write",
-    "locale-lint": "chromex-locale-lint --localesDir dist/_locales"
+    "locale-lint": "chromex-locale-lint --localesDir dist/_locales --strict"
   },
   "author": "okaryo",
   "license": "MIT",
@@ -22,7 +22,7 @@
     "@typescript-eslint/eslint-plugin": "^6.21.0",
     "@typescript-eslint/parser": "^6.21.0",
     "@vitejs/plugin-react": "^4.2.1",
-    "chromex-locale-lint": "^0.0.3",
+    "chromex-locale-lint": "^0.1.0",
     "eslint": "^8.56.0",
     "eslint-plugin-autofix": "^1.1.0",
     "eslint-plugin-import": "^2.29.1",
