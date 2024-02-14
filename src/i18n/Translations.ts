@@ -171,6 +171,9 @@ class Translations {
   get optionsNavigationFeedback() {
     return chrome.i18n.getMessage("options_navigation_feedback");
   }
+  get optionsNavigationSponsor() {
+    return chrome.i18n.getMessage("options_navigation_sponsor");
+  }
   get popupSizeHeader() {
     return chrome.i18n.getMessage("popup_size_header");
   }
@@ -249,6 +252,14 @@ class Translations {
   }
   get sourceCodeDescription() {
     return chrome.i18n.getMessage("source_code_description");
+  }
+
+  // SponsorPage
+  get sponsorPageHeader() {
+    return chrome.i18n.getMessage("sponsor_page_header");
+  }
+  get sponsorPageDescription() {
+    return chrome.i18n.getMessage("sponsor_page_description");
   }
 }
 

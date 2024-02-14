@@ -211,6 +211,10 @@
     "message": "Feedback",
     "description": "Navigation header for Feedback page in options.html"
   },
+  "options_navigation_sponsor": {
+    "message": "Sponsor",
+    "description": "Navigation header for Sponsor page in options.html"
+  },
   "popup_size_header": {
     "message": "Popup window size",
     "description": "Heading for the popup size settings."
@@ -279,14 +283,6 @@
     "message": "Please fix the error.",
     "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "settings": {
-    "message": "Settings",
-    "description": "Heading for the settings page."
-  },
-  "feedback": {
-    "message": "Feedback",
-    "description": "Heading for the feedback page."
-  },
   "bug_report_and_feature_request_title": {
     "message": "Bug Report & Feature Request",
     "description": "Heading for the section covering bug reports and feature requests."
@@ -310,5 +306,13 @@
   "source_code_description": {
     "message": "The code for TabTabTab is open source and publicly available. It is carefully managed to prevent any illicit programming, ensuring the extension is developed safely.",
     "description": "Description for the section related to the source code."
+  },
+  "sponsor_page_header": {
+    "message": "Become a Sponsor",
+    "description": "Header in Sponsor Page"
+  },
+  "sponsor_page_description": {
+    "message": "TabTabTab is an open-source project, mainly developed by an individual. If you find it useful, I'd be grateful if you could consider becoming a sponsor for its continuous development.",
+    "description": "Description in Sponsor Page"
   }
 }

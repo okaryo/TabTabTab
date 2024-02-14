@@ -211,6 +211,10 @@
     "message": "フィードバック",
     "description": "Navigation header for Feedback page in options.html"
   },
+  "options_navigation_sponsor": {
+    "message": "スポンサー",
+    "description": "Navigation header for Sponsor page in options.html"
+  },
   "popup_size_header": {
     "message": "ポップアップサイズ",
     "description": "Heading for the popup size settings."
@@ -279,14 +283,6 @@
     "message": "エラーを修正してください。",
     "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "settings": {
-    "message": "設定",
-    "description": "Heading for the settings page."
-  },
-  "feedback": {
-    "message": "フィードバック",
-    "description": "Heading for the feedback page."
-  },
   "bug_report_and_feature_request_title": {
     "message": "バグ報告&機能要望",
     "description": "Heading for the section covering bug reports and feature requests."
@@ -310,5 +306,13 @@
   "source_code_description": {
     "message": "TabTabTabのコードは公開されたオープンソースです。不正なプログラムが入らないよう管理されており、拡張機能が安全に開発されています。",
     "description": "Description for the section related to the source code."
+  },
+  "sponsor_page_header": {
+    "message": "スポンサーになる",
+    "description": "Header in Sponsor Page"
+  },
+  "sponsor_page_description": {
+    "message": "TabTabTabは、主に個人によって開発されたオープンソースプロジェクトです。役立つツールと思われた場合、継続的な開発のためにスポンサーになっていただけると嬉しいです。",
+    "description": "Description in Sponsor Page"
   }
 }

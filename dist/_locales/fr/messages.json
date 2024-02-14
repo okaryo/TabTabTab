@@ -211,6 +211,10 @@
     "message": "Retour d'information",
     "description": "Navigation header for Feedback page in options.html"
   },
+  "options_navigation_sponsor": {
+    "message": "Sponsor",
+    "description": "Navigation header for Sponsor page in options.html"
+  },
   "popup_size_header": {
     "message": "Taille de la fenêtre contextuelle",
     "description": "Heading for the popup size settings."
@@ -279,14 +283,6 @@
     "message": "Veuillez corriger l'erreur.",
     "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "settings": {
-    "message": "Paramètres",
-    "description": "Heading for the settings page."
-  },
-  "feedback": {
-    "message": "Retours",
-    "description": "Heading for the feedback page."
-  },
   "bug_report_and_feature_request_title": {
     "message": "Rapport de Bug & Demande de Fonctionnalité",
     "description": "Heading for the section covering bug reports and feature requests."
@@ -310,5 +306,13 @@
   "source_code_description": {
     "message": "Le code de TabTabTab est open source et accessible au public. Il est soigneusement géré pour empêcher toute programmation illicite, garantissant que l'extension puisse être développée en toute sécurité.",
     "description": "Description for the section related to the source code."
+  },
+  "sponsor_page_header": {
+    "message": "Devenez un Sponsor",
+    "description": "Header in Sponsor Page"
+  },
+  "sponsor_page_description": {
+    "message": "TabTabTab est un projet open-source, principalement développé par un individu. Si vous le trouvez utile, je serais reconnaissant si vous envisagiez de devenir un sponsor pour son développement continu.",
+    "description": "Description in Sponsor Page"
   }
 }

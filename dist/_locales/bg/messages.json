@@ -211,6 +211,10 @@
     "message": "Обратна връзка",
     "description": "Navigation header for Feedback page in options.html"
   },
+  "options_navigation_sponsor": {
+    "message": "Спонсор",
+    "description": "Navigation header for Sponsor page in options.html"
+  },
   "popup_size_header": {
     "message": "Размер на изкачащия прозорец",
     "description": "Heading for the popup size settings."
@@ -279,14 +283,6 @@
     "message": "Моля, поправете грешката.",
     "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "settings": {
-    "message": "Настройки",
-    "description": "Heading for the settings page."
-  },
-  "feedback": {
-    "message": "Обратна връзка",
-    "description": "Heading for the feedback page."
-  },
   "bug_report_and_feature_request_title": {
     "message": "Докладване на бъг & Заявка за подобрение",
     "description": "Heading for the section covering bug reports and feature requests."
@@ -310,5 +306,13 @@
   "source_code_description": {
     "message": "TabTabTab е софтуерен продукт с публично достъпен отворен код. Той се управлява внимателно, за да се предотвратят всякакви незаконни действия, гарантиращи сигурна и безопасна работа с приложението.",
     "description": "Description for the section related to the source code."
+  },
+  "sponsor_page_header": {
+    "message": "Станете Спонсор",
+    "description": "Header in Sponsor Page"
+  },
+  "sponsor_page_description": {
+    "message": "TabTabTab е проект с отворен код, разработен главно от един човек. Ако намирате, че е полезно, бих бил благодарен, ако обмислите възможността да станете спонсор за неговото непрекъснато развитие.",
+    "description": "Description in Sponsor Page"
   }
 }
