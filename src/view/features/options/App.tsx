@@ -2,6 +2,7 @@ import ForumIcon from "@mui/icons-material/Forum";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SyncIcon from "@mui/icons-material/Sync";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import { Divider, Stack } from "@mui/material";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -23,6 +24,7 @@ import WindowsProvider from "./components/WindowsProvider";
 import Feedback from "./pages/Feedback";
 import Overview from "./pages/Overview";
 import Settings from "./pages/Settings";
+import Sponsor from "./pages/Sponsor";
 
 export default function App() {
   const [currentPage, setPage] = useState(0);
@@ -60,6 +62,15 @@ export default function App() {
       content: (
         <Container sx={{ p: 2 }} maxWidth="md">
           <Feedback />
+        </Container>
+      ),
+    },
+    {
+      name: t.optionsNavigationSponsor,
+      icon: <VolunteerActivismIcon />,
+      content: (
+        <Container maxWidth="md">
+          <Sponsor />
         </Container>
       ),
     },
