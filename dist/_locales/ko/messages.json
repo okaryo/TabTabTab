@@ -211,6 +211,10 @@
     "message": "피드백",
     "description": "Navigation header for Feedback page in options.html"
   },
+  "options_navigation_sponsor": {
+    "message": "스폰서",
+    "description": "Navigation header for Sponsor page in options.html"
+  },
   "popup_size_header": {
     "message": "팝업 창 크기 조절",
     "description": "Heading for the popup size settings."
@@ -278,14 +282,6 @@
   "tab_cleaner_error_on_save": {
     "message": "에러를 수정하세요.",
     "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "settings": {
-    "message": "Settings",
-    "description": "Heading for the settings page."
-  },
-  "feedback": {
-    "message": "Feedback",
-    "description": "Heading for the feedback page."
   },
   "bug_report_and_feature_request_title": {
     "message": "버그 제보 & 신규 기능 요청",

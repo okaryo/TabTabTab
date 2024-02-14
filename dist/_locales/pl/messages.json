@@ -211,6 +211,10 @@
     "message": "Opinie",
     "description": "Navigation header for Feedback page in options.html"
   },
+  "options_navigation_sponsor": {
+    "message": "Sponsor",
+    "description": "Navigation header for Sponsor page in options.html"
+  },
   "popup_size_header": {
     "message": "Rozmiar okna pop-up",
     "description": "Heading for the popup size settings."
@@ -278,14 +282,6 @@
   "tab_cleaner_error_on_save": {
     "message": "Proszę napraw ten błąd.",
     "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "settings": {
-    "message": "Ustawienia",
-    "description": "Heading for the settings page."
-  },
-  "feedback": {
-    "message": "Informacja Zwrotna",
-    "description": "Heading for the feedback page."
   },
   "bug_report_and_feature_request_title": {
     "message": "Zgłoszenie Błędu & Wniosek o Funkcję",

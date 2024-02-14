@@ -171,6 +171,9 @@ class Translations {
   get optionsNavigationFeedback() {
     return chrome.i18n.getMessage("options_navigation_feedback");
   }
+  get optionsNavigationSponsor() {
+    return chrome.i18n.getMessage("options_navigation_sponsor");
+  }
   get popupSizeHeader() {
     return chrome.i18n.getMessage("popup_size_header");
   }
