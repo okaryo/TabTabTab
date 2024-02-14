@@ -310,5 +310,13 @@
   "source_code_description": {
     "message": "Le code de TabTabTab est open source et accessible au public. Il est soigneusement géré pour empêcher toute programmation illicite, garantissant que l'extension puisse être développée en toute sécurité.",
     "description": "Description for the section related to the source code."
+  },
+  "sponsor_page_header": {
+    "message": "Devenez un Sponsor",
+    "description": "Header in Sponsor Page"
+  },
+  "sponsor_page_description": {
+    "message": "TabTabTab est un projet open-source, principalement développé par un individu. Si vous le trouvez utile, je serais reconnaissant si vous envisagiez de devenir un sponsor pour son développement continu.",
+    "description": "Description in Sponsor Page"
   }
 }

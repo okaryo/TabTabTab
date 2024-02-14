@@ -310,5 +310,13 @@
   "source_code_description": {
     "message": "TabTabTab е софтуерен продукт с публично достъпен отворен код. Той се управлява внимателно, за да се предотвратят всякакви незаконни действия, гарантиращи сигурна и безопасна работа с приложението.",
     "description": "Description for the section related to the source code."
+  },
+  "sponsor_page_header": {
+    "message": "Станете Спонсор",
+    "description": "Header in Sponsor Page"
+  },
+  "sponsor_page_description": {
+    "message": "TabTabTab е проект с отворен код, разработен главно от един човек. Ако намирате, че е полезно, бих бил благодарен, ако обмислите възможността да станете спонсор за неговото непрекъснато развитие.",
+    "description": "Description in Sponsor Page"
   }
 }

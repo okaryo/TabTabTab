@@ -310,5 +310,13 @@
   "source_code_description": {
     "message": "TabTabTab은 오픈 소스 프로젝트이고, 소스 코드는 GitHub에 공개되어 있습니다. 안전한 확장 프로그램을 제공하기 위해 어떤 불법적인 프로그래밍도 하지 않습니다.",
     "description": "Description for the section related to the source code."
+  },
+  "sponsor_page_header": {
+    "message": "스폰서가 되세요",
+    "description": "Header in Sponsor Page"
+  },
+  "sponsor_page_description": {
+    "message": "TabTabTab은 주로 개인이 개발한 오픈소스 프로젝트입니다. 유용하다고 생각되면 지속적인 개발을 위해 스폰서가 되어주시면 감사하겠습니다.",
+    "description": "Description in Sponsor Page"
   }
 }

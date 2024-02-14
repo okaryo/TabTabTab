@@ -310,5 +310,13 @@
   "source_code_description": {
     "message": "Der Code für TabTabTab ist quelloffen und öffentlich zugänglich. Er wird sorgfältig verwaltet, um jegliche unerlaubte Programmierung zu verhindern und sicherzustellen, dass die Erweiterung sicher entwickelt wird.",
     "description": "Description for the section related to the source code."
+  },
+  "sponsor_page_header": {
+    "message": "Werden Sie ein Sponsor",
+    "description": "Header in Sponsor Page"
+  },
+  "sponsor_page_description": {
+    "message": "TabTabTab ist ein Open-Source-Projekt, das hauptsächlich von einer Einzelperson entwickelt wird. Wenn Sie es nützlich finden, wäre ich dankbar, wenn Sie in Erwägung ziehen würden, ein Sponsor für seine kontinuierliche Entwicklung zu werden.",
+    "description": "Description in Sponsor Page"
   }
 }
