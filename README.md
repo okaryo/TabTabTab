@@ -31,7 +31,7 @@ TabTabTab is a Chrome extension that supports your browsing by improving tab man
 * Duplicate Tab Alert: Avoid clutter with automated alerts for duplicate tabs. Effortlessly close duplicates to streamline your browsing.
 * Window Merge: Combine multiple browser windows into one with a single click, organizing scattered tabs into a cohesive session.
 * Time Tracking: Keep track of how long it's been since you last accessed a tab.
-Essential Tab Operations: Bookmarking, URL copying, pinning, and more.
+* Essential Tab Operations: URL copying, pinning, grouping, and more.
 * Screenshot Tool: Quickly capture the active tab's visible area.
 * Efficient Navigation & Search: Jump to or find your desired tabs in seconds.
 * Automatic Cleanup: Auto-remove tabs you haven't accessed based on your preferences.
