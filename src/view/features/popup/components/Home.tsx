@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 
-import { PopupSize } from "../../../../model/settings/PopupSize";
+import { PopupSize, defaultPopupSize } from "../../../../model/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
 import RestorePage from "../../../components/RestorePage";
 import StoredTabGroupsProvider from "../../../providers/StoredTabGroupsProvider";
@@ -15,9 +15,8 @@ type Page = "list" | "restore";
 const Home = () => {
   const [searchText, setSearchText] = useState("");
   const [currentPage, setCurrentPage] = useState<Page>("list");
-  const [popupSizeState, setPopupSizeState] = useState<PopupSize>(
-    PopupSize.default(),
-  );
+  const [popupSizeState, setPopupSizeState] =
+    useState<PopupSize>(defaultPopupSize);
   useEffect(() => {
     const initState = async () => {
       setPopupSizeState(await getPopupSizeSetting());
