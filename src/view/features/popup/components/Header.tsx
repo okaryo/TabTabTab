@@ -124,9 +124,11 @@ const Header = (props: HeaderProps) => {
             }
           />
         </Search>
-        <IconButton onClick={() => setCurrentPage("restore")} color="inherit">
-          <SyncIcon />
-        </IconButton>
+        {searchText.length === 0 && (
+          <IconButton onClick={() => setCurrentPage("restore")} color="inherit">
+            <SyncIcon />
+          </IconButton>
+        )}
         <IconButton
           color="inherit"
           onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
