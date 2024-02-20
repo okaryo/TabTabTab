@@ -16,8 +16,8 @@ import Stack from "@mui/material/Stack";
 import { useState } from "react";
 
 import t from "../../../i18n/Translations";
-import AutoGroupPage from "../../components/AutoGroupPage";
 import RestorePage from "../../components/RestorePage";
+import TabOrganizerPage from "../../components/TabOrganizerPage";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useTheme } from "../../hooks/useTheme";
 import ThemeProvider from "../../providers/ThemeProvider";
@@ -51,11 +51,11 @@ export default function App() {
       ),
     },
     {
-      name: "Auto Grouping",
+      name: "Tab Organizer",
       icon: <AutoAwesomeMotionIcon />,
       content: (
         <Container sx={{ py: 2, width: 700 }} fixed>
-          <AutoGroupPage />
+          <TabOrganizerPage />
         </Container>
       ),
     },
@@ -63,7 +63,7 @@ export default function App() {
       name: t.optionsNavigationSettings,
       icon: <SettingsIcon />,
       content: (
-        <Container sx={{ p: 2 }} maxWidth="md">
+        <Container sx={{ py: 2, width: 700 }} fixed>
           <Settings />
         </Container>
       ),
@@ -72,7 +72,7 @@ export default function App() {
       name: t.optionsNavigationFeedback,
       icon: <ForumIcon />,
       content: (
-        <Container sx={{ p: 2 }} maxWidth="md">
+        <Container sx={{ py: 2, width: 700 }} fixed>
           <Feedback />
         </Container>
       ),

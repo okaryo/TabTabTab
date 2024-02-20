@@ -1,4 +1,4 @@
-import { DurationUnit } from "../model/settings/TabCleaner";
+import { DurationUnit } from "../model/TabCleaner";
 import { TabGroupSetting } from "../model/TabGroupSetting";
 
 export class ChromeLocalStorage {
