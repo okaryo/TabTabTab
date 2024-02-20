@@ -273,19 +273,27 @@ class Translations {
     return chrome.i18n.getMessage("tab_grouping_detail_settings_header");
   }
   get tabGroupingAutoCollapseUnusedTabGroups() {
-    return chrome.i18n.getMessage("tab_grouping_auto_collapse_unused_tab_groups");
+    return chrome.i18n.getMessage(
+      "tab_grouping_auto_collapse_unused_tab_groups",
+    );
   }
   get tabGroupingAutoUngroupSingleTabGroups() {
-    return chrome.i18n.getMessage("tab_grouping_auto_ungroup_single_tab_groups");
+    return chrome.i18n.getMessage(
+      "tab_grouping_auto_ungroup_single_tab_groups",
+    );
   }
   get tabGroupingGroupTabsBy() {
     return chrome.i18n.getMessage("tab_grouping_group_tabs_by");
   }
   get tabGroupingGroupTabsByMenuItemDomain() {
-    return chrome.i18n.getMessage("tab_grouping_group_tabs_by_menu_item_domain");
+    return chrome.i18n.getMessage(
+      "tab_grouping_group_tabs_by_menu_item_domain",
+    );
   }
   get tabGroupingGroupTabsByMenuItemSubdomain() {
-    return chrome.i18n.getMessage("tab_grouping_group_tabs_by_menu_item_subdomain");
+    return chrome.i18n.getMessage(
+      "tab_grouping_group_tabs_by_menu_item_subdomain",
+    );
   }
 
   // SponsorPage

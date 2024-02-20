@@ -16,6 +16,7 @@ import Stack from "@mui/material/Stack";
 import { useState } from "react";
 
 import t from "../../../i18n/Translations";
+import OrganizationPage from "../../components/OrganizationPage";
 import RestorePage from "../../components/RestorePage";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useTheme } from "../../hooks/useTheme";
@@ -27,7 +28,6 @@ import Feedback from "./pages/Feedback";
 import Overview from "./pages/Overview";
 import Settings from "./pages/Settings";
 import Sponsor from "./pages/Sponsor";
-import OrganizationPage from "../../components/OrganizationPage";
 
 export default function App() {
   const [currentPage, setPage] = useState(0);
