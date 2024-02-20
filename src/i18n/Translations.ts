@@ -269,8 +269,8 @@ class Translations {
   get tabGroupingGroupTabsAutomatically() {
     return chrome.i18n.getMessage("tab_grouping_group_tabs_automatically");
   }
-  get tabGroupingDetailSettingsHeader() {
-    return chrome.i18n.getMessage("tab_grouping_detail_settings_header");
+  get tabGroupingDetailSettingsSubheader() {
+    return chrome.i18n.getMessage("tab_grouping_detail_settings_subheader");
   }
   get tabGroupingAutoCollapseUnusedTabGroups() {
     return chrome.i18n.getMessage(

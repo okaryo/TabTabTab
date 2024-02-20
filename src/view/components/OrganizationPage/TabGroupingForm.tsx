@@ -93,7 +93,7 @@ const TabGroupingForm = () => {
             <List
               subheader={
                 <ListSubheader>
-                  {t.tabGroupingDetailSettingsHeader}
+                  {t.tabGroupingDetailSettingsSubheader}
                 </ListSubheader>
               }
             >
