@@ -10,13 +10,14 @@ import Header from "./Header";
 import SearchResult from "./SearchResult";
 import WindowsContainer from "./WindowsContainer";
 
-type Page = "list" | "restore";
+type Page = "root" | "restore";
 
 const Home = () => {
   const [searchText, setSearchText] = useState("");
-  const [currentPage, setCurrentPage] = useState<Page>("list");
+  const [currentPage, setCurrentPage] = useState<Page>("root");
   const [popupSizeState, setPopupSizeState] =
     useState<PopupSize>(defaultPopupSize);
+
   useEffect(() => {
     const initState = async () => {
       setPopupSizeState(await getPopupSizeSetting());
@@ -24,9 +25,6 @@ const Home = () => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initState();
   }, []);
-
-  const onChangeSearchText = (value: string) => setSearchText(value);
-  const onChangePage = (page: Page) => setCurrentPage(page);
 
   return (
     <Box
@@ -39,16 +37,14 @@ const Home = () => {
       <Header
         currentPage={currentPage}
         searchText={searchText}
-        onChangePage={onChangePage}
-        onChangeSearchText={onChangeSearchText}
+        setCurrentPage={setCurrentPage}
+        setSearchText={setSearchText}
       />
-      {searchText.length > 0 && currentPage === "list" && (
-        <SearchResult searchText={searchText} />
-      )}
-      {searchText.length === 0 && currentPage === "list" && (
+      {searchText.length > 0 && <SearchResult searchText={searchText} />}
+      {searchText.length === 0 && currentPage === "root" && (
         <WindowsContainer />
       )}
-      {currentPage === "restore" && (
+      {searchText.length === 0 && currentPage === "restore" && (
         <Box sx={{ p: 1 }}>
           <StoredTabGroupsProvider>
             <RestorePage dense />
