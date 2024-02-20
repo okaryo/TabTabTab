@@ -141,39 +141,6 @@ class Translations {
   get resolveDuplicates() {
     return chrome.i18n.getMessage("resolve_duplicates");
   }
-  get tabCleanerHeader() {
-    return chrome.i18n.getMessage("tab_cleaner_header");
-  }
-  get tabCleanerDescription() {
-    return chrome.i18n.getMessage("tab_cleaner_description");
-  }
-  get duration() {
-    return chrome.i18n.getMessage("duration");
-  }
-  get unit() {
-    return chrome.i18n.getMessage("unit");
-  }
-  get durationUnitDay() {
-    return chrome.i18n.getMessage("duration_unit_day");
-  }
-  get durationUnitHour() {
-    return chrome.i18n.getMessage("duration_unit_hour");
-  }
-  get optionsNavigationAllWindows() {
-    return chrome.i18n.getMessage("options_navigation_all_windows");
-  }
-  get optionsNavigationRestore() {
-    return chrome.i18n.getMessage("options_navigation_restore");
-  }
-  get optionsNavigationSettings() {
-    return chrome.i18n.getMessage("options_navigation_settings");
-  }
-  get optionsNavigationFeedback() {
-    return chrome.i18n.getMessage("options_navigation_feedback");
-  }
-  get optionsNavigationSponsor() {
-    return chrome.i18n.getMessage("options_navigation_sponsor");
-  }
   get popupSizeHeader() {
     return chrome.i18n.getMessage("popup_size_header");
   }
@@ -206,12 +173,6 @@ class Translations {
   }
   get popupSizeValidationErrorValueRange() {
     return chrome.i18n.getMessage("popup_size_validation_error_value_range");
-  }
-  get tabCleanerValidationErrorValueFormat() {
-    return chrome.i18n.getMessage("tab_cleaner_validation_error_value_format");
-  }
-  get tabCleanerErrorOnSave() {
-    return chrome.i18n.getMessage("tab_cleaner_error_on_save");
   }
   get popupElementScaleHeader() {
     return chrome.i18n.getMessage("popup_element_scale_header");
@@ -252,6 +213,79 @@ class Translations {
   }
   get sourceCodeDescription() {
     return chrome.i18n.getMessage("source_code_description");
+  }
+
+  // OptionsHeader
+  get optionsNavigationAllWindows() {
+    return chrome.i18n.getMessage("options_navigation_all_windows");
+  }
+  get optionsNavigationRestore() {
+    return chrome.i18n.getMessage("options_navigation_restore");
+  }
+  get optionsNavigationOrganization() {
+    return chrome.i18n.getMessage("options_navigation_organization");
+  }
+  get optionsNavigationSettings() {
+    return chrome.i18n.getMessage("options_navigation_settings");
+  }
+  get optionsNavigationFeedback() {
+    return chrome.i18n.getMessage("options_navigation_feedback");
+  }
+  get optionsNavigationSponsor() {
+    return chrome.i18n.getMessage("options_navigation_sponsor");
+  }
+
+  // OrganizationPage
+  get cleanupTabsHeader() {
+    return chrome.i18n.getMessage("cleanup_tabs_header");
+  }
+  get tabCleanerHeader() {
+    return chrome.i18n.getMessage("tab_cleaner_header");
+  }
+  get tabCleanerDescription() {
+    return chrome.i18n.getMessage("tab_cleaner_description");
+  }
+  get tabCleanerValidationErrorValueFormat() {
+    return chrome.i18n.getMessage("tab_cleaner_validation_error_value_format");
+  }
+  get duration() {
+    return chrome.i18n.getMessage("duration");
+  }
+  get unit() {
+    return chrome.i18n.getMessage("unit");
+  }
+  get durationUnitDay() {
+    return chrome.i18n.getMessage("duration_unit_day");
+  }
+  get durationUnitHour() {
+    return chrome.i18n.getMessage("duration_unit_hour");
+  }
+  get tabGroupingHeader() {
+    return chrome.i18n.getMessage("tab_grouping_header");
+  }
+  get tabGroupingGroupTabsNow() {
+    return chrome.i18n.getMessage("tab_grouping_group_tabs_now");
+  }
+  get tabGroupingGroupTabsAutomatically() {
+    return chrome.i18n.getMessage("tab_grouping_group_tabs_automatically");
+  }
+  get tabGroupingDetailSettingsHeader() {
+    return chrome.i18n.getMessage("tab_grouping_detail_settings_header");
+  }
+  get tabGroupingAutoCollapseUnusedTabGroups() {
+    return chrome.i18n.getMessage("tab_grouping_auto_collapse_unused_tab_groups");
+  }
+  get tabGroupingAutoUngroupSingleTabGroups() {
+    return chrome.i18n.getMessage("tab_grouping_auto_ungroup_single_tab_groups");
+  }
+  get tabGroupingGroupTabsBy() {
+    return chrome.i18n.getMessage("tab_grouping_group_tabs_by");
+  }
+  get tabGroupingGroupTabsByMenuItemDomain() {
+    return chrome.i18n.getMessage("tab_grouping_group_tabs_by_menu_item_domain");
+  }
+  get tabGroupingGroupTabsByMenuItemSubdomain() {
+    return chrome.i18n.getMessage("tab_grouping_group_tabs_by_menu_item_subdomain");
   }
 
   // SponsorPage

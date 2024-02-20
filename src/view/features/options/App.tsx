@@ -17,7 +17,6 @@ import { useState } from "react";
 
 import t from "../../../i18n/Translations";
 import RestorePage from "../../components/RestorePage";
-import TabOrganizerPage from "../../components/TabOrganizerPage";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useTheme } from "../../hooks/useTheme";
 import ThemeProvider from "../../providers/ThemeProvider";
@@ -28,6 +27,7 @@ import Feedback from "./pages/Feedback";
 import Overview from "./pages/Overview";
 import Settings from "./pages/Settings";
 import Sponsor from "./pages/Sponsor";
+import OrganizationPage from "../../components/OrganizationPage";
 
 export default function App() {
   const [currentPage, setPage] = useState(0);
@@ -51,11 +51,11 @@ export default function App() {
       ),
     },
     {
-      name: "Tab Organizer",
+      name: t.optionsNavigationOrganization,
       icon: <AutoAwesomeMotionIcon />,
       content: (
         <Container sx={{ py: 2, width: 700 }} fixed>
-          <TabOrganizerPage />
+          <OrganizationPage />
         </Container>
       ),
     },

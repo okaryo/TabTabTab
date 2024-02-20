@@ -84,7 +84,7 @@ const TabCleanerForm = () => {
 
   return (
     <Stack spacing={1}>
-      <Typography variant="subtitle1">Cleanup Tabs</Typography>
+      <Typography variant="subtitle1">{t.cleanupTabsHeader}</Typography>
       <Paper variant="outlined">
         {setting && (
           <>

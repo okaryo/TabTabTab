@@ -24,6 +24,7 @@ import {
   removeListenerOnUpdateTabGroupSetting,
   updateTabGroupSetting,
 } from "../../../repository/TabGroupSettingRepository";
+import t from "../../../i18n/Translations";
 
 const TabGroupingForm = () => {
   const [setting, setSetting] = useState<TabGroupSetting>(null);
@@ -64,7 +65,7 @@ const TabGroupingForm = () => {
 
   return (
     <Stack spacing={1}>
-      <Typography variant="subtitle1">Tab Grouping</Typography>
+      <Typography variant="subtitle1">{t.tabGroupingHeader}</Typography>
       <Paper variant="outlined">
         {setting && (
           <>
@@ -78,43 +79,42 @@ const TabGroupingForm = () => {
                     textTransform: "none",
                   }}
                 >
-                  Group Tabs Now
+                  {t.tabGroupingGroupTabsNow}
                 </Button>
               </Box>
               <ListItemButton
                 onClick={() => onChangeSwitch("enabledAutoGrouping")}
               >
                 <ListItemText
-                  id="switch-list-label-wifi"
-                  primary="Group Tabs Automatically"
+                  primary={t.tabGroupingGroupTabsAutomatically}
                 />
                 <Switch edge="end" checked={setting.enabledAutoGrouping} />
               </ListItemButton>
             </List>
             <Divider />
-            <List subheader={<ListSubheader>Detail Settings</ListSubheader>}>
+            <List subheader={<ListSubheader>{t.tabGroupingDetailSettingsHeader}</ListSubheader>}>
               <ListItemButton
                 onClick={() => onChangeSwitch("collapseWhenNoInUse")}
               >
-                <ListItemText primary="Auto-Collapse Unused Tab Groups" />
+                <ListItemText primary={t.tabGroupingAutoCollapseUnusedTabGroups}/>
                 <Switch edge="end" checked={setting.collapseWhenNoInUse} />
               </ListItemButton>
               <ListItemButton
                 onClick={() => onChangeSwitch("ungroupSingleTabGroups")}
               >
-                <ListItemText primary="Auto-Ungroup Single-Tab Groups" />
+                <ListItemText primary={t.tabGroupingAutoUngroupSingleTabGroups} />
                 <Switch edge="end" checked={setting.ungroupSingleTabGroups} />
               </ListItemButton>
               <ListItem>
-                <ListItemText primary="Group Tabs By" />
+                <ListItemText primary={t.tabGroupingGroupTabsBy}/>
                 <FormControl size="small">
                   <Select
                     value={setting.groupBy}
                     placeholder={setting.groupBy}
                     onChange={onChangeGroupBySelect}
                   >
-                    <MenuItem value="domain">Domain</MenuItem>
-                    <MenuItem value="subdomain">Subdomain</MenuItem>
+                    <MenuItem value="domain">{t.tabGroupingGroupTabsByMenuItemDomain}</MenuItem>
+                    <MenuItem value="subdomain">{t.tabGroupingGroupTabsByMenuItemSubdomain}</MenuItem>
                   </Select>
                 </FormControl>
               </ListItem>

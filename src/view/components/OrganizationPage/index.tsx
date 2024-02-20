@@ -3,7 +3,7 @@ import Stack from "@mui/material/Stack";
 import TabCleanerSettingForm from "./TabCleanerForm";
 import TabGroupingForm from "./TabGroupingForm";
 
-const TabOrganizerPage = () => {
+const OrganizationPage = () => {
   return (
     <Stack spacing={4}>
       <TabGroupingForm />
@@ -12,4 +12,4 @@ const TabOrganizerPage = () => {
   );
 };
 
-export default TabOrganizerPage;
+export default OrganizationPage;

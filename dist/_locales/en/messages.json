@@ -171,8 +171,12 @@
     "message": "Resolve Duplicates",
     "description": "Text displayed on hover over the duplicate chip next to the tab, an action to resolve duplicate tabs."
   },
+  "cleanup_tabs_header": {
+    "message": "Cleanup Tabs",
+    "description": "Heading for the Cleanup Tabs feature."
+  },
   "tab_cleaner_header": {
-    "message": "Clean up unused tabs automatically",
+    "message": "Cleanup unused tabs automatically",
     "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
   },
   "tab_cleaner_description": {
@@ -203,6 +207,10 @@
     "message": "Restore",
     "description": "Navigation header for Restore page in options.html"
   },
+  "options_navigation_organization": {
+    "message": "Organization",
+    "description": "Navigation header for Organization page in options.html"
+  },
   "options_navigation_settings": {
     "message": "Settings",
     "description": "Navigation header for Settings page in options.html"
@@ -214,6 +222,42 @@
   "options_navigation_sponsor": {
     "message": "Sponsor",
     "description": "Navigation header for Sponsor page in options.html"
+  },
+  "tab_grouping_header": {
+    "message": "Tab Grouping",
+    "description": "The main header for the tab grouping section."
+  },
+  "tab_grouping_group_tabs_now": {
+    "message": "Group Tabs Now",
+    "description": "Button text to trigger immediate tab grouping."
+  },
+  "tab_grouping_group_tabs_automatically": {
+    "message": "Group Tabs Automatically",
+    "description": "Switch label for enabling/disabling automatic tab grouping."
+  },
+  "tab_grouping_detail_settings_subheader": {
+    "message": "Detail Settings",
+    "description": "Subheader for detailed tab grouping settings."
+  },
+  "tab_grouping_auto_collapse_unused_tab_groups": {
+    "message": "Auto-Collapse Unused Tab Groups",
+    "description": "Option to automatically collapse tab groups that are not in use."
+  },
+  "tab_grouping_auto_ungroup_single_tab_groups": {
+    "message": "Auto-Ungroup Single-Tab Groups",
+    "description": "Option to automatically ungroup tab groups that contain only one tab."
+  },
+  "tab_grouping_group_tabs_by": {
+    "message": "Group Tabs By",
+    "description": "Label for selecting the criterion for tab grouping."
+  },
+  "tab_grouping_group_tabs_by_menu_item_domain": {
+    "message": "Domain",
+    "description": "Option to group tabs by domain."
+  },
+  "tab_grouping_group_tabs_by_menu_item_subdomain": {
+    "message": "Subdomain",
+    "description": "Option to group tabs by subdomain."
   },
   "popup_size_header": {
     "message": "Popup window size",
@@ -278,10 +322,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "Input a positive integer.",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "tab_cleaner_error_on_save": {
-    "message": "Please fix the error.",
-    "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
   "bug_report_and_feature_request_title": {
     "message": "Bug Report & Feature Request",
