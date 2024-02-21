@@ -1,6 +1,7 @@
 /* eslint @typescript-eslint/no-misused-promises: 0 */
 
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import ClearIcon from "@mui/icons-material/Clear";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
@@ -21,10 +22,12 @@ import { navigateToOptionsPage } from "../../../../repository/SettingsRepository
 import { ThemeContext } from "../../../contexts/ThemeContext";
 import { useToggleTheme } from "../../../hooks/useToggleTheme";
 
+import { PopupPage } from "./Home";
+
 type HeaderProps = {
-  currentPage: "root" | "restore";
+  currentPage: PopupPage;
   searchText: string;
-  setCurrentPage: (page: "root" | "restore") => void;
+  setCurrentPage: (page: PopupPage) => void;
   setSearchText: (value: string) => void;
 };
 
@@ -72,7 +75,7 @@ const Header = (props: HeaderProps) => {
     setSearchText("");
   };
 
-  if (currentPage === "restore") {
+  if (["restore", "organization"].includes(currentPage)) {
     return (
       <AppBar position="static" color="primary">
         <Toolbar>
@@ -84,7 +87,8 @@ const Header = (props: HeaderProps) => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            {t.optionsNavigationRestore}
+            {currentPage === "restore" && t.optionsNavigationRestore}
+            {currentPage === "organization" && t.optionsNavigationOrganization}
           </Typography>
           <IconButton
             color="inherit"
@@ -125,9 +129,20 @@ const Header = (props: HeaderProps) => {
           />
         </Search>
         {searchText.length === 0 && (
-          <IconButton onClick={() => setCurrentPage("restore")} color="inherit">
-            <SyncIcon />
-          </IconButton>
+          <>
+            <IconButton
+              onClick={() => setCurrentPage("organization")}
+              color="inherit"
+            >
+              <AutoAwesomeMotionIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => setCurrentPage("restore")}
+              color="inherit"
+            >
+              <SyncIcon />
+            </IconButton>
+          </>
         )}
         <IconButton
           color="inherit"

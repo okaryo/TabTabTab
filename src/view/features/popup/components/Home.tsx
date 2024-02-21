@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { PopupSize, defaultPopupSize } from "../../../../model/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
+import OrganizationPage from "../../../components/OrganizationPage";
 import RestorePage from "../../../components/RestorePage";
 import StoredTabGroupsProvider from "../../../providers/StoredTabGroupsProvider";
 
@@ -10,11 +11,11 @@ import Header from "./Header";
 import SearchResult from "./SearchResult";
 import WindowsContainer from "./WindowsContainer";
 
-type Page = "root" | "restore";
+export type PopupPage = "root" | "restore" | "organization";
 
 const Home = () => {
   const [searchText, setSearchText] = useState("");
-  const [currentPage, setCurrentPage] = useState<Page>("root");
+  const [currentPage, setCurrentPage] = useState<PopupPage>("root");
   const [popupSizeState, setPopupSizeState] =
     useState<PopupSize>(defaultPopupSize);
 
@@ -49,6 +50,11 @@ const Home = () => {
           <StoredTabGroupsProvider>
             <RestorePage dense />
           </StoredTabGroupsProvider>
+        </Box>
+      )}
+      {searchText.length === 0 && currentPage === "organization" && (
+        <Box sx={{ p: 1 }}>
+          <OrganizationPage dense />
         </Box>
       )}
     </Box>

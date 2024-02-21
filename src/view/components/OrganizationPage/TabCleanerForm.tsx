@@ -1,5 +1,7 @@
 /* eslint @typescript-eslint/no-floating-promises: 0 */
 
+import { blueGrey } from "@mui/material/colors";
+import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import List from "@mui/material/List";
@@ -10,6 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
+import { alpha } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -22,12 +25,16 @@ import {
   updateTabCleanerSetting,
 } from "../../../repository/TabCleanerRepository";
 
+type TabCleanerFormProps = {
+  dense: boolean;
+};
 type DurationErrorState = {
   isError: boolean;
   errorMessage: string;
 };
 
-const TabCleanerForm = () => {
+const TabCleanerForm = (props: TabCleanerFormProps) => {
+  const { dense } = props;
   const [setting, setSetting] = useState<TabCleaner>(null);
   const [inputDuration, setInputDuration] = useState("");
   const [durationError, setDurationError] = useState<DurationErrorState>({
@@ -84,11 +91,28 @@ const TabCleanerForm = () => {
 
   return (
     <Stack spacing={1}>
-      <Typography variant="subtitle1">{t.cleanupTabsHeader}</Typography>
       <Paper variant="outlined">
+        <ListItem
+          sx={[
+            {
+              backgroundColor: alpha(blueGrey[50], 0.4),
+            },
+            (theme) =>
+              theme.applyStyles("dark", {
+                backgroundColor: alpha(blueGrey[800], 0.4),
+              }),
+          ]}
+        >
+          <ListItemText
+            primary={
+              <Typography variant="subtitle1">{t.cleanupTabsHeader}</Typography>
+            }
+          />
+        </ListItem>
+        <Divider />
         {setting && (
           <>
-            <List>
+            <List dense={dense}>
               <ListItemButton onClick={onChangeIsEnabled}>
                 <ListItemText
                   id="switch-list-label-wifi"

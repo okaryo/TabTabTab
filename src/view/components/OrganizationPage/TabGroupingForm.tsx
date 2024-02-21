@@ -2,6 +2,7 @@
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
+import { blueGrey } from "@mui/material/colors";
 import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
 import List from "@mui/material/List";
@@ -13,6 +14,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
 import Stack from "@mui/material/Stack";
+import { alpha } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
@@ -26,7 +28,12 @@ import {
   updateTabGroupSetting,
 } from "../../../repository/TabGroupSettingRepository";
 
-const TabGroupingForm = () => {
+type TabGroupingFormProps = {
+  dense: boolean;
+};
+
+const TabGroupingForm = (props: TabGroupingFormProps) => {
+  const { dense } = props;
   const [setting, setSetting] = useState<TabGroupSetting>(null);
 
   useEffect(() => {
@@ -65,11 +72,28 @@ const TabGroupingForm = () => {
 
   return (
     <Stack spacing={1}>
-      <Typography variant="subtitle1">{t.tabGroupingHeader}</Typography>
       <Paper variant="outlined">
+        <ListItem
+          sx={[
+            {
+              backgroundColor: alpha(blueGrey[50], 0.4),
+            },
+            (theme) =>
+              theme.applyStyles("dark", {
+                backgroundColor: alpha(blueGrey[800], 0.4),
+              }),
+          ]}
+        >
+          <ListItemText
+            primary={
+              <Typography variant="subtitle1">{t.tabGroupingHeader}</Typography>
+            }
+          />
+        </ListItem>
+        <Divider />
         {setting && (
           <>
-            <List>
+            <List dense={dense}>
               <Box sx={{ py: 1, px: 2 }}>
                 <Button
                   variant="contained"
@@ -89,8 +113,8 @@ const TabGroupingForm = () => {
                 <Switch edge="end" checked={setting.enabledAutoGrouping} />
               </ListItemButton>
             </List>
-            <Divider />
             <List
+              dense={dense}
               subheader={
                 <ListSubheader>
                   {t.tabGroupingDetailSettingsSubheader}
