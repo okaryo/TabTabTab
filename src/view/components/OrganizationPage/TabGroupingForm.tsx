@@ -1,4 +1,4 @@
-/* eslint @typescript-eslint/no-floating-promises: 0 */
+/* eslint @typescript-eslint/no-floating-promises: 0, @typescript-eslint/no-misused-promises: 0 */
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -27,6 +27,7 @@ import {
   removeListenerOnUpdateTabGroupSetting,
   updateTabGroupSetting,
 } from "../../../repository/TabGroupSettingRepository";
+import { useGroupTabsNow } from "../../hooks/useGroupTabsNow";
 
 type TabGroupingFormProps = {
   dense: boolean;
@@ -35,6 +36,7 @@ type TabGroupingFormProps = {
 const TabGroupingForm = (props: TabGroupingFormProps) => {
   const { dense } = props;
   const [setting, setSetting] = useState<TabGroupSetting>(null);
+  const groupTabsNow = useGroupTabsNow();
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -54,6 +56,9 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
 
   const onChangeSwitch = (key: keyof TabGroupSetting) => {
     const newSetting = { ...setting, [key]: !setting[key] };
+    if (key === "enabledAutoGrouping" && newSetting[key]) {
+      groupTabsNow(newSetting);
+    }
     updateSetting(newSetting);
   };
   const onChangeGroupBySelect = (
@@ -102,6 +107,7 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
                   sx={{
                     textTransform: "none",
                   }}
+                  onClick={() => groupTabsNow(setting)}
                 >
                   {t.tabGroupingGroupTabsNow}
                 </Button>
