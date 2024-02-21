@@ -98,10 +98,12 @@ const groupTabsBy = (
 ): { [key: string]: chrome.tabs.Tab[] } => {
   const groups: { [key: string]: chrome.tabs.Tab[] } = {};
   const groupNameBy = (url: string) => {
+    const parsedUrl = parse(url);
+    if (!parsedUrl.domainWithoutSuffix) return;
+
     if (groupBy === "domain") {
-      return parse(url).domainWithoutSuffix;
+      return parsedUrl.domainWithoutSuffix;
     } else if (groupBy === "subdomain") {
-      const parsedUrl = parse(url);
       return ["", "www"].includes(parsedUrl.subdomain)
         ? parsedUrl.domainWithoutSuffix
         : `${parsedUrl.subdomain}.${parsedUrl.domainWithoutSuffix}`;
