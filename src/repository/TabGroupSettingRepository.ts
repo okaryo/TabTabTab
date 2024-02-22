@@ -70,12 +70,12 @@ export const groupTabsBySetting = async (setting: TabGroupSetting) => {
       if (groups[groupName].length <= 1) continue;
 
       const tabs = groups[groupName];
-      const existActiveTab = tabs.some((tab) => tab.active);
+      const containsActiveTab = tabs.some((tab) => tab.active);
       const groupId = await chrome.tabs.group({
         tabIds: tabs.map((tab) => tab.id),
       });
       await chrome.tabGroups.update(groupId, { title: groupName });
-      if (setting.collapseWhenNoInUse && !existActiveTab) {
+      if (setting.collapseWhenNoInUse && !containsActiveTab) {
         await chrome.tabGroups.update(groupId, { collapsed: true });
       }
     }
