@@ -2,7 +2,7 @@
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { blueGrey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
 import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
 import List from "@mui/material/List";
@@ -81,11 +81,11 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
         <ListItem
           sx={[
             {
-              backgroundColor: alpha(blueGrey[50], 0.4),
+              backgroundColor: grey[100],
             },
             (theme) =>
               theme.applyStyles("dark", {
-                backgroundColor: alpha(blueGrey[800], 0.4),
+                backgroundColor: alpha(grey[800], 0.4),
               }),
           ]}
         >
