@@ -285,8 +285,15 @@ class Translations {
       "tab_grouping_auto_ungroup_single_tab_groups",
     );
   }
-  get tabGroupingLimitTargetToActiveTab() {
-    return chrome.i18n.getMessage("tab_grouping_limit_target_to_active_tab");
+  get tabGroupingApplyAutoGroupingToCurrentTabOnly() {
+    return chrome.i18n.getMessage(
+      "tab_grouping_apply_auto_grouping_to_current_tab_only",
+    );
+  }
+  get tabGroupingApplyAutoGroupingToCurrentTabOnlyDescription() {
+    return chrome.i18n.getMessage(
+      "tab_grouping_apply_auto_grouping_to_current_tab_only_description",
+    );
   }
   get tabGroupingGroupTabsBy() {
     return chrome.i18n.getMessage("tab_grouping_group_tabs_by");

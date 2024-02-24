@@ -247,9 +247,13 @@
     "message": "タブが1つのグループを自動的に解除",
     "description": "Option to automatically ungroup tab groups that contain only one tab."
   },
-  "tab_grouping_limit_target_to_active_tab": {
+  "tab_grouping_apply_auto_grouping_to_current_tab_only": {
     "message": "自動グルーピングの対象を現在のタブのみに限定",
     "description": "Option to apply automatic tab grouping only to the currently active tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only_description": {
+    "message": "この設定をオンにすると、現在のタブからリンクやブックマークなどで新しく開いたタブを自動グループ化の対象から外すことができます。",
+    "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
   },
   "tab_grouping_group_tabs_by": {
     "message": "タブのグループ化基準",

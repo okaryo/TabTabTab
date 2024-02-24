@@ -247,9 +247,13 @@
     "message": "Auto-Ungroup Single-Tab Groups",
     "description": "Option to automatically ungroup tab groups that contain only one tab."
   },
-  "tab_grouping_limit_target_to_active_tab": {
-    "message": "Limit Auto-Grouping Target to Active Tab Only",
+  "tab_grouping_apply_auto_grouping_to_current_tab_only": {
+    "message": "Apply Auto-Grouping to Current Tab Only",
     "description": "Option to apply automatic tab grouping only to the currently active tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only_description": {
+    "message": "When on, newly opened tabs from the current one, such as links or bookmarks, won't be auto-grouped.",
+    "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
   },
   "tab_grouping_group_tabs_by": {
     "message": "Group Tabs By",

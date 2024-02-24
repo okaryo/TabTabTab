@@ -122,7 +122,12 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
                 onChangeSwitch("limitAutoGroupingTargetToActiveTab")
               }
             >
-              <ListItemText primary={t.tabGroupingLimitTargetToActiveTab} />
+              <ListItemText
+                primary={t.tabGroupingApplyAutoGroupingToCurrentTabOnly}
+                secondary={
+                  t.tabGroupingApplyAutoGroupingToCurrentTabOnlyDescription
+                }
+              />
               <Switch
                 edge="end"
                 checked={setting.limitAutoGroupingTargetToActiveTab}

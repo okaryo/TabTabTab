@@ -247,9 +247,13 @@
     "message": "단일 탭 그룹 자동 해제",
     "description": "Option to automatically ungroup tab groups that contain only one tab."
   },
-  "tab_grouping_limit_target_to_active_tab": {
+  "tab_grouping_apply_auto_grouping_to_current_tab_only": {
     "message": "활성 탭에만 자동 그룹화 대상을 제한",
     "description": "Option to apply automatic tab grouping only to the currently active tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only_description": {
+    "message": "켜져 있으면, 현재 탭에서 새로 열린 탭(링크나 북마크 등)은 자동으로 그룹화되지 않습니다.",
+    "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
   },
   "tab_grouping_group_tabs_by": {
     "message": "탭 그룹화 기준",
