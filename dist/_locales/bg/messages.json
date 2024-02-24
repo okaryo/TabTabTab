@@ -263,6 +263,10 @@
     "message": "Поддомейн",
     "description": "Option to group tabs by subdomain."
   },
+  "popup_setting_header": {
+    "message": "Изскачащ прозорец",
+    "description": "The main header for the popup setting section."
+  },
   "popup_size_header": {
     "message": "Размер на изкачащия прозорец",
     "description": "Heading for the popup size settings."

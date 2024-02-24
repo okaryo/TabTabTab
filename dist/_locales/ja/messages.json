@@ -263,6 +263,10 @@
     "message": "サブドメイン",
     "description": "Option to group tabs by subdomain."
   },
+  "popup_setting_header": {
+    "message": "ポップアップ",
+    "description": "The main header for the popup setting section."
+  },
   "popup_size_header": {
     "message": "ポップアップサイズ",
     "description": "Heading for the popup size settings."

@@ -263,6 +263,10 @@
     "message": "서브도메인 별",
     "description": "Option to group tabs by subdomain."
   },
+  "popup_setting_header": {
+    "message": "팝업",
+    "description": "The main header for the popup setting section."
+  },
   "popup_size_header": {
     "message": "팝업 창 크기 조절",
     "description": "Heading for the popup size settings."

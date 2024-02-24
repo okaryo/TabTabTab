@@ -263,6 +263,10 @@
     "message": "Sous-domaine",
     "description": "Option to group tabs by subdomain."
   },
+  "popup_setting_header": {
+    "message": "Popup",
+    "description": "The main header for the popup setting section."
+  },
   "popup_size_header": {
     "message": "Taille de la fenêtre contextuelle",
     "description": "Heading for the popup size settings."

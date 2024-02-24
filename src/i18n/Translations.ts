@@ -141,6 +141,9 @@ class Translations {
   get resolveDuplicates() {
     return chrome.i18n.getMessage("resolve_duplicates");
   }
+  get popupSettingHeader() {
+    return chrome.i18n.getMessage("popup_setting_header");
+  }
   get popupSizeHeader() {
     return chrome.i18n.getMessage("popup_size_header");
   }
