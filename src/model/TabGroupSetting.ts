@@ -2,7 +2,7 @@ export type TabGroupSetting = {
   enabledAutoGrouping: boolean;
   collapseWhenNoInUse: boolean;
   ungroupSingleTabGroups: boolean;
-  limitAutoGroupingTargetToActiveTab: boolean;
+  applyAutoGroupingToCurrentTabOnly: boolean;
   groupBy: "domain" | "subdomain";
 };
 
@@ -10,6 +10,6 @@ export const defaultTabGroupSetting: TabGroupSetting = {
   enabledAutoGrouping: false,
   collapseWhenNoInUse: false,
   ungroupSingleTabGroups: true,
-  limitAutoGroupingTargetToActiveTab: false,
+  applyAutoGroupingToCurrentTabOnly: false,
   groupBy: "domain" as const,
 };

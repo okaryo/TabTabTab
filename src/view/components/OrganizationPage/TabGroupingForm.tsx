@@ -119,7 +119,7 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
             </ListItemButton>
             <ListItemButton
               onClick={() =>
-                onChangeSwitch("limitAutoGroupingTargetToActiveTab")
+                onChangeSwitch("applyAutoGroupingToCurrentTabOnly")
               }
             >
               <ListItemText
@@ -130,7 +130,7 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
               />
               <Switch
                 edge="end"
-                checked={setting.limitAutoGroupingTargetToActiveTab}
+                checked={setting.applyAutoGroupingToCurrentTabOnly}
               />
             </ListItemButton>
             <ListItem>

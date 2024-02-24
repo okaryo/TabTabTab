@@ -22,7 +22,7 @@ const onTabUpdated = async (
   if (!setting.enabledAutoGrouping) return;
 
   if (!tab || tab.pinned) return;
-  if (setting.limitAutoGroupingTargetToActiveTab && !tab.active) return;
+  if (setting.applyAutoGroupingToCurrentTabOnly && !tab.active) return;
 
   await organizeTabsByGroupingRule(tab, setting);
 };
