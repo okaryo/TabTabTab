@@ -215,3 +215,18 @@ const deserializeToTab = (serializedTab: SerializedTab): Tab => {
       : null,
   };
 };
+
+export const addListenerOnUpdateTabs = (callback: () => Promise<void>) => {
+  const listener = async () => {
+    await callback();
+  };
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  chrome.tabs.onUpdated.addListener(listener);
+
+  return listener;
+};
+
+export const removeListenerOnUpdateTabs = (listener: () => Promise<void>) => {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  chrome.tabs.onUpdated.removeListener(listener);
+};
