@@ -143,6 +143,17 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
                 />
                 <Switch edge="end" checked={setting.ungroupSingleTabGroups} />
               </ListItemButton>
+              <ListItemButton
+                onClick={() =>
+                  onChangeSwitch("limitAutoGroupingTargetToActiveTab")
+                }
+              >
+                <ListItemText primary={t.tabGroupingLimitTargetToActiveTab} />
+                <Switch
+                  edge="end"
+                  checked={setting.limitAutoGroupingTargetToActiveTab}
+                />
+              </ListItemButton>
               <ListItem>
                 <ListItemText primary={t.tabGroupingGroupTabsBy} />
                 <FormControl size="small">

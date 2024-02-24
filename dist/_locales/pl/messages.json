@@ -247,6 +247,10 @@
     "message": "Automatyczne rozgrupowanie pojedynczych kart",
     "description": "Option to automatically ungroup tab groups that contain only one tab."
   },
+  "tab_grouping_limit_target_to_active_tab": {
+    "message": "Ograniczanie automatycznego grupowania tylko do aktywnej karty",
+    "description": "Option to apply automatic tab grouping only to the currently active tab."
+  },
   "tab_grouping_group_tabs_by": {
     "message": "Grupuj karty według",
     "description": "Label for selecting the criterion for tab grouping."

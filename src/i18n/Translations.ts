@@ -282,6 +282,9 @@ class Translations {
       "tab_grouping_auto_ungroup_single_tab_groups",
     );
   }
+  get tabGroupingLimitTargetToActiveTab() {
+    return chrome.i18n.getMessage("tab_grouping_limit_target_to_active_tab");
+  }
   get tabGroupingGroupTabsBy() {
     return chrome.i18n.getMessage("tab_grouping_group_tabs_by");
   }

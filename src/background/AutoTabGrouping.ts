@@ -22,6 +22,7 @@ const onTabUpdated = async (
   if (!setting.enabledAutoGrouping) return;
 
   if (!tab || tab.pinned) return;
+  if (setting.limitAutoGroupingTargetToActiveTab && !tab.active) return;
 
   await organizeTabsByGroupingRule(tab, setting);
 };
@@ -67,11 +68,21 @@ const findGroupIdMatchingRule = async (
     groupBy,
   );
 
-  for (const tab of tabsInGroup) {
-    const groupName = getGroupNameBy(tab.url || tab.pendingUrl, groupBy);
-    if (groupName === targetGroupName) {
-      return tab.groupId;
-    }
+  const tabsCategorizedByGroupId = tabsInGroup.reduce(
+    (categorizedTabs, tab) => {
+      const stringGroupId = tab.groupId.toString();
+      categorizedTabs[stringGroupId] = categorizedTabs[stringGroupId] || [];
+      categorizedTabs[stringGroupId].push(tab);
+      return categorizedTabs;
+    },
+    {} as { [key: string]: chrome.tabs.Tab[] },
+  );
+  for (const groupId in tabsCategorizedByGroupId) {
+    const isAllSameMatchingRuleGroup = tabsCategorizedByGroupId[groupId].every(
+      (tab) =>
+        getGroupNameBy(tab.url || tab.pendingUrl, groupBy) === targetGroupName,
+    );
+    if (isAllSameMatchingRuleGroup) return Number(groupId);
   }
   return null;
 };
@@ -149,10 +160,10 @@ const collapseUnusedGroups = async (activeTabId: number, windowId: number) => {
   const groups: { [key: string]: chrome.tabs.Tab[] } = {};
   for (const tab of tabs) {
     if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
-      const key = tab.groupId.toString();
-      if (!groups[key]) groups[key] = [];
+      const stringGroupId = tab.groupId.toString();
+      if (!groups[stringGroupId]) groups[stringGroupId] = [];
 
-      groups[key].push(tab);
+      groups[stringGroupId].push(tab);
     }
   }
 
@@ -185,10 +196,10 @@ const ungroupSingleTabGroups = async (windowId: number) => {
   const groups: { [key: string]: number[] } = {};
   for (const tab of tabs) {
     if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
-      const key = tab.groupId.toString();
-      if (!groups[key]) groups[key] = [];
+      const stringGroupId = tab.groupId.toString();
+      if (!groups[stringGroupId]) groups[stringGroupId] = [];
 
-      groups[key].push(tab.id);
+      groups[stringGroupId].push(tab.id);
     }
   }
 
