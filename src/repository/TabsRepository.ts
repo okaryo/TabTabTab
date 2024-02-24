@@ -151,12 +151,12 @@ export const updateRecentActiveTabs = async (tabId: number) => {
 };
 
 const getTabBy = async (tabId: number): Promise<Tab | null> => {
-  const tab = await chrome.tabs.get(tabId).catch((error: unknown) => {
+  const tab = (await chrome.tabs.get(tabId).catch((error: unknown) => {
     if (error instanceof Error && !error.message.includes("No tab with id:")) {
       console.error(error);
     }
     return null;
-  });
+  })) as chrome.tabs.Tab | null;
   if (!tab) return null;
 
   const { last_activated_at } = (await chrome.storage.session.get(
