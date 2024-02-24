@@ -12,7 +12,6 @@ import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 
 import t from "../../../../../i18n/Translations";
-import { PopupSize } from "../../../../../model/settings/PopupSize";
 import {
   getPopupSizeSetting,
   updatePopupSizeSetting,
@@ -94,7 +93,7 @@ const PopupSizeSettingForm = () => {
 
     try {
       setSubmissionState({ isLoading: true, isError: false, errorMessage: "" });
-      const setting = new PopupSize(Number(height), Number(width));
+      const setting = { height: Number(height), width: Number(width) };
       await updatePopupSizeSetting(setting);
       setSubmissionState({
         isLoading: false,
@@ -112,7 +111,7 @@ const PopupSizeSettingForm = () => {
   };
 
   return (
-    <Card sx={{ p: 2 }} variant="outlined">
+    <Card sx={{ p: 2 }} elevation={0}>
       <CardHeader
         sx={{ p: 0 }}
         title={

@@ -1,8 +1,9 @@
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 
-import { PopupSize } from "../../../../model/settings/PopupSize";
+import { PopupSize, defaultPopupSize } from "../../../../model/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
+import OrganizationPage from "../../../components/OrganizationPage";
 import RestorePage from "../../../components/RestorePage";
 import StoredTabGroupsProvider from "../../../providers/StoredTabGroupsProvider";
 
@@ -10,14 +11,14 @@ import Header from "./Header";
 import SearchResult from "./SearchResult";
 import WindowsContainer from "./WindowsContainer";
 
-type Page = "list" | "restore";
+export type PopupPage = "root" | "restore" | "organization";
 
 const Home = () => {
   const [searchText, setSearchText] = useState("");
-  const [currentPage, setCurrentPage] = useState<Page>("list");
-  const [popupSizeState, setPopupSizeState] = useState<PopupSize>(
-    PopupSize.default(),
-  );
+  const [currentPage, setCurrentPage] = useState<PopupPage>("root");
+  const [popupSizeState, setPopupSizeState] =
+    useState<PopupSize>(defaultPopupSize);
+
   useEffect(() => {
     const initState = async () => {
       setPopupSizeState(await getPopupSizeSetting());
@@ -25,9 +26,6 @@ const Home = () => {
     // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initState();
   }, []);
-
-  const onChangeSearchText = (value: string) => setSearchText(value);
-  const onChangePage = (page: Page) => setCurrentPage(page);
 
   return (
     <Box
@@ -40,20 +38,23 @@ const Home = () => {
       <Header
         currentPage={currentPage}
         searchText={searchText}
-        onChangePage={onChangePage}
-        onChangeSearchText={onChangeSearchText}
+        setCurrentPage={setCurrentPage}
+        setSearchText={setSearchText}
       />
-      {searchText.length > 0 && currentPage === "list" && (
-        <SearchResult searchText={searchText} />
-      )}
-      {searchText.length === 0 && currentPage === "list" && (
+      {searchText.length > 0 && <SearchResult searchText={searchText} />}
+      {searchText.length === 0 && currentPage === "root" && (
         <WindowsContainer />
       )}
-      {currentPage === "restore" && (
+      {searchText.length === 0 && currentPage === "restore" && (
         <Box sx={{ p: 1 }}>
           <StoredTabGroupsProvider>
             <RestorePage dense />
           </StoredTabGroupsProvider>
+        </Box>
+      )}
+      {searchText.length === 0 && currentPage === "organization" && (
+        <Box sx={{ p: 1 }}>
+          <OrganizationPage dense />
         </Box>
       )}
     </Box>

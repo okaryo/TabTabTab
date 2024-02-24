@@ -127,8 +127,9 @@ export const getRecentActiveTabs = async (): Promise<Tab[]> => {
 
 export const updateRecentActiveTabs = async (tabId: number) => {
   const tab = await getTabBy(tabId);
-  const serializedTab = serializeTab(tab);
+  if (!tab) return;
 
+  const serializedTab = serializeTab(tab);
   let { recent_active_tabs: recentActiveTabs } =
     (await chrome.storage.session.get(
       ChromeSessionStorage.RECENT_ACTIVE_TABS_KEY,
@@ -149,8 +150,15 @@ export const updateRecentActiveTabs = async (tabId: number) => {
   });
 };
 
-const getTabBy = async (tabId: number): Promise<Tab> => {
-  const tab = await chrome.tabs.get(tabId);
+const getTabBy = async (tabId: number): Promise<Tab | null> => {
+  const tab = (await chrome.tabs.get(tabId).catch((error: unknown) => {
+    if (error instanceof Error && !error.message.includes("No tab with id:")) {
+      console.error(error);
+    }
+    return null;
+  })) as chrome.tabs.Tab | null;
+  if (!tab) return null;
+
   const { last_activated_at } = (await chrome.storage.session.get(
     ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
   )) as LastActivatedAtStorageObject;
@@ -206,4 +214,19 @@ const deserializeToTab = (serializedTab: SerializedTab): Tab => {
       ? new Date(serializedTab.lastActivatedAt)
       : null,
   };
+};
+
+export const addListenerOnUpdateTabs = (callback: () => Promise<void>) => {
+  const listener = async () => {
+    await callback();
+  };
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  chrome.tabs.onUpdated.addListener(listener);
+
+  return listener;
+};
+
+export const removeListenerOnUpdateTabs = (listener: () => Promise<void>) => {
+  // eslint-disable-next-line @typescript-eslint/no-misused-promises
+  chrome.tabs.onUpdated.removeListener(listener);
 };

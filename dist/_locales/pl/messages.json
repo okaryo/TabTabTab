@@ -171,6 +171,10 @@
     "message": "Rozwiąż Duplikaty",
     "description": "Text displayed on hover over the duplicate chip next to the tab, an action to resolve duplicate tabs."
   },
+  "cleanup_tabs_header": {
+    "message": "Oczyszczanie zakładek",
+    "description": "Heading for the Cleanup Tabs feature."
+  },
   "tab_cleaner_header": {
     "message": "Automatyczne zamykanie nieużywanych kart",
     "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
@@ -203,6 +207,10 @@
     "message": "Przywróć",
     "description": "Navigation header for Restore page in options.html"
   },
+  "options_navigation_organization": {
+    "message": "Organizacja",
+    "description": "Navigation header for Organization page in options.html"
+  },
   "options_navigation_settings": {
     "message": "Ustawienia",
     "description": "Navigation header for Settings page in options.html"
@@ -214,6 +222,54 @@
   "options_navigation_sponsor": {
     "message": "Sponsor",
     "description": "Navigation header for Sponsor page in options.html"
+  },
+  "tab_grouping_header": {
+    "message": "Grupowanie kart",
+    "description": "The main header for the tab grouping section."
+  },
+  "tab_grouping_group_tabs_now": {
+    "message": "Grupuj karty teraz",
+    "description": "Button text to trigger immediate tab grouping."
+  },
+  "tab_grouping_group_tabs_automatically": {
+    "message": "Automatyczne grupowanie kart",
+    "description": "Switch label for enabling/disabling automatic tab grouping."
+  },
+  "tab_grouping_detail_settings_subheader": {
+    "message": "Ustawienia szczegółowe",
+    "description": "Subheader for detailed tab grouping settings."
+  },
+  "tab_grouping_auto_collapse_unused_tab_groups": {
+    "message": "Automatyczne zwijanie nieużywanych grup kart",
+    "description": "Option to automatically collapse tab groups that are not in use."
+  },
+  "tab_grouping_auto_ungroup_single_tab_groups": {
+    "message": "Automatyczne rozgrupowanie pojedynczych kart",
+    "description": "Option to automatically ungroup tab groups that contain only one tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only": {
+    "message": "Ograniczanie automatycznego grupowania tylko do aktywnej karty",
+    "description": "Option to apply automatic tab grouping only to the currently active tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only_description": {
+    "message": "Gdy włączone, nowo otwarte karty z bieżącej, takie jak linki lub zakładki, nie będą automatycznie grupowane.",
+    "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
+  },
+  "tab_grouping_group_tabs_by": {
+    "message": "Grupuj karty według",
+    "description": "Label for selecting the criterion for tab grouping."
+  },
+  "tab_grouping_group_tabs_by_menu_item_domain": {
+    "message": "Domena",
+    "description": "Option to group tabs by domain."
+  },
+  "tab_grouping_group_tabs_by_menu_item_subdomain": {
+    "message": "Subdomena",
+    "description": "Option to group tabs by subdomain."
+  },
+  "popup_setting_header": {
+    "message": "Popup",
+    "description": "The main header for the popup setting section."
   },
   "popup_size_header": {
     "message": "Rozmiar okna pop-up",
@@ -278,10 +334,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "Wprowadź dodatnią liczbę całkowitą.",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "tab_cleaner_error_on_save": {
-    "message": "Proszę napraw ten błąd.",
-    "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
   "bug_report_and_feature_request_title": {
     "message": "Zgłoszenie Błędu & Wniosek o Funkcję",

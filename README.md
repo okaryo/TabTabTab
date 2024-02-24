@@ -25,6 +25,7 @@ TabTabTab is a Chrome extension that supports your browsing by improving tab man
 * Comprehensive Tab Overview: View all your windows and tabs, including those grouped, in one unified list.
 * Flexible Drag & Drop: Organize your tabs freely - be it pinned, grouped, or standalone.
 * Window and Group Save & Restore: Quickly save and restore your tab groups and window sessions, ensuring a seamless continuation of your work.
+* Automatic Tab Grouping: Tabs are automatically organized based on domain or subdomain, making it easier to manage and navigate your tabs.
 
 ### ✨ Additional Features
 
@@ -37,9 +38,10 @@ TabTabTab is a Chrome extension that supports your browsing by improving tab man
 * Automatic Cleanup: Auto-remove tabs you haven't accessed based on your preferences.
 * Dark Mode: Switch to a darker, more focused look whenever you wish.
 
-### 👀 ScreenShots(v2.27.0)
+### 👀 ScreenShots(v2.28.0)
 
 ![ScreenShot1](./docs/screenshot1.png)
 ![ScreenShot2](./docs/screenshot2.png)
 ![ScreenShot3](./docs/screenshot3.png)
 ![ScreenShot4](./docs/screenshot4.png)
+![ScreenShot5](./docs/screenshot5.png)

@@ -1,19 +1,22 @@
+import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import ForumIcon from "@mui/icons-material/Forum";
 import SettingsIcon from "@mui/icons-material/Settings";
 import SyncIcon from "@mui/icons-material/Sync";
 import ViewColumnIcon from "@mui/icons-material/ViewColumn";
 import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
-import { Divider, Stack } from "@mui/material";
 import Container from "@mui/material/Container";
 import CssBaseline from "@mui/material/CssBaseline";
+import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
+import Stack from "@mui/material/Stack";
 import { useState } from "react";
 
 import t from "../../../i18n/Translations";
+import OrganizationPage from "../../components/OrganizationPage";
 import RestorePage from "../../components/RestorePage";
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { useTheme } from "../../hooks/useTheme";
@@ -48,10 +51,19 @@ export default function App() {
       ),
     },
     {
+      name: t.optionsNavigationOrganization,
+      icon: <AutoAwesomeMotionIcon />,
+      content: (
+        <Container sx={{ py: 2, width: 700 }} fixed>
+          <OrganizationPage />
+        </Container>
+      ),
+    },
+    {
       name: t.optionsNavigationSettings,
       icon: <SettingsIcon />,
       content: (
-        <Container sx={{ p: 2 }} maxWidth="md">
+        <Container sx={{ py: 2, width: 700 }} fixed>
           <Settings />
         </Container>
       ),
@@ -60,7 +72,7 @@ export default function App() {
       name: t.optionsNavigationFeedback,
       icon: <ForumIcon />,
       content: (
-        <Container sx={{ p: 2 }} maxWidth="md">
+        <Container sx={{ py: 2, width: 700 }} fixed>
           <Feedback />
         </Container>
       ),

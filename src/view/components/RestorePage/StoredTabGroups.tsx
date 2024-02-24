@@ -11,11 +11,12 @@ import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
+import { grey } from "@mui/material/colors";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Radio from "@mui/material/Radio";
 import Stack from "@mui/material/Stack";
-import { styled, useTheme } from "@mui/material/styles";
+import { alpha, styled, useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
@@ -143,12 +144,19 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
       onChange={() => setExpanded(!expanded)}
     >
       <AccordionSummary
-        sx={{
-          px: dense ? 1 : 2,
-          "&.Mui-focusVisible": {
-            backgroundColor: "background.paper",
+        sx={[
+          {
+            px: dense ? 1 : 2,
+            "&.Mui-focusVisible": {
+              backgroundColor: "background.paper",
+            },
+            backgroundColor: grey[100],
           },
-        }}
+          (theme) =>
+            theme.applyStyles("dark", {
+              backgroundColor: alpha(grey[800], 0.4),
+            }),
+        ]}
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
       >

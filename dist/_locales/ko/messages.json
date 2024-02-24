@@ -171,6 +171,10 @@
     "message": "중복 해결",
     "description": "Text displayed on hover over the duplicate chip next to the tab, an action to resolve duplicate tabs."
   },
+  "cleanup_tabs_header": {
+    "message": "탭 정리",
+    "description": "Heading for the Cleanup Tabs feature."
+  },
   "tab_cleaner_header": {
     "message": "사용하지 않는 탭 자동 종료",
     "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
@@ -203,6 +207,10 @@
     "message": "복원",
     "description": "Navigation header for Restore page in options.html"
   },
+  "options_navigation_organization": {
+    "message": "정리",
+    "description": "Navigation header for Organization page in options.html"
+  },
   "options_navigation_settings": {
     "message": "설정",
     "description": "Navigation header for Settings page in options.html"
@@ -214,6 +222,54 @@
   "options_navigation_sponsor": {
     "message": "스폰서",
     "description": "Navigation header for Sponsor page in options.html"
+  },
+  "tab_grouping_header": {
+    "message": "탭 그룹화",
+    "description": "The main header for the tab grouping section."
+  },
+  "tab_grouping_group_tabs_now": {
+    "message": "지금 탭 그룹화",
+    "description": "Button text to trigger immediate tab grouping."
+  },
+  "tab_grouping_group_tabs_automatically": {
+    "message": "탭 자동 그룹화",
+    "description": "Switch label for enabling/disabling automatic tab grouping."
+  },
+  "tab_grouping_detail_settings_subheader": {
+    "message": "세부 설정",
+    "description": "Subheader for detailed tab grouping settings."
+  },
+  "tab_grouping_auto_collapse_unused_tab_groups": {
+    "message": "사용하지 않는 탭 그룹 자동 축소",
+    "description": "Option to automatically collapse tab groups that are not in use."
+  },
+  "tab_grouping_auto_ungroup_single_tab_groups": {
+    "message": "단일 탭 그룹 자동 해제",
+    "description": "Option to automatically ungroup tab groups that contain only one tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only": {
+    "message": "활성 탭에만 자동 그룹화 대상을 제한",
+    "description": "Option to apply automatic tab grouping only to the currently active tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only_description": {
+    "message": "켜져 있으면, 현재 탭에서 새로 열린 탭(링크나 북마크 등)은 자동으로 그룹화되지 않습니다.",
+    "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
+  },
+  "tab_grouping_group_tabs_by": {
+    "message": "탭 그룹화 기준",
+    "description": "Label for selecting the criterion for tab grouping."
+  },
+  "tab_grouping_group_tabs_by_menu_item_domain": {
+    "message": "도메인 별",
+    "description": "Option to group tabs by domain."
+  },
+  "tab_grouping_group_tabs_by_menu_item_subdomain": {
+    "message": "서브도메인 별",
+    "description": "Option to group tabs by subdomain."
+  },
+  "popup_setting_header": {
+    "message": "팝업",
+    "description": "The main header for the popup setting section."
   },
   "popup_size_header": {
     "message": "팝업 창 크기 조절",
@@ -278,10 +334,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "자연수를 입력하세요.",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "tab_cleaner_error_on_save": {
-    "message": "에러를 수정하세요.",
-    "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
   "bug_report_and_feature_request_title": {
     "message": "버그 제보 & 신규 기능 요청",

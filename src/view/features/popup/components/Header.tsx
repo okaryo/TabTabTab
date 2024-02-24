@@ -1,7 +1,10 @@
+/* eslint @typescript-eslint/no-misused-promises: 0 */
+
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
+import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import ClearIcon from "@mui/icons-material/Clear";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
-import ListIcon from "@mui/icons-material/List";
 import SearchIcon from "@mui/icons-material/Search";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import SyncIcon from "@mui/icons-material/Sync";
@@ -11,6 +14,7 @@ import InputAdornment from "@mui/material/InputAdornment";
 import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
+import Typography from "@mui/material/Typography";
 import { useContext } from "react";
 
 import t from "../../../../i18n/Translations";
@@ -18,11 +22,13 @@ import { navigateToOptionsPage } from "../../../../repository/SettingsRepository
 import { ThemeContext } from "../../../contexts/ThemeContext";
 import { useToggleTheme } from "../../../hooks/useToggleTheme";
 
+import { PopupPage } from "./Home";
+
 type HeaderProps = {
-  currentPage: "list" | "restore";
+  currentPage: PopupPage;
   searchText: string;
-  onChangePage: (page: "list" | "restore") => void;
-  onChangeSearchText: (value: string) => void;
+  setCurrentPage: (page: PopupPage) => void;
+  setSearchText: (value: string) => void;
 };
 
 const Search = styled("div")(({ theme }) => ({
@@ -58,16 +64,45 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = (props: HeaderProps) => {
-  const { currentPage, searchText, onChangePage, onChangeSearchText } = props;
+  const { currentPage, searchText, setCurrentPage, setSearchText } = props;
   const { theme } = useContext(ThemeContext);
   const toggleTheme = useToggleTheme();
 
   const onInputSearchField = (event: React.ChangeEvent<HTMLInputElement>) => {
-    onChangeSearchText(event.target.value);
+    setSearchText(event.target.value);
   };
   const onClearSearchText = () => {
-    onChangeSearchText("");
+    setSearchText("");
   };
+
+  if (["restore", "organization"].includes(currentPage)) {
+    return (
+      <AppBar position="static" color="primary">
+        <Toolbar>
+          <IconButton
+            sx={{ mr: 1 }}
+            color="inherit"
+            onClick={() => setCurrentPage("root")}
+          >
+            <ArrowBackIcon />
+          </IconButton>
+          <Typography variant="h6" sx={{ flexGrow: 1 }}>
+            {currentPage === "restore" && t.optionsNavigationRestore}
+            {currentPage === "organization" && t.optionsNavigationOrganization}
+          </Typography>
+          <IconButton
+            color="inherit"
+            onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
+          >
+            {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+          </IconButton>
+          <IconButton color="inherit" onClick={() => navigateToOptionsPage()}>
+            <SpaceDashboardIcon />
+          </IconButton>
+        </Toolbar>
+      </AppBar>
+    );
+  }
 
   return (
     <AppBar position="static" color="primary">
@@ -93,23 +128,29 @@ const Header = (props: HeaderProps) => {
             }
           />
         </Search>
+        {searchText.length === 0 && (
+          <>
+            <IconButton
+              onClick={() => setCurrentPage("organization")}
+              color="inherit"
+            >
+              <AutoAwesomeMotionIcon />
+            </IconButton>
+            <IconButton
+              onClick={() => setCurrentPage("restore")}
+              color="inherit"
+            >
+              <SyncIcon />
+            </IconButton>
+          </>
+        )}
         <IconButton
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
-          onClick={() =>
-            onChangePage(currentPage === "list" ? "restore" : "list")
-          }
           color="inherit"
-        >
-          {currentPage === "list" ? <SyncIcon /> : <ListIcon />}
-        </IconButton>
-        <IconButton
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
-          color="inherit"
         >
           {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
         </IconButton>
-        <IconButton onClick={() => navigateToOptionsPage()} color="inherit">
+        <IconButton color="inherit" onClick={() => navigateToOptionsPage()}>
           <SpaceDashboardIcon />
         </IconButton>
       </Toolbar>

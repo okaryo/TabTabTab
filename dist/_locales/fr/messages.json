@@ -171,6 +171,10 @@
     "message": "Résoudre les doublons",
     "description": "Text displayed on hover over the duplicate chip next to the tab, an action to resolve duplicate tabs."
   },
+  "cleanup_tabs_header": {
+    "message": "Nettoyer les onglets",
+    "description": "Heading for the Cleanup Tabs feature."
+  },
   "tab_cleaner_header": {
     "message": "Nettoyer automatiquement les onglets non utilisés",
     "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
@@ -203,6 +207,10 @@
     "message": "Restaurer",
     "description": "Navigation header for Restore page in options.html"
   },
+  "options_navigation_organization": {
+    "message": "Organisation",
+    "description": "Navigation header for Organization page in options.html"
+  },
   "options_navigation_settings": {
     "message": "Paramètres",
     "description": "Navigation header for Settings page in options.html"
@@ -214,6 +222,54 @@
   "options_navigation_sponsor": {
     "message": "Sponsor",
     "description": "Navigation header for Sponsor page in options.html"
+  },
+  "tab_grouping_header": {
+    "message": "Groupement d'onglets",
+    "description": "The main header for the tab grouping section."
+  },
+  "tab_grouping_group_tabs_now": {
+    "message": "Grouper les onglets maintenant",
+    "description": "Button text to trigger immediate tab grouping."
+  },
+  "tab_grouping_group_tabs_automatically": {
+    "message": "Grouper les onglets automatiquement",
+    "description": "Switch label for enabling/disabling automatic tab grouping."
+  },
+  "tab_grouping_detail_settings_subheader": {
+    "message": "Paramètres détaillés",
+    "description": "Subheader for detailed tab grouping settings."
+  },
+  "tab_grouping_auto_collapse_unused_tab_groups": {
+    "message": "Réduire automatiquement les groupes d'onglets inutilisés",
+    "description": "Option to automatically collapse tab groups that are not in use."
+  },
+  "tab_grouping_auto_ungroup_single_tab_groups": {
+    "message": "Dissocier automatiquement les groupes d'onglet unique",
+    "description": "Option to automatically ungroup tab groups that contain only one tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only": {
+    "message": "Limiter la cible du regroupement automatique au seul onglet actif",
+    "description": "Option to apply automatic tab grouping only to the currently active tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only_description": {
+    "message": "Lorsqu'activé, les onglets nouvellement ouverts à partir de l'actuel, tels que les liens ou les favoris, ne seront pas automatiquement groupés.",
+    "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
+  },
+  "tab_grouping_group_tabs_by": {
+    "message": "Grouper les onglets par",
+    "description": "Label for selecting the criterion for tab grouping."
+  },
+  "tab_grouping_group_tabs_by_menu_item_domain": {
+    "message": "Domaine",
+    "description": "Option to group tabs by domain."
+  },
+  "tab_grouping_group_tabs_by_menu_item_subdomain": {
+    "message": "Sous-domaine",
+    "description": "Option to group tabs by subdomain."
+  },
+  "popup_setting_header": {
+    "message": "Popup",
+    "description": "The main header for the popup setting section."
   },
   "popup_size_header": {
     "message": "Taille de la fenêtre contextuelle",
@@ -278,10 +334,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "Saisir un nombre entier positif.",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "tab_cleaner_error_on_save": {
-    "message": "Veuillez corriger l'erreur.",
-    "description": "Message displayed when an error occurs while saving the settings for the feature that automatically closes tabs after a specified period of inactivity."
   },
   "bug_report_and_feature_request_title": {
     "message": "Rapport de Bug & Demande de Fonctionnalité",

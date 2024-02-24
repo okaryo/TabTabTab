@@ -1,4 +1,5 @@
-import { DurationUnit } from "../model/settings/TabCleaner";
+import { DurationUnit } from "../model/TabCleaner";
+import { TabGroupSetting } from "../model/TabGroupSetting";
 
 export class ChromeLocalStorage {
   static readonly TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
@@ -7,6 +8,7 @@ export class ChromeLocalStorage {
   static readonly THEME_KEY = "theme";
   static readonly STORED_WINDOWS_KEY = "stored_windows";
   static readonly STORED_TAB_GROUPS_KEY = "stored_tab_groups";
+  static readonly TAB_GROUP_SETTING_KEY = "tab_group_setting";
 }
 
 export class ChromeSessionStorage {
@@ -98,4 +100,8 @@ export type SerializedTab = {
 };
 export type RecentActiveTabsStorageObject = {
   [ChromeSessionStorage.RECENT_ACTIVE_TABS_KEY]: SerializedTab[];
+};
+
+export type TabGroupSettingStorageObject = {
+  [ChromeLocalStorage.TAB_GROUP_SETTING_KEY]: TabGroupSetting;
 };
