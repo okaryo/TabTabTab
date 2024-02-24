@@ -2,8 +2,6 @@
 
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import { grey } from "@mui/material/colors";
-import Divider from "@mui/material/Divider";
 import FormControl from "@mui/material/FormControl";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
@@ -11,12 +9,8 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import ListSubheader from "@mui/material/ListSubheader";
 import MenuItem from "@mui/material/MenuItem";
-import Paper from "@mui/material/Paper";
 import Select from "@mui/material/Select";
-import Stack from "@mui/material/Stack";
-import { alpha } from "@mui/material/styles";
 import Switch from "@mui/material/Switch";
-import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 
 import t from "../../../i18n/Translations";
@@ -28,6 +22,7 @@ import {
   updateTabGroupSetting,
 } from "../../../repository/TabGroupSettingRepository";
 import { useGroupTabsNow } from "../../hooks/useGroupTabsNow";
+import PaperWithHeader from "../PaperWithHeader";
 
 type TabGroupingFormProps = {
   dense: boolean;
@@ -76,106 +71,84 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
   };
 
   return (
-    <Stack spacing={1}>
-      <Paper variant="outlined">
-        <ListItem
-          sx={[
-            {
-              backgroundColor: grey[100],
-            },
-            (theme) =>
-              theme.applyStyles("dark", {
-                backgroundColor: alpha(grey[800], 0.4),
-              }),
-          ]}
-        >
-          <ListItemText
-            primary={
-              <Typography variant="subtitle1">{t.tabGroupingHeader}</Typography>
-            }
-          />
-        </ListItem>
-        <Divider />
-        {setting && (
-          <>
-            <List dense={dense}>
-              <Box sx={{ py: 1, px: 2 }}>
-                <Button
-                  variant="contained"
-                  disableElevation
-                  fullWidth
-                  sx={{
-                    textTransform: "none",
-                  }}
-                  onClick={() => groupTabsNow(setting)}
-                >
-                  {t.tabGroupingGroupTabsNow}
-                </Button>
-              </Box>
-              <ListItemButton
-                onClick={() => onChangeSwitch("enabledAutoGrouping")}
+    <PaperWithHeader header={t.tabGroupingHeader}>
+      {setting && (
+        <>
+          <List dense={dense}>
+            <Box sx={{ py: 1, px: 2 }}>
+              <Button
+                variant="contained"
+                disableElevation
+                fullWidth
+                sx={{
+                  textTransform: "none",
+                }}
+                onClick={() => groupTabsNow(setting)}
               >
-                <ListItemText primary={t.tabGroupingGroupTabsAutomatically} />
-                <Switch edge="end" checked={setting.enabledAutoGrouping} />
-              </ListItemButton>
-            </List>
-            <List
-              dense={dense}
-              subheader={
-                <ListSubheader>
-                  {t.tabGroupingDetailSettingsSubheader}
-                </ListSubheader>
+                {t.tabGroupingGroupTabsNow}
+              </Button>
+            </Box>
+            <ListItemButton
+              onClick={() => onChangeSwitch("enabledAutoGrouping")}
+            >
+              <ListItemText primary={t.tabGroupingGroupTabsAutomatically} />
+              <Switch edge="end" checked={setting.enabledAutoGrouping} />
+            </ListItemButton>
+          </List>
+          <List
+            dense={dense}
+            subheader={
+              <ListSubheader>
+                {t.tabGroupingDetailSettingsSubheader}
+              </ListSubheader>
+            }
+          >
+            <ListItemButton
+              onClick={() => onChangeSwitch("collapseWhenNoInUse")}
+            >
+              <ListItemText
+                primary={t.tabGroupingAutoCollapseUnusedTabGroups}
+              />
+              <Switch edge="end" checked={setting.collapseWhenNoInUse} />
+            </ListItemButton>
+            <ListItemButton
+              onClick={() => onChangeSwitch("ungroupSingleTabGroups")}
+            >
+              <ListItemText primary={t.tabGroupingAutoUngroupSingleTabGroups} />
+              <Switch edge="end" checked={setting.ungroupSingleTabGroups} />
+            </ListItemButton>
+            <ListItemButton
+              onClick={() =>
+                onChangeSwitch("limitAutoGroupingTargetToActiveTab")
               }
             >
-              <ListItemButton
-                onClick={() => onChangeSwitch("collapseWhenNoInUse")}
-              >
-                <ListItemText
-                  primary={t.tabGroupingAutoCollapseUnusedTabGroups}
-                />
-                <Switch edge="end" checked={setting.collapseWhenNoInUse} />
-              </ListItemButton>
-              <ListItemButton
-                onClick={() => onChangeSwitch("ungroupSingleTabGroups")}
-              >
-                <ListItemText
-                  primary={t.tabGroupingAutoUngroupSingleTabGroups}
-                />
-                <Switch edge="end" checked={setting.ungroupSingleTabGroups} />
-              </ListItemButton>
-              <ListItemButton
-                onClick={() =>
-                  onChangeSwitch("limitAutoGroupingTargetToActiveTab")
-                }
-              >
-                <ListItemText primary={t.tabGroupingLimitTargetToActiveTab} />
-                <Switch
-                  edge="end"
-                  checked={setting.limitAutoGroupingTargetToActiveTab}
-                />
-              </ListItemButton>
-              <ListItem>
-                <ListItemText primary={t.tabGroupingGroupTabsBy} />
-                <FormControl size="small">
-                  <Select
-                    value={setting.groupBy}
-                    placeholder={setting.groupBy}
-                    onChange={onChangeGroupBySelect}
-                  >
-                    <MenuItem value="domain">
-                      {t.tabGroupingGroupTabsByMenuItemDomain}
-                    </MenuItem>
-                    <MenuItem value="subdomain">
-                      {t.tabGroupingGroupTabsByMenuItemSubdomain}
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </ListItem>
-            </List>
-          </>
-        )}
-      </Paper>
-    </Stack>
+              <ListItemText primary={t.tabGroupingLimitTargetToActiveTab} />
+              <Switch
+                edge="end"
+                checked={setting.limitAutoGroupingTargetToActiveTab}
+              />
+            </ListItemButton>
+            <ListItem>
+              <ListItemText primary={t.tabGroupingGroupTabsBy} />
+              <FormControl size="small">
+                <Select
+                  value={setting.groupBy}
+                  placeholder={setting.groupBy}
+                  onChange={onChangeGroupBySelect}
+                >
+                  <MenuItem value="domain">
+                    {t.tabGroupingGroupTabsByMenuItemDomain}
+                  </MenuItem>
+                  <MenuItem value="subdomain">
+                    {t.tabGroupingGroupTabsByMenuItemSubdomain}
+                  </MenuItem>
+                </Select>
+              </FormControl>
+            </ListItem>
+          </List>
+        </>
+      )}
+    </PaperWithHeader>
   );
 };
 
