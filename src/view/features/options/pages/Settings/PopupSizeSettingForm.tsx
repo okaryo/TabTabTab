@@ -111,7 +111,7 @@ const PopupSizeSettingForm = () => {
   };
 
   return (
-    <Card sx={{ p: 2 }} variant="outlined">
+    <Card sx={{ p: 2 }} elevation={0}>
       <CardHeader
         sx={{ p: 0 }}
         title={

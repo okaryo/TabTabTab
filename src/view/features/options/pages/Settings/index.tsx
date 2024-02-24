@@ -1,14 +1,18 @@
-import Stack from "@mui/material/Stack";
+import Divider from "@mui/material/Divider";
+
+import t from "../../../../../i18n/Translations";
+import PaperWithHeader from "../../../../components/PaperWithHeader";
 
 import PopupElementScaleSettingForm from "./PopupElementScaleSettingForm";
 import PopupSizeSettingForm from "./PopupSizeSettingForm";
 
 const Settings = () => {
   return (
-    <Stack spacing={2}>
+    <PaperWithHeader header={t.popupSettingHeader}>
       <PopupSizeSettingForm />
+      <Divider />
       <PopupElementScaleSettingForm />
-    </Stack>
+    </PaperWithHeader>
   );
 };
 
