@@ -1,4 +1,5 @@
 /* eslint @typescript-eslint/no-floating-promises: 0 */
+import { addTabGroupingListeners } from "./AutoTabGrouping";
 import {
   addListenerOnTabActivated,
   addListenerOnTabClosed,
@@ -11,3 +12,6 @@ addListenerOnTabClosed();
 
 // TabCleanerScheduler
 activateTabCleanerScheduler();
+
+// AutoTabGrouping
+addTabGroupingListeners();
