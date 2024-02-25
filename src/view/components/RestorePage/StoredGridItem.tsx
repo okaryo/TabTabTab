@@ -5,15 +5,15 @@ import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
+import { useTheme } from "@mui/material/styles";
 
 import t from "../../../i18n/Translations";
 import { StoredTab } from "../../../model/Tab";
 import {
-  isStoredTabGroup,
   StoredTabContainer,
+  isStoredTabGroup,
 } from "../../../model/TabContainer";
 import TabFavicon from "../TabFavicon";
 

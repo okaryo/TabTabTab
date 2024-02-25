@@ -11,15 +11,15 @@ import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
-import { grey } from "@mui/material/colors";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Radio from "@mui/material/Radio";
 import Stack from "@mui/material/Stack";
-import { alpha, styled, useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
+import { grey } from "@mui/material/colors";
+import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import t from "../../../i18n/Translations";
@@ -126,9 +126,9 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
       const clickOutsideEditForm =
         editTabGroupFormRef.current &&
         !editTabGroupFormRef.current.contains(event.target as Node);
-      const clickEditButton =
-        editButtonRef.current &&
-        editButtonRef.current.contains(event.target as Node);
+      const clickEditButton = editButtonRef.current?.contains(
+        event.target as Node,
+      );
       if (clickOutsideEditForm && !clickEditButton) {
         setEditMode(false);
       }
@@ -136,7 +136,7 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [editTabGroupFormRef]);
+  }, []);
 
   return (
     <OutlinedAccordion

@@ -36,7 +36,7 @@ describe("#durationSinceLastActivatedAt", () => {
         }),
       },
     ])(
-      `case %#: when currentTime is $currentTime and lastActivatedAt is $lastActivatedAt, it should return $expected`,
+      "case %#: when currentTime is $currentTime and lastActivatedAt is $lastActivatedAt, it should return $expected",
       ({ currentTime, lastActivatedAt, expected }) => {
         vi.setSystemTime(currentTime);
 

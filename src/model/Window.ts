@@ -38,13 +38,13 @@ export type StoredWindow = {
 };
 
 export const flatTabsInWindows = (windows: Window[]): Tab[] => {
-  return windows.map((window) => flatTabsInWindow(window)).flat();
+  return windows.flatMap((window) => flatTabsInWindow(window));
 };
 
 export const flatTabsInWindow = (window: Window): Tab[] => {
-  return window.children
-    .map((child) => (isTabContainer(child) ? child.children : child))
-    .flat();
+  return window.children.flatMap((child) =>
+    isTabContainer(child) ? child.children : child,
+  );
 };
 
 export const findParentContainer = (
@@ -150,15 +150,14 @@ export const updateLastActivatedAtOfTab = (
             return tab;
           }),
         };
-      } else {
-        if (child.id === tabId) {
-          return {
-            ...child,
-            lastActivatedAt,
-          };
-        }
-        return child;
       }
+      if (child.id === tabId) {
+        return {
+          ...child,
+          lastActivatedAt,
+        };
+      }
+      return child;
     });
     return window;
   });
@@ -168,11 +167,11 @@ export const findTabsByTitleOrUrl = (
   windows: Window[],
   value: string,
 ): Tab[] => {
-  value = value.toLowerCase();
+  const lowerCasedValue = value.toLowerCase();
   return flatTabsInWindows(windows).filter((tab) => {
     return (
-      tab.title.toLowerCase().includes(value) ||
-      tab.url.href.toLowerCase().includes(value)
+      tab.title.toLowerCase().includes(lowerCasedValue) ||
+      tab.url.href.toLowerCase().includes(lowerCasedValue)
     );
   });
 };

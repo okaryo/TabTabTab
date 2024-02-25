@@ -1,6 +1,6 @@
 import Box from "@mui/material/Box";
-import { useTheme } from "@mui/material/styles";
 import Tabs from "@mui/material/Tabs";
+import { useTheme } from "@mui/material/styles";
 import { Dispatch, useContext, useEffect } from "react";
 
 import t from "../../../../i18n/Translations";

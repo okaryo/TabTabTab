@@ -43,7 +43,7 @@ describe("#isTab", () => {
       expected: true,
     },
   ])(
-    `case %#: when params is $params, it should return $expected`,
+    "case %#: when params is $params, it should return $expected",
     ({ params, expected }) => {
       expect(isTab(params as any)).toBe(expected);
     },
@@ -86,7 +86,7 @@ describe("#isTabContainer", () => {
       expected: false,
     },
   ])(
-    `case %#: when params is $params, it should return $expected`,
+    "case %#: when params is $params, it should return $expected",
     ({ params, expected }) => {
       expect(isTabContainer(params as any)).toBe(expected);
     },
@@ -129,7 +129,7 @@ describe("#isPinned", () => {
       expected: false,
     },
   ])(
-    `case %#: when params is $params, it should return $expected`,
+    "case %#: when params is $params, it should return $expected",
     ({ params, expected }) => {
       expect(isPinned(params as any)).toBe(expected);
     },
@@ -172,7 +172,7 @@ describe("#isTabGroup", () => {
       expected: false,
     },
   ])(
-    `case %#: when params is $params, it should return $expected`,
+    "case %#: when params is $params, it should return $expected",
     ({ params, expected }) => {
       expect(isTabGroup(params as any)).toBe(expected);
     },

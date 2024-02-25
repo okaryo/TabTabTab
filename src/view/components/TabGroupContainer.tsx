@@ -8,7 +8,6 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Collapse from "@mui/material/Collapse";
-import grey from "@mui/material/colors/grey";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -16,9 +15,10 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import Radio from "@mui/material/Radio";
 import Stack from "@mui/material/Stack";
-import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
+import grey from "@mui/material/colors/grey";
+import { useTheme } from "@mui/material/styles";
 import { useEffect, useRef, useState } from "react";
 
 import { GroupColor } from "../../model/GroupColor";
@@ -118,7 +118,7 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [editGroupFormRef]);
+  }, []);
 
   return (
     <Stack direction="row">
@@ -189,7 +189,7 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                         }}
                         onClick={onClickGroupTitleToEditMode}
                       >
-                        {!editMode && <>{tabGroup.name}</>}
+                        {!editMode && tabGroup.name}
                         {editMode && (
                           <TextField
                             variant="standard"

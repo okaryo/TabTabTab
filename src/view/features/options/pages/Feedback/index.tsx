@@ -38,7 +38,7 @@ const Feedback = () => {
         return (
           <CardActionArea>
             <Link
-              key={index}
+              key={feedback.title}
               href={feedback.link}
               underline="none"
               target="_blank"

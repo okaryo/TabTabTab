@@ -468,9 +468,8 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
         // NOTE: Adjust collision detection for downward movements to be more responsive.
         if (isMovingUpwards) {
           return pointerWithin(collisionArgs);
-        } else {
-          return closestCenter(collisionArgs);
         }
+        return closestCenter(collisionArgs);
       }
 
       return pointerWithin(args);

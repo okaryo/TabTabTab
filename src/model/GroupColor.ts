@@ -51,6 +51,8 @@ export class GroupColor {
         return "#78D9EC";
       case "orange":
         return "#FBAD70";
+      default:
+        return "#BDC1C6";
     }
   }
 }

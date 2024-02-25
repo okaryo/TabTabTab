@@ -14,7 +14,7 @@ import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
 
 import t from "../../../i18n/Translations";
-import { TabCleaner, DurationUnit } from "../../../model/TabCleaner";
+import { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
 import {
   getTabCleanerSetting,
   updateTabCleanerSetting,

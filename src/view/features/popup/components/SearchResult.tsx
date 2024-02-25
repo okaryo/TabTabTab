@@ -78,7 +78,7 @@ const SearchResult = (props: SearchResultProps) => {
     return () => {
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [selectedTabIndex, tabs]);
+  }, [tabs[selectedTabIndex]]);
 
   const [recentActiveTabs, setRecentActiveTabs] = useState<Tab[]>(null);
   useEffect(() => {
@@ -105,7 +105,7 @@ const SearchResult = (props: SearchResultProps) => {
         });
       }
     }
-  }, [selectedTabIndex]);
+  }, []);
 
   return (
     <>
