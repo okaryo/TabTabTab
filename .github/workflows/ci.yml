@@ -24,9 +24,7 @@ jobs:
         run: npm install
       - name: Run Test
         run: npm run test
-      - name: Run Lint
-        run: npm run lint
-      - name: Run Formatter
-        run: npm run format
+      - name: Run Lint and Formatter
+        run: npm run check:ci
       - name: Run Locale Lint
         run: npm run locale-lint

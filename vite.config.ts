@@ -1,6 +1,6 @@
-import { defineConfig } from "vitest/config";
 import path from "path";
 import react from "@vitejs/plugin-react";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === "development";
@@ -31,7 +31,7 @@ export default defineConfig(({ mode }) => {
       },
     },
     test: {
-      globals: true
+      globals: true,
     },
   };
 });

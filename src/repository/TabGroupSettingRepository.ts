@@ -103,7 +103,8 @@ const groupTabsBy = (
 
     if (groupBy === "domain") {
       return parsedUrl.domainWithoutSuffix;
-    } else if (groupBy === "subdomain") {
+    }
+    if (groupBy === "subdomain") {
       return ["", "www"].includes(parsedUrl.subdomain)
         ? parsedUrl.domainWithoutSuffix
         : `${parsedUrl.subdomain}.${parsedUrl.domainWithoutSuffix}`;

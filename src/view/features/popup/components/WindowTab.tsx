@@ -2,9 +2,9 @@ import { useDroppable } from "@dnd-kit/core";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
-import { blue, grey } from "@mui/material/colors";
 import IconButton from "@mui/material/IconButton";
 import Tab from "@mui/material/Tab";
+import { blue, grey } from "@mui/material/colors";
 import { useState } from "react";
 
 import { Window, WindowId } from "../../../../model/Window";

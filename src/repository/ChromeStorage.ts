@@ -1,19 +1,19 @@
 import { DurationUnit } from "../model/TabCleaner";
 import { TabGroupSetting } from "../model/TabGroupSetting";
 
-export class ChromeLocalStorage {
-  static readonly TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
-  static readonly POPUP_SIZE_SETTING_KEY = "popup_size_setting";
-  static readonly POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
-  static readonly THEME_KEY = "theme";
-  static readonly STORED_WINDOWS_KEY = "stored_windows";
-  static readonly STORED_TAB_GROUPS_KEY = "stored_tab_groups";
-  static readonly TAB_GROUP_SETTING_KEY = "tab_group_setting";
+export namespace ChromeLocalStorage {
+  export const TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
+  export const POPUP_SIZE_SETTING_KEY = "popup_size_setting";
+  export const POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
+  export const THEME_KEY = "theme";
+  export const STORED_WINDOWS_KEY = "stored_windows";
+  export const STORED_TAB_GROUPS_KEY = "stored_tab_groups";
+  export const TAB_GROUP_SETTING_KEY = "tab_group_setting";
 }
 
-export class ChromeSessionStorage {
-  static readonly LAST_ACTIVATED_AT_KEY = "last_activated_at";
-  static readonly RECENT_ACTIVE_TABS_KEY = "recent_active_tabs";
+export namespace ChromeSessionStorage {
+  export const LAST_ACTIVATED_AT_KEY = "last_activated_at";
+  export const RECENT_ACTIVE_TABS_KEY = "recent_active_tabs";
 }
 
 export type TabCleanerSettingStorageObject = {

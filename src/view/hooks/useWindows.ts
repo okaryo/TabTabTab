@@ -15,10 +15,13 @@ export const useWindows = () => {
       (a, b) => (b.focused ? 1 : 0) - (a.focused ? 1 : 0),
     );
   };
-  const setWindows = useCallback((windows: Window[]) => {
-    const sortedWindows = sortByFocused(windows);
-    setState(sortedWindows);
-  }, []);
+  const setWindows = useCallback(
+    (windows: Window[]) => {
+      const sortedWindows = sortByFocused(windows);
+      setState(sortedWindows);
+    },
+    [sortByFocused],
+  );
 
   useEffect(() => {
     const initState = async () => {

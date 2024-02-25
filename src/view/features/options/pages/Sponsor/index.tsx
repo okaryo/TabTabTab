@@ -2,8 +2,8 @@ import GitHubIcon from "@mui/icons-material/GitHub";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
-import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
+import { useTheme } from "@mui/material/styles";
 
 import t from "../../../../../i18n/Translations";
 

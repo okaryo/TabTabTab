@@ -14,7 +14,7 @@ describe("#code", () => {
     { color: "orange", expected: "#FBAD70" },
     { color: "invalid", expected: "error", isError: true },
   ])(
-    `case %#: when color is $color, it should return $expected`,
+    "case %#: when color is $color, it should return $expected",
     ({ color, expected, isError }) => {
       if (isError) {
         expect(() => new GroupColor(color as any)).toThrowError();

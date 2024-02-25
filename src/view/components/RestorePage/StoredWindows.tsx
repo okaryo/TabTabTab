@@ -10,14 +10,14 @@ import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
-import { grey } from "@mui/material/colors";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Stack from "@mui/material/Stack";
-import { alpha, styled, useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Unstable_Grid2";
+import { grey } from "@mui/material/colors";
+import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 
 import t from "../../../i18n/Translations";
@@ -73,9 +73,9 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   const [expanded, setExpanded] = useState(index === 0);
   const [editMode, setEditMode] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-  const allCount = window.children
-    .map((child) => ("children" in child ? child.children : child))
-    .flat().length;
+  const allCount = window.children.flatMap((child) =>
+    "children" in child ? child.children : child,
+  ).length;
 
   const updateWindowName = useUpdateStoredWindowName();
   const restoreWindow = useRestoreWindow();
@@ -104,9 +104,9 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
       const clickOutsideEditForm =
         editWindowNameFormRef.current &&
         !editWindowNameFormRef.current.contains(event.target as Node);
-      const clickEditButton =
-        editButtonRef.current &&
-        editButtonRef.current.contains(event.target as Node);
+      const clickEditButton = editButtonRef.current?.contains(
+        event.target as Node,
+      );
       if (clickOutsideEditForm && !clickEditButton) {
         setEditMode(false);
       }
@@ -114,7 +114,7 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
     document.addEventListener("mousedown", handleClickOutside);
 
     return () => document.removeEventListener("mousedown", handleClickOutside);
-  }, [editWindowNameFormRef]);
+  }, []);
 
   return (
     <OutlinedAccordion

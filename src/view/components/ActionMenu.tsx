@@ -299,7 +299,9 @@ const ActionMenu = (props: ActionMenuProps) => {
       }}
     >
       {items.filter(Boolean).map((item, index) => {
-        if (item.type === "Divider") return <Divider key={index} />;
+        if (item.type === "Divider") {
+          return <Divider key={`${item.type}${index}`} />;
+        }
 
         return (
           <ActionMenuItem
