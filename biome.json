@@ -16,5 +16,17 @@
       "recommended": true
     },
     "ignore": ["node_modules/*", "dist/*"]
-  }
+  },
+  "overrides": [
+    {
+      "include": ["test/**"],
+      "linter": {
+        "rules": {
+          "suspicious": {
+            "noExplicitAny": "off"
+          }
+        }
+      }
+    }
+  ]
 }
