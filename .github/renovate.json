@@ -16,10 +16,6 @@
       "matchPackagePrefixes": ["react"]
     },
     {
-      "groupName": "eslint",
-      "matchPackagePrefixes": ["@typescript-eslint/", "eslint"]
-    },
-    {
       "groupName": "emotion",
       "matchPackagePrefixes": ["@emotion"]
     },
