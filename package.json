@@ -7,9 +7,9 @@
     "dev": "vite build --watch --mode development",
     "build": "vite build",
     "test": "vitest run",
-    "check": "biome check ./src",
-    "check:fix": "biome check --apply-unsafe ./src",
-    "check:ci": "biome ci ./src",
+    "check": "biome check .",
+    "check:fix": "biome check --apply-unsafe .",
+    "check:ci": "biome ci .",
     "locale-lint": "chromex-locale-lint --localesDir dist/_locales --strict"
   },
   "author": "okaryo",
