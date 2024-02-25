@@ -20,7 +20,8 @@ export const activateTabCleanerScheduler = async () => {
     if (!tabCleanerSetting.enabled) return;
 
     for (const tab of flatTabsInWindows(windows)) {
-      if (shouldCleanUp(tabCleanerSetting, tab, new Date())) {
+      const currentDateTime = new Date();
+      if (shouldCleanUp(tabCleanerSetting, tab, currentDateTime)) {
         await removeTab(tab.id);
       }
     }
