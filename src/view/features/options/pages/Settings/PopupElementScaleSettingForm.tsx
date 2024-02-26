@@ -78,7 +78,7 @@ const PopupFontAndIconScaleSettingForm = () => {
         errorMessage: "",
       });
       setIsOpenSnackBarState(true);
-    } catch (e) {
+    } catch (_) {
       setSubmissionState({
         isLoading: false,
         isError: true,
