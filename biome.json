@@ -20,6 +20,9 @@
       },
       "nursery": {
         "noUnusedImports": "error"
+      },
+      "suspicious": {
+        "noConsoleLog": "error"
       }
     },
     "ignore": ["node_modules/*", "dist/*"]
