@@ -20,7 +20,13 @@ const onTabUpdated = async (
   if (!setting.enabledAutoGrouping) return;
 
   if (!tab || tab.pinned) return;
-  if (setting.applyAutoGroupingToCurrentTabOnly && !tab.active) return;
+  const currentWindow = await chrome.windows.getCurrent();
+  if (
+    setting.applyAutoGroupingToCurrentTabOnly &&
+    (!tab.active || tab.windowId !== currentWindow.id)
+  ) {
+    return;
+  }
 
   await organizeTabsByGroupingRule(tab, setting);
 };
