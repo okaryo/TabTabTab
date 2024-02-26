@@ -18,7 +18,6 @@ const PopupThemeProvider = (props: ThemeProviderProps) => {
     const initState = async () => {
       setScale(await getPopupElementScaleSetting());
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initState();
   }, []);
 

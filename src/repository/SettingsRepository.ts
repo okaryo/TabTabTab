@@ -1,33 +1,20 @@
 import { PopupSize, defaultPopupSize } from "../model/PopupSize";
 
-import {
-  ChromeLocalStorage,
-  PopupElementScaleSettingStorageObject,
-  PopupSizeSettingStorageObject,
-} from "./ChromeStorage";
+import { ChromeLocalStorage } from "./ChromeStorage";
 
 export const getPopupSizeSetting = async (): Promise<PopupSize> => {
-  const { popup_size_setting: setting } = (await chrome.storage.local.get(
-    ChromeLocalStorage.POPUP_SIZE_SETTING_KEY,
-  )) as PopupSizeSettingStorageObject;
+  const setting = await ChromeLocalStorage.getPopupSizeSetting();
   if (!setting) return defaultPopupSize;
 
   return { height: setting.height, width: setting.width };
 };
 
 export const updatePopupSizeSetting = (popupSize: PopupSize): Promise<void> => {
-  return chrome.storage.local.set({
-    [ChromeLocalStorage.POPUP_SIZE_SETTING_KEY]: {
-      height: popupSize.height,
-      width: popupSize.width,
-    },
-  });
+  return ChromeLocalStorage.updatePopupSizeSetting(popupSize);
 };
 
 export const getPopupElementScaleSetting = async (): Promise<number> => {
-  const { popup_element_scale: setting } = (await chrome.storage.local.get(
-    ChromeLocalStorage.POPUP_ELEMENT_SCALE_SETTING_KEY,
-  )) as PopupElementScaleSettingStorageObject;
+  const setting = await ChromeLocalStorage.getPopupElementScaleSetting();
   if (!setting) return 80;
 
   return setting;
@@ -36,9 +23,7 @@ export const getPopupElementScaleSetting = async (): Promise<number> => {
 export const updatePopupElementScaleSetting = (
   scale: number,
 ): Promise<void> => {
-  return chrome.storage.local.set({
-    [ChromeLocalStorage.POPUP_ELEMENT_SCALE_SETTING_KEY]: scale,
-  });
+  return ChromeLocalStorage.updatePopupElementScaleSetting(scale);
 };
 
 export const navigateToOptionsPage = () => {

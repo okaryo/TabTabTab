@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/no-unsafe-argument: 0, @typescript-eslint/no-explicit-any: 0 */
 import {
   findParentContainer,
   findPinned,
@@ -12,7 +11,6 @@ import {
   hasDuplicatedTabs,
   indexOfWindowChild,
   moveTabOrTabGroup,
-  updateLastActivatedAtOfTab,
 } from "../../src/model/Window";
 import { mockPinned, mockTabGroup } from "../factory/TabContainerFactory";
 import { mockTab } from "../factory/TabFactory";
@@ -384,33 +382,6 @@ describe("#indexOfWindowChild", () => {
         expect(indexOfWindowChild(window, 10)).toEqual(0);
       });
     });
-  });
-});
-
-describe("#updateLastActivatedAtOfTab", () => {
-  it("should update lastActivatedAt of tab", () => {
-    const tab1 = mockTab({ id: 1, lastActivatedAt: new Date(2023, 8, 20) });
-    const tab2 = mockTab({ id: 2, lastActivatedAt: new Date(2023, 8, 21) });
-    const window1 = mockWindow({ id: 1, children: [tab1] });
-    const window2 = mockWindow({ id: 2, children: [tab2] });
-    const windows = [window1, window2];
-    const lastActivatedAt = new Date(2023, 8, 25);
-    const expected = [
-      window1,
-      {
-        ...window2,
-        children: [
-          {
-            ...tab2,
-            lastActivatedAt,
-          },
-        ],
-      },
-    ];
-
-    expect(updateLastActivatedAtOfTab(windows, 2, lastActivatedAt)).toEqual(
-      expected,
-    );
   });
 });
 

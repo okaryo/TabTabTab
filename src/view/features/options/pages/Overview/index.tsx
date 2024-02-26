@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-misused-promises: 0 */
-
 import { useDroppable } from "@dnd-kit/core";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";

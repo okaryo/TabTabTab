@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-misused-promises: 0 */
-
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import CropFreeIcon from "@mui/icons-material/CropFree";

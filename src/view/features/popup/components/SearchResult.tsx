@@ -69,7 +69,6 @@ const SearchResult = (props: SearchResultProps) => {
           oldIndex === minIndex ? maxIndex : oldIndex - 1,
         );
       } else if (event.key === "Enter") {
-        // eslint-disable-next-line @typescript-eslint/no-floating-promises
         focusTab(tabs[selectedTabIndex]);
       }
     };
@@ -86,7 +85,6 @@ const SearchResult = (props: SearchResultProps) => {
       const tabs = await getRecentActiveTabs();
       setRecentActiveTabs(tabs);
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initializeState();
   }, []);
 

@@ -1,42 +1,24 @@
-/* eslint @typescript-eslint/no-floating-promises: 0 */
 import {
-  deleteLastActivatedAtOfTab,
-  updateLastActivatedAtOfTab,
+  cleanupTabLastActivatedAt,
   updateRecentActiveTabs,
+  updateTabLastActivatedAt,
 } from "../repository/TabsRepository";
 
-export const addListenerOnTabActivated = () => {
+export const addTabAccessesListener = () => {
+  chrome.tabs.onCreated.addListener((tab) => {
+    updateTabLastActivatedAt(tab.id);
+    updateRecentActiveTabs(tab.id);
+  });
   chrome.tabs.onActivated.addListener((activeInfo) => {
     const { tabId } = activeInfo;
-    updateLastActivatedAtOfTab(tabId);
-    updateRecentActiveTabs(tabId);
-  });
-  chrome.tabs.onAttached.addListener((tabId) => {
-    updateLastActivatedAtOfTab(tabId);
-    updateRecentActiveTabs(tabId);
-  });
-  chrome.tabs.onHighlighted.addListener((highlightInfo) => {
-    const { tabIds } = highlightInfo;
-    for (const tabId of tabIds) {
-      updateLastActivatedAtOfTab(tabId);
-      updateRecentActiveTabs(tabId);
-    }
-  });
-  chrome.tabs.onMoved.addListener((tabId) => {
-    updateLastActivatedAtOfTab(tabId);
+    updateTabLastActivatedAt(tabId);
     updateRecentActiveTabs(tabId);
   });
   chrome.tabs.onUpdated.addListener((tabId) => {
-    updateLastActivatedAtOfTab(tabId);
+    updateTabLastActivatedAt(tabId, { onlyActiveTab: true });
     updateRecentActiveTabs(tabId);
   });
-};
-
-export const addListenerOnTabClosed = () => {
-  chrome.tabs.onDetached.addListener((tabId) => {
-    deleteLastActivatedAtOfTab(tabId);
-  });
   chrome.tabs.onRemoved.addListener((tabId) => {
-    deleteLastActivatedAtOfTab(tabId);
+    cleanupTabLastActivatedAt(tabId);
   });
 };

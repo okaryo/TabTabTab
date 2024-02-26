@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-floating-promises: 0 */
-
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";

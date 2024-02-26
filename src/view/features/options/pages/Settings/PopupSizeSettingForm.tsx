@@ -52,7 +52,6 @@ const PopupSizeSettingForm = () => {
         width: setting.width.toString(),
       });
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     setSetting();
   }, []);
 
@@ -101,7 +100,7 @@ const PopupSizeSettingForm = () => {
         errorMessage: "",
       });
       setIsOpenSnackBarState(true);
-    } catch (e) {
+    } catch (_) {
       setSubmissionState({
         isLoading: false,
         isError: true,
@@ -163,7 +162,6 @@ const PopupSizeSettingForm = () => {
             disabled={submissionState.isLoading}
             sx={{ textTransform: "none" }}
             disableElevation
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={onSave}
           >
             {submissionState.isLoading ? `${t.saving}...` : t.save}

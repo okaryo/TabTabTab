@@ -1,14 +1,7 @@
-/* eslint @typescript-eslint/no-floating-promises: 0 */
-
 import { Tab, TabId } from "../model/Tab";
 import { WindowId } from "../model/Window";
 
-import {
-  ChromeSessionStorage,
-  LastActivatedAtStorageObject,
-  RecentActiveTabsStorageObject,
-  SerializedTab,
-} from "./ChromeStorage";
+import { ChromeSessionStorage, ChromeStorage } from "./ChromeStorage";
 
 export const focusTab = async (tab: Tab) => {
   const isExistingTab = await chrome.tabs
@@ -31,26 +24,23 @@ export const removeTabs = async (tabIds: number[]) => {
   await chrome.tabs.remove(tabIds);
 };
 
-export const updateLastActivatedAtOfTab = async (tabId: number) => {
-  let { last_activated_at } = (await chrome.storage.session.get(
-    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
-  )) as LastActivatedAtStorageObject;
-  if (last_activated_at === undefined) last_activated_at = {};
+export const updateTabLastActivatedAt = async (
+  tabId: number,
+  options?: {
+    onlyActiveTab?: boolean;
+  },
+) => {
+  const tab = (await chrome.tabs
+    .get(tabId)
+    .catch(() => null)) as chrome.tabs.Tab | null;
+  if (!tab || tab.status !== "complete") return;
+  if (options?.onlyActiveTab && !tab.active) return;
 
-  last_activated_at[tabId] = new Date().toISOString();
-  await chrome.storage.session.set({
-    [ChromeSessionStorage.LAST_ACTIVATED_AT_KEY]: last_activated_at,
-  });
+  await ChromeStorage.updateTabLastAccesses(tab);
 };
 
-export const deleteLastActivatedAtOfTab = async (tabId: number) => {
-  const { last_activated_at } = (await chrome.storage.session.get(
-    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
-  )) as LastActivatedAtStorageObject;
-  delete last_activated_at[tabId];
-  await chrome.storage.session.set({
-    [ChromeSessionStorage.LAST_ACTIVATED_AT_KEY]: last_activated_at,
-  });
+export const cleanupTabLastActivatedAt = async (tabId: number) => {
+  await ChromeStorage.cleanupTabLastAccesses(tabId);
 };
 
 export const pinTab = async (tabId: number) => {
@@ -114,11 +104,8 @@ export const closeAllTabs = async (tabs: Tab[]) => {
 };
 
 export const getRecentActiveTabs = async (): Promise<Tab[]> => {
-  let { recent_active_tabs: recentActiveTabs } =
-    (await chrome.storage.session.get(
-      ChromeSessionStorage.RECENT_ACTIVE_TABS_KEY,
-    )) as RecentActiveTabsStorageObject;
-  if (recentActiveTabs === undefined) recentActiveTabs = [];
+  const recentActiveTabs = await ChromeSessionStorage.getRecentActiveTabs();
+  if (!recentActiveTabs) return [];
 
   return recentActiveTabs.map((serializedTab) =>
     deserializeToTab(serializedTab),
@@ -130,11 +117,8 @@ export const updateRecentActiveTabs = async (tabId: number) => {
   if (!tab) return;
 
   const serializedTab = serializeTab(tab);
-  let { recent_active_tabs: recentActiveTabs } =
-    (await chrome.storage.session.get(
-      ChromeSessionStorage.RECENT_ACTIVE_TABS_KEY,
-    )) as RecentActiveTabsStorageObject;
-  if (recentActiveTabs === undefined) recentActiveTabs = [];
+  const recentActiveTabs = await ChromeSessionStorage.getRecentActiveTabs();
+  if (!recentActiveTabs) return [];
 
   const uniqueTabs = recentActiveTabs.filter((recentActiveTab) => {
     const isDuplicated =
@@ -145,9 +129,7 @@ export const updateRecentActiveTabs = async (tabId: number) => {
   });
 
   const newTabs = [serializedTab, ...uniqueTabs].slice(0, 10);
-  await chrome.storage.session.set({
-    [ChromeSessionStorage.RECENT_ACTIVE_TABS_KEY]: newTabs,
-  });
+  await ChromeSessionStorage.updateRecentActiveTabs(newTabs);
 };
 
 const getTabBy = async (tabId: number): Promise<Tab | null> => {
@@ -159,10 +141,12 @@ const getTabBy = async (tabId: number): Promise<Tab | null> => {
   })) as chrome.tabs.Tab | null;
   if (!tab) return null;
 
-  const { last_activated_at } = (await chrome.storage.session.get(
-    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
-  )) as LastActivatedAtStorageObject;
+  const parsedTab = parseTab(tab);
+  const lastAccesses = await ChromeStorage.getTabLastAccesses();
+  return applyLastActivatedAt(parsedTab, lastAccesses);
+};
 
+export const parseTab = (tab: chrome.tabs.Tab): Tab => {
   return {
     id: tab.id,
     groupId:
@@ -176,10 +160,36 @@ const getTabBy = async (tabId: number): Promise<Tab | null> => {
     highlighted: tab.highlighted,
     audible: tab.audible,
     pinned: tab.pinned,
-    lastActivatedAt: last_activated_at[tabId]
-      ? new Date(last_activated_at[tabId])
-      : null,
   };
+};
+
+export const applyLastActivatedAt = async (
+  tab: Tab,
+  lastAccesses: {
+    local: { [key: string]: { lastActivatedAt: string } };
+    session: { [tabId: number]: { lastActivatedAt: string } };
+  },
+) => {
+  const { local, session } = lastAccesses;
+  if (session[tab.id]) {
+    return {
+      ...tab,
+      lastActivatedAt: new Date(session[tab.id].lastActivatedAt),
+    };
+  }
+
+  const key = await ChromeStorage.tabKeyForLastAccessesInLocal(
+    tab.title,
+    tab.url.toString(),
+  );
+  if (local[key]) {
+    return {
+      ...tab,
+      lastActivatedAt: new Date(local[key].lastActivatedAt),
+    };
+  }
+
+  return tab;
 };
 
 const serializeTab = (tab: Tab) => {
@@ -197,7 +207,9 @@ const serializeTab = (tab: Tab) => {
   };
 };
 
-const deserializeToTab = (serializedTab: SerializedTab): Tab => {
+const deserializeToTab = (
+  serializedTab: ChromeSessionStorage.SerializedTab,
+): Tab => {
   return {
     id: serializedTab.id,
     groupId: serializedTab.groupId,
@@ -220,13 +232,11 @@ export const addListenerOnUpdateTabs = (callback: () => Promise<void>) => {
   const listener = async () => {
     await callback();
   };
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   chrome.tabs.onUpdated.addListener(listener);
 
   return listener;
 };
 
 export const removeListenerOnUpdateTabs = (listener: () => Promise<void>) => {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   chrome.tabs.onUpdated.removeListener(listener);
 };

@@ -103,7 +103,6 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     event: React.MouseEvent<HTMLElement>,
   ) => {
     event.stopPropagation();
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     resolveDuplicateTabs(tab);
     setIsDuplicatedChipHovered(false);
   };
@@ -124,11 +123,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
               <MoreVertIcon />
             </IconButton>
             <Divider orientation="vertical" variant="middle" flexItem />
-            <IconButton
-              edge="end"
-              // eslint-disable-next-line @typescript-eslint/no-misused-promises
-              onClick={onClickDeleteButton}
-            >
+            <IconButton edge="end" onClick={onClickDeleteButton}>
               <Clear />
             </IconButton>
           </Stack>
@@ -143,7 +138,6 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
         style={{ cursor: "inherit" }}
         color="info"
         selected={tab.highlighted || selected}
-        // eslint-disable-next-line @typescript-eslint/no-misused-promises
         onClick={onTapTabItem}
       >
         {showDragIndicatorIcon && isHovered && (
@@ -189,7 +183,6 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
                   component="span"
                   onMouseEnter={() => setIsDuplicatedChipHovered(true)}
                   onMouseLeave={() => setIsDuplicatedChipHovered(false)}
-                  // eslint-disable-next-line @typescript-eslint/no-misused-promises
                   onClick={onClickResolveDuplicatesChip}
                   clickable
                 />

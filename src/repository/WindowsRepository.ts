@@ -7,6 +7,8 @@ import {
   TabGroup,
   generatePinnedId,
   isPinned,
+  isTab,
+  isTabContainer,
   isTabGroup,
 } from "../model/TabContainer";
 import {
@@ -16,93 +18,27 @@ import {
   findPinned,
   findTabGroup,
   flatTabsInWindow,
-  updateLastActivatedAtOfTab,
 } from "../model/Window";
 
-import {
-  ChromeLocalStorage,
-  ChromeSessionStorage,
-  LastActivatedAtStorageObject,
-  SerializedStoredTab,
-  StoredWindowsObject,
-} from "./ChromeStorage";
+import { ChromeLocalStorage, ChromeStorage } from "./ChromeStorage";
+import { applyLastActivatedAt, parseTab } from "./TabsRepository";
 
 export const getWindows = async (): Promise<Window[]> => {
   const currentWindow = await chrome.windows.getCurrent();
-  return applyLastActivatedAtOfTabInWindows(await windows(currentWindow.id));
-};
-
-export const addWindow = async (): Promise<WindowId> => {
-  const window = await chrome.windows.create({ focused: false });
-  return window.id;
-};
-
-export const addWindowWithTab = async (tabId: number): Promise<void> => {
-  await chrome.windows.create({ tabId, focused: false });
-};
-
-export const addWindowWithTabGroup = async (
-  tabGroup: TabGroup,
-): Promise<void> => {
-  const window = await chrome.windows.create({ focused: false });
-  await chrome.tabGroups.move(tabGroup.id, { windowId: window.id, index: -1 });
-
-  // NOTE: Remove the new tab created when the window is opened
-  const emptyTab = window.tabs[0];
-  await chrome.tabs.remove(emptyTab.id);
-};
-
-export const closeWindow = async (window: Window): Promise<Window[]> => {
-  /*
-    NOTE:
-    The `chrome.windows.remove` operation can be heavy, and sometimes,
-    when retrieving windows immediately after a remove operation,
-    the window supposed to be deleted may still appear.
-    Therefore, to ensure the window is closed reliably, we use `chrome.tabs.remove(tabIds)`.
-  */
-  const allTabs = flatTabsInWindow(window);
-  const tabIds = allTabs.map((tab) => tab.id);
-  await chrome.tabs.remove(tabIds);
-
-  return getWindows();
-};
-
-const windows = async (currentWindowId: number): Promise<Window[]> => {
   const windows = await chrome.windows.getAll({ populate: true });
 
   const parsedWindows: Window[] = [];
   for (const window of windows) {
     const parsedWindow: Window = {
       id: window.id,
-      focused: window.id === currentWindowId,
+      focused: window.id === currentWindow.id,
       state: window.state,
       type: window.type,
       children: [],
     };
 
     for (const tab of window.tabs) {
-      const parsedTab = {
-        id: tab.id,
-        groupId:
-          tab.groupId === chrome.tabGroups.TAB_GROUP_ID_NONE
-            ? null
-            : tab.groupId,
-        windowId:
-          tab.windowId === chrome.windows.WINDOW_ID_NONE ? null : tab.windowId,
-        title: tab.title,
-        url:
-          tab.url && tab.url !== ""
-            ? new URL(tab.url)
-            : new URL(tab.pendingUrl),
-        favIconUrl:
-          tab.favIconUrl && tab.favIconUrl !== ""
-            ? new URL(tab.favIconUrl)
-            : null,
-        highlighted: tab.highlighted,
-        audible: tab.audible,
-        pinned: tab.pinned,
-      };
-
+      const parsedTab = parseTab(tab);
       if (tab.pinned) {
         const pinned = findPinned(parsedWindow);
         if (pinned) {
@@ -155,37 +91,86 @@ const windows = async (currentWindowId: number): Promise<Window[]> => {
     parsedWindows.push(parsedWindow);
   }
 
-  return parsedWindows;
+  return applyLastActivatedAtToTabs(parsedWindows);
 };
 
-const applyLastActivatedAtOfTabInWindows = async (
+export const addWindow = async (): Promise<WindowId> => {
+  const window = await chrome.windows.create({ focused: false });
+  return window.id;
+};
+
+export const addWindowWithTab = async (tabId: number): Promise<void> => {
+  await chrome.windows.create({ tabId, focused: false });
+};
+
+export const addWindowWithTabGroup = async (
+  tabGroup: TabGroup,
+): Promise<void> => {
+  const window = await chrome.windows.create({ focused: false });
+  await chrome.tabGroups.move(tabGroup.id, { windowId: window.id, index: -1 });
+
+  // NOTE: Remove the new tab created when the window is opened
+  const emptyTab = window.tabs[0];
+  await chrome.tabs.remove(emptyTab.id);
+};
+
+export const closeWindow = async (window: Window): Promise<Window[]> => {
+  /*
+    NOTE:
+    The `chrome.windows.remove` operation can be heavy, and sometimes,
+    when retrieving windows immediately after a remove operation,
+    the window supposed to be deleted may still appear.
+    Therefore, to ensure the window is closed reliably, we use `chrome.tabs.remove(tabIds)`.
+  */
+  const allTabs = flatTabsInWindow(window);
+  const tabIds = allTabs.map((tab) => tab.id);
+  await chrome.tabs.remove(tabIds);
+
+  return getWindows();
+};
+
+const applyLastActivatedAtToTabs = async (
   windows: Window[],
 ): Promise<Window[]> => {
-  let newWindows = [...windows];
-  const { last_activated_at } = (await chrome.storage.session.get(
-    ChromeSessionStorage.LAST_ACTIVATED_AT_KEY,
-  )) as LastActivatedAtStorageObject;
-  if (!last_activated_at || Object.keys(last_activated_at).length === 0) {
-    return newWindows;
-  }
-
-  for (const [tabId, dateString] of Object.entries(last_activated_at)) {
-    newWindows = updateLastActivatedAtOfTab(
-      newWindows,
-      Number(tabId),
-      new Date(dateString),
-    );
+  const lastAccesses = await ChromeStorage.getTabLastAccesses();
+  const newWindows = [];
+  for (const window of windows) {
+    const windowChildren = [];
+    for (const windowChild of window.children) {
+      if (isTabContainer(windowChild)) {
+        const containerChildren = [];
+        for (const containerChild of windowChild.children) {
+          const applied = await applyLastActivatedAt(
+            containerChild,
+            lastAccesses,
+          );
+          containerChildren.push(applied);
+        }
+        windowChildren.push({
+          ...windowChild,
+          children: containerChildren,
+        });
+      }
+      if (isTab(windowChild)) {
+        const applied = await applyLastActivatedAt(windowChild, lastAccesses);
+        windowChildren.push(applied);
+      }
+    }
+    newWindows.push({
+      ...window,
+      children: windowChildren,
+    });
   }
   return newWindows;
 };
 
 export const getStoredWindows = async (): Promise<StoredWindow[]> => {
-  const { stored_windows: storedWindows } = (await chrome.storage.local.get(
-    ChromeLocalStorage.STORED_WINDOWS_KEY,
-  )) as StoredWindowsObject;
+  const storedWindows = await ChromeLocalStorage.getStoredWindows();
   if (!storedWindows) return [];
 
-  const deserializeStoredTab = (tab: SerializedStoredTab) => {
+  const deserializeStoredTab = (
+    tab: ChromeLocalStorage.SerializedStoredTab,
+  ) => {
     return {
       ...tab,
       url: new URL(tab.url),
@@ -223,11 +208,9 @@ export const getStoredWindows = async (): Promise<StoredWindow[]> => {
 export const saveStoredWindow = async (
   window: Window,
 ): Promise<StoredWindow[]> => {
-  const { stored_windows: storedWindows } = (await chrome.storage.local.get(
-    ChromeLocalStorage.STORED_WINDOWS_KEY,
-  )) as StoredWindowsObject;
+  const storedWindows = await ChromeLocalStorage.getStoredWindows();
 
-  const serializedTab = (tab: Tab) => ({
+  const serializedTab = (tab: Tab): ChromeLocalStorage.SerializedStoredTab => ({
     type: "tab",
     internalUid: crypto.randomUUID(),
     title: tab.title,
@@ -236,38 +219,36 @@ export const saveStoredWindow = async (
   });
 
   const currentDateTime = new Date();
-  await chrome.storage.local.set({
-    [ChromeLocalStorage.STORED_WINDOWS_KEY]: [
-      {
-        type: "window",
-        internalUid: crypto.randomUUID(),
-        storedAt: currentDateTime.toISOString(),
-        name: currentDateTime.toLocaleDateString(),
-        children: window.children.map((child) => {
-          if (isPinned(child)) {
-            return {
-              type: "pinned",
-              internalUid: crypto.randomUUID(),
-              children: child.children.map((tab) => serializedTab(tab)),
-            };
-          }
-          if (isTabGroup(child)) {
-            return {
-              type: "tabGroup",
-              internalUid: crypto.randomUUID(),
-              storedAt: currentDateTime.toISOString(),
-              name: child.name,
-              color: child.color.value,
-              children: child.children.map((tab) => serializedTab(tab)),
-            };
-          }
+  await ChromeLocalStorage.updateStoredWindows([
+    {
+      type: "window",
+      internalUid: crypto.randomUUID(),
+      storedAt: currentDateTime.toISOString(),
+      name: currentDateTime.toLocaleDateString(),
+      children: window.children.map((child) => {
+        if (isPinned(child)) {
+          return {
+            type: "pinned",
+            internalUid: crypto.randomUUID(),
+            children: child.children.map((tab) => serializedTab(tab)),
+          };
+        }
+        if (isTabGroup(child)) {
+          return {
+            type: "tabGroup",
+            internalUid: crypto.randomUUID(),
+            storedAt: currentDateTime.toISOString(),
+            name: child.name,
+            color: child.color.value,
+            children: child.children.map((tab) => serializedTab(tab)),
+          };
+        }
 
-          return serializedTab(child as Tab);
-        }),
-      },
-      ...(storedWindows ?? []),
-    ],
-  });
+        return serializedTab(child as Tab);
+      }),
+    },
+    ...(storedWindows ?? []),
+  ]);
 
   return getStoredWindows();
 };
@@ -276,18 +257,15 @@ export const updateStoredWindowName = async (
   id: string,
   name: string,
 ): Promise<StoredWindow[]> => {
-  const { stored_windows: storedWindows } = (await chrome.storage.local.get(
-    ChromeLocalStorage.STORED_WINDOWS_KEY,
-  )) as StoredWindowsObject;
-
-  await chrome.storage.local.set({
-    [ChromeLocalStorage.STORED_WINDOWS_KEY]: storedWindows.map((window) => {
+  const storedWindows = await ChromeLocalStorage.getStoredWindows();
+  await ChromeLocalStorage.updateStoredWindows(
+    storedWindows.map((window) => {
       if (window.internalUid === id) {
         return { ...window, name };
       }
       return window;
     }),
-  });
+  );
 
   return getStoredWindows();
 };
@@ -295,15 +273,10 @@ export const updateStoredWindowName = async (
 export const removeStoredWindow = async (
   id: string,
 ): Promise<StoredWindow[]> => {
-  const { stored_windows: storedWindows } = (await chrome.storage.local.get(
-    ChromeLocalStorage.STORED_WINDOWS_KEY,
-  )) as StoredWindowsObject;
-
-  await chrome.storage.local.set({
-    [ChromeLocalStorage.STORED_WINDOWS_KEY]: storedWindows.filter(
-      (group) => group.internalUid !== id,
-    ),
-  });
+  const storedWindows = await ChromeLocalStorage.getStoredWindows();
+  await ChromeLocalStorage.updateStoredWindows(
+    storedWindows.filter((group) => group.internalUid !== id),
+  );
 
   return getStoredWindows();
 };

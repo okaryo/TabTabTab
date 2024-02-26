@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-misused-promises: 0 */
-
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import ClearIcon from "@mui/icons-material/Clear";

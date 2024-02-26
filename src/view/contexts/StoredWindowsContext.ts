@@ -9,6 +9,5 @@ type StoredWindowsContextType = {
 
 export const StoredWindowsContext = createContext<StoredWindowsContextType>({
   storedWindows: [],
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setStoredWindows: () => {},
 });

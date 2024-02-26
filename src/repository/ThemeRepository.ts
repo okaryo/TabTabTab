@@ -1,18 +1,14 @@
-import { ChromeLocalStorage, ThemeStorageObject } from "./ChromeStorage";
+import { ChromeLocalStorage } from "./ChromeStorage";
 
 type Theme = "light" | "dark";
 
 export const getTheme = async (): Promise<Theme> => {
-  const { theme } = (await chrome.storage.local.get(
-    ChromeLocalStorage.THEME_KEY,
-  )) as ThemeStorageObject;
+  const theme = await ChromeLocalStorage.getTheme();
   if (!theme) return "light";
 
-  return theme as Theme;
+  return theme;
 };
 
 export const updateTheme = (theme: Theme): Promise<void> => {
-  return chrome.storage.local.set({
-    [ChromeLocalStorage.THEME_KEY]: theme,
-  });
+  return ChromeLocalStorage.updateTheme(theme);
 };

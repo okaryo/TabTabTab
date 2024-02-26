@@ -10,7 +10,6 @@ export const useStoredTabGroups = () => {
       const storedTabGroups = await getStoredTabGroups();
       setStoredTabGroups(storedTabGroups);
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initState();
   }, []);
 
