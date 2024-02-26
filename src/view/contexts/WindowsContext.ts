@@ -9,6 +9,5 @@ type WindowsContextType = {
 
 export const WindowsContext = createContext<WindowsContextType>({
   windows: [],
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setWindows: () => {},
 });

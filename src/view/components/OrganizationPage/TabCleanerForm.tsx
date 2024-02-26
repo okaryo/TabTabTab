@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-floating-promises: 0 */
-
 import FormControl from "@mui/material/FormControl";
 import InputLabel from "@mui/material/InputLabel";
 import List from "@mui/material/List";

@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/no-floating-promises: 0 */
 import { cleanupTabLastAccesses } from "../repository/ChromeStorage";
 import {
   updateRecentActiveTabs,

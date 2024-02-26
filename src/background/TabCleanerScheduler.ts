@@ -11,7 +11,6 @@ export const activateTabCleanerScheduler = async () => {
     periodInMinutes: 1,
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   chrome.alarms.onAlarm.addListener(async (alarm) => {
     if (alarm.name !== tabCleanerAlarmName) return;
 

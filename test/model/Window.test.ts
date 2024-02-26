@@ -1,4 +1,3 @@
-/* eslint @typescript-eslint/no-unsafe-argument: 0, @typescript-eslint/no-explicit-any: 0 */
 import {
   findParentContainer,
   findPinned,

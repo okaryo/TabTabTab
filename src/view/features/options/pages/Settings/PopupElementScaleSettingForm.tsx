@@ -40,7 +40,6 @@ const PopupFontAndIconScaleSettingForm = () => {
       const scale = await getPopupElementScaleSetting();
       setSettingState(scale.toString());
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     setSetting();
   }, []);
 
@@ -127,7 +126,6 @@ const PopupFontAndIconScaleSettingForm = () => {
             disabled={submissionState.isLoading}
             sx={{ textTransform: "none" }}
             disableElevation
-            // eslint-disable-next-line @typescript-eslint/no-misused-promises
             onClick={onSave}
           >
             {submissionState.isLoading ? `${t.saving}...` : t.save}

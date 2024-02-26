@@ -9,6 +9,5 @@ type ThemeContextType = {
 
 export const ThemeContext = createContext<ThemeContextType>({
   theme: null,
-  // eslint-disable-next-line @typescript-eslint/no-empty-function
   setTheme: () => {},
 });

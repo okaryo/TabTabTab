@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-misused-promises: 0 */
-
 import { parse } from "tldts";
 
 import { TabGroupSetting } from "../model/TabGroupSetting";

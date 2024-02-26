@@ -10,7 +10,6 @@ export const useStoredWindows = () => {
       const storedWindows = await getStoredWindows();
       setStoredWindows(storedWindows);
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initState();
   }, []);
 

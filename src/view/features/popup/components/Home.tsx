@@ -23,7 +23,6 @@ const Home = () => {
     const initState = async () => {
       setPopupSizeState(await getPopupSizeSetting());
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initState();
   }, []);
 

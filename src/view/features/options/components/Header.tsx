@@ -20,7 +20,6 @@ const Header = () => {
           TabTabTab
         </Typography>
         <IconButton
-          // eslint-disable-next-line @typescript-eslint/no-misused-promises
           onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
           color="inherit"
         >

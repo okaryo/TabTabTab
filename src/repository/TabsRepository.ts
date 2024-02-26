@@ -1,5 +1,3 @@
-/* eslint @typescript-eslint/no-floating-promises: 0 */
-
 import { Tab, TabId } from "../model/Tab";
 import { WindowId } from "../model/Window";
 
@@ -245,13 +243,11 @@ export const addListenerOnUpdateTabs = (callback: () => Promise<void>) => {
   const listener = async () => {
     await callback();
   };
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   chrome.tabs.onUpdated.addListener(listener);
 
   return listener;
 };
 
 export const removeListenerOnUpdateTabs = (listener: () => Promise<void>) => {
-  // eslint-disable-next-line @typescript-eslint/no-misused-promises
   chrome.tabs.onUpdated.removeListener(listener);
 };

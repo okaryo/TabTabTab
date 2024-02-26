@@ -28,7 +28,6 @@ export const useWindows = () => {
       const windows = await getWindows();
       setWindows(windows);
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initState();
 
     const listenerOnUpdateTabs = addListenerOnUpdateTabs(async () => {

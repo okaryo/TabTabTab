@@ -11,7 +11,6 @@ export const useTheme = () => {
     const initState = async () => {
       setState(await getTheme());
     };
-    // eslint-disable-next-line @typescript-eslint/no-floating-promises
     initState();
   }, []);
 

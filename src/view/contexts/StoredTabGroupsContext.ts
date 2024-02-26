@@ -10,7 +10,6 @@ type StoredTabGroupsContextType = {
 export const StoredTabGroupsContext = createContext<StoredTabGroupsContextType>(
   {
     storedTabGroups: [],
-    // eslint-disable-next-line @typescript-eslint/no-empty-function
     setStoredTabGroups: () => {},
   },
 );
