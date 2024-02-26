@@ -34,7 +34,7 @@ const Feedback = () => {
 
   return (
     <Stack spacing={2}>
-      {feedbacks.map((feedback, index) => {
+      {feedbacks.map((feedback) => {
         return (
           <CardActionArea>
             <Link

@@ -130,39 +130,6 @@ export const indexOfWindowChild = (
   }, 0);
 };
 
-export const updateLastActivatedAtOfTab = (
-  windows: Window[],
-  tabId: number,
-  lastActivatedAt: Date,
-): Window[] => {
-  return windows.map((window) => {
-    window.children = window.children.map((child) => {
-      if (isTabContainer(child)) {
-        return {
-          ...child,
-          children: child.children.map((tab) => {
-            if (tab.id === tabId) {
-              return {
-                ...tab,
-                lastActivatedAt,
-              };
-            }
-            return tab;
-          }),
-        };
-      }
-      if (child.id === tabId) {
-        return {
-          ...child,
-          lastActivatedAt,
-        };
-      }
-      return child;
-    });
-    return window;
-  });
-};
-
 export const findTabsByTitleOrUrl = (
   windows: Window[],
   value: string,
