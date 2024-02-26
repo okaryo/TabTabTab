@@ -18,14 +18,14 @@ import Typography from "@mui/material/Typography";
 import grey from "@mui/material/colors/grey";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useRef, useState } from "react";
-
 import { GroupColor } from "../../model/GroupColor";
 import { TabGroup } from "../../model/TabContainer";
-import { useCollapseTabGroup } from "../hooks/useCollapseTabGroup";
-import { useExpandTabGroup } from "../hooks/useExpandTabGroup";
-import { useUpdateTabGroupColor } from "../hooks/useUpdateTabGroupColor";
-import { useUpdateTabGroupTitle } from "../hooks/useUpdateTabGroupTitle";
-
+import {
+  collapseTabGroup,
+  expandTabGroup,
+  updateTabGroupColor,
+  updateTabGroupTitle,
+} from "../../repository/TabGroupRepository";
 import { TabGroupActionMenu } from "./ActionMenu";
 
 type TabGroupContainerProps = {
@@ -35,17 +35,11 @@ type TabGroupContainerProps = {
 
 const TabGroupContainer = (props: TabGroupContainerProps) => {
   const { children, tabGroup } = props;
-
   const editGroupFormRef = useRef<HTMLDivElement>(null);
   const [groupName, setGroupName] = useState(tabGroup.name);
   const [editMode, setEditMode] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
-
   const theme = useTheme();
-  const collapseTabGroup = useCollapseTabGroup();
-  const expandTabGroup = useExpandTabGroup();
-  const updateTabGroupTitle = useUpdateTabGroupTitle();
-  const updateTabGroupColor = useUpdateTabGroupColor();
 
   const toggleCollapsedStatus = () => {
     if (editMode) {

@@ -25,10 +25,10 @@ import { GroupColor } from "../../../model/GroupColor";
 import { StoredTabGroup } from "../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import { useRemoveStoredTabGroup } from "../../hooks/useRemoveStoredTabGroup";
-import { useRestoreTabGroup } from "../../hooks/useRestoreTabGroup";
 import { useUpdateStoredTabGroupColor } from "../../hooks/useUpdateStoredTabGroupColor";
 import { useUpdateStoredTabGroupName } from "../../hooks/useUpdateStoredTabGroupName";
 
+import { restoreTabGroup } from "../../../repository/TabGroupRepository";
 import { StoredGridTabItem } from "./StoredGridItem";
 
 type StoredTabGroupsProps = {
@@ -73,7 +73,6 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
   const [expanded, setExpanded] = useState(index === 0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const restoreTabGroup = useRestoreTabGroup();
   const removeStoredTabGroup = useRemoveStoredTabGroup();
   const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();

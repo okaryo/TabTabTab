@@ -1,9 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
-
 import { Window } from "../../model/Window";
 import {
-  addListenerOnUpdateTabs,
-  removeListenerOnUpdateTabs,
+  addListenerOnChangeTabs,
+  removeListenerOnChangeTabs,
 } from "../../repository/TabsRepository";
 import { getWindows } from "../../repository/WindowsRepository";
 
@@ -24,12 +23,12 @@ export const useWindows = () => {
     };
     initState();
 
-    const listenerOnUpdateTabs = addListenerOnUpdateTabs(async () => {
+    const listenerOnChangeTabs = addListenerOnChangeTabs(async () => {
       const windows = await getWindows();
       setWindows(windows);
     });
 
-    return () => removeListenerOnUpdateTabs(listenerOnUpdateTabs);
+    return () => removeListenerOnChangeTabs(listenerOnChangeTabs);
   }, [setWindows]);
 
   return {
