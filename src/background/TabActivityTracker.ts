@@ -1,5 +1,5 @@
-import { cleanupTabLastAccesses } from "../repository/ChromeStorage";
 import {
+  cleanupTabLastActivatedAt,
   updateRecentActiveTabs,
   updateTabLastActivatedAt,
 } from "../repository/TabsRepository";
@@ -19,6 +19,6 @@ export const addTabAccessesListener = () => {
     updateRecentActiveTabs(tabId);
   });
   chrome.tabs.onRemoved.addListener((tabId) => {
-    cleanupTabLastAccesses(tabId);
+    cleanupTabLastActivatedAt(tabId);
   });
 };

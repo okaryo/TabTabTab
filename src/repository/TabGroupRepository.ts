@@ -2,7 +2,7 @@ import { GroupColor } from "../model/GroupColor";
 import { StoredTabGroup, TabGroup } from "../model/TabContainer";
 import { WindowId } from "../model/Window";
 
-import { ChromeLocalStorage, StoredTabGroupsObject } from "./ChromeStorage";
+import { ChromeLocalStorage } from "./ChromeStorage";
 
 export const collapseTabGroup = async (groupId: number): Promise<void> => {
   await chrome.tabGroups.update(groupId, { collapsed: true });
@@ -61,10 +61,7 @@ export const closeTabGroup = async (tabGroup: TabGroup) => {
 };
 
 export const getStoredTabGroups = async (): Promise<StoredTabGroup[]> => {
-  const { stored_tab_groups: storedTabGroups } =
-    (await chrome.storage.local.get(
-      ChromeLocalStorage.STORED_TAB_GROUPS_KEY,
-    )) as StoredTabGroupsObject;
+  const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
   if (!storedTabGroups) return [];
 
   return storedTabGroups.map((group) => {
@@ -86,30 +83,24 @@ export const getStoredTabGroups = async (): Promise<StoredTabGroup[]> => {
 export const saveStoredTabGroup = async (
   tabGroup: TabGroup,
 ): Promise<StoredTabGroup[]> => {
-  const { stored_tab_groups: storedTabGroups } =
-    (await chrome.storage.local.get(
-      ChromeLocalStorage.STORED_TAB_GROUPS_KEY,
-    )) as StoredTabGroupsObject;
-
-  await chrome.storage.local.set({
-    [ChromeLocalStorage.STORED_TAB_GROUPS_KEY]: [
-      {
-        type: "tabGroup",
+  const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
+  await ChromeLocalStorage.updateStoredTabGroups([
+    {
+      type: "tabGroup",
+      internalUid: crypto.randomUUID(),
+      storedAt: new Date().toISOString(),
+      name: tabGroup.name,
+      color: tabGroup.color.value,
+      children: tabGroup.children.map((tab) => ({
+        type: "tab",
         internalUid: crypto.randomUUID(),
-        storedAt: new Date().toISOString(),
-        name: tabGroup.name,
-        color: tabGroup.color.value,
-        children: tabGroup.children.map((tab) => ({
-          type: "tab",
-          internalUid: crypto.randomUUID(),
-          title: tab.title,
-          url: tab.url.toString(),
-          favIconUrl: tab.favIconUrl?.toString(),
-        })),
-      },
-      ...(storedTabGroups ?? []),
-    ],
-  });
+        title: tab.title,
+        url: tab.url.toString(),
+        favIconUrl: tab.favIconUrl?.toString(),
+      })),
+    },
+    ...(storedTabGroups ?? []),
+  ]);
 
   return getStoredTabGroups();
 };
@@ -118,13 +109,9 @@ export const updateStoredTabGroupName = async (
   id: string,
   name: string,
 ): Promise<StoredTabGroup[]> => {
-  const { stored_tab_groups: storedTabGroups } =
-    (await chrome.storage.local.get(
-      ChromeLocalStorage.STORED_TAB_GROUPS_KEY,
-    )) as StoredTabGroupsObject;
-
-  await chrome.storage.local.set({
-    [ChromeLocalStorage.STORED_TAB_GROUPS_KEY]: storedTabGroups.map((group) => {
+  const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
+  await ChromeLocalStorage.updateStoredTabGroups(
+    storedTabGroups.map((group) => {
       if (group.internalUid === id) {
         return {
           ...group,
@@ -133,7 +120,7 @@ export const updateStoredTabGroupName = async (
       }
       return group;
     }),
-  });
+  );
 
   return getStoredTabGroups();
 };
@@ -142,13 +129,9 @@ export const updateStoredTabGroupColor = async (
   id: string,
   color: GroupColor,
 ): Promise<StoredTabGroup[]> => {
-  const { stored_tab_groups: storedTabGroups } =
-    (await chrome.storage.local.get(
-      ChromeLocalStorage.STORED_TAB_GROUPS_KEY,
-    )) as StoredTabGroupsObject;
-
-  await chrome.storage.local.set({
-    [ChromeLocalStorage.STORED_TAB_GROUPS_KEY]: storedTabGroups.map((group) => {
+  const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
+  await ChromeLocalStorage.updateStoredTabGroups(
+    storedTabGroups.map((group) => {
       if (group.internalUid === id) {
         return {
           ...group,
@@ -157,7 +140,7 @@ export const updateStoredTabGroupColor = async (
       }
       return group;
     }),
-  });
+  );
 
   return getStoredTabGroups();
 };
@@ -165,16 +148,10 @@ export const updateStoredTabGroupColor = async (
 export const removeStoredTabGroup = async (
   id: string,
 ): Promise<StoredTabGroup[]> => {
-  const { stored_tab_groups: storedTabGroups } =
-    (await chrome.storage.local.get(
-      ChromeLocalStorage.STORED_TAB_GROUPS_KEY,
-    )) as StoredTabGroupsObject;
-
-  await chrome.storage.local.set({
-    [ChromeLocalStorage.STORED_TAB_GROUPS_KEY]: storedTabGroups.filter(
-      (group) => group.internalUid !== id,
-    ),
-  });
+  const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
+  await ChromeLocalStorage.updateStoredTabGroups(
+    storedTabGroups.filter((group) => group.internalUid !== id),
+  );
 
   return getStoredTabGroups();
 };
