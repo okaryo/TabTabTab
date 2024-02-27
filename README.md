@@ -36,9 +36,10 @@ TabTabTab is a Chrome extension that supports your browsing by improving tab man
 * Screenshot Tool: Quickly capture the active tab's visible area.
 * Efficient Navigation & Search: Jump to or find your desired tabs in seconds.
 * Automatic Cleanup: Auto-remove tabs you haven't accessed based on your preferences.
+* Side Panel Tab Overview: Easily access a list of your tabs through a convenient side panel.
 * Dark Mode: Switch to a darker, more focused look whenever you wish.
 
-### 👀 ScreenShots(v2.28.0)
+### 👀 ScreenShots(v2.29.0)
 
 ![ScreenShot1](./docs/screenshot1.png)
 ![ScreenShot2](./docs/screenshot2.png)
