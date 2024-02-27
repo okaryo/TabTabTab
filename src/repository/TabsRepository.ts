@@ -112,7 +112,10 @@ export const updateRecentActiveTabs = async (tabId: number) => {
 
   const serializedTab = serializeTab(tab);
   const recentActiveTabs = await ChromeSessionStorage.getRecentActiveTabs();
-  if (!recentActiveTabs) return [];
+  if (!recentActiveTabs) {
+    await ChromeSessionStorage.updateRecentActiveTabs([serializedTab]);
+    return;
+  }
 
   const uniqueTabs = recentActiveTabs.filter((recentActiveTab) => {
     const isDuplicated =
