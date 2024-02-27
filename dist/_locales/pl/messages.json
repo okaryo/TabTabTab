@@ -119,6 +119,14 @@
     "message": "Ostatnio aktywne karty",
     "description": "Recently active tab headings to display in search results"
   },
+  "open_side_panel": {
+    "message": "Otwórz panel boczny",
+    "description": "Action text to open the side panel."
+  },
+  "open_dashboard": {
+    "message": "Otwórz pulpit nawigacyjny",
+    "description": "Action text to open the dashboard."
+  },
   "copy_url": {
     "message": "Skopiuj URL",
     "description": "Displayed within the action menu for tabs."

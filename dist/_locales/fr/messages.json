@@ -119,6 +119,14 @@
     "message": "Onglets récents",
     "description": "Recently active tab headings to display in search results"
   },
+  "open_side_panel": {
+    "message": "Ouvrir le panneau latéral",
+    "description": "Action text to open the side panel."
+  },
+  "open_dashboard": {
+    "message": "Ouvrir le tableau de bord",
+    "description": "Action text to open the dashboard."
+  },
   "copy_url": {
     "message": "Copier l'URL",
     "description": "Displayed within the action menu for tabs."
