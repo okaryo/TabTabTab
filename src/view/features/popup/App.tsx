@@ -1,11 +1,9 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { useEffect } from "react";
-
 import { ThemeContext } from "../../contexts/ThemeContext";
 import { WindowsContext } from "../../contexts/WindowsContext";
 import { useTheme } from "../../hooks/useTheme";
 import { useWindows } from "../../hooks/useWindows";
-
 import Home from "./components/Home";
 import PopupThemeProvider from "./components/ThemeProvider";
 
@@ -21,17 +19,19 @@ const Provider = ({ children }: { children: React.ReactNode }) => {
   );
 };
 
-const BasePage = () => {
+const BasePage = ({ sidePanel }: { sidePanel: boolean }) => {
   return (
     <>
       <CssBaseline />
-      <Home />
+      <Home sidePanel={sidePanel} />
     </>
   );
 };
 
-export default function App() {
+const App = ({ sidePanel = false }) => {
   useEffect(() => {
+    if (sidePanel) return;
+
     const closePopupOnOtherWindowFocused = () => {
       chrome.windows.onFocusChanged.addListener((windowId) => {
         const isNoWindowFocused = windowId === chrome.windows.WINDOW_ID_NONE;
@@ -41,11 +41,13 @@ export default function App() {
       });
     };
     closePopupOnOtherWindowFocused();
-  }, []);
+  }, [sidePanel]);
 
   return (
     <Provider>
-      <BasePage />
+      <BasePage sidePanel={sidePanel} />
     </Provider>
   );
-}
+};
+
+export default App;

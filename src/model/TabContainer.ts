@@ -1,5 +1,6 @@
 import { GroupColor } from "./GroupColor";
 import { StoredTab, Tab } from "./Tab";
+import { WindowId } from "./Window";
 
 export type TabContainerId = TabGroupId | PinnedId;
 export type TabContainer = {
@@ -22,7 +23,7 @@ export type StoredTabGroup = StoredTabContainer &
 export type StoredTabGroupInWindow = Omit<StoredTabGroup, "storedAt">;
 
 // NOTE: PinnedId format is `pinned-${windowId}`.
-type PinnedId = string;
+type PinnedId = `pinned-${WindowId}`;
 export type Pinned = TabContainer & {
   id: PinnedId;
 };
@@ -35,7 +36,8 @@ export type TabGroup = TabContainer & {
   collapsed: boolean;
 };
 
-export const generatePinnedId = (windowId: number) => `pinned-${windowId}`;
+export const generatePinnedId = (windowId: number): `pinned-${number}` =>
+  `pinned-${windowId}`;
 
 export const isPinnedId = (value: string | number): value is PinnedId => {
   return typeof value === "string" && value.startsWith("pinned");

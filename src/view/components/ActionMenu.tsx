@@ -6,17 +6,23 @@ import InputIcon from "@mui/icons-material/Input";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PushPinIcon from "@mui/icons-material/PushPin";
+import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import SyncIcon from "@mui/icons-material/Sync";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
+import SvgIcon from "@mui/material/SvgIcon";
 import React from "react";
 import t from "../../i18n/Translations";
 import { Tab } from "../../model/Tab";
 import { Pinned, TabGroup } from "../../model/TabContainer";
 import { Window } from "../../model/Window";
+import {
+  navigateToOptionsPage,
+  openSidePanel,
+} from "../../repository/SettingsRepository";
 import { closeTabGroup, ungroup } from "../../repository/TabGroupRepository";
 import {
   addTabToNewGroup,
@@ -225,7 +231,7 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
       type: "MenuItem",
       label: t.saveWindow,
       icon: <SyncIcon fontSize="small" />,
-      action: () => saveWindow(window, `${t.window}${currentIndex}`),
+      action: () => saveWindow(window),
     },
     !isLastWindow && {
       type: "MenuItem",
@@ -247,6 +253,54 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
       label: t.closeWindow,
       icon: <CancelPresentationIcon fontSize="small" />,
       action: () => closeWindow(window),
+    },
+  ];
+
+  return (
+    <ActionMenu
+      items={items}
+      isOpenMenu={isOpenMenu}
+      anchorElement={anchorElement}
+      onCloseMenu={onCloseMenu}
+    />
+  );
+};
+
+type PopupHeaderActionMenuProps = Omit<ActionMenuProps, "items"> & {
+  currentWindowId: number;
+};
+export const PopupHeaderActionMenu = (props: PopupHeaderActionMenuProps) => {
+  const { currentWindowId, isOpenMenu, anchorElement, onCloseMenu } = props;
+
+  const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.openSidePanel,
+      icon: (
+        <SvgIcon fontSize="small">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="SidePanel"
+            height="24"
+            viewBox="0 -960 960 960"
+            width="24"
+            fill="currentColor"
+          >
+            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm360-80v-560H200v560h360Z" />
+          </svg>
+        </SvgIcon>
+      ),
+      action: () => {
+        openSidePanel(currentWindowId);
+        window.close();
+      },
+    },
+    {
+      type: "MenuItem",
+      label: t.openDashboard,
+      icon: <SpaceDashboardIcon fontSize="small" />,
+      action: () => navigateToOptionsPage(),
     },
   ];
 

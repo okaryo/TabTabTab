@@ -29,3 +29,7 @@ export const updatePopupElementScaleSetting = (
 export const navigateToOptionsPage = () => {
   chrome.runtime.openOptionsPage();
 };
+
+export const openSidePanel = (windowId: number) => {
+  chrome.sidePanel.open({ windowId });
+};
