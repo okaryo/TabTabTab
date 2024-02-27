@@ -102,6 +102,12 @@ class Translations {
   get recentActiveTabsHeader() {
     return chrome.i18n.getMessage("recent_active_tabs_header");
   }
+  get openSidePanel() {
+    return chrome.i18n.getMessage("open_side_panel");
+  }
+  get openDashboard() {
+    return chrome.i18n.getMessage("open_dashboard");
+  }
   get copyUrl() {
     return chrome.i18n.getMessage("copy_url");
   }

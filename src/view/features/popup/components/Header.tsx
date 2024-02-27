@@ -3,6 +3,7 @@ import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import ClearIcon from "@mui/icons-material/Clear";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
 import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import SyncIcon from "@mui/icons-material/Sync";
@@ -13,16 +14,17 @@ import InputBase from "@mui/material/InputBase";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
-import { useContext } from "react";
-
+import { useContext, useState } from "react";
 import t from "../../../../i18n/Translations";
 import { navigateToOptionsPage } from "../../../../repository/SettingsRepository";
+import { PopupHeaderActionMenu } from "../../../components/ActionMenu";
 import { ThemeContext } from "../../../contexts/ThemeContext";
+import { WindowsContext } from "../../../contexts/WindowsContext";
 import { useToggleTheme } from "../../../hooks/useToggleTheme";
-
 import { PopupPage } from "./Home";
 
 type HeaderProps = {
+  sidePanel: boolean;
   currentPage: PopupPage;
   searchText: string;
   setCurrentPage: (page: PopupPage) => void;
@@ -62,15 +64,58 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const Header = (props: HeaderProps) => {
-  const { currentPage, searchText, setCurrentPage, setSearchText } = props;
+  const { sidePanel, currentPage, searchText, setCurrentPage, setSearchText } =
+    props;
+  const { windows } = useContext(WindowsContext);
   const { theme } = useContext(ThemeContext);
   const toggleTheme = useToggleTheme();
+  const currentWindow = windows && windows.length > 0 ? windows[0] : null;
 
   const onInputSearchField = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
   };
   const onClearSearchText = () => {
     setSearchText("");
+  };
+
+  const BasicIcons = () => {
+    const [menuAnchorElement, setMenuAnchorElement] =
+      useState<HTMLElement | null>(null);
+    const onClickActionMenu = (event: React.MouseEvent<HTMLElement>) => {
+      setMenuAnchorElement(event.currentTarget);
+    };
+    const onCloseMenu = () => setMenuAnchorElement(null);
+
+    return (
+      <>
+        <IconButton
+          color="inherit"
+          onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
+        >
+          {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+        </IconButton>
+        {sidePanel && (
+          <IconButton color="inherit" onClick={() => navigateToOptionsPage()}>
+            <SpaceDashboardIcon />
+          </IconButton>
+        )}
+        {!sidePanel && (
+          <>
+            <IconButton color="inherit" onClick={onClickActionMenu}>
+              <MoreVertIcon />
+            </IconButton>
+            {currentWindow && (
+              <PopupHeaderActionMenu
+                currentWindowId={currentWindow.id}
+                isOpenMenu={Boolean(menuAnchorElement)}
+                anchorElement={menuAnchorElement}
+                onCloseMenu={onCloseMenu}
+              />
+            )}
+          </>
+        )}
+      </>
+    );
   };
 
   if (["restore", "organization"].includes(currentPage)) {
@@ -88,15 +133,7 @@ const Header = (props: HeaderProps) => {
             {currentPage === "restore" && t.optionsNavigationRestore}
             {currentPage === "organization" && t.optionsNavigationOrganization}
           </Typography>
-          <IconButton
-            color="inherit"
-            onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
-          >
-            {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-          </IconButton>
-          <IconButton color="inherit" onClick={() => navigateToOptionsPage()}>
-            <SpaceDashboardIcon />
-          </IconButton>
+          <BasicIcons />
         </Toolbar>
       </AppBar>
     );
@@ -142,15 +179,7 @@ const Header = (props: HeaderProps) => {
             </IconButton>
           </>
         )}
-        <IconButton
-          color="inherit"
-          onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
-        >
-          {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-        </IconButton>
-        <IconButton color="inherit" onClick={() => navigateToOptionsPage()}>
-          <SpaceDashboardIcon />
-        </IconButton>
+        <BasicIcons />
       </Toolbar>
     </AppBar>
   );

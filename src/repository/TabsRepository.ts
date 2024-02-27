@@ -231,6 +231,7 @@ export const addListenerOnChangeTabs = (callback: () => Promise<void>) => {
   };
   chrome.tabs.onCreated.addListener(listener);
   chrome.tabs.onActivated.addListener(listener);
+  chrome.tabs.onAttached.addListener(listener);
   chrome.tabs.onUpdated.addListener(listener);
   chrome.tabs.onMoved.addListener(listener);
   chrome.tabs.onRemoved.addListener(listener);
@@ -243,6 +244,7 @@ export const addListenerOnChangeTabs = (callback: () => Promise<void>) => {
 export const removeListenerOnChangeTabs = (listener: () => Promise<void>) => {
   chrome.tabs.onCreated.removeListener(listener);
   chrome.tabs.onActivated.removeListener(listener);
+  chrome.tabs.onAttached.removeListener(listener);
   chrome.tabs.onUpdated.removeListener(listener);
   chrome.tabs.onMoved.removeListener(listener);
   chrome.tabs.onRemoved.removeListener(listener);

@@ -119,6 +119,14 @@
     "message": "最近のタブ",
     "description": "Recently active tab headings to display in search results"
   },
+  "open_side_panel": {
+    "message": "サイドパネルを開く",
+    "description": "Action text to open the side panel."
+  },
+  "open_dashboard": {
+    "message": "ダッシュボードを開く",
+    "description": "Action text to open the dashboard."
+  },
   "copy_url": {
     "message": "リンクをコピー",
     "description": "Displayed within the action menu for tabs."

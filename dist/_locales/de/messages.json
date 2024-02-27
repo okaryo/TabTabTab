@@ -119,6 +119,14 @@
     "message": "Kürzlich Tabs",
     "description": "Recently active tab headings to display in search results"
   },
+  "open_side_panel": {
+    "message": "Seitenpanel öffnen",
+    "description": "Action text to open the side panel."
+  },
+  "open_dashboard": {
+    "message": "Dashboard öffnen",
+    "description": "Action text to open the dashboard."
+  },
   "copy_url": {
     "message": "Kopiere URL",
     "description": "Displayed within the action menu for tabs."
