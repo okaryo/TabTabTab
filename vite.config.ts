@@ -16,6 +16,10 @@ export default defineConfig(({ mode }) => {
       rollupOptions: {
         input: {
           popup: path.resolve(__dirname, "src/view/features/popup/index.tsx"),
+          sidePanel: path.resolve(
+            __dirname,
+            "src/view/features/sidePanel/index.tsx",
+          ),
           options: path.resolve(
             __dirname,
             "src/view/features/options/index.tsx",

@@ -20,8 +20,12 @@
     "activeTab",
     "tabGroups",
     "tabs",
-    "storage"
+    "storage",
+    "sidePanel"
   ],
+  "side_panel": {
+    "default_path": "side_panel.html"
+  },
   "background" : {
     "service_worker" : "js/background.js",
     "type": "module"
