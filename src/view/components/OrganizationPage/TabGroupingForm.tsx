@@ -10,16 +10,15 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
 import { useEffect, useState } from "react";
-
 import t from "../../../i18n/Translations";
 import { TabGroupSetting } from "../../../model/TabGroupSetting";
 import {
   addListenerOnUpdateTabGroupSetting,
   getTabGroupSetting,
+  groupTabsBySetting,
   removeListenerOnUpdateTabGroupSetting,
   updateTabGroupSetting,
 } from "../../../repository/TabGroupSettingRepository";
-import { useGroupTabsNow } from "../../hooks/useGroupTabsNow";
 import PaperWithHeader from "../PaperWithHeader";
 
 type TabGroupingFormProps = {
@@ -29,7 +28,6 @@ type TabGroupingFormProps = {
 const TabGroupingForm = (props: TabGroupingFormProps) => {
   const { dense } = props;
   const [setting, setSetting] = useState<TabGroupSetting>(null);
-  const groupTabsNow = useGroupTabsNow();
 
   useEffect(() => {
     const fetchSettings = async () => {
@@ -50,7 +48,7 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
   const onChangeSwitch = (key: keyof TabGroupSetting) => {
     const newSetting = { ...setting, [key]: !setting[key] };
     if (key === "enabledAutoGrouping" && newSetting[key]) {
-      groupTabsNow(newSetting);
+      groupTabsBySetting(newSetting);
     }
     updateSetting(newSetting);
   };
@@ -81,7 +79,7 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
                 sx={{
                   textTransform: "none",
                 }}
-                onClick={() => groupTabsNow(setting)}
+                onClick={() => groupTabsBySetting(setting)}
               >
                 {t.tabGroupingGroupTabsNow}
               </Button>

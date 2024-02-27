@@ -13,24 +13,24 @@ import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import React from "react";
-
 import t from "../../i18n/Translations";
 import { Tab } from "../../model/Tab";
 import { Pinned, TabGroup } from "../../model/TabContainer";
 import { Window } from "../../model/Window";
-import { screenshotVisibleArea } from "../../repository/TabsRepository";
-import { useCloseWindow } from "../features/options/hooks/useCloseWindow";
-import { useAddTabToNewGroup } from "../hooks/useAddTabToNewGroup";
-import { useCloseAllTabs } from "../hooks/useCloseAllTabs";
-import { useCloseTabGroup } from "../hooks/useCloseTabGroup";
-import { useMergeWindow } from "../hooks/useMergeWindow";
-import { usePinTab } from "../hooks/usePinTab";
-import { useRemoveFromTabGroup } from "../hooks/useRemoveFromTabGroup";
+import { closeTabGroup, ungroup } from "../../repository/TabGroupRepository";
+import {
+  addTabToNewGroup,
+  closeTabs,
+  pinTab,
+  removeFromGroup,
+  screenshotVisibleArea,
+  unpinAllTabs,
+  unpinTab,
+} from "../../repository/TabsRepository";
+import { closeWindow } from "../../repository/WindowsRepository";
+import { mergeWindow } from "../functions/mergeWindow";
 import { useSaveStoredTabGroup } from "../hooks/useSaveStoredTabGroup";
 import { useSaveStoredWindow } from "../hooks/useSaveStoredWindow";
-import { useUngroup } from "../hooks/useUngroup";
-import { useUnpinAllTabs } from "../hooks/useUnpinAllTabs";
-import { useUnpinTab } from "../hooks/useUnpinTab";
 
 type ActionMenuItemAttrs =
   | {
@@ -81,10 +81,6 @@ const ActionMenuItem = (props: ActionMenuItemProps) => {
 export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
   const { tab, isOpenMenu, anchorElement, onCloseMenu } = props;
 
-  const pinTab = usePinTab();
-  const unpinTab = useUnpinTab();
-  const addTabToNewGroup = useAddTabToNewGroup();
-  const removeFromTabGroup = useRemoveFromTabGroup();
   const items: ActionMenuItemAttrs[] = [
     {
       type: "MenuItem",
@@ -108,7 +104,7 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
       type: "MenuItem",
       label: t.removeFromGroup,
       icon: <CropFreeIcon fontSize="small" />,
-      action: () => removeFromTabGroup(tab.id),
+      action: () => removeFromGroup(tab.id),
     },
     !tab.groupId && {
       type: "MenuItem",
@@ -148,8 +144,6 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
 export const PinnedActionMenu = (props: PinnedActionMenuProps) => {
   const { pinned, isOpenMenu, anchorElement, onCloseMenu } = props;
 
-  const unpinAllTabs = useUnpinAllTabs();
-  const closeAllTabs = useCloseAllTabs();
   const items: ActionMenuItemAttrs[] = [
     {
       type: "MenuItem",
@@ -164,7 +158,7 @@ export const PinnedActionMenu = (props: PinnedActionMenuProps) => {
       type: "MenuItem",
       label: t.closeAll,
       icon: <HighlightOffIcon fontSize="small" />,
-      action: () => closeAllTabs(pinned.children),
+      action: () => closeTabs(pinned.children.map((tab) => tab.id)),
     },
   ];
 
@@ -182,8 +176,6 @@ export const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
   const { tabGroup, isOpenMenu, anchorElement, onCloseMenu } = props;
 
   const saveTabGroup = useSaveStoredTabGroup();
-  const ungroup = useUngroup();
-  const closeTabGroup = useCloseTabGroup();
 
   const items: ActionMenuItemAttrs[] = [
     {
@@ -227,8 +219,6 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   const isLastWindow = currentIndex === windows.length - 1;
 
   const saveWindow = useSaveStoredWindow();
-  const mergeWindow = useMergeWindow();
-  const closeWindow = useCloseWindow();
 
   const items: ActionMenuItemAttrs[] = [
     {

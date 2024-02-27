@@ -1,6 +1,5 @@
 import { Tab, TabId } from "../model/Tab";
 import { WindowId } from "../model/Window";
-
 import { ChromeSessionStorage, ChromeStorage } from "./ChromeStorage";
 
 export const focusTab = async (tab: Tab) => {
@@ -16,11 +15,11 @@ export const focusTab = async (tab: Tab) => {
   }
 };
 
-export const removeTab = async (tabId: number) => {
+export const closeTab = async (tabId: number) => {
   await chrome.tabs.remove(tabId);
 };
 
-export const removeTabs = async (tabIds: number[]) => {
+export const closeTabs = async (tabIds: number[]) => {
   await chrome.tabs.remove(tabIds);
 };
 
@@ -68,7 +67,7 @@ export const moveTab = async (
   await chrome.tabs.move(tabId, { windowId, index });
 };
 
-export const addToNewGroup = async (tabId: number, windowId: number) => {
+export const addTabToNewGroup = async (tabId: number, windowId: number) => {
   await chrome.tabs.group({ tabIds: [tabId], createProperties: { windowId } });
 };
 
@@ -98,11 +97,6 @@ export const unpinAllTabs = async (tabs: Tab[]) => {
   }
 };
 
-export const closeAllTabs = async (tabs: Tab[]) => {
-  const ids = tabs.map((tab) => tab.id);
-  await chrome.tabs.remove(ids);
-};
-
 export const getRecentActiveTabs = async (): Promise<Tab[]> => {
   const recentActiveTabs = await ChromeSessionStorage.getRecentActiveTabs();
   if (!recentActiveTabs) return [];
@@ -118,7 +112,10 @@ export const updateRecentActiveTabs = async (tabId: number) => {
 
   const serializedTab = serializeTab(tab);
   const recentActiveTabs = await ChromeSessionStorage.getRecentActiveTabs();
-  if (!recentActiveTabs) return [];
+  if (!recentActiveTabs) {
+    await ChromeSessionStorage.updateRecentActiveTabs([serializedTab]);
+    return;
+  }
 
   const uniqueTabs = recentActiveTabs.filter((recentActiveTab) => {
     const isDuplicated =
@@ -228,15 +225,27 @@ const deserializeToTab = (
   };
 };
 
-export const addListenerOnUpdateTabs = (callback: () => Promise<void>) => {
+export const addListenerOnChangeTabs = (callback: () => Promise<void>) => {
   const listener = async () => {
     await callback();
   };
+  chrome.tabs.onCreated.addListener(listener);
+  chrome.tabs.onActivated.addListener(listener);
   chrome.tabs.onUpdated.addListener(listener);
+  chrome.tabs.onMoved.addListener(listener);
+  chrome.tabs.onRemoved.addListener(listener);
+  chrome.tabGroups.onUpdated.addListener(listener);
+  chrome.windows.onFocusChanged.addListener(listener);
 
   return listener;
 };
 
-export const removeListenerOnUpdateTabs = (listener: () => Promise<void>) => {
+export const removeListenerOnChangeTabs = (listener: () => Promise<void>) => {
+  chrome.tabs.onCreated.removeListener(listener);
+  chrome.tabs.onActivated.removeListener(listener);
   chrome.tabs.onUpdated.removeListener(listener);
+  chrome.tabs.onMoved.removeListener(listener);
+  chrome.tabs.onRemoved.removeListener(listener);
+  chrome.tabGroups.onUpdated.removeListener(listener);
+  chrome.windows.onFocusChanged.removeListener(listener);
 };

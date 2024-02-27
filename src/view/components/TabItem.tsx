@@ -12,15 +12,12 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import grey from "@mui/material/colors/grey";
 import { forwardRef, useContext, useState } from "react";
-
 import t from "../../i18n/Translations";
 import { Tab, durationSinceLastActivatedAt } from "../../model/Tab";
 import { hasDuplicatedTabs } from "../../model/Window";
-import { focusTab } from "../../repository/TabsRepository";
+import { closeTab, focusTab } from "../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/WindowsContext";
-import { useCloseTab } from "../hooks/useCloseTab";
-import { useResolveDuplicateTabs } from "../hooks/useResolveDuplicateTabs";
-
+import { resolveDuplicatedTabs } from "../functions/resolveDuplicatedTabs";
 import { TabItemActionMenu } from "./ActionMenu";
 import TabFavicon from "./TabFavicon";
 
@@ -87,7 +84,6 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   };
   const elapsedTimeText = elapsedTimeSinceLastActiveText();
 
-  const closeTab = useCloseTab();
   const onClickDeleteButton = () => closeTab(tab.id);
 
   const [menuAnchorElement, setMenuAnchorElement] =
@@ -98,12 +94,11 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const onCloseMenu = () => setMenuAnchorElement(null);
 
   const [isDuplicatedChipHovered, setIsDuplicatedChipHovered] = useState(false);
-  const resolveDuplicateTabs = useResolveDuplicateTabs();
   const onClickResolveDuplicatesChip = (
     event: React.MouseEvent<HTMLElement>,
   ) => {
     event.stopPropagation();
-    resolveDuplicateTabs(tab);
+    resolveDuplicatedTabs(windows, tab);
     setIsDuplicatedChipHovered(false);
   };
 

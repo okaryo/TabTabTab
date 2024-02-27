@@ -1,27 +1,20 @@
 import { useCallback, useEffect, useState } from "react";
-
 import { Window } from "../../model/Window";
 import {
-  addListenerOnUpdateTabs,
-  removeListenerOnUpdateTabs,
+  addListenerOnChangeTabs,
+  removeListenerOnChangeTabs,
 } from "../../repository/TabsRepository";
 import { getWindows } from "../../repository/WindowsRepository";
 
 export const useWindows = () => {
   const [windows, setState] = useState([]);
 
-  const sortByFocused = (windows: Window[]): Window[] => {
-    return [...windows].sort(
+  const setWindows = useCallback((windows: Window[]) => {
+    const sortedWindows = [...windows].sort(
       (a, b) => (b.focused ? 1 : 0) - (a.focused ? 1 : 0),
     );
-  };
-  const setWindows = useCallback(
-    (windows: Window[]) => {
-      const sortedWindows = sortByFocused(windows);
-      setState(sortedWindows);
-    },
-    [sortByFocused],
-  );
+    setState(sortedWindows);
+  }, []);
 
   useEffect(() => {
     const initState = async () => {
@@ -30,12 +23,12 @@ export const useWindows = () => {
     };
     initState();
 
-    const listenerOnUpdateTabs = addListenerOnUpdateTabs(async () => {
+    const listenerOnChangeTabs = addListenerOnChangeTabs(async () => {
       const windows = await getWindows();
       setWindows(windows);
     });
 
-    return () => removeListenerOnUpdateTabs(listenerOnUpdateTabs);
+    return () => removeListenerOnChangeTabs(listenerOnChangeTabs);
   }, [setWindows]);
 
   return {

@@ -17,14 +17,12 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { grey } from "@mui/material/colors";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
-
 import t from "../../../i18n/Translations";
 import { StoredWindow } from "../../../model/Window";
+import { restoreWindow } from "../../../repository/WindowsRepository";
 import { StoredWindowsContext } from "../../contexts/StoredWindowsContext";
 import { useRemoveStoredWindow } from "../../hooks/useRemoveStoredWindow";
-import { useRestoreWindow } from "../../hooks/useRestoreWindow";
 import { useUpdateStoredWindowName } from "../../hooks/useUpdateStoredWindowName";
-
 import {
   StoredGridTabContainerItem,
   StoredGridTabItem,
@@ -76,7 +74,6 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   ).length;
 
   const updateWindowName = useUpdateStoredWindowName();
-  const restoreWindow = useRestoreWindow();
   const removeStoredWindow = useRemoveStoredWindow();
   const onChangeWindowNameField = (
     event: React.ChangeEvent<HTMLInputElement>,

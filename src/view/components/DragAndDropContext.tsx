@@ -20,7 +20,6 @@ import { RectMap } from "@dnd-kit/core/dist/store/types";
 import { Coordinates } from "@dnd-kit/core/dist/types";
 import { SortableData } from "@dnd-kit/sortable";
 import { useCallback, useContext, useMemo, useRef, useState } from "react";
-
 import { Tab } from "../../model/Tab";
 import {
   TabGroup,
@@ -38,19 +37,24 @@ import {
   indexOfWindowChild,
   moveTabOrTabGroup,
 } from "../../model/Window";
+import {
+  addTabToTabGroup,
+  moveTabGroup,
+  moveTabGroupToOtherWindow,
+} from "../../repository/TabGroupRepository";
+import {
+  moveTab,
+  moveTabOutOfGroup,
+  moveTabToOtherWindow,
+  unpinTab,
+} from "../../repository/TabsRepository";
+import {
+  addWindowWithTab,
+  addWindowWithTabGroup,
+} from "../../repository/WindowsRepository";
 import { WindowsContext } from "../contexts/WindowsContext";
-import { useAddWindowWithTab } from "../features/options/hooks/useAddWindowWithTab";
-import { useAddWindowWithTabGroup } from "../features/options/hooks/useAddWindowWithTabGroup";
-import { useAddTabToTabGroup } from "../hooks/useAddTabToTabGroup";
-import { useMoveTab } from "../hooks/useMoveTab";
-import { useMoveTabFromPinnedToPinned } from "../hooks/useMoveTabFromPinnedToPinned";
-import { useMoveTabFromRootToPinned } from "../hooks/useMoveTabFromRootToPinned";
-import { useMoveTabGroup } from "../hooks/useMoveTabGroup";
-import { useMoveTabGroupToOtherWindow } from "../hooks/useMoveTabGroupToOtherWindow";
-import { useMoveTabToOtherWindow } from "../hooks/useMoveTabToOtherWindow";
-import { useMoveTabOutOfGroup } from "../hooks/useTabOutOfTabGroup";
-import { useUnpinTab } from "../hooks/useUnpinTab";
-
+import { moveTabFromPinnedToPinned } from "../functions/moveTabFromPinnedToPinned";
+import { moveTabFromRootToPinned } from "../functions/moveTabFromRootToPinned";
 import TabGroupContainer from "./TabGroupContainer";
 import TabItem from "./TabItem";
 
@@ -83,18 +87,6 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
       },
     }),
   );
-
-  const moveTabGroup = useMoveTabGroup();
-  const moveTab = useMoveTab();
-  const unpinTab = useUnpinTab();
-  const addTabToTabGroup = useAddTabToTabGroup();
-  const moveTabOutOfGroup = useMoveTabOutOfGroup();
-  const moveTabToOtherWindow = useMoveTabToOtherWindow();
-  const moveTabGroupToOtherWindow = useMoveTabGroupToOtherWindow();
-  const moveTabFromRootToPinned = useMoveTabFromRootToPinned();
-  const moveTabFromPinnedToPinned = useMoveTabFromPinnedToPinned();
-  const addWindowWithTab = useAddWindowWithTab();
-  const addWindowWithTabGroup = useAddWindowWithTabGroup();
 
   const onDragCancel = () => {
     if (windowsBeforeDrag) {
