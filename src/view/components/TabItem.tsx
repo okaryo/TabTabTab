@@ -144,7 +144,12 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
             }}
           />
         )}
-        <TabFavicon url={tab.favIconUrl} style={{ marginRight: "20px" }} />
+        <TabFavicon
+          url={tab.favIconUrl}
+          style={{ marginRight: "20px" }}
+          discarded={tab.discarded}
+          isLoading={tab.status === "loading"}
+        />
         <ListItemText
           primary={
             <Typography

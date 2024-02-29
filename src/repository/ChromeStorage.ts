@@ -193,6 +193,7 @@ export namespace ChromeSessionStorage {
     highlighted: boolean;
     audible: boolean;
     pinned: boolean;
+    discarded: boolean;
     lastActivatedAt: string | null;
   };
   type RecentActiveTabsStorageObject = {

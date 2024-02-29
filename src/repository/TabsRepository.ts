@@ -1,4 +1,4 @@
-import { Tab, TabId } from "../model/Tab";
+import { Tab, TabId, TabStatus } from "../model/Tab";
 import { WindowId } from "../model/Window";
 import { ChromeSessionStorage, ChromeStorage } from "./ChromeStorage";
 
@@ -157,6 +157,8 @@ export const parseTab = (tab: chrome.tabs.Tab): Tab => {
     highlighted: tab.highlighted,
     audible: tab.audible,
     pinned: tab.pinned,
+    status: tab.status ? (tab.status as TabStatus) : undefined,
+    discarded: tab.discarded,
   };
 };
 
@@ -189,6 +191,7 @@ export const applyLastActivatedAt = async (
   return tab;
 };
 
+// TODO: Refactor to clearer function name
 const serializeTab = (tab: Tab) => {
   return {
     id: tab.id,
@@ -200,6 +203,7 @@ const serializeTab = (tab: Tab) => {
     highlighted: false,
     audible: false,
     pinned: false,
+    discarded: false,
     lastActivatedAt: tab.lastActivatedAt?.toISOString(),
   };
 };
@@ -222,6 +226,7 @@ const deserializeToTab = (
     lastActivatedAt: serializedTab.lastActivatedAt
       ? new Date(serializedTab.lastActivatedAt)
       : null,
+    discarded: serializedTab.discarded ?? false,
   };
 };
 
