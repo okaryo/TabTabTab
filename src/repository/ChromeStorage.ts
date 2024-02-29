@@ -296,7 +296,10 @@ export namespace ChromeStorage {
       ChromeLocalStorage.TAB_LAST_ACCESSES_KEY,
     )) as TabLastAccessesLocalStorageObject;
 
-    const windows = await chrome.windows.getAll({ populate: true });
+    const windows = await chrome.windows.getAll({
+      populate: true,
+      windowTypes: ["normal"],
+    });
     const cleanedUpInLocal = {};
     for (const tab of windows.flatMap((window) => window.tabs)) {
       const key = await tabKeyForLastAccessesInLocal(

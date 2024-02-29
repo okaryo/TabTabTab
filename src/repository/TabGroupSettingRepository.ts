@@ -53,7 +53,10 @@ const onTabGroupSettingChanged = (
 };
 
 export const groupTabsBySetting = async (setting: TabGroupSetting) => {
-  const windows = await chrome.windows.getAll({ populate: true });
+  const windows = await chrome.windows.getAll({
+    populate: true,
+    windowTypes: ["normal"],
+  });
   for (const window of windows) {
     await ungroupAll(window.tabs);
 
