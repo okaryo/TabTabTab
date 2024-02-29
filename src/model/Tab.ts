@@ -2,6 +2,7 @@ import { Duration } from "./Duration";
 import { WindowId } from "./Window";
 
 export type TabId = number;
+export type TabStatus = "unloaded" | "loading" | "complete";
 export type Tab = {
   id: TabId;
   groupId?: number;
@@ -13,6 +14,7 @@ export type Tab = {
   audible: boolean;
   pinned: boolean;
   discarded: boolean;
+  status?: TabStatus;
   lastActivatedAt?: Date;
 };
 export type StoredTab = Pick<Tab, "title" | "url" | "favIconUrl"> & {

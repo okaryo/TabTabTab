@@ -148,6 +148,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
           url={tab.favIconUrl}
           style={{ marginRight: "20px" }}
           discarded={tab.discarded}
+          isLoading={tab.status === "loading"}
         />
         <ListItemText
           primary={
