@@ -157,6 +157,7 @@ export const parseTab = (tab: chrome.tabs.Tab): Tab => {
     highlighted: tab.highlighted,
     audible: tab.audible,
     pinned: tab.pinned,
+    discarded: tab.discarded,
   };
 };
 
@@ -189,6 +190,7 @@ export const applyLastActivatedAt = async (
   return tab;
 };
 
+// TODO: Refactor to clearer function name
 const serializeTab = (tab: Tab) => {
   return {
     id: tab.id,
@@ -200,6 +202,7 @@ const serializeTab = (tab: Tab) => {
     highlighted: false,
     audible: false,
     pinned: false,
+    discarded: false,
     lastActivatedAt: tab.lastActivatedAt?.toISOString(),
   };
 };
@@ -222,6 +225,7 @@ const deserializeToTab = (
     lastActivatedAt: serializedTab.lastActivatedAt
       ? new Date(serializedTab.lastActivatedAt)
       : null,
+    discarded: serializedTab.discarded ?? false,
   };
 };
 

@@ -12,6 +12,7 @@ export type Tab = {
   highlighted: boolean;
   audible: boolean;
   pinned: boolean;
+  discarded: boolean;
   lastActivatedAt?: Date;
 };
 export type StoredTab = Pick<Tab, "title" | "url" | "favIconUrl"> & {
