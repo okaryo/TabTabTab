@@ -154,7 +154,7 @@ export const parseTab = (tab: chrome.tabs.Tab): Tab => {
     url: tab.url && tab.url !== "" ? new URL(tab.url) : new URL(tab.pendingUrl),
     favIconUrl:
       tab.favIconUrl && tab.favIconUrl !== "" ? new URL(tab.favIconUrl) : null,
-    highlighted: tab.highlighted,
+    active: tab.active,
     audible: tab.audible,
     pinned: tab.pinned,
     status: tab.status ? (tab.status as TabStatus) : undefined,
@@ -200,7 +200,7 @@ const serializeTab = (tab: Tab) => {
     title: tab.title,
     url: tab.url.toString(),
     favIconUrl: tab.favIconUrl?.toString(),
-    highlighted: false,
+    active: false,
     audible: false,
     pinned: false,
     discarded: false,
@@ -220,7 +220,7 @@ const deserializeToTab = (
     favIconUrl: serializedTab.favIconUrl
       ? new URL(serializedTab.favIconUrl)
       : null,
-    highlighted: serializedTab.highlighted,
+    active: serializedTab.active,
     audible: serializedTab.audible,
     pinned: serializedTab.pinned,
     lastActivatedAt: serializedTab.lastActivatedAt

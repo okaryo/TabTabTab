@@ -8,9 +8,10 @@ export const mockTab = (attrs: Partial<Tab> = {}): Tab => {
     title: "title",
     url: new URL("https://example.com"),
     favIconUrl: new URL("https://example.com/favicon.ico"),
-    highlighted: false,
+    active: false,
     audible: false,
     pinned: false,
+    discarded: false,
     lastActivatedAt: new Date(),
     ...attrs,
   };

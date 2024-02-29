@@ -190,7 +190,7 @@ export namespace ChromeSessionStorage {
     title: string;
     url: string;
     favIconUrl: string | null;
-    highlighted: boolean;
+    active: boolean;
     audible: boolean;
     pinned: boolean;
     discarded: boolean;

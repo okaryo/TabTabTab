@@ -118,10 +118,10 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
       icon: <LibraryAddIcon fontSize="small" />,
       action: () => addTabToNewGroup(tab.id, tab.windowId),
     },
-    tab.highlighted && {
+    tab.active && {
       type: "Divider",
     },
-    tab.highlighted && {
+    tab.active && {
       type: "MenuItem",
       label: t.screenshotVisibleArea,
       icon: <PhotoCameraIcon fontSize="small" />,

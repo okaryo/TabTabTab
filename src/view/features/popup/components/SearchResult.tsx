@@ -128,7 +128,7 @@ const SearchResult = (props: SearchResultProps) => {
             <TabItem
               key={tab.id}
               ref={i === selectedTabIndex ? selectedItemRef : null}
-              tab={{ ...tab, highlighted: false }}
+              tab={{ ...tab, active: false }}
               selected={selectedTabIndex === i}
               showDragIndicatorIcon={false}
             />
