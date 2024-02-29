@@ -40,7 +40,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab);
   const [isHovered, setIsHovered] = useState(false);
-  const shouldShowActions = showActions && (tab.highlighted || isHovered);
+  const shouldShowActions = showActions && (tab.active || isHovered);
 
   const elapsedTimeSinceLastActiveText = (): string => {
     const duration = durationSinceLastActivatedAt(tab);
@@ -132,7 +132,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
         sx={{ width: "100%", pt: 0, pb: 0 }}
         style={{ cursor: "inherit" }}
         color="info"
-        selected={tab.highlighted || selected}
+        selected={tab.active || selected}
         onClick={onTapTabItem}
       >
         {showDragIndicatorIcon && isHovered && (

@@ -44,9 +44,10 @@ describe("#durationSinceLastActivatedAt", () => {
           id: 1,
           title: "title",
           url: new URL("https://example.com"),
-          highlighted: false,
+          active: false,
           audible: false,
           pinned: false,
+          discarded: false,
           lastActivatedAt: lastActivatedAt,
         };
         const actual = durationSinceLastActivatedAt(tab);
