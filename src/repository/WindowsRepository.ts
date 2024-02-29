@@ -25,7 +25,10 @@ import { applyLastActivatedAt, parseTab } from "./TabsRepository";
 
 export const getWindows = async (): Promise<Window[]> => {
   const currentWindow = await chrome.windows.getCurrent();
-  const windows = await chrome.windows.getAll({ populate: true });
+  const windows = await chrome.windows.getAll({
+    populate: true,
+    windowTypes: ["normal"],
+  });
 
   const parsedWindows: Window[] = [];
   for (const window of windows) {
