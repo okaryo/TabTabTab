@@ -1,32 +1,9 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { useEffect } from "react";
-import { ThemeContext } from "../../contexts/ThemeContext";
-import { WindowsContext } from "../../contexts/WindowsContext";
-import { useTheme } from "../../hooks/useTheme";
-import { useWindows } from "../../hooks/useWindows";
+import { ModeProvider } from "../../contexts/ModeContext";
+import { WindowsProvider } from "../../contexts/WindowsContext";
+import AppearanceThemeProvider from "./components/AppearanceThemeProvider";
 import Home from "./components/Home";
-import PopupThemeProvider from "./components/ThemeProvider";
-
-const Provider = ({ children }: { children: React.ReactNode }) => {
-  return (
-    <ThemeContext.Provider value={useTheme()}>
-      <PopupThemeProvider>
-        <WindowsContext.Provider value={useWindows()}>
-          {children}
-        </WindowsContext.Provider>
-      </PopupThemeProvider>
-    </ThemeContext.Provider>
-  );
-};
-
-const BasePage = ({ sidePanel }: { sidePanel: boolean }) => {
-  return (
-    <>
-      <CssBaseline />
-      <Home sidePanel={sidePanel} />
-    </>
-  );
-};
 
 const App = ({ sidePanel = false }) => {
   useEffect(() => {
@@ -44,9 +21,14 @@ const App = ({ sidePanel = false }) => {
   }, [sidePanel]);
 
   return (
-    <Provider>
-      <BasePage sidePanel={sidePanel} />
-    </Provider>
+    <ModeProvider>
+      <AppearanceThemeProvider>
+        <WindowsProvider>
+          <CssBaseline />
+          <Home sidePanel={sidePanel} />
+        </WindowsProvider>
+      </AppearanceThemeProvider>
+    </ModeProvider>
   );
 };
 

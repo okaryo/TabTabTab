@@ -1,14 +1,13 @@
+import { Mode } from "../view/contexts/ModeContext";
 import { ChromeLocalStorage } from "./ChromeStorage";
 
-type Theme = "light" | "dark";
+export const getMode = async (): Promise<Mode> => {
+  const mode = await ChromeLocalStorage.getMode();
+  if (!mode) return "light";
 
-export const getTheme = async (): Promise<Theme> => {
-  const theme = await ChromeLocalStorage.getTheme();
-  if (!theme) return "light";
-
-  return theme;
+  return mode;
 };
 
-export const updateTheme = (theme: Theme): Promise<void> => {
-  return ChromeLocalStorage.updateTheme(theme);
+export const updateMode = (mode: Mode): Promise<void> => {
+  return ChromeLocalStorage.updateMode(mode);
 };

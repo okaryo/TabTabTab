@@ -5,13 +5,12 @@ import IconButton from "@mui/material/IconButton";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useContext } from "react";
-
-import { ThemeContext } from "../../../contexts/ThemeContext";
-import { useToggleTheme } from "../../../hooks/useToggleTheme";
+import { ModeContext } from "../../../contexts/ModeContext";
+import { useToggleMode } from "../../../hooks/useToggleMode";
 
 const Header = () => {
-  const { theme } = useContext(ThemeContext);
-  const toggleTheme = useToggleTheme();
+  const { mode } = useContext(ModeContext);
+  const toggleMode = useToggleMode();
 
   return (
     <AppBar position="static" color="primary">
@@ -20,10 +19,10 @@ const Header = () => {
           TabTabTab
         </Typography>
         <IconButton
-          onClick={() => toggleTheme(theme === "light" ? "dark" : "light")}
+          onClick={() => toggleMode(mode === "light" ? "dark" : "light")}
           color="inherit"
         >
-          {theme === "light" ? <DarkModeIcon /> : <LightModeIcon />}
+          {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
         </IconButton>
       </Toolbar>
     </AppBar>
