@@ -21,6 +21,7 @@ import OrganizationPage from "../../components/OrganizationPage";
 import RestorePage from "../../components/RestorePage";
 import { ModeContext, ModeProvider } from "../../contexts/ModeContext";
 import { WindowsProvider } from "../../contexts/WindowsContext";
+import { tabGroupColorPalette } from "../../resources/tabGroupColorPalette";
 import Header from "./components/Header";
 import Feedback from "./pages/Feedback";
 import Overview from "./pages/Overview";
@@ -32,6 +33,7 @@ const MuiThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const themePalette = createTheme({
     palette: {
       mode,
+      ...tabGroupColorPalette(mode),
     },
   });
 

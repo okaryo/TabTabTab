@@ -103,13 +103,17 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
       <Radio
         sx={{
           p: 0,
-          color: color.code,
+          color: theme.palette.tabGroup[group.color.value],
           "&.Mui-checked": {
-            color: color.code,
+            color: theme.palette.tabGroup[group.color.value],
           },
         }}
         checked={group.color.value === color.value}
-        icon={<CircleIcon sx={{ color: color.code }} />}
+        icon={
+          <CircleIcon
+            sx={{ color: theme.palette.tabGroup[group.color.value] }}
+          />
+        }
         onClick={(event) => {
           event.stopPropagation();
           updateTabGroupColor(group.internalUid, color);
@@ -171,8 +175,10 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
                 style={{
                   display: "inline-block",
                   borderRadius: "8px",
-                  backgroundColor: `${group.color.code}`,
-                  color: theme.palette.getContrastText(group.color.code),
+                  backgroundColor: theme.palette.tabGroup[group.color.value],
+                  color: theme.palette.getContrastText(
+                    theme.palette.tabGroup[group.color.value],
+                  ),
                 }}
               >
                 {!editMode && group.name}
@@ -189,8 +195,10 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
             )}
             <Chip
               sx={{
-                backgroundColor: group.color.code,
-                color: theme.palette.getContrastText(group.color.code),
+                backgroundColor: theme.palette.tabGroup[group.color.value],
+                color: theme.palette.getContrastText(
+                  theme.palette.tabGroup[group.color.value],
+                ),
               }}
               label={group.children.length}
               size="small"

@@ -83,13 +83,17 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
       <Radio
         sx={{
           p: 0,
-          color: color.code,
+          color: theme.palette.tabGroup[tabGroup.color.value],
           "&.Mui-checked": {
-            color: color.code,
+            color: theme.palette.tabGroup[tabGroup.color.value],
           },
         }}
         checked={tabGroup.color.value === color.value}
-        icon={<CircleIcon sx={{ color: color.code }} />}
+        icon={
+          <CircleIcon
+            sx={{ color: theme.palette.tabGroup[tabGroup.color.value] }}
+          />
+        }
         onClick={(event) => {
           event.stopPropagation();
           updateTabGroupColor(tabGroup.id, color);
@@ -118,7 +122,9 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
         <Stack direction="row">
           <Box
             style={{
-              borderRight: `5px solid ${tabGroup.color.code}`,
+              borderRight: `5px solid ${
+                theme.palette.tabGroup[tabGroup.color.value]
+              }`,
               borderRadius: "0 5px 5px 0",
             }}
           />
@@ -174,9 +180,10 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                         style={{
                           display: "inline-block",
                           borderRadius: "8px",
-                          backgroundColor: `${tabGroup.color.code}`,
+                          backgroundColor:
+                            theme.palette.tabGroup[tabGroup.color.value],
                           color: theme.palette.getContrastText(
-                            tabGroup.color.code,
+                            theme.palette.tabGroup[tabGroup.color.value],
                           ),
                         }}
                         onClick={onClickGroupTitleToEditMode}
@@ -195,9 +202,10 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                     )}
                     <Chip
                       sx={{
-                        backgroundColor: props.tabGroup.color.code,
+                        backgroundColor:
+                          theme.palette.tabGroup[tabGroup.color.value],
                         color: theme.palette.getContrastText(
-                          tabGroup.color.code,
+                          theme.palette.tabGroup[tabGroup.color.value],
                         ),
                       }}
                       label={tabGroup.children.length}
