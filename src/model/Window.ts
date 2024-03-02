@@ -108,7 +108,7 @@ export const findPinned = (window: Window): Pinned | undefined => {
 export const findTabGroup = (
   groupId: number,
   container: Window | Window[],
-): TabGroup | null => {
+): TabGroup | undefined => {
   const windows = Array.isArray(container) ? container : [container];
   for (const window of windows) {
     for (const child of window.children) {
@@ -117,7 +117,7 @@ export const findTabGroup = (
       }
     }
   }
-  return null;
+  return;
 };
 
 export const indexOfWindowChild = (
