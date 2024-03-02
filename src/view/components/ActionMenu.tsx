@@ -266,11 +266,9 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   );
 };
 
-type PopupHeaderActionMenuProps = Omit<ActionMenuProps, "items"> & {
-  currentWindowId: number;
-};
+type PopupHeaderActionMenuProps = Omit<ActionMenuProps, "items">;
 export const PopupHeaderActionMenu = (props: PopupHeaderActionMenuProps) => {
-  const { currentWindowId, isOpenMenu, anchorElement, onCloseMenu } = props;
+  const { isOpenMenu, anchorElement, onCloseMenu } = props;
 
   const items: ActionMenuItemAttrs[] = [
     {
@@ -291,8 +289,8 @@ export const PopupHeaderActionMenu = (props: PopupHeaderActionMenuProps) => {
           </svg>
         </SvgIcon>
       ),
-      action: () => {
-        openSidePanel(currentWindowId);
+      action: async () => {
+        await openSidePanel();
         window.close();
       },
     },

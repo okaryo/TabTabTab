@@ -30,6 +30,7 @@ export const navigateToOptionsPage = () => {
   chrome.runtime.openOptionsPage();
 };
 
-export const openSidePanel = (windowId: number) => {
-  chrome.sidePanel.open({ windowId });
+export const openSidePanel = async () => {
+  const currentWindow = await chrome.windows.getCurrent();
+  return chrome.sidePanel.open({ windowId: currentWindow.id });
 };

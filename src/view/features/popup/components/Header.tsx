@@ -19,7 +19,6 @@ import t from "../../../../i18n/Translations";
 import { navigateToOptionsPage } from "../../../../repository/SettingsRepository";
 import { PopupHeaderActionMenu } from "../../../components/ActionMenu";
 import { ModeContext } from "../../../contexts/ModeContext";
-import { WindowsContext } from "../../../contexts/WindowsContext";
 import { useToggleMode } from "../../../hooks/useToggleMode";
 import { PopupPage } from "./Home";
 
@@ -66,10 +65,8 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Header = (props: HeaderProps) => {
   const { sidePanel, currentPage, searchText, setCurrentPage, setSearchText } =
     props;
-  const { windows } = useContext(WindowsContext);
   const { mode } = useContext(ModeContext);
   const toggleMode = useToggleMode();
-  const currentWindow = windows && windows.length > 0 ? windows[0] : null;
 
   const onInputSearchField = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
@@ -104,14 +101,12 @@ const Header = (props: HeaderProps) => {
             <IconButton color="inherit" onClick={onClickActionMenu}>
               <MoreVertIcon />
             </IconButton>
-            {currentWindow && (
-              <PopupHeaderActionMenu
-                currentWindowId={currentWindow.id}
-                isOpenMenu={Boolean(menuAnchorElement)}
-                anchorElement={menuAnchorElement}
-                onCloseMenu={onCloseMenu}
-              />
-            )}
+
+            <PopupHeaderActionMenu
+              isOpenMenu={Boolean(menuAnchorElement)}
+              anchorElement={menuAnchorElement}
+              onCloseMenu={onCloseMenu}
+            />
           </>
         )}
       </>
