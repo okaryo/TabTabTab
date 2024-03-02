@@ -36,7 +36,7 @@ export const ModeProvider = (props: { children: React.ReactNode }) => {
 
   return (
     <ModeContext.Provider value={{ mode, setMode }}>
-      <ThemeProvider theme={themePalette}>{children}</ThemeProvider>;
+      <ThemeProvider theme={themePalette}>{children}</ThemeProvider>
     </ModeContext.Provider>
   );
 };
