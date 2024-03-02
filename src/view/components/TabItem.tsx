@@ -117,7 +117,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
       <>
         <CircleIcon
           sx={{
-            color: theme.palette.tabGroup[group.color.value],
+            color: theme.palette.tabGroup[group.color],
             fontSize: theme.spacing(1),
           }}
         />

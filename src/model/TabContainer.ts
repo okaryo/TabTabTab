@@ -1,4 +1,3 @@
-import { GroupColor } from "./GroupColor";
 import { StoredTab, Tab } from "./Tab";
 import { WindowId } from "./Window";
 
@@ -29,10 +28,20 @@ export type Pinned = TabContainer & {
 };
 
 export type TabGroupId = number;
+export type TabGroupColor =
+  | "grey"
+  | "blue"
+  | "red"
+  | "yellow"
+  | "green"
+  | "pink"
+  | "purple"
+  | "cyan"
+  | "orange";
 export type TabGroup = TabContainer & {
   id: TabGroupId;
   name: string;
-  color: GroupColor;
+  color: TabGroupColor;
   collapsed: boolean;
 };
 
@@ -76,3 +85,15 @@ export const isStoredTabGroup = (
 ): container is StoredTabGroup => {
   return container.type === "tabGroup";
 };
+
+export const tabGroupColors: TabGroupColor[] = [
+  "grey",
+  "blue",
+  "red",
+  "yellow",
+  "green",
+  "pink",
+  "purple",
+  "cyan",
+  "orange",
+];

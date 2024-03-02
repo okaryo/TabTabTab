@@ -56,11 +56,11 @@ export const StoredGridTabContainerItem = (
                     display: "inline-block",
                     borderRadius: "4px",
                     backgroundColor: isTabGroup
-                      ? theme.palette.tabGroup[container.color.value]
+                      ? theme.palette.tabGroup[container.color]
                       : undefined,
                     color: isTabGroup
                       ? theme.palette.getContrastText(
-                          theme.palette.tabGroup[container.color.value],
+                          theme.palette.tabGroup[container.color],
                         )
                       : undefined,
                   }}
@@ -74,11 +74,11 @@ export const StoredGridTabContainerItem = (
                   sx={{
                     height: 18,
                     backgroundColor: isTabGroup
-                      ? theme.palette.tabGroup[container.color.value]
+                      ? theme.palette.tabGroup[container.color]
                       : undefined,
                     color: isTabGroup
                       ? theme.palette.getContrastText(
-                          theme.palette.tabGroup[container.color.value],
+                          theme.palette.tabGroup[container.color],
                         )
                       : undefined,
                   }}

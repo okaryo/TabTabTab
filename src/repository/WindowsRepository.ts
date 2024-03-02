@@ -1,4 +1,3 @@
-import { GroupColor } from "../model/GroupColor";
 import { Tab } from "../model/Tab";
 import {
   Pinned,
@@ -76,11 +75,10 @@ export const getWindows = async (): Promise<Window[]> => {
           });
         } else {
           const group = await chrome.tabGroups.get(groupId);
-          const groupColor = new GroupColor(group.color);
           const newTabGroup = {
             id: groupId,
             name: group.title,
-            color: groupColor,
+            color: group.color,
             collapsed: group.collapsed,
             children: [parsedTab],
           };
@@ -192,7 +190,7 @@ export const getStoredWindows = async (): Promise<StoredWindow[]> => {
       if (child.type === "tabGroup") {
         return {
           ...child,
-          color: new GroupColor(child.color as GroupColor["value"]),
+          color: child.color,
           children: child.children.map((tab) => deserializeStoredTab(tab)),
         };
       }
@@ -242,7 +240,7 @@ export const saveStoredWindow = async (
             internalUid: crypto.randomUUID(),
             storedAt: currentDateTime.toISOString(),
             name: child.name,
-            color: child.color.value,
+            color: child.color,
             children: child.children.map((tab) => serializedTab(tab)),
           };
         }
@@ -320,7 +318,7 @@ export const restoreWindow = async (
         });
         await chrome.tabGroups.update(groupId, {
           title: tabGroup.name,
-          color: tabGroup.color.value,
+          color: tabGroup.color,
         });
       }
     } else {

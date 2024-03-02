@@ -19,16 +19,17 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { grey } from "@mui/material/colors";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
-
 import t from "../../../i18n/Translations";
-import { GroupColor } from "../../../model/GroupColor";
-import { StoredTabGroup } from "../../../model/TabContainer";
+import {
+  StoredTabGroup,
+  TabGroupColor,
+  tabGroupColors,
+} from "../../../model/TabContainer";
+import { restoreTabGroup } from "../../../repository/TabGroupRepository";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import { useRemoveStoredTabGroup } from "../../hooks/useRemoveStoredTabGroup";
 import { useUpdateStoredTabGroupColor } from "../../hooks/useUpdateStoredTabGroupColor";
 import { useUpdateStoredTabGroupName } from "../../hooks/useUpdateStoredTabGroupName";
-
-import { restoreTabGroup } from "../../../repository/TabGroupRepository";
 import { StoredGridTabItem } from "./StoredGridItem";
 
 type StoredTabGroupsProps = {
@@ -96,23 +97,21 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
     updateTabGroupName(group.internalUid, event.target.value);
   };
 
-  const GroupColorRadio = (props: { color: GroupColor }) => {
+  const GroupColorRadio = (props: { color: TabGroupColor }) => {
     const { color } = props;
 
     return (
       <Radio
         sx={{
           p: 0,
-          color: theme.palette.tabGroup[group.color.value],
+          color: theme.palette.tabGroup[group.color],
           "&.Mui-checked": {
-            color: theme.palette.tabGroup[group.color.value],
+            color: theme.palette.tabGroup[group.color],
           },
         }}
-        checked={group.color.value === color.value}
+        checked={group.color === color}
         icon={
-          <CircleIcon
-            sx={{ color: theme.palette.tabGroup[group.color.value] }}
-          />
+          <CircleIcon sx={{ color: theme.palette.tabGroup[group.color] }} />
         }
         onClick={(event) => {
           event.stopPropagation();
@@ -175,9 +174,9 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
                 style={{
                   display: "inline-block",
                   borderRadius: "8px",
-                  backgroundColor: theme.palette.tabGroup[group.color.value],
+                  backgroundColor: theme.palette.tabGroup[group.color],
                   color: theme.palette.getContrastText(
-                    theme.palette.tabGroup[group.color.value],
+                    theme.palette.tabGroup[group.color],
                   ),
                 }}
               >
@@ -195,9 +194,9 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
             )}
             <Chip
               sx={{
-                backgroundColor: theme.palette.tabGroup[group.color.value],
+                backgroundColor: theme.palette.tabGroup[group.color],
                 color: theme.palette.getContrastText(
-                  theme.palette.tabGroup[group.color.value],
+                  theme.palette.tabGroup[group.color],
                 ),
               }}
               label={group.children.length}
@@ -211,8 +210,8 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
               alignItems="center"
               justifyContent="flex-start"
             >
-              {GroupColor.values.map((color) => (
-                <GroupColorRadio key={color} color={new GroupColor(color)} />
+              {tabGroupColors.map((color) => (
+                <GroupColorRadio key={color} color={color} />
               ))}
             </Stack>
           )}

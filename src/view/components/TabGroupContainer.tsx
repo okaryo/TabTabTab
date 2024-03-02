@@ -18,8 +18,11 @@ import Typography from "@mui/material/Typography";
 import grey from "@mui/material/colors/grey";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useRef, useState } from "react";
-import { GroupColor } from "../../model/GroupColor";
-import { TabGroup } from "../../model/TabContainer";
+import {
+  TabGroup,
+  TabGroupColor,
+  tabGroupColors,
+} from "../../model/TabContainer";
 import {
   collapseTabGroup,
   expandTabGroup,
@@ -76,23 +79,21 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
   };
   const onCloseMenu = () => setMenuAnchorElement(null);
 
-  const GroupColorRadio = (props: { color: GroupColor }) => {
+  const GroupColorRadio = (props: { color: TabGroupColor }) => {
     const { color } = props;
 
     return (
       <Radio
         sx={{
           p: 0,
-          color: theme.palette.tabGroup[tabGroup.color.value],
+          color: theme.palette.tabGroup[tabGroup.color],
           "&.Mui-checked": {
-            color: theme.palette.tabGroup[tabGroup.color.value],
+            color: theme.palette.tabGroup[tabGroup.color],
           },
         }}
-        checked={tabGroup.color.value === color.value}
+        checked={tabGroup.color === color}
         icon={
-          <CircleIcon
-            sx={{ color: theme.palette.tabGroup[tabGroup.color.value] }}
-          />
+          <CircleIcon sx={{ color: theme.palette.tabGroup[tabGroup.color] }} />
         }
         onClick={(event) => {
           event.stopPropagation();
@@ -123,7 +124,7 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
           <Box
             style={{
               borderRight: `5px solid ${
-                theme.palette.tabGroup[tabGroup.color.value]
+                theme.palette.tabGroup[tabGroup.color]
               }`,
               borderRadius: "0 5px 5px 0",
             }}
@@ -181,9 +182,9 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                           display: "inline-block",
                           borderRadius: "8px",
                           backgroundColor:
-                            theme.palette.tabGroup[tabGroup.color.value],
+                            theme.palette.tabGroup[tabGroup.color],
                           color: theme.palette.getContrastText(
-                            theme.palette.tabGroup[tabGroup.color.value],
+                            theme.palette.tabGroup[tabGroup.color],
                           ),
                         }}
                         onClick={onClickGroupTitleToEditMode}
@@ -202,10 +203,9 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                     )}
                     <Chip
                       sx={{
-                        backgroundColor:
-                          theme.palette.tabGroup[tabGroup.color.value],
+                        backgroundColor: theme.palette.tabGroup[tabGroup.color],
                         color: theme.palette.getContrastText(
-                          theme.palette.tabGroup[tabGroup.color.value],
+                          theme.palette.tabGroup[tabGroup.color],
                         ),
                       }}
                       label={tabGroup.children.length}
@@ -221,11 +221,8 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                       alignItems="center"
                       justifyContent="flex-start"
                     >
-                      {GroupColor.values.map((color) => (
-                        <GroupColorRadio
-                          key={color}
-                          color={new GroupColor(color)}
-                        />
+                      {tabGroupColors.map((color) => (
+                        <GroupColorRadio key={color} color={color} />
                       ))}
                     </Stack>
                   )}
