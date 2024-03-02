@@ -188,7 +188,7 @@
     "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
   },
   "tab_cleaner_description": {
-    "message": "この設定を有効にすると、最終アクセスからの経過期間が設定した期間を過ぎると自動でタブが閉じられます。",
+    "message": "この設定を有効にすると、最終アクセスからの経過期間が設定期間を過ぎると自動でタブが閉じられます。",
     "description": "Description for the feature that automatically closes tabs that have not been used for a specified period of time."
   },
   "duration": {
