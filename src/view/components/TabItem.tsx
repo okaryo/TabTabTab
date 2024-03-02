@@ -1,3 +1,4 @@
+import CircleIcon from "@mui/icons-material/Circle";
 import Clear from "@mui/icons-material/Clear";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
@@ -11,10 +12,11 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import grey from "@mui/material/colors/grey";
+import { useTheme } from "@mui/material/styles";
 import { forwardRef, useContext, useState } from "react";
 import t from "../../i18n/Translations";
 import { Tab, durationSinceLastActivatedAt } from "../../model/Tab";
-import { hasDuplicatedTabs } from "../../model/Window";
+import { findTabGroup, hasDuplicatedTabs } from "../../model/Window";
 import { closeTab, focusTab } from "../../repository/TabsRepository";
 import { WindowsContext } from "../contexts/WindowsContext";
 import { resolveDuplicatedTabs } from "../functions/resolveDuplicatedTabs";
@@ -24,18 +26,22 @@ import TabFavicon from "./TabFavicon";
 type TabItemProps = {
   tab: Tab;
   selected?: boolean;
+  cursorGrabbing?: boolean;
   showDragIndicatorIcon?: boolean;
   showActions?: boolean;
   showDuplicatedChip?: boolean;
+  showBelongingGroup?: boolean;
 };
 
 const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const {
     tab,
     selected,
+    cursorGrabbing = false,
     showDragIndicatorIcon = true,
     showActions = true,
     showDuplicatedChip = true,
+    showBelongingGroup = false,
   } = props;
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab);
@@ -102,6 +108,33 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     setIsDuplicatedChipHovered(false);
   };
 
+  const BelongingTabGroup = () => {
+    const theme = useTheme();
+    const group = findTabGroup(tab.groupId, windows);
+    if (!group) return;
+
+    return (
+      <>
+        <CircleIcon
+          sx={{
+            color: group.color.code,
+            fontSize: theme.spacing(1),
+          }}
+        />
+        <span
+          style={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {group.name}
+        </span>
+        <span>•</span>
+      </>
+    );
+  };
+
   return (
     <ListItem
       ref={ref}
@@ -130,7 +163,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     >
       <ListItemButton
         sx={{ width: "100%", pt: 0, pb: 0 }}
-        style={{ cursor: "inherit" }}
+        style={{ cursor: cursorGrabbing ? "inherit" : "pointer" }}
         color="info"
         selected={tab.active || selected}
         onClick={onTapTabItem}
@@ -190,7 +223,8 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
             </Typography>
           }
           secondary={
-            <span style={{ display: "flex" }}>
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              {showBelongingGroup && <BelongingTabGroup />}
               <span
                 style={{
                   whiteSpace: "nowrap",
@@ -200,11 +234,11 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
               >
                 {tab.url.host}
               </span>
-              {elapsedTimeText !== "" && <span>・</span>}
+              {elapsedTimeText !== "" && <span>•</span>}
               {elapsedTimeText !== "" && (
                 <span style={{ whiteSpace: "nowrap" }}>{elapsedTimeText}</span>
               )}
-            </span>
+            </Stack>
           }
         />
       </ListItemButton>

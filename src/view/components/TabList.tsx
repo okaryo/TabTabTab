@@ -70,7 +70,7 @@ const TabList = memo((props: TabListProps) => {
         id={tab.id.toString()}
         data={{ type: "tab", parentType: "window", windowId: window.id }}
       >
-        <TabItem tab={tab} />
+        <TabItem tab={tab} cursorGrabbing />
       </SortableItem>
     );
   };

@@ -4,7 +4,6 @@ import List from "@mui/material/List";
 import ListSubheader from "@mui/material/ListSubheader";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
-
 import t from "../../../../i18n/Translations";
 import { Tab } from "../../../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../../../model/Window";
@@ -124,13 +123,14 @@ const SearchResult = (props: SearchResultProps) => {
           sx={{ width: "100%", bgcolor: "background.paper", overflowY: "auto" }}
           disablePadding
         >
-          {tabs.map((tab, i) => (
+          {tabs.map((tab, index) => (
             <TabItem
               key={tab.id}
-              ref={i === selectedTabIndex ? selectedItemRef : null}
+              ref={index === selectedTabIndex ? selectedItemRef : null}
               tab={{ ...tab, active: false }}
-              selected={selectedTabIndex === i}
+              selected={selectedTabIndex === index}
               showDragIndicatorIcon={false}
+              showBelongingGroup
             />
           ))}
         </List>

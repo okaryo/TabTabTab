@@ -30,7 +30,7 @@ const SortableTabs = (props: SortableTabsProps) => {
           id={tab.id.toString()}
           data={{ type: "tab", parentType: parentType, windowId }}
         >
-          <TabItem tab={tab} />
+          <TabItem tab={tab} cursorGrabbing />
         </SortableItem>
       ))}
     </SortableContext>
