@@ -42,7 +42,7 @@ describe("#flatTabsInWindows", () => {
         const tabs1 = [mockTab({ id: 1 }), mockTab({ id: 2 })];
         const tabs2 = [mockTab({ id: 3 }), mockTab({ id: 4 })];
         const tabs3 = [mockTab({ id: 5 }), mockTab({ id: 6 })];
-        const pinned = mockPinned({ id: "pinned", children: tabs1 });
+        const pinned = mockPinned({ id: "pinned-1", children: tabs1 });
         const tabGroup = mockTabGroup({ id: 1, children: tabs2 });
         const windows = [
           mockWindow({ id: 1, children: [pinned] }),
@@ -82,7 +82,7 @@ describe("#flatTabsInWindow", () => {
         const tabs1 = [mockTab({ id: 1 }), mockTab({ id: 2 })];
         const tabs2 = [mockTab({ id: 3 }), mockTab({ id: 4 })];
         const tabs3 = [mockTab({ id: 5 }), mockTab({ id: 6 })];
-        const pinned = mockPinned({ id: "pinned", children: tabs1 });
+        const pinned = mockPinned({ id: "pinned-1", children: tabs1 });
         const tabGroup = mockTabGroup({ id: 1, children: tabs2 });
         const window = mockWindow({
           id: 1,
@@ -122,7 +122,7 @@ describe("#findParentContainer", () => {
       it("should return Pinned", () => {
         const tab1 = mockTab({ id: 1 });
         const tab2 = mockTab({ id: 2 });
-        const pinned = mockPinned({ id: "pinned", children: [tab1] });
+        const pinned = mockPinned({ id: "pinned-100", children: [tab1] });
         const window = mockWindow({ id: 100, children: [pinned, tab2] });
 
         expect(findParentContainer(window, 1)).toEqual(pinned);
@@ -270,7 +270,7 @@ describe("#findPinned", () => {
     describe("when pinned is found", () => {
       it("should return pinned", () => {
         const tab = mockTab({ id: 1 });
-        const pinned = mockPinned({ id: "pinned", children: [tab] });
+        const pinned = mockPinned({ id: "pinned-1", children: [tab] });
         const window = mockWindow({ id: 1, children: [pinned] });
 
         expect(findPinned(window)).toEqual(pinned);
@@ -292,7 +292,7 @@ describe("#findTabGroup", () => {
   describe("when windows is empty", () => {
     it("should return undefined", () => {
       const window = mockWindow({ id: 1, children: [] });
-      expect(findTabGroup(window, 1)).toBeUndefined();
+      expect(findTabGroup(1, window)).toBeUndefined();
     });
   });
 
@@ -303,7 +303,7 @@ describe("#findTabGroup", () => {
         const tabGroup = mockTabGroup({ id: 1, children: [tab] });
         const window = mockWindow({ id: 1, children: [tabGroup] });
 
-        expect(findTabGroup(window, 1)).toEqual(tabGroup);
+        expect(findTabGroup(1, window)).toEqual(tabGroup);
       });
     });
 
@@ -313,7 +313,7 @@ describe("#findTabGroup", () => {
         const tabGroup = mockTabGroup({ id: 1, children: [tab] });
         const window = mockWindow({ id: 1, children: [tabGroup] });
 
-        expect(findTabGroup(window, 2)).toBeUndefined();
+        expect(findTabGroup(2, window)).toBeUndefined();
       });
     });
   });
@@ -355,7 +355,7 @@ describe("#indexOfWindowChild", () => {
         const tab4 = mockTab({ id: 4 });
         const tab5 = mockTab({ id: 5 });
         const tab6 = mockTab({ id: 6 });
-        const pinned = mockPinned({ id: "pinned", children: [tab2] });
+        const pinned = mockPinned({ id: "pinned-100", children: [tab2] });
         const tabGroup1 = mockTabGroup({ id: 10, children: [tab3, tab4] });
         const tabGroup2 = mockTabGroup({ id: 11, children: [tab5, tab6] });
         const window = mockWindow({
@@ -474,13 +474,23 @@ describe("#moveTabOrTabGroup", () => {
           const tab3 = mockTab({ id: 3 });
           const tab4 = mockTab({ id: 4 });
           const tab5 = mockTab({ id: 5 });
-          const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+          const pinned = mockPinned({
+            id: "pinned-100",
+            children: [tab1, tab2],
+          });
           const window = mockWindow({
             id: 100,
             children: [pinned, tab3, tab4, tab5],
           });
 
-          const actual = moveTabOrTabGroup([window], 3, 100, 100, "pinned", 1);
+          const actual = moveTabOrTabGroup(
+            [window],
+            3,
+            100,
+            100,
+            "pinned-100",
+            1,
+          );
           const expected = [
             mockWindow({
               id: 100,
@@ -532,7 +542,10 @@ describe("#moveTabOrTabGroup", () => {
           const tab3 = mockTab({ id: 3 });
           const tab4 = mockTab({ id: 4 });
           const tab5 = mockTab({ id: 5 });
-          const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+          const pinned = mockPinned({
+            id: "pinned-100",
+            children: [tab1, tab2],
+          });
           const window = mockWindow({
             id: 100,
             children: [pinned, tab3, tab4, tab5],
@@ -562,13 +575,23 @@ describe("#moveTabOrTabGroup", () => {
           const tab3 = mockTab({ id: 3 });
           const tab4 = mockTab({ id: 4 });
           const tab5 = mockTab({ id: 5 });
-          const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+          const pinned = mockPinned({
+            id: "pinned-100",
+            children: [tab1, tab2],
+          });
           const window = mockWindow({
             id: 100,
             children: [pinned, tab3, tab4, tab5],
           });
 
-          const actual = moveTabOrTabGroup([window], 2, 100, 100, "pinned", 0);
+          const actual = moveTabOrTabGroup(
+            [window],
+            2,
+            100,
+            100,
+            "pinned-100",
+            0,
+          );
           const expected = [
             mockWindow({
               id: 100,
@@ -591,7 +614,10 @@ describe("#moveTabOrTabGroup", () => {
           const tab3 = mockTab({ id: 3 });
           const tab4 = mockTab({ id: 4 });
           const tab5 = mockTab({ id: 5 });
-          const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+          const pinned = mockPinned({
+            id: "pinned-100",
+            children: [tab1, tab2],
+          });
           const tabGroup = mockTabGroup({ id: 10, children: [tab3, tab4] });
           const window = mockWindow({
             id: 100,
@@ -652,14 +678,21 @@ describe("#moveTabOrTabGroup", () => {
           const tab3 = mockTab({ id: 3 });
           const tab4 = mockTab({ id: 4 });
           const tab5 = mockTab({ id: 5 });
-          const pinned = mockPinned({ id: "pinned", children: [tab1] });
+          const pinned = mockPinned({ id: "pinned-100", children: [tab1] });
           const tabGroup = mockTabGroup({ id: 10, children: [tab3, tab4] });
           const window = mockWindow({
             id: 100,
             children: [pinned, tab2, tabGroup, tab5],
           });
 
-          const actual = moveTabOrTabGroup([window], 3, 100, 100, "pinned", 0);
+          const actual = moveTabOrTabGroup(
+            [window],
+            3,
+            100,
+            100,
+            "pinned-100",
+            0,
+          );
           const expected = [
             mockWindow({
               id: 100,
@@ -682,7 +715,7 @@ describe("#moveTabOrTabGroup", () => {
           const tab3 = mockTab({ id: 3 });
           const tab4 = mockTab({ id: 4 });
           const tab5 = mockTab({ id: 5 });
-          const pinned = mockPinned({ id: "pinned", children: [tab1] });
+          const pinned = mockPinned({ id: "pinned-100", children: [tab1] });
           const tabGroup = mockTabGroup({ id: 10, children: [tab3, tab4] });
           const window = mockWindow({
             id: 100,
@@ -743,7 +776,7 @@ describe("#moveTabOrTabGroup", () => {
       const tab3 = mockTab({ id: 3 });
       const tab4 = mockTab({ id: 4 });
       const tab5 = mockTab({ id: 5 });
-      const pinned = mockPinned({ id: "pinned", children: [tab1, tab2] });
+      const pinned = mockPinned({ id: "pinned-100", children: [tab1, tab2] });
       const window = mockWindow({
         id: 100,
         children: [pinned, tab3, tab4, tab5],

@@ -131,6 +131,7 @@ const SearchResult = (props: SearchResultProps) => {
               tab={{ ...tab, active: false }}
               selected={selectedTabIndex === i}
               showDragIndicatorIcon={false}
+              showBelongingGroup
             />
           ))}
         </List>

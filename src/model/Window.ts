@@ -106,13 +106,18 @@ export const findPinned = (window: Window): Pinned | undefined => {
 };
 
 export const findTabGroup = (
-  window: Window,
   groupId: number,
-): TabGroup | undefined => {
-  const tabGroup = window.children.find((child) => {
-    return isTabGroup(child) && child.id === groupId;
-  });
-  return tabGroup as TabGroup | undefined;
+  container: Window | Window[],
+): TabGroup | null => {
+  const windows = Array.isArray(container) ? container : [container];
+  for (const window of windows) {
+    for (const child of window.children) {
+      if (isTabGroup(child) && child.id === groupId) {
+        return child;
+      }
+    }
+  }
+  return null;
 };
 
 export const indexOfWindowChild = (

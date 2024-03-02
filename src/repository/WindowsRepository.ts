@@ -63,7 +63,7 @@ export const getWindows = async (): Promise<Window[]> => {
         }
       } else if (tab.groupId !== chrome.tabGroups.TAB_GROUP_ID_NONE) {
         const groupId = tab.groupId;
-        const tabGroup = findTabGroup(parsedWindow, groupId);
+        const tabGroup = findTabGroup(groupId, parsedWindow);
         if (tabGroup) {
           parsedWindow.children = parsedWindow.children.map((child) => {
             if (isTabGroup(child) && child.id === groupId) {
