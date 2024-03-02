@@ -86,15 +86,13 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
       <Radio
         sx={{
           p: 0,
-          color: theme.palette.tabGroup[tabGroup.color],
+          color: theme.palette.tabGroup[color],
           "&.Mui-checked": {
-            color: theme.palette.tabGroup[tabGroup.color],
+            color: theme.palette.tabGroup[color],
           },
         }}
         checked={tabGroup.color === color}
-        icon={
-          <CircleIcon sx={{ color: theme.palette.tabGroup[tabGroup.color] }} />
-        }
+        icon={<CircleIcon sx={{ color: theme.palette.tabGroup[color] }} />}
         onClick={(event) => {
           event.stopPropagation();
           updateTabGroupColor(tabGroup.id, color);
@@ -195,6 +193,13 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                             variant="standard"
                             size="small"
                             value={groupName}
+                            sx={{
+                              "& input": {
+                                color: theme.palette.getContrastText(
+                                  theme.palette.tabGroup[tabGroup.color],
+                                ),
+                              },
+                            }}
                             onChange={onChangeGroupTitleField}
                             autoFocus
                           />
