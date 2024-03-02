@@ -79,7 +79,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
         duration.inMinutes === 1 ? t.min : t.mins,
       );
     }
-    if (duration.inSeconds >= 1) {
+    if (duration.inSeconds >= 0) {
       return t.elapsedTime(
         duration.inSeconds,
         duration.inSeconds === 1 ? t.sec : t.secs,
