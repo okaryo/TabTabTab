@@ -1,9 +1,6 @@
-import { ThemeProvider } from "@emotion/react";
-import { createTheme } from "@mui/material/styles";
-import { createContext, useEffect, useMemo, useState } from "react";
+import { createContext, useEffect, useState } from "react";
+import { Mode } from "../../model/Mode";
 import { getMode } from "../../repository/ThemeRepository";
-
-export type Mode = "light" | "dark";
 
 type ModeContextType = {
   mode: Mode;
@@ -26,17 +23,9 @@ export const ModeProvider = (props: { children: React.ReactNode }) => {
     initState();
   }, []);
 
-  const themePalette = useMemo(() => {
-    return createTheme({
-      palette: {
-        mode,
-      },
-    });
-  }, [mode]);
-
   return (
     <ModeContext.Provider value={{ mode, setMode }}>
-      <ThemeProvider theme={themePalette}>{children}</ThemeProvider>
+      {children}
     </ModeContext.Provider>
   );
 };

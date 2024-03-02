@@ -1,8 +1,8 @@
+import { Mode } from "../model/Mode";
 import { PopupSize } from "../model/PopupSize";
 import { DurationUnit, TabCleaner } from "../model/TabCleaner";
 import { TabGroupSetting } from "../model/TabGroupSetting";
 import { generateHash } from "../utility/hash";
-import { Mode } from "../view/contexts/ModeContext";
 
 export namespace ChromeLocalStorage {
   const TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";

@@ -1,4 +1,3 @@
-import { GroupColor } from "../../src/model/GroupColor";
 import {
   isPinned,
   isTab,
@@ -14,7 +13,7 @@ describe("#isTab", () => {
       params: {
         id: 10000,
         name: "group",
-        color: new GroupColor("red"),
+        color: "red",
         collapsed: true,
         children: [],
       },
@@ -24,7 +23,7 @@ describe("#isTab", () => {
       params: {
         id: 10000,
         name: "group",
-        color: new GroupColor("red"),
+        color: "red",
         collapsed: true,
       },
       expected: false,
@@ -57,7 +56,7 @@ describe("#isTabContainer", () => {
       params: {
         id: 10000,
         name: "group",
-        color: new GroupColor("red"),
+        color: "red",
         collapsed: true,
         children: [],
       },
@@ -67,7 +66,7 @@ describe("#isTabContainer", () => {
       params: {
         id: 10000,
         name: "group",
-        color: new GroupColor("red"),
+        color: "red",
         collapsed: true,
       },
       expected: false,
@@ -100,7 +99,7 @@ describe("#isPinned", () => {
       params: {
         id: 10000,
         name: "group",
-        color: new GroupColor("red"),
+        color: "red",
         collapsed: true,
         children: [],
       },
@@ -110,7 +109,7 @@ describe("#isPinned", () => {
       params: {
         id: 10000,
         name: "group",
-        color: new GroupColor("red"),
+        color: "red",
         collapsed: true,
       },
       expected: false,
@@ -143,7 +142,7 @@ describe("#isTabGroup", () => {
       params: {
         id: 10000,
         name: "group",
-        color: new GroupColor("red"),
+        color: "red",
         collapsed: true,
         children: [],
       },
@@ -153,7 +152,7 @@ describe("#isTabGroup", () => {
       params: {
         id: 10000,
         name: "group",
-        color: new GroupColor("red"),
+        color: "red",
         collapsed: true,
       },
       expected: false,

@@ -2,8 +2,8 @@ import CssBaseline from "@mui/material/CssBaseline";
 import { useEffect } from "react";
 import { ModeProvider } from "../../contexts/ModeContext";
 import { WindowsProvider } from "../../contexts/WindowsContext";
-import AppearanceThemeProvider from "./components/AppearanceThemeProvider";
 import Home from "./components/Home";
+import MuiThemeProvider from "./components/MuiThemeProvider";
 
 const App = ({ sidePanel = false }) => {
   useEffect(() => {
@@ -22,12 +22,12 @@ const App = ({ sidePanel = false }) => {
 
   return (
     <ModeProvider>
-      <AppearanceThemeProvider>
+      <MuiThemeProvider>
         <WindowsProvider>
           <CssBaseline />
           <Home sidePanel={sidePanel} />
         </WindowsProvider>
-      </AppearanceThemeProvider>
+      </MuiThemeProvider>
     </ModeProvider>
   );
 };

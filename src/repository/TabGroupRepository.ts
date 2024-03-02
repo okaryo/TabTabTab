@@ -1,5 +1,4 @@
-import { GroupColor } from "../model/GroupColor";
-import { StoredTabGroup, TabGroup } from "../model/TabContainer";
+import { StoredTabGroup, TabGroup, TabGroupColor } from "../model/TabContainer";
 import { WindowId } from "../model/Window";
 
 import { ChromeLocalStorage } from "./ChromeStorage";
@@ -45,9 +44,9 @@ export const updateTabGroupTitle = async (groupId: number, title: string) => {
 
 export const updateTabGroupColor = async (
   groupId: number,
-  color: GroupColor,
+  color: TabGroupColor,
 ) => {
-  await chrome.tabGroups.update(groupId, { color: color.value });
+  await chrome.tabGroups.update(groupId, { color });
 };
 
 export const ungroup = async (tabGroup: TabGroup) => {
@@ -67,7 +66,7 @@ export const getStoredTabGroups = async (): Promise<StoredTabGroup[]> => {
   return storedTabGroups.map((group) => {
     return {
       ...group,
-      color: new GroupColor(group.color as GroupColor["value"]),
+      color: group.color as TabGroupColor,
       storedAt: new Date(group.storedAt),
       children: group.children.map((tab) => {
         return {
@@ -90,7 +89,7 @@ export const saveStoredTabGroup = async (
       internalUid: crypto.randomUUID(),
       storedAt: new Date().toISOString(),
       name: tabGroup.name,
-      color: tabGroup.color.value,
+      color: tabGroup.color,
       children: tabGroup.children.map((tab) => ({
         type: "tab",
         internalUid: crypto.randomUUID(),
@@ -127,7 +126,7 @@ export const updateStoredTabGroupName = async (
 
 export const updateStoredTabGroupColor = async (
   id: string,
-  color: GroupColor,
+  color: TabGroupColor,
 ): Promise<StoredTabGroup[]> => {
   const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
   await ChromeLocalStorage.updateStoredTabGroups(
@@ -135,7 +134,7 @@ export const updateStoredTabGroupColor = async (
       if (group.internalUid === id) {
         return {
           ...group,
-          color: color.value,
+          color,
         };
       }
       return group;
@@ -167,6 +166,6 @@ export const restoreTabGroup = async (
   const groupId = await chrome.tabs.group({ tabIds });
   await chrome.tabGroups.update(groupId, {
     title: tabGroup.name,
-    color: tabGroup.color.value,
+    color: tabGroup.color,
   });
 };

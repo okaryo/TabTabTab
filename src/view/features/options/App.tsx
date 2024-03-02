@@ -1,3 +1,4 @@
+import { ThemeProvider } from "@emotion/react";
 import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import ForumIcon from "@mui/icons-material/Forum";
 import SettingsIcon from "@mui/icons-material/Settings";
@@ -13,19 +14,33 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
-import { useState } from "react";
+import { createTheme } from "@mui/material/styles";
+import React, { useContext, useState } from "react";
 import t from "../../../i18n/Translations";
 import OrganizationPage from "../../components/OrganizationPage";
 import RestorePage from "../../components/RestorePage";
-import { ModeProvider } from "../../contexts/ModeContext";
+import { ModeContext, ModeProvider } from "../../contexts/ModeContext";
 import { WindowsProvider } from "../../contexts/WindowsContext";
+import { tabGroupColorPalette } from "../../resources/tabGroupColorPalette";
 import Header from "./components/Header";
 import Feedback from "./pages/Feedback";
 import Overview from "./pages/Overview";
 import Settings from "./pages/Settings";
 import Sponsor from "./pages/Sponsor";
 
-export default function App() {
+const MuiThemeProvider = ({ children }: { children: React.ReactNode }) => {
+  const { mode } = useContext(ModeContext);
+  const themePalette = createTheme({
+    palette: {
+      mode,
+      ...tabGroupColorPalette(mode),
+    },
+  });
+
+  return <ThemeProvider theme={themePalette}>{children}</ThemeProvider>;
+};
+
+const App = () => {
   const [currentPage, setPage] = useState(0);
   const pages = [
     {
@@ -86,33 +101,37 @@ export default function App() {
 
   return (
     <ModeProvider>
-      <CssBaseline />
-      <Header />
+      <MuiThemeProvider>
+        <CssBaseline />
+        <Header />
 
-      <Stack sx={{ height: "100%" }} direction="row">
-        <List
-          sx={{
-            height: "calc(100vh - 64px)",
-            flexShrink: 0,
-          }}
-        >
-          {pages.map((page, index) => (
-            <ListItem disablePadding>
-              <ListItemButton
-                key={page.name}
-                sx={{ py: 1, pl: 2, pr: 6 }}
-                selected={currentPage === index}
-                onClick={() => setPage(index)}
-              >
-                <ListItemIcon>{page.icon}</ListItemIcon>
-                <ListItemText primary={page.name} />
-              </ListItemButton>
-            </ListItem>
-          ))}
-        </List>
-        <Divider orientation="vertical" flexItem />
-        {pages[currentPage].content}
-      </Stack>
+        <Stack sx={{ height: "100%" }} direction="row">
+          <List
+            sx={{
+              height: "calc(100vh - 64px)",
+              flexShrink: 0,
+            }}
+          >
+            {pages.map((page, index) => (
+              <ListItem disablePadding>
+                <ListItemButton
+                  key={page.name}
+                  sx={{ py: 1, pl: 2, pr: 6 }}
+                  selected={currentPage === index}
+                  onClick={() => setPage(index)}
+                >
+                  <ListItemIcon>{page.icon}</ListItemIcon>
+                  <ListItemText primary={page.name} />
+                </ListItemButton>
+              </ListItem>
+            ))}
+          </List>
+          <Divider orientation="vertical" flexItem />
+          {pages[currentPage].content}
+        </Stack>
+      </MuiThemeProvider>
     </ModeProvider>
   );
-}
+};
+
+export default App;
