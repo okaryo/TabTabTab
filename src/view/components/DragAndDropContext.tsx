@@ -472,7 +472,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
 
     const source = findWindowChild(
       windows,
-      activeItem.id === "pinned" ? activeItem.id : Number(activeItem.id),
+      isPinnedId(activeItem.id) ? activeItem.id : Number(activeItem.id),
     );
     if (!source) return null;
 
@@ -501,7 +501,7 @@ const DragAndDropContext = (props: DragAndDropContextProps) => {
           opacity: overItem?.data?.current?.type === "window" ? "0.5" : "1",
         }}
       >
-        <TabItem tab={tab} />
+        <TabItem tab={tab} cursorGrabbing />
       </div>
     );
   }, [activeItem, overItem, windows]);

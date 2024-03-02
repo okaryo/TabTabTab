@@ -26,6 +26,7 @@ import TabFavicon from "./TabFavicon";
 type TabItemProps = {
   tab: Tab;
   selected?: boolean;
+  cursorGrabbing?: boolean;
   showDragIndicatorIcon?: boolean;
   showActions?: boolean;
   showDuplicatedChip?: boolean;
@@ -36,6 +37,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const {
     tab,
     selected,
+    cursorGrabbing = false,
     showDragIndicatorIcon = true,
     showActions = true,
     showDuplicatedChip = true,
@@ -161,7 +163,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     >
       <ListItemButton
         sx={{ width: "100%", pt: 0, pb: 0 }}
-        style={{ cursor: "inherit" }}
+        style={{ cursor: cursorGrabbing ? "inherit" : "pointer" }}
         color="info"
         selected={tab.active || selected}
         onClick={onTapTabItem}
