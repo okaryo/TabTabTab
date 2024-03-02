@@ -104,15 +104,13 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
       <Radio
         sx={{
           p: 0,
-          color: theme.palette.tabGroup[group.color],
+          color: theme.palette.tabGroup[color],
           "&.Mui-checked": {
-            color: theme.palette.tabGroup[group.color],
+            color: theme.palette.tabGroup[color],
           },
         }}
         checked={group.color === color}
-        icon={
-          <CircleIcon sx={{ color: theme.palette.tabGroup[group.color] }} />
-        }
+        icon={<CircleIcon sx={{ color: theme.palette.tabGroup[color] }} />}
         onClick={(event) => {
           event.stopPropagation();
           updateTabGroupColor(group.internalUid, color);
@@ -186,6 +184,13 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
                     variant="standard"
                     size="small"
                     value={groupName}
+                    sx={{
+                      "& input": {
+                        color: theme.palette.getContrastText(
+                          theme.palette.tabGroup[group.color],
+                        ),
+                      },
+                    }}
                     onChange={onChangeGroupNameField}
                     autoFocus
                   />
