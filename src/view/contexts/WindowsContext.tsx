@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from "react";
+import { createContext, useCallback, useEffect, useState } from "react";
 import { Window } from "../../model/Window";
 import {
   addListenerOnChangeTabs,
@@ -6,7 +6,21 @@ import {
 } from "../../repository/TabsRepository";
 import { getWindows } from "../../repository/WindowsRepository";
 
-export const useWindows = () => {
+type WindowsContextType = {
+  windows: Window[];
+  setWindows: React.Dispatch<React.SetStateAction<Window[]>>;
+};
+
+export const WindowsContext = createContext<WindowsContextType>({
+  windows: [],
+  setWindows: () => {},
+});
+
+export const WindowsProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [windows, setState] = useState([]);
 
   const setWindows = useCallback((windows: Window[]) => {
@@ -31,8 +45,9 @@ export const useWindows = () => {
     return () => removeListenerOnChangeTabs(listenerOnChangeTabs);
   }, [setWindows]);
 
-  return {
-    windows,
-    setWindows,
-  };
+  return (
+    <WindowsContext.Provider value={{ windows, setWindows }}>
+      {children}
+    </WindowsContext.Provider>
+  );
 };

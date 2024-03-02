@@ -2,12 +2,13 @@ import { PopupSize } from "../model/PopupSize";
 import { DurationUnit, TabCleaner } from "../model/TabCleaner";
 import { TabGroupSetting } from "../model/TabGroupSetting";
 import { generateHash } from "../utility/hash";
+import { Mode } from "../view/contexts/ModeContext";
 
 export namespace ChromeLocalStorage {
   const TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
   const POPUP_SIZE_SETTING_KEY = "popup_size_setting";
   const POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
-  const THEME_KEY = "theme";
+  const MODE_KEY = "mode";
   const STORED_WINDOWS_KEY = "stored_windows";
   const STORED_TAB_GROUPS_KEY = "stored_tab_groups";
   export const TAB_GROUP_SETTING_KEY = "tab_group_setting";
@@ -78,20 +79,19 @@ export namespace ChromeLocalStorage {
     });
   };
 
-  // Theme
-  type Theme = "light" | "dark";
-  export type ThemeStorageObject = {
-    [THEME_KEY]: Theme;
+  // Mode
+  export type ModeStorageObject = {
+    [MODE_KEY]: Mode;
   };
-  export const getTheme = async () => {
-    const { [THEME_KEY]: theme } = (await chrome.storage.local.get(
-      THEME_KEY,
-    )) as ThemeStorageObject;
-    return theme;
+  export const getMode = async () => {
+    const { [MODE_KEY]: mode } = (await chrome.storage.local.get(
+      MODE_KEY,
+    )) as ModeStorageObject;
+    return mode;
   };
-  export const updateTheme = (theme: Theme) => {
+  export const updateMode = (mode: Mode) => {
     return chrome.storage.local.set({
-      [THEME_KEY]: theme,
+      [MODE_KEY]: mode,
     });
   };
 

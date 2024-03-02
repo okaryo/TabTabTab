@@ -4,7 +4,6 @@ import { PopupSize, defaultPopupSize } from "../../../../model/PopupSize";
 import { getPopupSizeSetting } from "../../../../repository/SettingsRepository";
 import OrganizationPage from "../../../components/OrganizationPage";
 import RestorePage from "../../../components/RestorePage";
-import StoredTabGroupsProvider from "../../../providers/StoredTabGroupsProvider";
 import Header from "./Header";
 import SearchResult from "./SearchResult";
 import WindowsContainer from "./WindowsContainer";
@@ -49,9 +48,7 @@ const Home = (props: HomeProps) => {
       )}
       {searchText.length === 0 && currentPage === "restore" && (
         <Box sx={{ p: 1 }}>
-          <StoredTabGroupsProvider>
-            <RestorePage dense />
-          </StoredTabGroupsProvider>
+          <RestorePage dense />
         </Box>
       )}
       {searchText.length === 0 && currentPage === "organization" && (

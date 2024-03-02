@@ -1,17 +1,16 @@
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import { useContext, useEffect, useMemo, useState } from "react";
-
 import { getPopupElementScaleSetting } from "../../../../repository/SettingsRepository";
-import { ThemeContext } from "../../../contexts/ThemeContext";
+import { ModeContext } from "../../../contexts/ModeContext";
 
 type ThemeProviderProps = {
   children: React.ReactNode;
 };
 
-const PopupThemeProvider = (props: ThemeProviderProps) => {
+const AppearanceThemeProvider = (props: ThemeProviderProps) => {
   const { children } = props;
-  const { theme } = useContext(ThemeContext);
+  const { mode } = useContext(ModeContext);
 
   const [scale, setScale] = useState(100);
   useEffect(() => {
@@ -30,7 +29,7 @@ const PopupThemeProvider = (props: ThemeProviderProps) => {
 
     return createTheme({
       palette: {
-        mode: theme,
+        mode,
       },
       breakpoints: {
         values: {
@@ -75,9 +74,9 @@ const PopupThemeProvider = (props: ThemeProviderProps) => {
         },
       },
     });
-  }, [theme, scale]);
+  }, [mode, scale]);
 
   return <ThemeProvider theme={themePalette}>{children}</ThemeProvider>;
 };
 
-export default PopupThemeProvider;
+export default AppearanceThemeProvider;

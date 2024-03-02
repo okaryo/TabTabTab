@@ -2,11 +2,9 @@ import Stack from "@mui/material/Stack";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useState } from "react";
-
 import t from "../../../i18n/Translations";
-import StoredTabGroupsProvider from "../../providers/StoredTabGroupsProvider";
-import StoredWindowsProvider from "../../providers/StoredWindowsProvider";
-
+import { StoredTabGroupsProvider } from "../../contexts/StoredTabGroupsContext";
+import { StoredWindowsProvider } from "../../contexts/StoredWindowsContext";
 import StoredTabGroups from "./StoredTabGroups";
 import StoredWindows from "./StoredWindows";
 
