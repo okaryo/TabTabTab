@@ -179,7 +179,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
         )}
         <TabFavicon
           url={tab.favIconUrl}
-          style={{ marginRight: "20px" }}
+          style={{ marginRight: "20px", flexShrink: 0 }}
           discarded={tab.discarded}
           isLoading={tab.status === "loading"}
         />
