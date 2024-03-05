@@ -164,7 +164,6 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
       <ListItemButton
         sx={{ width: "100%", pt: 0, pb: 0 }}
         style={{ cursor: cursorGrabbing ? "inherit" : "pointer" }}
-        color="info"
         selected={tab.active || selected}
         onClick={onTapTabItem}
       >

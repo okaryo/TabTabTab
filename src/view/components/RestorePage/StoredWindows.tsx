@@ -157,7 +157,7 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
               autoFocus
             />
           )}
-          <Chip label={allCount} size="small" color="info" />
+          <Chip label={allCount} size="small" color="primary" />
         </Stack>
         <Stack direction="row">
           {(expanded || isHovered) && (
