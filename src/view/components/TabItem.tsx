@@ -49,6 +49,8 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
   const shouldShowActions = showActions && (tab.active || isHovered);
 
   const elapsedTimeSinceLastActiveText = (): string => {
+    if (!tab.lastActivatedAt) return "";
+
     const duration = durationSinceLastActivatedAt(tab);
     if (duration.inDays >= 30) {
       const elapsedMonths = Math.floor(duration.inDays / 30);
@@ -164,7 +166,6 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
       <ListItemButton
         sx={{ width: "100%", pt: 0, pb: 0 }}
         style={{ cursor: cursorGrabbing ? "inherit" : "pointer" }}
-        color="info"
         selected={tab.active || selected}
         onClick={onTapTabItem}
       >

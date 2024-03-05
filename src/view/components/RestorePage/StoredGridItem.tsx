@@ -70,7 +70,7 @@ export const StoredGridTabContainerItem = (
                 <Chip
                   label={container.children.length}
                   size="small"
-                  color={container.type === "pinned" ? "info" : "default"}
+                  color={container.type === "pinned" ? "primary" : undefined}
                   sx={{
                     height: 18,
                     backgroundColor: isTabGroup

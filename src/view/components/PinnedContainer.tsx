@@ -56,9 +56,11 @@ const PinnedContainer = (props: PinnedContainerProps) => {
   return (
     <Stack ref={setNodeRef} direction="row">
       <Box
-        style={{
-          borderRight: "5px solid #818181",
+        sx={{
+          borderColor: "primary.main",
           borderRadius: "0 5px 5px 0",
+          borderRightWidth: "5px",
+          borderRightStyle: "solid",
         }}
       />
       <List sx={{ width: "100%", bgcolor: "background.paper" }} disablePadding>
@@ -99,7 +101,7 @@ const PinnedContainer = (props: PinnedContainerProps) => {
                 <Chip
                   label={pinned.children.length}
                   size="small"
-                  color="info"
+                  color="primary"
                 />
               </Stack>
             </ListItemButton>

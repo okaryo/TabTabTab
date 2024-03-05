@@ -66,7 +66,7 @@ const WindowTab = (props: WindowTabProps) => {
             <Chip
               label={tabCount}
               size="small"
-              color="info"
+              color="primary"
               sx={{ visibility: showIcon ? "hidden" : "visible" }}
             />
             <IconButton

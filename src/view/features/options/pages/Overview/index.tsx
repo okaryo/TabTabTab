@@ -66,7 +66,7 @@ const WindowColumn = (props: WindowColumnProps) => {
           <Chip
             label={flatTabsInWindow(window).length}
             size="small"
-            color="info"
+            color="primary"
           />
         </Stack>
         <IconButton onClick={onClickWindowActionMenu}>
