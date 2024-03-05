@@ -169,26 +169,14 @@ export const applyLastActivatedAt = async (
     session: { [tabId: number]: { lastActivatedAt: string } };
   },
 ) => {
-  const { local, session } = lastAccesses;
-  if (session[tab.id]) {
-    return {
-      ...tab,
-      lastActivatedAt: new Date(session[tab.id].lastActivatedAt),
-    };
-  }
-
-  const key = await ChromeStorage.tabKeyForLastAccessesInLocal(
-    tab.title,
-    tab.url.toString(),
+  const lastActivatedAt = await ChromeStorage.getTabLastActivatedAt(
+    tab,
+    lastAccesses,
   );
-  if (local[key]) {
-    return {
-      ...tab,
-      lastActivatedAt: new Date(local[key].lastActivatedAt),
-    };
-  }
-
-  return tab;
+  return {
+    ...tab,
+    lastActivatedAt,
+  };
 };
 
 // TODO: Refactor to clearer function name

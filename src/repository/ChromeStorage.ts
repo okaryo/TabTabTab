@@ -1,5 +1,6 @@
 import { Mode } from "../model/Mode";
 import { PopupSize } from "../model/PopupSize";
+import { Tab } from "../model/Tab";
 import { DurationUnit, TabCleaner } from "../model/TabCleaner";
 import { TabGroupSetting } from "../model/TabGroupSetting";
 import { generateHash } from "../utility/hash";
@@ -229,8 +230,6 @@ export namespace ChromeStorage {
       };
     };
   };
-  export const tabKeyForLastAccessesInLocal = (title: string, url: string) =>
-    generateHash(`${title}${url}`);
   export const getTabLastAccesses = async () => {
     const {
       [ChromeLocalStorage.TAB_LAST_ACCESSES_KEY]: lastAccessesInLocal = {},
@@ -247,6 +246,24 @@ export namespace ChromeStorage {
       local: lastAccessesInLocal,
       session: lastAccessesInSession,
     };
+  };
+  export const getTabLastActivatedAt = async (
+    tab: Tab,
+    lastAccesses: {
+      local: { [key: string]: { lastActivatedAt: string } };
+      session: { [tabId: number]: { lastActivatedAt: string } };
+    },
+  ) => {
+    const { local, session } = lastAccesses;
+    if (session[tab.id]) return new Date(session[tab.id].lastActivatedAt);
+
+    const key = await tabKeyForLastAccessesInLocal(
+      tab.title,
+      tab.url.toString(),
+    );
+    if (local[key]) return new Date(local[key].lastActivatedAt);
+
+    return;
   };
   export const updateTabLastAccesses = async (tab: chrome.tabs.Tab) => {
     const lastActivatedAt = new Date().toISOString();
@@ -314,4 +331,6 @@ export namespace ChromeStorage {
       [ChromeLocalStorage.TAB_LAST_ACCESSES_KEY]: cleanedUpInLocal,
     });
   };
+  const tabKeyForLastAccessesInLocal = (title: string, url: string) =>
+    generateHash(`${title}${url}`);
 }
