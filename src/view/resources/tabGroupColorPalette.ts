@@ -1,5 +1,5 @@
 import { Palette } from "@mui/material/styles";
-import { Mode } from "../../model/Mode";
+import { Mode } from "../../model/Theme";
 
 declare module "@mui/material/styles" {
   interface Palette {
