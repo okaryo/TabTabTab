@@ -1,8 +1,8 @@
-import { Mode } from "../model/Mode";
 import { PopupSize } from "../model/PopupSize";
 import { Tab } from "../model/Tab";
 import { DurationUnit, TabCleaner } from "../model/TabCleaner";
 import { TabGroupSetting } from "../model/TabGroupSetting";
+import { Mode, ThemeColor } from "../model/Theme";
 import { generateHash } from "../utility/hash";
 
 export namespace ChromeLocalStorage {
@@ -10,6 +10,7 @@ export namespace ChromeLocalStorage {
   const POPUP_SIZE_SETTING_KEY = "popup_size_setting";
   const POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
   const MODE_KEY = "mode";
+  const THEME_COLOR_KEY = "theme_color";
   const STORED_WINDOWS_KEY = "stored_windows";
   const STORED_TAB_GROUPS_KEY = "stored_tab_groups";
   export const TAB_GROUP_SETTING_KEY = "tab_group_setting";
@@ -93,6 +94,22 @@ export namespace ChromeLocalStorage {
   export const updateMode = (mode: Mode) => {
     return chrome.storage.local.set({
       [MODE_KEY]: mode,
+    });
+  };
+
+  // ThemeColor
+  export type ThemeColorStorageObject = {
+    [THEME_COLOR_KEY]: ThemeColor;
+  };
+  export const getThemeColor = async () => {
+    const { [THEME_COLOR_KEY]: color } = (await chrome.storage.local.get(
+      THEME_COLOR_KEY,
+    )) as ThemeColorStorageObject;
+    return color;
+  };
+  export const updateThemeColor = (color: ThemeColor) => {
+    return chrome.storage.local.set({
+      [THEME_COLOR_KEY]: color,
     });
   };
 
