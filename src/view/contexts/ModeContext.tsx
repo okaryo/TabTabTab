@@ -1,5 +1,5 @@
 import { createContext, useEffect, useState } from "react";
-import { Mode } from "../../model/Mode";
+import { Mode } from "../../model/Theme";
 import { getMode } from "../../repository/ThemeRepository";
 
 type ModeContextType = {
