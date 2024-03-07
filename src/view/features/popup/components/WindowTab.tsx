@@ -4,9 +4,9 @@ import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import IconButton from "@mui/material/IconButton";
 import Tab from "@mui/material/Tab";
-import { blue, grey } from "@mui/material/colors";
+import { grey } from "@mui/material/colors";
+import { alpha, useTheme } from "@mui/material/styles";
 import { useState } from "react";
-
 import { Window, WindowId } from "../../../../model/Window";
 import { WindowActionMenu } from "../../../components/ActionMenu";
 
@@ -28,6 +28,7 @@ const WindowTab = (props: WindowTabProps) => {
     },
   });
   const droppable = active && isOver && active.data.current?.windowId !== id;
+  const theme = useTheme();
 
   const [menuAnchorElement, setMenuAnchorElement] =
     useState<HTMLElement | null>(null);
@@ -43,7 +44,9 @@ const WindowTab = (props: WindowTabProps) => {
       <Tab
         ref={setNodeRef}
         sx={{
-          bgcolor: droppable ? blue[100] : undefined,
+          bgcolor: droppable
+            ? alpha(theme.palette.primary.light, 0.2)
+            : undefined,
           borderColor: droppable ? "primary.main" : undefined,
           borderWidth: droppable ? 1 : undefined,
           borderStyle: droppable ? "solid" : undefined,
