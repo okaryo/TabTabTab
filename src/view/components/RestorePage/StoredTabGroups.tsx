@@ -1,4 +1,3 @@
-import CircleIcon from "@mui/icons-material/Circle";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -11,7 +10,6 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Radio from "@mui/material/Radio";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -20,16 +18,13 @@ import { grey } from "@mui/material/colors";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import t from "../../../i18n/Translations";
-import {
-  StoredTabGroup,
-  TabGroupColor,
-  tabGroupColors,
-} from "../../../model/TabContainer";
+import { StoredTabGroup, tabGroupColors } from "../../../model/TabContainer";
 import { restoreTabGroup } from "../../../repository/TabGroupRepository";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import { useRemoveStoredTabGroup } from "../../hooks/useRemoveStoredTabGroup";
 import { useUpdateStoredTabGroupColor } from "../../hooks/useUpdateStoredTabGroupColor";
 import { useUpdateStoredTabGroupName } from "../../hooks/useUpdateStoredTabGroupName";
+import TabGroupColorRadio from "../TabGroupColorRadio";
 import { StoredGridTabItem } from "./StoredGridItem";
 
 type StoredTabGroupsProps = {
@@ -95,28 +90,6 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
   ) => {
     setGroupName(event.target.value);
     updateTabGroupName(group.internalUid, event.target.value);
-  };
-
-  const GroupColorRadio = (props: { color: TabGroupColor }) => {
-    const { color } = props;
-
-    return (
-      <Radio
-        sx={{
-          p: 0,
-          color: theme.palette.tabGroup[color],
-          "&.Mui-checked": {
-            color: theme.palette.tabGroup[color],
-          },
-        }}
-        checked={group.color === color}
-        icon={<CircleIcon sx={{ color: theme.palette.tabGroup[color] }} />}
-        onClick={(event) => {
-          event.stopPropagation();
-          updateTabGroupColor(group.internalUid, color);
-        }}
-      />
-    );
   };
 
   useEffect(() => {
@@ -216,7 +189,14 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
               justifyContent="flex-start"
             >
               {tabGroupColors.map((color) => (
-                <GroupColorRadio key={color} color={color} />
+                <TabGroupColorRadio
+                  color={color}
+                  checked={group.color === color}
+                  onClick={(event) => {
+                    event.stopPropagation();
+                    updateTabGroupColor(group.internalUid, color);
+                  }}
+                />
               ))}
             </Stack>
           )}

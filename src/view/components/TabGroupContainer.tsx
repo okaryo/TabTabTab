@@ -1,4 +1,3 @@
-import CircleIcon from "@mui/icons-material/Circle";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import ExpandLess from "@mui/icons-material/ExpandLess";
 import ExpandMore from "@mui/icons-material/ExpandMore";
@@ -11,18 +10,13 @@ import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import Radio from "@mui/material/Radio";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import grey from "@mui/material/colors/grey";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useRef, useState } from "react";
-import {
-  TabGroup,
-  TabGroupColor,
-  tabGroupColors,
-} from "../../model/TabContainer";
+import { TabGroup, tabGroupColors } from "../../model/TabContainer";
 import {
   collapseTabGroup,
   expandTabGroup,
@@ -30,6 +24,7 @@ import {
   updateTabGroupTitle,
 } from "../../repository/TabGroupRepository";
 import { TabGroupActionMenu } from "./ActionMenu";
+import TabGroupColorRadio from "./TabGroupColorRadio";
 
 type TabGroupContainerProps = {
   children: React.ReactNode;
@@ -78,28 +73,6 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
     setMenuAnchorElement(event.currentTarget);
   };
   const onCloseMenu = () => setMenuAnchorElement(null);
-
-  const GroupColorRadio = (props: { color: TabGroupColor }) => {
-    const { color } = props;
-
-    return (
-      <Radio
-        sx={{
-          p: 0,
-          color: theme.palette.tabGroup[color],
-          "&.Mui-checked": {
-            color: theme.palette.tabGroup[color],
-          },
-        }}
-        checked={tabGroup.color === color}
-        icon={<CircleIcon sx={{ color: theme.palette.tabGroup[color] }} />}
-        onClick={(event) => {
-          event.stopPropagation();
-          updateTabGroupColor(tabGroup.id, color);
-        }}
-      />
-    );
-  };
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -227,7 +200,15 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                       justifyContent="flex-start"
                     >
                       {tabGroupColors.map((color) => (
-                        <GroupColorRadio key={color} color={color} />
+                        <TabGroupColorRadio
+                          key={color}
+                          color={color}
+                          checked={tabGroup.color === color}
+                          onClick={(event) => {
+                            event.stopPropagation();
+                            updateTabGroupColor(tabGroup.id, color);
+                          }}
+                        />
                       ))}
                     </Stack>
                   )}
