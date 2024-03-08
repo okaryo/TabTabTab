@@ -179,6 +179,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
           />
         )}
         <TabFavicon
+          key={`${tab.id}${tab.favIconUrl?.href}`}
           url={tab.favIconUrl}
           style={{ marginRight: "20px", flexShrink: 0 }}
           discarded={tab.discarded}

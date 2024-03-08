@@ -2,7 +2,7 @@ import ExtensionIcon from "@mui/icons-material/Extension";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTheme } from "@mui/material/styles";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 
 type TabFaviconProps = {
   url: URL;
@@ -16,10 +16,6 @@ const TabFavicon = (props: TabFaviconProps) => {
   const { url, style, size = 20, discarded = false, isLoading = false } = props;
   const [isError, setIsError] = useState(false);
   const theme = useTheme();
-
-  useEffect(() => {
-    setIsError(false);
-  }, [props]);
 
   if (isLoading) {
     return <CircularProgress style={{ ...style }} size={size} />;
