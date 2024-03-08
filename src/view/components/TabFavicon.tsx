@@ -1,7 +1,8 @@
-import TabIcon from "@mui/icons-material/Tab";
+import ExtensionIcon from "@mui/icons-material/Extension";
 import Box from "@mui/material/Box";
 import CircularProgress from "@mui/material/CircularProgress";
 import { useTheme } from "@mui/material/styles";
+import { useEffect, useState } from "react";
 
 type TabFaviconProps = {
   url: URL;
@@ -13,13 +14,18 @@ type TabFaviconProps = {
 
 const TabFavicon = (props: TabFaviconProps) => {
   const { url, style, size = 20, discarded = false, isLoading = false } = props;
+  const [isError, setIsError] = useState(false);
   const theme = useTheme();
+
+  useEffect(() => {
+    setIsError(false);
+  }, [props]);
 
   if (isLoading) {
     return <CircularProgress style={{ ...style }} size={size} />;
   }
 
-  const validUrl =
+  const accessibleUrl =
     url &&
     url.href !== "" &&
     (url.protocol === "https:" || url.protocol === "http:");
@@ -30,7 +36,7 @@ const TabFavicon = (props: TabFaviconProps) => {
     opacity: discarded ? 0.5 : 1,
   };
 
-  if (validUrl) {
+  if (accessibleUrl && !isError) {
     return (
       <Box
         component="img"
@@ -40,12 +46,13 @@ const TabFavicon = (props: TabFaviconProps) => {
           width: size,
         }}
         src={url.href}
+        onError={() => setIsError(true)}
       />
     );
   }
 
   return (
-    <TabIcon
+    <ExtensionIcon
       color="disabled"
       style={iconStyle}
       sx={{
