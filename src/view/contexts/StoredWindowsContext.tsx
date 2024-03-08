@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
+import { getStoredWindows } from "../../data/repository/WindowsRepository";
 import { StoredWindow } from "../../model/Window";
-import { getStoredWindows } from "../../repository/WindowsRepository";
 
 type StoredWindowsContextType = {
   storedWindows: StoredWindow[];

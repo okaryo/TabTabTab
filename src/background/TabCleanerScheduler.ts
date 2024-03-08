@@ -1,8 +1,8 @@
+import { getTabCleanerSetting } from "../data/repository/TabCleanerRepository";
+import { closeTab } from "../data/repository/TabsRepository";
+import { getWindows } from "../data/repository/WindowsRepository";
 import { shouldCleanUp } from "../model/TabCleaner";
 import { flatTabsInWindows } from "../model/Window";
-import { getTabCleanerSetting } from "../repository/TabCleanerRepository";
-import { closeTab } from "../repository/TabsRepository";
-import { getWindows } from "../repository/WindowsRepository";
 
 export const activateTabCleanerScheduler = async () => {
   const tabCleanerAlarmName = "tabCleanerAlarm";

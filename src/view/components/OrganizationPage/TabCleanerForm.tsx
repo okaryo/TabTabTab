@@ -10,13 +10,12 @@ import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
-
-import t from "../../../i18n/Translations";
-import { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
 import {
   getTabCleanerSetting,
   updateTabCleanerSetting,
-} from "../../../repository/TabCleanerRepository";
+} from "../../../data/repository/TabCleanerRepository";
+import t from "../../../i18n/Translations";
+import { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
 import PaperWithHeader from "../PaperWithHeader";
 
 type TabCleanerFormProps = {

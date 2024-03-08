@@ -1,9 +1,9 @@
-import { PopupSize } from "../model/PopupSize";
-import { Tab } from "../model/Tab";
-import { DurationUnit, TabCleaner } from "../model/TabCleaner";
-import { TabGroupSetting } from "../model/TabGroupSetting";
-import { Mode, ThemeColor } from "../model/Theme";
-import { generateHash } from "../utility/hash";
+import { PopupSize } from "../../model/PopupSize";
+import { Tab } from "../../model/Tab";
+import { DurationUnit, TabCleaner } from "../../model/TabCleaner";
+import { TabGroupSetting } from "../../model/TabGroupSetting";
+import { Mode, ThemeColor } from "../../model/Theme";
+import { generateHash } from "../../utility/hash";
 
 export namespace ChromeLocalStorage {
   const TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";

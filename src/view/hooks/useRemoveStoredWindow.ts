@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 
-import { removeStoredWindow } from "../../repository/WindowsRepository";
+import { removeStoredWindow } from "../../data/repository/WindowsRepository";
 import { StoredWindowsContext } from "../contexts/StoredWindowsContext";
 
 export const useRemoveStoredWindow = (): ((id: string) => Promise<void>) => {

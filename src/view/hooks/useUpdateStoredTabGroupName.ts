@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 
-import { updateStoredTabGroupName } from "../../repository/TabGroupRepository";
+import { updateStoredTabGroupName } from "../../data/repository/TabGroupRepository";
 import { StoredTabGroupsContext } from "../contexts/StoredTabGroupsContext";
 
 export const useUpdateStoredTabGroupName = (): ((

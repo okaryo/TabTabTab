@@ -1,5 +1,5 @@
 import { useCallback, useContext } from "react";
-import { updateMode } from "../../repository/ThemeRepository";
+import { updateMode } from "../../data/repository/ThemeRepository";
 import { Mode, ModeContext } from "../contexts/ModeContext";
 
 export const useToggleMode = (): ((mode: Mode) => Promise<void>) => {

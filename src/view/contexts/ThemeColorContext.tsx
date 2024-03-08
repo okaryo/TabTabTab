@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
+import { getThemeColor } from "../../data/repository/ThemeRepository";
 import { ThemeColor, defaultThemeColor } from "../../model/Theme";
-import { getThemeColor } from "../../repository/ThemeRepository";
 
 type ThemeColorContextType = {
   themeColor: ThemeColor;

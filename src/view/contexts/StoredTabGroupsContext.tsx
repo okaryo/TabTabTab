@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
+import { getStoredTabGroups } from "../../data/repository/TabGroupRepository";
 import { StoredTabGroup } from "../../model/TabContainer";
-import { getStoredTabGroups } from "../../repository/TabGroupRepository";
 
 type StoredTabGroupsContextType = {
   storedTabGroups: StoredTabGroup[];

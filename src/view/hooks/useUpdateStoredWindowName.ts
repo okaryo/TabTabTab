@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
 
-import { updateStoredWindowName } from "../../repository/WindowsRepository";
+import { updateStoredWindowName } from "../../data/repository/WindowsRepository";
 import { StoredWindowsContext } from "../contexts/StoredWindowsContext";
 
 export const useUpdateStoredWindowName = (): ((

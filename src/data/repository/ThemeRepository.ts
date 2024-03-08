@@ -3,8 +3,8 @@ import {
   ThemeColor,
   defaultMode,
   defaultThemeColor,
-} from "../model/Theme";
-import { ChromeLocalStorage } from "./ChromeStorage";
+} from "../../model/Theme";
+import { ChromeLocalStorage } from "../storage/ChromeStorage";
 
 export const getMode = async (): Promise<Mode> => {
   const mode = await ChromeLocalStorage.getMode();

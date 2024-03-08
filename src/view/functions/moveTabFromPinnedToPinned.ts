@@ -1,4 +1,4 @@
-import { moveTab, pinTab } from "../../repository/TabsRepository";
+import { moveTab, pinTab } from "../../data/repository/TabsRepository";
 
 export const moveTabFromPinnedToPinned = async (
   tabId: number,

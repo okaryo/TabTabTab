@@ -15,11 +15,9 @@ import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-
 import t from "../../i18n/Translations";
 import { Pinned } from "../../model/TabContainer";
 import { WindowId } from "../../model/Window";
-
 import { PinnedActionMenu } from "./ActionMenu";
 
 type PinnedContainerProps = {

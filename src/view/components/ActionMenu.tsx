@@ -15,15 +15,14 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import SvgIcon from "@mui/material/SvgIcon";
 import React from "react";
-import t from "../../i18n/Translations";
-import { Tab } from "../../model/Tab";
-import { Pinned, TabGroup } from "../../model/TabContainer";
-import { Window } from "../../model/Window";
 import {
   navigateToOptionsPage,
   openSidePanel,
-} from "../../repository/SettingsRepository";
-import { closeTabGroup, ungroup } from "../../repository/TabGroupRepository";
+} from "../../data/repository/SettingsRepository";
+import {
+  closeTabGroup,
+  ungroup,
+} from "../../data/repository/TabGroupRepository";
 import {
   addTabToNewGroup,
   closeTabs,
@@ -32,8 +31,12 @@ import {
   screenshotVisibleArea,
   unpinAllTabs,
   unpinTab,
-} from "../../repository/TabsRepository";
-import { closeWindow } from "../../repository/WindowsRepository";
+} from "../../data/repository/TabsRepository";
+import { closeWindow } from "../../data/repository/WindowsRepository";
+import t from "../../i18n/Translations";
+import { Tab } from "../../model/Tab";
+import { Pinned, TabGroup } from "../../model/TabContainer";
+import { Window } from "../../model/Window";
 import { mergeWindow } from "../functions/mergeWindow";
 import { useSaveStoredTabGroup } from "../hooks/useSaveStoredTabGroup";
 import { useSaveStoredWindow } from "../hooks/useSaveStoredWindow";

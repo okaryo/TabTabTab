@@ -1,6 +1,6 @@
 import { useCallback, useContext } from "react";
+import { updateStoredTabGroupColor } from "../../data/repository/TabGroupRepository";
 import { TabGroupColor } from "../../model/TabContainer";
-import { updateStoredTabGroupColor } from "../../repository/TabGroupRepository";
 import { StoredTabGroupsContext } from "../contexts/StoredTabGroupsContext";
 
 export const useUpdateStoredTabGroupColor = (): ((

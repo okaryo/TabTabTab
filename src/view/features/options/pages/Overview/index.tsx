@@ -11,9 +11,9 @@ import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { useContext, useState } from "react";
+import { addWindow } from "../../../../../data/repository/WindowsRepository";
 import t from "../../../../../i18n/Translations";
 import { Window, flatTabsInWindow } from "../../../../../model/Window";
-import { addWindow } from "../../../../../repository/WindowsRepository";
 import { WindowActionMenu } from "../../../../components/ActionMenu";
 import DragAndDropContext, {
   DROPPABLE_EMPTY_WINDOW_COLUMN_ID,

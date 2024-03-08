@@ -1,8 +1,8 @@
 import Stack from "@mui/material/Stack";
 import { useContext } from "react";
+import { updateThemeColor } from "../../../../../data/repository/ThemeRepository";
 import t from "../../../../../i18n/Translations";
 import { themeColors } from "../../../../../model/Theme";
-import { updateThemeColor } from "../../../../../repository/ThemeRepository";
 import PaperWithHeader from "../../../../components/PaperWithHeader";
 import TabGroupColorRadio from "../../../../components/TabGroupColorRadio";
 import { ThemeColorContext } from "../../../../contexts/ThemeColorContext";

@@ -1,4 +1,4 @@
-import { Tab } from "../model/Tab";
+import { Tab } from "../../model/Tab";
 import {
   Pinned,
   StoredPinned,
@@ -9,7 +9,7 @@ import {
   isTab,
   isTabContainer,
   isTabGroup,
-} from "../model/TabContainer";
+} from "../../model/TabContainer";
 import {
   StoredWindow,
   Window,
@@ -17,9 +17,8 @@ import {
   findPinned,
   findTabGroup,
   flatTabsInWindow,
-} from "../model/Window";
-
-import { ChromeLocalStorage, ChromeStorage } from "./ChromeStorage";
+} from "../../model/Window";
+import { ChromeLocalStorage, ChromeStorage } from "../storage/ChromeStorage";
 import { applyLastActivatedAt, parseTab } from "./TabsRepository";
 
 export const getWindows = async (): Promise<Window[]> => {

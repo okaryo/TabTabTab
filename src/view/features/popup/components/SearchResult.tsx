@@ -4,13 +4,13 @@ import List from "@mui/material/List";
 import ListSubheader from "@mui/material/ListSubheader";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
-import t from "../../../../i18n/Translations";
-import { Tab } from "../../../../model/Tab";
-import { findTabsByTitleOrUrl } from "../../../../model/Window";
 import {
   focusTab,
   getRecentActiveTabs,
-} from "../../../../repository/TabsRepository";
+} from "../../../../data/repository/TabsRepository";
+import t from "../../../../i18n/Translations";
+import { Tab } from "../../../../model/Tab";
+import { findTabsByTitleOrUrl } from "../../../../model/Window";
 import TabItem from "../../../components/TabItem";
 import { WindowsContext } from "../../../contexts/WindowsContext";
 

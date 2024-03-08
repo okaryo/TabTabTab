@@ -1,11 +1,10 @@
 import { parse } from "tldts";
-
 import {
   TabGroupSetting,
   defaultTabGroupSetting,
-} from "../model/TabGroupSetting";
+} from "../../model/TabGroupSetting";
 
-import { ChromeLocalStorage } from "./ChromeStorage";
+import { ChromeLocalStorage } from "../storage/ChromeStorage";
 
 export const getTabGroupSetting = async (): Promise<TabGroupSetting> => {
   const setting = await ChromeLocalStorage.getTabGroupSetting();

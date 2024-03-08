@@ -1,6 +1,6 @@
 import { createContext, useEffect, useState } from "react";
+import { getMode } from "../../data/repository/ThemeRepository";
 import { Mode } from "../../model/Theme";
-import { getMode } from "../../repository/ThemeRepository";
 
 type ModeContextType = {
   mode: Mode;

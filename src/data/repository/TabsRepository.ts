@@ -1,6 +1,6 @@
-import { Tab, TabId, TabStatus } from "../model/Tab";
-import { WindowId } from "../model/Window";
-import { ChromeSessionStorage, ChromeStorage } from "./ChromeStorage";
+import { Tab, TabId, TabStatus } from "../../model/Tab";
+import { WindowId } from "../../model/Window";
+import { ChromeSessionStorage, ChromeStorage } from "../storage/ChromeStorage";
 
 export const focusTab = async (tab: Tab) => {
   const isExistingTab = await chrome.tabs
