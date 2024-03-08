@@ -275,6 +275,10 @@
     "message": "Поддомейн",
     "description": "Option to group tabs by subdomain."
   },
+  "theme_color_setting_header": {
+    "message": "Цвят на темата",
+    "description": "The main header for the theme color setting section."
+  },
   "popup_setting_header": {
     "message": "Изскачащ прозорец",
     "description": "The main header for the popup setting section."

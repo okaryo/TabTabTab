@@ -1,5 +1,6 @@
 import Stack from "@mui/material/Stack";
 import { useContext } from "react";
+import t from "../../../../../i18n/Translations";
 import { themeColors } from "../../../../../model/Theme";
 import { updateThemeColor } from "../../../../../repository/ThemeRepository";
 import PaperWithHeader from "../../../../components/PaperWithHeader";
@@ -9,7 +10,7 @@ import { ThemeColorContext } from "../../../../contexts/ThemeColorContext";
 const ThemeColorSetting = () => {
   const { themeColor, setThemeColor } = useContext(ThemeColorContext);
   return (
-    <PaperWithHeader header={"ThemeColor"}>
+    <PaperWithHeader header={t.themeColorSettingHeader}>
       <Stack
         spacing={1}
         direction="row"
