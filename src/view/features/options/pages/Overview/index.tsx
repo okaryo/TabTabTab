@@ -9,7 +9,7 @@ import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { blue } from "@mui/material/colors";
+import { alpha, useTheme } from "@mui/material/styles";
 import { useContext, useState } from "react";
 import t from "../../../../../i18n/Translations";
 import { Window, flatTabsInWindow } from "../../../../../model/Window";
@@ -88,7 +88,6 @@ const WindowColumn = (props: WindowColumnProps) => {
 
 const DroppableTabList = (props: TabListProps) => {
   const { window, index } = props;
-
   const { setNodeRef } = useDroppable({
     id: `${DROPPABLE_WINDOW_COLUMN_ID_PREFIX}${window.id}`,
   });
@@ -104,6 +103,7 @@ const DroppableEmptyWindowColumn = () => {
   const { setNodeRef, isOver } = useDroppable({
     id: DROPPABLE_EMPTY_WINDOW_COLUMN_ID,
   });
+  const theme = useTheme();
 
   return (
     <Card
@@ -117,7 +117,12 @@ const DroppableEmptyWindowColumn = () => {
         width: 420,
         overflow: "hidden",
         borderStyle: isOver ? "solid" : "dashed",
-        backgroundColor: isOver ? blue[100] : "background.paper",
+        borderColor: isOver
+          ? theme.palette.primary.light
+          : theme.palette.divider,
+        backgroundColor: isOver
+          ? alpha(theme.palette.primary.light, 0.2)
+          : "background.paper",
       }}
     >
       <CardActionArea

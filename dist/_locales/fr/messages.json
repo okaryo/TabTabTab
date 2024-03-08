@@ -275,6 +275,10 @@
     "message": "Sous-domaine",
     "description": "Option to group tabs by subdomain."
   },
+  "theme_color_setting_header": {
+    "message": "Couleur du thème",
+    "description": "The main header for the theme color setting section."
+  },
   "popup_setting_header": {
     "message": "Popup",
     "description": "The main header for the popup setting section."

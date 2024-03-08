@@ -3,7 +3,9 @@ import { createTheme } from "@mui/material/styles";
 import { useContext, useEffect, useMemo, useState } from "react";
 import { getPopupElementScaleSetting } from "../../../../repository/SettingsRepository";
 import { ModeContext } from "../../../contexts/ModeContext";
+import { ThemeColorContext } from "../../../contexts/ThemeColorContext";
 import { tabGroupColorPalette } from "../../../resources/tabGroupColorPalette";
+import { themeColorPaletteBy } from "../../../resources/themeColorPalette";
 
 type MuiThemeProviderProps = {
   children: React.ReactNode;
@@ -12,6 +14,7 @@ type MuiThemeProviderProps = {
 const MuiThemeProvider = (props: MuiThemeProviderProps) => {
   const { children } = props;
   const { mode } = useContext(ModeContext);
+  const { themeColor } = useContext(ThemeColorContext);
 
   const [scale, setScale] = useState(100);
   useEffect(() => {
@@ -31,6 +34,7 @@ const MuiThemeProvider = (props: MuiThemeProviderProps) => {
     return createTheme({
       palette: {
         mode,
+        primary: themeColorPaletteBy(themeColor, mode),
         ...tabGroupColorPalette(mode),
       },
       breakpoints: {
@@ -76,7 +80,7 @@ const MuiThemeProvider = (props: MuiThemeProviderProps) => {
         },
       },
     });
-  }, [mode, scale]);
+  }, [mode, themeColor, scale]);
 
   return <ThemeProvider theme={themePalette}>{children}</ThemeProvider>;
 };

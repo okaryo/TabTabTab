@@ -7,7 +7,6 @@ import CardHeader from "@mui/material/CardHeader";
 import Link from "@mui/material/Link";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-
 import t from "../../../../../i18n/Translations";
 
 const Feedback = () => {

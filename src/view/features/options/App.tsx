@@ -20,8 +20,13 @@ import t from "../../../i18n/Translations";
 import OrganizationPage from "../../components/OrganizationPage";
 import RestorePage from "../../components/RestorePage";
 import { ModeContext, ModeProvider } from "../../contexts/ModeContext";
+import {
+  ThemeColorContext,
+  ThemeColorProvider,
+} from "../../contexts/ThemeColorContext";
 import { WindowsProvider } from "../../contexts/WindowsContext";
 import { tabGroupColorPalette } from "../../resources/tabGroupColorPalette";
+import { themeColorPaletteBy } from "../../resources/themeColorPalette";
 import Header from "./components/Header";
 import Feedback from "./pages/Feedback";
 import Overview from "./pages/Overview";
@@ -30,9 +35,11 @@ import Sponsor from "./pages/Sponsor";
 
 const MuiThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { mode } = useContext(ModeContext);
+  const { themeColor } = useContext(ThemeColorContext);
   const themePalette = createTheme({
     palette: {
       mode,
+      primary: themeColorPaletteBy(themeColor, mode),
       ...tabGroupColorPalette(mode),
     },
   });
@@ -101,35 +108,37 @@ const App = () => {
 
   return (
     <ModeProvider>
-      <MuiThemeProvider>
-        <CssBaseline />
-        <Header />
+      <ThemeColorProvider>
+        <MuiThemeProvider>
+          <CssBaseline />
+          <Header />
 
-        <Stack sx={{ height: "100%" }} direction="row">
-          <List
-            sx={{
-              height: "calc(100vh - 64px)",
-              flexShrink: 0,
-            }}
-          >
-            {pages.map((page, index) => (
-              <ListItem disablePadding>
-                <ListItemButton
-                  key={page.name}
-                  sx={{ py: 1, pl: 2, pr: 6 }}
-                  selected={currentPage === index}
-                  onClick={() => setPage(index)}
-                >
-                  <ListItemIcon>{page.icon}</ListItemIcon>
-                  <ListItemText primary={page.name} />
-                </ListItemButton>
-              </ListItem>
-            ))}
-          </List>
-          <Divider orientation="vertical" flexItem />
-          {pages[currentPage].content}
-        </Stack>
-      </MuiThemeProvider>
+          <Stack sx={{ height: "100%" }} direction="row">
+            <List
+              sx={{
+                height: "calc(100vh - 64px)",
+                flexShrink: 0,
+              }}
+            >
+              {pages.map((page, index) => (
+                <ListItem disablePadding>
+                  <ListItemButton
+                    key={page.name}
+                    sx={{ py: 1, pl: 2, pr: 6 }}
+                    selected={currentPage === index}
+                    onClick={() => setPage(index)}
+                  >
+                    <ListItemIcon>{page.icon}</ListItemIcon>
+                    <ListItemText primary={page.name} />
+                  </ListItemButton>
+                </ListItem>
+              ))}
+            </List>
+            <Divider orientation="vertical" flexItem />
+            {pages[currentPage].content}
+          </Stack>
+        </MuiThemeProvider>
+      </ThemeColorProvider>
     </ModeProvider>
   );
 };

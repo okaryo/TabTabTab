@@ -147,6 +147,9 @@ class Translations {
   get resolveDuplicates() {
     return chrome.i18n.getMessage("resolve_duplicates");
   }
+  get themeColorSettingHeader() {
+    return chrome.i18n.getMessage("theme_color_setting_header");
+  }
   get popupSettingHeader() {
     return chrome.i18n.getMessage("popup_setting_header");
   }
