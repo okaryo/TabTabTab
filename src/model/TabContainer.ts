@@ -1,5 +1,5 @@
 import { StoredTab, Tab } from "./Tab";
-import { WindowId } from "./Window";
+import { Window, WindowId } from "./Window";
 
 export type TabContainerId = TabGroupId | PinnedId;
 export type TabContainer = {
@@ -78,6 +78,40 @@ export const isTabGroup = (value: TabContainer | Tab): value is TabGroup => {
     "color" in value &&
     "collapsed" in value
   );
+};
+
+export const adjacentToTabContainerBefore = (
+  windows: Window[],
+  id: TabGroupId | PinnedId,
+) => {
+  const currentWindow = windows.find((window) =>
+    window.children.some((child) => child.id === id),
+  );
+  if (!currentWindow) return false;
+
+  const currentIndexInWindow = currentWindow.children.findIndex(
+    (child) => child.id === id,
+  );
+  return currentIndexInWindow !== 0
+    ? isTabContainer(currentWindow.children[currentIndexInWindow - 1])
+    : false;
+};
+
+export const adjacentToTabContainerAfter = (
+  windows: Window[],
+  id: TabGroupId | PinnedId,
+) => {
+  const currentWindow = windows.find((window) =>
+    window.children.some((child) => child.id === id),
+  );
+  if (!currentWindow) return false;
+
+  const currentIndexInWindow = currentWindow.children.findIndex(
+    (child) => child.id === id,
+  );
+  return currentIndexInWindow !== currentWindow.children.length - 1
+    ? isTabContainer(currentWindow.children[currentIndexInWindow + 1])
+    : false;
 };
 
 export const isStoredTabGroup = (

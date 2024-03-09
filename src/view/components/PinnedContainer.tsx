@@ -14,10 +14,15 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import t from "../../i18n/Translations";
-import { Pinned } from "../../model/TabContainer";
+import {
+  Pinned,
+  adjacentToTabContainerAfter,
+  adjacentToTabContainerBefore,
+} from "../../model/TabContainer";
 import { WindowId } from "../../model/Window";
+import { WindowsContext } from "../contexts/WindowsContext";
 import { PinnedActionMenu } from "./ActionMenu";
 
 type PinnedContainerProps = {
@@ -34,6 +39,7 @@ type PinnedContainerProps = {
 
 const PinnedContainer = (props: PinnedContainerProps) => {
   const { children, pinned, collapsed, toggleCollapsed, data } = props;
+  const { windows } = useContext(WindowsContext);
   const { over, setNodeRef } = useDroppable({
     id: pinned.id,
     data: {
@@ -42,6 +48,15 @@ const PinnedContainer = (props: PinnedContainerProps) => {
     },
   });
   const isOver = over && over.id === pinned.id;
+
+  const adjacentToTabContainerAbove = adjacentToTabContainerBefore(
+    windows,
+    pinned.id,
+  );
+  const adjacentToTabContainerBelow = adjacentToTabContainerAfter(
+    windows,
+    pinned.id,
+  );
 
   const [isHovered, setIsHovered] = useState(false);
   const [menuAnchorElement, setMenuAnchorElement] =
@@ -56,7 +71,9 @@ const PinnedContainer = (props: PinnedContainerProps) => {
       <Box
         sx={{
           borderColor: "primary.main",
-          borderRadius: "0 5px 5px 0",
+          borderRadius: `0 ${adjacentToTabContainerAbove ? "0" : "5px"} ${
+            adjacentToTabContainerBelow ? "0" : "5px"
+          } 0`,
           borderRightWidth: "5px",
           borderRightStyle: "solid",
         }}
