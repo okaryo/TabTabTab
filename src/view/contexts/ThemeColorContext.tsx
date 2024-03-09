@@ -1,15 +1,17 @@
 import { createContext, useEffect, useState } from "react";
-import { getThemeColor } from "../../data/repository/ThemeRepository";
+import {
+  addListenerOnChangeThemeColor,
+  getThemeColor,
+  removeListenerOnChangeThemeColor,
+} from "../../data/repository/ThemeRepository";
 import { ThemeColor, defaultThemeColor } from "../../model/Theme";
 
 type ThemeColorContextType = {
   themeColor: ThemeColor;
-  setThemeColor: React.Dispatch<React.SetStateAction<ThemeColor>>;
 };
 
 export const ThemeColorContext = createContext<ThemeColorContextType>({
   themeColor: null,
-  setThemeColor: () => {},
 });
 
 export const ThemeColorProvider = (props: { children: React.ReactNode }) => {
@@ -21,10 +23,16 @@ export const ThemeColorProvider = (props: { children: React.ReactNode }) => {
       setThemeColor(await getThemeColor());
     };
     initState();
+
+    const listenerOnChange = addListenerOnChangeThemeColor(
+      (color: ThemeColor) => setThemeColor(color),
+    );
+
+    return () => removeListenerOnChangeThemeColor(listenerOnChange);
   }, []);
 
   return (
-    <ThemeColorContext.Provider value={{ themeColor, setThemeColor }}>
+    <ThemeColorContext.Provider value={{ themeColor }}>
       {children}
     </ThemeColorContext.Provider>
   );

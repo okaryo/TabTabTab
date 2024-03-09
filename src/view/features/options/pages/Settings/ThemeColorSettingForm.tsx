@@ -8,7 +8,7 @@ import TabGroupColorRadio from "../../../../components/TabGroupColorRadio";
 import { ThemeColorContext } from "../../../../contexts/ThemeColorContext";
 
 const ThemeColorSetting = () => {
-  const { themeColor, setThemeColor } = useContext(ThemeColorContext);
+  const { themeColor } = useContext(ThemeColorContext);
   return (
     <PaperWithHeader header={t.themeColorSettingHeader}>
       <Stack
@@ -25,7 +25,6 @@ const ThemeColorSetting = () => {
             checked={color === themeColor}
             onClick={() => {
               updateThemeColor(color);
-              setThemeColor(color);
             }}
           />
         ))}

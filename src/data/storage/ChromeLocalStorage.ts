@@ -15,6 +15,11 @@ export namespace ChromeLocalStorage {
   export const TAB_GROUP_SETTING_KEY = "tab_group_setting";
   const TAB_LAST_ACCESSES_KEY = "tab_last_accesses_in_local";
 
+  export type ChangeListener = (
+    changes: { [key: string]: chrome.storage.StorageChange },
+    areaName: string,
+  ) => Promise<void>;
+
   // TabCleanerSetting
   type TabCleanerSettingStorageObject = {
     [TAB_CLEANER_SETTING_KEY]: {
@@ -110,6 +115,27 @@ export namespace ChromeLocalStorage {
     return chrome.storage.local.set({
       [THEME_COLOR_KEY]: color,
     });
+  };
+  export const addListenerOnChangeThemeColor = (
+    callback: (color: ThemeColor) => void,
+  ): ChangeListener => {
+    const listener = async (
+      changes: { [key: string]: chrome.storage.StorageChange },
+      areaName: string,
+    ) => {
+      if (areaName === "local" && THEME_COLOR_KEY in changes) {
+        const newValue = changes[THEME_COLOR_KEY].newValue as ThemeColor;
+        callback(newValue);
+      }
+    };
+    chrome.storage.onChanged.addListener(listener);
+
+    return listener;
+  };
+  export const removeListenerOnChangeThemeColor = (
+    listener: ChangeListener,
+  ) => {
+    chrome.storage.onChanged.removeListener(listener);
   };
 
   // StoredWindows and StoredTabGroups

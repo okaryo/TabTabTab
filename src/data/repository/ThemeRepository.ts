@@ -27,3 +27,15 @@ export const getThemeColor = async (): Promise<ThemeColor> => {
 export const updateThemeColor = async (color: ThemeColor): Promise<void> => {
   return await ChromeLocalStorage.updateThemeColor(color);
 };
+
+export const addListenerOnChangeThemeColor = (
+  callback: (color: ThemeColor) => void,
+): ChromeLocalStorage.ChangeListener => {
+  return ChromeLocalStorage.addListenerOnChangeThemeColor(callback);
+};
+
+export const removeListenerOnChangeThemeColor = (
+  listener: ChromeLocalStorage.ChangeListener,
+) => {
+  ChromeLocalStorage.removeListenerOnChangeThemeColor(listener);
+};
