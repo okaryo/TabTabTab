@@ -15,14 +15,20 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import grey from "@mui/material/colors/grey";
 import { useTheme } from "@mui/material/styles";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import {
   collapseTabGroup,
   expandTabGroup,
   updateTabGroupColor,
   updateTabGroupTitle,
 } from "../../data/repository/TabGroupRepository";
-import { TabGroup, tabGroupColors } from "../../model/TabContainer";
+import {
+  TabGroup,
+  adjacentToTabContainerAfter,
+  adjacentToTabContainerBefore,
+  tabGroupColors,
+} from "../../model/TabContainer";
+import { WindowsContext } from "../contexts/WindowsContext";
 import { TabGroupActionMenu } from "./ActionMenu";
 import TabGroupColorRadio from "./TabGroupColorRadio";
 
@@ -33,11 +39,21 @@ type TabGroupContainerProps = {
 
 const TabGroupContainer = (props: TabGroupContainerProps) => {
   const { children, tabGroup } = props;
+  const { windows } = useContext(WindowsContext);
   const editGroupFormRef = useRef<HTMLDivElement>(null);
   const [groupName, setGroupName] = useState(tabGroup.name);
   const [editMode, setEditMode] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
   const theme = useTheme();
+
+  const adjacentToTabContainerAbove = adjacentToTabContainerBefore(
+    windows,
+    tabGroup.id,
+  );
+  const adjacentToTabContainerBelow = adjacentToTabContainerAfter(
+    windows,
+    tabGroup.id,
+  );
 
   const toggleCollapsedStatus = () => {
     if (editMode) {
@@ -97,7 +113,9 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
               borderRight: `5px solid ${
                 theme.palette.tabGroup[tabGroup.color]
               }`,
-              borderRadius: "0 5px 5px 0",
+              borderRadius: `0 ${adjacentToTabContainerAbove ? "0" : "5px"} ${
+                adjacentToTabContainerBelow ? "0" : "5px"
+              } 0`,
             }}
           />
           <Stack sx={{ width: "calc(100% - 5px)" }}>
@@ -148,7 +166,7 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                       <Typography
                         variant="subtitle1"
                         component="h6"
-                        sx={{ px: 1.25, py: 0.25 }}
+                        sx={{ px: 1.25 }}
                         style={{
                           display: "inline-block",
                           borderRadius: "8px",

@@ -18,7 +18,6 @@ type WindowState =
   | "maximized"
   | "fullscreen"
   | "locked-fullscreen";
-type WindowType = "normal" | "popup" | "panel" | "app" | "devtools";
 export type WindowId = number;
 type WindowChildId = TabContainerId | TabId;
 export type WindowChild = TabContainer | Tab;
@@ -26,7 +25,6 @@ export type Window = {
   id: WindowId;
   focused: boolean;
   state?: WindowState;
-  type?: WindowType;
   children: WindowChild[];
 };
 export type StoredWindow = {
