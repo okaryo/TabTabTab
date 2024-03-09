@@ -189,10 +189,7 @@ const onTabAttached = async (tabId: number) => {
   }
 };
 
-const onTabDetached = async (
-  _: number,
-  info: chrome.tabs.TabDetachInfo,
-) => {
+const onTabDetached = async (_: number, info: chrome.tabs.TabDetachInfo) => {
   const setting = await getTabGroupSetting();
   if (!setting.enabledAutoGrouping || !setting.ungroupSingleTabGroups) return;
 
