@@ -26,7 +26,7 @@ export const addListenerOnChangeTabGroupSetting = (
 export const removeListenerOnChangeTabGroupSetting = (
   listener: ChromeLocalStorage.ChangeListener,
 ) => {
-  ChromeLocalStorage.removeListenerOnChangeTabGroupSetting(listener);
+  ChromeLocalStorage.removeListenerOnChange(listener);
 };
 
 export const groupTabsBySetting = async (setting: TabGroupSetting) => {

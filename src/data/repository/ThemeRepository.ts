@@ -17,6 +17,18 @@ export const updateMode = (mode: Mode): Promise<void> => {
   return ChromeLocalStorage.updateMode(mode);
 };
 
+export const addListenerOnChangeMode = (
+  callback: (mode: Mode) => void,
+): ChromeLocalStorage.ChangeListener => {
+  return ChromeLocalStorage.addListenerOnChangeMode(callback);
+};
+
+export const removeListenerOnChangeMode = (
+  listener: ChromeLocalStorage.ChangeListener,
+) => {
+  ChromeLocalStorage.removeListenerOnChange(listener);
+};
+
 export const getThemeColor = async (): Promise<ThemeColor> => {
   const color = await ChromeLocalStorage.getThemeColor();
   if (!color) return defaultThemeColor;
@@ -37,5 +49,5 @@ export const addListenerOnChangeThemeColor = (
 export const removeListenerOnChangeThemeColor = (
   listener: ChromeLocalStorage.ChangeListener,
 ) => {
-  ChromeLocalStorage.removeListenerOnChangeThemeColor(listener);
+  ChromeLocalStorage.removeListenerOnChange(listener);
 };

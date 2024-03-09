@@ -1,15 +1,17 @@
 import { createContext, useEffect, useState } from "react";
-import { getMode } from "../../data/repository/ThemeRepository";
+import {
+  addListenerOnChangeMode,
+  getMode,
+  removeListenerOnChangeMode,
+} from "../../data/repository/ThemeRepository";
 import { Mode } from "../../model/Theme";
 
 type ModeContextType = {
   mode: Mode;
-  setMode: React.Dispatch<React.SetStateAction<Mode>>;
 };
 
 export const ModeContext = createContext<ModeContextType>({
   mode: null,
-  setMode: () => {},
 });
 
 export const ModeProvider = (props: { children: React.ReactNode }) => {
@@ -21,11 +23,15 @@ export const ModeProvider = (props: { children: React.ReactNode }) => {
       setMode(await getMode());
     };
     initState();
+
+    const listenerOnChange = addListenerOnChangeMode((mode: Mode) =>
+      setMode(mode),
+    );
+
+    return () => removeListenerOnChangeMode(listenerOnChange);
   }, []);
 
   return (
-    <ModeContext.Provider value={{ mode, setMode }}>
-      {children}
-    </ModeContext.Provider>
+    <ModeContext.Provider value={{ mode }}>{children}</ModeContext.Provider>
   );
 };

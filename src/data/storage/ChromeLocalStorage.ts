@@ -19,6 +19,9 @@ export namespace ChromeLocalStorage {
     changes: { [key: string]: chrome.storage.StorageChange },
     areaName: string,
   ) => Promise<void>;
+  export const removeListenerOnChange = (listener: ChangeListener) => {
+    chrome.storage.onChanged.removeListener(listener);
+  };
 
   // TabCleanerSetting
   type TabCleanerSettingStorageObject = {
@@ -100,6 +103,22 @@ export namespace ChromeLocalStorage {
       [MODE_KEY]: mode,
     });
   };
+  export const addListenerOnChangeMode = (
+    callback: (mode: Mode) => void,
+  ): ChangeListener => {
+    const listener = async (
+      changes: { [key: string]: chrome.storage.StorageChange },
+      areaName: string,
+    ) => {
+      if (areaName === "local" && MODE_KEY in changes) {
+        const newValue = changes[MODE_KEY].newValue as Mode;
+        callback(newValue);
+      }
+    };
+    chrome.storage.onChanged.addListener(listener);
+
+    return listener;
+  };
 
   // ThemeColor
   export type ThemeColorStorageObject = {
@@ -131,11 +150,6 @@ export namespace ChromeLocalStorage {
     chrome.storage.onChanged.addListener(listener);
 
     return listener;
-  };
-  export const removeListenerOnChangeThemeColor = (
-    listener: ChangeListener,
-  ) => {
-    chrome.storage.onChanged.removeListener(listener);
   };
 
   // StoredWindows and StoredTabGroups
@@ -235,11 +249,6 @@ export namespace ChromeLocalStorage {
     chrome.storage.onChanged.addListener(listener);
 
     return listener;
-  };
-  export const removeListenerOnChangeTabGroupSetting = (
-    listener: ChangeListener,
-  ) => {
-    chrome.storage.onChanged.removeListener(listener);
   };
 
   // TabLastAccesses
