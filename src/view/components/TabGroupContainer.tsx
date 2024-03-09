@@ -166,7 +166,7 @@ const TabGroupContainer = (props: TabGroupContainerProps) => {
                       <Typography
                         variant="subtitle1"
                         component="h6"
-                        sx={{ px: 1.25, py: 0.25 }}
+                        sx={{ px: 1.25 }}
                         style={{
                           display: "inline-block",
                           borderRadius: "8px",
