@@ -11,10 +11,10 @@ import Select from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
 import { useEffect, useState } from "react";
 import {
-  addListenerOnUpdateTabGroupSetting,
+  addListenerOnChangeTabGroupSetting,
   getTabGroupSetting,
   groupTabsBySetting,
-  removeListenerOnUpdateTabGroupSetting,
+  removeListenerOnChangeTabGroupSetting,
   updateTabGroupSetting,
 } from "../../../data/repository/TabGroupSettingRepository";
 import t from "../../../i18n/Translations";
@@ -36,12 +36,12 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
     };
     fetchSettings();
 
-    const listener = addListenerOnUpdateTabGroupSetting((newSetting) => {
+    const listener = addListenerOnChangeTabGroupSetting((newSetting) => {
       setSetting(newSetting);
     });
 
     return () => {
-      removeListenerOnUpdateTabGroupSetting(listener);
+      removeListenerOnChangeTabGroupSetting(listener);
     };
   }, []);
 

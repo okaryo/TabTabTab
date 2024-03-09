@@ -219,6 +219,28 @@ export namespace ChromeLocalStorage {
   export const updateTabGroupSetting = async (setting: TabGroupSetting) => {
     return await chrome.storage.local.set({ [TAB_GROUP_SETTING_KEY]: setting });
   };
+  export const addListenerOnChangeTabGroupSetting = (
+    callback: (setting: TabGroupSetting) => void,
+  ): ChangeListener => {
+    const listener = async (
+      changes: { [key: string]: chrome.storage.StorageChange },
+      areaName: string,
+    ) => {
+      if (areaName === "local" && TAB_GROUP_SETTING_KEY in changes) {
+        const newValue = changes[TAB_CLEANER_SETTING_KEY]
+          .newValue as TabGroupSetting;
+        callback(newValue);
+      }
+    };
+    chrome.storage.onChanged.addListener(listener);
+
+    return listener;
+  };
+  export const removeListenerOnChangeTabGroupSetting = (
+    listener: ChangeListener,
+  ) => {
+    chrome.storage.onChanged.removeListener(listener);
+  };
 
   // TabLastAccesses
   type TabLastAccessesStorageObject = {
