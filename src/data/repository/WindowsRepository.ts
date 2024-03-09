@@ -35,7 +35,6 @@ export const getWindows = async (): Promise<Window[]> => {
       id: window.id,
       focused: window.id === currentWindow.id,
       state: window.state,
-      type: window.type,
       children: [],
     };
 
