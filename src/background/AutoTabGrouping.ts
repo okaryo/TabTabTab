@@ -190,7 +190,7 @@ const onTabAttached = async (tabId: number) => {
 };
 
 const onTabDetached = async (
-  _tabId: number,
+  _: number,
   info: chrome.tabs.TabDetachInfo,
 ) => {
   const setting = await getTabGroupSetting();
