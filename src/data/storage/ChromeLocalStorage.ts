@@ -261,7 +261,8 @@ export namespace ChromeLocalStorage {
       areaName: string,
     ) => {
       if (areaName === "local" && TAB_GROUP_SETTING_KEY in changes) {
-        const newValue = changes[TAB_GROUP_SETTING_KEY].newValue as TabGroupSetting;
+        const newValue = changes[TAB_GROUP_SETTING_KEY]
+          .newValue as TabGroupSetting;
         callback(newValue);
       }
     };
