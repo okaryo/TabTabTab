@@ -6,6 +6,8 @@ export const addTabGroupingListeners = () => {
   chrome.tabs.onUpdated.addListener(onTabUpdated);
   chrome.tabs.onRemoved.addListener(onTabRemoved);
   chrome.tabs.onActivated.addListener(onTabActivated);
+  chrome.tabs.onAttached.addListener(onTabAttached);
+  chrome.tabs.onDetached.addListener(onTabDetached);
 };
 
 const onTabUpdated = async (
@@ -110,7 +112,10 @@ const createGroupIfExistMatchingTabs = async (
   );
   if (sameGroupNameTabs.length > 1) {
     const tabIds = sameGroupNameTabs.map((tab) => tab.id);
-    const groupId = await chrome.tabs.group({ tabIds });
+    const groupId = await chrome.tabs.group({
+      tabIds,
+      createProperties: { windowId: targetTab.windowId },
+    });
     try {
       await chrome.tabGroups.update(groupId, { title: targetGroupName });
     } catch (error: unknown) {
@@ -157,6 +162,41 @@ const onTabRemoved = async (_: number, info: chrome.tabs.TabRemoveInfo) => {
   if (!setting.enabledAutoGrouping || !setting.ungroupSingleTabGroups) return;
 
   await ungroupSingleTabGroups(info.windowId);
+};
+
+const onTabAttached = async (tabId: number) => {
+  const setting = await getTabGroupSetting();
+  if (!setting.enabledAutoGrouping) return;
+
+  const tab = await chrome.tabs.get(tabId);
+  if (!tab || tab.pinned) return;
+  if (setting.applyAutoGroupingToCurrentTabOnly && !tab.active) return;
+
+  const MAX_RETRIES = 10;
+  const RETRY_DELAY = 200;
+
+  // NOTE: Retry with a delay due to the possible error:
+  // Uncaught (in promise) Error: Tabs cannot be edited right now (user may be dragging a tab).
+  let retries = 0;
+  while (retries < MAX_RETRIES) {
+    try {
+      await organizeTabsByGroupingRule(tab, setting);
+      break;
+    } catch (_) {
+      retries++;
+      await new Promise((resolve) => setTimeout(resolve, RETRY_DELAY));
+    }
+  }
+};
+
+const onTabDetached = async (
+  _tabId: number,
+  info: chrome.tabs.TabDetachInfo,
+) => {
+  const setting = await getTabGroupSetting();
+  if (!setting.enabledAutoGrouping || !setting.ungroupSingleTabGroups) return;
+
+  await ungroupSingleTabGroups(info.oldWindowId);
 };
 
 const collapseUnusedGroups = async (activeTabId: number, windowId: number) => {
