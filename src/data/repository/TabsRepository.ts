@@ -39,12 +39,13 @@ export const updateTabLastActivatedAt = async (
 
   const lastActivatedAt = new Date();
 
+  await ChromeSessionStorage.updateTabLastAccesses(tab.id, lastActivatedAt);
+
   const key = await tabKeyForLastAccessesInLocal(
     tab.title,
     tab.url !== "" ? tab.url : tab.pendingUrl,
   );
   await ChromeLocalStorage.updateTabLastAccesses(key, lastActivatedAt);
-  await ChromeSessionStorage.updateTabLastAccesses(tab.id, lastActivatedAt);
 };
 
 export const cleanupTabLastActivatedAt = async (tabId: number) => {
