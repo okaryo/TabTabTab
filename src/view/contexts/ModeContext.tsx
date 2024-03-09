@@ -24,8 +24,8 @@ export const ModeProvider = (props: { children: React.ReactNode }) => {
     };
     initState();
 
-    const listenerOnChange = addListenerOnChangeMode((mode: Mode) =>
-      setMode(mode),
+    const listenerOnChange = addListenerOnChangeMode((newValue: Mode) =>
+      setMode(newValue),
     );
 
     return () => removeListenerOnChangeMode(listenerOnChange);

@@ -25,7 +25,7 @@ export const ThemeColorProvider = (props: { children: React.ReactNode }) => {
     initState();
 
     const listenerOnChange = addListenerOnChangeThemeColor(
-      (color: ThemeColor) => setThemeColor(color),
+      (newValue: ThemeColor) => setThemeColor(newValue),
     );
 
     return () => removeListenerOnChangeThemeColor(listenerOnChange);
