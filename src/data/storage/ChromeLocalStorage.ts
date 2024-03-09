@@ -11,8 +11,7 @@ export namespace ChromeLocalStorage {
   const THEME_COLOR_KEY = "theme_color";
   const STORED_WINDOWS_KEY = "stored_windows";
   const STORED_TAB_GROUPS_KEY = "stored_tab_groups";
-  // FIXME: remove export
-  export const TAB_GROUP_SETTING_KEY = "tab_group_setting";
+  const TAB_GROUP_SETTING_KEY = "tab_group_setting";
   const TAB_LAST_ACCESSES_KEY = "tab_last_accesses_in_local";
 
   export type ChangeListener = (
@@ -46,6 +45,27 @@ export namespace ChromeLocalStorage {
         durationUnit: setting.durationUnit,
       },
     });
+  };
+  export const addListenerOnChangeTabCleanerSetting = (
+    callback: (setting: TabCleaner) => void,
+  ): ChangeListener => {
+    const listener = async (
+      changes: { [key: string]: chrome.storage.StorageChange },
+      areaName: string,
+    ) => {
+      if (areaName === "local" && TAB_CLEANER_SETTING_KEY in changes) {
+        const newValue = changes[TAB_CLEANER_SETTING_KEY]
+          .newValue as TabCleanerSettingStorageObject[typeof TAB_CLEANER_SETTING_KEY];
+        callback({
+          enabled: newValue.isEnabled,
+          duration: newValue.duration,
+          durationUnit: newValue.durationUnit,
+        });
+      }
+    };
+    chrome.storage.onChanged.addListener(listener);
+
+    return listener;
   };
 
   // PopupSizeSetting

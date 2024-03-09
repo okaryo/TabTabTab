@@ -17,3 +17,15 @@ export const updateTabCleanerSetting = (
 ): Promise<void> => {
   return ChromeLocalStorage.updateTabCleanerSetting(tabCleaner);
 };
+
+export const addListenerOnChangeTabCleanerSetting = (
+  callback: (setting: TabCleaner) => void,
+): ChromeLocalStorage.ChangeListener => {
+  return ChromeLocalStorage.addListenerOnChangeTabCleanerSetting(callback);
+};
+
+export const removeListenerOnChangeTabCleanerSetting = (
+  listener: ChromeLocalStorage.ChangeListener,
+) => {
+  ChromeLocalStorage.removeListenerOnChange(listener);
+};
