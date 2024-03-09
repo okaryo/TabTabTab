@@ -18,7 +18,8 @@ import {
   findTabGroup,
   flatTabsInWindow,
 } from "../../model/Window";
-import { ChromeLocalStorage, ChromeStorage } from "../storage/ChromeStorage";
+import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
+import { ChromeSessionStorage } from "../storage/ChromeSessionStorage";
 import { applyLastActivatedAt, parseTab } from "./TabsRepository";
 
 export const getWindows = async (): Promise<Window[]> => {
@@ -132,7 +133,8 @@ export const closeWindow = async (window: Window): Promise<Window[]> => {
 const applyLastActivatedAtToTabs = async (
   windows: Window[],
 ): Promise<Window[]> => {
-  const lastAccesses = await ChromeStorage.getTabLastAccesses();
+  const lastAccessesInSession = await ChromeSessionStorage.getTabLastAccesses();
+  const lastAccessesInLocal = await ChromeLocalStorage.getTabLastAccesses();
   const newWindows = [];
   for (const window of windows) {
     const windowChildren = [];
@@ -140,10 +142,10 @@ const applyLastActivatedAtToTabs = async (
       if (isTabContainer(windowChild)) {
         const containerChildren = [];
         for (const containerChild of windowChild.children) {
-          const applied = await applyLastActivatedAt(
-            containerChild,
-            lastAccesses,
-          );
+          const applied = await applyLastActivatedAt(containerChild, {
+            session: lastAccessesInSession,
+            local: lastAccessesInLocal,
+          });
           containerChildren.push(applied);
         }
         windowChildren.push({
@@ -152,7 +154,10 @@ const applyLastActivatedAtToTabs = async (
         });
       }
       if (isTab(windowChild)) {
-        const applied = await applyLastActivatedAt(windowChild, lastAccesses);
+        const applied = await applyLastActivatedAt(windowChild, {
+          session: lastAccessesInSession,
+          local: lastAccessesInLocal,
+        });
         windowChildren.push(applied);
       }
     }

@@ -1,9 +1,7 @@
 import { PopupSize } from "../../model/PopupSize";
-import { Tab } from "../../model/Tab";
 import { DurationUnit, TabCleaner } from "../../model/TabCleaner";
 import { TabGroupSetting } from "../../model/TabGroupSetting";
 import { Mode, ThemeColor } from "../../model/Theme";
-import { generateHash } from "../../utility/hash";
 
 export namespace ChromeLocalStorage {
   const TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
@@ -13,8 +11,9 @@ export namespace ChromeLocalStorage {
   const THEME_COLOR_KEY = "theme_color";
   const STORED_WINDOWS_KEY = "stored_windows";
   const STORED_TAB_GROUPS_KEY = "stored_tab_groups";
+  // FIXME: remove export
   export const TAB_GROUP_SETTING_KEY = "tab_group_setting";
-  export const TAB_LAST_ACCESSES_KEY = "tab_last_accesses_in_local";
+  const TAB_LAST_ACCESSES_KEY = "tab_last_accesses_in_local";
 
   // TabCleanerSetting
   type TabCleanerSettingStorageObject = {
@@ -194,160 +193,53 @@ export namespace ChromeLocalStorage {
   export const updateTabGroupSetting = async (setting: TabGroupSetting) => {
     return await chrome.storage.local.set({ [TAB_GROUP_SETTING_KEY]: setting });
   };
-}
 
-export namespace ChromeSessionStorage {
-  const RECENT_ACTIVE_TABS_KEY = "recent_active_tabs";
-  export const TAB_LAST_ACCESSES_KEY = "tab_last_accesses_in_session";
-
-  // RecentActiveTabs
-  export type SerializedTab = {
-    id: number;
-    groupId: number | null;
-    windowId: number | null;
-    title: string;
-    url: string;
-    favIconUrl: string | null;
-    active: boolean;
-    audible: boolean;
-    pinned: boolean;
-    discarded: boolean;
-    lastActivatedAt: string | null;
-  };
-  type RecentActiveTabsStorageObject = {
-    [RECENT_ACTIVE_TABS_KEY]: SerializedTab[];
-  };
-  export const getRecentActiveTabs = async () => {
-    const { [RECENT_ACTIVE_TABS_KEY]: recentActiveTabs } =
-      (await chrome.storage.session.get(
-        RECENT_ACTIVE_TABS_KEY,
-      )) as RecentActiveTabsStorageObject;
-    return recentActiveTabs;
-  };
-  export const updateRecentActiveTabs = async (tabs: SerializedTab[]) => {
-    return chrome.storage.session.set({
-      [RECENT_ACTIVE_TABS_KEY]: tabs,
-    });
-  };
-}
-
-export namespace ChromeStorage {
   // TabLastAccesses
-  type TabLastAccessesLocalStorageObject = {
-    [ChromeLocalStorage.TAB_LAST_ACCESSES_KEY]: {
-      [tabId: string]: {
-        lastActivatedAt: string;
-      };
-    };
-  };
-  type TabLastAccessesSessionStorageObject = {
-    [ChromeSessionStorage.TAB_LAST_ACCESSES_KEY]: {
+  type TabLastAccessesStorageObject = {
+    [TAB_LAST_ACCESSES_KEY]: {
       [tabHashKey: string]: {
         lastActivatedAt: string;
       };
     };
   };
   export const getTabLastAccesses = async () => {
-    const {
-      [ChromeLocalStorage.TAB_LAST_ACCESSES_KEY]: lastAccessesInLocal = {},
-    } = (await chrome.storage.local.get(
-      ChromeLocalStorage.TAB_LAST_ACCESSES_KEY,
-    )) as TabLastAccessesLocalStorageObject;
-    const {
-      [ChromeSessionStorage.TAB_LAST_ACCESSES_KEY]: lastAccessesInSession = {},
-    } = (await chrome.storage.session.get(
-      ChromeSessionStorage.TAB_LAST_ACCESSES_KEY,
-    )) as TabLastAccessesSessionStorageObject;
+    const { [TAB_LAST_ACCESSES_KEY]: lastAccesses = {} } =
+      (await chrome.storage.local.get(
+        TAB_LAST_ACCESSES_KEY,
+      )) as TabLastAccessesStorageObject;
 
-    return {
-      local: lastAccessesInLocal,
-      session: lastAccessesInSession,
-    };
+    return lastAccesses;
   };
-  export const getTabLastActivatedAt = async (
-    tab: Tab,
-    lastAccesses: {
-      local: { [key: string]: { lastActivatedAt: string } };
-      session: { [tabId: number]: { lastActivatedAt: string } };
-    },
+  export const updateTabLastAccesses = async (
+    key: string,
+    lastActivatedAt: Date,
   ) => {
-    const { local, session } = lastAccesses;
-    if (session[tab.id]) return new Date(session[tab.id].lastActivatedAt);
-
-    const key = await tabKeyForLastAccessesInLocal(
-      tab.title,
-      tab.url.toString(),
-    );
-    if (local[key]) return new Date(local[key].lastActivatedAt);
-
-    return;
-  };
-  export const updateTabLastAccesses = async (tab: chrome.tabs.Tab) => {
-    const lastActivatedAt = new Date().toISOString();
-
-    const key = await tabKeyForLastAccessesInLocal(
-      tab.title,
-      tab.url !== "" ? tab.url : tab.pendingUrl,
-    );
-    const {
-      [ChromeLocalStorage.TAB_LAST_ACCESSES_KEY]: lastAccessesInLocal = {},
-    } = (await chrome.storage.local.get(
-      ChromeLocalStorage.TAB_LAST_ACCESSES_KEY,
-    )) as TabLastAccessesLocalStorageObject;
+    const { [TAB_LAST_ACCESSES_KEY]: lastAccesses = {} } =
+      (await chrome.storage.local.get(
+        TAB_LAST_ACCESSES_KEY,
+      )) as TabLastAccessesStorageObject;
     await chrome.storage.local.set({
-      [ChromeLocalStorage.TAB_LAST_ACCESSES_KEY]: {
-        ...lastAccessesInLocal,
+      [TAB_LAST_ACCESSES_KEY]: {
+        ...lastAccesses,
         [key]: {
-          lastActivatedAt,
-        },
-      },
-    });
-
-    const {
-      [ChromeSessionStorage.TAB_LAST_ACCESSES_KEY]: lastAccessesInSession = {},
-    } = (await chrome.storage.session.get(
-      ChromeSessionStorage.TAB_LAST_ACCESSES_KEY,
-    )) as TabLastAccessesSessionStorageObject;
-    await chrome.storage.session.set({
-      [ChromeSessionStorage.TAB_LAST_ACCESSES_KEY]: {
-        ...lastAccessesInSession,
-        [tab.id]: {
-          lastActivatedAt: new Date().toISOString(),
+          lastActivatedAt: lastActivatedAt.toISOString(),
         },
       },
     });
   };
-  export const cleanupTabLastAccesses = async (tabId: number) => {
-    const {
-      [ChromeSessionStorage.TAB_LAST_ACCESSES_KEY]: lastAccessesInSession = {},
-    } = (await chrome.storage.session.get(
-      ChromeSessionStorage.TAB_LAST_ACCESSES_KEY,
-    )) as TabLastAccessesSessionStorageObject;
-    delete lastAccessesInSession[tabId];
+  export const cleanupTabLastAccesses = async (keepKeys: string[]) => {
+    const { [TAB_LAST_ACCESSES_KEY]: lastAccesses = {} } =
+      (await chrome.storage.local.get(
+        TAB_LAST_ACCESSES_KEY,
+      )) as TabLastAccessesStorageObject;
 
-    const {
-      [ChromeLocalStorage.TAB_LAST_ACCESSES_KEY]: lastAccessesInLocal = {},
-    } = (await chrome.storage.local.get(
-      ChromeLocalStorage.TAB_LAST_ACCESSES_KEY,
-    )) as TabLastAccessesLocalStorageObject;
-
-    const windows = await chrome.windows.getAll({
-      populate: true,
-      windowTypes: ["normal"],
-    });
-    const cleanedUpInLocal = {};
-    for (const tab of windows.flatMap((window) => window.tabs)) {
-      const key = await tabKeyForLastAccessesInLocal(
-        tab.title,
-        tab.url !== "" ? tab.url : tab.pendingUrl,
-      );
-      cleanedUpInLocal[key] = lastAccessesInLocal[key];
+    const keepLastAccesses = {};
+    for (const key of keepKeys) {
+      keepLastAccesses[key] = lastAccesses[key];
     }
 
     await chrome.storage.local.set({
-      [ChromeLocalStorage.TAB_LAST_ACCESSES_KEY]: cleanedUpInLocal,
+      [TAB_LAST_ACCESSES_KEY]: keepLastAccesses,
     });
   };
-  const tabKeyForLastAccessesInLocal = (title: string, url: string) =>
-    generateHash(`${title}${url}`);
 }

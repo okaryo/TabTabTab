@@ -4,7 +4,7 @@ import {
   defaultTabGroupSetting,
 } from "../../model/TabGroupSetting";
 
-import { ChromeLocalStorage } from "../storage/ChromeStorage";
+import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
 export const getTabGroupSetting = async (): Promise<TabGroupSetting> => {
   const setting = await ChromeLocalStorage.getTabGroupSetting();

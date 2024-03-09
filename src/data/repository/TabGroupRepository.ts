@@ -4,7 +4,7 @@ import {
   TabGroupColor,
 } from "../../model/TabContainer";
 import { WindowId } from "../../model/Window";
-import { ChromeLocalStorage } from "../storage/ChromeStorage";
+import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
 export const collapseTabGroup = async (groupId: number): Promise<void> => {
   await chrome.tabGroups.update(groupId, { collapsed: true });
