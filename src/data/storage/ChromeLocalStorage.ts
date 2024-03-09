@@ -173,7 +173,7 @@ export namespace ChromeLocalStorage {
   };
 
   // StoredWindows and StoredTabGroups
-  type SerializedStoredWindow = {
+  export type SerializedStoredWindow = {
     type: "window";
     internalUid: string;
     name: string;
@@ -191,7 +191,7 @@ export namespace ChromeLocalStorage {
   type SerializedStoredPinned = SerializedStoredTabContainerBase & {
     type: "pinned";
   };
-  type SerializedStoredTabGroup = SerializedStoredTabContainerBase & {
+  export type SerializedStoredTabGroup = SerializedStoredTabContainerBase & {
     type: "tabGroup";
     storedAt: string;
     name: string;
@@ -224,6 +224,23 @@ export namespace ChromeLocalStorage {
       [STORED_WINDOWS_KEY]: windows,
     });
   };
+  export const addListenerOnChangeStoredWindows = (
+    callback: (windows: SerializedStoredWindow[]) => void,
+  ): ChangeListener => {
+    const listener = async (
+      changes: { [key: string]: chrome.storage.StorageChange },
+      areaName: string,
+    ) => {
+      if (areaName === "local" && STORED_WINDOWS_KEY in changes) {
+        const newValues = changes[STORED_WINDOWS_KEY]
+          .newValue as SerializedStoredWindow[];
+        callback(newValues);
+      }
+    };
+    chrome.storage.onChanged.addListener(listener);
+
+    return listener;
+  };
   export const getStoredTabGroups = async () => {
     const { [STORED_TAB_GROUPS_KEY]: storedTabGroups } =
       (await chrome.storage.local.get(
@@ -237,6 +254,23 @@ export namespace ChromeLocalStorage {
     return await chrome.storage.local.set({
       [STORED_TAB_GROUPS_KEY]: groups,
     });
+  };
+  export const addListenerOnChangeStoredTabGroups = (
+    callback: (groups: SerializedStoredTabGroup[]) => void,
+  ): ChangeListener => {
+    const listener = async (
+      changes: { [key: string]: chrome.storage.StorageChange },
+      areaName: string,
+    ) => {
+      if (areaName === "local" && STORED_TAB_GROUPS_KEY in changes) {
+        const newValues = changes[STORED_TAB_GROUPS_KEY]
+          .newValue as SerializedStoredTabGroup[];
+        callback(newValues);
+      }
+    };
+    chrome.storage.onChanged.addListener(listener);
+
+    return listener;
   };
 
   // TabGroupSetting

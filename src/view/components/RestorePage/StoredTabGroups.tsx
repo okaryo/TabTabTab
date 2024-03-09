@@ -17,13 +17,15 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { grey } from "@mui/material/colors";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
-import { restoreTabGroup } from "../../../data/repository/TabGroupRepository";
+import {
+  removeStoredTabGroup,
+  restoreTabGroup,
+  updateStoredTabGroupColor,
+  updateStoredTabGroupName,
+} from "../../../data/repository/TabGroupRepository";
 import t from "../../../i18n/Translations";
 import { StoredTabGroup, tabGroupColors } from "../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
-import { useRemoveStoredTabGroup } from "../../hooks/useRemoveStoredTabGroup";
-import { useUpdateStoredTabGroupColor } from "../../hooks/useUpdateStoredTabGroupColor";
-import { useUpdateStoredTabGroupName } from "../../hooks/useUpdateStoredTabGroupName";
 import TabGroupColorRadio from "../TabGroupColorRadio";
 import { StoredGridTabItem } from "./StoredGridItem";
 
@@ -64,12 +66,10 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
   const theme = useTheme();
   const editTabGroupFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
-  const [groupName, setGroupName] = useState(group.name);
   const [editMode, setEditMode] = useState(false);
   const [expanded, setExpanded] = useState(index === 0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const removeStoredTabGroup = useRemoveStoredTabGroup();
   const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setEditMode(!editMode);
@@ -83,13 +83,10 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
     removeStoredTabGroup(group.internalUid);
   };
 
-  const updateTabGroupName = useUpdateStoredTabGroupName();
-  const updateTabGroupColor = useUpdateStoredTabGroupColor();
   const onChangeGroupNameField = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setGroupName(event.target.value);
-    updateTabGroupName(group.internalUid, event.target.value);
+    updateStoredTabGroupName(group.internalUid, event.target.value);
   };
 
   useEffect(() => {
@@ -156,7 +153,7 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
                   <TextField
                     variant="standard"
                     size="small"
-                    value={groupName}
+                    value={group.name}
                     sx={{
                       "& input": {
                         color: theme.palette.getContrastText(
@@ -194,7 +191,7 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
                   checked={group.color === color}
                   onClick={(event) => {
                     event.stopPropagation();
-                    updateTabGroupColor(group.internalUid, color);
+                    updateStoredTabGroupColor(group.internalUid, color);
                   }}
                 />
               ))}
