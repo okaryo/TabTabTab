@@ -1,6 +1,8 @@
-import { Tab, TabId, TabStatus } from "../model/Tab";
-import { WindowId } from "../model/Window";
-import { ChromeSessionStorage, ChromeStorage } from "./ChromeStorage";
+import { Tab, TabId, TabStatus } from "../../model/Tab";
+import { WindowId } from "../../model/Window";
+import { generateHash } from "../../utility/hash";
+import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
+import { ChromeSessionStorage } from "../storage/ChromeSessionStorage";
 
 export const focusTab = async (tab: Tab) => {
   const isExistingTab = await chrome.tabs
@@ -35,11 +37,35 @@ export const updateTabLastActivatedAt = async (
   if (!tab || tab.status !== "complete") return;
   if (options?.onlyActiveTab && !tab.active) return;
 
-  await ChromeStorage.updateTabLastAccesses(tab);
+  const lastActivatedAt = new Date();
+
+  await ChromeSessionStorage.updateTabLastAccesses(tab.id, lastActivatedAt);
+
+  const key = await tabKeyForLastAccessesInLocal(
+    tab.title,
+    tab.url !== "" ? tab.url : tab.pendingUrl,
+  );
+  await ChromeLocalStorage.updateTabLastAccesses(key, lastActivatedAt);
 };
 
 export const cleanupTabLastActivatedAt = async (tabId: number) => {
-  await ChromeStorage.cleanupTabLastAccesses(tabId);
+  await ChromeSessionStorage.cleanupTabLastAccesses(tabId);
+
+  const windows = await chrome.windows.getAll({
+    populate: true,
+    windowTypes: ["normal"],
+  });
+  const keepKeysPromises = windows
+    .flatMap((window) => window.tabs)
+    .map(async (tab) => {
+      const key = await tabKeyForLastAccessesInLocal(
+        tab.title,
+        tab.url !== "" ? tab.url : tab.pendingUrl,
+      );
+      return key;
+    });
+  const keepKeys = await Promise.all(keepKeysPromises);
+  await ChromeLocalStorage.cleanupTabLastAccesses(keepKeys);
 };
 
 export const pinTab = async (tabId: number) => {
@@ -139,8 +165,12 @@ const getTabBy = async (tabId: number): Promise<Tab | null> => {
   if (!tab) return null;
 
   const parsedTab = parseTab(tab);
-  const lastAccesses = await ChromeStorage.getTabLastAccesses();
-  return applyLastActivatedAt(parsedTab, lastAccesses);
+  const lastAccessesInSession = await ChromeSessionStorage.getTabLastAccesses();
+  const lastAccessesInLocal = await ChromeLocalStorage.getTabLastAccesses();
+  return applyLastActivatedAt(parsedTab, {
+    session: lastAccessesInSession,
+    local: lastAccessesInLocal,
+  });
 };
 
 export const parseTab = (tab: chrome.tabs.Tab): Tab => {
@@ -165,19 +195,34 @@ export const parseTab = (tab: chrome.tabs.Tab): Tab => {
 export const applyLastActivatedAt = async (
   tab: Tab,
   lastAccesses: {
-    local: { [key: string]: { lastActivatedAt: string } };
-    session: { [tabId: number]: { lastActivatedAt: string } };
+    session: {
+      [tabId: string]: { lastActivatedAt: string };
+    };
+    local: {
+      [key: number]: { lastActivatedAt: string };
+    };
   },
 ) => {
-  const lastActivatedAt = await ChromeStorage.getTabLastActivatedAt(
-    tab,
-    lastAccesses,
-  );
-  return {
-    ...tab,
-    lastActivatedAt,
-  };
+  const { session, local } = lastAccesses;
+
+  if (session[tab.id])
+    return {
+      ...tab,
+      lastActivatedAt: new Date(session[tab.id].lastActivatedAt),
+    };
+
+  const key = await tabKeyForLastAccessesInLocal(tab.title, tab.url.toString());
+  if (local[key])
+    return {
+      ...tab,
+      lastActivatedAt: new Date(local[key].lastActivatedAt),
+    };
+
+  return tab;
 };
+
+const tabKeyForLastAccessesInLocal = (title: string, url: string) =>
+  generateHash(`${title}${url}`);
 
 // TODO: Refactor to clearer function name
 const serializeTab = (tab: Tab) => {

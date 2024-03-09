@@ -1,6 +1,5 @@
 import { useSortable } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
-
 import { WindowId } from "../../model/Window";
 
 type SortableItemProps = {

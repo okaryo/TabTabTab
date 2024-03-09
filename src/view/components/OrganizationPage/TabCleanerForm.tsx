@@ -10,13 +10,14 @@ import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
-
-import t from "../../../i18n/Translations";
-import { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
 import {
+  addListenerOnChangeTabCleanerSetting,
   getTabCleanerSetting,
   updateTabCleanerSetting,
-} from "../../../repository/TabCleanerRepository";
+} from "../../../data/repository/TabCleanerRepository";
+import { removeListenerOnChangeTabGroupSetting } from "../../../data/repository/TabGroupSettingRepository";
+import t from "../../../i18n/Translations";
+import { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
 import PaperWithHeader from "../PaperWithHeader";
 
 type TabCleanerFormProps = {
@@ -43,6 +44,12 @@ const TabCleanerForm = (props: TabCleanerFormProps) => {
       setInputDuration(String(initialSetting.duration));
     };
     setInitialSetting();
+
+    const listenerOnChange = addListenerOnChangeTabCleanerSetting(
+      (newValue: TabCleaner) => setSetting(newValue),
+    );
+
+    return () => removeListenerOnChangeTabGroupSetting(listenerOnChange);
   }, []);
 
   const validateDurationValue = (value: string): DurationErrorState => {
@@ -58,7 +65,7 @@ const TabCleanerForm = (props: TabCleanerFormProps) => {
 
   const onChangeIsEnabled = () => {
     const newSetting = { ...setting, enabled: !setting.enabled };
-    updateSetting(newSetting);
+    updateTabCleanerSetting(newSetting);
   };
   const onChangeDuration = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
@@ -69,65 +76,57 @@ const TabCleanerForm = (props: TabCleanerFormProps) => {
     if (validationResult.isError) return;
 
     const newSetting = { ...setting, duration: Number(value) };
-    updateSetting(newSetting);
+    updateTabCleanerSetting(newSetting);
   };
   const onChangeDurationUnit = (event: React.ChangeEvent<HTMLInputElement>) => {
     const newSetting = {
       ...setting,
       durationUnit: event.target.value as DurationUnit,
     };
-    updateSetting(newSetting);
-  };
-  const updateSetting = (newSetting: TabCleaner) => {
-    setSetting(newSetting);
     updateTabCleanerSetting(newSetting);
   };
 
   return (
     <PaperWithHeader header={t.cleanupTabsHeader}>
       {setting && (
-        <>
-          <List dense={dense}>
-            <ListItemButton onClick={onChangeIsEnabled}>
-              <ListItemText
-                id="switch-list-label-wifi"
-                primary={t.tabCleanerHeader}
-                secondary={t.tabCleanerDescription}
+        <List dense={dense}>
+          <ListItemButton onClick={onChangeIsEnabled}>
+            <ListItemText
+              primary={t.tabCleanerHeader}
+              secondary={t.tabCleanerDescription}
+            />
+            <Switch edge="end" checked={setting.enabled} />
+          </ListItemButton>
+          <ListItem>
+            <Stack direction="row" spacing={2}>
+              <TextField
+                value={inputDuration}
+                variant="outlined"
+                size="small"
+                label={t.duration}
+                disabled={!setting.enabled}
+                onChange={onChangeDuration}
+                error={durationError.isError}
+                helperText={durationError.errorMessage}
               />
-              <Switch edge="end" checked={setting.enabled} />
-            </ListItemButton>
-            <ListItem>
-              <Stack direction="row" spacing={2}>
-                <TextField
-                  value={inputDuration}
-                  variant="outlined"
-                  size="small"
-                  label={t.duration}
-                  disabled={!setting.enabled}
-                  onChange={onChangeDuration}
-                  error={durationError.isError}
-                  helperText={durationError.errorMessage}
-                />
-                <FormControl
-                  size="small"
-                  sx={{ minWidth: 120 }}
-                  disabled={!setting.enabled}
+              <FormControl
+                size="small"
+                sx={{ minWidth: 120 }}
+                disabled={!setting.enabled}
+              >
+                <InputLabel>{t.unit}</InputLabel>
+                <Select
+                  value={setting.durationUnit}
+                  label={t.unit}
+                  onChange={onChangeDurationUnit}
                 >
-                  <InputLabel id="duration-select-label">{t.unit}</InputLabel>
-                  <Select
-                    labelId="duration-select-label"
-                    value={setting.durationUnit}
-                    label={t.unit}
-                    onChange={onChangeDurationUnit}
-                  >
-                    <MenuItem value={"day"}>{t.durationUnitDay}</MenuItem>
-                    <MenuItem value={"hour"}>{t.durationUnitHour}</MenuItem>
-                  </Select>
-                </FormControl>
-              </Stack>
-            </ListItem>
-          </List>
-        </>
+                  <MenuItem value={"day"}>{t.durationUnitDay}</MenuItem>
+                  <MenuItem value={"hour"}>{t.durationUnitHour}</MenuItem>
+                </Select>
+              </FormControl>
+            </Stack>
+          </ListItem>
+        </List>
       )}
     </PaperWithHeader>
   );

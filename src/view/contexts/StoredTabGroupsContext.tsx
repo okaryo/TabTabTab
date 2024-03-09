@@ -1,16 +1,18 @@
 import { createContext, useEffect, useState } from "react";
+import {
+  addListenerOnChangeStoredTabGroups,
+  getStoredTabGroups,
+  removeListenerOnChangeStoredTabGroups,
+} from "../../data/repository/TabGroupRepository";
 import { StoredTabGroup } from "../../model/TabContainer";
-import { getStoredTabGroups } from "../../repository/TabGroupRepository";
 
 type StoredTabGroupsContextType = {
   storedTabGroups: StoredTabGroup[];
-  setStoredTabGroups: React.Dispatch<React.SetStateAction<StoredTabGroup[]>>;
 };
 
 export const StoredTabGroupsContext = createContext<StoredTabGroupsContextType>(
   {
     storedTabGroups: [],
-    setStoredTabGroups: () => {},
   },
 );
 
@@ -27,12 +29,16 @@ export const StoredTabGroupsProvider = ({
       setStoredTabGroups(storedTabGroups);
     };
     initState();
+
+    const listenerOnChange = addListenerOnChangeStoredTabGroups(
+      (newValue: StoredTabGroup[]) => setStoredTabGroups(newValue),
+    );
+
+    return () => removeListenerOnChangeStoredTabGroups(listenerOnChange);
   }, []);
 
   return (
-    <StoredTabGroupsContext.Provider
-      value={{ storedTabGroups, setStoredTabGroups }}
-    >
+    <StoredTabGroupsContext.Provider value={{ storedTabGroups }}>
       {children}
     </StoredTabGroupsContext.Provider>
   );

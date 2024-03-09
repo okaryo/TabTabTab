@@ -1,14 +1,14 @@
 import Stack from "@mui/material/Stack";
 import { useContext } from "react";
+import { updateThemeColor } from "../../../../../data/repository/ThemeRepository";
 import t from "../../../../../i18n/Translations";
 import { themeColors } from "../../../../../model/Theme";
-import { updateThemeColor } from "../../../../../repository/ThemeRepository";
 import PaperWithHeader from "../../../../components/PaperWithHeader";
 import TabGroupColorRadio from "../../../../components/TabGroupColorRadio";
 import { ThemeColorContext } from "../../../../contexts/ThemeColorContext";
 
 const ThemeColorSetting = () => {
-  const { themeColor, setThemeColor } = useContext(ThemeColorContext);
+  const { themeColor } = useContext(ThemeColorContext);
   return (
     <PaperWithHeader header={t.themeColorSettingHeader}>
       <Stack
@@ -25,7 +25,6 @@ const ThemeColorSetting = () => {
             checked={color === themeColor}
             onClick={() => {
               updateThemeColor(color);
-              setThemeColor(color);
             }}
           />
         ))}

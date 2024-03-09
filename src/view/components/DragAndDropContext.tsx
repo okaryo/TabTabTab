@@ -20,6 +20,21 @@ import { RectMap } from "@dnd-kit/core/dist/store/types";
 import { Coordinates } from "@dnd-kit/core/dist/types";
 import { SortableData } from "@dnd-kit/sortable";
 import { useCallback, useContext, useMemo, useRef, useState } from "react";
+import {
+  addTabToTabGroup,
+  moveTabGroup,
+  moveTabGroupToOtherWindow,
+} from "../../data/repository/TabGroupRepository";
+import {
+  moveTab,
+  moveTabOutOfGroup,
+  moveTabToOtherWindow,
+  unpinTab,
+} from "../../data/repository/TabsRepository";
+import {
+  addWindowWithTab,
+  addWindowWithTabGroup,
+} from "../../data/repository/WindowsRepository";
 import { Tab } from "../../model/Tab";
 import {
   TabGroup,
@@ -37,21 +52,6 @@ import {
   indexOfWindowChild,
   moveTabOrTabGroup,
 } from "../../model/Window";
-import {
-  addTabToTabGroup,
-  moveTabGroup,
-  moveTabGroupToOtherWindow,
-} from "../../repository/TabGroupRepository";
-import {
-  moveTab,
-  moveTabOutOfGroup,
-  moveTabToOtherWindow,
-  unpinTab,
-} from "../../repository/TabsRepository";
-import {
-  addWindowWithTab,
-  addWindowWithTabGroup,
-} from "../../repository/WindowsRepository";
 import { WindowsContext } from "../contexts/WindowsContext";
 import { moveTabFromPinnedToPinned } from "../functions/moveTabFromPinnedToPinned";
 import { moveTabFromRootToPinned } from "../functions/moveTabFromRootToPinned";

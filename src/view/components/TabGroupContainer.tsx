@@ -16,13 +16,13 @@ import Typography from "@mui/material/Typography";
 import grey from "@mui/material/colors/grey";
 import { useTheme } from "@mui/material/styles";
 import { useEffect, useRef, useState } from "react";
-import { TabGroup, tabGroupColors } from "../../model/TabContainer";
 import {
   collapseTabGroup,
   expandTabGroup,
   updateTabGroupColor,
   updateTabGroupTitle,
-} from "../../repository/TabGroupRepository";
+} from "../../data/repository/TabGroupRepository";
+import { TabGroup, tabGroupColors } from "../../model/TabContainer";
 import { TabGroupActionMenu } from "./ActionMenu";
 import TabGroupColorRadio from "./TabGroupColorRadio";
 

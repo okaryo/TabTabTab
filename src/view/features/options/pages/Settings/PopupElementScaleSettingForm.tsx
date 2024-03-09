@@ -11,11 +11,11 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
 
-import t from "../../../../../i18n/Translations";
 import {
   getPopupElementScaleSetting,
   updatePopupElementScaleSetting,
-} from "../../../../../repository/SettingsRepository";
+} from "../../../../../data/repository/SettingsRepository";
+import t from "../../../../../i18n/Translations";
 
 type SubmissionState = {
   isLoading: boolean;

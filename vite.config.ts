@@ -32,6 +32,15 @@ export default defineConfig(({ mode }) => {
             ? "assets/[name].js"
             : "assets/[name].[hash].js",
         },
+        // FIXME: Remove when Vite supports it: Temporary workaround to suppress source map warnings during build.
+        // ref: https://github.com/vitejs/vite/issues/15012
+        onwarn: (warning, defaultHandler) => {
+          if (isDev && warning.code === "SOURCEMAP_ERROR") {
+            return;
+          }
+
+          defaultHandler(warning);
+        },
       },
     },
     test: {

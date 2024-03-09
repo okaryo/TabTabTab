@@ -1,7 +1,7 @@
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import { useContext, useEffect, useMemo, useState } from "react";
-import { getPopupElementScaleSetting } from "../../../../repository/SettingsRepository";
+import { getPopupElementScaleSetting } from "../../../../data/repository/SettingsRepository";
 import { ModeContext } from "../../../contexts/ModeContext";
 import { ThemeColorContext } from "../../../contexts/ThemeColorContext";
 import { tabGroupColorPalette } from "../../../resources/tabGroupColorPalette";

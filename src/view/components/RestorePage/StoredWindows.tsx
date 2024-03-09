@@ -17,12 +17,14 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { grey } from "@mui/material/colors";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
+import {
+  removeStoredWindow,
+  restoreWindow,
+  updateStoredWindowName,
+} from "../../../data/repository/WindowsRepository";
 import t from "../../../i18n/Translations";
 import { StoredWindow } from "../../../model/Window";
-import { restoreWindow } from "../../../repository/WindowsRepository";
 import { StoredWindowsContext } from "../../contexts/StoredWindowsContext";
-import { useRemoveStoredWindow } from "../../hooks/useRemoveStoredWindow";
-import { useUpdateStoredWindowName } from "../../hooks/useUpdateStoredWindowName";
 import {
   StoredGridTabContainerItem,
   StoredGridTabItem,
@@ -65,7 +67,6 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   const theme = useTheme();
   const editWindowNameFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
-  const [windowName, setWindowName] = useState(window.name);
   const [expanded, setExpanded] = useState(index === 0);
   const [editMode, setEditMode] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -73,13 +74,10 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
     "children" in child ? child.children : child,
   ).length;
 
-  const updateWindowName = useUpdateStoredWindowName();
-  const removeStoredWindow = useRemoveStoredWindow();
   const onChangeWindowNameField = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
-    setWindowName(event.target.value);
-    updateWindowName(window.internalUid, event.target.value);
+    updateStoredWindowName(window.internalUid, event.target.value);
   };
   const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -152,7 +150,7 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
               ref={editWindowNameFormRef}
               variant="standard"
               size="small"
-              value={windowName}
+              value={window.name}
               onChange={onChangeWindowNameField}
               autoFocus
             />

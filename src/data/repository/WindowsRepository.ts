@@ -1,4 +1,4 @@
-import { Tab } from "../model/Tab";
+import { Tab } from "../../model/Tab";
 import {
   Pinned,
   StoredPinned,
@@ -9,7 +9,7 @@ import {
   isTab,
   isTabContainer,
   isTabGroup,
-} from "../model/TabContainer";
+} from "../../model/TabContainer";
 import {
   StoredWindow,
   Window,
@@ -17,9 +17,9 @@ import {
   findPinned,
   findTabGroup,
   flatTabsInWindow,
-} from "../model/Window";
-
-import { ChromeLocalStorage, ChromeStorage } from "./ChromeStorage";
+} from "../../model/Window";
+import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
+import { ChromeSessionStorage } from "../storage/ChromeSessionStorage";
 import { applyLastActivatedAt, parseTab } from "./TabsRepository";
 
 export const getWindows = async (): Promise<Window[]> => {
@@ -133,7 +133,8 @@ export const closeWindow = async (window: Window): Promise<Window[]> => {
 const applyLastActivatedAtToTabs = async (
   windows: Window[],
 ): Promise<Window[]> => {
-  const lastAccesses = await ChromeStorage.getTabLastAccesses();
+  const lastAccessesInSession = await ChromeSessionStorage.getTabLastAccesses();
+  const lastAccessesInLocal = await ChromeLocalStorage.getTabLastAccesses();
   const newWindows = [];
   for (const window of windows) {
     const windowChildren = [];
@@ -141,10 +142,10 @@ const applyLastActivatedAtToTabs = async (
       if (isTabContainer(windowChild)) {
         const containerChildren = [];
         for (const containerChild of windowChild.children) {
-          const applied = await applyLastActivatedAt(
-            containerChild,
-            lastAccesses,
-          );
+          const applied = await applyLastActivatedAt(containerChild, {
+            session: lastAccessesInSession,
+            local: lastAccessesInLocal,
+          });
           containerChildren.push(applied);
         }
         windowChildren.push({
@@ -153,7 +154,10 @@ const applyLastActivatedAtToTabs = async (
         });
       }
       if (isTab(windowChild)) {
-        const applied = await applyLastActivatedAt(windowChild, lastAccesses);
+        const applied = await applyLastActivatedAt(windowChild, {
+          session: lastAccessesInSession,
+          local: lastAccessesInLocal,
+        });
         windowChildren.push(applied);
       }
     }
@@ -169,46 +173,12 @@ export const getStoredWindows = async (): Promise<StoredWindow[]> => {
   const storedWindows = await ChromeLocalStorage.getStoredWindows();
   if (!storedWindows) return [];
 
-  const deserializeStoredTab = (
-    tab: ChromeLocalStorage.SerializedStoredTab,
-  ) => {
-    return {
-      ...tab,
-      url: new URL(tab.url),
-      favIconUrl: tab.favIconUrl ? new URL(tab.favIconUrl) : null,
-    };
-  };
-
-  return storedWindows.map((window) => {
-    const children = window.children.map((child) => {
-      if (child.type === "pinned") {
-        return {
-          ...child,
-          children: child.children.map((tab) => deserializeStoredTab(tab)),
-        };
-      }
-      if (child.type === "tabGroup") {
-        return {
-          ...child,
-          color: child.color,
-          children: child.children.map((tab) => deserializeStoredTab(tab)),
-        };
-      }
-
-      return deserializeStoredTab(child);
-    });
-
-    return {
-      ...window,
-      storedAt: new Date(window.storedAt),
-      children,
-    };
-  });
+  return storedWindows.map((window) =>
+    transformSerializedStoredWindowToModel(window),
+  );
 };
 
-export const saveStoredWindow = async (
-  window: Window,
-): Promise<StoredWindow[]> => {
+export const saveWindow = async (window: Window): Promise<void> => {
   const storedWindows = await ChromeLocalStorage.getStoredWindows();
 
   const serializedTab = (tab: Tab): ChromeLocalStorage.SerializedStoredTab => ({
@@ -250,14 +220,12 @@ export const saveStoredWindow = async (
     },
     ...(storedWindows ?? []),
   ]);
-
-  return getStoredWindows();
 };
 
 export const updateStoredWindowName = async (
   id: string,
   name: string,
-): Promise<StoredWindow[]> => {
+): Promise<void> => {
   const storedWindows = await ChromeLocalStorage.getStoredWindows();
   await ChromeLocalStorage.updateStoredWindows(
     storedWindows.map((window) => {
@@ -267,19 +235,13 @@ export const updateStoredWindowName = async (
       return window;
     }),
   );
-
-  return getStoredWindows();
 };
 
-export const removeStoredWindow = async (
-  id: string,
-): Promise<StoredWindow[]> => {
+export const removeStoredWindow = async (id: string): Promise<void> => {
   const storedWindows = await ChromeLocalStorage.getStoredWindows();
   await ChromeLocalStorage.updateStoredWindows(
     storedWindows.filter((group) => group.internalUid !== id),
   );
-
-  return getStoredWindows();
 };
 
 export const restoreWindow = async (
@@ -333,4 +295,59 @@ export const restoreWindow = async (
   // NOTE: Remove the new tab created when the window is opened
   const emptyTab = window.tabs[0];
   await chrome.tabs.remove(emptyTab.id);
+};
+
+export const addListenerOnChangeStoredWindows = (
+  callback: (groups: StoredWindow[]) => void,
+): ChromeLocalStorage.ChangeListener => {
+  return ChromeLocalStorage.addListenerOnChangeStoredWindows(
+    (serializedWindows: ChromeLocalStorage.SerializedStoredWindow[]) => {
+      const transformedWindows = serializedWindows.map((window) =>
+        transformSerializedStoredWindowToModel(window),
+      );
+      callback(transformedWindows);
+    },
+  );
+};
+
+export const removeListenerOnChangeStoredWindows = (
+  listener: ChromeLocalStorage.ChangeListener,
+) => {
+  ChromeLocalStorage.removeListenerOnChange(listener);
+};
+
+const deserializeStoredTab = (tab: ChromeLocalStorage.SerializedStoredTab) => {
+  return {
+    ...tab,
+    url: new URL(tab.url),
+    favIconUrl: tab.favIconUrl ? new URL(tab.favIconUrl) : null,
+  };
+};
+
+const transformSerializedStoredWindowToModel = (
+  window: ChromeLocalStorage.SerializedStoredWindow,
+): StoredWindow => {
+  const children = window.children.map((child) => {
+    if (child.type === "pinned") {
+      return {
+        ...child,
+        children: child.children.map((tab) => deserializeStoredTab(tab)),
+      };
+    }
+    if (child.type === "tabGroup") {
+      return {
+        ...child,
+        color: child.color,
+        children: child.children.map((tab) => deserializeStoredTab(tab)),
+      };
+    }
+
+    return deserializeStoredTab(child);
+  });
+
+  return {
+    ...window,
+    storedAt: new Date(window.storedAt),
+    children,
+  };
 };

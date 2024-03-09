@@ -1,7 +1,10 @@
-import { StoredTabGroup, TabGroup, TabGroupColor } from "../model/TabContainer";
-import { WindowId } from "../model/Window";
-
-import { ChromeLocalStorage } from "./ChromeStorage";
+import {
+  StoredTabGroup,
+  TabGroup,
+  TabGroupColor,
+} from "../../model/TabContainer";
+import { WindowId } from "../../model/Window";
+import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
 export const collapseTabGroup = async (groupId: number): Promise<void> => {
   await chrome.tabGroups.update(groupId, { collapsed: true });
@@ -63,25 +66,12 @@ export const getStoredTabGroups = async (): Promise<StoredTabGroup[]> => {
   const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
   if (!storedTabGroups) return [];
 
-  return storedTabGroups.map((group) => {
-    return {
-      ...group,
-      color: group.color as TabGroupColor,
-      storedAt: new Date(group.storedAt),
-      children: group.children.map((tab) => {
-        return {
-          ...tab,
-          url: new URL(tab.url),
-          favIconUrl: tab.favIconUrl ? new URL(tab.favIconUrl) : null,
-        };
-      }),
-    };
-  });
+  return storedTabGroups.map((group) =>
+    transformSerializedStoredTabGroupToModel(group),
+  );
 };
 
-export const saveStoredTabGroup = async (
-  tabGroup: TabGroup,
-): Promise<StoredTabGroup[]> => {
+export const saveTabGroup = async (tabGroup: TabGroup): Promise<void> => {
   const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
   await ChromeLocalStorage.updateStoredTabGroups([
     {
@@ -100,14 +90,12 @@ export const saveStoredTabGroup = async (
     },
     ...(storedTabGroups ?? []),
   ]);
-
-  return getStoredTabGroups();
 };
 
 export const updateStoredTabGroupName = async (
   id: string,
   name: string,
-): Promise<StoredTabGroup[]> => {
+): Promise<void> => {
   const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
   await ChromeLocalStorage.updateStoredTabGroups(
     storedTabGroups.map((group) => {
@@ -120,14 +108,12 @@ export const updateStoredTabGroupName = async (
       return group;
     }),
   );
-
-  return getStoredTabGroups();
 };
 
 export const updateStoredTabGroupColor = async (
   id: string,
   color: TabGroupColor,
-): Promise<StoredTabGroup[]> => {
+): Promise<void> => {
   const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
   await ChromeLocalStorage.updateStoredTabGroups(
     storedTabGroups.map((group) => {
@@ -140,19 +126,13 @@ export const updateStoredTabGroupColor = async (
       return group;
     }),
   );
-
-  return getStoredTabGroups();
 };
 
-export const removeStoredTabGroup = async (
-  id: string,
-): Promise<StoredTabGroup[]> => {
+export const removeStoredTabGroup = async (id: string): Promise<void> => {
   const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
   await ChromeLocalStorage.updateStoredTabGroups(
     storedTabGroups.filter((group) => group.internalUid !== id),
   );
-
-  return getStoredTabGroups();
 };
 
 export const restoreTabGroup = async (
@@ -168,4 +148,40 @@ export const restoreTabGroup = async (
     title: tabGroup.name,
     color: tabGroup.color,
   });
+};
+
+export const addListenerOnChangeStoredTabGroups = (
+  callback: (groups: StoredTabGroup[]) => void,
+): ChromeLocalStorage.ChangeListener => {
+  return ChromeLocalStorage.addListenerOnChangeStoredTabGroups(
+    (serializedGroups: ChromeLocalStorage.SerializedStoredTabGroup[]) => {
+      const transformedGroups = serializedGroups.map((group) =>
+        transformSerializedStoredTabGroupToModel(group),
+      );
+      callback(transformedGroups);
+    },
+  );
+};
+
+export const removeListenerOnChangeStoredTabGroups = (
+  listener: ChromeLocalStorage.ChangeListener,
+) => {
+  ChromeLocalStorage.removeListenerOnChange(listener);
+};
+
+const transformSerializedStoredTabGroupToModel = (
+  group: ChromeLocalStorage.SerializedStoredTabGroup,
+): StoredTabGroup => {
+  return {
+    ...group,
+    color: group.color as TabGroupColor,
+    storedAt: new Date(group.storedAt),
+    children: group.children.map((tab) => {
+      return {
+        ...tab,
+        url: new URL(tab.url),
+        favIconUrl: tab.favIconUrl ? new URL(tab.favIconUrl) : null,
+      };
+    }),
+  };
 };

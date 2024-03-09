@@ -10,15 +10,15 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
 import { useEffect, useState } from "react";
-import t from "../../../i18n/Translations";
-import { TabGroupSetting } from "../../../model/TabGroupSetting";
 import {
-  addListenerOnUpdateTabGroupSetting,
+  addListenerOnChangeTabGroupSetting,
   getTabGroupSetting,
   groupTabsBySetting,
-  removeListenerOnUpdateTabGroupSetting,
+  removeListenerOnChangeTabGroupSetting,
   updateTabGroupSetting,
-} from "../../../repository/TabGroupSettingRepository";
+} from "../../../data/repository/TabGroupSettingRepository";
+import t from "../../../i18n/Translations";
+import { TabGroupSetting } from "../../../model/TabGroupSetting";
 import PaperWithHeader from "../PaperWithHeader";
 
 type TabGroupingFormProps = {
@@ -36,12 +36,12 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
     };
     fetchSettings();
 
-    const listener = addListenerOnUpdateTabGroupSetting((newSetting) => {
+    const listener = addListenerOnChangeTabGroupSetting((newSetting) => {
       setSetting(newSetting);
     });
 
     return () => {
-      removeListenerOnUpdateTabGroupSetting(listener);
+      removeListenerOnChangeTabGroupSetting(listener);
     };
   }, []);
 

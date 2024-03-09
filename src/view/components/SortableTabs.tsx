@@ -2,9 +2,7 @@ import {
   SortableContext,
   verticalListSortingStrategy,
 } from "@dnd-kit/sortable";
-
 import { Tab } from "../../model/Tab";
-
 import SortableItem from "./SortableItem";
 import TabItem from "./TabItem";
 

@@ -15,11 +15,11 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import { useContext, useState } from "react";
+import { navigateToOptionsPage } from "../../../../data/repository/SettingsRepository";
+import { updateMode } from "../../../../data/repository/ThemeRepository";
 import t from "../../../../i18n/Translations";
-import { navigateToOptionsPage } from "../../../../repository/SettingsRepository";
 import { PopupHeaderActionMenu } from "../../../components/ActionMenu";
 import { ModeContext } from "../../../contexts/ModeContext";
-import { useToggleMode } from "../../../hooks/useToggleMode";
 import { PopupPage } from "./Home";
 
 type HeaderProps = {
@@ -66,7 +66,6 @@ const Header = (props: HeaderProps) => {
   const { sidePanel, currentPage, searchText, setCurrentPage, setSearchText } =
     props;
   const { mode } = useContext(ModeContext);
-  const toggleMode = useToggleMode();
 
   const onInputSearchField = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
@@ -87,7 +86,7 @@ const Header = (props: HeaderProps) => {
       <>
         <IconButton
           color="inherit"
-          onClick={() => toggleMode(mode === "light" ? "dark" : "light")}
+          onClick={() => updateMode(mode === "light" ? "dark" : "light")}
         >
           {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
         </IconButton>

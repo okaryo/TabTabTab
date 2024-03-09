@@ -1,5 +1,4 @@
 import Stack from "@mui/material/Stack";
-
 import TabCleanerSettingForm from "./TabCleanerForm";
 import TabGroupingForm from "./TabGroupingForm";
 

@@ -1,11 +1,10 @@
 import { parse } from "tldts";
-
 import {
   TabGroupSetting,
   defaultTabGroupSetting,
-} from "../model/TabGroupSetting";
+} from "../../model/TabGroupSetting";
 
-import { ChromeLocalStorage } from "./ChromeStorage";
+import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
 export const getTabGroupSetting = async (): Promise<TabGroupSetting> => {
   const setting = await ChromeLocalStorage.getTabGroupSetting();
@@ -18,38 +17,16 @@ export const updateTabGroupSetting = async (setting: TabGroupSetting) => {
   return ChromeLocalStorage.updateTabGroupSetting(setting);
 };
 
-export const addListenerOnUpdateTabGroupSetting = (
+export const addListenerOnChangeTabGroupSetting = (
   callback: (setting: TabGroupSetting) => void,
-) => {
-  const listener = (
-    changes: { [key: string]: chrome.storage.StorageChange },
-    areaName: string,
-  ) => onTabGroupSettingChanged(changes, areaName, callback);
-  chrome.storage.onChanged.addListener(listener);
-
-  return listener;
+): ChromeLocalStorage.ChangeListener => {
+  return ChromeLocalStorage.addListenerOnChangeTabGroupSetting(callback);
 };
 
-export const removeListenerOnUpdateTabGroupSetting = (
-  listener: (
-    changes: { [key: string]: chrome.storage.StorageChange },
-    areaName: string,
-  ) => void,
+export const removeListenerOnChangeTabGroupSetting = (
+  listener: ChromeLocalStorage.ChangeListener,
 ) => {
-  chrome.storage.onChanged.removeListener(listener);
-};
-
-const onTabGroupSettingChanged = (
-  changes: { [key: string]: chrome.storage.StorageChange },
-  areaName: string,
-  callback: (setting: TabGroupSetting) => void,
-) => {
-  if (areaName !== "local") return;
-  if (ChromeLocalStorage.TAB_GROUP_SETTING_KEY in changes) {
-    const newSetting = changes[ChromeLocalStorage.TAB_GROUP_SETTING_KEY]
-      .newValue as TabGroupSetting;
-    callback(newSetting);
-  }
+  ChromeLocalStorage.removeListenerOnChange(listener);
 };
 
 export const groupTabsBySetting = async (setting: TabGroupSetting) => {

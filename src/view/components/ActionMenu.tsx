@@ -15,15 +15,15 @@ import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import SvgIcon from "@mui/material/SvgIcon";
 import React from "react";
-import t from "../../i18n/Translations";
-import { Tab } from "../../model/Tab";
-import { Pinned, TabGroup } from "../../model/TabContainer";
-import { Window } from "../../model/Window";
 import {
   navigateToOptionsPage,
   openSidePanel,
-} from "../../repository/SettingsRepository";
-import { closeTabGroup, ungroup } from "../../repository/TabGroupRepository";
+} from "../../data/repository/SettingsRepository";
+import {
+  closeTabGroup,
+  saveTabGroup,
+  ungroup,
+} from "../../data/repository/TabGroupRepository";
 import {
   addTabToNewGroup,
   closeTabs,
@@ -32,11 +32,16 @@ import {
   screenshotVisibleArea,
   unpinAllTabs,
   unpinTab,
-} from "../../repository/TabsRepository";
-import { closeWindow } from "../../repository/WindowsRepository";
+} from "../../data/repository/TabsRepository";
+import {
+  closeWindow,
+  saveWindow,
+} from "../../data/repository/WindowsRepository";
+import t from "../../i18n/Translations";
+import { Tab } from "../../model/Tab";
+import { Pinned, TabGroup } from "../../model/TabContainer";
+import { Window } from "../../model/Window";
 import { mergeWindow } from "../functions/mergeWindow";
-import { useSaveStoredTabGroup } from "../hooks/useSaveStoredTabGroup";
-import { useSaveStoredWindow } from "../hooks/useSaveStoredWindow";
 
 type ActionMenuItemAttrs =
   | {
@@ -181,8 +186,6 @@ export const PinnedActionMenu = (props: PinnedActionMenuProps) => {
 export const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
   const { tabGroup, isOpenMenu, anchorElement, onCloseMenu } = props;
 
-  const saveTabGroup = useSaveStoredTabGroup();
-
   const items: ActionMenuItemAttrs[] = [
     {
       type: "MenuItem",
@@ -223,8 +226,6 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   const window = windows[currentIndex];
   const isFirstWindow = currentIndex === 0;
   const isLastWindow = currentIndex === windows.length - 1;
-
-  const saveWindow = useSaveStoredWindow();
 
   const items: ActionMenuItemAttrs[] = [
     {

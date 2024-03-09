@@ -1,15 +1,17 @@
 import { createContext, useEffect, useState } from "react";
+import {
+  addListenerOnChangeStoredWindows,
+  getStoredWindows,
+  removeListenerOnChangeStoredWindows,
+} from "../../data/repository/WindowsRepository";
 import { StoredWindow } from "../../model/Window";
-import { getStoredWindows } from "../../repository/WindowsRepository";
 
 type StoredWindowsContextType = {
   storedWindows: StoredWindow[];
-  setStoredWindows: React.Dispatch<React.SetStateAction<StoredWindow[]>>;
 };
 
 export const StoredWindowsContext = createContext<StoredWindowsContextType>({
   storedWindows: [],
-  setStoredWindows: () => {},
 });
 
 export const StoredWindowsProvider = ({
@@ -23,10 +25,16 @@ export const StoredWindowsProvider = ({
       setStoredWindows(storedWindows);
     };
     initState();
+
+    const listenerOnChange = addListenerOnChangeStoredWindows(
+      (newValue: StoredWindow[]) => setStoredWindows(newValue),
+    );
+
+    return () => removeListenerOnChangeStoredWindows(listenerOnChange);
   }, []);
 
   return (
-    <StoredWindowsContext.Provider value={{ storedWindows, setStoredWindows }}>
+    <StoredWindowsContext.Provider value={{ storedWindows }}>
       {children}
     </StoredWindowsContext.Provider>
   );
