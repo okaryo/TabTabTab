@@ -15,11 +15,9 @@
     "rules": {
       "recommended": true,
       "correctness": {
+        "noUnusedImports": "error",
         "noUnusedVariables": "error",
         "useHookAtTopLevel": "error"
-      },
-      "nursery": {
-        "noUnusedImports": "error"
       },
       "suspicious": {
         "noConsoleLog": "error"

@@ -1,6 +1,6 @@
 import { parse } from "tldts";
 import { getTabGroupSetting } from "../data/repository/TabGroupSettingRepository";
-import { TabGroupSetting } from "../model/TabGroupSetting";
+import type { TabGroupSetting } from "../model/TabGroupSetting";
 
 export const addTabGroupingListeners = () => {
   chrome.tabs.onUpdated.addListener(onTabUpdated);

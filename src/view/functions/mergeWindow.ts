@@ -1,7 +1,7 @@
 import { moveTabGroup } from "../../data/repository/TabGroupRepository";
 import { moveTab, pinTab } from "../../data/repository/TabsRepository";
 import { isPinned, isTab, isTabGroup } from "../../model/TabContainer";
-import { Window } from "../../model/Window";
+import type { Window } from "../../model/Window";
 
 export const mergeWindow = async (
   destWindowId: number,

@@ -1,5 +1,5 @@
 import { Duration } from "./Duration";
-import { WindowId } from "./Window";
+import type { WindowId } from "./Window";
 
 export type TabId = number;
 export type TabStatus = "unloaded" | "loading" | "complete";

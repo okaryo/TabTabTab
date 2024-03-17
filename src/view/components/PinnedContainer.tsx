@@ -17,11 +17,11 @@ import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
 import t from "../../i18n/Translations";
 import {
-  Pinned,
+  type Pinned,
   adjacentToTabContainerAfter,
   adjacentToTabContainerBefore,
 } from "../../model/TabContainer";
-import { WindowId } from "../../model/Window";
+import type { WindowId } from "../../model/Window";
 import { WindowsContext } from "../contexts/WindowsContext";
 import { PinnedActionMenu } from "./ActionMenu";
 

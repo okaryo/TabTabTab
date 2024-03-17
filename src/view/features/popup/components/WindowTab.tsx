@@ -7,7 +7,7 @@ import Tab from "@mui/material/Tab";
 import { grey } from "@mui/material/colors";
 import { alpha, useTheme } from "@mui/material/styles";
 import { useState } from "react";
-import { Window, WindowId } from "../../../../model/Window";
+import type { Window, WindowId } from "../../../../model/Window";
 import { WindowActionMenu } from "../../../components/ActionMenu";
 
 type WindowTabProps = {

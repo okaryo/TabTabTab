@@ -17,7 +17,7 @@ import {
 } from "../../../data/repository/TabCleanerRepository";
 import { removeListenerOnChangeTabGroupSetting } from "../../../data/repository/TabGroupSettingRepository";
 import t from "../../../i18n/Translations";
-import { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
+import type { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
 import PaperWithHeader from "../PaperWithHeader";
 
 type TabCleanerFormProps = {

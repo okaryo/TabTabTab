@@ -1,24 +1,24 @@
 import {
-  Active,
-  CollisionDetection,
+  type Active,
+  type CollisionDetection,
   DndContext,
-  DragEndEvent,
-  DragOverEvent,
+  type DragEndEvent,
+  type DragOverEvent,
   DragOverlay,
-  DragStartEvent,
-  DroppableContainer,
+  type DragStartEvent,
+  type DroppableContainer,
   MeasuringStrategy,
   MouseSensor,
-  Over,
+  type Over,
   TouchSensor,
   closestCenter,
   pointerWithin,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
-import { RectMap } from "@dnd-kit/core/dist/store/types";
-import { Coordinates } from "@dnd-kit/core/dist/types";
-import { SortableData } from "@dnd-kit/sortable";
+import type { RectMap } from "@dnd-kit/core/dist/store/types";
+import type { Coordinates } from "@dnd-kit/core/dist/types";
+import type { SortableData } from "@dnd-kit/sortable";
 import { useCallback, useContext, useMemo, useRef, useState } from "react";
 import {
   addTabToTabGroup,
@@ -35,9 +35,9 @@ import {
   addWindowWithTab,
   addWindowWithTabGroup,
 } from "../../data/repository/WindowsRepository";
-import { Tab } from "../../model/Tab";
+import type { Tab } from "../../model/Tab";
 import {
-  TabGroup,
+  type TabGroup,
   isPinned,
   isPinnedId,
   isTab,
@@ -45,7 +45,7 @@ import {
   isTabGroup,
 } from "../../model/TabContainer";
 import {
-  Window,
+  type Window,
   findParentContainer,
   findWindow,
   findWindowChild,

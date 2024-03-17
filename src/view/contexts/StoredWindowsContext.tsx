@@ -4,7 +4,7 @@ import {
   getStoredWindows,
   removeListenerOnChangeStoredWindows,
 } from "../../data/repository/WindowsRepository";
-import { StoredWindow } from "../../model/Window";
+import type { StoredWindow } from "../../model/Window";
 
 type StoredWindowsContextType = {
   storedWindows: StoredWindow[];

@@ -4,7 +4,7 @@ import {
   getThemeColor,
   removeListenerOnChangeThemeColor,
 } from "../../data/repository/ThemeRepository";
-import { ThemeColor, defaultThemeColor } from "../../model/Theme";
+import { type ThemeColor, defaultThemeColor } from "../../model/Theme";
 
 type ThemeColorContextType = {
   themeColor: ThemeColor;

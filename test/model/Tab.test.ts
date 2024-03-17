@@ -1,5 +1,5 @@
 import { Duration } from "../../src/model/Duration";
-import { Tab, durationSinceLastActivatedAt } from "../../src/model/Tab";
+import { type Tab, durationSinceLastActivatedAt } from "../../src/model/Tab";
 import { mockTab } from "../factory/TabFactory";
 
 describe("#durationSinceLastActivatedAt", () => {

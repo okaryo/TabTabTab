@@ -1,4 +1,4 @@
-import { PopupSize, defaultPopupSize } from "../../model/PopupSize";
+import { type PopupSize, defaultPopupSize } from "../../model/PopupSize";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
 export const getPopupSizeSetting = async (): Promise<PopupSize> => {

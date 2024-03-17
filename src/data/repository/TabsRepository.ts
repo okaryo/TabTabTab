@@ -1,5 +1,5 @@
-import { Tab, TabId, TabStatus } from "../../model/Tab";
-import { WindowId } from "../../model/Window";
+import type { Tab, TabId, TabStatus } from "../../model/Tab";
+import type { WindowId } from "../../model/Window";
 import { generateHash } from "../../utility/hash";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 import { ChromeSessionStorage } from "../storage/ChromeSessionStorage";
