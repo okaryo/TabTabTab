@@ -9,7 +9,7 @@ import {
   getRecentActiveTabs,
 } from "../../../../data/repository/TabsRepository";
 import t from "../../../../i18n/Translations";
-import { Tab } from "../../../../model/Tab";
+import type { Tab } from "../../../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../../../model/Window";
 import TabItem from "../../../components/TabItem";
 import { WindowsContext } from "../../../contexts/WindowsContext";
@@ -76,7 +76,7 @@ const SearchResult = (props: SearchResultProps) => {
     return () => {
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [tabs[selectedTabIndex]]);
+  }, [selectedTabIndex, tabs[selectedTabIndex]]);
 
   const [recentActiveTabs, setRecentActiveTabs] = useState<Tab[]>(null);
   useEffect(() => {

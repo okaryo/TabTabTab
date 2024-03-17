@@ -1,4 +1,4 @@
-import { Window } from "../../src/model/Window";
+import type { Window } from "../../src/model/Window";
 
 export const mockWindow = (attrs: Partial<Window> = {}): Window => {
   return {

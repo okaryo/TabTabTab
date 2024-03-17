@@ -1,10 +1,10 @@
-import { StoredTab, Tab, TabId, isSamePageTabs } from "./Tab";
+import { type StoredTab, type Tab, type TabId, isSamePageTabs } from "./Tab";
 import {
-  Pinned,
-  StoredTabContainer,
-  TabContainer,
-  TabContainerId,
-  TabGroup,
+  type Pinned,
+  type StoredTabContainer,
+  type TabContainer,
+  type TabContainerId,
+  type TabGroup,
   isPinned,
   isPinnedId,
   isTab,

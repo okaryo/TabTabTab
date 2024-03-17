@@ -4,7 +4,7 @@ import {
   removeListenerOnChangeTabs,
 } from "../../data/repository/TabsRepository";
 import { getWindows } from "../../data/repository/WindowsRepository";
-import { Window } from "../../model/Window";
+import type { Window } from "../../model/Window";
 
 type WindowsContextType = {
   windows: Window[];

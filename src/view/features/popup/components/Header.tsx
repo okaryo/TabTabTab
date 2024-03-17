@@ -20,7 +20,7 @@ import { updateMode } from "../../../../data/repository/ThemeRepository";
 import t from "../../../../i18n/Translations";
 import { PopupHeaderActionMenu } from "../../../components/ActionMenu";
 import { ModeContext } from "../../../contexts/ModeContext";
-import { PopupPage } from "./Home";
+import type { PopupPage } from "./Home";
 
 type HeaderProps = {
   sidePanel: boolean;

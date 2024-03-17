@@ -1,6 +1,6 @@
 import { parse } from "tldts";
 import {
-  TabGroupSetting,
+  type TabGroupSetting,
   defaultTabGroupSetting,
 } from "../../model/TabGroupSetting";
 

@@ -1,4 +1,4 @@
-import { Tab } from "./Tab";
+import type { Tab } from "./Tab";
 
 export type DurationUnit = "day" | "hour";
 

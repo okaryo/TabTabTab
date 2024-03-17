@@ -1,9 +1,9 @@
-import { Tab } from "../../model/Tab";
+import type { Tab } from "../../model/Tab";
 import {
-  Pinned,
-  StoredPinned,
-  StoredTabGroup,
-  TabGroup,
+  type Pinned,
+  type StoredPinned,
+  type StoredTabGroup,
+  type TabGroup,
   generatePinnedId,
   isPinned,
   isTab,
@@ -11,9 +11,9 @@ import {
   isTabGroup,
 } from "../../model/TabContainer";
 import {
-  StoredWindow,
-  Window,
-  WindowId,
+  type StoredWindow,
+  type Window,
+  type WindowId,
   findPinned,
   findTabGroup,
   flatTabsInWindow,

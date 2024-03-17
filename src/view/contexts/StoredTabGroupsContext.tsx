@@ -4,7 +4,7 @@ import {
   getStoredTabGroups,
   removeListenerOnChangeStoredTabGroups,
 } from "../../data/repository/TabGroupRepository";
-import { StoredTabGroup } from "../../model/TabContainer";
+import type { StoredTabGroup } from "../../model/TabContainer";
 
 type StoredTabGroupsContextType = {
   storedTabGroups: StoredTabGroup[];

@@ -4,7 +4,7 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import SyncIcon from "@mui/icons-material/Sync";
-import MuiAccordion, { AccordionProps } from "@mui/material/Accordion";
+import MuiAccordion, { type AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
@@ -24,7 +24,10 @@ import {
   updateStoredTabGroupName,
 } from "../../../data/repository/TabGroupRepository";
 import t from "../../../i18n/Translations";
-import { StoredTabGroup, tabGroupColors } from "../../../model/TabContainer";
+import {
+  type StoredTabGroup,
+  tabGroupColors,
+} from "../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import TabGroupColorRadio from "../TabGroupColorRadio";
 import { StoredGridTabItem } from "./StoredGridItem";

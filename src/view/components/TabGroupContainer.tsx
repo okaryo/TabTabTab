@@ -23,7 +23,7 @@ import {
   updateTabGroupTitle,
 } from "../../data/repository/TabGroupRepository";
 import {
-  TabGroup,
+  type TabGroup,
   adjacentToTabContainerAfter,
   adjacentToTabContainerBefore,
   tabGroupColors,

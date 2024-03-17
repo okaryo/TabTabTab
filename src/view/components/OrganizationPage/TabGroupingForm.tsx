@@ -18,7 +18,7 @@ import {
   updateTabGroupSetting,
 } from "../../../data/repository/TabGroupSettingRepository";
 import t from "../../../i18n/Translations";
-import { TabGroupSetting } from "../../../model/TabGroupSetting";
+import type { TabGroupSetting } from "../../../model/TabGroupSetting";
 import PaperWithHeader from "../PaperWithHeader";
 
 type TabGroupingFormProps = {

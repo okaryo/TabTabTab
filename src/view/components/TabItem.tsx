@@ -16,7 +16,7 @@ import { useTheme } from "@mui/material/styles";
 import { forwardRef, useContext, useState } from "react";
 import { closeTab, focusTab } from "../../data/repository/TabsRepository";
 import t from "../../i18n/Translations";
-import { Tab, durationSinceLastActivatedAt } from "../../model/Tab";
+import { type Tab, durationSinceLastActivatedAt } from "../../model/Tab";
 import { findTabGroup, hasDuplicatedTabs } from "../../model/Window";
 import { WindowsContext } from "../contexts/WindowsContext";
 import { resolveDuplicatedTabs } from "../functions/resolveDuplicatedTabs";

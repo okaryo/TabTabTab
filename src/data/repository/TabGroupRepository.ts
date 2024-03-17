@@ -1,9 +1,9 @@
-import {
+import type {
   StoredTabGroup,
   TabGroup,
   TabGroupColor,
 } from "../../model/TabContainer";
-import { WindowId } from "../../model/Window";
+import type { WindowId } from "../../model/Window";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
 export const collapseTabGroup = async (groupId: number): Promise<void> => {

@@ -1,5 +1,5 @@
-import { StoredTab, Tab } from "./Tab";
-import { Window, WindowId } from "./Window";
+import type { StoredTab, Tab } from "./Tab";
+import type { Window, WindowId } from "./Window";
 
 export type TabContainerId = TabGroupId | PinnedId;
 export type TabContainer = {

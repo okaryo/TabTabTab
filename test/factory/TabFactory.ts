@@ -1,4 +1,4 @@
-import { Tab } from "../../src/model/Tab";
+import type { Tab } from "../../src/model/Tab";
 
 export const mockTab = (attrs: Partial<Tab> = {}): Tab => {
   return {

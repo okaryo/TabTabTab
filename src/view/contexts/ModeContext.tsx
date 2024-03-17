@@ -4,7 +4,7 @@ import {
   getMode,
   removeListenerOnChangeMode,
 } from "../../data/repository/ThemeRepository";
-import { Mode } from "../../model/Theme";
+import type { Mode } from "../../model/Theme";
 
 type ModeContextType = {
   mode: Mode;

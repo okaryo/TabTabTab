@@ -4,9 +4,9 @@ import {
 } from "@dnd-kit/sortable";
 import List from "@mui/material/List";
 import { memo, useContext, useState } from "react";
-import { Tab } from "../../model/Tab";
+import type { Tab } from "../../model/Tab";
 import { isPinned, isTabGroup } from "../../model/TabContainer";
-import { WindowChild } from "../../model/Window";
+import type { WindowChild } from "../../model/Window";
 import { WindowsContext } from "../contexts/WindowsContext";
 import PinnedContainer from "./PinnedContainer";
 import SortableItem from "./SortableItem";

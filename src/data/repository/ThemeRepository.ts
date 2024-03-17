@@ -1,6 +1,6 @@
 import {
-  Mode,
-  ThemeColor,
+  type Mode,
+  type ThemeColor,
   defaultMode,
   defaultThemeColor,
 } from "../../model/Theme";

@@ -9,8 +9,8 @@ import {
   red,
   yellow,
 } from "@mui/material/colors";
-import { PaletteColorOptions } from "@mui/material/styles";
-import { Mode, ThemeColor } from "../../model/Theme";
+import type { PaletteColorOptions } from "@mui/material/styles";
+import type { Mode, ThemeColor } from "../../model/Theme";
 
 export const themeColorPaletteBy = (
   themeColor: ThemeColor,

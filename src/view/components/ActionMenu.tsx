@@ -14,7 +14,7 @@ import ListItemText from "@mui/material/ListItemText";
 import Menu from "@mui/material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import SvgIcon from "@mui/material/SvgIcon";
-import React from "react";
+import type React from "react";
 import {
   navigateToOptionsPage,
   openSidePanel,
@@ -38,9 +38,9 @@ import {
   saveWindow,
 } from "../../data/repository/WindowsRepository";
 import t from "../../i18n/Translations";
-import { Tab } from "../../model/Tab";
-import { Pinned, TabGroup } from "../../model/TabContainer";
-import { Window } from "../../model/Window";
+import type { Tab } from "../../model/Tab";
+import type { Pinned, TabGroup } from "../../model/TabContainer";
+import type { Window } from "../../model/Window";
 import { mergeWindow } from "../functions/mergeWindow";
 
 type ActionMenuItemAttrs =

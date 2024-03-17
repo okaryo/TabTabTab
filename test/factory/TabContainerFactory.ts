@@ -1,4 +1,4 @@
-import { Pinned, TabGroup } from "../../src/model/TabContainer";
+import type { Pinned, TabGroup } from "../../src/model/TabContainer";
 
 export const mockPinned = (attrs: Partial<Pinned> = {}): Pinned => {
   return {

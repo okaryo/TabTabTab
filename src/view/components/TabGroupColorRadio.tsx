@@ -1,7 +1,7 @@
 import CircleIcon from "@mui/icons-material/Circle";
 import Radio from "@mui/material/Radio";
 import { useTheme } from "@mui/material/styles";
-import { TabGroupColor } from "../../model/TabContainer";
+import type { TabGroupColor } from "../../model/TabContainer";
 
 type TabGroupColorRadioProps = {
   color: TabGroupColor;

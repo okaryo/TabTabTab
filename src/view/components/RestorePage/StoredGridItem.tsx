@@ -1,6 +1,6 @@
 import PushPin from "@mui/icons-material/PushPin";
 import Chip from "@mui/material/Chip";
-import { GridSize } from "@mui/material/Grid";
+import type { GridSize } from "@mui/material/Grid";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
@@ -10,9 +10,9 @@ import Grid from "@mui/material/Unstable_Grid2";
 import { useTheme } from "@mui/material/styles";
 
 import t from "../../../i18n/Translations";
-import { StoredTab } from "../../../model/Tab";
+import type { StoredTab } from "../../../model/Tab";
 import {
-  StoredTabContainer,
+  type StoredTabContainer,
   isStoredTabGroup,
 } from "../../../model/TabContainer";
 import TabFavicon from "../TabFavicon";
