@@ -15,7 +15,7 @@
   "author": "okaryo",
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "1.6.1",
+    "@biomejs/biome": "1.6.3",
     "@types/chrome": "^0.0.263",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
