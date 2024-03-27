@@ -131,6 +131,10 @@
     "message": "URL 복사",
     "description": "Displayed within the action menu for tabs."
   },
+  "duplicate_tab": {
+    "message": "복제",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "핀 고정",
     "description": "Displayed within the action menu for tabs."
@@ -372,11 +376,11 @@
     "description": "Description for the section related to the source code."
   },
   "sponsor_page_header": {
-    "message": "스폰서가 되세요",
+    "message": "프로젝트 지원하기",
     "description": "Header in Sponsor Page"
   },
   "sponsor_page_description": {
-    "message": "TabTabTab은 주로 개인이 개발한 오픈소스 프로젝트입니다. 유용하다고 생각되면 지속적인 개발을 위해 스폰서가 되어주시면 감사하겠습니다.",
+    "message": "TabTabTab은 주로 개인이 개발한 오픈 소스 프로젝트입니다. 유용하다고 생각되면 이 프로젝트를 지원해 주시면 감사하겠습니다.",
     "description": "Description in Sponsor Page"
   }
 }

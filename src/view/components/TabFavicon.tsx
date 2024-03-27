@@ -42,6 +42,7 @@ const TabFavicon = (props: TabFaviconProps) => {
           width: size,
         }}
         src={url.href}
+        loading="lazy"
         onError={() => setIsError(true)}
       />
     );

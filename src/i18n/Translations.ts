@@ -111,6 +111,9 @@ class Translations {
   get copyUrl() {
     return chrome.i18n.getMessage("copy_url");
   }
+  get duplicateTab() {
+    return chrome.i18n.getMessage("duplicate_tab");
+  }
   get pin() {
     return chrome.i18n.getMessage("pin");
   }

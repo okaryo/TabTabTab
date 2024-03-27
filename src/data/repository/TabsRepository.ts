@@ -17,6 +17,10 @@ export const focusTab = async (tab: Tab) => {
   }
 };
 
+export const focusTabBy = (tabId: number) => {
+  return chrome.tabs.update(tabId, { active: true });
+};
+
 export const closeTab = async (tabId: number) => {
   await chrome.tabs.remove(tabId);
 };
@@ -66,6 +70,17 @@ export const cleanupTabLastActivatedAt = async (tabId: number) => {
     });
   const keepKeys = await Promise.all(keepKeysPromises);
   await ChromeLocalStorage.cleanupTabLastAccesses(keepKeys);
+};
+
+export const getCurrentActiveTabId = async () => {
+  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+  if (tabs.length === 0) return null;
+
+  return tabs[0].id;
+};
+
+export const duplicateTab = (tabId: number) => {
+  return chrome.tabs.duplicate(tabId);
 };
 
 export const pinTab = async (tabId: number) => {

@@ -131,6 +131,10 @@
     "message": "Copy URL",
     "description": "Displayed within the action menu for tabs."
   },
+  "duplicate_tab": {
+    "message": "Duplicate",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Pin",
     "description": "Displayed within the action menu for tabs."
@@ -372,11 +376,11 @@
     "description": "Description for the section related to the source code."
   },
   "sponsor_page_header": {
-    "message": "Become a Sponsor",
+    "message": "Support the Project",
     "description": "Header in Sponsor Page"
   },
   "sponsor_page_description": {
-    "message": "TabTabTab is an open-source project, mainly developed by an individual. If you find it useful, I'd be grateful if you could consider becoming a sponsor for its continuous development.",
+    "message": "TabTabTab is an open-source project, mainly developed by an individual. If you find it useful, I'd be grateful if you could consider supporting this project.",
     "description": "Description in Sponsor Page"
   }
 }
