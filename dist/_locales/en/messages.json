@@ -131,6 +131,10 @@
     "message": "Copy URL",
     "description": "Displayed within the action menu for tabs."
   },
+  "duplicate_tab": {
+    "message": "Duplicate",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Pin",
     "description": "Displayed within the action menu for tabs."

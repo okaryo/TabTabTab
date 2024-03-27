@@ -131,6 +131,10 @@
     "message": "Copier l'URL",
     "description": "Displayed within the action menu for tabs."
   },
+  "duplicate_tab": {
+    "message": "Dupliquer",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Epingler",
     "description": "Displayed within the action menu for tabs."

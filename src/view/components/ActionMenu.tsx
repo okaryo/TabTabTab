@@ -1,5 +1,6 @@
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputIcon from "@mui/icons-material/Input";
@@ -27,6 +28,9 @@ import {
 import {
   addTabToNewGroup,
   closeTabs,
+  duplicateTab,
+  focusTabBy,
+  getCurrentActiveTabId,
   pinTab,
   removeFromGroup,
   screenshotVisibleArea,
@@ -98,6 +102,16 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
       label: t.copyUrl,
       icon: <ContentCopyIcon fontSize="small" />,
       action: () => navigator.clipboard.writeText(tab.url.href),
+    },
+    {
+      type: "MenuItem",
+      label: t.duplicateTab,
+      icon: <ControlPointDuplicateIcon fontSize="small" />,
+      action: async () => {
+        const activeTabId = await getCurrentActiveTabId();
+        await duplicateTab(tab.id);
+        await focusTabBy(activeTabId);
+      },
     },
     tab.pinned && {
       type: "MenuItem",

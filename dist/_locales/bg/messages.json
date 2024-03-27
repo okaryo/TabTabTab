@@ -131,6 +131,10 @@
     "message": "Копирай линк",
     "description": "Displayed within the action menu for tabs."
   },
+  "duplicate_tab": {
+    "message": "Дубликат",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Закачи",
     "description": "Displayed within the action menu for tabs."

@@ -131,6 +131,10 @@
     "message": "URL 복사",
     "description": "Displayed within the action menu for tabs."
   },
+  "duplicate_tab": {
+    "message": "복제",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "핀 고정",
     "description": "Displayed within the action menu for tabs."

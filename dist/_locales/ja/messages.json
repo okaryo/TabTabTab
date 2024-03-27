@@ -131,6 +131,10 @@
     "message": "リンクをコピー",
     "description": "Displayed within the action menu for tabs."
   },
+  "duplicate_tab": {
+    "message": "複製",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "固定",
     "description": "Displayed within the action menu for tabs."
