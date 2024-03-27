@@ -376,11 +376,11 @@
     "description": "Description for the section related to the source code."
   },
   "sponsor_page_header": {
-    "message": "Zostań Sponsorem",
+    "message": "Wesprzyj projekt",
     "description": "Header in Sponsor Page"
   },
   "sponsor_page_description": {
-    "message": "TabTabTab to projekt open-source, głównie rozwijany przez jedną osobę. Jeśli uznasz go za przydatny, byłbym wdzięczny, gdybyś rozważył zostanie sponsorem jego ciągłego rozwoju.",
+    "message": "TabTabTab jest projektem open-source, głównie rozwijanym przez jedną osobę. Jeśli uznasz go za przydatny, byłbym wdzięczny, gdybyś rozważył wsparcie tego projektu.",
     "description": "Description in Sponsor Page"
   }
 }

@@ -376,11 +376,11 @@
     "description": "Description for the section related to the source code."
   },
   "sponsor_page_header": {
-    "message": "Станете Спонсор",
+    "message": "Подкрепете проекта",
     "description": "Header in Sponsor Page"
   },
   "sponsor_page_description": {
-    "message": "TabTabTab е проект с отворен код, разработен главно от един човек. Ако намирате, че е полезно, бих бил благодарен, ако обмислите възможността да станете спонсор за неговото непрекъснато развитие.",
+    "message": "TabTabTab е отворен проект, разработен главно от един индивид. Ако намирате, че е полезен, ще съм благодарен, ако обмислите подкрепата си за този проект.",
     "description": "Description in Sponsor Page"
   }
 }
