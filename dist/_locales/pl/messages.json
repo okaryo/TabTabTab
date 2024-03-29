@@ -139,6 +139,10 @@
     "message": "Dodaj nową kartę obok",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_in_group": {
+    "message": "Dodaj nową kartę do grupy",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Przypnij",
     "description": "Displayed within the action menu for tabs."

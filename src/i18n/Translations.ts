@@ -117,6 +117,9 @@ class Translations {
   get addNewTabNext() {
     return chrome.i18n.getMessage("add_new_tab_next");
   }
+  get addNewTabInGroup() {
+    return chrome.i18n.getMessage("add_new_tab_in_group");
+  }
   get pin() {
     return chrome.i18n.getMessage("pin");
   }

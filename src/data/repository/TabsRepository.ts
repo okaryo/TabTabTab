@@ -87,6 +87,15 @@ export const createNewTabNext = async (tabId: number) => {
   });
 };
 
+export const createNewTabInGroup = async (groupId: number) => {
+  const group = await chrome.tabGroups.get(groupId);
+  const newTab = await chrome.tabs.create({
+    windowId: group.windowId,
+    active: false,
+  });
+  return chrome.tabs.group({ tabIds: [newTab.id], groupId });
+};
+
 export const pinTab = async (tabId: number) => {
   await chrome.tabs.update(tabId, { pinned: true });
 };

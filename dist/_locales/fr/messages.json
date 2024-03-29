@@ -139,6 +139,10 @@
     "message": "Ajouter un nouvel onglet à côté",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_in_group": {
+    "message": "Ajouter un nouvel onglet dans le groupe",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Epingler",
     "description": "Displayed within the action menu for tabs."

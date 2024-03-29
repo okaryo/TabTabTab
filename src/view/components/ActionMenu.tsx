@@ -29,6 +29,7 @@ import {
 import {
   addTabToNewGroup,
   closeTabs,
+  createNewTabInGroup,
   createNewTabNext,
   duplicateTab,
   pinTab,
@@ -206,6 +207,12 @@ export const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
   const { tabGroup, isOpenMenu, anchorElement, onCloseMenu } = props;
 
   const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.addNewTabInGroup,
+      icon: <ControlPointIcon fontSize="small" />,
+      action: () => createNewTabInGroup(tabGroup.id),
+    },
     {
       type: "MenuItem",
       label: t.saveTabGroup,
