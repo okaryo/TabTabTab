@@ -30,6 +30,7 @@ import {
   addTabToNewGroup,
   closeTabs,
   createNewTabInGroup,
+  createNewTabInWindow,
   createNewTabNext,
   duplicateTab,
   pinTab,
@@ -254,6 +255,12 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   const isLastWindow = currentIndex === windows.length - 1;
 
   const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.addNewTabInWindow,
+      icon: <ControlPointIcon fontSize="small" />,
+      action: () => createNewTabInWindow(window.id),
+    },
     {
       type: "MenuItem",
       label: t.saveWindow,

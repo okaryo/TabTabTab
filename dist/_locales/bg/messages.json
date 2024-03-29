@@ -143,6 +143,10 @@
     "message": "Добавяне на нов раздел в групата",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_in_window": {
+    "message": "Добавяне на нов раздел",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Закачи",
     "description": "Displayed within the action menu for tabs."

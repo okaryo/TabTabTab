@@ -143,6 +143,10 @@
     "message": "New Tab in Group",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_in_window": {
+    "message": "New Tab",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Pin",
     "description": "Displayed within the action menu for tabs."

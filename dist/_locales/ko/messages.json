@@ -143,6 +143,10 @@
     "message": "그룹 내 새 탭 추가",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_in_window": {
+    "message": "새 탭 추가",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "핀 고정",
     "description": "Displayed within the action menu for tabs."
