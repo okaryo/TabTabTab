@@ -1,5 +1,6 @@
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -28,9 +29,10 @@ import {
 import {
   addTabToNewGroup,
   closeTabs,
+  createNewTabInGroup,
+  createNewTabInWindow,
+  createNewTabNext,
   duplicateTab,
-  focusTabBy,
-  getCurrentActiveTabId,
   pinTab,
   removeFromGroup,
   screenshotVisibleArea,
@@ -99,31 +101,9 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
   const items: ActionMenuItemAttrs[] = [
     {
       type: "MenuItem",
-      label: t.copyUrl,
-      icon: <ContentCopyIcon fontSize="small" />,
-      action: () => navigator.clipboard.writeText(tab.url.href),
-    },
-    {
-      type: "MenuItem",
-      label: t.duplicateTab,
-      icon: <ControlPointDuplicateIcon fontSize="small" />,
-      action: async () => {
-        const activeTabId = await getCurrentActiveTabId();
-        await duplicateTab(tab.id);
-        await focusTabBy(activeTabId);
-      },
-    },
-    tab.pinned && {
-      type: "MenuItem",
-      label: t.unpin,
-      icon: <PushPinIcon fontSize="small" />,
-      action: () => unpinTab(tab.id),
-    },
-    !tab.pinned && {
-      type: "MenuItem",
-      label: t.pin,
-      icon: <PushPinIcon fontSize="small" />,
-      action: () => pinTab(tab.id),
+      label: t.addNewTabNext,
+      icon: <ControlPointIcon fontSize="small" />,
+      action: () => createNewTabNext(tab.id),
     },
     tab.groupId && {
       type: "MenuItem",
@@ -136,6 +116,33 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
       label: t.addToNewGroup,
       icon: <LibraryAddIcon fontSize="small" />,
       action: () => addTabToNewGroup(tab.id, tab.windowId),
+    },
+    {
+      type: "Divider",
+    },
+    {
+      type: "MenuItem",
+      label: t.copyUrl,
+      icon: <ContentCopyIcon fontSize="small" />,
+      action: () => navigator.clipboard.writeText(tab.url.href),
+    },
+    {
+      type: "MenuItem",
+      label: t.duplicateTab,
+      icon: <ControlPointDuplicateIcon fontSize="small" />,
+      action: () => duplicateTab(tab.id),
+    },
+    tab.pinned && {
+      type: "MenuItem",
+      label: t.unpin,
+      icon: <PushPinIcon fontSize="small" />,
+      action: () => unpinTab(tab.id),
+    },
+    !tab.pinned && {
+      type: "MenuItem",
+      label: t.pin,
+      icon: <PushPinIcon fontSize="small" />,
+      action: () => pinTab(tab.id),
     },
     tab.active && {
       type: "Divider",
@@ -203,6 +210,12 @@ export const TabGroupActionMenu = (props: TabGroupActionMenuProps) => {
   const items: ActionMenuItemAttrs[] = [
     {
       type: "MenuItem",
+      label: t.addNewTabInGroup,
+      icon: <ControlPointIcon fontSize="small" />,
+      action: () => createNewTabInGroup(tabGroup.id),
+    },
+    {
+      type: "MenuItem",
       label: t.saveTabGroup,
       icon: <SyncIcon fontSize="small" />,
       action: () => saveTabGroup(tabGroup),
@@ -242,6 +255,12 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   const isLastWindow = currentIndex === windows.length - 1;
 
   const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.addNewTabInWindow,
+      icon: <ControlPointIcon fontSize="small" />,
+      action: () => createNewTabInWindow(window.id),
+    },
     {
       type: "MenuItem",
       label: t.saveWindow,

@@ -114,6 +114,15 @@ class Translations {
   get duplicateTab() {
     return chrome.i18n.getMessage("duplicate_tab");
   }
+  get addNewTabNext() {
+    return chrome.i18n.getMessage("add_new_tab_next");
+  }
+  get addNewTabInGroup() {
+    return chrome.i18n.getMessage("add_new_tab_in_group");
+  }
+  get addNewTabInWindow() {
+    return chrome.i18n.getMessage("add_new_tab_in_window");
+  }
   get pin() {
     return chrome.i18n.getMessage("pin");
   }

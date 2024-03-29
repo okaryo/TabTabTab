@@ -135,6 +135,18 @@
     "message": "複製",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_next": {
+    "message": "隣に新しいタブを追加",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "add_new_tab_in_group": {
+    "message": "グループ内に新しいタブを追加",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "add_new_tab_in_window": {
+    "message": "新しいタブを追加",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "固定",
     "description": "Displayed within the action menu for tabs."

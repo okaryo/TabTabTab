@@ -17,10 +17,6 @@ export const focusTab = async (tab: Tab) => {
   }
 };
 
-export const focusTabBy = (tabId: number) => {
-  return chrome.tabs.update(tabId, { active: true });
-};
-
 export const closeTab = async (tabId: number) => {
   await chrome.tabs.remove(tabId);
 };
@@ -72,15 +68,36 @@ export const cleanupTabLastActivatedAt = async (tabId: number) => {
   await ChromeLocalStorage.cleanupTabLastAccesses(keepKeys);
 };
 
-export const getCurrentActiveTabId = async () => {
-  const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
-  if (tabs.length === 0) return null;
-
-  return tabs[0].id;
+export const duplicateTab = async (tabId: number) => {
+  const tab = await chrome.tabs.get(tabId);
+  return chrome.tabs.create({
+    index: tab.index + 1,
+    url: tab.url,
+    windowId: tab.windowId,
+    active: false,
+  });
 };
 
-export const duplicateTab = (tabId: number) => {
-  return chrome.tabs.duplicate(tabId);
+export const createNewTabNext = async (tabId: number) => {
+  const tab = await chrome.tabs.get(tabId);
+  return chrome.tabs.create({
+    index: tab.index + 1,
+    windowId: tab.windowId,
+    active: false,
+  });
+};
+
+export const createNewTabInGroup = async (groupId: number) => {
+  const group = await chrome.tabGroups.get(groupId);
+  const newTab = await chrome.tabs.create({
+    windowId: group.windowId,
+    active: false,
+  });
+  return chrome.tabs.group({ tabIds: [newTab.id], groupId });
+};
+
+export const createNewTabInWindow = async (windowId: number) => {
+  return chrome.tabs.create({ windowId, active: false });
 };
 
 export const pinTab = async (tabId: number) => {
