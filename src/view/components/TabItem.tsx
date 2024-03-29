@@ -164,7 +164,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
       disablePadding
     >
       <ListItemButton
-        sx={{ width: "100%", pt: 0, pb: 0 }}
+        sx={{ width: "100%", py: 0 }}
         style={{ cursor: cursorGrabbing ? "inherit" : "pointer" }}
         selected={tab.active || selected}
         onClick={onTapTabItem}
