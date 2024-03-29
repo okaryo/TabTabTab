@@ -1,5 +1,6 @@
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
+import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
 import CropFreeIcon from "@mui/icons-material/CropFree";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
@@ -28,6 +29,7 @@ import {
 import {
   addTabToNewGroup,
   closeTabs,
+  createNewTabNext,
   duplicateTab,
   pinTab,
   removeFromGroup,
@@ -97,6 +99,27 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
   const items: ActionMenuItemAttrs[] = [
     {
       type: "MenuItem",
+      label: t.addNewTabNext,
+      icon: <ControlPointIcon fontSize="small" />,
+      action: () => createNewTabNext(tab.id),
+    },
+    tab.groupId && {
+      type: "MenuItem",
+      label: t.removeFromGroup,
+      icon: <CropFreeIcon fontSize="small" />,
+      action: () => removeFromGroup(tab.id),
+    },
+    !tab.groupId && {
+      type: "MenuItem",
+      label: t.addToNewGroup,
+      icon: <LibraryAddIcon fontSize="small" />,
+      action: () => addTabToNewGroup(tab.id, tab.windowId),
+    },
+    {
+      type: "Divider",
+    },
+    {
+      type: "MenuItem",
       label: t.copyUrl,
       icon: <ContentCopyIcon fontSize="small" />,
       action: () => navigator.clipboard.writeText(tab.url.href),
@@ -118,18 +141,6 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
       label: t.pin,
       icon: <PushPinIcon fontSize="small" />,
       action: () => pinTab(tab.id),
-    },
-    tab.groupId && {
-      type: "MenuItem",
-      label: t.removeFromGroup,
-      icon: <CropFreeIcon fontSize="small" />,
-      action: () => removeFromGroup(tab.id),
-    },
-    !tab.groupId && {
-      type: "MenuItem",
-      label: t.addToNewGroup,
-      icon: <LibraryAddIcon fontSize="small" />,
-      action: () => addTabToNewGroup(tab.id, tab.windowId),
     },
     tab.active && {
       type: "Divider",

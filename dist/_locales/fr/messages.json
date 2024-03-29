@@ -135,6 +135,10 @@
     "message": "Dupliquer",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_next": {
+    "message": "Ajouter un nouvel onglet à côté",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Epingler",
     "description": "Displayed within the action menu for tabs."

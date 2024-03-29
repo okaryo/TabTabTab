@@ -135,6 +135,10 @@
     "message": "Дубликат",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_next": {
+    "message": "Добавяне на нов раздел до",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Закачи",
     "description": "Displayed within the action menu for tabs."

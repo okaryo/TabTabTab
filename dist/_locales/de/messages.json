@@ -135,6 +135,10 @@
     "message": "Duplikat",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_next": {
+    "message": "Neuen Tab daneben hinzufügen",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "Anpinnen",
     "description": "Displayed within the action menu for tabs."

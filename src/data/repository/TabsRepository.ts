@@ -78,6 +78,15 @@ export const duplicateTab = async (tabId: number) => {
   });
 };
 
+export const createNewTabNext = async (tabId: number) => {
+  const tab = await chrome.tabs.get(tabId);
+  return chrome.tabs.create({
+    index: tab.index + 1,
+    windowId: tab.windowId,
+    active: false,
+  });
+};
+
 export const pinTab = async (tabId: number) => {
   await chrome.tabs.update(tabId, { pinned: true });
 };

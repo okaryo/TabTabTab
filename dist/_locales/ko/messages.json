@@ -135,6 +135,10 @@
     "message": "복제",
     "description": "Displayed within the action menu for tabs."
   },
+  "add_new_tab_next": {
+    "message": "옆에 새 탭 추가",
+    "description": "Displayed within the action menu for tabs."
+  },
   "pin": {
     "message": "핀 고정",
     "description": "Displayed within the action menu for tabs."
