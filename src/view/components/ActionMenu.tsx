@@ -29,8 +29,6 @@ import {
   addTabToNewGroup,
   closeTabs,
   duplicateTab,
-  focusTabBy,
-  getCurrentActiveTabId,
   pinTab,
   removeFromGroup,
   screenshotVisibleArea,
@@ -107,11 +105,7 @@ export const TabItemActionMenu = (props: TabItemActionMenuProps) => {
       type: "MenuItem",
       label: t.duplicateTab,
       icon: <ControlPointDuplicateIcon fontSize="small" />,
-      action: async () => {
-        const activeTabId = await getCurrentActiveTabId();
-        await duplicateTab(tab.id);
-        await focusTabBy(activeTabId);
-      },
+      action: () => duplicateTab(tab.id),
     },
     tab.pinned && {
       type: "MenuItem",
