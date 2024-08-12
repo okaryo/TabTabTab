@@ -279,6 +279,10 @@
     "message": "Gdy włączone, nowo otwarte karty z bieżącej, takie jak linki lub zakładki, nie będą automatycznie grupowane.",
     "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
   },
+  "tab_grouping_sort_groups_alphabetically": {
+    "message": "Sortuj grupy alfabetycznie",
+    "description": "Label for sorting groups."
+  },
   "tab_grouping_group_tabs_by": {
     "message": "Grupuj karty według",
     "description": "Label for selecting the criterion for tab grouping."

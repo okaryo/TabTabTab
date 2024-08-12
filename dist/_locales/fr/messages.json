@@ -279,6 +279,10 @@
     "message": "Lorsqu'activé, les onglets nouvellement ouverts à partir de l'actuel, tels que les liens ou les favoris, ne seront pas automatiquement groupés.",
     "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
   },
+  "tab_grouping_sort_groups_alphabetically": {
+    "message": "Trier les groupes par ordre alphabétique",
+    "description": "Label for sorting groups."
+  },
   "tab_grouping_group_tabs_by": {
     "message": "Grouper les onglets par",
     "description": "Label for selecting the criterion for tab grouping."

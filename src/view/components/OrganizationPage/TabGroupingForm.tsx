@@ -129,6 +129,12 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
                 checked={setting.applyAutoGroupingToCurrentTabOnly}
               />
             </ListItemButton>
+            <ListItemButton
+              onClick={() => onChangeSwitch("sortGroupsAlphabetically")}
+            >
+              <ListItemText primary={t.tabGroupingSortGroupsAlphabetically} />
+              <Switch edge="end" checked={setting.sortGroupsAlphabetically} />
+            </ListItemButton>
             <ListItem>
               <ListItemText primary={t.tabGroupingGroupTabsBy} />
               <FormControl size="small">

@@ -279,6 +279,10 @@
     "message": "켜져 있으면, 현재 탭에서 새로 열린 탭(링크나 북마크 등)은 자동으로 그룹화되지 않습니다.",
     "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
   },
+  "tab_grouping_sort_groups_alphabetically": {
+    "message": "그룹을 알파벳 순으로 정렬",
+    "description": "Label for sorting groups."
+  },
   "tab_grouping_group_tabs_by": {
     "message": "탭 그룹화 기준",
     "description": "Label for selecting the criterion for tab grouping."

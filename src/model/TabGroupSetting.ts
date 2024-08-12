@@ -3,6 +3,7 @@ export type TabGroupSetting = {
   collapseWhenNoInUse: boolean;
   ungroupSingleTabGroups: boolean;
   applyAutoGroupingToCurrentTabOnly: boolean;
+  sortGroupsAlphabetically: boolean;
   groupBy: "domain" | "subdomain";
 };
 
@@ -11,5 +12,6 @@ export const defaultTabGroupSetting: TabGroupSetting = {
   collapseWhenNoInUse: false,
   ungroupSingleTabGroups: true,
   applyAutoGroupingToCurrentTabOnly: false,
+  sortGroupsAlphabetically: false,
   groupBy: "domain" as const,
 };
