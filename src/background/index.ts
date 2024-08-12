@@ -3,7 +3,7 @@ import { addTabAccessesListener } from "./TabActivityTracker";
 import { activateTabCleanerScheduler } from "./TabCleanerScheduler";
 
 if (import.meta.env.DEV) {
-  chrome.action.setBadgeText({ text: 'DEV' });
+  chrome.action.setBadgeText({ text: "DEV" });
 }
 
 // TabActivityTracker
