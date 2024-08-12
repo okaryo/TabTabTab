@@ -190,6 +190,7 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
             >
               {tabGroupColors.map((color) => (
                 <TabGroupColorRadio
+                  key={color}
                   color={color}
                   checked={group.color === color}
                   onClick={(event) => {

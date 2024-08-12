@@ -43,7 +43,11 @@ const RestorePage = (props: RestorePageProps) => {
         onChange={onChangePage}
       >
         {pages.map((page) => (
-          <ToggleButton value={page.value} style={{ textTransform: "none" }}>
+          <ToggleButton
+            key={page.value}
+            value={page.value}
+            style={{ textTransform: "none" }}
+          >
             {page.label}
           </ToggleButton>
         ))}

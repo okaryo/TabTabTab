@@ -122,7 +122,7 @@ const App = () => {
               }}
             >
               {pages.map((page, index) => (
-                <ListItem disablePadding>
+                <ListItem key={page.name} disablePadding>
                   <ListItemButton
                     key={page.name}
                     sx={{ py: 1, pl: 2, pr: 6 }}
