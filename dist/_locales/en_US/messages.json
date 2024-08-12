@@ -279,6 +279,10 @@
     "message": "When on, newly opened tabs from the current one, such as links or bookmarks, won't be auto-grouped.",
     "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
   },
+  "tab_grouping_sort_groups_alphabetically": {
+    "message": "Sort Groups Alphabetically",
+    "description": "Label for sorting groups."
+  },
   "tab_grouping_group_tabs_by": {
     "message": "Group Tabs By",
     "description": "Label for selecting the criterion for tab grouping."

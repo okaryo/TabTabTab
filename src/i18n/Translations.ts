@@ -316,6 +316,9 @@ class Translations {
       "tab_grouping_apply_auto_grouping_to_current_tab_only_description",
     );
   }
+  get tabGroupingSortGroupsAlphabetically() {
+    return chrome.i18n.getMessage("tab_grouping_sort_groups_alphabetically");
+  }
   get tabGroupingGroupTabsBy() {
     return chrome.i18n.getMessage("tab_grouping_group_tabs_by");
   }

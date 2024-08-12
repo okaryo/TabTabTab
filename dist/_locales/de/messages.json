@@ -279,6 +279,10 @@
     "message": "Wenn aktiviert, werden neu geöffnete Tabs vom aktuellen Tab, wie Links oder Lesezeichen, nicht automatisch gruppiert.",
     "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
   },
+  "tab_grouping_sort_groups_alphabetically": {
+    "message": "Gruppen alphabetisch sortieren",
+    "description": "Label for sorting groups."
+  },
   "tab_grouping_group_tabs_by": {
     "message": "Tabs gruppieren nach",
     "description": "Label for selecting the criterion for tab grouping."
