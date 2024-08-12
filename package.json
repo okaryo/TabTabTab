@@ -8,14 +8,14 @@
     "build": "vite build",
     "test": "vitest run",
     "check": "biome check .",
-    "check:fix": "biome check --apply-unsafe .",
+    "check:fix": "biome check --write --unsafe .",
     "check:ci": "biome ci .",
     "locale-lint": "chromex-locale-lint --localesDir dist/_locales --strict"
   },
   "author": "okaryo",
   "license": "MIT",
   "devDependencies": {
-    "@biomejs/biome": "1.6.3",
+    "@biomejs/biome": "1.8.3",
     "@types/chrome": "^0.0.269",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
