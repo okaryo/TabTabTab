@@ -5,6 +5,7 @@ import {
 } from "../../model/TabGroupSetting";
 
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
+import { sortGroupsAlphabetically } from "./TabGroupRepository";
 
 export const getTabGroupSetting = async (): Promise<TabGroupSetting> => {
   const setting = await ChromeLocalStorage.getTabGroupSetting();
@@ -46,11 +47,16 @@ export const groupTabsBySetting = async (setting: TabGroupSetting) => {
       const containsActiveTab = tabs.some((tab) => tab.active);
       const groupId = await chrome.tabs.group({
         tabIds: tabs.map((tab) => tab.id),
+        createProperties: { windowId: window.id },
       });
       await chrome.tabGroups.update(groupId, { title: groupName });
       if (setting.collapseWhenNoInUse && !containsActiveTab) {
         await chrome.tabGroups.update(groupId, { collapsed: true });
       }
+    }
+
+    if (setting.sortGroupsAlphabetically) {
+      await sortGroupsAlphabetically(window.id);
     }
   }
 };

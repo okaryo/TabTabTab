@@ -1,4 +1,5 @@
 import { parse } from "tldts";
+import { sortGroupsAlphabetically } from "../data/repository/TabGroupRepository";
 import { getTabGroupSetting } from "../data/repository/TabGroupSettingRepository";
 import type { TabGroupSetting } from "../model/TabGroupSetting";
 
@@ -54,6 +55,13 @@ const organizeTabsByGroupingRule = async (
 
   if (setting.ungroupSingleTabGroups) {
     await ungroupSingleTabGroups(tab.windowId);
+  }
+
+  if (setting.sortGroupsAlphabetically) {
+    const windows = await chrome.windows.getAll({ windowTypes: ["normal"] });
+    for (const window of windows) {
+      await sortGroupsAlphabetically(window.id);
+    }
   }
 };
 

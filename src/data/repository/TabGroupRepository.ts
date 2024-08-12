@@ -169,6 +169,34 @@ export const removeListenerOnChangeStoredTabGroups = (
   ChromeLocalStorage.removeListenerOnChange(listener);
 };
 
+export const sortGroupsAlphabetically = async (windowId: number) => {
+  const allGroups = await chrome.tabGroups.query({ windowId });
+
+  const groupSizeMap = {};
+  for (const group of allGroups) {
+    const tabsInGroup = await chrome.tabs.query({ groupId: group.id });
+    groupSizeMap[group.id] = tabsInGroup.length;
+  }
+
+  const sortedGroups = allGroups.sort((a, b) => a.title.localeCompare(b.title));
+  const pinnedCount = await getPinnedTabsCount(windowId);
+  let currentIndex = pinnedCount;
+
+  try {
+    for (const group of sortedGroups) {
+      await chrome.tabGroups.move(group.id, { index: currentIndex });
+      currentIndex += groupSizeMap[group.id];
+    }
+  } catch (error) {
+    console.error(error);
+  }
+};
+
+const getPinnedTabsCount = async (windowId: number) => {
+  const pinnedTabs = await chrome.tabs.query({ windowId, pinned: true });
+  return pinnedTabs.length;
+};
+
 const transformSerializedStoredTabGroupToModel = (
   group: ChromeLocalStorage.SerializedStoredTabGroup,
 ): StoredTabGroup => {
