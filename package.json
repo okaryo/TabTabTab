@@ -4,7 +4,7 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite build --watch --mode development",
+    "dev": "NODE_ENV=development vite build --watch --mode development",
     "build": "vite build",
     "test": "vitest run",
     "check": "biome check .",
