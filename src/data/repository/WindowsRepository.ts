@@ -243,6 +243,50 @@ export const removeStoredWindow = async (id: string): Promise<void> => {
   );
 };
 
+export const removeItemFromStoredWindow = async (
+  windowId: string,
+  itemId: string,
+) => {
+  const storedWindows = await ChromeLocalStorage.getStoredWindows();
+  const updatedWindows = storedWindows
+    .map((window) => {
+      if (window.internalUid === windowId) {
+        const updatedChildren = window.children
+          .map((child) => {
+            if (child.internalUid === itemId) {
+              return null;
+            }
+
+            if ("children" in child) {
+              const updatedNestedChildren = child.children.filter(
+                (nestedChild) => nestedChild.internalUid !== itemId,
+              );
+              return {
+                ...child,
+                children: updatedNestedChildren,
+              };
+            }
+
+            return child;
+          })
+          .filter(
+            (child) =>
+              child && (!("children" in child) || child.children.length > 0),
+          );
+
+        return {
+          ...window,
+          children: updatedChildren,
+        };
+      }
+
+      return window;
+    })
+    .filter((window) => window.children.length > 0);
+
+  await ChromeLocalStorage.updateStoredWindows(updatedWindows);
+};
+
 export const restoreWindow = async (
   storedWindow: StoredWindow,
 ): Promise<void> => {

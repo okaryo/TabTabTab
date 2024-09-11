@@ -1,5 +1,5 @@
 import type { StoredTab, Tab } from "./Tab";
-import type { Window, WindowId } from "./Window";
+import type { StoredWindow, Window, WindowId } from "./Window";
 
 export type TabContainerId = TabGroupId | PinnedId;
 export type TabContainer = {
@@ -114,10 +114,58 @@ export const adjacentToTabContainerAfter = (
     : false;
 };
 
+export const isStoredPinned = (
+  container: StoredTabContainer,
+): container is StoredPinned => {
+  return container.type === "pinned";
+};
+
 export const isStoredTabGroup = (
   container: StoredTabContainer,
 ): container is StoredTabGroup => {
   return container.type === "tabGroup";
+};
+
+export const adjacentToStoredTabContainerBefore = (
+  window: StoredWindow,
+  id: string,
+) => {
+  const currentIndexInWindow = window.children.findIndex(
+    (child) => child.internalUid === id,
+  );
+  if (currentIndexInWindow === -1 || currentIndexInWindow === 0) {
+    return false;
+  }
+
+  return isStoredTabContainer(window.children[currentIndexInWindow - 1]);
+};
+
+export const adjacentToStoredTabContainerAfter = (
+  window: StoredWindow,
+  id: string,
+) => {
+  const currentIndexInWindow = window.children.findIndex(
+    (child) => child.internalUid === id,
+  );
+  if (
+    currentIndexInWindow === -1 ||
+    currentIndexInWindow === window.children.length - 1
+  ) {
+    return false;
+  }
+
+  return isStoredTabContainer(window.children[currentIndexInWindow + 1]);
+};
+
+const isStoredTabContainer = (
+  value: StoredTab | StoredTabContainer,
+): value is StoredTabContainer => {
+  return (
+    "internalUid" in value &&
+    "children" in value &&
+    "type" in value &&
+    (value.type === "pinned" || value.type === "tabGroup")
+  );
 };
 
 export const tabGroupColors: TabGroupColor[] = [
