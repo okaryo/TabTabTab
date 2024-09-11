@@ -4,23 +4,20 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
-import { removeTabFromStoredTabGroup } from "../../../data/repository/TabGroupRepository";
 import { createNewTab } from "../../../data/repository/TabsRepository";
 import type { StoredTab } from "../../../model/Tab";
-import type { StoredTabGroup } from "../../../model/TabContainer";
 import TabFavicon from "../TabFavicon";
 
 type StoredGridTabItemProps = {
-  group: StoredTabGroup;
   tab: StoredTab;
+  onDeleteItem: () => void;
 };
 
 export const StoredTabItem = (props: StoredGridTabItemProps) => {
-  const { group, tab } = props;
+  const { tab, onDeleteItem } = props;
   const [isHovered, setIsHovered] = useState(false);
   const onClickTabItem = () => createNewTab(tab.url.toString());
-  const onClickDeleteIcon = () =>
-    removeTabFromStoredTabGroup(group.internalUid, tab.internalUid);
+  const onClickDeleteIcon = () => onDeleteItem();
 
   return (
     <ListItem

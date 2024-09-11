@@ -19,6 +19,7 @@ import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
   removeStoredTabGroup,
+  removeTabFromStoredTabGroup,
   restoreTabGroup,
   updateStoredTabGroupColor,
   updateStoredTabGroupName,
@@ -224,8 +225,14 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
       </AccordionSummary>
       <AccordionDetails style={{ padding: 0 }}>
         <List dense disablePadding>
-          {group.children.map((tab, _index) => (
-            <StoredTabItem group={group} tab={tab} key={tab.internalUid} />
+          {group.children.map((tab) => (
+            <StoredTabItem
+              key={tab.internalUid}
+              tab={tab}
+              onDeleteItem={() =>
+                removeTabFromStoredTabGroup(group.internalUid, tab.internalUid)
+              }
+            />
           ))}
         </List>
       </AccordionDetails>

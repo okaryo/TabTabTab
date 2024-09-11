@@ -1,4 +1,5 @@
 import type {
+  StoredPinned,
   StoredTabGroup,
   TabGroup,
   TabGroupColor,
@@ -153,6 +154,17 @@ export const removeTabFromStoredTabGroup = async (
     .filter((group) => group.children.length > 0);
 
   await ChromeLocalStorage.updateStoredTabGroups(updatedTabGroups);
+};
+
+export const restorePinned = async (pinned: StoredPinned): Promise<void> => {
+  const createTabPromises = pinned.children.map((tab) =>
+    chrome.tabs.create({
+      url: tab.url.toString(),
+      active: false,
+      pinned: true,
+    }),
+  );
+  await Promise.all(createTabPromises);
 };
 
 export const restoreTabGroup = async (
