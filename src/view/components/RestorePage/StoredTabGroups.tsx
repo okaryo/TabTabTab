@@ -10,10 +10,10 @@ import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Unstable_Grid2";
 import { grey } from "@mui/material/colors";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -30,7 +30,7 @@ import {
 } from "../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import TabGroupColorRadio from "../TabGroupColorRadio";
-import { StoredGridTabItem } from "./StoredGridItem";
+import { StoredTabItem } from "./StoredTabItem";
 
 type StoredTabGroupsProps = {
   dense: boolean;
@@ -222,18 +222,12 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
           </IconButton>
         </Stack>
       </AccordionSummary>
-      <AccordionDetails style={{ padding: theme.spacing(dense ? 1 : 2) }}>
-        <Grid container spacing={dense ? 1 : 2}>
-          {group.children.map((tab) => (
-            <StoredGridTabItem
-              key={tab.internalUid}
-              tab={tab}
-              xsSize={6}
-              mdSize={4}
-              dense={dense}
-            />
+      <AccordionDetails style={{ padding: 0 }}>
+        <List dense disablePadding>
+          {group.children.map((tab, _index) => (
+            <StoredTabItem group={group} tab={tab} key={tab.internalUid} />
           ))}
-        </Grid>
+        </List>
       </AccordionDetails>
     </OutlinedAccordion>
   );

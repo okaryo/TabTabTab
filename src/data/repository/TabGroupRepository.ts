@@ -135,6 +135,26 @@ export const removeStoredTabGroup = async (id: string): Promise<void> => {
   );
 };
 
+export const removeTabFromStoredTabGroup = async (
+  groupId: string,
+  tabId: string,
+) => {
+  const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
+  const updatedTabGroups = storedTabGroups
+    .map((group) => {
+      if (group.internalUid === groupId) {
+        return {
+          ...group,
+          children: group.children.filter((tab) => tab.internalUid !== tabId),
+        };
+      }
+      return group;
+    })
+    .filter((group) => group.children.length > 0);
+
+  await ChromeLocalStorage.updateStoredTabGroups(updatedTabGroups);
+};
+
 export const restoreTabGroup = async (
   tabGroup: StoredTabGroup,
 ): Promise<void> => {

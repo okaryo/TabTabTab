@@ -78,6 +78,10 @@ export const duplicateTab = async (tabId: number) => {
   });
 };
 
+export const createNewTab = (url: string) => {
+  return chrome.tabs.create({ url });
+};
+
 export const createNewTabNext = async (tabId: number) => {
   const tab = await chrome.tabs.get(tabId);
   return chrome.tabs.create({
