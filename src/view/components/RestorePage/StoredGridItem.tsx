@@ -1,12 +1,12 @@
 import PushPin from "@mui/icons-material/PushPin";
 import Chip from "@mui/material/Chip";
 import type { GridSize } from "@mui/material/Grid";
+import Grid from "@mui/material/Grid2";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import Grid from "@mui/material/Unstable_Grid2";
 import { useTheme } from "@mui/material/styles";
 
 import t from "../../../i18n/Translations";
@@ -33,7 +33,7 @@ export const StoredGridTabContainerItem = (
   const isTabGroup = isStoredTabGroup(container);
 
   return (
-    <Grid xs={xsSize} md={mdSize}>
+    <Grid size={{ xs: xsSize, md: mdSize }}>
       <Paper variant="outlined" sx={{ display: "flex", height: "100%" }}>
         <ListItem sx={{ gap: 2, py: dense ? 0.5 : 1, px: dense ? 1 : 2 }}>
           <ListItemText
