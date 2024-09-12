@@ -364,6 +364,9 @@ export const PopupHeaderActionMenu = (props: PopupHeaderActionMenuProps) => {
       action: () => navigateToOptionsPage(),
     },
     {
+      type: "Divider",
+    },
+    {
       type: "MenuItem",
       label: t.rateAndReview,
       icon: <RateReviewIcon fontSize="small" />,

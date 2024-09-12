@@ -9,7 +9,6 @@ import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
-import Grid from "@mui/material/Grid2";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
