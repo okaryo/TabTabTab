@@ -123,9 +123,25 @@
     "message": "Otwórz panel boczny",
     "description": "Action text to open the side panel."
   },
+  "close_side_panel": {
+    "message": "Zamknij panel boczny",
+    "description": "Action text to close the side panel."
+  },
   "open_dashboard": {
     "message": "Otwórz pulpit nawigacyjny",
     "description": "Action text to open the dashboard."
+  },
+  "rate_and_review": {
+    "message": "Oceń i zrecenzuj",
+    "description": "Action text to open the store review page."
+  },
+  "join_discussions": {
+    "message": "Dołącz do dyskusji",
+    "description": "Action text to open GitHub Discussions page."
+  },
+  "sponsor_project": {
+    "message": "Wesprzyj projekt",
+    "description": "Action text to open Sponsor page."
   },
   "copy_url": {
     "message": "Skopiuj URL",

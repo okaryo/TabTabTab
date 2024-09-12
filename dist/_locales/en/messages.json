@@ -123,9 +123,25 @@
     "message": "Open SidePanel",
     "description": "Action text to open the side panel."
   },
+  "close_side_panel": {
+    "message": "Close SidePanel",
+    "description": "Action text to close the side panel."
+  },
   "open_dashboard": {
     "message": "Open Dashboard",
     "description": "Action text to open the dashboard."
+  },
+  "rate_and_review": {
+    "message": "Rate & Review",
+    "description": "Action text to open the store review page."
+  },
+  "join_discussions": {
+    "message": "Join Discussions",
+    "description": "Action text to open GitHub Discussions page."
+  },
+  "sponsor_project": {
+    "message": "Sponsor Project",
+    "description": "Action text to open Sponsor page."
   },
   "copy_url": {
     "message": "Copy URL",
