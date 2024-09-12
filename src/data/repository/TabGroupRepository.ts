@@ -1,4 +1,5 @@
 import type {
+  StoredPinned,
   StoredTabGroup,
   TabGroup,
   TabGroupColor,
@@ -133,6 +134,37 @@ export const removeStoredTabGroup = async (id: string): Promise<void> => {
   await ChromeLocalStorage.updateStoredTabGroups(
     storedTabGroups.filter((group) => group.internalUid !== id),
   );
+};
+
+export const removeTabFromStoredTabGroup = async (
+  groupId: string,
+  tabId: string,
+) => {
+  const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
+  const updatedTabGroups = storedTabGroups
+    .map((group) => {
+      if (group.internalUid === groupId) {
+        return {
+          ...group,
+          children: group.children.filter((tab) => tab.internalUid !== tabId),
+        };
+      }
+      return group;
+    })
+    .filter((group) => group.children.length > 0);
+
+  await ChromeLocalStorage.updateStoredTabGroups(updatedTabGroups);
+};
+
+export const restorePinned = async (pinned: StoredPinned): Promise<void> => {
+  const createTabPromises = pinned.children.map((tab) =>
+    chrome.tabs.create({
+      url: tab.url.toString(),
+      active: false,
+      pinned: true,
+    }),
+  );
+  await Promise.all(createTabPromises);
 };
 
 export const restoreTabGroup = async (

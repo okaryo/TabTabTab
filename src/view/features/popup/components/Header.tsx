@@ -5,7 +5,6 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
-import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
 import SyncIcon from "@mui/icons-material/Sync";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
@@ -15,7 +14,6 @@ import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { alpha, styled } from "@mui/material/styles";
 import { useContext, useState } from "react";
-import { navigateToOptionsPage } from "../../../../data/repository/SettingsRepository";
 import { updateMode } from "../../../../data/repository/ThemeRepository";
 import t from "../../../../i18n/Translations";
 import { PopupHeaderActionMenu } from "../../../components/ActionMenu";
@@ -90,24 +88,15 @@ const Header = (props: HeaderProps) => {
         >
           {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
         </IconButton>
-        {sidePanel && (
-          <IconButton color="inherit" onClick={() => navigateToOptionsPage()}>
-            <SpaceDashboardIcon />
-          </IconButton>
-        )}
-        {!sidePanel && (
-          <>
-            <IconButton color="inherit" onClick={onClickActionMenu}>
-              <MoreVertIcon />
-            </IconButton>
-
-            <PopupHeaderActionMenu
-              isOpenMenu={Boolean(menuAnchorElement)}
-              anchorElement={menuAnchorElement}
-              onCloseMenu={onCloseMenu}
-            />
-          </>
-        )}
+        <IconButton color="inherit" onClick={onClickActionMenu}>
+          <MoreVertIcon />
+        </IconButton>
+        <PopupHeaderActionMenu
+          isOpenMenu={Boolean(menuAnchorElement)}
+          anchorElement={menuAnchorElement}
+          onCloseMenu={onCloseMenu}
+          sidePanel={sidePanel}
+        />
       </>
     );
   };

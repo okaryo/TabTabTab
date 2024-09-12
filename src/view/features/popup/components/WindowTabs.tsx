@@ -69,7 +69,7 @@ const WindowTabs = (props: WindowTabsProps) => {
             opacity: 1,
             zIndex: 10,
           },
-          "& .MuiTabScrollButton-horizontal:first-child": {
+          "& .MuiTabScrollButton-horizontal:first-of-child": {
             left: 0,
             ml: 0.5,
           },

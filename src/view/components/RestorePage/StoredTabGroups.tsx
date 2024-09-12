@@ -11,6 +11,7 @@ import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid2";
 import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -19,6 +20,7 @@ import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
   removeStoredTabGroup,
+  removeTabFromStoredTabGroup,
   restoreTabGroup,
   updateStoredTabGroupColor,
   updateStoredTabGroupName,
@@ -30,7 +32,7 @@ import {
 } from "../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import TabGroupColorRadio from "../TabGroupColorRadio";
-import { StoredGridTabItem } from "./StoredGridItem";
+import { StoredTabItem } from "./StoredTabItem";
 
 type StoredTabGroupsProps = {
   dense: boolean;
@@ -222,18 +224,18 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
           </IconButton>
         </Stack>
       </AccordionSummary>
-      <AccordionDetails style={{ padding: theme.spacing(dense ? 1 : 2) }}>
-        <Grid container spacing={dense ? 1 : 2}>
+      <AccordionDetails style={{ padding: 0 }}>
+        <List dense disablePadding>
           {group.children.map((tab) => (
-            <StoredGridTabItem
+            <StoredTabItem
               key={tab.internalUid}
               tab={tab}
-              xsSize={6}
-              mdSize={4}
-              dense={dense}
+              onDeleteItem={() =>
+                removeTabFromStoredTabGroup(group.internalUid, tab.internalUid)
+              }
             />
           ))}
-        </Grid>
+        </List>
       </AccordionDetails>
     </OutlinedAccordion>
   );

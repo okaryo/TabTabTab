@@ -123,9 +123,25 @@
     "message": "Ouvrir le panneau latéral",
     "description": "Action text to open the side panel."
   },
+  "close_side_panel": {
+    "message": "Fermer le panneau latéral",
+    "description": "Action text to close the side panel."
+  },
   "open_dashboard": {
     "message": "Ouvrir le tableau de bord",
     "description": "Action text to open the dashboard."
+  },
+  "rate_and_review": {
+    "message": "Évaluer et commenter",
+    "description": "Action text to open the store review page."
+  },
+  "join_discussions": {
+    "message": "Rejoindre les discussions",
+    "description": "Action text to open GitHub Discussions page."
+  },
+  "sponsor_project": {
+    "message": "Soutenir le projet",
+    "description": "Action text to open Sponsor page."
   },
   "copy_url": {
     "message": "Copier l'URL",

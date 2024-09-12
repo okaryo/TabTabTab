@@ -11,6 +11,7 @@ import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import Grid from "@mui/material/Grid2";
 import IconButton from "@mui/material/IconButton";
+import List from "@mui/material/List";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
@@ -18,6 +19,7 @@ import { grey } from "@mui/material/colors";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
+  removeItemFromStoredWindow,
   removeStoredWindow,
   restoreWindow,
   updateStoredWindowName,
@@ -25,10 +27,8 @@ import {
 import t from "../../../i18n/Translations";
 import type { StoredWindow } from "../../../model/Window";
 import { StoredWindowsContext } from "../../contexts/StoredWindowsContext";
-import {
-  StoredGridTabContainerItem,
-  StoredGridTabItem,
-} from "./StoredGridItem";
+import { StoredTabItem } from "./StoredTabItem";
+import { StoredTabItemContainer } from "./StoredTabItemContainer";
 
 type StoredWindowsProps = {
   dense?: boolean;
@@ -64,7 +64,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   const { window, index, dense } = props;
-  const theme = useTheme();
+  const _theme = useTheme();
   const editWindowNameFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
   const [expanded, setExpanded] = useState(index === 0);
@@ -177,32 +177,34 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
           </IconButton>
         </Stack>
       </AccordionSummary>
-      <AccordionDetails style={{ padding: theme.spacing(dense ? 1 : 2) }}>
-        <Grid container alignItems="stretch" spacing={dense ? 1 : 2}>
+      <AccordionDetails style={{ padding: 0 }}>
+        <List dense disablePadding>
           {window.children.map((child) => {
             if ("children" in child) {
               return (
-                <StoredGridTabContainerItem
+                <StoredTabItemContainer
                   key={child.internalUid}
+                  window={window}
                   container={child}
-                  xsSize={6}
-                  mdSize={4}
-                  dense={dense}
+                  onDeleteItem={removeItemFromStoredWindow}
                 />
               );
             }
 
             return (
-              <StoredGridTabItem
-                key={child.internalUid}
+              <StoredTabItem
                 tab={child}
-                xsSize={6}
-                mdSize={4}
-                dense={dense}
+                onDeleteItem={() =>
+                  removeItemFromStoredWindow(
+                    window.internalUid,
+                    child.internalUid,
+                  )
+                }
+                key={child.internalUid}
               />
             );
           })}
-        </Grid>
+        </List>
       </AccordionDetails>
     </OutlinedAccordion>
   );

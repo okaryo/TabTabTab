@@ -123,9 +123,25 @@
     "message": "Отвори страничния панел",
     "description": "Action text to open the side panel."
   },
+  "close_side_panel": {
+    "message": "Затвори страничния панел",
+    "description": "Action text to close the side panel."
+  },
   "open_dashboard": {
     "message": "Отвори таблото",
     "description": "Action text to open the dashboard."
+  },
+  "rate_and_review": {
+    "message": "Оценете и прегледайте",
+    "description": "Action text to open the store review page."
+  },
+  "join_discussions": {
+    "message": "Присъединете се към дискусиите",
+    "description": "Action text to open GitHub Discussions page."
+  },
+  "sponsor_project": {
+    "message": "Спонсорирайте проекта",
+    "description": "Action text to open Sponsor page."
   },
   "copy_url": {
     "message": "Копирай линк",

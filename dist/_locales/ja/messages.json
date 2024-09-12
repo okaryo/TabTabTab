@@ -123,9 +123,25 @@
     "message": "サイドパネルを開く",
     "description": "Action text to open the side panel."
   },
+  "close_side_panel": {
+    "message": "サイドパネルを閉じる",
+    "description": "Action text to close the side panel."
+  },
   "open_dashboard": {
     "message": "ダッシュボードを開く",
     "description": "Action text to open the dashboard."
+  },
+  "rate_and_review": {
+    "message": "評価とレビュー",
+    "description": "Action text to open the store review page."
+  },
+  "join_discussions": {
+    "message": "ディスカッションに参加",
+    "description": "Action text to open GitHub Discussions page."
+  },
+  "sponsor_project": {
+    "message": "スポンサーになる",
+    "description": "Action text to open Sponsor page."
   },
   "copy_url": {
     "message": "リンクをコピー",

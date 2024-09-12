@@ -3,13 +3,16 @@ import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
 import CropFreeIcon from "@mui/icons-material/CropFree";
+import ForumIcon from "@mui/icons-material/Forum";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputIcon from "@mui/icons-material/Input";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PushPinIcon from "@mui/icons-material/PushPin";
-import SpaceDashboardIcon from "@mui/icons-material/SpaceDashboard";
+import RateReviewIcon from "@mui/icons-material/RateReview";
+import SpaceDashboardOutlinedIcon from "@mui/icons-material/SpaceDashboard";
 import SyncIcon from "@mui/icons-material/Sync";
+import VolunteerActivismIcon from "@mui/icons-material/VolunteerActivism";
 import Divider from "@mui/material/Divider";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
@@ -29,6 +32,7 @@ import {
 import {
   addTabToNewGroup,
   closeTabs,
+  createNewTab,
   createNewTabInGroup,
   createNewTabInWindow,
   createNewTabNext,
@@ -300,12 +304,37 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   );
 };
 
-type PopupHeaderActionMenuProps = Omit<ActionMenuProps, "items">;
+type PopupHeaderActionMenuProps = Omit<ActionMenuProps, "items"> & {
+  sidePanel: boolean;
+};
 export const PopupHeaderActionMenu = (props: PopupHeaderActionMenuProps) => {
-  const { isOpenMenu, anchorElement, onCloseMenu } = props;
+  const { isOpenMenu, anchorElement, onCloseMenu, sidePanel } = props;
 
   const items: ActionMenuItemAttrs[] = [
-    {
+    sidePanel && {
+      type: "MenuItem",
+      label: t.closeSidePanel,
+      icon: (
+        <SvgIcon fontSize="small">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            role="img"
+            aria-label="CloseSidePanel"
+            height="24"
+            width="24"
+            viewBox="0 -960 960 960"
+            fill="currentColor"
+          >
+            <path d="M300-640v320l160-160-160-160ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm360-80v-560H200v560h360Z" />
+          </svg>
+        </SvgIcon>
+      ),
+      action: async () => {
+        await openSidePanel();
+        window.close();
+      },
+    },
+    !sidePanel && {
       type: "MenuItem",
       label: t.openSidePanel,
       icon: (
@@ -313,13 +342,13 @@ export const PopupHeaderActionMenu = (props: PopupHeaderActionMenuProps) => {
           <svg
             xmlns="http://www.w3.org/2000/svg"
             role="img"
-            aria-label="SidePanel"
+            aria-label="OpenSidePanel"
             height="24"
-            viewBox="0 -960 960 960"
             width="24"
+            viewBox="0 -960 960 960"
             fill="currentColor"
           >
-            <path d="M200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm360-80v-560H200v560h360Z" />
+            <path d="M460-320v-320L300-480l160 160ZM200-120q-33 0-56.5-23.5T120-200v-560q0-33 23.5-56.5T200-840h560q33 0 56.5 23.5T840-760v560q0 33-23.5 56.5T760-120H200Zm360-80v-560H200v560h360Z" />
           </svg>
         </SvgIcon>
       ),
@@ -331,8 +360,30 @@ export const PopupHeaderActionMenu = (props: PopupHeaderActionMenuProps) => {
     {
       type: "MenuItem",
       label: t.openDashboard,
-      icon: <SpaceDashboardIcon fontSize="small" />,
+      icon: <SpaceDashboardOutlinedIcon fontSize="small" />,
       action: () => navigateToOptionsPage(),
+    },
+    {
+      type: "MenuItem",
+      label: t.rateAndReview,
+      icon: <RateReviewIcon fontSize="small" />,
+      action: () =>
+        createNewTab(
+          "https://chromewebstore.google.com/detail/tabtabtab-all-in-one-tab/hfmnidllojimehmfjkclnadpebibhgoi/reviews",
+        ),
+    },
+    {
+      type: "MenuItem",
+      label: t.joinDiscussions,
+      icon: <ForumIcon fontSize="small" />,
+      action: () =>
+        createNewTab("https://github.com/okaryo/TabTabTab/discussions"),
+    },
+    {
+      type: "MenuItem",
+      label: t.sponsorProject,
+      icon: <VolunteerActivismIcon fontSize="small" />,
+      action: () => createNewTab("https://www.buymeacoffee.com/okaryo"),
     },
   ];
 
