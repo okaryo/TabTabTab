@@ -105,8 +105,20 @@ class Translations {
   get openSidePanel() {
     return chrome.i18n.getMessage("open_side_panel");
   }
+  get closeSidePanel() {
+    return chrome.i18n.getMessage("close_side_panel");
+  }
   get openDashboard() {
     return chrome.i18n.getMessage("open_dashboard");
+  }
+  get rateAndReview() {
+    return chrome.i18n.getMessage("rate_and_review");
+  }
+  get joinDiscussions() {
+    return chrome.i18n.getMessage("join_discussions");
+  }
+  get sponsorProject() {
+    return chrome.i18n.getMessage("sponsor_project");
   }
   get copyUrl() {
     return chrome.i18n.getMessage("copy_url");

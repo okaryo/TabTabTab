@@ -123,9 +123,25 @@
     "message": "사이드 패널 열기",
     "description": "Action text to open the side panel."
   },
+  "close_side_panel": {
+    "message": "사이드 패널 닫기",
+    "description": "Action text to close the side panel."
+  },
   "open_dashboard": {
     "message": "대시보드 열기",
     "description": "Action text to open the dashboard."
+  },
+  "rate_and_review": {
+    "message": "평가 및 리뷰",
+    "description": "Action text to open the store review page."
+  },
+  "join_discussions": {
+    "message": "토론 참여",
+    "description": "Action text to open GitHub Discussions page."
+  },
+  "sponsor_project": {
+    "message": "프로젝트 후원",
+    "description": "Action text to open Sponsor page."
   },
   "copy_url": {
     "message": "URL 복사",
