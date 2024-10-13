@@ -46,6 +46,7 @@ import {
 import {
   closeWindow,
   saveWindow,
+  saveWindows,
 } from "../../data/repository/WindowsRepository";
 import t from "../../i18n/Translations";
 import type { Tab } from "../../model/Tab";
@@ -255,8 +256,10 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   const { windows, currentIndex, isOpenMenu, anchorElement, onCloseMenu } =
     props;
   const window = windows[currentIndex];
-  const isFirstWindow = currentIndex === 0;
-  const isLastWindow = currentIndex === windows.length - 1;
+  const hasMultipleWindows = windows.length > 1;
+  const hasWindowOnRightSide =
+    hasMultipleWindows && currentIndex !== windows.length - 1;
+  const hasWindowOnLeftSide = hasMultipleWindows && currentIndex !== 0;
 
   const items: ActionMenuItemAttrs[] = [
     {
@@ -271,13 +274,19 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
       icon: <SyncIcon fontSize="small" />,
       action: () => saveWindow(window),
     },
-    !isLastWindow && {
+    hasMultipleWindows && {
+      type: "MenuItem",
+      label: t.saveAllWindows,
+      icon: <SyncIcon fontSize="small" />,
+      action: () => saveWindows(windows),
+    },
+    hasWindowOnRightSide && {
       type: "MenuItem",
       label: t.mergeRightWindow,
       icon: <InputIcon fontSize="small" sx={{ transform: "scaleX(-1)" }} />,
       action: () => mergeWindow(window.id, windows[currentIndex + 1]),
     },
-    !isFirstWindow && {
+    hasWindowOnLeftSide && {
       type: "MenuItem",
       label: t.mergeLeftWindow,
       icon: <InputIcon fontSize="small" />,
