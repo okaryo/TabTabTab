@@ -27,6 +27,10 @@
     "message": "Zapisz okno",
     "description": "Text used to display the action for save a window"
   },
+  "save_all_windows": {
+    "message": "Zapisz wszystkie okna",
+    "description": "Text used to display the action for save all windows"
+  },
   "merge_right_window": {
     "message": "Scal z prawą",
     "description": "Text used to display the action for merge a right window"

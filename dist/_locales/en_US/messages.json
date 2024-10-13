@@ -27,6 +27,10 @@
     "message": "Save Window",
     "description": "Text used to display the action for save a window"
   },
+  "save_all_windows": {
+    "message": "Save All Windows",
+    "description": "Text used to display the action for save all windows"
+  },
   "merge_right_window": {
     "message": "Merge Right",
     "description": "Text used to display the action for merge a right window"

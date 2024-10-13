@@ -17,6 +17,9 @@ class Translations {
   get saveWindow() {
     return chrome.i18n.getMessage("save_window");
   }
+  get saveAllWindows() {
+    return chrome.i18n.getMessage("save_all_windows");
+  }
   get mergeRightWindow() {
     return chrome.i18n.getMessage("merge_right_window");
   }
