@@ -46,6 +46,7 @@ import {
 import {
   closeWindow,
   saveWindow,
+  saveWindows,
 } from "../../data/repository/WindowsRepository";
 import t from "../../i18n/Translations";
 import type { Tab } from "../../model/Tab";
@@ -257,6 +258,7 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
   const window = windows[currentIndex];
   const isFirstWindow = currentIndex === 0;
   const isLastWindow = currentIndex === windows.length - 1;
+  const hasMultipleWindows = windows.length > 1;
 
   const items: ActionMenuItemAttrs[] = [
     {
@@ -270,6 +272,12 @@ export const WindowActionMenu = (props: WindowActionMenuProps) => {
       label: t.saveWindow,
       icon: <SyncIcon fontSize="small" />,
       action: () => saveWindow(window),
+    },
+    hasMultipleWindows && {
+      type: "MenuItem",
+      label: t.saveAllWindows,
+      icon: <SyncIcon fontSize="small" />,
+      action: () => saveWindows(windows),
     },
     !isLastWindow && {
       type: "MenuItem",
