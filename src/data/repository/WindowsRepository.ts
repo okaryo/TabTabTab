@@ -177,6 +177,12 @@ export const getStoredWindows = async (): Promise<StoredWindow[]> => {
   );
 };
 
+export const saveWindows = async (windows: Window[]): Promise<void> => {
+  for (const window of windows) {
+    await saveWindow(window);
+  }
+};
+
 export const saveWindow = async (window: Window): Promise<void> => {
   const storedWindows = await ChromeLocalStorage.getStoredWindows();
 
