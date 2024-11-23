@@ -21,6 +21,7 @@ export const StoredTabItem = (props: StoredGridTabItemProps) => {
 
   return (
     <ListItem
+      title={tab.title}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
       secondaryAction={
