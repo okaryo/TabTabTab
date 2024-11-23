@@ -15,7 +15,7 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { grey } from "@mui/material/colors";
-import { alpha, styled, useTheme } from "@mui/material/styles";
+import { alpha, styled } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
   removeItemFromStoredWindow,
@@ -63,7 +63,6 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   const { window, index, dense } = props;
-  const _theme = useTheme();
   const editWindowNameFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
   const [expanded, setExpanded] = useState(index === 0);
