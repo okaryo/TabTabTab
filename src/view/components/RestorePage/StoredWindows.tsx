@@ -63,7 +63,6 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 
 const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   const { window, index, dense } = props;
-  const _theme = useTheme();
   const editWindowNameFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
   const [expanded, setExpanded] = useState(index === 0);
