@@ -28,6 +28,7 @@ const TabList = memo((props: TabListProps) => {
     if (isPinned(child)) {
       return (
         <PinnedContainer
+          key={child.id}
           pinned={child}
           collapsed={pinnedCollapsed}
           toggleCollapsed={() => setPinnedCollapsed(!pinnedCollapsed)}
