@@ -8,6 +8,7 @@ import SyncIcon from "@mui/icons-material/Sync";
 import MuiAccordion, { type AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -23,11 +24,13 @@ import {
   removeItemFromStoredWindow,
   removeStoredWindow,
   restoreWindow,
+  saveWindow,
   updateStoredWindowName,
 } from "../../../data/repository/WindowsRepository";
 import t from "../../../i18n/Translations";
 import type { StoredWindow } from "../../../model/Window";
 import { StoredWindowsContext } from "../../contexts/StoredWindowsContext";
+import { WindowsContext } from "../../contexts/WindowsContext";
 import { AddTabForm } from "./AddTabFrom";
 import { StoredTabItem } from "./StoredTabItem";
 import { StoredTabItemContainer } from "./StoredTabItemContainer";
@@ -258,15 +261,18 @@ const StoredWindows = (props: StoredWindowsProps) => {
   return (
     <>
       {sortedWindows.length > 0 && (
-        <Stack>
-          {sortedWindows.map((window, index) => (
-            <StoredWindowAccordion
-              key={window.internalUid}
-              window={window}
-              index={index}
-              dense={dense}
-            />
-          ))}
+        <Stack spacing={1}>
+          <SaveCurrentWindowButton />
+          <Stack>
+            {sortedWindows.map((window, index) => (
+              <StoredWindowAccordion
+                key={window.internalUid}
+                window={window}
+                index={index}
+                dense={dense}
+              />
+            ))}
+          </Stack>
         </Stack>
       )}
       {sortedWindows.length === 0 && (
@@ -288,10 +294,30 @@ const StoredWindows = (props: StoredWindowsProps) => {
             >
               {t.noStoredWindowDescription}
             </Typography>
+            <SaveCurrentWindowButton />
           </Stack>
         </Stack>
       )}
     </>
+  );
+};
+
+const SaveCurrentWindowButton = () => {
+  const { windows } = useContext(WindowsContext);
+  const currentWindow = windows.find((window) => window.focused);
+
+  const onClick = () => {
+    saveWindow(currentWindow);
+  };
+
+  return (
+    <Button
+      sx={{ textTransform: "none", width: "100%" }}
+      variant="contained"
+      onClick={onClick}
+    >
+      {t.saveCurrentWindow}
+    </Button>
   );
 };
 

@@ -51,6 +51,10 @@
     "message": "Po zapisaniu okna z listy, możesz je tutaj przywrócić.",
     "description": "Used to show when stored window is empty."
   },
+  "save_current_window": {
+    "message": "Zapisz bieżące okno",
+    "description": "Text used to display the action for save the current window"
+  },
   "new_tab_title_form_placeholder_to_stored": {
     "message": "Tytuł (automatycznie wypełniony z URL)",
     "description": "Text used to display the action for save a new tab to stored window/group"

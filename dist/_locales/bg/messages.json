@@ -51,6 +51,10 @@
     "message": "След като запазите прозорец от списъка, можете да го възстановите тук.",
     "description": "Used to show when stored window is empty."
   },
+  "save_current_window": {
+    "message": "Запазване на текущия прозорец",
+    "description": "Text used to display the action for save the current window"
+  },
   "new_tab_title_form_placeholder_to_stored": {
     "message": "Заглавие (автоматично попълнено от URL)",
     "description": "Text used to display the action for save a new tab to stored window/group"

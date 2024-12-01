@@ -35,6 +35,9 @@ class Translations {
   get noStoredWindowDescription() {
     return chrome.i18n.getMessage("no_stored_window_description");
   }
+  get saveCurrentWindow() {
+    return chrome.i18n.getMessage("save_current_window");
+  }
   get newTabTitleFormPlaceholderToStored() {
     return chrome.i18n.getMessage("new_tab_title_form_placeholder_to_stored");
   }

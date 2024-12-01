@@ -51,6 +51,10 @@
     "message": "목록에서 창을 저장하면 여기에서 복원할 수 있습니다.",
     "description": "Used to show when stored window is empty."
   },
+  "save_current_window": {
+    "message": "현재 창 저장",
+    "description": "Text used to display the action for save the current window"
+  },
   "new_tab_title_form_placeholder_to_stored": {
     "message": "제목 (URL에서 자동 입력됨)",
     "description": "Text used to display the action for save a new tab to stored window/group"

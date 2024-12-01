@@ -64,9 +64,11 @@ const App = () => {
       name: t.optionsNavigationRestore,
       icon: <SyncIcon />,
       content: (
-        <Container sx={{ p: 2 }} maxWidth="md">
-          <RestorePage />
-        </Container>
+        <WindowsProvider>
+          <Container sx={{ p: 2 }} maxWidth="md">
+            <RestorePage />
+          </Container>
+        </WindowsProvider>
       ),
     },
     {
