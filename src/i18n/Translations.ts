@@ -35,6 +35,9 @@ class Translations {
   get noStoredWindowDescription() {
     return chrome.i18n.getMessage("no_stored_window_description");
   }
+  get newTabTitleFormPlaceholderToStored() {
+    return chrome.i18n.getMessage("new_tab_title_form_placeholder_to_stored");
+  }
 
   // Grouped Tabs
   get pinned() {
@@ -95,6 +98,15 @@ class Translations {
   }
   get ago() {
     return chrome.i18n.getMessage("ago");
+  }
+  get url() {
+    return chrome.i18n.getMessage("url");
+  }
+  get cancel() {
+    return chrome.i18n.getMessage("cancel");
+  }
+  get add() {
+    return chrome.i18n.getMessage("add");
   }
   get searchTabs() {
     return chrome.i18n.getMessage("search_tabs");

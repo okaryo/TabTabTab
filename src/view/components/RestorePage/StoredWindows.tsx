@@ -1,3 +1,4 @@
+import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -18,6 +19,7 @@ import { grey } from "@mui/material/colors";
 import { alpha, styled } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
+  addTabToStoredWindow,
   removeItemFromStoredWindow,
   removeStoredWindow,
   restoreWindow,
@@ -26,6 +28,7 @@ import {
 import t from "../../../i18n/Translations";
 import type { StoredWindow } from "../../../model/Window";
 import { StoredWindowsContext } from "../../contexts/StoredWindowsContext";
+import { AddTabForm } from "./AddTabFrom";
 import { StoredTabItem } from "./StoredTabItem";
 import { StoredTabItemContainer } from "./StoredTabItemContainer";
 
@@ -65,6 +68,9 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   const { window, index, dense } = props;
   const editWindowNameFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
+  const addTabFormRef = useRef<HTMLDivElement>(null);
+  const addTabButtonRef = useRef<HTMLButtonElement>(null);
+  const [addTabMode, setAddTabMode] = useState(false);
   const [expanded, setExpanded] = useState(index === 0);
   const [editMode, setEditMode] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -76,6 +82,13 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     updateStoredWindowName(window.internalUid, event.target.value);
+  };
+  const onClickAddButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setAddTabMode(!addTabMode);
+    if (!expanded) {
+      setExpanded(true);
+    }
   };
   const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -100,6 +113,16 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
       );
       if (clickOutsideEditForm && !clickEditButton) {
         setEditMode(false);
+      }
+
+      const clickOutsideAddTabForm =
+        addTabFormRef.current &&
+        !addTabFormRef.current.contains(event.target as Node);
+      const clickAddTabButton = addTabButtonRef.current?.contains(
+        event.target as Node,
+      );
+      if (clickOutsideAddTabForm && !clickAddTabButton) {
+        setAddTabMode(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -158,6 +181,9 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
         <Stack direction="row">
           {(expanded || isHovered) && (
             <>
+              <IconButton ref={addTabButtonRef} onClick={onClickAddButton}>
+                <AddIcon />
+              </IconButton>
               <IconButton ref={editButtonRef} onClick={onClickEditButton}>
                 <EditIcon />
               </IconButton>
@@ -202,6 +228,20 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
               />
             );
           })}
+          {addTabMode && (
+            <AddTabForm
+              ref={addTabFormRef}
+              onComplete={({ title, url, favIconUrl }) => {
+                addTabToStoredWindow(window.internalUid, {
+                  title,
+                  url,
+                  favIconUrl,
+                });
+                setAddTabMode(false);
+              }}
+              onCancel={() => setAddTabMode(false)}
+            />
+          )}
         </List>
       </AccordionDetails>
     </OutlinedAccordion>
