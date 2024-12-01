@@ -93,6 +93,33 @@ export const saveTabGroup = async (tabGroup: TabGroup): Promise<void> => {
   ]);
 };
 
+export const addTabToSavedGroup = async (
+  groupId: string,
+  tab: { title: string; url: string; favIconUrl: string },
+): Promise<void> => {
+  const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
+  await ChromeLocalStorage.updateStoredTabGroups(
+    storedTabGroups.map((group) => {
+      if (group.internalUid === groupId) {
+        return {
+          ...group,
+          children: [
+            ...group.children,
+            {
+              type: "tab",
+              internalUid: crypto.randomUUID(),
+              title: tab.title,
+              url: tab.url,
+              favIconUrl: tab.favIconUrl,
+            },
+          ],
+        };
+      }
+      return group;
+    }),
+  );
+};
+
 export const updateStoredTabGroupName = async (
   id: string,
   name: string,
