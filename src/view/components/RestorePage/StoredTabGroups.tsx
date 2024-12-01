@@ -1,3 +1,4 @@
+import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -18,6 +19,7 @@ import { grey } from "@mui/material/colors";
 import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
+  addTabToSavedGroup,
   removeStoredTabGroup,
   removeTabFromStoredTabGroup,
   restoreTabGroup,
@@ -31,6 +33,7 @@ import {
 } from "../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import TabGroupColorRadio from "../TabGroupColorRadio";
+import { AddTabForm } from "./AddTabFrom";
 import { StoredTabItem } from "./StoredTabItem";
 
 type StoredTabGroupsProps = {
@@ -70,10 +73,20 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
   const theme = useTheme();
   const editTabGroupFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
+  const addTabFormRef = useRef<HTMLDivElement>(null);
+  const addTabButtonRef = useRef<HTMLButtonElement>(null);
+  const [addTabMode, setAddTabMode] = useState(false);
   const [editMode, setEditMode] = useState(false);
   const [expanded, setExpanded] = useState(index === 0);
   const [isHovered, setIsHovered] = useState(false);
 
+  const onClickAddButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setAddTabMode(!addTabMode);
+    if (!expanded) {
+      setExpanded(true);
+    }
+  };
   const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
     setEditMode(!editMode);
@@ -103,6 +116,16 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
       );
       if (clickOutsideEditForm && !clickEditButton) {
         setEditMode(false);
+      }
+
+      const clickOutsideAddTabForm =
+        addTabFormRef.current &&
+        !addTabFormRef.current.contains(event.target as Node);
+      const clickAddTabButton = addTabButtonRef.current?.contains(
+        event.target as Node,
+      );
+      if (clickOutsideAddTabForm && !clickAddTabButton) {
+        setAddTabMode(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -206,6 +229,9 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
         <Stack direction="row">
           {(expanded || isHovered) && (
             <>
+              <IconButton ref={addTabButtonRef} onClick={onClickAddButton}>
+                <AddIcon />
+              </IconButton>
               <IconButton ref={editButtonRef} onClick={onClickEditButton}>
                 <EditIcon />
               </IconButton>
@@ -234,6 +260,20 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
               }
             />
           ))}
+          {addTabMode && (
+            <AddTabForm
+              ref={addTabFormRef}
+              onComplete={({ title, url, favIconUrl }) => {
+                addTabToSavedGroup(group.internalUid, {
+                  title,
+                  url,
+                  favIconUrl,
+                });
+                setAddTabMode(false);
+              }}
+              onCancel={() => setAddTabMode(false)}
+            />
+          )}
         </List>
       </AccordionDetails>
     </OutlinedAccordion>

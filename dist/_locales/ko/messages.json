@@ -51,6 +51,14 @@
     "message": "목록에서 창을 저장하면 여기에서 복원할 수 있습니다.",
     "description": "Used to show when stored window is empty."
   },
+  "save_current_window": {
+    "message": "현재 창 저장",
+    "description": "Text used to display the action for save the current window"
+  },
+  "new_tab_title_form_placeholder_to_stored": {
+    "message": "제목 (URL에서 자동 입력됨)",
+    "description": "Text used to display the action for save a new tab to stored window/group"
+  },
   "pinned": {
     "message": "고정됨",
     "description": "Used as a heading for grouping and displaying pinned tabs together."
@@ -110,6 +118,18 @@
   "ago": {
     "message": "전",
     "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
+  },
+  "url": {
+    "message": "URL",
+    "description": "Used for url"
+  },
+  "cancel": {
+    "message": "취소",
+    "description": "Used for cancel"
+  },
+  "add": {
+    "message": "추가",
+    "description": "Used for add"
   },
   "search_tabs": {
     "message": "탭 검색",

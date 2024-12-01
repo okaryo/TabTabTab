@@ -1,3 +1,4 @@
+import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
 import EditIcon from "@mui/icons-material/Edit";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
@@ -7,6 +8,7 @@ import SyncIcon from "@mui/icons-material/Sync";
 import MuiAccordion, { type AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
@@ -18,14 +20,18 @@ import { grey } from "@mui/material/colors";
 import { alpha, styled } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
+  addTabToStoredWindow,
   removeItemFromStoredWindow,
   removeStoredWindow,
   restoreWindow,
+  saveWindow,
   updateStoredWindowName,
 } from "../../../data/repository/WindowsRepository";
 import t from "../../../i18n/Translations";
 import type { StoredWindow } from "../../../model/Window";
 import { StoredWindowsContext } from "../../contexts/StoredWindowsContext";
+import { WindowsContext } from "../../contexts/WindowsContext";
+import { AddTabForm } from "./AddTabFrom";
 import { StoredTabItem } from "./StoredTabItem";
 import { StoredTabItemContainer } from "./StoredTabItemContainer";
 
@@ -65,6 +71,9 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   const { window, index, dense } = props;
   const editWindowNameFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
+  const addTabFormRef = useRef<HTMLDivElement>(null);
+  const addTabButtonRef = useRef<HTMLButtonElement>(null);
+  const [addTabMode, setAddTabMode] = useState(false);
   const [expanded, setExpanded] = useState(index === 0);
   const [editMode, setEditMode] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
@@ -76,6 +85,13 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     updateStoredWindowName(window.internalUid, event.target.value);
+  };
+  const onClickAddButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+    event.stopPropagation();
+    setAddTabMode(!addTabMode);
+    if (!expanded) {
+      setExpanded(true);
+    }
   };
   const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
     event.stopPropagation();
@@ -100,6 +116,16 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
       );
       if (clickOutsideEditForm && !clickEditButton) {
         setEditMode(false);
+      }
+
+      const clickOutsideAddTabForm =
+        addTabFormRef.current &&
+        !addTabFormRef.current.contains(event.target as Node);
+      const clickAddTabButton = addTabButtonRef.current?.contains(
+        event.target as Node,
+      );
+      if (clickOutsideAddTabForm && !clickAddTabButton) {
+        setAddTabMode(false);
       }
     };
     document.addEventListener("mousedown", handleClickOutside);
@@ -158,6 +184,9 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
         <Stack direction="row">
           {(expanded || isHovered) && (
             <>
+              <IconButton ref={addTabButtonRef} onClick={onClickAddButton}>
+                <AddIcon />
+              </IconButton>
               <IconButton ref={editButtonRef} onClick={onClickEditButton}>
                 <EditIcon />
               </IconButton>
@@ -202,6 +231,20 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
               />
             );
           })}
+          {addTabMode && (
+            <AddTabForm
+              ref={addTabFormRef}
+              onComplete={({ title, url, favIconUrl }) => {
+                addTabToStoredWindow(window.internalUid, {
+                  title,
+                  url,
+                  favIconUrl,
+                });
+                setAddTabMode(false);
+              }}
+              onCancel={() => setAddTabMode(false)}
+            />
+          )}
         </List>
       </AccordionDetails>
     </OutlinedAccordion>
@@ -218,15 +261,18 @@ const StoredWindows = (props: StoredWindowsProps) => {
   return (
     <>
       {sortedWindows.length > 0 && (
-        <Stack>
-          {sortedWindows.map((window, index) => (
-            <StoredWindowAccordion
-              key={window.internalUid}
-              window={window}
-              index={index}
-              dense={dense}
-            />
-          ))}
+        <Stack spacing={1}>
+          <SaveCurrentWindowButton />
+          <Stack>
+            {sortedWindows.map((window, index) => (
+              <StoredWindowAccordion
+                key={window.internalUid}
+                window={window}
+                index={index}
+                dense={dense}
+              />
+            ))}
+          </Stack>
         </Stack>
       )}
       {sortedWindows.length === 0 && (
@@ -248,10 +294,30 @@ const StoredWindows = (props: StoredWindowsProps) => {
             >
               {t.noStoredWindowDescription}
             </Typography>
+            <SaveCurrentWindowButton />
           </Stack>
         </Stack>
       )}
     </>
+  );
+};
+
+const SaveCurrentWindowButton = () => {
+  const { windows } = useContext(WindowsContext);
+  const currentWindow = windows.find((window) => window.focused);
+
+  const onClick = () => {
+    saveWindow(currentWindow);
+  };
+
+  return (
+    <Button
+      sx={{ textTransform: "none", width: "100%" }}
+      variant="contained"
+      onClick={onClick}
+    >
+      {t.saveCurrentWindow}
+    </Button>
   );
 };
 
