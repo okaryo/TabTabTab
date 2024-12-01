@@ -381,7 +381,7 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
     >
       <Stack sx={{ flexGrow: 1 }} spacing={0.5}>
         <TextField
-          placeholder="title"
+          placeholder={t.newTabTitleFormPlaceholderToStored}
           variant="outlined"
           size="small"
           disabled={!isTitleEditable}
@@ -402,7 +402,7 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
           onChange={onChangeTitle}
         />
         <TextField
-          placeholder="URL"
+          placeholder={t.url}
           variant="outlined"
           size="small"
           autoFocus
@@ -413,7 +413,7 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
 
       <Stack spacing={0.5}>
         <Button variant="outlined" size="small" onClick={onCancel}>
-          Cancel
+          {t.cancel}
         </Button>
         <Button
           variant="contained"
@@ -421,7 +421,7 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
           onClick={onClickAddButton}
           disabled={!canAdd}
         >
-          Add
+          {t.add}
         </Button>
       </Stack>
     </Stack>

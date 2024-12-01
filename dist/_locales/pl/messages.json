@@ -51,6 +51,10 @@
     "message": "Po zapisaniu okna z listy, możesz je tutaj przywrócić.",
     "description": "Used to show when stored window is empty."
   },
+  "new_tab_title_form_placeholder_to_stored": {
+    "message": "Tytuł (automatycznie wypełniony z URL)",
+    "description": "Text used to display the action for save a new tab to stored window/group"
+  },
   "pinned": {
     "message": "Przypięty",
     "description": "Used as a heading for grouping and displaying pinned tabs together."
@@ -110,6 +114,18 @@
   "ago": {
     "message": "temu",
     "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
+  },
+  "url": {
+    "message": "URL",
+    "description": "Used for url"
+  },
+  "cancel": {
+    "message": "Anuluj",
+    "description": "Used for cancel"
+  },
+  "add": {
+    "message": "Dodaj",
+    "description": "Used for add"
   },
   "search_tabs": {
     "message": "Szukaj zakładek",
