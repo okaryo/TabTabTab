@@ -227,6 +227,33 @@ export const saveWindow = async (window: Window): Promise<void> => {
   ]);
 };
 
+export const addTabToStoredWindow = async (
+  windowId: string,
+  tab: { title: string; url: string; favIconUrl: string },
+) => {
+  const storedWindows = await ChromeLocalStorage.getStoredWindows();
+  await ChromeLocalStorage.updateStoredWindows(
+    storedWindows.map((window) => {
+      if (window.internalUid === windowId) {
+        return {
+          ...window,
+          children: [
+            ...window.children,
+            {
+              type: "tab",
+              internalUid: crypto.randomUUID(),
+              title: tab.title,
+              url: tab.url,
+              favIconUrl: tab.favIconUrl,
+            },
+          ],
+        };
+      }
+      return window;
+    }),
+  );
+};
+
 export const updateStoredWindowName = async (
   id: string,
   name: string,
