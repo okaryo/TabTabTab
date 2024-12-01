@@ -51,6 +51,10 @@
     "message": "Once you save a window from the list, you can restore it here.",
     "description": "Used to show when stored window is empty."
   },
+  "save_current_window": {
+    "message": "Save Current Window",
+    "description": "Text used to display the action for save the current window"
+  },
   "new_tab_title_form_placeholder_to_stored": {
     "message": "Title (auto-filled from URL)",
     "description": "Text used to display the action for save a new tab to stored window/group"
