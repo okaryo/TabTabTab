@@ -412,10 +412,16 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
       </Stack>
 
       <Stack spacing={0.5}>
-        <Button variant="outlined" size="small" onClick={onCancel}>
+        <Button
+          sx={{ textTransform: "none" }}
+          variant="outlined"
+          size="small"
+          onClick={onCancel}
+        >
           {t.cancel}
         </Button>
         <Button
+          sx={{ textTransform: "none" }}
           variant="contained"
           size="small"
           onClick={onClickAddButton}
