@@ -1,4 +1,4 @@
-Release: <%= Time.now.strftime('%Y-%m-%d %H:%M') %>
+Release: <%= Time.now.strftime('%Y-%m-%d %H:%M') %>(UTC)
 <% feature_prs = pull_requests.select { |pr| pr.labels.map { |label| label['name'] }.include?('feature') } -%>
 <% if feature_prs.any? -%>
 ## 🎉 Features
