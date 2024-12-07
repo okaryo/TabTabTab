@@ -1,4 +1,5 @@
 import {
+  findGroupsByName,
   findParentContainer,
   findPinned,
   findTab,
@@ -314,6 +315,60 @@ describe("#findTabGroup", () => {
         const window = mockWindow({ id: 1, children: [tabGroup] });
 
         expect(findTabGroup(2, window)).toBeUndefined();
+      });
+    });
+  });
+});
+
+describe("#findGroupsByName", () => {
+  describe("when windows is empty", () => {
+    it("should return empty array", () => {
+      const window = mockWindow({ id: 1, children: [] });
+      expect(findGroupsByName("group", window)).toEqual([]);
+    });
+  });
+
+  describe("when windows is not empty", () => {
+    describe("when groups are found", () => {
+      it("should return groups", () => {
+        const tab1 = mockTab({ id: 1 });
+        const tab2 = mockTab({ id: 2 });
+        const tabGroup1 = mockTabGroup({
+          id: 10,
+          name: "group",
+          children: [tab1],
+        });
+        const tabGroup2 = mockTabGroup({
+          id: 11,
+          name: "group",
+          children: [tab2],
+        });
+        const window = mockWindow({ id: 1, children: [tabGroup1, tabGroup2] });
+
+        expect(findGroupsByName("group", window)).toEqual([
+          tabGroup1,
+          tabGroup2,
+        ]);
+      });
+    });
+
+    describe("when groups are not found", () => {
+      it("should return empty array", () => {
+        const tab1 = mockTab({ id: 1 });
+        const tab2 = mockTab({ id: 2 });
+        const tabGroup1 = mockTabGroup({
+          id: 10,
+          name: "group",
+          children: [tab1],
+        });
+        const tabGroup2 = mockTabGroup({
+          id: 11,
+          name: "group",
+          children: [tab2],
+        });
+        const window = mockWindow({ id: 1, children: [tabGroup1, tabGroup2] });
+
+        expect(findGroupsByName("other", window)).toEqual([]);
       });
     });
   });

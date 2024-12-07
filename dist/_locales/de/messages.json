@@ -139,6 +139,14 @@
     "message": "Keine Ergebnisse gefunden",
     "description": "Displayed when no results are found during a tab search."
   },
+  "group_tabs_search_result_tabs": {
+    "message": "Tabs gruppieren",
+    "description": "Displayed as a button for the search results in the tab group."
+  },
+  "group_tabs_search_result_tabs_description": {
+    "message": "Gruppiert Suchergebnis-Tabs nach Schlüsselwort. Fügt Tabs zu einer bestehenden Gruppe hinzu oder erstellt eine neue, wobei angeheftete Tabs ausgeschlossen werden.",
+    "description": "Displayed as a description for the button to group tabs in the search results."
+  },
   "recent_active_tabs_header": {
     "message": "Kürzlich Tabs",
     "description": "Recently active tab headings to display in search results"

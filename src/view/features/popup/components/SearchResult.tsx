@@ -1,7 +1,9 @@
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListSubheader from "@mui/material/ListSubheader";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
@@ -13,6 +15,7 @@ import type { Tab } from "../../../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../../../model/Window";
 import TabItem from "../../../components/TabItem";
 import { WindowsContext } from "../../../contexts/WindowsContext";
+import groupTabsBySearchKeyword from "../../../functions/groupTabsBySearchKeyword";
 
 type SearchResultProps = {
   searchText: string;
@@ -104,6 +107,11 @@ const SearchResult = (props: SearchResultProps) => {
     }
   }, []);
 
+  const onClickGroupTabsButton = () => {
+    const tabIds = tabs.map((t) => t.id);
+    groupTabsBySearchKeyword(searchText, windows, tabIds);
+  };
+
   return (
     <>
       {tabs.length === 0 && (
@@ -123,6 +131,17 @@ const SearchResult = (props: SearchResultProps) => {
           sx={{ width: "100%", bgcolor: "background.paper", overflowY: "auto" }}
           disablePadding
         >
+          <Box sx={{ m: 1 }}>
+            <Tooltip title={t.groupTabsSearchResultTabsDescription}>
+              <Button
+                variant="contained"
+                sx={{ width: "100%", textTransform: "none" }}
+                onClick={onClickGroupTabsButton}
+              >
+                {`${t.groupTabsSearchResultTabs}: ${searchText}`}
+              </Button>
+            </Tooltip>
+          </Box>
           {tabs.map((tab, index) => (
             <TabItem
               key={tab.id}
