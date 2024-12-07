@@ -83,6 +83,14 @@
     "message": "Monate",
     "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
+  "week": {
+    "message": "Woche",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 week ago'."
+  },
+  "weeks": {
+    "message": "Wochen",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 weeks ago'."
+  },
   "day": {
     "message": "Tag",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
