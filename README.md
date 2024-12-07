@@ -7,14 +7,18 @@
 <div align="center">
 
 [![CI][ci-badge]][ci-url]
-[![ChromeWebStore][chrome-web-store-badge]][chrome-web-store-url]
+[![ChromeWebStore][chrome-web-store-version-badge]][chrome-web-store-url]
 [![ChromeWebStoreUsers][chrome-web-store-users-badge]][chrome-web-store-url]
+[![ChromeWebStoreSize][chrome-web-store-size-badge]][chrome-web-store-url]
+[![ChromeWebStoreRating][chrome-web-store-rating-badge]][chrome-web-store-url]
 
 [ci-badge]: https://github.com/okaryo/TabTabTab/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/okaryo/TabTabTab/actions/workflows/ci.yml
-[chrome-web-store-badge]: https://img.shields.io/chrome-web-store/v/hfmnidllojimehmfjkclnadpebibhgoi
 [chrome-web-store-url]: https://chrome.google.com/webstore/detail/tabtabtab-tab-manager/hfmnidllojimehmfjkclnadpebibhgoi
+[chrome-web-store-version-badge]: https://img.shields.io/chrome-web-store/v/hfmnidllojimehmfjkclnadpebibhgoi?label=version
 [chrome-web-store-users-badge]: https://img.shields.io/chrome-web-store/users/hfmnidllojimehmfjkclnadpebibhgoi
+[chrome-web-store-size-badge]: https://img.shields.io/chrome-web-store/size/hfmnidllojimehmfjkclnadpebibhgoi?label=size
+[chrome-web-store-rating-badge]: https://img.shields.io/chrome-web-store/rating/hfmnidllojimehmfjkclnadpebibhgoi
 
 </div>
 
