@@ -1,4 +1,5 @@
 import Box from "@mui/material/Box";
+import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListSubheader from "@mui/material/ListSubheader";
@@ -123,6 +124,14 @@ const SearchResult = (props: SearchResultProps) => {
           sx={{ width: "100%", bgcolor: "background.paper", overflowY: "auto" }}
           disablePadding
         >
+          <Box sx={{ m: 1 }}>
+            <Button
+              variant="contained"
+              sx={{ width: "100%", textTransform: "none" }}
+            >
+              {`Group Tabs: ${searchText}`}
+            </Button>
+          </Box>
           {tabs.map((tab, index) => (
             <TabItem
               key={tab.id}
