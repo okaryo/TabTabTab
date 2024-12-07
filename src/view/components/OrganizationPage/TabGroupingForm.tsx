@@ -140,7 +140,6 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
               <FormControl size="small">
                 <Select
                   value={setting.groupBy}
-                  placeholder={setting.groupBy}
                   onChange={onChangeGroupBySelect}
                 >
                   <MenuItem value="domain">
