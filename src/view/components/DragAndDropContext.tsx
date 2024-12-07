@@ -53,8 +53,8 @@ import {
   moveTabOrTabGroup,
 } from "../../model/Window";
 import { WindowsContext } from "../contexts/WindowsContext";
-import { moveTabFromPinnedToPinned } from "../functions/moveTabFromPinnedToPinned";
-import { moveTabFromRootToPinned } from "../functions/moveTabFromRootToPinned";
+import moveTabFromPinnedToPinned from "../functions/moveTabFromPinnedToPinned";
+import moveTabFromRootToPinned from "../functions/moveTabFromRootToPinned";
 import TabGroupContainer from "./TabGroupContainer";
 import TabItem from "./TabItem";
 

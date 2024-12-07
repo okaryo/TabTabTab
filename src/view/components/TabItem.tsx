@@ -19,7 +19,7 @@ import t from "../../i18n/Translations";
 import { type Tab, durationSinceLastActivatedAt } from "../../model/Tab";
 import { findTabGroup, hasDuplicatedTabs } from "../../model/Window";
 import { WindowsContext } from "../contexts/WindowsContext";
-import { resolveDuplicatedTabs } from "../functions/resolveDuplicatedTabs";
+import resolveDuplicatedTabs from "../functions/resolveDuplicatedTabs";
 import { TabItemActionMenu } from "./ActionMenu";
 import TabFavicon from "./TabFavicon";
 

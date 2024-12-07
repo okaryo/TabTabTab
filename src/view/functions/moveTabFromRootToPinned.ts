@@ -1,6 +1,6 @@
 import { moveTab, pinTab } from "../../data/repository/TabsRepository";
 
-export const moveTabFromRootToPinned = async (
+const moveTabFromRootToPinned = async (
   tabId: number,
   windowId: number,
   index: number,
@@ -9,3 +9,5 @@ export const moveTabFromRootToPinned = async (
   await pinTab(tabId);
   await moveTab(tabId, windowId, index);
 };
+
+export default moveTabFromRootToPinned;
