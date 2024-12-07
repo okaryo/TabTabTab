@@ -132,13 +132,13 @@ const SearchResult = (props: SearchResultProps) => {
           disablePadding
         >
           <Box sx={{ m: 1 }}>
-            <Tooltip title="Group search result tabs by name. Adds to an existing group or creates a new one.">
+            <Tooltip title={t.groupTabsSearchResultTabsDescription}>
               <Button
                 variant="contained"
                 sx={{ width: "100%", textTransform: "none" }}
                 onClick={onClickGroupTabsButton}
               >
-                {`Group Tabs: ${searchText}`}
+                {`${t.groupTabsSearchResultTabs}: ${searchText}`}
               </Button>
             </Tooltip>
           </Box>

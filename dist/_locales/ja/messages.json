@@ -139,6 +139,14 @@
     "message": "結果が見つかりません",
     "description": "Displayed when no results are found during a tab search."
   },
+  "group_tabs_search_result_tabs": {
+    "message": "タブをグループ化",
+    "description": "Displayed as a button for the search results in the tab group."
+  },
+  "group_tabs_search_result_tabs_description": {
+    "message": "検索結果のタブをキーワード名でグループ化します。同じ名前のグループがあればそのグループにまとめ、なければ新しいグループを作成します。ピン留めされたタブは対象外です。",
+    "description": "Displayed as a description for the button to group tabs in the search results."
+  },
   "recent_active_tabs_header": {
     "message": "最近のタブ",
     "description": "Recently active tab headings to display in search results"

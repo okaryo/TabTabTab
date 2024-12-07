@@ -117,6 +117,12 @@ class Translations {
   get noResultsFound() {
     return chrome.i18n.getMessage("no_results_found");
   }
+  get groupTabsSearchResultTabs() {
+    return chrome.i18n.getMessage("group_tabs_search_result_tabs");
+  }
+  get groupTabsSearchResultTabsDescription() {
+    return chrome.i18n.getMessage("group_tabs_search_result_tabs_description");
+  }
   get recentActiveTabsHeader() {
     return chrome.i18n.getMessage("recent_active_tabs_header");
   }
