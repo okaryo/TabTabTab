@@ -52,10 +52,6 @@ const BelongingTabContainer = (props: BelongingTabContainerProps) => {
   const theme = useTheme();
   const { tab, windows } = props;
   const container = findParentContainer(windows, tab.id);
-  const belongingPinnedOrGroup =
-    isPinned(container as TabContainer) ||
-    isTabGroup(container as TabContainer);
-  if (!belongingPinnedOrGroup) return;
 
   if (isPinned(container as TabContainer)) {
     return (
