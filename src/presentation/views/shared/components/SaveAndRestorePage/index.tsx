@@ -10,11 +10,11 @@ import StoredWindows from "./StoredWindows";
 
 type Page = "window" | "tabGroup";
 
-type RestorePageProps = {
+type SaveAndRestorePageProps = {
   dense?: boolean;
 };
 
-const RestorePage = (props: RestorePageProps) => {
+const SaveAndRestorePage = (props: SaveAndRestorePageProps) => {
   const { dense = false } = props;
   const [currentPage, setCurrentPage] = useState<Page>("window");
   const pages = [
@@ -66,4 +66,4 @@ const RestorePage = (props: RestorePageProps) => {
   );
 };
 
-export default RestorePage;
+export default SaveAndRestorePage;

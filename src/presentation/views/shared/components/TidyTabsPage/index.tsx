@@ -2,11 +2,11 @@ import Stack from "@mui/material/Stack";
 import TabCleanerSettingForm from "./TabCleanerForm";
 import TabGroupingForm from "./TabGroupingForm";
 
-type OrganizationPageProps = {
+type TidyTabsPageProps = {
   dense?: boolean;
 };
 
-const OrganizationPage = (props: OrganizationPageProps) => {
+const TidyTabsPage = (props: TidyTabsPageProps) => {
   const { dense = false } = props;
 
   return (
@@ -17,4 +17,4 @@ const OrganizationPage = (props: OrganizationPageProps) => {
   );
 };
 
-export default OrganizationPage;
+export default TidyTabsPage;
