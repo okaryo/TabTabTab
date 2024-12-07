@@ -283,9 +283,9 @@
     "message": "Всички прозорци",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "Възстановяване",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "Запазване и Възстановяване",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
   "options_navigation_organization": {
     "message": "Организация",

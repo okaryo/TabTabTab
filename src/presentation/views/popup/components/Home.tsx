@@ -3,12 +3,12 @@ import { useEffect, useState } from "react";
 import { getPopupSizeSetting } from "../../../../data/repository/SettingsRepository";
 import { type PopupSize, defaultPopupSize } from "../../../../model/PopupSize";
 import OrganizationPage from "../../shared/components/OrganizationPage";
-import RestorePage from "../../shared/components/RestorePage";
+import SaveAndRestorePage from "../../shared/components/SaveAndRestorePage";
 import Header from "./Header";
 import SearchResult from "./SearchResult";
 import WindowsContainer from "./WindowsContainer";
 
-export type PopupPage = "root" | "restore" | "organization";
+export type PopupPage = "root" | "saveAndRestore" | "organization";
 type HomeProps = {
   sidePanel: boolean;
 };
@@ -46,9 +46,9 @@ const Home = (props: HomeProps) => {
       {searchText.length === 0 && currentPage === "root" && (
         <WindowsContainer />
       )}
-      {searchText.length === 0 && currentPage === "restore" && (
+      {searchText.length === 0 && currentPage === "saveAndRestore" && (
         <Box sx={{ p: 1 }}>
-          <RestorePage dense />
+          <SaveAndRestorePage dense />
         </Box>
       )}
       {searchText.length === 0 && currentPage === "organization" && (

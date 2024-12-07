@@ -283,9 +283,9 @@
     "message": "すべてのウィンドウ",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "リストア",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "保存と復元",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
   "options_navigation_organization": {
     "message": "タブ整理",

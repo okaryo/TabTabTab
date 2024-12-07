@@ -283,9 +283,9 @@
     "message": "모든 창",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "복원",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "저장 및 복원",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
   "options_navigation_organization": {
     "message": "정리",

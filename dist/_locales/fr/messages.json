@@ -283,9 +283,9 @@
     "message": "Toutes les fenêtres",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "Restaurer",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "Sauvegarder et Restaurer",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
   "options_navigation_organization": {
     "message": "Organisation",

@@ -279,8 +279,8 @@ class Translations {
   get optionsNavigationAllWindows() {
     return chrome.i18n.getMessage("options_navigation_all_windows");
   }
-  get optionsNavigationRestore() {
-    return chrome.i18n.getMessage("options_navigation_restore");
+  get optionsNavigationSaveAndRestore() {
+    return chrome.i18n.getMessage("options_navigation_save_and_restore");
   }
   get optionsNavigationOrganization() {
     return chrome.i18n.getMessage("options_navigation_organization");

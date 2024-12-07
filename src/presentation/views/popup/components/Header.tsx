@@ -113,7 +113,8 @@ const Header = (props: HeaderProps) => {
             <ArrowBackIcon />
           </IconButton>
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
-            {currentPage === "restore" && t.optionsNavigationRestore}
+            {currentPage === "saveAndRestore" &&
+              t.optionsNavigationSaveAndRestore}
             {currentPage === "organization" && t.optionsNavigationOrganization}
           </Typography>
           <BasicIcons />
@@ -155,7 +156,7 @@ const Header = (props: HeaderProps) => {
               <AutoAwesomeMotionIcon />
             </IconButton>
             <IconButton
-              onClick={() => setCurrentPage("restore")}
+              onClick={() => setCurrentPage("saveAndRestore")}
               color="inherit"
             >
               <SyncIcon />
