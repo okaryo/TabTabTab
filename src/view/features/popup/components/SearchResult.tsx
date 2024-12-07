@@ -15,6 +15,7 @@ import type { Tab } from "../../../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../../../model/Window";
 import TabItem from "../../../components/TabItem";
 import { WindowsContext } from "../../../contexts/WindowsContext";
+import groupTabsBySearchKeyword from "../../../functions/groupTabsBySearchKeyword";
 
 type SearchResultProps = {
   searchText: string;
@@ -106,6 +107,11 @@ const SearchResult = (props: SearchResultProps) => {
     }
   }, []);
 
+  const onClickGroupTabsButton = () => {
+    const tabIds = tabs.map((t) => t.id);
+    groupTabsBySearchKeyword(searchText, windows, tabIds);
+  };
+
   return (
     <>
       {tabs.length === 0 && (
@@ -130,6 +136,7 @@ const SearchResult = (props: SearchResultProps) => {
               <Button
                 variant="contained"
                 sx={{ width: "100%", textTransform: "none" }}
+                onClick={onClickGroupTabsButton}
               >
                 {`Group Tabs: ${searchText}`}
               </Button>
