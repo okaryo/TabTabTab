@@ -1,6 +1,7 @@
+/// <reference types="vitest/config" />
 import path from "node:path";
 import react from "@vitejs/plugin-react";
-import { defineConfig } from "vitest/config";
+import { defineConfig } from "vite";
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === "development";
@@ -15,14 +16,17 @@ export default defineConfig(({ mode }) => {
       reportCompressedSize: isProduction,
       rollupOptions: {
         input: {
-          popup: path.resolve(__dirname, "src/view/features/popup/index.tsx"),
+          popup: path.resolve(
+            __dirname,
+            "src/presentation/views/popup/index.tsx",
+          ),
           sidePanel: path.resolve(
             __dirname,
-            "src/view/features/sidePanel/index.tsx",
+            "src/presentation/views/sidePanel/index.tsx",
           ),
           options: path.resolve(
             __dirname,
-            "src/view/features/options/index.tsx",
+            "src/presentation/views/options/index.tsx",
           ),
           background: path.resolve(__dirname, "src/background/index.ts"),
         },
