@@ -2,6 +2,7 @@ import CircleIcon from "@mui/icons-material/Circle";
 import Clear from "@mui/icons-material/Clear";
 import DragIndicatorIcon from "@mui/icons-material/DragIndicator";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
+import PushPin from "@mui/icons-material/PushPin";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import Chip from "@mui/material/Chip";
 import Divider from "@mui/material/Divider";
@@ -17,7 +18,17 @@ import { forwardRef, useContext, useState } from "react";
 import { closeTab, focusTab } from "../../data/repository/TabsRepository";
 import t from "../../i18n/Translations";
 import { type Tab, durationSinceLastActivatedAt } from "../../model/Tab";
-import { findTabGroup, hasDuplicatedTabs } from "../../model/Window";
+import {
+  type TabContainer,
+  isPinned,
+  isTabGroup,
+} from "../../model/TabContainer";
+import {
+  type Window,
+  findParentContainer,
+  findTabGroup,
+  hasDuplicatedTabs,
+} from "../../model/Window";
 import { WindowsContext } from "../contexts/WindowsContext";
 import resolveDuplicatedTabs from "../functions/resolveDuplicatedTabs";
 import { TabItemActionMenu } from "./ActionMenu";
@@ -31,6 +42,54 @@ type TabItemProps = {
   showActions?: boolean;
   showDuplicatedChip?: boolean;
   showBelongingContainer?: boolean;
+};
+type BelongingTabContainerProps = {
+  tab: Tab;
+  windows: Window[];
+};
+
+const BelongingTabContainer = (props: BelongingTabContainerProps) => {
+  const theme = useTheme();
+  const { tab, windows } = props;
+  const container = findParentContainer(windows, tab.id);
+  const belongingPinnedOrGroup =
+    isPinned(container as TabContainer) ||
+    isTabGroup(container as TabContainer);
+  if (!belongingPinnedOrGroup) return;
+
+  if (isPinned(container as TabContainer)) {
+    return (
+      <>
+        <PushPin sx={{ fontSize: theme.spacing(1.5) }} />
+        <span>{t.pinned}</span>
+      </>
+    );
+  }
+
+  if (isTabGroup(container as TabContainer)) {
+    const group = findTabGroup(tab.groupId, windows);
+    return (
+      <>
+        <CircleIcon
+          sx={{
+            color: theme.palette.tabGroup[group.color],
+            fontSize: theme.spacing(1),
+          }}
+        />
+        <span
+          style={{
+            whiteSpace: "nowrap",
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+          }}
+        >
+          {group.name}
+        </span>
+      </>
+    );
+  }
+
+  return;
 };
 
 const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
@@ -108,33 +167,6 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     event.stopPropagation();
     resolveDuplicatedTabs(windows, tab);
     setIsDuplicatedChipHovered(false);
-  };
-
-  const BelongingTabGroup = () => {
-    const theme = useTheme();
-    const group = findTabGroup(tab.groupId, windows);
-    if (!group) return;
-
-    return (
-      <>
-        <CircleIcon
-          sx={{
-            color: theme.palette.tabGroup[group.color],
-            fontSize: theme.spacing(1),
-          }}
-        />
-        <span
-          style={{
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
-          {group.name}
-        </span>
-        <span>•</span>
-      </>
-    );
   };
 
   return (
@@ -226,7 +258,12 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
           }
           secondary={
             <Stack direction="row" alignItems="center" spacing={0.5}>
-              {showBelongingContainer && <BelongingTabGroup />}
+              {showBelongingContainer && (
+                <>
+                  <BelongingTabContainer tab={tab} windows={windows} />
+                  <span>•</span>
+                </>
+              )}
               <span
                 style={{
                   whiteSpace: "nowrap",
