@@ -24,8 +24,8 @@ import {
   ThemeColorProvider,
 } from "../../contexts/ThemeColorContext";
 import { WindowsProvider } from "../../contexts/WindowsContext";
-import TidyTabsPage from "../shared/components/TidyTabsPage";
 import SaveAndRestorePage from "../shared/components/SaveAndRestorePage";
+import TidyTabsPage from "../shared/components/TidyTabsPage";
 import { tabGroupColorPalette } from "../shared/resources/tabGroupColorPalette";
 import { themeColorPaletteBy } from "../shared/resources/themeColorPalette";
 import Header from "./components/Header";
