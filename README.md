@@ -7,14 +7,18 @@
 <div align="center">
 
 [![CI][ci-badge]][ci-url]
-[![ChromeWebStore][chrome-web-store-badge]][chrome-web-store-url]
+[![ChromeWebStore][chrome-web-store-version-badge]][chrome-web-store-url]
 [![ChromeWebStoreUsers][chrome-web-store-users-badge]][chrome-web-store-url]
+[![ChromeWebStoreSize][chrome-web-store-size-badge]][chrome-web-store-url]
+[![ChromeWebStoreRating][chrome-web-store-rating-badge]][chrome-web-store-url]
 
 [ci-badge]: https://github.com/okaryo/TabTabTab/actions/workflows/ci.yml/badge.svg
 [ci-url]: https://github.com/okaryo/TabTabTab/actions/workflows/ci.yml
-[chrome-web-store-badge]: https://img.shields.io/chrome-web-store/v/hfmnidllojimehmfjkclnadpebibhgoi
 [chrome-web-store-url]: https://chrome.google.com/webstore/detail/tabtabtab-tab-manager/hfmnidllojimehmfjkclnadpebibhgoi
+[chrome-web-store-version-badge]: https://img.shields.io/chrome-web-store/v/hfmnidllojimehmfjkclnadpebibhgoi?label=version
 [chrome-web-store-users-badge]: https://img.shields.io/chrome-web-store/users/hfmnidllojimehmfjkclnadpebibhgoi
+[chrome-web-store-size-badge]: https://img.shields.io/chrome-web-store/size/hfmnidllojimehmfjkclnadpebibhgoi?label=size
+[chrome-web-store-rating-badge]: https://img.shields.io/chrome-web-store/rating/hfmnidllojimehmfjkclnadpebibhgoi
 
 </div>
 
@@ -27,7 +31,7 @@ TabTabTab is a Chrome extension that supports your browsing by improving tab man
 * Window and Group Save & Restore: Quickly save and restore your tab groups and window sessions, ensuring a seamless continuation of your work.
 * Automatic Tab Grouping: Tabs are automatically organized based on domain or subdomain, making it easier to manage and navigate your tabs.
 
-### ✨ Additional Features
+### ✨ Other Features
 
 * Duplicate Tab Alert: Avoid clutter with automated alerts for duplicate tabs. Effortlessly close duplicates to streamline your browsing.
 * Window Merge: Combine multiple browser windows into one with a single click, organizing scattered tabs into a cohesive session.
