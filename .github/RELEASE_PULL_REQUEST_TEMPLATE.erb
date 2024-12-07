@@ -37,7 +37,7 @@ Release: <%= Time.now.strftime('%Y-%m-%d %H:%M') %>(UTC)
 <% documentation_prs = pull_requests.select { |pr| pr.labels.map { |label| label['name'] }.include?('documentation') } -%>
 <% if documentation_prs.any? -%>
 ## 📝 Documentation
-<% Documentation_prs.each do |pr| -%>
+<% documentation_prs.each do |pr| -%>
 <%= "* #{pr.title} by #{pr.mention} in ##{pr.number}" %>
 <% end -%>
 <% end -%>
