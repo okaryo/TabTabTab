@@ -24,7 +24,7 @@ import {
   ThemeColorProvider,
 } from "../../contexts/ThemeColorContext";
 import { WindowsProvider } from "../../contexts/WindowsContext";
-import OrganizationPage from "../shared/components/OrganizationPage";
+import TidyTabsPage from "../shared/components/TidyTabsPage";
 import SaveAndRestorePage from "../shared/components/SaveAndRestorePage";
 import { tabGroupColorPalette } from "../shared/resources/tabGroupColorPalette";
 import { themeColorPaletteBy } from "../shared/resources/themeColorPalette";
@@ -72,11 +72,11 @@ const App = () => {
       ),
     },
     {
-      name: t.optionsNavigationOrganization,
+      name: t.optionsNavigationTidyTabs,
       icon: <AutoAwesomeMotionIcon />,
       content: (
         <Container sx={{ py: 2, width: 700 }} fixed>
-          <OrganizationPage />
+          <TidyTabsPage />
         </Container>
       ),
     },

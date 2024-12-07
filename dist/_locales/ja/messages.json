@@ -287,9 +287,9 @@
     "message": "保存と復元",
     "description": "Navigation header for Save & Restore page in options.html"
   },
-  "options_navigation_organization": {
+  "options_navigation_tidy_tabs": {
     "message": "タブ整理",
-    "description": "Navigation header for Organization page in options.html"
+    "description": "Navigation header for TidyTabs page in options.html"
   },
   "options_navigation_settings": {
     "message": "設定",

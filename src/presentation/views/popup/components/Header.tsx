@@ -101,7 +101,7 @@ const Header = (props: HeaderProps) => {
     );
   };
 
-  if (["restore", "organization"].includes(currentPage)) {
+  if (["saveAndRestore", "tidyTabs"].includes(currentPage)) {
     return (
       <AppBar position="static" color="primary">
         <Toolbar>
@@ -115,7 +115,7 @@ const Header = (props: HeaderProps) => {
           <Typography variant="h6" sx={{ flexGrow: 1 }}>
             {currentPage === "saveAndRestore" &&
               t.optionsNavigationSaveAndRestore}
-            {currentPage === "organization" && t.optionsNavigationOrganization}
+            {currentPage === "tidyTabs" && t.optionsNavigationTidyTabs}
           </Typography>
           <BasicIcons />
         </Toolbar>
@@ -150,7 +150,7 @@ const Header = (props: HeaderProps) => {
         {searchText.length === 0 && (
           <>
             <IconButton
-              onClick={() => setCurrentPage("organization")}
+              onClick={() => setCurrentPage("tidyTabs")}
               color="inherit"
             >
               <AutoAwesomeMotionIcon />
