@@ -15,14 +15,17 @@ export default defineConfig(({ mode }) => {
       reportCompressedSize: isProduction,
       rollupOptions: {
         input: {
-          popup: path.resolve(__dirname, "src/view/features/popup/index.tsx"),
+          popup: path.resolve(
+            __dirname,
+            "src/presentation/views/popup/index.tsx",
+          ),
           sidePanel: path.resolve(
             __dirname,
-            "src/view/features/sidePanel/index.tsx",
+            "src/presentation/views/sidePanel/index.tsx",
           ),
           options: path.resolve(
             __dirname,
-            "src/view/features/options/index.tsx",
+            "src/presentation/views/options/index.tsx",
           ),
           background: path.resolve(__dirname, "src/background/index.ts"),
         },
