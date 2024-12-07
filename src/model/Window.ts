@@ -118,6 +118,17 @@ export const findTabGroup = (
   return;
 };
 
+export const findGroupsByName = (
+  name: string,
+  container: Window | Window[],
+) => {
+  const windows = Array.isArray(container) ? container : [container];
+  const groups = windows.flatMap((window) =>
+    window.children.filter((child) => isTabGroup(child) && child.name === name),
+  );
+  return groups;
+};
+
 export const indexOfWindowChild = (
   window: Window,
   id: WindowChildId,
