@@ -52,7 +52,7 @@ import t from "../../i18n/Translations";
 import type { Tab } from "../../model/Tab";
 import type { Pinned, TabGroup } from "../../model/TabContainer";
 import type { Window } from "../../model/Window";
-import { mergeWindow } from "../functions/mergeWindow";
+import mergeWindow from "../functions/mergeWindow";
 
 type ActionMenuItemAttrs =
   | {
