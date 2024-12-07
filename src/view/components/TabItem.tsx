@@ -30,7 +30,7 @@ type TabItemProps = {
   showDragIndicatorIcon?: boolean;
   showActions?: boolean;
   showDuplicatedChip?: boolean;
-  showBelongingGroup?: boolean;
+  showBelongingContainer?: boolean;
 };
 
 const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
@@ -41,7 +41,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
     showDragIndicatorIcon = true,
     showActions = true,
     showDuplicatedChip = true,
-    showBelongingGroup = false,
+    showBelongingContainer = false,
   } = props;
   const { windows } = useContext(WindowsContext);
   const onTapTabItem = () => focusTab(tab);
@@ -226,7 +226,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
           }
           secondary={
             <Stack direction="row" alignItems="center" spacing={0.5}>
-              {showBelongingGroup && <BelongingTabGroup />}
+              {showBelongingContainer && <BelongingTabGroup />}
               <span
                 style={{
                   whiteSpace: "nowrap",

@@ -149,7 +149,7 @@ const SearchResult = (props: SearchResultProps) => {
               tab={{ ...tab, active: false }}
               selected={selectedTabIndex === index}
               showDragIndicatorIcon={false}
-              showBelongingGroup
+              showBelongingContainer
             />
           ))}
         </List>
