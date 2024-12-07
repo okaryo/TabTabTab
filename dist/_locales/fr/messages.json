@@ -83,6 +83,14 @@
     "message": "mois",
     "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
+  "week": {
+    "message": "semaine",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 week ago'."
+  },
+  "weeks": {
+    "message": "semaines",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 weeks ago'."
+  },
   "day": {
     "message": "jour",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
@@ -138,6 +146,14 @@
   "no_results_found": {
     "message": "Aucun résultat trouvé",
     "description": "Displayed when no results are found during a tab search."
+  },
+  "group_tabs_search_result_tabs": {
+    "message": "Regrouper les onglets",
+    "description": "Displayed as a button for the search results in the tab group."
+  },
+  "group_tabs_search_result_tabs_description": {
+    "message": "Regroupe les onglets des résultats de recherche par mot-clé. Ajoute à un groupe existant ou en crée un nouveau, en excluant les onglets épinglés.",
+    "description": "Displayed as a description for the button to group tabs in the search results."
   },
   "recent_active_tabs_header": {
     "message": "Onglets récents",
@@ -267,13 +283,13 @@
     "message": "Toutes les fenêtres",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "Restaurer",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "Sauvegarder et Restaurer",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
-  "options_navigation_organization": {
-    "message": "Organisation",
-    "description": "Navigation header for Organization page in options.html"
+  "options_navigation_tidy_tabs": {
+    "message": "Onglets rangés",
+    "description": "Navigation header for TidyTabs page in options.html"
   },
   "options_navigation_settings": {
     "message": "Paramètres",

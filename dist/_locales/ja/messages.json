@@ -83,6 +83,14 @@
     "message": "ヶ月",
     "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
+  "week": {
+    "message": "週間",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 week ago'."
+  },
+  "weeks": {
+    "message": "週間",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 weeks ago'."
+  },
   "day": {
     "message": "日",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
@@ -138,6 +146,14 @@
   "no_results_found": {
     "message": "結果が見つかりません",
     "description": "Displayed when no results are found during a tab search."
+  },
+  "group_tabs_search_result_tabs": {
+    "message": "タブをグループ化",
+    "description": "Displayed as a button for the search results in the tab group."
+  },
+  "group_tabs_search_result_tabs_description": {
+    "message": "検索結果のタブをキーワード名でグループ化します。同じ名前のグループがあればそのグループにまとめ、なければ新しいグループを作成します。ピン留めされたタブは対象外です。",
+    "description": "Displayed as a description for the button to group tabs in the search results."
   },
   "recent_active_tabs_header": {
     "message": "最近のタブ",
@@ -267,13 +283,13 @@
     "message": "すべてのウィンドウ",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "リストア",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "保存と復元",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
-  "options_navigation_organization": {
+  "options_navigation_tidy_tabs": {
     "message": "タブ整理",
-    "description": "Navigation header for Organization page in options.html"
+    "description": "Navigation header for TidyTabs page in options.html"
   },
   "options_navigation_settings": {
     "message": "設定",

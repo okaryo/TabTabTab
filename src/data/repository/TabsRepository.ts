@@ -1,6 +1,5 @@
 import type { Tab, TabId, TabStatus } from "../../model/Tab";
 import type { WindowId } from "../../model/Window";
-import { generateHash } from "../../utility/hash";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 import { ChromeSessionStorage } from "../storage/ChromeSessionStorage";
 
@@ -127,6 +126,10 @@ export const moveTab = async (
   index: number,
 ) => {
   await chrome.tabs.move(tabId, { windowId, index });
+};
+
+export const addTabsToGroup = async (tabIds: number[], groupId: number) => {
+  await chrome.tabs.group({ tabIds, groupId });
 };
 
 export const addTabToNewGroup = async (tabId: number, windowId: number) => {
@@ -324,4 +327,15 @@ export const removeListenerOnChangeTabs = (listener: () => Promise<void>) => {
   chrome.tabs.onRemoved.removeListener(listener);
   chrome.tabGroups.onUpdated.removeListener(listener);
   chrome.windows.onFocusChanged.removeListener(listener);
+};
+
+const generateHash = async (value: string) => {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(value);
+  const hashBuffer = await crypto.subtle.digest("SHA-256", data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hashHex = hashArray
+    .map((byte) => byte.toString(16).padStart(2, "0"))
+    .join("");
+  return hashHex;
 };

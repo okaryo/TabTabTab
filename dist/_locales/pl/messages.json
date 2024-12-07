@@ -83,6 +83,14 @@
     "message": "mies.",
     "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
+  "week": {
+    "message": "tydzień",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 week ago'."
+  },
+  "weeks": {
+    "message": "tygodnie",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 weeks ago'."
+  },
   "day": {
     "message": "dzień",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
@@ -138,6 +146,14 @@
   "no_results_found": {
     "message": "Nie znaleziono wyników",
     "description": "Displayed when no results are found during a tab search."
+  },
+  "group_tabs_search_result_tabs": {
+    "message": "Grupuj karty",
+    "description": "Displayed as a button for the search results in the tab group."
+  },
+  "group_tabs_search_result_tabs_description": {
+    "message": "Grupuje karty wyników wyszukiwania według słowa kluczowego. Dodaje do istniejącej grupy lub tworzy nową, pomijając przypięte karty.",
+    "description": "Displayed as a description for the button to group tabs in the search results."
   },
   "recent_active_tabs_header": {
     "message": "Ostatnio aktywne karty",
@@ -267,13 +283,13 @@
     "message": "Wszystkie okna",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "Przywróć",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "Zapisz i Przywróć",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
-  "options_navigation_organization": {
-    "message": "Organizacja",
-    "description": "Navigation header for Organization page in options.html"
+  "options_navigation_tidy_tabs": {
+    "message": "Posprzątane Karty",
+    "description": "Navigation header for TidyTabs page in options.html"
   },
   "options_navigation_settings": {
     "message": "Ustawienia",

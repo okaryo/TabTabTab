@@ -117,6 +117,12 @@ class Translations {
   get noResultsFound() {
     return chrome.i18n.getMessage("no_results_found");
   }
+  get groupTabsSearchResultTabs() {
+    return chrome.i18n.getMessage("group_tabs_search_result_tabs");
+  }
+  get groupTabsSearchResultTabsDescription() {
+    return chrome.i18n.getMessage("group_tabs_search_result_tabs_description");
+  }
   get recentActiveTabsHeader() {
     return chrome.i18n.getMessage("recent_active_tabs_header");
   }
@@ -273,11 +279,11 @@ class Translations {
   get optionsNavigationAllWindows() {
     return chrome.i18n.getMessage("options_navigation_all_windows");
   }
-  get optionsNavigationRestore() {
-    return chrome.i18n.getMessage("options_navigation_restore");
+  get optionsNavigationSaveAndRestore() {
+    return chrome.i18n.getMessage("options_navigation_save_and_restore");
   }
-  get optionsNavigationOrganization() {
-    return chrome.i18n.getMessage("options_navigation_organization");
+  get optionsNavigationTidyTabs() {
+    return chrome.i18n.getMessage("options_navigation_tidy_tabs");
   }
   get optionsNavigationSettings() {
     return chrome.i18n.getMessage("options_navigation_settings");
@@ -289,7 +295,7 @@ class Translations {
     return chrome.i18n.getMessage("options_navigation_sponsor");
   }
 
-  // OrganizationPage
+  // TidyTabPage
   get cleanupTabsHeader() {
     return chrome.i18n.getMessage("cleanup_tabs_header");
   }

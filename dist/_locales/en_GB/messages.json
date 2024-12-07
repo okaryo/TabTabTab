@@ -83,6 +83,14 @@
     "message": "months",
     "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
+  "week": {
+    "message": "week",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 week ago'."
+  },
+  "weeks": {
+    "message": "weeks",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 weeks ago'."
+  },
   "day": {
     "message": "day",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
@@ -138,6 +146,14 @@
   "no_results_found": {
     "message": "No Results Found",
     "description": "Displayed when no results are found during a tab search."
+  },
+  "group_tabs_search_result_tabs": {
+    "message": "Group Tabs",
+    "description": "Displayed as a button for the search results in the tab group."
+  },
+  "group_tabs_search_result_tabs_description": {
+    "message": "Group search result tabs by keyword. Adds to an existing group or creates a new one, excluding pinned tabs.",
+    "description": "Displayed as a description for the button to group tabs in the search results."
   },
   "recent_active_tabs_header": {
     "message": "Recent Tabs",
@@ -267,13 +283,13 @@
     "message": "All Windows",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "Restore",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "Save & Restore",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
-  "options_navigation_organization": {
-    "message": "Organization",
-    "description": "Navigation header for Organization page in options.html"
+  "options_navigation_tidy_tabs": {
+    "message": "Tidy Tabs",
+    "description": "Navigation header for TidyTabs page in options.html"
   },
   "options_navigation_settings": {
     "message": "Settings",

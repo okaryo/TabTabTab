@@ -83,6 +83,14 @@
     "message": "개월",
     "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
+  "week": {
+    "message": "주",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 week ago'."
+  },
+  "weeks": {
+    "message": "주",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 weeks ago'."
+  },
   "day": {
     "message": "일",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
@@ -138,6 +146,14 @@
   "no_results_found": {
     "message": "결과 없음",
     "description": "Displayed when no results are found during a tab search."
+  },
+  "group_tabs_search_result_tabs": {
+    "message": "탭 그룹화",
+    "description": "Displayed as a button for the search results in the tab group."
+  },
+  "group_tabs_search_result_tabs_description": {
+    "message": "검색 결과 탭을 키워드로 그룹화합니다. 동일한 이름의 그룹이 있으면 추가하고, 없으면 새 그룹을 생성합니다. 고정된 탭은 제외됩니다.",
+    "description": "Displayed as a description for the button to group tabs in the search results."
   },
   "recent_active_tabs_header": {
     "message": "최근 활동 탭",
@@ -267,13 +283,13 @@
     "message": "모든 창",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "복원",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "저장 및 복원",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
-  "options_navigation_organization": {
-    "message": "정리",
-    "description": "Navigation header for Organization page in options.html"
+  "options_navigation_tidy_tabs": {
+    "message": "깔끔한 탭들",
+    "description": "Navigation header for TidyTabs page in options.html"
   },
   "options_navigation_settings": {
     "message": "설정",

@@ -83,6 +83,14 @@
     "message": "месеци",
     "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
   },
+  "week": {
+    "message": "седмица",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 week ago'."
+  },
+  "weeks": {
+    "message": "седмици",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 weeks ago'."
+  },
   "day": {
     "message": "ден",
     "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
@@ -138,6 +146,14 @@
   "no_results_found": {
     "message": "Няма намерени резултати",
     "description": "Displayed when no results are found during a tab search."
+  },
+  "group_tabs_search_result_tabs": {
+    "message": "Групиране на табове",
+    "description": "Displayed as a button for the search results in the tab group."
+  },
+  "group_tabs_search_result_tabs_description": {
+    "message": "Групира табовете от резултатите от търсенето по ключова дума. Добавя към съществуваща група или създава нова, като изключва фиксираните табове.",
+    "description": "Displayed as a description for the button to group tabs in the search results."
   },
   "recent_active_tabs_header": {
     "message": "Скорошни раздели",
@@ -267,13 +283,13 @@
     "message": "Всички прозорци",
     "description": "Navigation header for AllWindows Page in options.html"
   },
-  "options_navigation_restore": {
-    "message": "Възстановяване",
-    "description": "Navigation header for Restore page in options.html"
+  "options_navigation_save_and_restore": {
+    "message": "Запазване и Възстановяване",
+    "description": "Navigation header for Save & Restore page in options.html"
   },
-  "options_navigation_organization": {
-    "message": "Организация",
-    "description": "Navigation header for Organization page in options.html"
+  "options_navigation_tidy_tabs": {
+    "message": "Подредени табове",
+    "description": "Navigation header for TidyTabs page in options.html"
   },
   "options_navigation_settings": {
     "message": "Настройки",
