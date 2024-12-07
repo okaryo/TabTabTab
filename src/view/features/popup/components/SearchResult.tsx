@@ -3,6 +3,7 @@ import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListSubheader from "@mui/material/ListSubheader";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
@@ -125,12 +126,14 @@ const SearchResult = (props: SearchResultProps) => {
           disablePadding
         >
           <Box sx={{ m: 1 }}>
-            <Button
-              variant="contained"
-              sx={{ width: "100%", textTransform: "none" }}
-            >
-              {`Group Tabs: ${searchText}`}
-            </Button>
+            <Tooltip title="Group search result tabs by name. Adds to an existing group or creates a new one.">
+              <Button
+                variant="contained"
+                sx={{ width: "100%", textTransform: "none" }}
+              >
+                {`Group Tabs: ${searchText}`}
+              </Button>
+            </Tooltip>
           </Box>
           {tabs.map((tab, index) => (
             <TabItem
