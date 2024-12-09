@@ -12,8 +12,8 @@ const groupTabsBySearchKeyword = async (
   tabIds: number[],
 ) => {
   const pinnedTabs = flatTabsInWindows(windows).filter((tab) => tab.pinned);
-  const tabIdsExcludingPinned = tabIds.filter((tabId) =>
-    pinnedTabs.some((tab) => tab.id === tabId),
+  const tabIdsExcludingPinned = tabIds.filter(
+    (tabId) => !pinnedTabs.some((tab) => tab.id === tabId),
   );
 
   const sameNameGroups = findGroupsByName(keyword, windows);
