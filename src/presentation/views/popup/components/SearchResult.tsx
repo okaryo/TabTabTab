@@ -19,6 +19,7 @@ import TabItem from "../../shared/components/TabItem";
 
 type SearchResultProps = {
   searchText: string;
+  resetSearch: () => void;
 };
 type RecentActiveTabsProps = {
   recentActiveTabs: Tab[];
@@ -52,7 +53,7 @@ const RecentActiveTabs = (props: RecentActiveTabsProps) => {
 };
 
 const SearchResult = (props: SearchResultProps) => {
-  const { searchText } = props;
+  const { searchText, resetSearch } = props;
   const { windows } = useContext(WindowsContext);
   const tabs = findTabsByTitleOrUrl(windows, searchText);
 
@@ -110,6 +111,8 @@ const SearchResult = (props: SearchResultProps) => {
   const onClickGroupTabsButton = () => {
     const tabIds = tabs.map((t) => t.id);
     groupTabsBySearchKeyword(searchText, windows, tabIds);
+
+    resetSearch();
   };
 
   return (
