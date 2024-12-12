@@ -20,6 +20,10 @@ const Home = (props: HomeProps) => {
   const [popupSizeState, setPopupSizeState] =
     useState<PopupSize>(defaultPopupSize);
 
+  const clearSearchText = () => {
+    setSearchText("");
+  };
+
   useEffect(() => {
     const initState = async () => {
       setPopupSizeState(await getPopupSizeSetting());
@@ -42,7 +46,9 @@ const Home = (props: HomeProps) => {
         setCurrentPage={setCurrentPage}
         setSearchText={setSearchText}
       />
-      {searchText.length > 0 && <SearchResult searchText={searchText} />}
+      {searchText.length > 0 && (
+        <SearchResult searchText={searchText} resetSearch={clearSearchText} />
+      )}
       {searchText.length === 0 && currentPage === "root" && (
         <WindowsContainer />
       )}

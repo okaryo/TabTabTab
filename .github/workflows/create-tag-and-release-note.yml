@@ -1,0 +1,28 @@
+name: Create Tag and Release Note
+
+on:
+  pull_request:
+    branches:
+      - main
+    types:
+      - closed
+
+jobs:
+  create_tag:
+    if: github.event.pull_request.merged == true
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install jq
+        run: sudo apt-get install -y jq
+      - name: Get version from manifest.json
+        run: |
+          VERSION=$(jq -r '.version' dist/manifest.json)
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+      - name: Create tag and release note
+        uses: softprops/action-gh-release@v2
+        with:
+          target_commitish: main
+          name: ${{ env.VERSION }}
+          tag_name: ${{ env.VERSION }}
+          generate_release_notes: true

@@ -1,0 +1,31 @@
+name: Validate Release
+
+on:
+  push:
+    branches:
+      - develop
+
+jobs:
+  check_manifest_version_update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Install jq
+        run: sudo apt-get install jq
+      - name: Get latest tag from main branch
+        run: |
+          git fetch --tags
+          LATEST_TAG=$(git tag --merged origin/main | sort -V | tail -n 1)
+          echo "Latest tag: $LATEST_TAG"
+          echo "LATEST_VERSION=$LATEST_TAG" >> $GITHUB_ENV
+      - name: Get version from manifest.json
+        run: |
+          MANIFEST_VERSION=$(jq -r '.version' dist/manifest.json)
+          echo "Manifest version: $MANIFEST_VERSION"
+          echo "MANIFEST_VERSION=$MANIFEST_VERSION" >> $GITHUB_ENV
+      - name: Verify version is updated
+        run: |
+          if [  ${{ env.LATEST_VERSION }} == ${{ env.MANIFEST_VERSION }} ]; then
+            echo "Version in manifest.json is required to be updated."
+            exit 1
+          fi
