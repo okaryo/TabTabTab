@@ -34,6 +34,9 @@ import { WindowsContext } from "../../../../contexts/WindowsContext";
 import AddTabForm from "./AddTabFrom";
 import StoredTabItem from "./StoredTabItem";
 import { StoredTabItemContainer } from "./StoredTabItemContainer";
+import { isLoading } from "../../../../../model/AsyncState";
+import Box from "@mui/material/Box";
+import CircularProgress from "@mui/material/CircularProgress";
 
 type StoredWindowsProps = {
   dense?: boolean;
@@ -253,10 +256,25 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
 
 const StoredWindows = (props: StoredWindowsProps) => {
   const { dense } = props;
-  const { storedWindows } = useContext(StoredWindowsContext);
-  const sortedWindows = storedWindows.sort((a, b) =>
+  const state = useContext(StoredWindowsContext);
+  const sortedWindows = state.value?.sort((a, b) =>
     a.storedAt > b.storedAt ? -1 : 1,
   );
+
+  if (isLoading(state)) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          p: 4,
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <>
