@@ -4,41 +4,37 @@ import {
   getStoredTabGroups,
   removeListenerOnChangeStoredTabGroups,
 } from "../../data/repository/TabGroupRepository";
+import { type AsyncState, initialState } from "../../model/AsyncState";
 import type { StoredTabGroup } from "../../model/TabContainer";
+import useAsync from "../hooks/useAsync";
 
-type StoredTabGroupsContextType = {
-  storedTabGroups: StoredTabGroup[];
-};
-
-export const StoredTabGroupsContext = createContext<StoredTabGroupsContextType>(
-  {
-    storedTabGroups: [],
-  },
-);
+export const StoredTabGroupsContext =
+  createContext<AsyncState<StoredTabGroup[]>>(initialState);
 
 export const StoredTabGroupsProvider = ({
   children,
-}: {
-  children: React.ReactNode;
-}) => {
-  const [storedTabGroups, setStoredTabGroups] = useState([]);
+}: { children: React.ReactNode }) => {
+  const asyncState = useAsync<StoredTabGroup[]>(async () => {
+    const storedTabGroups = await getStoredTabGroups();
+    return storedTabGroups;
+  }, []);
+  const [state, setState] = useState(asyncState);
 
   useEffect(() => {
-    const initState = async () => {
-      const storedTabGroups = await getStoredTabGroups();
-      setStoredTabGroups(storedTabGroups);
-    };
-    initState();
+    setState(asyncState);
+  }, [asyncState]);
 
+  useEffect(() => {
     const listenerOnChange = addListenerOnChangeStoredTabGroups(
-      (newValue: StoredTabGroup[]) => setStoredTabGroups(newValue),
+      (newValue: StoredTabGroup[]) =>
+        setState({ loading: false, value: newValue, error: null }),
     );
 
     return () => removeListenerOnChangeStoredTabGroups(listenerOnChange);
   }, []);
 
   return (
-    <StoredTabGroupsContext.Provider value={{ storedTabGroups }}>
+    <StoredTabGroupsContext.Provider value={state}>
       {children}
     </StoredTabGroupsContext.Provider>
   );

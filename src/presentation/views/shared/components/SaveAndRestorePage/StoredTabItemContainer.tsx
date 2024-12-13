@@ -28,7 +28,7 @@ import {
   isStoredTabGroup,
 } from "../../../../../model/TabContainer";
 import type { StoredWindow } from "../../../../../model/Window";
-import { StoredTabItem } from "./StoredTabItem";
+import StoredTabItem from "./StoredTabItem";
 
 type StoredTabItemContainerProps = {
   window: StoredWindow;

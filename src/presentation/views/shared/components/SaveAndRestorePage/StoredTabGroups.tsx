@@ -8,7 +8,9 @@ import SyncIcon from "@mui/icons-material/Sync";
 import MuiAccordion, { type AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
+import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -27,14 +29,15 @@ import {
   updateStoredTabGroupName,
 } from "../../../../../data/repository/TabGroupRepository";
 import t from "../../../../../i18n/Translations";
+import { isLoading } from "../../../../../model/AsyncState";
 import {
   type StoredTabGroup,
   tabGroupColors,
 } from "../../../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../../../contexts/StoredTabGroupsContext";
 import TabGroupColorRadio from "../TabGroupColorRadio";
-import { AddTabForm } from "./AddTabFrom";
-import { StoredTabItem } from "./StoredTabItem";
+import AddTabForm from "./AddTabFrom";
+import StoredTabItem from "./StoredTabItem";
 
 type StoredTabGroupsProps = {
   dense: boolean;
@@ -282,10 +285,25 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
 
 const StoredTabGroups = (props: StoredTabGroupsProps) => {
   const { dense } = props;
-  const { storedTabGroups } = useContext(StoredTabGroupsContext);
-  const sortedGroups = storedTabGroups.sort((a, b) =>
+  const state = useContext(StoredTabGroupsContext);
+  const sortedGroups = state.value?.sort((a, b) =>
     a.storedAt > b.storedAt ? -1 : 1,
   );
+
+  if (isLoading(state)) {
+    return (
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          p: 4,
+        }}
+      >
+        <CircularProgress />
+      </Box>
+    );
+  }
 
   return (
     <>
