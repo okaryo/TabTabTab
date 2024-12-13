@@ -8,8 +8,10 @@ import SyncIcon from "@mui/icons-material/Sync";
 import MuiAccordion, { type AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
 import MuiAccordionSummary from "@mui/material/AccordionSummary";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
+import CircularProgress from "@mui/material/CircularProgress";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
@@ -28,15 +30,13 @@ import {
   updateStoredWindowName,
 } from "../../../../../data/repository/WindowsRepository";
 import t from "../../../../../i18n/Translations";
+import { isLoading } from "../../../../../model/AsyncState";
 import type { StoredWindow } from "../../../../../model/Window";
 import { StoredWindowsContext } from "../../../../contexts/StoredWindowsContext";
 import { WindowsContext } from "../../../../contexts/WindowsContext";
 import AddTabForm from "./AddTabFrom";
 import StoredTabItem from "./StoredTabItem";
 import { StoredTabItemContainer } from "./StoredTabItemContainer";
-import { isLoading } from "../../../../../model/AsyncState";
-import Box from "@mui/material/Box";
-import CircularProgress from "@mui/material/CircularProgress";
 
 type StoredWindowsProps = {
   dense?: boolean;
