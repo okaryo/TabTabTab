@@ -9,3 +9,7 @@ export const initialState = {
   value: null,
   error: null,
 };
+
+export const isLoading = <T>(state: AsyncState<T>) => {
+  return state.loading || state.value === null;
+};
