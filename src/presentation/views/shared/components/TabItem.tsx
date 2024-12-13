@@ -253,7 +253,12 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
             </Typography>
           }
           secondary={
-            <Stack direction="row" alignItems="center" spacing={0.5}>
+            <Stack
+              direction="row"
+              alignItems="center"
+              spacing={0.5}
+              component="span"
+            >
               {showBelongingContainer && (
                 <>
                   <BelongingTabContainer tab={tab} windows={windows} />

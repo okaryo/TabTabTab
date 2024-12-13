@@ -6,9 +6,10 @@ import {
 import { getWindows, saveWindow } from "../data/repository/WindowsRepository";
 import t from "../i18n/Translations";
 
-const saveCurrentWindowId = "saveCurrentWindow";
-const groupTabsNowId = "groupTabsNow";
-const openDashboardId = "openDashboard";
+const idPrefix = import.meta.env.DEV ? "dev_" : "";
+const saveCurrentWindowId = `${idPrefix}saveCurrentWindow`;
+const groupTabsNowId = `${idPrefix}groupTabsNow`;
+const openDashboardId = `${idPrefix}openDashboard`;
 
 export const addToolBarActions = () => {
   chrome.contextMenus.create({
