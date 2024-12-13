@@ -13,7 +13,7 @@ type StoredGridTabItemProps = {
   onDeleteItem: () => void;
 };
 
-export const StoredTabItem = (props: StoredGridTabItemProps) => {
+const StoredTabItem = (props: StoredGridTabItemProps) => {
   const { tab, onDeleteItem } = props;
   const [isHovered, setIsHovered] = useState(false);
   const onClickTabItem = () => createNewTab(tab.url.toString());
@@ -53,3 +53,5 @@ export const StoredTabItem = (props: StoredGridTabItemProps) => {
     </ListItem>
   );
 };
+
+export default StoredTabItem;

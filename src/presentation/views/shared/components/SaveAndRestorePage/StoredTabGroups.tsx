@@ -33,8 +33,8 @@ import {
 } from "../../../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../../../contexts/StoredTabGroupsContext";
 import TabGroupColorRadio from "../TabGroupColorRadio";
-import { AddTabForm } from "./AddTabFrom";
-import { StoredTabItem } from "./StoredTabItem";
+import AddTabForm from "./AddTabFrom";
+import StoredTabItem from "./StoredTabItem";
 
 type StoredTabGroupsProps = {
   dense: boolean;

@@ -31,8 +31,8 @@ import t from "../../../../../i18n/Translations";
 import type { StoredWindow } from "../../../../../model/Window";
 import { StoredWindowsContext } from "../../../../contexts/StoredWindowsContext";
 import { WindowsContext } from "../../../../contexts/WindowsContext";
-import { AddTabForm } from "./AddTabFrom";
-import { StoredTabItem } from "./StoredTabItem";
+import AddTabForm from "./AddTabFrom";
+import StoredTabItem from "./StoredTabItem";
 import { StoredTabItemContainer } from "./StoredTabItemContainer";
 
 type StoredWindowsProps = {
