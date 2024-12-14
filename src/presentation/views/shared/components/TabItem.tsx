@@ -58,6 +58,7 @@ const BelongingTabContainer = (props: BelongingTabContainerProps) => {
       <>
         <PushPin sx={{ fontSize: theme.spacing(1.5) }} />
         <span>{t.pinned}</span>
+        <span>•</span>
       </>
     );
   }
@@ -81,6 +82,7 @@ const BelongingTabContainer = (props: BelongingTabContainerProps) => {
         >
           {group.name}
         </span>
+        <span>•</span>
       </>
     );
   }
@@ -260,10 +262,7 @@ const TabItem = forwardRef<HTMLLIElement, TabItemProps>((props, ref) => {
               component="span"
             >
               {showBelongingContainer && (
-                <>
-                  <BelongingTabContainer tab={tab} windows={windows} />
-                  <span>•</span>
-                </>
+                <BelongingTabContainer tab={tab} windows={windows} />
               )}
               <span
                 style={{
