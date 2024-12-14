@@ -7,9 +7,9 @@ import {
   setToolbarIconBehaviorToOpenDashboard,
   setToolbarIconBehaviorToOpenDefaultPopup,
 } from "../../../../../data/repository/ToolbarRepository";
+import t from "../../../../../i18n/Translations";
 import type { ToolbarSetting } from "../../../../../model/ToolbarSetting";
 import PaperWithHeader from "../../../shared/components/PaperWithHeader";
-import t from "../../../../../i18n/Translations";
 
 const ToolbarSettingForm = () => {
   const [settingState, setSettingState] = useState<ToolbarSetting>(null);
@@ -37,9 +37,7 @@ const ToolbarSettingForm = () => {
           sx={{ p: 2 }}
           onClick={onChangeOpenDashboardWhenIconClicked}
         >
-          <ListItemText
-            primary={t.toolbarIconClickBehaviorSettingHeader}
-          />
+          <ListItemText primary={t.toolbarIconClickBehaviorSettingHeader} />
           <Switch
             edge="end"
             checked={settingState.openDashboardWhenIconClicked}
