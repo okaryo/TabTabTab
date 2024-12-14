@@ -383,6 +383,14 @@
     "message": "Въведете числена стойност от 50 до 150.",
     "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
+  "toolbar_setting_header": {
+    "message": "Лента с инструменти",
+    "description": "The main header for the toolbar setting section."
+  },
+  "toolbar_icon_click_behavior_setting_header": {
+    "message": "Отворете таблото, когато щракнете върху иконата на лентата с инструменти.",
+    "description": "Heading for the toolbar icon click behavior settings."
+  },
   "scale": {
     "message": "Скала",
     "description": "Heading for the input form to adjust the scale of elements within the popup."

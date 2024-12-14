@@ -383,6 +383,14 @@
     "message": "Geben Sie einen Wert im Bereich von 50 bis 150 ein.",
     "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
+  "toolbar_setting_header": {
+    "message": "Symbolleiste",
+    "description": "The main header for the toolbar setting section."
+  },
+  "toolbar_icon_click_behavior_setting_header": {
+    "message": "Öffnen Sie das Dashboard, wenn auf das Symbol in der Symbolleiste geklickt wird.",
+    "description": "Heading for the toolbar icon click behavior settings."
+  },
   "scale": {
     "message": "Skalierung",
     "description": "Heading for the input form to adjust the scale of elements within the popup."

@@ -383,6 +383,14 @@
     "message": "50~150の範囲の値を入力してください。",
     "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
+  "toolbar_setting_header": {
+    "message": "ツールバー",
+    "description": "The main header for the toolbar setting section."
+  },
+  "toolbar_icon_click_behavior_setting_header": {
+    "message": "ツールバーのアイコンをクリックしたときにダッシュボードを開く",
+    "description": "Heading for the toolbar icon click behavior settings."
+  },
   "scale": {
     "message": "スケール",
     "description": "Heading for the input form to adjust the scale of elements within the popup."

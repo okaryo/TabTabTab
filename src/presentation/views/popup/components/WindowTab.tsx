@@ -82,6 +82,7 @@ const WindowTab = (props: WindowTabProps) => {
                 transform: "translate(-50%, -50%)",
               }}
               size="small"
+              component="div"
               onClick={onClickWindowActionMenu}
             >
               <MoreVertIcon />

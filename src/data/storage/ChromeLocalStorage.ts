@@ -2,11 +2,13 @@ import type { PopupSize } from "../../model/PopupSize";
 import type { DurationUnit, TabCleaner } from "../../model/TabCleaner";
 import type { TabGroupSetting } from "../../model/TabGroupSetting";
 import type { Mode, ThemeColor } from "../../model/Theme";
+import type { ToolbarSetting } from "../../model/ToolbarSetting";
 
 export namespace ChromeLocalStorage {
   const TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
   const POPUP_SIZE_SETTING_KEY = "popup_size_setting";
   const POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
+  const TOOLBAR_SETTING_KEY = "toolbar_setting";
   const MODE_KEY = "mode";
   const THEME_COLOR_KEY = "theme_color";
   const STORED_WINDOWS_KEY = "stored_windows";
@@ -105,6 +107,24 @@ export namespace ChromeLocalStorage {
   export const updatePopupElementScaleSetting = (scale: number) => {
     return chrome.storage.local.set({
       [POPUP_ELEMENT_SCALE_SETTING_KEY]: scale,
+    });
+  };
+
+  // ToolbarSetting
+  type ToolbarSettingStorageObject = {
+    [TOOLBAR_SETTING_KEY]: {
+      openDashboardWhenIconClicked: boolean;
+    };
+  };
+  export const getToolbarSetting = async () => {
+    const { [TOOLBAR_SETTING_KEY]: setting } = (await chrome.storage.local.get(
+      TOOLBAR_SETTING_KEY,
+    )) as ToolbarSettingStorageObject;
+    return setting;
+  };
+  export const updateToolbarSetting = async (setting: ToolbarSetting) => {
+    return chrome.storage.local.set({
+      [TOOLBAR_SETTING_KEY]: setting,
     });
   };
 

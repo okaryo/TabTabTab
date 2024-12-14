@@ -1,4 +1,8 @@
 import { type PopupSize, defaultPopupSize } from "../../model/PopupSize";
+import {
+  type ToolbarSetting,
+  defaultToolbarSetting,
+} from "../../model/ToolbarSetting";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
 export const getPopupSizeSetting = async (): Promise<PopupSize> => {
@@ -23,6 +27,13 @@ export const updatePopupElementScaleSetting = (
   scale: number,
 ): Promise<void> => {
   return ChromeLocalStorage.updatePopupElementScaleSetting(scale);
+};
+
+export const getToolbarSetting = async (): Promise<ToolbarSetting> => {
+  const setting = await ChromeLocalStorage.getToolbarSetting();
+  if (!setting) return defaultToolbarSetting;
+
+  return setting;
 };
 
 export const navigateToOptionsPage = () => {

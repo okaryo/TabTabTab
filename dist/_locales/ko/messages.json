@@ -383,6 +383,14 @@
     "message": "50-150% 사이의 값을 입력하세요.",
     "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
+  "toolbar_setting_header": {
+    "message": "도구 모음",
+    "description": "The main header for the toolbar setting section."
+  },
+  "toolbar_icon_click_behavior_setting_header": {
+    "message": "도구 모음 아이콘을 클릭하면 대시보드가 열립니다.",
+    "description": "Heading for the toolbar icon click behavior settings."
+  },
   "scale": {
     "message": "비율",
     "description": "Heading for the input form to adjust the scale of elements within the popup."

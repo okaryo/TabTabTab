@@ -383,6 +383,14 @@
     "message": "Wprowadź wartość w zakresie od 50 do 150.",
     "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
+  "toolbar_setting_header": {
+    "message": "Pasek narzędzi",
+    "description": "The main header for the toolbar setting section."
+  },
+  "toolbar_icon_click_behavior_setting_header": {
+    "message": "Otwórz pulpit nawigacyjny po kliknięciu ikony na pasku narzędzi.",
+    "description": "Heading for the toolbar icon click behavior settings."
+  },
   "scale": {
     "message": "Skala",
     "description": "Heading for the input form to adjust the scale of elements within the popup."

@@ -1,4 +1,7 @@
-import { navigateToOptionsPage } from "../data/repository/SettingsRepository";
+import {
+  getToolbarSetting,
+  navigateToOptionsPage,
+} from "../data/repository/SettingsRepository";
 import {
   getTabGroupSetting,
   groupTabsBySetting,
@@ -25,6 +28,13 @@ export const addToolBarActions = () => {
     id: openDashboardId,
     title: t.openDashboard,
     contexts: ["action"],
+  });
+
+  chrome.action.onClicked.addListener(async () => {
+    const toolbarSetting = await getToolbarSetting();
+    if (toolbarSetting.openDashboardWhenIconClicked) {
+      navigateToOptionsPage();
+    }
   });
 };
 
