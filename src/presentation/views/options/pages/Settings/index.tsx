@@ -4,17 +4,19 @@ import t from "../../../../../i18n/Translations";
 import PaperWithHeader from "../../../shared/components/PaperWithHeader";
 import PopupElementScaleSettingForm from "./PopupElementScaleSettingForm";
 import PopupSizeSettingForm from "./PopupSizeSettingForm";
-import ThemeColorSetting from "./ThemeColorSettingForm";
+import ThemeColorSettingForm from "./ThemeColorSettingForm";
+import ToolbarSettingForm from "./ToolbarSettingForm";
 
 const Settings = () => {
   return (
     <Stack spacing={2}>
-      <ThemeColorSetting />
+      <ThemeColorSettingForm />
       <PaperWithHeader header={t.popupSettingHeader}>
         <PopupSizeSettingForm />
         <Divider />
         <PopupElementScaleSettingForm />
       </PaperWithHeader>
+      <ToolbarSettingForm />
     </Stack>
   );
 };
