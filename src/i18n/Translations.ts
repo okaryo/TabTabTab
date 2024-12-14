@@ -207,6 +207,12 @@ class Translations {
   get popupSizeDescription() {
     return chrome.i18n.getMessage("popup_size_description");
   }
+  get toolbarSettingHeader() {
+    return chrome.i18n.getMessage("toolbar_setting_header");
+  }
+  get toolbarIconClickBehaviorSettingHeader() {
+    return chrome.i18n.getMessage("toolbar_icon_click_behavior_setting_header");
+  }
   get height() {
     return chrome.i18n.getMessage("height");
   }

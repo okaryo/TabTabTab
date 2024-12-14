@@ -383,6 +383,14 @@
     "message": "Entrez une valeur dans la plage de 50 à 150.",
     "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
+  "toolbar_setting_header": {
+    "message": "Barre d'outils",
+    "description": "The main header for the toolbar setting section."
+  },
+  "toolbar_icon_click_behavior_setting_header": {
+    "message": "Ouvrez le tableau de bord lorsque vous cliquez sur l'icône de la barre d'outils.",
+    "description": "Heading for the toolbar icon click behavior settings."
+  },
   "scale": {
     "message": "Échelle",
     "description": "Heading for the input form to adjust the scale of elements within the popup."
