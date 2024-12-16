@@ -1,25 +1,28 @@
-import ListItemButton from "@mui/material/ListItemButton";
+import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
-import Switch from "@mui/material/Switch";
+import MenuItem from "@mui/material/MenuItem";
+import Select, { type SelectChangeEvent } from "@mui/material/Select";
 import { useEffect, useState } from "react";
 import { getToolbarSetting } from "../../../../../data/repository/SettingsRepository";
-import {
-  setToolbarIconBehaviorToOpenDashboard,
-  setToolbarIconBehaviorToOpenDefaultPopup,
-} from "../../../../../data/repository/ToolbarRepository";
+import { setToolbarIconClickOpenView } from "../../../../../data/repository/ToolbarRepository";
 import t from "../../../../../i18n/Translations";
-import type { ToolbarSetting } from "../../../../../model/ToolbarSetting";
+import {
+  type ToolbarSetting,
+  isValidIconClickOpenView,
+} from "../../../../../model/ToolbarSetting";
 import PaperWithHeader from "../../../shared/components/PaperWithHeader";
 
 const ToolbarSettingForm = () => {
   const [settingState, setSettingState] = useState<ToolbarSetting>(null);
 
-  const onChangeOpenDashboardWhenIconClicked = async () => {
-    const newSetting = settingState.openDashboardWhenIconClicked
-      ? await setToolbarIconBehaviorToOpenDefaultPopup()
-      : await setToolbarIconBehaviorToOpenDashboard();
-
-    setSettingState(newSetting);
+  const onChangeIconClickOpenView = async (
+    event: SelectChangeEvent<string>,
+  ) => {
+    const value = event.target.value;
+    if (isValidIconClickOpenView(value)) {
+      const newSetting = await setToolbarIconClickOpenView(value);
+      setSettingState(newSetting);
+    }
   };
 
   useEffect(() => {
@@ -33,16 +36,23 @@ const ToolbarSettingForm = () => {
   return (
     <PaperWithHeader header={t.toolbarSettingHeader}>
       {settingState && (
-        <ListItemButton
-          sx={{ p: 2 }}
-          onClick={onChangeOpenDashboardWhenIconClicked}
-        >
+        <ListItem sx={{ p: 2 }}>
           <ListItemText primary={t.toolbarIconClickBehaviorSettingHeader} />
-          <Switch
-            edge="end"
-            checked={settingState.openDashboardWhenIconClicked}
-          />
-        </ListItemButton>
+          <Select
+            value={settingState.iconClickOpenView}
+            onChange={onChangeIconClickOpenView}
+          >
+            <MenuItem value="popup">
+              {t.toolbarIconClickBehaviorSelectPopup}
+            </MenuItem>
+            <MenuItem value="sidePanel">
+              {t.toolbarIconClickBehaviorSelectSidePanel}
+            </MenuItem>
+            <MenuItem value="dashboard">
+              {t.toolbarIconClickBehaviorSelectDashboard}
+            </MenuItem>
+          </Select>
+        </ListItem>
       )}
     </PaperWithHeader>
   );
