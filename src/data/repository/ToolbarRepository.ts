@@ -1,24 +1,44 @@
 import type { ToolbarSetting } from "../../model/ToolbarSetting";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
-export const setToolbarIconBehaviorToOpenDefaultPopup =
-  async (): Promise<ToolbarSetting> => {
-    const setting = await ChromeLocalStorage.getToolbarSetting();
-    const newSetting = { ...setting, openDashboardWhenIconClicked: false };
+export const setToolbarIconClickOpenView = async (
+  view: ToolbarSetting["iconClickOpenView"],
+) => {
+  const setting = await ChromeLocalStorage.getToolbarSetting();
+  const newSetting = { ...setting, iconClickOpenView: view };
+  await ChromeLocalStorage.updateToolbarSetting(newSetting);
 
-    await ChromeLocalStorage.updateToolbarSetting(newSetting);
-    await chrome.action.setPopup({ popup: "popup.html" });
+  switch (view) {
+    case "popup":
+      await setToolbarIconBehaviorToOpenPopup();
+      break;
+    case "sidePanel":
+      await setToolbarIconBehaviorToOpenSidePanel();
+      break;
+    case "dashboard":
+      await setToolbarIconBehaviorToNone();
+      break;
+    default:
+      throw new Error(`Invalid view: ${view}`);
+  }
 
-    return newSetting;
-  };
+  return newSetting;
+};
 
-export const setToolbarIconBehaviorToOpenDashboard =
-  async (): Promise<ToolbarSetting> => {
-    const setting = await ChromeLocalStorage.getToolbarSetting();
-    const newSetting = { ...setting, openDashboardWhenIconClicked: true };
+export const setToolbarIconBehaviorToOpenPopup = async () => {
+  await disableOpenSidePanel();
+  await chrome.action.setPopup({ popup: "popup.html" });
+};
 
-    await ChromeLocalStorage.updateToolbarSetting(newSetting);
-    await chrome.action.setPopup({ popup: "" });
+export const setToolbarIconBehaviorToOpenSidePanel = async () => {
+  await chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: true });
+};
 
-    return newSetting;
-  };
+export const setToolbarIconBehaviorToNone = async () => {
+  await disableOpenSidePanel();
+  await chrome.action.setPopup({ popup: "" });
+};
+
+const disableOpenSidePanel = async () => {
+  await chrome.sidePanel.setPanelBehavior({ openPanelOnActionClick: false });
+};

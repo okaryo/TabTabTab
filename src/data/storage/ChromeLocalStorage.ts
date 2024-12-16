@@ -113,7 +113,7 @@ export namespace ChromeLocalStorage {
   // ToolbarSetting
   type ToolbarSettingStorageObject = {
     [TOOLBAR_SETTING_KEY]: {
-      openDashboardWhenIconClicked: boolean;
+      iconClickOpenView: ToolbarSetting["iconClickOpenView"];
     };
   };
   export const getToolbarSetting = async () => {

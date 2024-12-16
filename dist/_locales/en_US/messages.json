@@ -388,8 +388,20 @@
     "description": "The main header for the toolbar setting section."
   },
   "toolbar_icon_click_behavior_setting_header": {
-    "message": "Open the dashboard when the toolbar icon is clicked.",
+    "message": "Select which view to open when the toolbar icon is clicked.",
     "description": "Heading for the toolbar icon click behavior settings."
+  },
+  "toolbar_icon_click_behavior_select_popup": {
+    "message": "Popup",
+    "description": "Option to open the popup when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_side_panel": {
+    "message": "SidePanel",
+    "description": "Option to open the side panel when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_dashboard": {
+    "message": "Dashboard",
+    "description": "Option to open the dashboard when the toolbar icon is clicked."
   },
   "scale": {
     "message": "Scale",

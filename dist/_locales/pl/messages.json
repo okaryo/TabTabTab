@@ -388,8 +388,20 @@
     "description": "The main header for the toolbar setting section."
   },
   "toolbar_icon_click_behavior_setting_header": {
-    "message": "Otwórz pulpit nawigacyjny po kliknięciu ikony na pasku narzędzi.",
+    "message": "Wybierz widok, który ma się otworzyć po kliknięciu ikony paska narzędzi.",
     "description": "Heading for the toolbar icon click behavior settings."
+  },
+  "toolbar_icon_click_behavior_select_popup": {
+    "message": "Okienko",
+    "description": "Option to open the popup when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_side_panel": {
+    "message": "Panel boczny",
+    "description": "Option to open the side panel when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_dashboard": {
+    "message": "Pulpit nawigacyjny",
+    "description": "Option to open the dashboard when the toolbar icon is clicked."
   },
   "scale": {
     "message": "Skala",
