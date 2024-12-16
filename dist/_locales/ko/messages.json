@@ -388,8 +388,20 @@
     "description": "The main header for the toolbar setting section."
   },
   "toolbar_icon_click_behavior_setting_header": {
-    "message": "도구 모음 아이콘을 클릭하면 대시보드가 열립니다.",
+    "message": "도구 모음 아이콘을 클릭할 때 열릴 뷰를 선택하세요.",
     "description": "Heading for the toolbar icon click behavior settings."
+  },
+  "toolbar_icon_click_behavior_select_popup": {
+    "message": "팝업",
+    "description": "Option to open the popup when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_side_panel": {
+    "message": "사이드 패널",
+    "description": "Option to open the side panel when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_dashboard": {
+    "message": "대시보드",
+    "description": "Option to open the dashboard when the toolbar icon is clicked."
   },
   "scale": {
     "message": "비율",

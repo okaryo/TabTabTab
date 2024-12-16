@@ -388,8 +388,20 @@
     "description": "The main header for the toolbar setting section."
   },
   "toolbar_icon_click_behavior_setting_header": {
-    "message": "ツールバーのアイコンをクリックしたときにダッシュボードを開く",
+    "message": "ツールバーのアイコンをクリックしたときにどのビューで開くかを選択してください。",
     "description": "Heading for the toolbar icon click behavior settings."
+  },
+  "toolbar_icon_click_behavior_select_popup": {
+    "message": "ポップアップ",
+    "description": "Option to open the popup when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_side_panel": {
+    "message": "サイドパネル",
+    "description": "Option to open the side panel when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_dashboard": {
+    "message": "ダッシュボード",
+    "description": "Option to open the dashboard when the toolbar icon is clicked."
   },
   "scale": {
     "message": "スケール",
