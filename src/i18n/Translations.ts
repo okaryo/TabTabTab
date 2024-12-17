@@ -41,6 +41,9 @@ class Translations {
   get newTabTitleFormPlaceholderToStored() {
     return chrome.i18n.getMessage("new_tab_title_form_placeholder_to_stored");
   }
+  get newTabFormSiteFetchError() {
+    return chrome.i18n.getMessage("new_tab_form_site_fetch_error");
+  }
 
   // Grouped Tabs
   get pinned() {

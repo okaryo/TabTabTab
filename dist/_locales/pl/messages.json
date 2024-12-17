@@ -59,6 +59,10 @@
     "message": "Tytuł (automatycznie wypełniony z URL)",
     "description": "Text used to display the action for save a new tab to stored window/group"
   },
+  "new_tab_form_site_fetch_error": {
+    "message": "Nie udało się pobrać. Wprowadź ręcznie.",
+    "description": "Displayed when site title and favicon cannot be fetched automatically."
+  },
   "pinned": {
     "message": "Przypięty",
     "description": "Used as a heading for grouping and displaying pinned tabs together."
