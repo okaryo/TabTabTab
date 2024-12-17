@@ -40,7 +40,7 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
     setUrl(event.target.value);
   };
   const fetchSiteTitleAndFavicon = useCallback(async (url: string) => {
-    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+    const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent(url)}`;
     const response = await fetch(proxyUrl);
     if (!response.ok) {
       setLoading(false);
