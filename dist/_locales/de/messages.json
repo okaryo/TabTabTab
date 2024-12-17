@@ -59,6 +59,10 @@
     "message": "Titel (automatisch aus URL ausgefüllt)",
     "description": "Text used to display the action for save a new tab to stored window/group"
   },
+  "new_tab_form_site_fetch_error": {
+    "message": "Abrufen fehlgeschlagen. Bitte manuell eingeben.",
+    "description": "Displayed when site title and favicon cannot be fetched automatically."
+  },
   "pinned": {
     "message": "Angepinnt",
     "description": "Used as a heading for grouping and displaying pinned tabs together."
@@ -388,8 +392,20 @@
     "description": "The main header for the toolbar setting section."
   },
   "toolbar_icon_click_behavior_setting_header": {
-    "message": "Öffnen Sie das Dashboard, wenn auf das Symbol in der Symbolleiste geklickt wird.",
+    "message": "Wählen Sie aus, welche Ansicht geöffnet werden soll, wenn auf das Symbol in der Symbolleiste geklickt wird.",
     "description": "Heading for the toolbar icon click behavior settings."
+  },
+  "toolbar_icon_click_behavior_select_popup": {
+    "message": "Popup",
+    "description": "Option to open the popup when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_side_panel": {
+    "message": "Seitenbereich",
+    "description": "Option to open the side panel when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_dashboard": {
+    "message": "Dashboard",
+    "description": "Option to open the dashboard when the toolbar icon is clicked."
   },
   "scale": {
     "message": "Skalierung",

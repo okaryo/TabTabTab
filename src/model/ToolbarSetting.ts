@@ -1,7 +1,13 @@
 export type ToolbarSetting = {
-  openDashboardWhenIconClicked: boolean;
+  iconClickOpenView: "popup" | "sidePanel" | "dashboard";
 };
 
 export const defaultToolbarSetting: ToolbarSetting = {
-  openDashboardWhenIconClicked: false,
+  iconClickOpenView: "popup",
+};
+
+export const isValidIconClickOpenView = (
+  value: string,
+): value is ToolbarSetting["iconClickOpenView"] => {
+  return ["popup", "sidePanel", "dashboard"].includes(value);
 };

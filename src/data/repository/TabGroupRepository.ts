@@ -100,7 +100,7 @@ export const saveTabGroup = async (tabGroup: TabGroup): Promise<void> => {
 
 export const addTabToSavedGroup = async (
   groupId: string,
-  tab: { title: string; url: string; favIconUrl: string },
+  tab: { title: string; url: string; favIconUrl: string | null },
 ): Promise<void> => {
   const storedTabGroups = await ChromeLocalStorage.getStoredTabGroups();
   await ChromeLocalStorage.updateStoredTabGroups(
