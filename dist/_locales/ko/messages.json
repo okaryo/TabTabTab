@@ -59,6 +59,10 @@
     "message": "제목 (URL에서 자동 입력됨)",
     "description": "Text used to display the action for save a new tab to stored window/group"
   },
+  "new_tab_form_site_fetch_error": {
+    "message": "가져오기에 실패했습니다. 수동으로 입력해 주세요.",
+    "description": "Displayed when site title and favicon cannot be fetched automatically."
+  },
   "pinned": {
     "message": "고정됨",
     "description": "Used as a heading for grouping and displaying pinned tabs together."

@@ -59,6 +59,10 @@
     "message": "タイトル (URLから自動入力)",
     "description": "Text used to display the action for save a new tab to stored window/group"
   },
+  "new_tab_form_site_fetch_error": {
+    "message": "取得に失敗しました。手動で入力してください。",
+    "description": "Displayed when site title and favicon cannot be fetched automatically."
+  },
   "pinned": {
     "message": "固定タブ",
     "description": "Used as a heading for grouping and displaying pinned tabs together."

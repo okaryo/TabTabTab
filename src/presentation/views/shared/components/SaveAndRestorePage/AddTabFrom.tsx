@@ -11,7 +11,7 @@ type AddTabFormProps = {
   onComplete: (data: {
     url: string;
     title: string;
-    favIconUrl: string;
+    favIconUrl: string | null;
   }) => void;
   onCancel: () => void;
 };
@@ -25,27 +25,25 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
   const [title, setTitle] = useState("");
   const [favIconUrl, setFavIconUrl] = useState(null);
   const [isTitleEditable, setIsTitleEditable] = useState(false);
+  const [fetchSiteError, setFetchSiteError] = useState(false);
   const canAdd =
     !loading &&
     title !== "" &&
     url &&
-    favIconUrl &&
     URL.canParse(urlWithScheme(url)) &&
-    URL.canParse(urlWithScheme(favIconUrl));
+    (!favIconUrl || (favIconUrl && URL.canParse(urlWithScheme(favIconUrl))));
 
   const onChangeTitle = (event: React.ChangeEvent<HTMLInputElement>) => {
     setTitle(event.target.value);
+    setFetchSiteError(null);
   };
   const onChangeUrl = async (event: React.ChangeEvent<HTMLInputElement>) => {
     setUrl(event.target.value);
   };
   const fetchSiteTitleAndFavicon = useCallback(async (url: string) => {
-    const proxyUrl = `https://corsproxy.io/?${encodeURIComponent(url)}`;
+    const proxyUrl = `https://corsproxy.io/?url=${encodeURIComponent(url)}`;
     const response = await fetch(proxyUrl);
-    if (!response.ok) {
-      setLoading(false);
-      return;
-    }
+    if (!response.ok) throw new Error(response.statusText);
 
     const html = await response.text();
     const domParser = new DOMParser();
@@ -64,15 +62,12 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
     } else {
       setFavIconUrl(null);
     }
-
-    setIsTitleEditable(true);
-    setLoading(false);
   }, []);
   const onClickAddButton = () => {
     onComplete({
       title,
       url: urlWithScheme(url),
-      favIconUrl: urlWithScheme(favIconUrl),
+      favIconUrl: favIconUrl !== null ? urlWithScheme(favIconUrl) : null,
     });
   };
 
@@ -81,12 +76,19 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
     if (!URL.canParse(normalizedUrl)) return;
 
     setLoading(true);
-    try {
-      fetchSiteTitleAndFavicon(normalizedUrl);
-    } catch (error) {
-      console.error("Failed to fetch metadata:", error);
-      setLoading(false);
-    }
+    fetchSiteTitleAndFavicon(normalizedUrl)
+      .then(() => {
+        setFetchSiteError(null);
+      })
+      .catch((error) => {
+        console.error("Failed to fetch metadata:", error);
+        setFavIconUrl(null);
+        setFetchSiteError(true);
+      })
+      .finally(() => {
+        setLoading(false);
+        setIsTitleEditable(true);
+      });
   }, [debouncedUrl, fetchSiteTitleAndFavicon]);
 
   return (
@@ -99,9 +101,12 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
     >
       <Stack sx={{ flexGrow: 1 }} spacing={0.5}>
         <TextField
-          placeholder={t.newTabTitleFormPlaceholderToStored}
           variant="outlined"
           size="small"
+          value={title}
+          placeholder={t.newTabTitleFormPlaceholderToStored}
+          error={fetchSiteError}
+          helperText={fetchSiteError ? t.newTabFormSiteFetchError : null}
           disabled={!isTitleEditable}
           slotProps={{
             input: {
@@ -116,7 +121,6 @@ const AddTabForm = forwardRef<HTMLDivElement, AddTabFormProps>((props, ref) => {
               ),
             },
           }}
-          value={title}
           onChange={onChangeTitle}
         />
         <TextField
