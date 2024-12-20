@@ -1,12 +1,16 @@
+import AddIcon from "@mui/icons-material/Add";
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import ContentCopyIcon from "@mui/icons-material/ContentCopy";
 import ControlPointIcon from "@mui/icons-material/ControlPoint";
 import ControlPointDuplicateIcon from "@mui/icons-material/ControlPointDuplicate";
 import CropFreeIcon from "@mui/icons-material/CropFree";
+import DeleteIcon from "@mui/icons-material/Delete";
+import EditIcon from "@mui/icons-material/Edit";
 import ForumIcon from "@mui/icons-material/Forum";
 import HighlightOffIcon from "@mui/icons-material/HighlightOff";
 import InputIcon from "@mui/icons-material/Input";
 import LibraryAddIcon from "@mui/icons-material/LibraryAdd";
+import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import PushPinIcon from "@mui/icons-material/PushPin";
 import RateReviewIcon from "@mui/icons-material/RateReview";
@@ -45,13 +49,15 @@ import {
 } from "../../../../data/repository/TabsRepository";
 import {
   closeWindow,
+  removeStoredWindow,
+  restoreWindow,
   saveWindow,
   saveWindows,
 } from "../../../../data/repository/WindowsRepository";
 import t from "../../../../i18n/Translations";
 import type { Tab } from "../../../../model/Tab";
 import type { Pinned, TabGroup } from "../../../../model/TabContainer";
-import type { Window } from "../../../../model/Window";
+import type { StoredWindow, Window } from "../../../../model/Window";
 import mergeWindow from "../../../functions/mergeWindow";
 
 type ActionMenuItemAttrs =
@@ -396,6 +402,73 @@ export const PopupHeaderActionMenu = (props: PopupHeaderActionMenuProps) => {
       label: t.sponsorProject,
       icon: <VolunteerActivismIcon fontSize="small" />,
       action: () => createNewTab("https://www.buymeacoffee.com/okaryo"),
+    },
+  ];
+
+  return (
+    <ActionMenu
+      items={items}
+      isOpenMenu={isOpenMenu}
+      anchorElement={anchorElement}
+      onCloseMenu={onCloseMenu}
+    />
+  );
+};
+
+type StoredWindowActionMenuProps = Omit<ActionMenuProps, "items"> & {
+  window: StoredWindow;
+  onClickAddTabAction: () => void;
+  onClickEditAction: () => void;
+};
+export const StoredWindowActionMenu = (props: StoredWindowActionMenuProps) => {
+  const {
+    window,
+    onClickAddTabAction,
+    onClickEditAction,
+    isOpenMenu,
+    anchorElement,
+    onCloseMenu,
+  } = props;
+  const onClickAddButton = () => {
+    onClickAddTabAction();
+  };
+  const onClickEditButton = () => {
+    onClickEditAction();
+  };
+  const onClickRestoreButton = () => {
+    restoreWindow(window);
+  };
+  const onClickRemoveButton = () => {
+    removeStoredWindow(window.internalUid);
+  };
+
+  const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.addTab,
+      icon: <AddIcon fontSize="small" />,
+      action: onClickAddButton,
+    },
+    {
+      type: "MenuItem",
+      label: t.editTitle,
+      icon: <EditIcon fontSize="small" />,
+      action: onClickEditButton,
+    },
+    {
+      type: "MenuItem",
+      label: t.open,
+      icon: <OpenInBrowserIcon fontSize="small" />,
+      action: onClickRestoreButton,
+    },
+    {
+      type: "Divider",
+    },
+    {
+      type: "MenuItem",
+      label: t.remove,
+      icon: <DeleteIcon fontSize="small" />,
+      action: onClickRemoveButton,
     },
   ];
 

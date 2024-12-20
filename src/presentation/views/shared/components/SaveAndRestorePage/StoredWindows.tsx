@@ -1,9 +1,6 @@
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SyncIcon from "@mui/icons-material/Sync";
 import MuiAccordion, { type AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
@@ -24,8 +21,6 @@ import { useContext, useEffect, useRef, useState } from "react";
 import {
   addTabToStoredWindow,
   removeItemFromStoredWindow,
-  removeStoredWindow,
-  restoreWindow,
   saveWindow,
   updateStoredWindowName,
 } from "../../../../../data/repository/WindowsRepository";
@@ -34,6 +29,7 @@ import { isLoading } from "../../../../../model/AsyncState";
 import type { StoredWindow } from "../../../../../model/Window";
 import { StoredWindowsContext } from "../../../../contexts/StoredWindowsContext";
 import { WindowsContext } from "../../../../contexts/WindowsContext";
+import { StoredWindowActionMenu } from "../ActionMenu";
 import AddTabForm from "./AddTabFrom";
 import StoredTabItem from "./StoredTabItem";
 import { StoredTabItemContainer } from "./StoredTabItemContainer";
@@ -84,29 +80,27 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
     "children" in child ? child.children : child,
   ).length;
 
-  const onChangeWindowNameField = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    updateStoredWindowName(window.internalUid, event.target.value);
-  };
-  const onClickAddButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
+  const onClickAddTabAction = () => {
     setAddTabMode(!addTabMode);
     if (!expanded) {
       setExpanded(true);
     }
   };
-  const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
+  const onClickEditAction = () => {
     setEditMode(!editMode);
   };
-  const onClickRestoreButton = (event: React.MouseEvent<HTMLButtonElement>) => {
+  const [menuAnchorElement, setMenuAnchorElement] =
+    useState<HTMLElement | null>(null);
+  const onClickWindowActionMenu = (event: React.MouseEvent<HTMLElement>) => {
     event.stopPropagation();
-    restoreWindow(window);
+    setMenuAnchorElement(event.currentTarget);
   };
-  const onClickRemoveButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    removeStoredWindow(window.internalUid);
+  const onCloseMenu = () => setMenuAnchorElement(null);
+
+  const onChangeWindowNameField = (
+    event: React.ChangeEvent<HTMLInputElement>,
+  ) => {
+    updateStoredWindowName(window.internalUid, event.target.value);
   };
 
   useEffect(() => {
@@ -139,7 +133,11 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   return (
     <OutlinedAccordion
       expanded={expanded}
-      onChange={() => setExpanded(!expanded)}
+      onChange={() => {
+        if (!menuAnchorElement) {
+          setExpanded(!expanded);
+        }
+      }}
     >
       <AccordionSummary
         sx={[
@@ -185,19 +183,10 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
           <Chip label={allCount} size="small" color="primary" />
         </Stack>
         <Stack direction="row">
-          {(expanded || isHovered) && (
+          {isHovered && (
             <>
-              <IconButton ref={addTabButtonRef} onClick={onClickAddButton}>
-                <AddIcon />
-              </IconButton>
-              <IconButton ref={editButtonRef} onClick={onClickEditButton}>
-                <EditIcon />
-              </IconButton>
-              <IconButton onClick={onClickRestoreButton}>
-                <OpenInBrowserIcon />
-              </IconButton>
-              <IconButton onClick={onClickRemoveButton}>
-                <DeleteIcon />
+              <IconButton onClick={onClickWindowActionMenu}>
+                <MoreVertIcon />
               </IconButton>
               <Divider orientation="vertical" variant="middle" flexItem />
             </>
@@ -205,6 +194,14 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
           <IconButton>
             {expanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
           </IconButton>
+          <StoredWindowActionMenu
+            window={window}
+            onClickAddTabAction={onClickAddTabAction}
+            onClickEditAction={onClickEditAction}
+            isOpenMenu={Boolean(menuAnchorElement)}
+            anchorElement={menuAnchorElement}
+            onCloseMenu={onCloseMenu}
+          />
         </Stack>
       </AccordionSummary>
       <AccordionDetails style={{ padding: 0 }}>
