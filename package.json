@@ -17,7 +17,7 @@
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
     "@types/chrome": "^0.0.287",
-    "@types/react": "^18.3.16",
+    "@types/react": "^18.3.18",
     "@types/react-dom": "^18.3.5",
     "@vitejs/plugin-react": "^4.3.4",
     "chromex-locale-lint": "^0.1.0",
