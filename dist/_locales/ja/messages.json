@@ -478,5 +478,21 @@
   "sponsor_page_description": {
     "message": "TabTabTabは、主に個人によって開発されているオープンソースプロジェクトです。役立つツールと思われましたら、このプロジェクトをサポートしていただけるとありがたいです。",
     "description": "Description in Sponsor Page"
+  },
+  "add_tab": {
+    "message": "タブを追加",
+    "description": "Action to add a new tab."
+  },
+  "edit_title": {
+    "message": "タイトルを編集",
+    "description": "Action to edit the title of an item."
+  },
+  "open": {
+    "message": "開く",
+    "description": "Action to open the selected item."
+  },
+  "remove": {
+    "message": "削除",
+    "description": "Action to remove the selected item."
   }
 }

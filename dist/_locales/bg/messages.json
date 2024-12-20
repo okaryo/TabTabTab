@@ -478,5 +478,21 @@
   "sponsor_page_description": {
     "message": "TabTabTab е отворен проект, разработен главно от един индивид. Ако намирате, че е полезен, ще съм благодарен, ако обмислите подкрепата си за този проект.",
     "description": "Description in Sponsor Page"
+  },
+  "add_tab": {
+    "message": "Добавяне на раздел",
+    "description": "Action to add a new tab."
+  },
+  "edit_title": {
+    "message": "Редактиране на заглавието",
+    "description": "Action to edit the title of an item."
+  },
+  "open": {
+    "message": "Отвори",
+    "description": "Action to open the selected item."
+  },
+  "remove": {
+    "message": "Премахни",
+    "description": "Action to remove the selected item."
   }
 }

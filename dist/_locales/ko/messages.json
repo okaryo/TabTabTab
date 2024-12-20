@@ -478,5 +478,21 @@
   "sponsor_page_description": {
     "message": "TabTabTab은 주로 개인이 개발한 오픈 소스 프로젝트입니다. 유용하다고 생각되면 이 프로젝트를 지원해 주시면 감사하겠습니다.",
     "description": "Description in Sponsor Page"
+  },
+  "add_tab": {
+    "message": "탭 추가",
+    "description": "Action to add a new tab."
+  },
+  "edit_title": {
+    "message": "제목 편집",
+    "description": "Action to edit the title of an item."
+  },
+  "open": {
+    "message": "열기",
+    "description": "Action to open the selected item."
+  },
+  "remove": {
+    "message": "삭제",
+    "description": "Action to remove the selected item."
   }
 }
