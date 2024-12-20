@@ -30,6 +30,8 @@ import {
 } from "../../../../data/repository/SettingsRepository";
 import {
   closeTabGroup,
+  removeStoredTabGroup,
+  restoreTabGroup,
   saveTabGroup,
   ungroup,
 } from "../../../../data/repository/TabGroupRepository";
@@ -56,7 +58,11 @@ import {
 } from "../../../../data/repository/WindowsRepository";
 import t from "../../../../i18n/Translations";
 import type { Tab } from "../../../../model/Tab";
-import type { Pinned, TabGroup } from "../../../../model/TabContainer";
+import type {
+  Pinned,
+  StoredTabGroup,
+  TabGroup,
+} from "../../../../model/TabContainer";
 import type { StoredWindow, Window } from "../../../../model/Window";
 import mergeWindow from "../../../functions/mergeWindow";
 
@@ -440,6 +446,75 @@ export const StoredWindowActionMenu = (props: StoredWindowActionMenuProps) => {
   };
   const onClickRemoveButton = () => {
     removeStoredWindow(window.internalUid);
+  };
+
+  const items: ActionMenuItemAttrs[] = [
+    {
+      type: "MenuItem",
+      label: t.addTab,
+      icon: <AddIcon fontSize="small" />,
+      action: onClickAddButton,
+    },
+    {
+      type: "MenuItem",
+      label: t.editTitle,
+      icon: <EditIcon fontSize="small" />,
+      action: onClickEditButton,
+    },
+    {
+      type: "MenuItem",
+      label: t.open,
+      icon: <OpenInBrowserIcon fontSize="small" />,
+      action: onClickRestoreButton,
+    },
+    {
+      type: "Divider",
+    },
+    {
+      type: "MenuItem",
+      label: t.remove,
+      icon: <DeleteIcon fontSize="small" />,
+      action: onClickRemoveButton,
+    },
+  ];
+
+  return (
+    <ActionMenu
+      items={items}
+      isOpenMenu={isOpenMenu}
+      anchorElement={anchorElement}
+      onCloseMenu={onCloseMenu}
+    />
+  );
+};
+
+type StoredTabGroupActionMenuProps = Omit<ActionMenuProps, "items"> & {
+  group: StoredTabGroup;
+  onClickAddTabAction: () => void;
+  onClickEditAction: () => void;
+};
+export const StoredTabGroupActionMenu = (
+  props: StoredTabGroupActionMenuProps,
+) => {
+  const {
+    group,
+    onClickAddTabAction,
+    onClickEditAction,
+    isOpenMenu,
+    anchorElement,
+    onCloseMenu,
+  } = props;
+  const onClickAddButton = () => {
+    onClickAddTabAction();
+  };
+  const onClickEditButton = () => {
+    onClickEditAction();
+  };
+  const onClickRestoreButton = () => {
+    restoreTabGroup(group);
+  };
+  const onClickRemoveButton = () => {
+    removeStoredTabGroup(group.internalUid);
   };
 
   const items: ActionMenuItemAttrs[] = [

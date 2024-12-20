@@ -1,9 +1,6 @@
-import AddIcon from "@mui/icons-material/Add";
-import DeleteIcon from "@mui/icons-material/Delete";
-import EditIcon from "@mui/icons-material/Edit";
 import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import OpenInBrowserIcon from "@mui/icons-material/OpenInBrowser";
+import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SyncIcon from "@mui/icons-material/Sync";
 import MuiAccordion, { type AccordionProps } from "@mui/material/Accordion";
 import MuiAccordionDetails from "@mui/material/AccordionDetails";
@@ -22,9 +19,7 @@ import { alpha, styled, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
   addTabToSavedGroup,
-  removeStoredTabGroup,
   removeTabFromStoredTabGroup,
-  restoreTabGroup,
   updateStoredTabGroupColor,
   updateStoredTabGroupName,
 } from "../../../../../data/repository/TabGroupRepository";
@@ -35,6 +30,7 @@ import {
   tabGroupColors,
 } from "../../../../../model/TabContainer";
 import { StoredTabGroupsContext } from "../../../../contexts/StoredTabGroupsContext";
+import { StoredTabGroupActionMenu } from "../ActionMenu";
 import TabGroupColorRadio from "../TabGroupColorRadio";
 import AddTabForm from "./AddTabFrom";
 import StoredTabItem from "./StoredTabItem";
@@ -83,31 +79,28 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
   const [expanded, setExpanded] = useState(index === 0);
   const [isHovered, setIsHovered] = useState(false);
 
-  const onClickAddButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setAddTabMode(!addTabMode);
-    if (!expanded) {
-      setExpanded(true);
-    }
-  };
-  const onClickEditButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    setEditMode(!editMode);
-  };
-  const onClickRestoreButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    restoreTabGroup(group);
-  };
-  const onClickRemoveButton = (event: React.MouseEvent<HTMLButtonElement>) => {
-    event.stopPropagation();
-    removeStoredTabGroup(group.internalUid);
-  };
-
   const onChangeGroupNameField = (
     event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     updateStoredTabGroupName(group.internalUid, event.target.value);
   };
+
+  const onClickAddTabAction = () => {
+    setAddTabMode(!addTabMode);
+    if (!expanded) {
+      setExpanded(true);
+    }
+  };
+  const onClickEditAction = () => {
+    setEditMode(!editMode);
+  };
+  const [menuAnchorElement, setMenuAnchorElement] =
+    useState<HTMLElement | null>(null);
+  const onClickWindowActionMenu = (event: React.MouseEvent<HTMLElement>) => {
+    event.stopPropagation();
+    setMenuAnchorElement(event.currentTarget);
+  };
+  const onCloseMenu = () => setMenuAnchorElement(null);
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -139,7 +132,11 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
   return (
     <OutlinedAccordion
       expanded={expanded}
-      onChange={() => setExpanded(!expanded)}
+      onChange={() => {
+        if (!menuAnchorElement) {
+          setExpanded(!expanded);
+        }
+      }}
     >
       <AccordionSummary
         sx={[
@@ -230,19 +227,10 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
           )}
         </Stack>
         <Stack direction="row">
-          {(expanded || isHovered) && (
+          {isHovered && (
             <>
-              <IconButton ref={addTabButtonRef} onClick={onClickAddButton}>
-                <AddIcon />
-              </IconButton>
-              <IconButton ref={editButtonRef} onClick={onClickEditButton}>
-                <EditIcon />
-              </IconButton>
-              <IconButton onClick={onClickRestoreButton}>
-                <OpenInBrowserIcon />
-              </IconButton>
-              <IconButton onClick={onClickRemoveButton}>
-                <DeleteIcon />
+              <IconButton onClick={onClickWindowActionMenu}>
+                <MoreVertIcon />
               </IconButton>
               <Divider orientation="vertical" variant="middle" flexItem />
             </>
@@ -250,6 +238,14 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
           <IconButton>
             {expanded ? <ExpandMoreIcon /> : <ExpandLessIcon />}
           </IconButton>
+          <StoredTabGroupActionMenu
+            group={group}
+            onClickAddTabAction={onClickAddTabAction}
+            onClickEditAction={onClickEditAction}
+            isOpenMenu={Boolean(menuAnchorElement)}
+            anchorElement={menuAnchorElement}
+            onCloseMenu={onCloseMenu}
+          />
         </Stack>
       </AccordionSummary>
       <AccordionDetails style={{ padding: 0 }}>
