@@ -398,6 +398,20 @@ class Translations {
   get sponsorPageDescription() {
     return chrome.i18n.getMessage("sponsor_page_description");
   }
+
+  // Common
+  get addTab() {
+    return chrome.i18n.getMessage("add_tab");
+  }
+  get editTitle() {
+    return chrome.i18n.getMessage("edit_title");
+  }
+  get open() {
+    return chrome.i18n.getMessage("open");
+  }
+  get remove() {
+    return chrome.i18n.getMessage("remove");
+  }
 }
 
 const t = new Translations();
