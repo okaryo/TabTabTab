@@ -478,5 +478,21 @@
   "sponsor_page_description": {
     "message": "TabTabTab is an open-source project, mainly developed by an individual. If you find it useful, I'd be grateful if you could consider supporting this project.",
     "description": "Description in Sponsor Page"
+  },
+  "add_tab": {
+    "message": "Add Tab",
+    "description": "Action to add a new tab."
+  },
+  "edit_title": {
+    "message": "Edit Title",
+    "description": "Action to edit the title of an item."
+  },
+  "open": {
+    "message": "Open",
+    "description": "Action to open the selected item."
+  },
+  "remove": {
+    "message": "Remove",
+    "description": "Action to remove the selected item."
   }
 }
