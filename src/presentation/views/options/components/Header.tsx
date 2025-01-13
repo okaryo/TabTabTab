@@ -16,6 +16,7 @@ import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Toolbar from "@mui/material/Toolbar";
+import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useState } from "react";
@@ -23,7 +24,13 @@ import { getRecentActiveTabs } from "../../../../data/repository/TabsRepository"
 import { updateMode } from "../../../../data/repository/ThemeRepository";
 import t from "../../../../i18n/Translations";
 import type { Tab } from "../../../../model/Tab";
+import { findTabsByTitleOrUrl } from "../../../../model/Window";
 import { ModeContext } from "../../../contexts/ModeContext";
+import {
+  WindowsContext,
+  WindowsProvider,
+} from "../../../contexts/WindowsContext";
+import groupTabsBySearchKeyword from "../../../functions/groupTabsBySearchKeyword";
 import TabItem from "../../shared/components/TabItem";
 
 type SearchDialogProps = {
@@ -63,10 +70,84 @@ const RecentActiveTabs = ({ tabs }: { tabs: Tab[] }) => {
   );
 };
 
+const NoResultsFound = () => {
+  return (
+    <Box sx={{ p: 2 }}>
+      <Typography
+        variant="h6"
+        component="h2"
+        sx={{ ml: 2, textAlign: "center" }}
+      >
+        {t.noResultsFound}
+      </Typography>
+    </Box>
+  );
+};
+
+type SearchedTabsProps = {
+  searchText: string;
+  searchedTabs: Tab[];
+  onClickGroupTabsButton: () => void;
+};
+const SearchedTabs = (props: SearchedTabsProps) => {
+  const { searchText, searchedTabs, onClickGroupTabsButton } = props;
+
+  return (
+    <List
+      sx={{ width: "100%" }}
+      disablePadding
+      subheader={
+        <ListSubheader
+          component="div"
+          disableGutters
+          color="primary"
+          sx={{ py: 1 }}
+          style={{ backgroundImage: "var(--Paper-overlay)", lineHeight: 1.5 }}
+        >
+          <Tooltip title={t.groupTabsSearchResultTabsDescription}>
+            <Button
+              variant="contained"
+              sx={{ width: "100%", textTransform: "none" }}
+              onClick={onClickGroupTabsButton}
+            >
+              {`${t.groupTabsSearchResultTabs}: ${searchText}`}
+            </Button>
+          </Tooltip>
+        </ListSubheader>
+      }
+    >
+      <Paper variant="outlined" style={{ overflow: "hidden" }}>
+        {searchedTabs.map((tab) => (
+          <TabItem
+            key={tab.id}
+            tab={{ ...tab, active: false }}
+            showDragIndicatorIcon={false}
+            showBelongingContainer
+          />
+        ))}
+      </Paper>
+    </List>
+  );
+};
+
 const SearchDialog = (props: SearchDialogProps) => {
   const { open, onClose } = props;
+  const { windows } = useContext(WindowsContext);
   const [searchText, setSearchText] = useState("");
   const [recentActiveTabs, setRecentActiveTabs] = useState<Tab[]>(null);
+  const searchedTabs = findTabsByTitleOrUrl(windows, searchText);
+
+  const closeDialog = () => {
+    setSearchText("");
+    onClose();
+  };
+
+  const onClickGroupTabsButton = () => {
+    const tabIds = searchedTabs.map((t) => t.id);
+    groupTabsBySearchKeyword(searchText, windows, tabIds);
+
+    closeDialog();
+  };
 
   useEffect(() => {
     const initializeState = async () => {
@@ -86,7 +167,7 @@ const SearchDialog = (props: SearchDialogProps) => {
       }}
       fullWidth
       open={open}
-      onClose={onClose}
+      onClose={closeDialog}
     >
       <Container sx={{ pt: 2, px: 2 }} disableGutters>
         <TextField
@@ -122,6 +203,14 @@ const SearchDialog = (props: SearchDialogProps) => {
       >
         {!searchText && recentActiveTabs && recentActiveTabs.length > 0 && (
           <RecentActiveTabs tabs={recentActiveTabs} />
+        )}
+        {searchText && searchedTabs.length === 0 && <NoResultsFound />}
+        {searchText && searchedTabs.length > 0 && (
+          <SearchedTabs
+            searchText={searchText}
+            searchedTabs={searchedTabs}
+            onClickGroupTabsButton={onClickGroupTabsButton}
+          />
         )}
       </Box>
     </Dialog>
@@ -184,10 +273,12 @@ const Header = () => {
           >
             {t.searchTabs}
           </Button>
-          <SearchDialog
-            open={openSearchDialog}
-            onClose={() => setOpenSearchDialog(false)}
-          />
+          <WindowsProvider>
+            <SearchDialog
+              open={openSearchDialog}
+              onClose={() => setOpenSearchDialog(false)}
+            />
+          </WindowsProvider>
 
           <IconButton
             onClick={() => updateMode(mode === "light" ? "dark" : "light")}
