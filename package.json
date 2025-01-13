@@ -16,13 +16,13 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/chrome": "^0.0.287",
-    "@types/react": "^19.0.2",
+    "@types/chrome": "^0.0.290",
+    "@types/react": "^19.0.3",
     "@types/react-dom": "^19.0.2",
     "@vitejs/plugin-react": "^4.3.4",
     "chromex-locale-lint": "^0.1.0",
     "typescript": "^5.7.2",
-    "vite": "^6.0.5",
+    "vite": "^6.0.6",
     "vitest": "^2.1.8"
   },
   "dependencies": {
@@ -30,10 +30,10 @@
     "@dnd-kit/sortable": "^8.0.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.2.1",
-    "@mui/material": "^6.2.1",
+    "@mui/icons-material": "^6.3.0",
+    "@mui/material": "^6.3.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tldts": "^6.1.69"
+    "tldts": "^6.1.70"
   }
 }
