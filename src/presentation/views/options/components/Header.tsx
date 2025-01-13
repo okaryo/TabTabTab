@@ -134,15 +134,15 @@ const Header = () => {
   const [openSearchDialog, setOpenSearchDialog] = useState(false);
 
   useEffect(() => {
-    const handleKeyDown = (event) => {
-      if (event.key === "/") {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "/" && !openSearchDialog) {
         event.preventDefault();
         setOpenSearchDialog(true);
       }
     };
     window.addEventListener("keydown", handleKeyDown);
     return () => window.removeEventListener("keydown", handleKeyDown);
-  }, []);
+  }, [openSearchDialog]);
 
   return (
     <AppBar position="static" color="primary">
