@@ -3,6 +3,7 @@ import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import SearchIcon from "@mui/icons-material/Search";
 import AppBar from "@mui/material/AppBar";
+import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Chip from "@mui/material/Chip";
 import Container from "@mui/material/Container";
@@ -33,14 +34,14 @@ type SearchDialogProps = {
 const RecentActiveTabs = ({ tabs }: { tabs: Tab[] }) => {
   return (
     <List
-      sx={{ width: "100%", overflowY: "auto" }}
+      sx={{ width: "100%" }}
       disablePadding
       subheader={
         <ListSubheader
           component="div"
           disableGutters
           color="primary"
-          style={{ backgroundColor: "transparent" }}
+          style={{ backgroundImage: "var(--Paper-overlay)" }}
         >
           {t.recentActiveTabsHeader}
         </ListSubheader>
@@ -64,7 +65,6 @@ const RecentActiveTabs = ({ tabs }: { tabs: Tab[] }) => {
 
 const SearchDialog = (props: SearchDialogProps) => {
   const { open, onClose } = props;
-  const _theme = useTheme();
   const [searchText, setSearchText] = useState("");
   const [recentActiveTabs, setRecentActiveTabs] = useState<Tab[]>(null);
 
@@ -77,37 +77,53 @@ const SearchDialog = (props: SearchDialogProps) => {
   }, []);
 
   return (
-    <Dialog sx={{ maxHeight: 600 }} fullWidth open={open} onClose={onClose}>
-      <Container maxWidth="sm" sx={{ p: 2 }} disableGutters>
-        <Stack>
-          <TextField
-            placeholder={t.searchTabs}
-            value={searchText}
-            onChange={(event) => setSearchText(event.target.value)}
-            fullWidth
-            autoFocus
-            slotProps={{
-              input: {
-                startAdornment: (
-                  <InputAdornment position="start">
-                    <SearchIcon />
-                  </InputAdornment>
-                ),
-                endAdornment: searchText && (
-                  <InputAdornment position="end">
-                    <IconButton onClick={() => setSearchText("")}>
-                      <ClearIcon />
-                    </IconButton>
-                  </InputAdornment>
-                ),
-              },
-            }}
-          />
-          {!searchText && recentActiveTabs && recentActiveTabs.length > 0 && (
-            <RecentActiveTabs tabs={recentActiveTabs} />
-          )}
-        </Stack>
+    <Dialog
+      sx={{
+        maxHeight: 600,
+        "& .MuiDialog-container": {
+          alignItems: "flex-start",
+        },
+      }}
+      fullWidth
+      open={open}
+      onClose={onClose}
+    >
+      <Container sx={{ pt: 2, px: 2 }} disableGutters>
+        <TextField
+          placeholder={t.searchTabs}
+          value={searchText}
+          onChange={(event) => setSearchText(event.target.value)}
+          fullWidth
+          autoFocus
+          slotProps={{
+            input: {
+              startAdornment: (
+                <InputAdornment position="start">
+                  <SearchIcon />
+                </InputAdornment>
+              ),
+              endAdornment: searchText && (
+                <InputAdornment position="end">
+                  <IconButton onClick={() => setSearchText("")}>
+                    <ClearIcon />
+                  </IconButton>
+                </InputAdornment>
+              ),
+            },
+          }}
+        />
       </Container>
+      <Box
+        sx={{
+          overflowY: "auto",
+          px: 2,
+          pb: 2,
+        }}
+      >
+        {!searchText && recentActiveTabs && recentActiveTabs.length > 0 && (
+          <RecentActiveTabs tabs={recentActiveTabs} />
+        )}
+      </Box>
     </Dialog>
   );
 };
