@@ -2,6 +2,7 @@ import ClearIcon from "@mui/icons-material/Clear";
 import DarkModeIcon from "@mui/icons-material/DarkMode";
 import LightModeIcon from "@mui/icons-material/LightMode";
 import SearchIcon from "@mui/icons-material/Search";
+import SearchOffIcon from "@mui/icons-material/SearchOff";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -72,7 +73,8 @@ const RecentActiveTabs = ({ tabs }: { tabs: Tab[] }) => {
 
 const NoResultsFound = () => {
   return (
-    <Box sx={{ p: 2 }}>
+    <Stack sx={{ p: 4, alignItems: "center" }} spacing={2}>
+      <SearchOffIcon sx={{ fontSize: 48 }} />
       <Typography
         variant="h6"
         component="h2"
@@ -80,7 +82,7 @@ const NoResultsFound = () => {
       >
         {t.noResultsFound}
       </Typography>
-    </Box>
+    </Stack>
   );
 };
 

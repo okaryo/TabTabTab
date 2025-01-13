@@ -1,8 +1,10 @@
+import SearchOffIcon from "@mui/icons-material/SearchOff";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Divider from "@mui/material/Divider";
 import List from "@mui/material/List";
 import ListSubheader from "@mui/material/ListSubheader";
+import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
@@ -118,7 +120,8 @@ const SearchResult = (props: SearchResultProps) => {
   return (
     <>
       {tabs.length === 0 && (
-        <Box sx={{ p: 2 }}>
+        <Stack sx={{ p: 2, alignItems: "center" }} spacing={1}>
+          <SearchOffIcon fontSize="large" />
           <Typography
             variant="h6"
             component="h2"
@@ -126,7 +129,7 @@ const SearchResult = (props: SearchResultProps) => {
           >
             {t.noResultsFound}
           </Typography>
-        </Box>
+        </Stack>
       )}
       {tabs.length > 0 && (
         <List
