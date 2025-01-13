@@ -19,7 +19,7 @@ import Toolbar from "@mui/material/Toolbar";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { getRecentActiveTabs } from "../../../../data/repository/TabsRepository";
 import { updateMode } from "../../../../data/repository/ThemeRepository";
 import t from "../../../../i18n/Translations";
@@ -133,6 +133,7 @@ const SearchedTabs = (props: SearchedTabsProps) => {
 const SearchDialog = (props: SearchDialogProps) => {
   const { open, onClose } = props;
   const { windows } = useContext(WindowsContext);
+  const textFieldRef = useRef<HTMLInputElement | null>(null);
   const [searchText, setSearchText] = useState("");
   const [recentActiveTabs, setRecentActiveTabs] = useState<Tab[]>(null);
   const searchedTabs = findTabsByTitleOrUrl(windows, searchText);
@@ -140,6 +141,11 @@ const SearchDialog = (props: SearchDialogProps) => {
   const closeDialog = () => {
     setSearchText("");
     onClose();
+  };
+
+  const onClearSearchText = () => {
+    setSearchText("");
+    textFieldRef.current?.focus();
   };
 
   const onClickGroupTabsButton = () => {
@@ -171,6 +177,7 @@ const SearchDialog = (props: SearchDialogProps) => {
     >
       <Container sx={{ pt: 2, px: 2 }} disableGutters>
         <TextField
+          inputRef={textFieldRef}
           placeholder={t.searchTabs}
           value={searchText}
           onChange={(event) => setSearchText(event.target.value)}
@@ -185,7 +192,7 @@ const SearchDialog = (props: SearchDialogProps) => {
               ),
               endAdornment: searchText && (
                 <InputAdornment position="end">
-                  <IconButton onClick={() => setSearchText("")}>
+                  <IconButton onClick={onClearSearchText}>
                     <ClearIcon />
                   </IconButton>
                 </InputAdornment>
