@@ -381,6 +381,7 @@ const SearchDialog = (props: SearchDialogProps) => {
 
   const onClearSearchText = () => {
     setSearchText("");
+    setSelectedItemIndex(0);
     textFieldRef.current?.focus();
   };
 
