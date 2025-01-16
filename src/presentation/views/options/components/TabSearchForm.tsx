@@ -183,14 +183,17 @@ const SearchDialog = (props: SearchDialogProps) => {
         ? searchedTabs.length - 1
         : recentActiveTabs.length - 1;
 
-      if (event.key === "ArrowDown") {
-        setSelectedItemIndex((oldIndex) =>
-          oldIndex === maxIndex ? minIndex : oldIndex + 1,
-        );
-      } else if (event.key === "ArrowUp") {
-        setSelectedItemIndex((oldIndex) =>
-          oldIndex === minIndex ? maxIndex : oldIndex - 1,
-        );
+      if (["ArrowUp", "ArrowDown"].includes(event.key)) {
+        event.preventDefault();
+        if (event.key === "ArrowDown") {
+          setSelectedItemIndex((oldIndex) =>
+            oldIndex === maxIndex ? minIndex : oldIndex + 1,
+          );
+        } else if (event.key === "ArrowUp") {
+          setSelectedItemIndex((oldIndex) =>
+            oldIndex === minIndex ? maxIndex : oldIndex - 1,
+          );
+        }
       } else if (event.key === "Enter") {
         const tabs = searchText ? searchedTabs : recentActiveTabs;
         focusTab(tabs[selectedItemIndex]);
@@ -224,6 +227,9 @@ const SearchDialog = (props: SearchDialogProps) => {
           fullWidth
           autoFocus
           slotProps={{
+            htmlInput: {
+              autoComplete: "off",
+            },
             input: {
               startAdornment: (
                 <InputAdornment position="start">
