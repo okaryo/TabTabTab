@@ -17,7 +17,10 @@ import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
-import { getRecentActiveTabs } from "../../../../data/repository/TabsRepository";
+import {
+  focusTab,
+  getRecentActiveTabs,
+} from "../../../../data/repository/TabsRepository";
 import t from "../../../../i18n/Translations";
 import type { Tab } from "../../../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../../../model/Window";
@@ -28,12 +31,13 @@ import {
 import groupTabsBySearchKeyword from "../../../functions/groupTabsBySearchKeyword";
 import TabItem from "../../shared/components/TabItem";
 
-type SearchDialogProps = {
-  open: boolean;
-  onClose: () => void;
+type RecentActiveTabsProps = {
+  tabs: Tab[];
+  selectedIndex: number;
 };
+const RecentActiveTabs = (props: RecentActiveTabsProps) => {
+  const { tabs, selectedIndex } = props;
 
-const RecentActiveTabs = ({ tabs }: { tabs: Tab[] }) => {
   return (
     <List
       sx={{ width: "100%" }}
@@ -50,11 +54,11 @@ const RecentActiveTabs = ({ tabs }: { tabs: Tab[] }) => {
       }
     >
       <Paper variant="outlined" style={{ overflow: "hidden" }}>
-        {tabs.map((tab) => (
+        {tabs.map((tab, index) => (
           <TabItem
             key={tab.id}
             tab={tab}
-            selected={false}
+            selected={selectedIndex === index}
             showDragIndicatorIcon={false}
             showActions={false}
             showDuplicatedChip={false}
@@ -83,10 +87,12 @@ const NoResultsFound = () => {
 type SearchedTabsProps = {
   searchText: string;
   searchedTabs: Tab[];
+  selectedIndex: number;
   onClickGroupTabsButton: () => void;
 };
 const SearchedTabs = (props: SearchedTabsProps) => {
-  const { searchText, searchedTabs, onClickGroupTabsButton } = props;
+  const { searchText, searchedTabs, selectedIndex, onClickGroupTabsButton } =
+    props;
 
   return (
     <List
@@ -113,12 +119,13 @@ const SearchedTabs = (props: SearchedTabsProps) => {
       }
     >
       <Paper variant="outlined" style={{ overflow: "hidden" }}>
-        {searchedTabs.map((tab) => (
+        {searchedTabs.map((tab, index) => (
           <TabItem
             key={tab.id}
             tab={{ ...tab, active: false }}
             showDragIndicatorIcon={false}
             showBelongingContainer
+            selected={selectedIndex === index}
           />
         ))}
       </Paper>
@@ -126,6 +133,10 @@ const SearchedTabs = (props: SearchedTabsProps) => {
   );
 };
 
+type SearchDialogProps = {
+  open: boolean;
+  onClose: () => void;
+};
 const SearchDialog = (props: SearchDialogProps) => {
   const { open, onClose } = props;
   const { windows } = useContext(WindowsContext);
@@ -133,10 +144,16 @@ const SearchDialog = (props: SearchDialogProps) => {
   const [searchText, setSearchText] = useState("");
   const [recentActiveTabs, setRecentActiveTabs] = useState<Tab[]>(null);
   const searchedTabs = findTabsByTitleOrUrl(windows, searchText);
+  const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
   const closeDialog = () => {
     setSearchText("");
     onClose();
+  };
+
+  const onChangeSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
+    setSelectedItemIndex(0);
   };
 
   const onClearSearchText = () => {
@@ -159,6 +176,33 @@ const SearchDialog = (props: SearchDialogProps) => {
     initializeState();
   }, []);
 
+  useEffect(() => {
+    const onKeyDown = (event: KeyboardEvent) => {
+      const minIndex = 0;
+      const maxIndex = searchText
+        ? searchedTabs.length - 1
+        : recentActiveTabs.length - 1;
+
+      if (event.key === "ArrowDown") {
+        setSelectedItemIndex((oldIndex) =>
+          oldIndex === maxIndex ? minIndex : oldIndex + 1,
+        );
+      } else if (event.key === "ArrowUp") {
+        setSelectedItemIndex((oldIndex) =>
+          oldIndex === minIndex ? maxIndex : oldIndex - 1,
+        );
+      } else if (event.key === "Enter") {
+        const tabs = searchText ? searchedTabs : recentActiveTabs;
+        focusTab(tabs[selectedItemIndex]);
+      }
+    };
+    document.addEventListener("keydown", onKeyDown);
+
+    return () => {
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [searchedTabs, recentActiveTabs, searchText, selectedItemIndex]);
+
   return (
     <Dialog
       sx={{
@@ -176,7 +220,7 @@ const SearchDialog = (props: SearchDialogProps) => {
           inputRef={textFieldRef}
           placeholder={t.searchTabs}
           value={searchText}
-          onChange={(event) => setSearchText(event.target.value)}
+          onChange={onChangeSearchText}
           fullWidth
           autoFocus
           slotProps={{
@@ -205,13 +249,17 @@ const SearchDialog = (props: SearchDialogProps) => {
         }}
       >
         {!searchText && recentActiveTabs && recentActiveTabs.length > 0 && (
-          <RecentActiveTabs tabs={recentActiveTabs} />
+          <RecentActiveTabs
+            tabs={recentActiveTabs}
+            selectedIndex={selectedItemIndex}
+          />
         )}
         {searchText && searchedTabs.length === 0 && <NoResultsFound />}
         {searchText && searchedTabs.length > 0 && (
           <SearchedTabs
             searchText={searchText}
             searchedTabs={searchedTabs}
+            selectedIndex={selectedItemIndex}
             onClickGroupTabsButton={onClickGroupTabsButton}
           />
         )}
