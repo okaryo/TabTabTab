@@ -173,7 +173,7 @@ const DialogFooter = () => {
             </g>
           </svg>
         </Box>
-        <span>to select</span>
+        <span>{t.toSelect}</span>
       </Typography>
       <Typography
         variant="caption"
@@ -228,7 +228,7 @@ const DialogFooter = () => {
             </g>
           </svg>
         </Box>
-        to navigate
+        <span>{t.toNavigate}</span>
       </Typography>
       <Typography
         variant="caption"
@@ -259,7 +259,7 @@ const DialogFooter = () => {
             </g>
           </svg>
         </Box>
-        to close
+        <span>{t.toClose}</span>
       </Typography>
     </Stack>
   );
