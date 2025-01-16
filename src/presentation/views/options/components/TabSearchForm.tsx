@@ -17,7 +17,7 @@ import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import {
   focusTab,
   getRecentActiveTabs,
@@ -32,12 +32,60 @@ import {
 import groupTabsBySearchKeyword from "../../../functions/groupTabsBySearchKeyword";
 import TabItem from "../../shared/components/TabItem";
 
+const smoothScrollTo = (container: HTMLElement, targetScrollTop: number) => {
+  const startScrollTop = container.scrollTop;
+  const scrollDifference = targetScrollTop - startScrollTop;
+  const duration = 300;
+  const startTime = performance.now();
+
+  const animateScroll = (currentTime: number) => {
+    const elapsedTime = currentTime - startTime;
+    const progress = Math.min(elapsedTime / duration, 1);
+    const easeInOutQuad =
+      progress < 0.5
+        ? 2 * progress * progress
+        : -1 + (4 - 2 * progress) * progress;
+
+    container.scrollTop = startScrollTop + scrollDifference * easeInOutQuad;
+
+    if (progress < 1) {
+      requestAnimationFrame(animateScroll);
+    }
+  };
+
+  requestAnimationFrame(animateScroll);
+};
+
 type RecentActiveTabsProps = {
+  parentRef: React.RefObject<HTMLDivElement>;
   tabs: Tab[];
   selectedIndex: number;
 };
 const RecentActiveTabs = (props: RecentActiveTabsProps) => {
-  const { tabs, selectedIndex } = props;
+  const { parentRef, tabs, selectedIndex } = props;
+  const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    if (tabRefs.current[selectedIndex]) {
+      const tabElement = tabRefs.current[selectedIndex];
+
+      tabElement.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+
+      if (!parentRef.current) return;
+
+      const parentElement = parentRef.current;
+      const tabTop = tabElement.offsetTop;
+      const parentScrollTop = parentElement.scrollTop;
+
+      if (tabTop < parentScrollTop) {
+        const stickyHeaderHeight = 48;
+        smoothScrollTo(parentElement, tabTop - stickyHeaderHeight);
+      }
+    }
+  }, [selectedIndex, parentRef]);
 
   return (
     <List
@@ -56,14 +104,20 @@ const RecentActiveTabs = (props: RecentActiveTabsProps) => {
     >
       <Paper variant="outlined" style={{ overflow: "hidden" }}>
         {tabs.map((tab, index) => (
-          <TabItem
+          <div
             key={tab.id}
-            tab={tab}
-            selected={selectedIndex === index}
-            showDragIndicatorIcon={false}
-            showActions={false}
-            showDuplicatedChip={false}
-          />
+            ref={(el) => {
+              tabRefs.current[index] = el;
+            }}
+          >
+            <TabItem
+              tab={tab}
+              selected={selectedIndex === index}
+              showDragIndicatorIcon={false}
+              showActions={false}
+              showDuplicatedChip={false}
+            />
+          </div>
         ))}
       </Paper>
     </List>
@@ -86,14 +140,43 @@ const NoResultsFound = () => {
 };
 
 type SearchedTabsProps = {
+  parentRef: React.RefObject<HTMLDivElement>;
   searchText: string;
   searchedTabs: Tab[];
   selectedIndex: number;
   onClickGroupTabsButton: () => void;
 };
 const SearchedTabs = (props: SearchedTabsProps) => {
-  const { searchText, searchedTabs, selectedIndex, onClickGroupTabsButton } =
-    props;
+  const {
+    parentRef,
+    searchText,
+    searchedTabs,
+    selectedIndex,
+    onClickGroupTabsButton,
+  } = props;
+  const tabRefs = useRef<(HTMLDivElement | null)[]>([]);
+
+  useEffect(() => {
+    if (tabRefs.current[selectedIndex]) {
+      const tabElement = tabRefs.current[selectedIndex];
+
+      tabElement.scrollIntoView({
+        behavior: "smooth",
+        block: "nearest",
+      });
+
+      if (!parentRef.current) return;
+
+      const parentElement = parentRef.current;
+      const tabTop = tabElement.offsetTop;
+      const parentScrollTop = parentElement.scrollTop;
+
+      if (tabTop < parentScrollTop) {
+        const stickyHeaderHeight = 48;
+        smoothScrollTo(parentElement, tabTop - stickyHeaderHeight);
+      }
+    }
+  }, [selectedIndex, parentRef]);
 
   return (
     <List
@@ -121,13 +204,19 @@ const SearchedTabs = (props: SearchedTabsProps) => {
     >
       <Paper variant="outlined" style={{ overflow: "hidden" }}>
         {searchedTabs.map((tab, index) => (
-          <TabItem
+          <div
             key={tab.id}
-            tab={{ ...tab, active: false }}
-            showDragIndicatorIcon={false}
-            showBelongingContainer
-            selected={selectedIndex === index}
-          />
+            ref={(el) => {
+              tabRefs.current[index] = el;
+            }}
+          >
+            <TabItem
+              tab={{ ...tab, active: false }}
+              showDragIndicatorIcon={false}
+              showBelongingContainer
+              selected={selectedIndex === index}
+            />
+          </div>
         ))}
       </Paper>
     </List>
@@ -273,16 +362,17 @@ const SearchDialog = (props: SearchDialogProps) => {
   const { open, onClose } = props;
   const { windows } = useContext(WindowsContext);
   const textFieldRef = useRef<HTMLInputElement | null>(null);
+  const bodyRef = useRef<HTMLDivElement | null>(null);
   const [searchText, setSearchText] = useState("");
   const [recentActiveTabs, setRecentActiveTabs] = useState<Tab[]>(null);
   const searchedTabs = findTabsByTitleOrUrl(windows, searchText);
   const [selectedItemIndex, setSelectedItemIndex] = useState(0);
 
-  const closeDialog = () => {
+  const closeDialog = useCallback(() => {
     setSearchText("");
     setSelectedItemIndex(0);
     onClose();
-  };
+  }, [onClose]);
 
   const onChangeSearchText = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
@@ -342,7 +432,13 @@ const SearchDialog = (props: SearchDialogProps) => {
     return () => {
       document.removeEventListener("keydown", onKeyDown);
     };
-  }, [searchedTabs, recentActiveTabs, searchText, selectedItemIndex]);
+  }, [
+    searchedTabs,
+    recentActiveTabs,
+    searchText,
+    selectedItemIndex,
+    closeDialog,
+  ]);
 
   return (
     <Dialog
@@ -386,6 +482,7 @@ const SearchDialog = (props: SearchDialogProps) => {
         />
       </Container>
       <Box
+        ref={bodyRef}
         sx={{
           overflowY: "auto",
           px: 2,
@@ -394,6 +491,7 @@ const SearchDialog = (props: SearchDialogProps) => {
       >
         {!searchText && recentActiveTabs && recentActiveTabs.length > 0 && (
           <RecentActiveTabs
+            parentRef={bodyRef}
             tabs={recentActiveTabs}
             selectedIndex={selectedItemIndex}
           />
@@ -401,6 +499,7 @@ const SearchDialog = (props: SearchDialogProps) => {
         {searchText && searchedTabs.length === 0 && <NoResultsFound />}
         {searchText && searchedTabs.length > 0 && (
           <SearchedTabs
+            parentRef={bodyRef}
             searchText={searchText}
             searchedTabs={searchedTabs}
             selectedIndex={selectedItemIndex}
