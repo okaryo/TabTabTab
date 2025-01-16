@@ -280,6 +280,7 @@ const SearchDialog = (props: SearchDialogProps) => {
 
   const closeDialog = () => {
     setSearchText("");
+    setSelectedItemIndex(0);
     onClose();
   };
 
@@ -330,6 +331,10 @@ const SearchDialog = (props: SearchDialogProps) => {
       } else if (event.key === "Enter") {
         const tabs = searchText ? searchedTabs : recentActiveTabs;
         focusTab(tabs[selectedItemIndex]);
+        closeDialog();
+
+        // NOTE: Prevent default to avoid reopening the dialog when the Search Tabs button is focused
+        event.preventDefault();
       }
     };
     document.addEventListener("keydown", onKeyDown);
