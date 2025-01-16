@@ -494,5 +494,17 @@
   "remove": {
     "message": "Supprimer",
     "description": "Action to remove the selected item."
+  },
+  "to_select": {
+    "message": "sélectionner",
+    "description": "Instruction for selecting an item in the search dialog footer."
+  },
+  "to_navigate": {
+    "message": "naviguer",
+    "description": "Instruction for navigating between items in the search dialog footer."
+  },
+  "to_close": {
+    "message": "fermer",
+    "description": "Instruction for closing the search dialog in the footer."
   }
 }
