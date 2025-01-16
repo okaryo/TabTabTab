@@ -412,6 +412,15 @@ class Translations {
   get remove() {
     return chrome.i18n.getMessage("remove");
   }
+  get toSelect() {
+    return chrome.i18n.getMessage("to_select");
+  }
+  get toNavigate() {
+    return chrome.i18n.getMessage("to_navigate");
+  }
+  get toClose() {
+    return chrome.i18n.getMessage("to_close");
+  }
 }
 
 const t = new Translations();
