@@ -65,14 +65,18 @@ const SearchResult = (props: SearchResultProps) => {
       const minIndex = 0;
       const maxIndex = tabs.length - 1;
 
-      if (event.key === "ArrowDown") {
-        setSelectedTabIndex((oldIndex) =>
-          oldIndex === maxIndex ? minIndex : oldIndex + 1,
-        );
-      } else if (event.key === "ArrowUp") {
-        setSelectedTabIndex((oldIndex) =>
-          oldIndex === minIndex ? maxIndex : oldIndex - 1,
-        );
+      if (["ArrowUp", "ArrowDown"].includes(event.key)) {
+        event.preventDefault();
+
+        if (event.key === "ArrowDown") {
+          setSelectedTabIndex((oldIndex) =>
+            oldIndex === maxIndex ? minIndex : oldIndex + 1,
+          );
+        } else if (event.key === "ArrowUp") {
+          setSelectedTabIndex((oldIndex) =>
+            oldIndex === minIndex ? maxIndex : oldIndex - 1,
+          );
+        }
       } else if (event.key === "Enter") {
         focusTab(tabs[selectedTabIndex]);
       }
