@@ -1,0 +1,510 @@
+{
+  "app_name": {
+    "message": "TabTabTab - All In One Tab Manager",
+    "description": "The name of the application. Shown in the web store."
+  },
+  "app_name_short": {
+    "message": "TabTabTab",
+    "description": "The short name of the application. Shown at the top of the dropdown menu."
+  },
+  "app_desc": {
+    "message": "از مدیریت تب‌ها برای بهبود تجربه مرور شما پشتیبانی می‌کند.",
+    "description": "The short description of the application. Shown in the web store."
+  },
+  "window": {
+    "message": "پنجره",
+    "description": "Used as a heading for window tabs in the popup. For example, it is used as 'Window1', 'Window2', etc."
+  },
+  "current_window": {
+    "message": "پنجره فعلی",
+    "description": "Used as a heading within the popup to indicate the current window in the window tabs section."
+  },
+  "add_window": {
+    "message": "اضافه کردن پنجره",
+    "description": "Text used to display the action for adding a window"
+  },
+  "save_window": {
+    "message": "ذخیره پنجره",
+    "description": "Text used to display the action for save a window"
+  },
+  "save_all_windows": {
+    "message": "ذخیره تمامی پنجره ها",
+    "description": "Text used to display the action for save all windows"
+  },
+  "merge_right_window": {
+    "message": "ادغام به سمت راست",
+    "description": "Text used to display the action for merge a right window"
+  },
+  "merge_left_window": {
+    "message": "ادغام به سمت چپ",
+    "description": "Text used to display the action for merge a left window"
+  },
+  "close_window": {
+    "message": "بستن پنجره",
+    "description": "Text used to display the action for closing a window"
+  },
+  "no_stored_window_header": {
+    "message": "هیچ پنجره‌ای ذخیره نشده است.",
+    "description": "Used to show when stored window is empty."
+  },
+  "no_stored_window_description": {
+    "message": "زمانی که یک پنجره را از لیست ذخیره کنید، می‌توانید آن را در اینجا بازگردانی کنید.",
+    "description": "Used to show when stored window is empty."
+  },
+  "save_current_window": {
+    "message": "ذخیره پنجره فعلی",
+    "description": "Text used to display the action for save the current window"
+  },
+  "new_tab_title_form_placeholder_to_stored": {
+    "message": "تیتر (به طور خودکار توسط آدرس پر میشود.)",
+    "description": "Text used to display the action for save a new tab to stored window/group"
+  },
+  "new_tab_form_site_fetch_error": {
+    "message": "دریافت ناموفق بود. لطفاً به صورت دستی وارد کنید.",
+    "description": "Displayed when site title and favicon cannot be fetched automatically."
+  },
+  "pinned": {
+    "message": "پین شده",
+    "description": "Used as a heading for grouping and displaying pinned tabs together."
+  },
+  "tab_group": {
+    "message": "گروه",
+    "description": "Used as a heading for Tab Group."
+  },
+  "no_stored_tab_group_header": {
+    "message": "هیچ گروهی ذخیره نشده است",
+    "description": "Used to show when stored tab group is empty."
+  },
+  "no_stored_tab_group_description": {
+    "message": "زمانی که یک گروه را از لیست ذخیره کنید، می‌توانید آن را در اینجا بازگردانی کنید",
+    "description": "Used to show when stored tab group is empty."
+  },
+  "month": {
+    "message": "ماه",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 month ago'."
+  },
+  "months": {
+    "message": "ماه",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 months ago'."
+  },
+  "week": {
+    "message": "هفته",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 week ago'."
+  },
+  "weeks": {
+    "message": "هفته",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 weeks ago'."
+  },
+  "day": {
+    "message": "روز",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 day ago'."
+  },
+  "days": {
+    "message": "روز",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 days ago'."
+  },
+  "hour": {
+    "message": "ساعت",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 hour ago'."
+  },
+  "hours": {
+    "message": "ساعت",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 hours ago'."
+  },
+  "min": {
+    "message": "دقیقه",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 min ago'."
+  },
+  "mins": {
+    "message": "دقیقه",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
+  },
+  "sec": {
+    "message": "ثانیه",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '1 sec ago'."
+  },
+  "secs": {
+    "message": "ثانیه",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 secs ago'."
+  },
+  "ago": {
+    "message": "سن",
+    "description": "Used to display the elapsed time since the tab was last active, for example, '2 mins ago'."
+  },
+  "url": {
+    "message": "آدرس صفحه وب",
+    "description": "Used for url"
+  },
+  "cancel": {
+    "message": "لغو",
+    "description": "Used for cancel"
+  },
+  "add": {
+    "message": "اضافه",
+    "description": "Used for add"
+  },
+  "search_tabs": {
+    "message": "جستجوی تب‌ها",
+    "description": "Displayed as a placeholder in the tab search form."
+  },
+  "no_results_found": {
+    "message": "هیچ نتیجه ای پیدا نشد",
+    "description": "Displayed when no results are found during a tab search."
+  },
+  "group_tabs_search_result_tabs": {
+    "message": "تب گروهی",
+    "description": "Displayed as a button for the search results in the tab group."
+  },
+  "group_tabs_search_result_tabs_description": {
+    "message": "تب‌های نتایج جستجو را بر اساس کلمه کلیدی گروه‌بندی می‌کند. این تب‌ها به یک گروه موجود اضافه می‌شوند یا یک گروه جدید ایجاد می‌کنند، به استثنای تب‌های چسبانده شده.",
+    "description": "Displayed as a description for the button to group tabs in the search results."
+  },
+  "recent_active_tabs_header": {
+    "message": "تب های اخیر",
+    "description": "Recently active tab headings to display in search results"
+  },
+  "open_side_panel": {
+    "message": "پنل کناری را باز کن",
+    "description": "Action text to open the side panel."
+  },
+  "close_side_panel": {
+    "message": "پنل کناری را ببند",
+    "description": "Action text to close the side panel."
+  },
+  "open_dashboard": {
+    "message": "داشبورد رو باز بکن",
+    "description": "Action text to open the dashboard."
+  },
+  "rate_and_review": {
+    "message": "امتیاز و بازخورد ها",
+    "description": "Action text to open the store review page."
+  },
+  "join_discussions": {
+    "message": "به بحث‌ها بپیوندید",
+    "description": "Action text to open GitHub Discussions page."
+  },
+  "sponsor_project": {
+    "message": "حامی پروژه",
+    "description": "Action text to open Sponsor page."
+  },
+  "copy_url": {
+    "message": "کپی آدرس وب",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "duplicate_tab": {
+    "message": "دو برابر کردن",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "add_new_tab_next": {
+    "message": "تب جدید بعدی",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "add_new_tab_in_group": {
+    "message": "تب جدید در گروه",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "add_new_tab_in_window": {
+    "message": "تب جدید",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "pin": {
+    "message": "پین",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "unpin": {
+    "message": "لغو پین کردن",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "add_to_new_group": {
+    "message": "اضافه به گروه جدید",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "remove_from_group": {
+    "message": "حذف از گروه",
+    "description": "Displayed within the action menu for tabs."
+  },
+  "screenshot_visible_area": {
+    "message": "تصویر گرفتن از ناحیه قابل مشاهده",
+    "description": "Displayed within the action menu for highlighted tab."
+  },
+  "save_tab_group": {
+    "message": "ذخیره گروه",
+    "description": "Displayed within the action menu for tab group."
+  },
+  "ungroup": {
+    "message": "لغو گروه",
+    "description": "Displayed within the action menu for tab group."
+  },
+  "close_group": {
+    "message": "بستن گروه",
+    "description": "Displayed within the action menu for tab group."
+  },
+  "unpin_all": {
+    "message": "لغو پین همه",
+    "description": "Displayed within the action menu for pinned."
+  },
+  "close_all": {
+    "message": "بستن همه",
+    "description": "Displayed within the action menu for pinned."
+  },
+  "duplicated": {
+    "message": "دوبرابر شده",
+    "description": "Displayed next to the tab title if the same tab exists across the entire window."
+  },
+  "resolve_duplicates": {
+    "message": "حل تکراری‌ها",
+    "description": "Text displayed on hover over the duplicate chip next to the tab, an action to resolve duplicate tabs."
+  },
+  "cleanup_tabs_header": {
+    "message": "پاک کردن تب ها",
+    "description": "Heading for the Cleanup Tabs feature."
+  },
+  "tab_cleaner_header": {
+    "message": "تب های کم استفاده را تمیز کن",
+    "description": "Heading for the feature that automatically close tabs that have not been used for a set period of time."
+  },
+  "tab_cleaner_description": {
+    "message": "با فعال کردن این تنظیم، تب‌ها به‌طور خودکار پس از گذشت مدت زمان تعیین‌شده از آخرین فعالیتشان بسته خواهند شد.",
+    "description": "Description for the feature that automatically closes tabs that have not been used for a specified period of time."
+  },
+  "duration": {
+    "message": "مدت زمان",
+    "description": "Heading for the input form to set the duration for automatically closing tabs that have been inactive for a specified period."
+  },
+  "unit": {
+    "message": "واحد",
+    "description": "Heading for the unit input form used in the feature for automatically closing tabs after a specified period of inactivity."
+  },
+  "duration_unit_day": {
+    "message": "روز",
+    "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
+  },
+  "duration_unit_hour": {
+    "message": "ساعت",
+    "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
+  },
+  "options_navigation_all_windows": {
+    "message": "تمام پنجره ها",
+    "description": "Navigation header for AllWindows Page in options.html"
+  },
+  "options_navigation_save_and_restore": {
+    "message": "ذخیره و بازیابی",
+    "description": "Navigation header for Save & Restore page in options.html"
+  },
+  "options_navigation_tidy_tabs": {
+    "message": "تب های تمیز",
+    "description": "Navigation header for TidyTabs page in options.html"
+  },
+  "options_navigation_settings": {
+    "message": "تنظیمات",
+    "description": "Navigation header for Settings page in options.html"
+  },
+  "options_navigation_feedback": {
+    "message": "بازخورد",
+    "description": "Navigation header for Feedback page in options.html"
+  },
+  "options_navigation_sponsor": {
+    "message": "حامی ",
+    "description": "Navigation header for Sponsor page in options.html"
+  },
+  "tab_grouping_header": {
+    "message": "گروه کردن تب",
+    "description": "The main header for the tab grouping section."
+  },
+  "tab_grouping_group_tabs_now": {
+    "message": "همین حالا تب ها را گروه کن",
+    "description": "Button text to trigger immediate tab grouping."
+  },
+  "tab_grouping_group_tabs_automatically": {
+    "message": "گروه کردن خودکار تب ها",
+    "description": "Switch label for enabling/disabling automatic tab grouping."
+  },
+  "tab_grouping_detail_settings_subheader": {
+    "message": "تنظیمات جزئیات",
+    "description": "Subheader for detailed tab grouping settings."
+  },
+  "tab_grouping_auto_collapse_unused_tab_groups": {
+    "message": "جمع‌کردن خودکار گروه‌های تب استفاده‌نشده",
+    "description": "Option to automatically collapse tab groups that are not in use."
+  },
+  "tab_grouping_auto_ungroup_single_tab_groups": {
+    "message": "لغو خودکار گروه‌بندی گروه‌های تک‌تب",
+    "description": "Option to automatically ungroup tab groups that contain only one tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only": {
+    "message": "اعمال گروه‌بندی خودکار فقط بر روی تب فعلی",
+    "description": "Option to apply automatic tab grouping only to the currently active tab."
+  },
+  "tab_grouping_apply_auto_grouping_to_current_tab_only_description": {
+    "message": "زمانی که فعال باشد، تب‌های جدیدی که از تب فعلی باز می‌شوند، مانند لینک‌ها یا بوکمارک‌ها، به‌صورت خودکار گروه‌بندی نخواهند شد.",
+    "description": "Details how enabling this option will exclude tabs opened from the current one from automatic grouping."
+  },
+  "tab_grouping_sort_groups_alphabetically": {
+    "message": "گروه هارا بر اساس الفبا مرتب کن",
+    "description": "Label for sorting groups."
+  },
+  "tab_grouping_group_tabs_by": {
+    "message": "گروه‌بندی تب‌ها بر اساس",
+    "description": "Label for selecting the criterion for tab grouping."
+  },
+  "tab_grouping_group_tabs_by_menu_item_domain": {
+    "message": "دامنه",
+    "description": "Option to group tabs by domain."
+  },
+  "tab_grouping_group_tabs_by_menu_item_subdomain": {
+    "message": "زیردامنه",
+    "description": "Option to group tabs by subdomain."
+  },
+  "theme_color_setting_header": {
+    "message": "رنگ قالب",
+    "description": "The main header for the theme color setting section."
+  },
+  "popup_setting_header": {
+    "message": "پاپ اپ",
+    "description": "The main header for the popup setting section."
+  },
+  "popup_size_header": {
+    "message": "اندازه پنجره پاپ آپ",
+    "description": "Heading for the popup size settings."
+  },
+  "popup_size_description": {
+    "message": "ارتفاع: ۲۰۰-۶۰۰ پیکسل، عرض: ۴۰۰-۸۰۰ پیکسل الزامی است.",
+    "description": "Notes or cautionary advice regarding the settings for the popup size."
+  },
+  "popup_element_scale_header": {
+    "message": "مقیاس عناصر پنجره پاپ‌آپ",
+    "description": "Heading for the settings to adjust the scale of elements within the popup."
+  },
+  "popup_element_scale_description": {
+    "message": "اندازه عناصری مانند فونت‌ها و آیکون‌ها را در پنجره پاپ‌آپ بین ۵۰ تا ۱۵۰ درصد از اندازه پیش‌فرض تنظیم کنید.",
+    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
+  },
+  "popup_element_scale_validation_error_value_format": {
+    "message": "یک عدد صحیح وارد کنید.",
+    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
+  },
+  "popup_element_scale_validation_error_value_range": {
+    "message": "یک مقدار در بازه ۵۰ تا ۱۵۰ وارد کنید.",
+    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
+  },
+  "toolbar_setting_header": {
+    "message": "نوار ابزار",
+    "description": "The main header for the toolbar setting section."
+  },
+  "toolbar_icon_click_behavior_setting_header": {
+    "message": "انتخاب کنید که کدام نما هنگام کلیک روی آیکون نوار ابزار باز شود.",
+    "description": "Heading for the toolbar icon click behavior settings."
+  },
+  "toolbar_icon_click_behavior_select_popup": {
+    "message": "پاپ آپ",
+    "description": "Option to open the popup when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_side_panel": {
+    "message": "پنل کناری",
+    "description": "Option to open the side panel when the toolbar icon is clicked."
+  },
+  "toolbar_icon_click_behavior_select_dashboard": {
+    "message": "داشبورد",
+    "description": "Option to open the dashboard when the toolbar icon is clicked."
+  },
+  "scale": {
+    "message": "مقیاس",
+    "description": "Heading for the input form to adjust the scale of elements within the popup."
+  },
+  "height": {
+    "message": "ارتفاع",
+    "description": "Heading for the height input form in the popup size settings."
+  },
+  "width": {
+    "message": "عرض",
+    "description": "Heading for the width input form in the popup size settings."
+  },
+  "save": {
+    "message": "ذخیره",
+    "description": "Text for the save button in the settings form."
+  },
+  "saving": {
+    "message": "در حال ذخیره",
+    "description": "Text displayed on the save button in the settings form when saving is in progress."
+  },
+  "saved_successfully": {
+    "message": "تنظیمات با موفقیت ذخیره شد",
+    "description": "Message displayed in a toast notification when settings are successfully saved in the settings form."
+  },
+  "saved_error": {
+    "message": "تنظیمات ذخیره نشد، لطفا مجدد تلاش کنید",
+    "description": "Message displayed in a toast notification when settings fail to save in the settings form."
+  },
+  "popup_size_validation_error_value_format": {
+    "message": "یک عدد صحیح وارد کنید.",
+    "description": "Error message displayed for validation issues in the popup size settings."
+  },
+  "popup_size_validation_error_value_range": {
+    "message": "ارتفاع باید روی مقداری بین ۲۰۰ تا ۶۰۰ تنظیم شود و عرض باید روی مقداری بین ۴۰۰ تا ۸۰۰ تنظیم گردد.",
+    "description": "Error message displayed for validation issues in the popup size settings."
+  },
+  "tab_cleaner_validation_error_value_format": {
+    "message": "یک عدد صحیح مثبت وارد کنید",
+    "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
+  },
+  "bug_report_and_feature_request_title": {
+    "message": "گزارش مشکل یا درخواست ویژگی",
+    "description": "Heading for the section covering bug reports and feature requests."
+  },
+  "bug_report_and_feature_request_description": {
+    "message": "اگر هنگام استفاده از TabTabTab با باگی مواجه شدید یا پیشنهادی برای ویژگی‌های جدید دارید، لطفاً با خیال راحت یک ایشو در GitHub ایجاد کنید.",
+    "description": "Description for the section dedicated to submitting bug reports and feature requests."
+  },
+  "store_review_title": {
+    "message": "بازخورد فروشگاه",
+    "description": "Heading for the store reviews section."
+  },
+  "store_review_description": {
+    "message": "اگر TabTabTab برای شما مفید بوده است، بسیار سپاسگزار خواهیم شد اگر نظر خود را در Chrome Web Store ثبت کنید! بازخورد شما تأثیر زیادی در توسعه و بهبود TabTabTab دارد.",
+    "description": "Description for the section regarding store reviews."
+  },
+  "source_code_title": {
+    "message": "منبع کد",
+    "description": "Heading for the source code section."
+  },
+  "source_code_description": {
+    "message": "کد TabTabTab متن‌باز و به‌صورت عمومی در دسترس است. این کد به‌دقت مدیریت می‌شود تا از هرگونه برنامه‌نویسی غیرقانونی جلوگیری شود و توسعه این افزونه به‌صورت ایمن انجام گیرد.",
+    "description": "Description for the section related to the source code."
+  },
+  "sponsor_page_header": {
+    "message": "حمایت از پروژه",
+    "description": "Header in Sponsor Page"
+  },
+  "sponsor_page_description": {
+    "message": "TabTabTab یک پروژه متن‌باز است که عمدتاً توسط یک فرد توسعه داده شده است. اگر این پروژه برای شما مفید بوده، خوشحال می‌شوم اگر حمایت از آن را در نظر بگیرید.",
+    "description": "Description in Sponsor Page"
+  },
+  "add_tab": {
+    "message": "اضافه کردن تب",
+    "description": "Action to add a new tab."
+  },
+  "edit_title": {
+    "message": "ویرایش عنوان",
+    "description": "Action to edit the title of an item."
+  },
+  "open": {
+    "message": "باز کردن",
+    "description": "Action to open the selected item."
+  },
+  "remove": {
+    "message": "حذف",
+    "description": "Action to remove the selected item."
+  },
+  "to_select": {
+    "message": "انتخاب کردن",
+    "description": "Instruction for selecting an item in the search dialog footer."
+  },
+  "to_navigate": {
+    "message": "پیمایش کردن",
+    "description": "Instruction for navigating between items in the search dialog footer."
+  },
+  "to_close": {
+    "message": "بستن",
+    "description": "Instruction for closing the search dialog in the footer."
+  }
+}
