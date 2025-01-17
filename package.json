@@ -16,8 +16,8 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/chrome": "^0.0.293",
-    "@types/react": "^19.0.6",
+    "@types/chrome": "^0.0.297",
+    "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "chromex-locale-lint": "^0.1.0",
