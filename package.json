@@ -16,8 +16,8 @@
   "license": "MIT",
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/chrome": "^0.0.293",
-    "@types/react": "^19.0.6",
+    "@types/chrome": "^0.0.297",
+    "@types/react": "^19.0.7",
     "@types/react-dom": "^19.0.3",
     "@vitejs/plugin-react": "^4.3.4",
     "chromex-locale-lint": "^0.1.0",
@@ -30,10 +30,10 @@
     "@dnd-kit/sortable": "^8.0.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.3.1",
-    "@mui/material": "^6.3.1",
+    "@mui/icons-material": "^6.4.0",
+    "@mui/material": "^6.4.0",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "tldts": "^6.1.71"
+    "tldts": "^6.1.72"
   }
 }
