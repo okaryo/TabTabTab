@@ -7,7 +7,13 @@ export const setToolbarIconClickOpenView = async (
   const setting = await ChromeLocalStorage.getToolbarSetting();
   const newSetting = { ...setting, iconClickOpenView: view };
   await ChromeLocalStorage.updateToolbarSetting(newSetting);
+  setToolbarIconBehavior(view);
+  return newSetting;
+};
 
+export const setToolbarIconBehavior = async (
+  view: ToolbarSetting["iconClickOpenView"],
+) => {
   switch (view) {
     case "popup":
       await setToolbarIconBehaviorToOpenPopup();
@@ -21,8 +27,6 @@ export const setToolbarIconClickOpenView = async (
     default:
       throw new Error(`Invalid view: ${view}`);
   }
-
-  return newSetting;
 };
 
 export const setToolbarIconBehaviorToOpenPopup = async () => {
