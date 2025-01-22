@@ -1,6 +1,6 @@
 {
   "name": "TabTabTab",
-  "description": "This chrome extension makes it easier to manage your open tabs.",
+  "description": "All In One Chrome Tab Manager",
   "private": true,
   "type": "module",
   "scripts": {

@@ -6,6 +6,7 @@ import {
   getTabGroupSetting,
   groupTabsBySetting,
 } from "../data/repository/TabGroupSettingRepository";
+import { setToolbarIconBehavior } from "../data/repository/ToolbarRepository";
 import { getWindows, saveWindow } from "../data/repository/WindowsRepository";
 import t from "../i18n/Translations";
 
@@ -13,7 +14,7 @@ const saveCurrentWindowId = "saveCurrentWindow";
 const groupTabsNowId = "groupTabsNow";
 const openDashboardId = "openDashboard";
 
-export const addToolBarActions = () => {
+export const addToolBarActions = async () => {
   chrome.contextMenus.create({
     id: saveCurrentWindowId,
     title: t.saveCurrentWindow,
@@ -29,6 +30,9 @@ export const addToolBarActions = () => {
     title: t.openDashboard,
     contexts: ["action"],
   });
+
+  const toolbarSetting = await getToolbarSetting();
+  setToolbarIconBehavior(toolbarSetting.iconClickOpenView);
 
   chrome.action.onClicked.addListener(async () => {
     const toolbarSetting = await getToolbarSetting();
