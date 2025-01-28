@@ -29,7 +29,7 @@ To run the development version of the Chrome extension in your browser:
 4. Verify that the extension is loaded and functioning as expected.
 5. If the development server is running, changes to the code will be reflected by simply reloading the page. However, if changes are made to `manifest.json` or `background.js`, you will need to click the **Reload** button in `chrome://extensions` to update the extension.
 
-![Load local extension](./docs/setup_local_extension.png)
+![Load local extension](./docs/load_local_extension.png)
 
 ### Contribution Workflow
 
