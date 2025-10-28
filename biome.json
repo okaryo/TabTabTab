@@ -1,15 +1,15 @@
 {
-  "$schema": "https://biomejs.dev/schemas/1.5.3/schema.json",
-  "organizeImports": {
-    "enabled": true,
-    "ignore": ["node_modules/*", "dist/*"]
+  "$schema": "https://biomejs.dev/schemas/2.3.1/schema.json",
+  "assist": { "actions": { "source": { "organizeImports": "on" } } },
+  "files": {
+    "ignoreUnknown": false,
+    "includes": ["**", "!**/node_modules", "!**/dist"]
   },
   "formatter": {
     "enabled": true,
     "indentStyle": "space",
     "indentWidth": 2,
-    "lineWidth": 80,
-    "ignore": ["node_modules/*", "dist/*"]
+    "lineWidth": 80
   },
   "linter": {
     "enabled": true,
@@ -21,14 +21,16 @@
         "useHookAtTopLevel": "error"
       },
       "suspicious": {
-        "noConsoleLog": "error"
+        "noConsole": {
+          "level": "error",
+          "options": { "allow": ["error", "warn"] }
+        }
       }
-    },
-    "ignore": ["node_modules/*", "dist/*"]
+    }
   },
   "overrides": [
     {
-      "include": ["test/**"],
+      "includes": ["**/test/**"],
       "linter": {
         "rules": {
           "suspicious": {

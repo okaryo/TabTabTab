@@ -8,12 +8,12 @@ import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import Paper from "@mui/material/Paper";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { alpha, useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
 import { addWindow } from "../../../../../data/repository/WindowsRepository";
 import t from "../../../../../i18n/Translations";
-import { type Window, flatTabsInWindow } from "../../../../../model/Window";
+import { flatTabsInWindow, type Window } from "../../../../../model/Window";
 import { WindowsContext } from "../../../../contexts/WindowsContext";
 import { WindowActionMenu } from "../../../shared/components/ActionMenu";
 import DragAndDropContext, {

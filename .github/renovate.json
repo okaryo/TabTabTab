@@ -10,29 +10,16 @@
   "prHourlyLimit": 0,
   "packageRules": [
     {
-      "groupName": "react",
-      "matchPackageNames": ["@types/react", "@types/react-dom"],
-      "matchPackagePrefixes": ["react"]
+      "matchDepTypes": ["devDependencies"],
+      "groupName": "devDependencies"
     },
     {
-      "groupName": "emotion",
-      "matchPackagePrefixes": ["@emotion"]
+      "matchFileNames": ["dependencies"],
+      "groupName": "dependencies"
     },
     {
-      "groupName": "mui",
-      "matchPackagePrefixes": ["@mui"]
-    },
-    {
-      "groupName": "vite",
-      "matchPackagePrefixes": ["vite", "@vitejs/"]
-    },
-    {
-      "groupName": "types",
-      "matchPackagePrefixes": ["@types/"]
-    },
-    {
-      "groupName": "dnd-kit",
-      "matchPackagePrefixes": ["@dnd-kit/"]
+      "matchManagers": ["github-actions"],
+      "groupName": "GitHub Actions"
     }
   ]
 }

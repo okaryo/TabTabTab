@@ -13,7 +13,7 @@ export const addTabGroupingListeners = () => {
 
 const onTabUpdated = async (
   _: number,
-  info: chrome.tabs.TabChangeInfo,
+  info: chrome.tabs.OnUpdatedInfo,
   tab: chrome.tabs.Tab,
 ) => {
   if (info.status !== "loading" && info.status !== "complete") return;
@@ -121,7 +121,7 @@ const createGroupIfExistMatchingTabs = async (
   if (sameGroupNameTabs.length > 1) {
     const tabIds = sameGroupNameTabs.map((tab) => tab.id);
     const groupId = await chrome.tabs.group({
-      tabIds,
+      tabIds: tabIds as [number, ...number[]],
       createProperties: { windowId: targetTab.windowId },
     });
     try {
@@ -158,14 +158,14 @@ const moveTabToGroup = async (tabId: number, groupId: number) => {
   await chrome.tabs.group({ tabIds: [tabId], groupId });
 };
 
-const onTabActivated = async (info: chrome.tabs.TabActiveInfo) => {
+const onTabActivated = async (info: chrome.tabs.OnActivatedInfo) => {
   const setting = await getTabGroupSetting();
   if (!setting.enabledAutoGrouping || !setting.collapseWhenNoInUse) return;
 
   await collapseUnusedGroups(info.tabId, info.windowId);
 };
 
-const onTabRemoved = async (_: number, info: chrome.tabs.TabRemoveInfo) => {
+const onTabRemoved = async (_: number, info: chrome.tabs.OnRemovedInfo) => {
   const setting = await getTabGroupSetting();
   if (!setting.enabledAutoGrouping || !setting.ungroupSingleTabGroups) return;
 
@@ -197,7 +197,7 @@ const onTabAttached = async (tabId: number) => {
   }
 };
 
-const onTabDetached = async (_: number, info: chrome.tabs.TabDetachInfo) => {
+const onTabDetached = async (_: number, info: chrome.tabs.OnDetachedInfo) => {
   const setting = await getTabGroupSetting();
   if (!setting.enabledAutoGrouping || !setting.ungroupSingleTabGroups) return;
 
@@ -255,7 +255,7 @@ const ungroupSingleTabGroups = async (windowId: number) => {
   await Promise.all(
     Object.keys(groups).map(async (groupId) => {
       if (groups[groupId].length === 1) {
-        await chrome.tabs.ungroup(groups[groupId]);
+        await chrome.tabs.ungroup(groups[groupId][0]);
       }
     }),
   );

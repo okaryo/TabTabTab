@@ -1,8 +1,8 @@
 import {
-  type Mode,
-  type ThemeColor,
   defaultMode,
   defaultThemeColor,
+  type Mode,
+  type ThemeColor,
 } from "../../model/Theme";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 

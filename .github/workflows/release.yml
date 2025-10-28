@@ -12,7 +12,7 @@ jobs:
     if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - name: Install jq
         run: sudo apt-get install -y jq
       - name: Get version from manifest.json
@@ -20,7 +20,7 @@ jobs:
           VERSION=$(jq -r '.version' dist/manifest.json)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Create tag and release note
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090 # v2.4.1
         with:
           target_commitish: main
           name: ${{ env.VERSION }}
@@ -31,12 +31,12 @@ jobs:
     needs: create_tag_and_release_note
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+      - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: 20
+          node-version: 24.10.0
           cache: npm
-      - uses: actions/cache@v4
+      - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         id: node_modules_cache_id
         env:
           cache-name: cache-node-modules
@@ -51,7 +51,7 @@ jobs:
       - name: Zip
         run: zip -r dist.zip dist
       - name: Upload to Chrome Web Store
-        uses: mnao305/chrome-extension-upload@v5.0.0
+        uses: mnao305/chrome-extension-upload@4008e29e13c144d0f6725462cbd49b7c291b4928 # v5.0.0
         with:
           file-path: dist.zip
           extension-id: ${{ secrets.EXTENSION_ID }}

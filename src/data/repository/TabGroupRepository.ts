@@ -23,7 +23,11 @@ export const addTabToTabGroup = async (
 };
 
 export const createGroupWithTabs = async (name: string, tabIds: number[]) => {
-  const groupId = await chrome.tabs.group({ tabIds });
+  if (tabIds.length === 0) return;
+
+  const groupId = await chrome.tabs.group({
+    tabIds: tabIds as [number, ...number[]],
+  });
   await chrome.tabGroups.update(groupId, { title: name });
 };
 
@@ -60,7 +64,9 @@ export const updateTabGroupColor = async (
 
 export const ungroup = async (tabGroup: TabGroup) => {
   const ids = tabGroup.children.map((tab) => tab.id);
-  await chrome.tabs.ungroup(ids);
+  if (ids.length === 0) return;
+
+  await chrome.tabs.ungroup(ids as [number, ...number[]]);
 };
 
 export const closeTabGroup = async (tabGroup: TabGroup) => {
@@ -207,7 +213,11 @@ export const restoreTabGroup = async (
   );
   const tabs = await Promise.all(createTabPromises);
   const tabIds = tabs.map((tab) => tab.id);
-  const groupId = await chrome.tabs.group({ tabIds });
+  if (tabIds.length === 0) return;
+
+  const groupId = await chrome.tabs.group({
+    tabIds: tabIds as [number, ...number[]],
+  });
   await chrome.tabGroups.update(groupId, {
     title: tabGroup.name,
     color: tabGroup.color,

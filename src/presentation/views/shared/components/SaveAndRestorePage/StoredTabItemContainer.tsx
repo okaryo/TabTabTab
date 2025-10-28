@@ -12,8 +12,8 @@ import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
 import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { useState } from "react";
 import {
   restorePinned,
@@ -21,11 +21,11 @@ import {
 } from "../../../../../data/repository/TabGroupRepository";
 import t from "../../../../../i18n/Translations";
 import {
-  type StoredTabContainer,
   adjacentToStoredTabContainerAfter,
   adjacentToStoredTabContainerBefore,
   isStoredPinned,
   isStoredTabGroup,
+  type StoredTabContainer,
 } from "../../../../../model/TabContainer";
 import type { StoredWindow } from "../../../../../model/Window";
 import StoredTabItem from "./StoredTabItem";

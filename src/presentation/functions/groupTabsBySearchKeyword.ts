@@ -1,9 +1,9 @@
 import { createGroupWithTabs } from "../../data/repository/TabGroupRepository";
 import { addTabsToGroup } from "../../data/repository/TabsRepository";
 import {
-  type Window,
   findGroupsByName,
   flatTabsInWindows,
+  type Window,
 } from "../../model/Window";
 
 const groupTabsBySearchKeyword = async (

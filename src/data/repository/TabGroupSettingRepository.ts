@@ -1,7 +1,7 @@
 import { parse } from "tldts";
 import {
-  type TabGroupSetting,
   defaultTabGroupSetting,
+  type TabGroupSetting,
 } from "../../model/TabGroupSetting";
 
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
@@ -46,7 +46,7 @@ export const groupTabsBySetting = async (setting: TabGroupSetting) => {
       const tabs = groups[groupName];
       const containsActiveTab = tabs.some((tab) => tab.active);
       const groupId = await chrome.tabs.group({
-        tabIds: tabs.map((tab) => tab.id),
+        tabIds: tabs.map((tab) => tab.id) as [number, ...number[]],
         createProperties: { windowId: window.id },
       });
       await chrome.tabGroups.update(groupId, { title: groupName });

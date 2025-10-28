@@ -17,9 +17,9 @@ import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
 import t from "../../../../i18n/Translations";
 import {
-  type Pinned,
   adjacentToTabContainerAfter,
   adjacentToTabContainerBefore,
+  type Pinned,
 } from "../../../../model/TabContainer";
 import type { WindowId } from "../../../../model/Window";
 import { WindowsContext } from "../../../contexts/WindowsContext";

@@ -1,4 +1,8 @@
 changelog:
+  exclude:
+    labels:
+      - release
+
   categories:
     - title: 🎉 Features
       labels:

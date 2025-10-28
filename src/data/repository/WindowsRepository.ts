@@ -1,22 +1,22 @@
 import type { Tab } from "../../model/Tab";
 import {
-  type Pinned,
-  type StoredPinned,
-  type StoredTabGroup,
-  type TabGroup,
   generatePinnedId,
   isPinned,
   isTab,
   isTabContainer,
   isTabGroup,
+  type Pinned,
+  type StoredPinned,
+  type StoredTabGroup,
+  type TabGroup,
 } from "../../model/TabContainer";
 import {
-  type StoredWindow,
-  type Window,
-  type WindowId,
   findPinned,
   findTabGroup,
   flatTabsInWindow,
+  type StoredWindow,
+  type Window,
+  type WindowId,
 } from "../../model/Window";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 import { ChromeSessionStorage } from "../storage/ChromeSessionStorage";
@@ -350,8 +350,10 @@ export const restoreWindow = async (
         );
         const tabs = await Promise.all(createTabPromises);
         const tabIds = tabs.map((tab) => tab.id);
+        if (tabIds.length === 0) continue;
+
         const groupId = await chrome.tabs.group({
-          tabIds,
+          tabIds: tabIds as [number, ...number[]],
           createProperties: { windowId: window.id },
         });
         await chrome.tabGroups.update(groupId, {
