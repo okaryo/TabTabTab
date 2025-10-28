@@ -7,8 +7,8 @@ import { getToolbarSetting } from "../../../../../data/repository/SettingsReposi
 import { setToolbarIconClickOpenView } from "../../../../../data/repository/ToolbarRepository";
 import t from "../../../../../i18n/Translations";
 import {
-  type ToolbarSetting,
   isValidIconClickOpenView,
+  type ToolbarSetting,
 } from "../../../../../model/ToolbarSetting";
 import PaperWithHeader from "../../../shared/components/PaperWithHeader";
 

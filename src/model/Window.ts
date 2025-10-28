@@ -1,15 +1,15 @@
-import { type StoredTab, type Tab, type TabId, isSamePageTabs } from "./Tab";
+import { isSamePageTabs, type StoredTab, type Tab, type TabId } from "./Tab";
 import {
-  type Pinned,
-  type StoredTabContainer,
-  type TabContainer,
-  type TabContainerId,
-  type TabGroup,
   isPinned,
   isPinnedId,
   isTab,
   isTabContainer,
   isTabGroup,
+  type Pinned,
+  type StoredTabContainer,
+  type TabContainer,
+  type TabContainerId,
+  type TabGroup,
 } from "./TabContainer";
 
 type WindowState =

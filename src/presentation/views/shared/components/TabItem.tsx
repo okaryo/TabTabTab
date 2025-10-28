@@ -5,29 +5,29 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import PushPin from "@mui/icons-material/PushPin";
 import VolumeUpIcon from "@mui/icons-material/VolumeUp";
 import Chip from "@mui/material/Chip";
+import { grey } from "@mui/material/colors";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
-import { grey } from "@mui/material/colors";
 import { useTheme } from "@mui/material/styles";
+import Typography from "@mui/material/Typography";
 import { forwardRef, useContext, useState } from "react";
 import { closeTab, focusTab } from "../../../../data/repository/TabsRepository";
 import t from "../../../../i18n/Translations";
-import { type Tab, durationSinceLastActivatedAt } from "../../../../model/Tab";
+import { durationSinceLastActivatedAt, type Tab } from "../../../../model/Tab";
 import {
-  type TabContainer,
   isPinned,
   isTabGroup,
+  type TabContainer,
 } from "../../../../model/TabContainer";
 import {
-  type Window,
   findParentContainer,
   findTabGroup,
   hasDuplicatedTabs,
+  type Window,
 } from "../../../../model/Window";
 import { WindowsContext } from "../../../contexts/WindowsContext";
 import resolveDuplicatedTabs from "../../../functions/resolveDuplicatedTabs";

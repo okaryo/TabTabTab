@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
 import { getPopupSizeSetting } from "../../../../data/repository/SettingsRepository";
-import { type PopupSize, defaultPopupSize } from "../../../../model/PopupSize";
+import { defaultPopupSize, type PopupSize } from "../../../../model/PopupSize";
 import SaveAndRestorePage from "../../shared/components/SaveAndRestorePage";
 import TidyTabsPage from "../../shared/components/TidyTabsPage";
 import Header from "./Header";

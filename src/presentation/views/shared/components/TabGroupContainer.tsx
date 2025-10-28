@@ -5,16 +5,16 @@ import MoreVertIcon from "@mui/icons-material/MoreVert";
 import Box from "@mui/material/Box";
 import Chip from "@mui/material/Chip";
 import Collapse from "@mui/material/Collapse";
+import { grey } from "@mui/material/colors";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
 import List from "@mui/material/List";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import Stack from "@mui/material/Stack";
+import { useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
-import { grey } from "@mui/material/colors";
-import { useTheme } from "@mui/material/styles";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
   collapseTabGroup,
@@ -23,9 +23,9 @@ import {
   updateTabGroupTitle,
 } from "../../../../data/repository/TabGroupRepository";
 import {
-  type TabGroup,
   adjacentToTabContainerAfter,
   adjacentToTabContainerBefore,
+  type TabGroup,
   tabGroupColors,
 } from "../../../../model/TabContainer";
 import { WindowsContext } from "../../../contexts/WindowsContext";

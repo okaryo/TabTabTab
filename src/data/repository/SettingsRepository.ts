@@ -1,7 +1,7 @@
-import { type PopupSize, defaultPopupSize } from "../../model/PopupSize";
+import { defaultPopupSize, type PopupSize } from "../../model/PopupSize";
 import {
-  type ToolbarSetting,
   defaultToolbarSetting,
+  type ToolbarSetting,
 } from "../../model/ToolbarSetting";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
