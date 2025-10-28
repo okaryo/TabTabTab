@@ -10,30 +10,31 @@
     "check": "biome check .",
     "check:fix": "biome check --write --unsafe .",
     "check:ci": "biome ci .",
+    "typecheck": "tsc --noEmit --skipLibCheck",
     "locale-lint": "chromex-locale-lint --localesDir dist/_locales --strict"
   },
   "author": "okaryo",
   "license": "MIT",
+  "dependencies": {
+    "@dnd-kit/core": "^6.3.1",
+    "@dnd-kit/sortable": "^10.0.0",
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.1",
+    "@mui/icons-material": "^7.3.4",
+    "@mui/material": "^7.3.4",
+    "react": "^19.2.0",
+    "react-dom": "^19.2.0",
+    "tldts": "^6.1.86"
+  },
   "devDependencies": {
     "@biomejs/biome": "1.9.4",
-    "@types/chrome": "^0.0.299",
-    "@types/react": "^19.0.7",
-    "@types/react-dom": "^19.0.3",
-    "@vitejs/plugin-react": "^4.3.4",
+    "@types/chrome": "^0.1.27",
+    "@types/react": "^19.2.2",
+    "@types/react-dom": "^19.2.2",
+    "@vitejs/plugin-react": "^5.1.0",
     "chromex-locale-lint": "^0.1.0",
-    "typescript": "^5.7.3",
-    "vite": "^6.0.11",
-    "vitest": "^2.1.8"
-  },
-  "dependencies": {
-    "@dnd-kit/core": "^6.1.0",
-    "@dnd-kit/sortable": "^8.0.0",
-    "@emotion/react": "^11.14.0",
-    "@emotion/styled": "^11.14.0",
-    "@mui/icons-material": "^6.4.1",
-    "@mui/material": "^6.4.1",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "tldts": "^6.1.73"
+    "typescript": "^5.9.3",
+    "vite": "^7.1.12",
+    "vitest": "^4.0.4"
   }
 }
