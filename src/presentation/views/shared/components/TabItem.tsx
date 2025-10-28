@@ -12,7 +12,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import Typography from "@mui/material/Typography";
-import grey from "@mui/material/colors/grey";
+import { grey } from "@mui/material/colors";
 import { useTheme } from "@mui/material/styles";
 import { forwardRef, useContext, useState } from "react";
 import { closeTab, focusTab } from "../../../../data/repository/TabsRepository";
