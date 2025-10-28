@@ -10,6 +10,7 @@
     "check": "biome check .",
     "check:fix": "biome check --write --unsafe .",
     "check:ci": "biome ci .",
+    "typecheck": "tsc --noEmit --skipLibCheck",
     "locale-lint": "chromex-locale-lint --localesDir dist/_locales --strict"
   },
   "author": "okaryo",
