@@ -28,7 +28,8 @@ const useAsync = <T>(
     };
 
     execute();
-  }, [fn, ...deps]);
+    // biome-ignore lint/correctness/useExhaustiveDependencies: `fn` is excluded to avoid unnecessary re-renders
+  }, deps);
 
   return state;
 };
