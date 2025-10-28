@@ -11,7 +11,6 @@ const useAsync = <T>(
     error: null,
   });
 
-  // biome-ignore lint/correctness/useExhaustiveDependencies(fn): `fn` is excluded to avoid unnecessary re-renders
   useEffect(() => {
     const execute = async () => {
       setState({ loading: true, value: null, error: null });
@@ -29,7 +28,7 @@ const useAsync = <T>(
     };
 
     execute();
-  }, deps);
+  }, [fn, ...deps]);
 
   return state;
 };

@@ -1,22 +1,22 @@
 import type { Tab } from "../../model/Tab";
 import {
-  type Pinned,
-  type StoredPinned,
-  type StoredTabGroup,
-  type TabGroup,
   generatePinnedId,
   isPinned,
   isTab,
   isTabContainer,
   isTabGroup,
+  type Pinned,
+  type StoredPinned,
+  type StoredTabGroup,
+  type TabGroup,
 } from "../../model/TabContainer";
 import {
-  type StoredWindow,
-  type Window,
-  type WindowId,
   findPinned,
   findTabGroup,
   flatTabsInWindow,
+  type StoredWindow,
+  type Window,
+  type WindowId,
 } from "../../model/Window";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 import { ChromeSessionStorage } from "../storage/ChromeSessionStorage";

@@ -13,7 +13,9 @@ export const StoredWindowsContext =
 
 export const StoredWindowsProvider = ({
   children,
-}: { children: React.ReactNode }) => {
+}: {
+  children: React.ReactNode;
+}) => {
   const asyncState = useAsync<StoredWindow[]>(async () => {
     const storedWindows = await getStoredWindows();
     return storedWindows;

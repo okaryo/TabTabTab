@@ -1,4 +1,4 @@
-import { type TabCleaner, defaultTabCleaner } from "../../model/TabCleaner";
+import { defaultTabCleaner, type TabCleaner } from "../../model/TabCleaner";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 
 export const getTabCleanerSetting = async (): Promise<TabCleaner> => {

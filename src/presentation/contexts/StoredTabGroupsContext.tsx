@@ -13,7 +13,9 @@ export const StoredTabGroupsContext =
 
 export const StoredTabGroupsProvider = ({
   children,
-}: { children: React.ReactNode }) => {
+}: {
+  children: React.ReactNode;
+}) => {
   const asyncState = useAsync<StoredTabGroup[]>(async () => {
     const storedTabGroups = await getStoredTabGroups();
     return storedTabGroups;

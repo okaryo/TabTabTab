@@ -1,6 +1,7 @@
 import {
   type Active,
   type CollisionDetection,
+  closestCenter,
   DndContext,
   type DragEndEvent,
   type DragOverEvent,
@@ -10,9 +11,8 @@ import {
   MeasuringStrategy,
   MouseSensor,
   type Over,
-  TouchSensor,
-  closestCenter,
   pointerWithin,
+  TouchSensor,
   useSensor,
   useSensors,
 } from "@dnd-kit/core";
@@ -37,20 +37,20 @@ import {
 } from "../../../../data/repository/WindowsRepository";
 import type { Tab } from "../../../../model/Tab";
 import {
-  type TabGroup,
   isPinned,
   isPinnedId,
   isTab,
   isTabContainer,
   isTabGroup,
+  type TabGroup,
 } from "../../../../model/TabContainer";
 import {
-  type Window,
   findParentContainer,
   findWindow,
   findWindowChild,
   indexOfWindowChild,
   moveTabOrTabGroup,
+  type Window,
 } from "../../../../model/Window";
 import { WindowsContext } from "../../../contexts/WindowsContext";
 import moveTabFromPinnedToPinned from "../../../functions/moveTabFromPinnedToPinned";

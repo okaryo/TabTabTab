@@ -1,7 +1,7 @@
 import { parse } from "tldts";
 import {
-  type TabGroupSetting,
   defaultTabGroupSetting,
+  type TabGroupSetting,
 } from "../../model/TabGroupSetting";
 
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
