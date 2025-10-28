@@ -5,7 +5,6 @@ export const mockWindow = (attrs: Partial<Window> = {}): Window => {
     id: 1,
     focused: false,
     state: "normal",
-    type: "normal",
     children: [],
     ...attrs,
   };
