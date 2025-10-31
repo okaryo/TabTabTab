@@ -19,6 +19,9 @@ changelog:
     - title: 🏠 Maintenances
       labels:
         - maintenance
+    - title: 🗑️ Remove Features
+      labels:
+        - remove
     - title: 📝 Documentation
       labels:
         - documentation

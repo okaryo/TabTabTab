@@ -1,7 +1,10 @@
 /// <reference types="vitest/config" />
-import path from "node:path";
+import { dirname, resolve } from "node:path";
+import { fileURLToPath } from "node:url";
 import react from "@vitejs/plugin-react";
 import { defineConfig } from "vite";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
 
 export default defineConfig(({ mode }) => {
   const isDev = mode === "development";
@@ -16,19 +19,16 @@ export default defineConfig(({ mode }) => {
       reportCompressedSize: isProduction,
       rollupOptions: {
         input: {
-          popup: path.resolve(
-            __dirname,
-            "src/presentation/views/popup/index.tsx",
-          ),
-          sidePanel: path.resolve(
+          popup: resolve(__dirname, "src/presentation/views/popup/index.tsx"),
+          sidePanel: resolve(
             __dirname,
             "src/presentation/views/sidePanel/index.tsx",
           ),
-          options: path.resolve(
+          options: resolve(
             __dirname,
             "src/presentation/views/options/index.tsx",
           ),
-          background: path.resolve(__dirname, "src/background/index.ts"),
+          background: resolve(__dirname, "src/background/index.ts"),
         },
         output: {
           entryFileNames: "[name].js",
