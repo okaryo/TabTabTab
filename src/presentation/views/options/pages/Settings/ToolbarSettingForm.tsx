@@ -1,3 +1,4 @@
+import FormControl from "@mui/material/FormControl";
 import ListItem from "@mui/material/ListItem";
 import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
@@ -38,20 +39,22 @@ const ToolbarSettingForm = () => {
       {settingState && (
         <ListItem sx={{ p: 2 }}>
           <ListItemText primary={t.toolbarIconClickBehaviorSettingHeader} />
-          <Select
-            value={settingState.iconClickOpenView}
-            onChange={onChangeIconClickOpenView}
-          >
-            <MenuItem value="popup">
-              {t.toolbarIconClickBehaviorSelectPopup}
-            </MenuItem>
-            <MenuItem value="sidePanel">
-              {t.toolbarIconClickBehaviorSelectSidePanel}
-            </MenuItem>
-            <MenuItem value="dashboard">
-              {t.toolbarIconClickBehaviorSelectDashboard}
-            </MenuItem>
-          </Select>
+          <FormControl size="small">
+            <Select
+              value={settingState.iconClickOpenView}
+              onChange={onChangeIconClickOpenView}
+            >
+              <MenuItem value="popup">
+                {t.toolbarIconClickBehaviorSelectPopup}
+              </MenuItem>
+              <MenuItem value="sidePanel">
+                {t.toolbarIconClickBehaviorSelectSidePanel}
+              </MenuItem>
+              <MenuItem value="dashboard">
+                {t.toolbarIconClickBehaviorSelectDashboard}
+              </MenuItem>
+            </Select>
+          </FormControl>
         </ListItem>
       )}
     </PaperWithHeader>
