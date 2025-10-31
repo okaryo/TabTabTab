@@ -38,7 +38,7 @@ Release: <%= Time.now.strftime('%Y-%m-%d %H:%M') %>(UTC)
 <% if remove_prs.any? -%>
 ## 🗑️ Remove Features
 <% remove_prs.each do |pr| -%>
-<%= "* #{pr.title} by #{pr.mention} in ##{pr.number}}" %>
+<%= "* #{pr.title} by #{pr.mention} in ##{pr.number}" %>
 <% end -%>
 <% end -%>
 <% documentation_prs = pull_requests.select { |pr| pr.labels.map { |label| label['name'] }.include?('documentation') } -%>
