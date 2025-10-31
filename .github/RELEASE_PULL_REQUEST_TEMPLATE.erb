@@ -48,7 +48,7 @@ Release: <%= Time.now.strftime('%Y-%m-%d %H:%M') %>(UTC)
 <%= "* #{pr.title} by #{pr.mention} in ##{pr.number}" %>
 <% end -%>
 <% end -%>
-<% other_prs = pull_requests.reject { |pr| (pr.labels.map { |label| label['name'] } & ['feature', 'refinement', 'bug', 'translation', 'maintenance', 'documentation']).any? } -%>
+<% other_prs = pull_requests.reject { |pr| (pr.labels.map { |label| label['name'] } & ['feature', 'refinement', 'bug', 'translation', 'maintenance', 'remove', 'documentation']).any? } -%>
 <% if other_prs.any? -%>
 ## Others
 <% other_prs.each do |pr| -%>
