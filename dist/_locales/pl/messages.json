@@ -371,22 +371,6 @@
     "message": "Wymagania: wysokość: 200-600px, szerokość: 400-800px.",
     "description": "Notes or cautionary advice regarding the settings for the popup size."
   },
-  "popup_element_scale_header": {
-    "message": "Skalowanie elementów popupu",
-    "description": "Heading for the settings to adjust the scale of elements within the popup."
-  },
-  "popup_element_scale_description": {
-    "message": "Dostosuj rozmiar elementów, takich jak czcionki i ikony w popupie, do 50~150% ich domyślnego rozmiaru.",
-    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_format": {
-    "message": "Wprowadź liczbę całkowitą.",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_range": {
-    "message": "Wprowadź wartość w zakresie od 50 do 150.",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
   "toolbar_setting_header": {
     "message": "Pasek narzędzi",
     "description": "The main header for the toolbar setting section."

@@ -256,22 +256,6 @@ class Translations {
   get popupSizeValidationErrorValueRange() {
     return chrome.i18n.getMessage("popup_size_validation_error_value_range");
   }
-  get popupElementScaleHeader() {
-    return chrome.i18n.getMessage("popup_element_scale_header");
-  }
-  get popupElementScaleDescription() {
-    return chrome.i18n.getMessage("popup_element_scale_description");
-  }
-  get popupElementScaleValidationErrorValueFormat() {
-    return chrome.i18n.getMessage(
-      "popup_element_scale_validation_error_value_format",
-    );
-  }
-  get popupElementScaleValidationErrorValueRange() {
-    return chrome.i18n.getMessage(
-      "popup_element_scale_validation_error_value_range",
-    );
-  }
   get settings() {
     return chrome.i18n.getMessage("settings");
   }

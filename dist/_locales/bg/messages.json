@@ -371,22 +371,6 @@
     "message": "Височина: 200-600px, Ширина: 400-800px задължително.",
     "description": "Notes or cautionary advice regarding the settings for the popup size."
   },
-  "popup_element_scale_header": {
-    "message": "Скала за размера на изкачащия прозорец",
-    "description": "Heading for the settings to adjust the scale of elements within the popup."
-  },
-  "popup_element_scale_description": {
-    "message": "Коригирайте размерът на елементите (шрифтове, иконки) в изскачащия прозорец между 50-150% от размера им по подразбиране.",
-    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_format": {
-    "message": "Въведете число!",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_range": {
-    "message": "Въведете числена стойност от 50 до 150.",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
   "toolbar_setting_header": {
     "message": "Лента с инструменти",
     "description": "The main header for the toolbar setting section."

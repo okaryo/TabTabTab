@@ -7,7 +7,7 @@ import type { ToolbarSetting } from "../../model/ToolbarSetting";
 export namespace ChromeLocalStorage {
   const TAB_CLEANER_SETTING_KEY = "tab_cleaner_setting";
   const POPUP_SIZE_SETTING_KEY = "popup_size_setting";
-  const POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
+  const _POPUP_ELEMENT_SCALE_SETTING_KEY = "popup_element_scale";
   const TOOLBAR_SETTING_KEY = "toolbar_setting";
   const MODE_KEY = "mode";
   const THEME_COLOR_KEY = "theme_color";
@@ -90,23 +90,6 @@ export namespace ChromeLocalStorage {
         height: setting.height,
         width: setting.width,
       },
-    });
-  };
-
-  // PopupElementScaleSetting
-  type PopupElementScaleSettingStorageObject = {
-    [POPUP_ELEMENT_SCALE_SETTING_KEY]: number;
-  };
-  export const getPopupElementScaleSetting = async () => {
-    const { [POPUP_ELEMENT_SCALE_SETTING_KEY]: setting } =
-      (await chrome.storage.local.get(
-        POPUP_ELEMENT_SCALE_SETTING_KEY,
-      )) as PopupElementScaleSettingStorageObject;
-    return setting;
-  };
-  export const updatePopupElementScaleSetting = (scale: number) => {
-    return chrome.storage.local.set({
-      [POPUP_ELEMENT_SCALE_SETTING_KEY]: scale,
     });
   };
 

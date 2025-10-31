@@ -1,7 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
-import { useContext, useEffect, useMemo, useState } from "react";
-import { getPopupElementScaleSetting } from "../../../../data/repository/SettingsRepository";
+import { useContext, useMemo } from "react";
 import { ModeContext } from "../../../contexts/ModeContext";
 import { ThemeColorContext } from "../../../contexts/ThemeColorContext";
 import { tabGroupColorPalette } from "../../shared/resources/tabGroupColorPalette";
@@ -16,21 +15,7 @@ const MuiThemeProvider = (props: MuiThemeProviderProps) => {
   const { mode } = useContext(ModeContext);
   const { themeColor } = useContext(ThemeColorContext);
 
-  const [scale, setScale] = useState(100);
-  useEffect(() => {
-    const initState = async () => {
-      setScale(await getPopupElementScaleSetting());
-    };
-    initState();
-  }, []);
-
   const themePalette = useMemo(() => {
-    const defaultTheme = createTheme();
-    const defaultTabMinHeight = 48;
-    const defaultTabsMinHeight = 48;
-    const defaultToolbarMinHeight = 56;
-    const defaultChipHeight = 22;
-
     return createTheme({
       palette: {
         mode,
@@ -47,40 +32,40 @@ const MuiThemeProvider = (props: MuiThemeProviderProps) => {
         },
       },
       typography: {
-        fontSize: defaultTheme.typography.fontSize * (scale / 100),
+        fontSize: 12,
       },
       components: {
         MuiTab: {
           styleOverrides: {
             root: {
-              minHeight: defaultTabMinHeight * (scale / 100),
+              minHeight: 36,
             },
           },
         },
         MuiTabs: {
           styleOverrides: {
             root: {
-              minHeight: defaultTabsMinHeight * (scale / 100),
+              minHeight: 36,
             },
           },
         },
         MuiToolbar: {
           styleOverrides: {
             root: {
-              minHeight: defaultToolbarMinHeight * (scale / 100),
+              minHeight: 42,
             },
           },
         },
         MuiChip: {
           styleOverrides: {
             root: {
-              height: defaultChipHeight * (scale / 100),
+              height: 16,
             },
           },
         },
       },
     });
-  }, [mode, themeColor, scale]);
+  }, [mode, themeColor]);
 
   return <ThemeProvider theme={themePalette}>{children}</ThemeProvider>;
 };
