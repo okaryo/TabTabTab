@@ -371,22 +371,6 @@
     "message": "ارتفاع: ۲۰۰-۶۰۰ پیکسل، عرض: ۴۰۰-۸۰۰ پیکسل الزامی است.",
     "description": "Notes or cautionary advice regarding the settings for the popup size."
   },
-  "popup_element_scale_header": {
-    "message": "مقیاس عناصر پنجره پاپ‌آپ",
-    "description": "Heading for the settings to adjust the scale of elements within the popup."
-  },
-  "popup_element_scale_description": {
-    "message": "اندازه عناصری مانند فونت‌ها و آیکون‌ها را در پنجره پاپ‌آپ بین ۵۰ تا ۱۵۰ درصد از اندازه پیش‌فرض تنظیم کنید.",
-    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_format": {
-    "message": "یک عدد صحیح وارد کنید.",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_range": {
-    "message": "یک مقدار در بازه ۵۰ تا ۱۵۰ وارد کنید.",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
   "toolbar_setting_header": {
     "message": "نوار ابزار",
     "description": "The main header for the toolbar setting section."

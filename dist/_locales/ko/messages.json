@@ -371,22 +371,6 @@
     "message": "높이 범위: 200-600px, 너비 범위: 400-800px.",
     "description": "Notes or cautionary advice regarding the settings for the popup size."
   },
-  "popup_element_scale_header": {
-    "message": "텍스트 및 아이콘 크기 조절",
-    "description": "Heading for the settings to adjust the scale of elements within the popup."
-  },
-  "popup_element_scale_description": {
-    "message": "팝업 창 내 글씨와 아이콘의 크기를 조절합니다. 50-150% 사이 값을 입력하세요.",
-    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_format": {
-    "message": "정수 값을 입력하세요.",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_range": {
-    "message": "50-150% 사이의 값을 입력하세요.",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
   "toolbar_setting_header": {
     "message": "도구 모음",
     "description": "The main header for the toolbar setting section."
