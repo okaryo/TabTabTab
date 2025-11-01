@@ -4,8 +4,8 @@ import { updateThemeColor } from "../../../../../data/repository/ThemeRepository
 import t from "../../../../../i18n/Translations";
 import { themeColors } from "../../../../../model/Theme";
 import { ThemeColorContext } from "../../../../contexts/ThemeColorContext";
-import PaperWithHeader from "../../../shared/components/PaperWithHeader";
-import TabGroupColorRadio from "../../../shared/components/TabGroupColorRadio";
+import PaperWithHeader from "../PaperWithHeader";
+import TabGroupColorRadio from "../TabGroupColorRadio";
 
 const ThemeColorSetting = () => {
   const { themeColor } = useContext(ThemeColorContext);

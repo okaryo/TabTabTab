@@ -10,7 +10,7 @@ import t from "../../../../../i18n/Translations";
 import type { Mode } from "../../../../../model/Theme";
 import type { ToolbarSetting } from "../../../../../model/ToolbarSetting";
 import { ModeContext } from "../../../../contexts/ModeContext";
-import PaperWithHeader from "../../../shared/components/PaperWithHeader";
+import PaperWithHeader from "../PaperWithHeader";
 
 const ModeSettingForm = () => {
   const { mode } = useContext(ModeContext);

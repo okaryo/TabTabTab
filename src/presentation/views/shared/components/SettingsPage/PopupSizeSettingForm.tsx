@@ -16,7 +16,7 @@ import {
   updatePopupSizeSetting,
 } from "../../../../../data/repository/SettingsRepository";
 import t from "../../../../../i18n/Translations";
-import PaperWithHeader from "../../../shared/components/PaperWithHeader";
+import PaperWithHeader from "../PaperWithHeader";
 
 type SettingForm = {
   height: string;

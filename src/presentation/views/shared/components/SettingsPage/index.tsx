@@ -4,9 +4,9 @@ import PopupSizeSettingForm from "./PopupSizeSettingForm";
 import ThemeColorSettingForm from "./ThemeColorSettingForm";
 import ToolbarSettingForm from "./ToolbarSettingForm";
 
-const Settings = () => {
+const SettingsPage = () => {
   return (
-    <Stack spacing={2}>
+    <Stack spacing={1}>
       <ModeSettingForm />
       <ThemeColorSettingForm />
       <PopupSizeSettingForm />
@@ -15,4 +15,4 @@ const Settings = () => {
   );
 };
 
-export default Settings;
+export default SettingsPage;
