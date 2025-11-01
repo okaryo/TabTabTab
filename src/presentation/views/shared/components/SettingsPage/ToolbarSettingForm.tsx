@@ -50,9 +50,6 @@ const ToolbarSettingForm = () => {
               <MenuItem value="sidePanel">
                 {t.toolbarIconClickBehaviorSelectSidePanel}
               </MenuItem>
-              <MenuItem value="dashboard">
-                {t.toolbarIconClickBehaviorSelectDashboard}
-              </MenuItem>
             </Select>
           </FormControl>
         </ListItem>

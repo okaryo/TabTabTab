@@ -403,10 +403,6 @@
     "message": "사이드 패널",
     "description": "Option to open the side panel when the toolbar icon is clicked."
   },
-  "toolbar_icon_click_behavior_select_dashboard": {
-    "message": "대시보드",
-    "description": "Option to open the dashboard when the toolbar icon is clicked."
-  },
   "scale": {
     "message": "비율",
     "description": "Heading for the input form to adjust the scale of elements within the popup."

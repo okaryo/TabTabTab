@@ -21,11 +21,9 @@ export const setToolbarIconBehavior = async (
     case "sidePanel":
       await setToolbarIconBehaviorToOpenSidePanel();
       break;
-    case "dashboard":
-      await setToolbarIconBehaviorToNone();
-      break;
     default:
-      throw new Error(`Invalid view: ${view}`);
+      console.error(`Unknown toolbar icon click view: ${view}`);
+      await setToolbarIconBehaviorToOpenPopup();
   }
 };
 

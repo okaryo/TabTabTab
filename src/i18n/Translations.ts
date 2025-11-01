@@ -236,11 +236,6 @@ class Translations {
       "toolbar_icon_click_behavior_select_side_panel",
     );
   }
-  get toolbarIconClickBehaviorSelectDashboard() {
-    return chrome.i18n.getMessage(
-      "toolbar_icon_click_behavior_select_dashboard",
-    );
-  }
   get height() {
     return chrome.i18n.getMessage("height");
   }
