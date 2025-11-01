@@ -283,10 +283,6 @@
     "message": "시간",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "options_navigation_all_windows": {
-    "message": "모든 창",
-    "description": "Navigation header for AllWindows Page in options.html"
-  },
   "options_navigation_save_and_restore": {
     "message": "저장 및 복원",
     "description": "Navigation header for Save & Restore page in options.html"
@@ -298,14 +294,6 @@
   "options_navigation_settings": {
     "message": "설정",
     "description": "Navigation header for Settings page in options.html"
-  },
-  "options_navigation_feedback": {
-    "message": "피드백",
-    "description": "Navigation header for Feedback page in options.html"
-  },
-  "options_navigation_sponsor": {
-    "message": "스폰서",
-    "description": "Navigation header for Sponsor page in options.html"
   },
   "tab_grouping_header": {
     "message": "탭 그룹화",
@@ -403,10 +391,6 @@
     "message": "사이드 패널",
     "description": "Option to open the side panel when the toolbar icon is clicked."
   },
-  "toolbar_icon_click_behavior_select_dashboard": {
-    "message": "대시보드",
-    "description": "Option to open the dashboard when the toolbar icon is clicked."
-  },
   "scale": {
     "message": "비율",
     "description": "Heading for the input form to adjust the scale of elements within the popup."
@@ -446,38 +430,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "자연수를 입력하세요.",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "bug_report_and_feature_request_title": {
-    "message": "버그 제보 & 신규 기능 요청",
-    "description": "Heading for the section covering bug reports and feature requests."
-  },
-  "bug_report_and_feature_request_description": {
-    "message": "사용 중에 발견한 버그를 제보하거나 신규 기능을 요청하고 싶은 경우, GitHub에 이슈를 생성해주세요.",
-    "description": "Description for the section dedicated to submitting bug reports and feature requests."
-  },
-  "store_review_title": {
-    "message": "스토어 리뷰",
-    "description": "Heading for the store reviews section."
-  },
-  "store_review_description": {
-    "message": "TabTabTab이 마음에 들었다면 Chrome 웹 스토어에 리뷰를 남겨주세요! 여러분의 리뷰는 개발에 큰 도움이 됩니다.",
-    "description": "Description for the section regarding store reviews."
-  },
-  "source_code_title": {
-    "message": "소스 코드",
-    "description": "Heading for the source code section."
-  },
-  "source_code_description": {
-    "message": "TabTabTab은 오픈 소스 프로젝트이고, 소스 코드는 GitHub에 공개되어 있습니다. 안전한 확장 프로그램을 제공하기 위해 어떤 불법적인 프로그래밍도 하지 않습니다.",
-    "description": "Description for the section related to the source code."
-  },
-  "sponsor_page_header": {
-    "message": "프로젝트 지원하기",
-    "description": "Header in Sponsor Page"
-  },
-  "sponsor_page_description": {
-    "message": "TabTabTab은 주로 개인이 개발한 오픈 소스 프로젝트입니다. 유용하다고 생각되면 이 프로젝트를 지원해 주시면 감사하겠습니다.",
-    "description": "Description in Sponsor Page"
   },
   "add_tab": {
     "message": "탭 추가",

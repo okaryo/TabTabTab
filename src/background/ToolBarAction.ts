@@ -33,19 +33,6 @@ export const addToolBarActions = async () => {
 
   const toolbarSetting = await getToolbarSetting();
   setToolbarIconBehavior(toolbarSetting.iconClickOpenView);
-
-  chrome.action.onClicked.addListener(async () => {
-    const toolbarSetting = await getToolbarSetting();
-    const openView = toolbarSetting.iconClickOpenView;
-    switch (openView) {
-      case "dashboard":
-        navigateToOptionsPage();
-        break;
-      case "popup":
-      case "sidePanel":
-        break;
-    }
-  });
 };
 
 chrome.contextMenus.onClicked.addListener(async (info) => {

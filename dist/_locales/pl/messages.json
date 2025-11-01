@@ -283,10 +283,6 @@
     "message": "Godzina",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "options_navigation_all_windows": {
-    "message": "Wszystkie okna",
-    "description": "Navigation header for AllWindows Page in options.html"
-  },
   "options_navigation_save_and_restore": {
     "message": "Zapisz i Przywróć",
     "description": "Navigation header for Save & Restore page in options.html"
@@ -298,14 +294,6 @@
   "options_navigation_settings": {
     "message": "Ustawienia",
     "description": "Navigation header for Settings page in options.html"
-  },
-  "options_navigation_feedback": {
-    "message": "Opinie",
-    "description": "Navigation header for Feedback page in options.html"
-  },
-  "options_navigation_sponsor": {
-    "message": "Sponsor",
-    "description": "Navigation header for Sponsor page in options.html"
   },
   "tab_grouping_header": {
     "message": "Grupowanie kart",
@@ -403,10 +391,6 @@
     "message": "Panel boczny",
     "description": "Option to open the side panel when the toolbar icon is clicked."
   },
-  "toolbar_icon_click_behavior_select_dashboard": {
-    "message": "Pulpit nawigacyjny",
-    "description": "Option to open the dashboard when the toolbar icon is clicked."
-  },
   "scale": {
     "message": "Skala",
     "description": "Heading for the input form to adjust the scale of elements within the popup."
@@ -446,38 +430,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "Wprowadź dodatnią liczbę całkowitą.",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "bug_report_and_feature_request_title": {
-    "message": "Zgłoszenie Błędu & Wniosek o Funkcję",
-    "description": "Heading for the section covering bug reports and feature requests."
-  },
-  "bug_report_and_feature_request_description": {
-    "message": "Jeśli podczas korzystania z TabTabTab zauważysz jakieś błędy lub masz sugestie dotyczące funkcjonalności, możesz utworzyć zgłoszenie w serwisie GitHub.",
-    "description": "Description for the section dedicated to submitting bug reports and feature requests."
-  },
-  "store_review_title": {
-    "message": "Opinie",
-    "description": "Heading for the store reviews section."
-  },
-  "store_review_description": {
-    "message": "Jeśli uważasz, że TabTabTab jest pomocny - napisz nam swoją opinię w ChromeWebStore! Będziemy Ci za to bardzo wdzięczni. Twój głos w znacznym stopniu przyczynia się do rozwoju TabTabTab.",
-    "description": "Description for the section regarding store reviews."
-  },
-  "source_code_title": {
-    "message": "Kod Źródłowy",
-    "description": "Heading for the source code section."
-  },
-  "source_code_description": {
-    "message": "Kod źródłowy TabTabTab jest otwarty i publicznie dostępny (open source). Jest też starannie zarządzany, aby nie dopuścić do jakiegokolwiek niedozwolonego oprogramowania, zapewniając tym samym bezpieczny rozwój rozszerzenia.",
-    "description": "Description for the section related to the source code."
-  },
-  "sponsor_page_header": {
-    "message": "Wesprzyj projekt",
-    "description": "Header in Sponsor Page"
-  },
-  "sponsor_page_description": {
-    "message": "TabTabTab jest projektem open-source, głównie rozwijanym przez jedną osobę. Jeśli uznasz go za przydatny, byłbym wdzięczny, gdybyś rozważył wsparcie tego projektu.",
-    "description": "Description in Sponsor Page"
   },
   "add_tab": {
     "message": "Dodaj kartę",
