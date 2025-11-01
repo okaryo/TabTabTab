@@ -269,29 +269,8 @@ class Translations {
   get feedback() {
     return chrome.i18n.getMessage("feedback");
   }
-  get bugReportAndFeatureRequestTitle() {
-    return chrome.i18n.getMessage("bug_report_and_feature_request_title");
-  }
-  get bugReportAndFeatureRequestDescription() {
-    return chrome.i18n.getMessage("bug_report_and_feature_request_description");
-  }
-  get storeReviewTitle() {
-    return chrome.i18n.getMessage("store_review_title");
-  }
-  get storeReviewDescription() {
-    return chrome.i18n.getMessage("store_review_description");
-  }
-  get sourceCodeTitle() {
-    return chrome.i18n.getMessage("source_code_title");
-  }
-  get sourceCodeDescription() {
-    return chrome.i18n.getMessage("source_code_description");
-  }
 
   // OptionsHeader
-  get optionsNavigationAllWindows() {
-    return chrome.i18n.getMessage("options_navigation_all_windows");
-  }
   get optionsNavigationSaveAndRestore() {
     return chrome.i18n.getMessage("options_navigation_save_and_restore");
   }
@@ -300,12 +279,6 @@ class Translations {
   }
   get optionsNavigationSettings() {
     return chrome.i18n.getMessage("options_navigation_settings");
-  }
-  get optionsNavigationFeedback() {
-    return chrome.i18n.getMessage("options_navigation_feedback");
-  }
-  get optionsNavigationSponsor() {
-    return chrome.i18n.getMessage("options_navigation_sponsor");
   }
 
   // TidyTabPage
@@ -381,15 +354,6 @@ class Translations {
       "tab_grouping_group_tabs_by_menu_item_subdomain",
     );
   }
-
-  // SponsorPage
-  get sponsorPageHeader() {
-    return chrome.i18n.getMessage("sponsor_page_header");
-  }
-  get sponsorPageDescription() {
-    return chrome.i18n.getMessage("sponsor_page_description");
-  }
-
   // Common
   get addTab() {
     return chrome.i18n.getMessage("add_tab");

@@ -283,10 +283,6 @@
     "message": "Час",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "options_navigation_all_windows": {
-    "message": "Всички прозорци",
-    "description": "Navigation header for AllWindows Page in options.html"
-  },
   "options_navigation_save_and_restore": {
     "message": "Запазване и Възстановяване",
     "description": "Navigation header for Save & Restore page in options.html"
@@ -298,14 +294,6 @@
   "options_navigation_settings": {
     "message": "Настройки",
     "description": "Navigation header for Settings page in options.html"
-  },
-  "options_navigation_feedback": {
-    "message": "Обратна връзка",
-    "description": "Navigation header for Feedback page in options.html"
-  },
-  "options_navigation_sponsor": {
-    "message": "Спонсор",
-    "description": "Navigation header for Sponsor page in options.html"
   },
   "tab_grouping_header": {
     "message": "Групиране на раздели",
@@ -442,38 +430,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "Въведете положително число.",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "bug_report_and_feature_request_title": {
-    "message": "Докладване на бъг & Заявка за подобрение",
-    "description": "Heading for the section covering bug reports and feature requests."
-  },
-  "bug_report_and_feature_request_description": {
-    "message": "Ако попаднете на бъг, докато използвате TabTabTab или имате предложение за подобрение, не се колебайте да отворите `Issue` в Github.",
-    "description": "Description for the section dedicated to submitting bug reports and feature requests."
-  },
-  "store_review_title": {
-    "message": "Преглед в магазина",
-    "description": "Heading for the store reviews section."
-  },
-  "store_review_description": {
-    "message": "Ако намирате TabTabTab за полезен, ще сме много благодарни, ако ни оставите отзив в ChromeWebStore! Вашият глас значително допринася за развитието на TabTabTab.",
-    "description": "Description for the section regarding store reviews."
-  },
-  "source_code_title": {
-    "message": "Програмен код",
-    "description": "Heading for the source code section."
-  },
-  "source_code_description": {
-    "message": "TabTabTab е софтуерен продукт с публично достъпен отворен код. Той се управлява внимателно, за да се предотвратят всякакви незаконни действия, гарантиращи сигурна и безопасна работа с приложението.",
-    "description": "Description for the section related to the source code."
-  },
-  "sponsor_page_header": {
-    "message": "Подкрепете проекта",
-    "description": "Header in Sponsor Page"
-  },
-  "sponsor_page_description": {
-    "message": "TabTabTab е отворен проект, разработен главно от един индивид. Ако намирате, че е полезен, ще съм благодарен, ако обмислите подкрепата си за този проект.",
-    "description": "Description in Sponsor Page"
   },
   "add_tab": {
     "message": "Добавяне на раздел",

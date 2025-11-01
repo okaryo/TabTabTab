@@ -283,10 +283,6 @@
     "message": "Hour",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "options_navigation_all_windows": {
-    "message": "All Windows",
-    "description": "Navigation header for AllWindows Page in options.html"
-  },
   "options_navigation_save_and_restore": {
     "message": "Save & Restore",
     "description": "Navigation header for Save & Restore page in options.html"
@@ -298,14 +294,6 @@
   "options_navigation_settings": {
     "message": "Settings",
     "description": "Navigation header for Settings page in options.html"
-  },
-  "options_navigation_feedback": {
-    "message": "Feedback",
-    "description": "Navigation header for Feedback page in options.html"
-  },
-  "options_navigation_sponsor": {
-    "message": "Sponsor",
-    "description": "Navigation header for Sponsor page in options.html"
   },
   "tab_grouping_header": {
     "message": "Tab Grouping",
@@ -442,38 +430,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "Input a positive integer.",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "bug_report_and_feature_request_title": {
-    "message": "Bug Report & Feature Request",
-    "description": "Heading for the section covering bug reports and feature requests."
-  },
-  "bug_report_and_feature_request_description": {
-    "message": "If you encounter any bugs while using TabTabTab, or have suggestions for feature requests, please feel free to create an issue on GitHub.",
-    "description": "Description for the section dedicated to submitting bug reports and feature requests."
-  },
-  "store_review_title": {
-    "message": "Store Review",
-    "description": "Heading for the store reviews section."
-  },
-  "store_review_description": {
-    "message": "If you find TabTabTab helpful, we would greatly appreciate it if you could leave us a review on the ChromeWebStore! Your voice greatly contributes to the development of TabTabTab.",
-    "description": "Description for the section regarding store reviews."
-  },
-  "source_code_title": {
-    "message": "Source Code",
-    "description": "Heading for the source code section."
-  },
-  "source_code_description": {
-    "message": "The code for TabTabTab is open source and publicly available. It is carefully managed to prevent any illicit programming, ensuring the extension is developed safely.",
-    "description": "Description for the section related to the source code."
-  },
-  "sponsor_page_header": {
-    "message": "Support the Project",
-    "description": "Header in Sponsor Page"
-  },
-  "sponsor_page_description": {
-    "message": "TabTabTab is an open-source project, mainly developed by an individual. If you find it useful, I'd be grateful if you could consider supporting this project.",
-    "description": "Description in Sponsor Page"
   },
   "add_tab": {
     "message": "Add Tab",
