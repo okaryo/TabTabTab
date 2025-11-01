@@ -3,12 +3,13 @@ import { useEffect, useState } from "react";
 import { getPopupSizeSetting } from "../../../../data/repository/SettingsRepository";
 import { defaultPopupSize, type PopupSize } from "../../../../model/PopupSize";
 import SaveAndRestorePage from "../../shared/components/SaveAndRestorePage";
+import SettingsPage from "../../shared/components/SettingsPage";
 import TidyTabsPage from "../../shared/components/TidyTabsPage";
 import Header from "./Header";
 import SearchResult from "./SearchResult";
 import WindowsContainer from "./WindowsContainer";
 
-export type PopupPage = "root" | "saveAndRestore" | "tidyTabs";
+export type PopupPage = "root" | "saveAndRestore" | "tidyTabs" | "settings";
 type HomeProps = {
   sidePanel: boolean;
 };
@@ -60,6 +61,11 @@ const Home = (props: HomeProps) => {
       {searchText.length === 0 && currentPage === "tidyTabs" && (
         <Box sx={{ p: 1 }}>
           <TidyTabsPage dense />
+        </Box>
+      )}
+      {searchText.length === 0 && currentPage === "settings" && (
+        <Box sx={{ p: 1 }}>
+          <SettingsPage />
         </Box>
       )}
     </Box>

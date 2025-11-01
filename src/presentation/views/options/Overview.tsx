@@ -11,16 +11,16 @@ import Stack from "@mui/material/Stack";
 import { alpha, useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useContext, useState } from "react";
-import { addWindow } from "../../../../../data/repository/WindowsRepository";
-import t from "../../../../../i18n/Translations";
-import { flatTabsInWindow, type Window } from "../../../../../model/Window";
-import { WindowsContext } from "../../../../contexts/WindowsContext";
-import { WindowActionMenu } from "../../../shared/components/ActionMenu";
+import { addWindow } from "../../../data/repository/WindowsRepository";
+import t from "../../../i18n/Translations";
+import { flatTabsInWindow, type Window } from "../../../model/Window";
+import { WindowsContext } from "../../contexts/WindowsContext";
+import { WindowActionMenu } from "../shared/components/ActionMenu";
 import DragAndDropContext, {
   DROPPABLE_EMPTY_WINDOW_COLUMN_ID,
   DROPPABLE_WINDOW_COLUMN_ID_PREFIX,
-} from "../../../shared/components/DragAndDropContext";
-import TabList from "../../../shared/components/TabList";
+} from "../shared/components/DragAndDropContext";
+import TabList from "../shared/components/TabList";
 
 type WindowColumnProps = {
   windows: Window[];

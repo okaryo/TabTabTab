@@ -283,10 +283,6 @@
     "message": "時間",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "options_navigation_all_windows": {
-    "message": "すべてのウィンドウ",
-    "description": "Navigation header for AllWindows Page in options.html"
-  },
   "options_navigation_save_and_restore": {
     "message": "保存と復元",
     "description": "Navigation header for Save & Restore page in options.html"
@@ -298,14 +294,6 @@
   "options_navigation_settings": {
     "message": "設定",
     "description": "Navigation header for Settings page in options.html"
-  },
-  "options_navigation_feedback": {
-    "message": "フィードバック",
-    "description": "Navigation header for Feedback page in options.html"
-  },
-  "options_navigation_sponsor": {
-    "message": "スポンサー",
-    "description": "Navigation header for Sponsor page in options.html"
   },
   "tab_grouping_header": {
     "message": "タブのグループ化",
@@ -359,6 +347,22 @@
     "message": "テーマカラー",
     "description": "The main header for the theme color setting section."
   },
+  "mode": {
+    "message": "モード",
+    "description": "Label for theme mode selection."
+  },
+  "light": {
+    "message": "ライト",
+    "description": "Light theme mode option."
+  },
+  "system": {
+    "message": "システム",
+    "description": "System theme mode option that follows OS settings."
+  },
+  "dark": {
+    "message": "ダーク",
+    "description": "Dark theme mode option."
+  },
   "popup_setting_header": {
     "message": "ポップアップ",
     "description": "The main header for the popup setting section."
@@ -370,22 +374,6 @@
   "popup_size_description": {
     "message": "高さ: 200~600px, 幅: 400~800px の範囲で指定してください。",
     "description": "Notes or cautionary advice regarding the settings for the popup size."
-  },
-  "popup_element_scale_header": {
-    "message": "ポップアップ要素のスケール",
-    "description": "Heading for the settings to adjust the scale of elements within the popup."
-  },
-  "popup_element_scale_description": {
-    "message": "フォントやアイコンなどのポップアップ内の要素サイズをデフォルトサイズに対する50~150%の範囲で調整します。",
-    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_format": {
-    "message": "整数値を入力してください。",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_range": {
-    "message": "50~150の範囲の値を入力してください。",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
   "toolbar_setting_header": {
     "message": "ツールバー",
@@ -402,10 +390,6 @@
   "toolbar_icon_click_behavior_select_side_panel": {
     "message": "サイドパネル",
     "description": "Option to open the side panel when the toolbar icon is clicked."
-  },
-  "toolbar_icon_click_behavior_select_dashboard": {
-    "message": "ダッシュボード",
-    "description": "Option to open the dashboard when the toolbar icon is clicked."
   },
   "scale": {
     "message": "スケール",
@@ -446,38 +430,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "1以上の整数値を入力してください。",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "bug_report_and_feature_request_title": {
-    "message": "バグ報告&機能要望",
-    "description": "Heading for the section covering bug reports and feature requests."
-  },
-  "bug_report_and_feature_request_description": {
-    "message": "TabTabTabを使っていてバグを見つけたり、機能改善の要望がありましたらGitHubにてお気軽にイシューを作成ください。",
-    "description": "Description for the section dedicated to submitting bug reports and feature requests."
-  },
-  "store_review_title": {
-    "message": "ストアのレビュー",
-    "description": "Heading for the store reviews section."
-  },
-  "store_review_description": {
-    "message": "TabTabTabが役立つと思ったらぜひChromeストアでレビューをお願いします！あなたの声がTabTabTabの発展に大きく寄与します！",
-    "description": "Description for the section regarding store reviews."
-  },
-  "source_code_title": {
-    "message": "ソースコード",
-    "description": "Heading for the source code section."
-  },
-  "source_code_description": {
-    "message": "TabTabTabのコードは公開されたオープンソースです。不正なプログラムが入らないよう管理されており、拡張機能が安全に開発されています。",
-    "description": "Description for the section related to the source code."
-  },
-  "sponsor_page_header": {
-    "message": "プロジェクトをサポートする",
-    "description": "Header in Sponsor Page"
-  },
-  "sponsor_page_description": {
-    "message": "TabTabTabは、主に個人によって開発されているオープンソースプロジェクトです。役立つツールと思われましたら、このプロジェクトをサポートしていただけるとありがたいです。",
-    "description": "Description in Sponsor Page"
   },
   "add_tab": {
     "message": "タブを追加",

@@ -1,5 +1,5 @@
 export type ToolbarSetting = {
-  iconClickOpenView: "popup" | "sidePanel" | "dashboard";
+  iconClickOpenView: "popup" | "sidePanel";
 };
 
 export const defaultToolbarSetting: ToolbarSetting = {
@@ -9,5 +9,5 @@ export const defaultToolbarSetting: ToolbarSetting = {
 export const isValidIconClickOpenView = (
   value: string,
 ): value is ToolbarSetting["iconClickOpenView"] => {
-  return ["popup", "sidePanel", "dashboard"].includes(value);
+  return ["popup", "sidePanel"].includes(value);
 };

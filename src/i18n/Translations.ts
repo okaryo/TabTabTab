@@ -201,6 +201,18 @@ class Translations {
   get themeColorSettingHeader() {
     return chrome.i18n.getMessage("theme_color_setting_header");
   }
+  get mode() {
+    return chrome.i18n.getMessage("mode");
+  }
+  get light() {
+    return chrome.i18n.getMessage("light");
+  }
+  get dark() {
+    return chrome.i18n.getMessage("dark");
+  }
+  get system() {
+    return chrome.i18n.getMessage("system");
+  }
   get popupSettingHeader() {
     return chrome.i18n.getMessage("popup_setting_header");
   }
@@ -222,11 +234,6 @@ class Translations {
   get toolbarIconClickBehaviorSelectSidePanel() {
     return chrome.i18n.getMessage(
       "toolbar_icon_click_behavior_select_side_panel",
-    );
-  }
-  get toolbarIconClickBehaviorSelectDashboard() {
-    return chrome.i18n.getMessage(
-      "toolbar_icon_click_behavior_select_dashboard",
     );
   }
   get height() {
@@ -256,51 +263,14 @@ class Translations {
   get popupSizeValidationErrorValueRange() {
     return chrome.i18n.getMessage("popup_size_validation_error_value_range");
   }
-  get popupElementScaleHeader() {
-    return chrome.i18n.getMessage("popup_element_scale_header");
-  }
-  get popupElementScaleDescription() {
-    return chrome.i18n.getMessage("popup_element_scale_description");
-  }
-  get popupElementScaleValidationErrorValueFormat() {
-    return chrome.i18n.getMessage(
-      "popup_element_scale_validation_error_value_format",
-    );
-  }
-  get popupElementScaleValidationErrorValueRange() {
-    return chrome.i18n.getMessage(
-      "popup_element_scale_validation_error_value_range",
-    );
-  }
   get settings() {
     return chrome.i18n.getMessage("settings");
   }
   get feedback() {
     return chrome.i18n.getMessage("feedback");
   }
-  get bugReportAndFeatureRequestTitle() {
-    return chrome.i18n.getMessage("bug_report_and_feature_request_title");
-  }
-  get bugReportAndFeatureRequestDescription() {
-    return chrome.i18n.getMessage("bug_report_and_feature_request_description");
-  }
-  get storeReviewTitle() {
-    return chrome.i18n.getMessage("store_review_title");
-  }
-  get storeReviewDescription() {
-    return chrome.i18n.getMessage("store_review_description");
-  }
-  get sourceCodeTitle() {
-    return chrome.i18n.getMessage("source_code_title");
-  }
-  get sourceCodeDescription() {
-    return chrome.i18n.getMessage("source_code_description");
-  }
 
   // OptionsHeader
-  get optionsNavigationAllWindows() {
-    return chrome.i18n.getMessage("options_navigation_all_windows");
-  }
   get optionsNavigationSaveAndRestore() {
     return chrome.i18n.getMessage("options_navigation_save_and_restore");
   }
@@ -309,12 +279,6 @@ class Translations {
   }
   get optionsNavigationSettings() {
     return chrome.i18n.getMessage("options_navigation_settings");
-  }
-  get optionsNavigationFeedback() {
-    return chrome.i18n.getMessage("options_navigation_feedback");
-  }
-  get optionsNavigationSponsor() {
-    return chrome.i18n.getMessage("options_navigation_sponsor");
   }
 
   // TidyTabPage
@@ -390,15 +354,6 @@ class Translations {
       "tab_grouping_group_tabs_by_menu_item_subdomain",
     );
   }
-
-  // SponsorPage
-  get sponsorPageHeader() {
-    return chrome.i18n.getMessage("sponsor_page_header");
-  }
-  get sponsorPageDescription() {
-    return chrome.i18n.getMessage("sponsor_page_description");
-  }
-
   // Common
   get addTab() {
     return chrome.i18n.getMessage("add_tab");

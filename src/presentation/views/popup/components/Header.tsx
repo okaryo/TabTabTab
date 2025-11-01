@@ -1,10 +1,9 @@
 import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 import AutoAwesomeMotionIcon from "@mui/icons-material/AutoAwesomeMotion";
 import ClearIcon from "@mui/icons-material/Clear";
-import DarkModeIcon from "@mui/icons-material/DarkMode";
-import LightModeIcon from "@mui/icons-material/LightMode";
 import MoreVertIcon from "@mui/icons-material/MoreVert";
 import SearchIcon from "@mui/icons-material/Search";
+import SettingsIcon from "@mui/icons-material/Settings";
 import SyncIcon from "@mui/icons-material/Sync";
 import AppBar from "@mui/material/AppBar";
 import IconButton from "@mui/material/IconButton";
@@ -13,10 +12,8 @@ import InputBase from "@mui/material/InputBase";
 import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
-import { useContext, useState } from "react";
-import { updateMode } from "../../../../data/repository/ThemeRepository";
+import { useState } from "react";
 import t from "../../../../i18n/Translations";
-import { ModeContext } from "../../../contexts/ModeContext";
 import { PopupHeaderActionMenu } from "../../shared/components/ActionMenu";
 import type { PopupPage } from "./Home";
 
@@ -63,7 +60,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 const Header = (props: HeaderProps) => {
   const { sidePanel, currentPage, searchText, setCurrentPage, setSearchText } =
     props;
-  const { mode } = useContext(ModeContext);
 
   const onInputSearchField = (event: React.ChangeEvent<HTMLInputElement>) => {
     setSearchText(event.target.value);
@@ -82,12 +78,6 @@ const Header = (props: HeaderProps) => {
 
     return (
       <>
-        <IconButton
-          color="inherit"
-          onClick={() => updateMode(mode === "light" ? "dark" : "light")}
-        >
-          {mode === "light" ? <DarkModeIcon /> : <LightModeIcon />}
-        </IconButton>
         <IconButton color="inherit" onClick={onClickActionMenu}>
           <MoreVertIcon />
         </IconButton>
@@ -101,7 +91,7 @@ const Header = (props: HeaderProps) => {
     );
   };
 
-  if (["saveAndRestore", "tidyTabs"].includes(currentPage)) {
+  if (["saveAndRestore", "tidyTabs", "settings"].includes(currentPage)) {
     return (
       <AppBar position="static" color="primary">
         <Toolbar>
@@ -116,6 +106,7 @@ const Header = (props: HeaderProps) => {
             {currentPage === "saveAndRestore" &&
               t.optionsNavigationSaveAndRestore}
             {currentPage === "tidyTabs" && t.optionsNavigationTidyTabs}
+            {currentPage === "settings" && t.optionsNavigationSettings}
           </Typography>
           <BasicIcons />
         </Toolbar>
@@ -160,6 +151,12 @@ const Header = (props: HeaderProps) => {
               color="inherit"
             >
               <SyncIcon />
+            </IconButton>
+            <IconButton
+              color="inherit"
+              onClick={() => setCurrentPage("settings")}
+            >
+              <SettingsIcon />
             </IconButton>
           </>
         )}

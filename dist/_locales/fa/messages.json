@@ -283,10 +283,6 @@
     "message": "ساعت",
     "description": "One of the selectable units for the duration in the feature that automatically closes tabs after a specified period of inactivity."
   },
-  "options_navigation_all_windows": {
-    "message": "تمام پنجره ها",
-    "description": "Navigation header for AllWindows Page in options.html"
-  },
   "options_navigation_save_and_restore": {
     "message": "ذخیره و بازیابی",
     "description": "Navigation header for Save & Restore page in options.html"
@@ -298,14 +294,6 @@
   "options_navigation_settings": {
     "message": "تنظیمات",
     "description": "Navigation header for Settings page in options.html"
-  },
-  "options_navigation_feedback": {
-    "message": "بازخورد",
-    "description": "Navigation header for Feedback page in options.html"
-  },
-  "options_navigation_sponsor": {
-    "message": "حامی ",
-    "description": "Navigation header for Sponsor page in options.html"
   },
   "tab_grouping_header": {
     "message": "گروه کردن تب",
@@ -359,6 +347,22 @@
     "message": "رنگ قالب",
     "description": "The main header for the theme color setting section."
   },
+  "mode": {
+    "message": "حالت",
+    "description": "Label for theme mode selection."
+  },
+  "light": {
+    "message": "روشن",
+    "description": "Light theme mode option."
+  },
+  "system": {
+    "message": "سیستم",
+    "description": "System theme mode option that follows OS settings."
+  },
+  "dark": {
+    "message": "تیره",
+    "description": "Dark theme mode option."
+  },
   "popup_setting_header": {
     "message": "پاپ اپ",
     "description": "The main header for the popup setting section."
@@ -370,22 +374,6 @@
   "popup_size_description": {
     "message": "ارتفاع: ۲۰۰-۶۰۰ پیکسل، عرض: ۴۰۰-۸۰۰ پیکسل الزامی است.",
     "description": "Notes or cautionary advice regarding the settings for the popup size."
-  },
-  "popup_element_scale_header": {
-    "message": "مقیاس عناصر پنجره پاپ‌آپ",
-    "description": "Heading for the settings to adjust the scale of elements within the popup."
-  },
-  "popup_element_scale_description": {
-    "message": "اندازه عناصری مانند فونت‌ها و آیکون‌ها را در پنجره پاپ‌آپ بین ۵۰ تا ۱۵۰ درصد از اندازه پیش‌فرض تنظیم کنید.",
-    "description": "Notes or cautionary advice regarding the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_format": {
-    "message": "یک عدد صحیح وارد کنید.",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
-  },
-  "popup_element_scale_validation_error_value_range": {
-    "message": "یک مقدار در بازه ۵۰ تا ۱۵۰ وارد کنید.",
-    "description": "Error message displayed for validation issues in the settings for scaling elements within the popup."
   },
   "toolbar_setting_header": {
     "message": "نوار ابزار",
@@ -402,10 +390,6 @@
   "toolbar_icon_click_behavior_select_side_panel": {
     "message": "پنل کناری",
     "description": "Option to open the side panel when the toolbar icon is clicked."
-  },
-  "toolbar_icon_click_behavior_select_dashboard": {
-    "message": "داشبورد",
-    "description": "Option to open the dashboard when the toolbar icon is clicked."
   },
   "scale": {
     "message": "مقیاس",
@@ -446,38 +430,6 @@
   "tab_cleaner_validation_error_value_format": {
     "message": "یک عدد صحیح مثبت وارد کنید",
     "description": "Error message displayed for validation issues in the feature that automatically closes tabs after a specified period of inactivity."
-  },
-  "bug_report_and_feature_request_title": {
-    "message": "گزارش مشکل یا درخواست ویژگی",
-    "description": "Heading for the section covering bug reports and feature requests."
-  },
-  "bug_report_and_feature_request_description": {
-    "message": "اگر هنگام استفاده از TabTabTab با باگی مواجه شدید یا پیشنهادی برای ویژگی‌های جدید دارید، لطفاً با خیال راحت یک ایشو در GitHub ایجاد کنید.",
-    "description": "Description for the section dedicated to submitting bug reports and feature requests."
-  },
-  "store_review_title": {
-    "message": "بازخورد فروشگاه",
-    "description": "Heading for the store reviews section."
-  },
-  "store_review_description": {
-    "message": "اگر TabTabTab برای شما مفید بوده است، بسیار سپاسگزار خواهیم شد اگر نظر خود را در Chrome Web Store ثبت کنید! بازخورد شما تأثیر زیادی در توسعه و بهبود TabTabTab دارد.",
-    "description": "Description for the section regarding store reviews."
-  },
-  "source_code_title": {
-    "message": "منبع کد",
-    "description": "Heading for the source code section."
-  },
-  "source_code_description": {
-    "message": "کد TabTabTab متن‌باز و به‌صورت عمومی در دسترس است. این کد به‌دقت مدیریت می‌شود تا از هرگونه برنامه‌نویسی غیرقانونی جلوگیری شود و توسعه این افزونه به‌صورت ایمن انجام گیرد.",
-    "description": "Description for the section related to the source code."
-  },
-  "sponsor_page_header": {
-    "message": "حمایت از پروژه",
-    "description": "Header in Sponsor Page"
-  },
-  "sponsor_page_description": {
-    "message": "TabTabTab یک پروژه متن‌باز است که عمدتاً توسط یک فرد توسعه داده شده است. اگر این پروژه برای شما مفید بوده، خوشحال می‌شوم اگر حمایت از آن را در نظر بگیرید.",
-    "description": "Description in Sponsor Page"
   },
   "add_tab": {
     "message": "اضافه کردن تب",
