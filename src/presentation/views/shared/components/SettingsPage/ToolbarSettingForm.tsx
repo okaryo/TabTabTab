@@ -37,9 +37,9 @@ const ToolbarSettingForm = () => {
   return (
     <PaperWithHeader header={t.toolbarSettingHeader}>
       {settingState && (
-        <ListItem sx={{ p: 2 }}>
+        <ListItem sx={{ p: 2, gap: 2 }}>
           <ListItemText primary={t.toolbarIconClickBehaviorSettingHeader} />
-          <FormControl size="small">
+          <FormControl size="small" sx={{ minWidth: 120 }}>
             <Select
               value={settingState.iconClickOpenView}
               onChange={onChangeIconClickOpenView}

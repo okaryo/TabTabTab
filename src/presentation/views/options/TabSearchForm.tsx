@@ -25,10 +25,7 @@ import {
 import t from "../../../i18n/Translations";
 import type { Tab } from "../../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../../model/Window";
-import {
-  WindowsContext,
-  WindowsProvider,
-} from "../../contexts/WindowsContext";
+import { WindowsContext, WindowsProvider } from "../../contexts/WindowsContext";
 import groupTabsBySearchKeyword from "../../functions/groupTabsBySearchKeyword";
 import TabItem from "../shared/components/TabItem";
 
