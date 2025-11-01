@@ -12,8 +12,8 @@ import {
 import { WindowsProvider } from "../../contexts/WindowsContext";
 import { tabGroupColorPalette } from "../shared/resources/tabGroupColorPalette";
 import { themeColorPaletteBy } from "../shared/resources/themeColorPalette";
-import Header from "./components/Header";
-import Overview from "./pages/Overview";
+import Header from "./Header";
+import Overview from "./Overview";
 
 const MuiThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { mode } = useContext(ModeContext);
