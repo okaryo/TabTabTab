@@ -22,6 +22,7 @@ export const setToolbarIconBehavior = async (
       await setToolbarIconBehaviorToOpenSidePanel();
       break;
     default:
+      // NOTE: Fallback for legacy "dashboard" value from previous versions
       console.error(`Unknown toolbar icon click view: ${view}`);
       await setToolbarIconBehaviorToOpenPopup();
   }
