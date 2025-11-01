@@ -3,18 +3,15 @@ import LightModeIcon from "@mui/icons-material/LightMode";
 import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-import { useContext, useEffect, useState } from "react";
-import { getToolbarSetting } from "../../../../../data/repository/SettingsRepository";
+import { useContext } from "react";
 import { updateMode } from "../../../../../data/repository/ThemeRepository";
 import t from "../../../../../i18n/Translations";
 import type { Mode } from "../../../../../model/Theme";
-import type { ToolbarSetting } from "../../../../../model/ToolbarSetting";
 import { ModeContext } from "../../../../contexts/ModeContext";
 import PaperWithHeader from "../PaperWithHeader";
 
 const ModeSettingForm = () => {
   const { mode } = useContext(ModeContext);
-  const [_settingState, setSettingState] = useState<ToolbarSetting>(null);
 
   const onChangeMode = async (
     _: React.MouseEvent<HTMLElement>,
@@ -33,14 +30,6 @@ const ModeSettingForm = () => {
     { value: "dark", label: t.dark, icon: <DarkModeIcon sx={{ mr: 1 }} /> },
   ];
 
-  useEffect(() => {
-    const setSetting = async () => {
-      const setting = await getToolbarSetting();
-      setSettingState(setting);
-    };
-    setSetting();
-  }, []);
-
   return (
     <PaperWithHeader header={t.mode}>
       <ToggleButtonGroup
@@ -50,9 +39,6 @@ const ModeSettingForm = () => {
         exclusive
         fullWidth
         sx={{ p: 2 }}
-        style={{
-          textTransform: "none",
-        }}
         onChange={onChangeMode}
       >
         {items.map((item) => (
