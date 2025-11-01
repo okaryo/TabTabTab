@@ -359,6 +359,22 @@
     "message": "رنگ قالب",
     "description": "The main header for the theme color setting section."
   },
+  "mode": {
+    "message": "حالت",
+    "description": "Label for theme mode selection."
+  },
+  "light": {
+    "message": "روشن",
+    "description": "Light theme mode option."
+  },
+  "system": {
+    "message": "سیستم",
+    "description": "System theme mode option that follows OS settings."
+  },
+  "dark": {
+    "message": "تیره",
+    "description": "Dark theme mode option."
+  },
   "popup_setting_header": {
     "message": "پاپ اپ",
     "description": "The main header for the popup setting section."

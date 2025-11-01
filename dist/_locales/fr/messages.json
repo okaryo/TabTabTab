@@ -359,6 +359,22 @@
     "message": "Couleur du thème",
     "description": "The main header for the theme color setting section."
   },
+  "mode": {
+    "message": "Mode",
+    "description": "Label for theme mode selection."
+  },
+  "light": {
+    "message": "Clair",
+    "description": "Light theme mode option."
+  },
+  "system": {
+    "message": "Système",
+    "description": "System theme mode option that follows OS settings."
+  },
+  "dark": {
+    "message": "Sombre",
+    "description": "Dark theme mode option."
+  },
   "popup_setting_header": {
     "message": "Popup",
     "description": "The main header for the popup setting section."

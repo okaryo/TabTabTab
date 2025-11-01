@@ -15,6 +15,7 @@ import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import Stack from "@mui/material/Stack";
 import { createTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import type React from "react";
 import { useContext, useState } from "react";
 import t from "../../../i18n/Translations";
@@ -37,11 +38,14 @@ import Sponsor from "./pages/Sponsor";
 const MuiThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { mode } = useContext(ModeContext);
   const { themeColor } = useContext(ThemeColorContext);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const actualMode =
+    mode === "system" ? (prefersDarkMode ? "dark" : "light") : mode;
   const themePalette = createTheme({
     palette: {
-      mode,
-      primary: themeColorPaletteBy(themeColor, mode),
-      ...tabGroupColorPalette(mode),
+      mode: actualMode,
+      primary: themeColorPaletteBy(themeColor, actualMode),
+      ...tabGroupColorPalette(actualMode),
     },
   });
 

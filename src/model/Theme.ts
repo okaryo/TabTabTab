@@ -1,4 +1,4 @@
-export type Mode = "light" | "dark";
+export type Mode = "light" | "dark" | "system";
 export type ThemeColor =
   | "grey"
   | "blue"
