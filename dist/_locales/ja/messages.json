@@ -359,6 +359,22 @@
     "message": "テーマカラー",
     "description": "The main header for the theme color setting section."
   },
+  "mode": {
+    "message": "モード",
+    "description": "Label for theme mode selection."
+  },
+  "light": {
+    "message": "ライト",
+    "description": "Light theme mode option."
+  },
+  "system": {
+    "message": "システム",
+    "description": "System theme mode option that follows OS settings."
+  },
+  "dark": {
+    "message": "ダーク",
+    "description": "Dark theme mode option."
+  },
   "popup_setting_header": {
     "message": "ポップアップ",
     "description": "The main header for the popup setting section."

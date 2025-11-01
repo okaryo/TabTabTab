@@ -201,6 +201,18 @@ class Translations {
   get themeColorSettingHeader() {
     return chrome.i18n.getMessage("theme_color_setting_header");
   }
+  get mode() {
+    return chrome.i18n.getMessage("mode");
+  }
+  get light() {
+    return chrome.i18n.getMessage("light");
+  }
+  get dark() {
+    return chrome.i18n.getMessage("dark");
+  }
+  get system() {
+    return chrome.i18n.getMessage("system");
+  }
   get popupSettingHeader() {
     return chrome.i18n.getMessage("popup_setting_header");
   }

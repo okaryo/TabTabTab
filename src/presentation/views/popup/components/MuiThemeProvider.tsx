@@ -1,5 +1,6 @@
 import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
+import useMediaQuery from "@mui/material/useMediaQuery";
 import { useContext, useMemo } from "react";
 import { ModeContext } from "../../../contexts/ModeContext";
 import { ThemeColorContext } from "../../../contexts/ThemeColorContext";
@@ -14,13 +15,16 @@ const MuiThemeProvider = (props: MuiThemeProviderProps) => {
   const { children } = props;
   const { mode } = useContext(ModeContext);
   const { themeColor } = useContext(ThemeColorContext);
+  const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+  const actualMode =
+    mode === "system" ? (prefersDarkMode ? "dark" : "light") : mode;
 
   const themePalette = useMemo(() => {
     return createTheme({
       palette: {
-        mode,
-        primary: themeColorPaletteBy(themeColor, mode),
-        ...tabGroupColorPalette(mode),
+        mode: actualMode,
+        primary: themeColorPaletteBy(themeColor, actualMode),
+        ...tabGroupColorPalette(actualMode),
       },
       breakpoints: {
         values: {
@@ -65,7 +69,7 @@ const MuiThemeProvider = (props: MuiThemeProviderProps) => {
         },
       },
     });
-  }, [mode, themeColor]);
+  }, [actualMode, themeColor]);
 
   return <ThemeProvider theme={themePalette}>{children}</ThemeProvider>;
 };

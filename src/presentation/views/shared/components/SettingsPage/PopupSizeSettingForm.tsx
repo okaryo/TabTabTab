@@ -16,6 +16,7 @@ import {
   updatePopupSizeSetting,
 } from "../../../../../data/repository/SettingsRepository";
 import t from "../../../../../i18n/Translations";
+import PaperWithHeader from "../PaperWithHeader";
 
 type SettingForm = {
   height: string;
@@ -110,74 +111,80 @@ const PopupSizeSettingForm = () => {
   };
 
   return (
-    <Card sx={{ p: 2 }} elevation={0}>
-      <CardHeader
-        sx={{ p: 0 }}
-        title={
-          <Typography variant="subtitle1" component="h3">
-            {t.popupSizeHeader}
-          </Typography>
-        }
-        subheader={
-          <Typography variant="caption" component="p" style={{ color: "grey" }}>
-            {t.popupSizeDescription}
-          </Typography>
-        }
-      />
-      <FormControl
-        error={submissionState.isError}
-        sx={{ width: "100%", pt: 1 }}
-      >
-        <Stack spacing={2}>
-          <Box>
-            <Stack direction="row" spacing={2}>
-              <TextField
-                value={settingState.height}
-                variant="outlined"
-                size="small"
-                label={t.height}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">px</InputAdornment>
-                  ),
-                }}
-                onChange={onChangeHeight}
-              />
-              <TextField
-                value={settingState.width}
-                variant="outlined"
-                size="small"
-                label={t.width}
-                InputProps={{
-                  endAdornment: (
-                    <InputAdornment position="end">px</InputAdornment>
-                  ),
-                }}
-                onChange={onChangeWidth}
-              />
-            </Stack>
-          </Box>
-          <Button
-            variant="contained"
-            disabled={submissionState.isLoading}
-            sx={{ textTransform: "none" }}
-            disableElevation
-            onClick={onSave}
-          >
-            {submissionState.isLoading ? `${t.saving}...` : t.save}
-          </Button>
-          <FormHelperText style={{ marginTop: "4px" }}>
-            {submissionState.errorMessage}
-          </FormHelperText>
-          <Snackbar
-            open={isOpenSnackBarState}
-            onClose={() => setIsOpenSnackBarState(false)}
-            autoHideDuration={3000}
-            message={t.savedSuccessfully}
-          />
-        </Stack>
-      </FormControl>
-    </Card>
+    <PaperWithHeader header={t.popupSettingHeader}>
+      <Card sx={{ p: 2 }} elevation={0}>
+        <CardHeader
+          sx={{ p: 0 }}
+          title={
+            <Typography variant="subtitle1" component="h3">
+              {t.popupSizeHeader}
+            </Typography>
+          }
+          subheader={
+            <Typography
+              variant="caption"
+              component="p"
+              style={{ color: "grey" }}
+            >
+              {t.popupSizeDescription}
+            </Typography>
+          }
+        />
+        <FormControl
+          error={submissionState.isError}
+          sx={{ width: "100%", pt: 1 }}
+        >
+          <Stack spacing={2}>
+            <Box>
+              <Stack direction="row" spacing={2}>
+                <TextField
+                  value={settingState.height}
+                  variant="outlined"
+                  size="small"
+                  label={t.height}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">px</InputAdornment>
+                    ),
+                  }}
+                  onChange={onChangeHeight}
+                />
+                <TextField
+                  value={settingState.width}
+                  variant="outlined"
+                  size="small"
+                  label={t.width}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">px</InputAdornment>
+                    ),
+                  }}
+                  onChange={onChangeWidth}
+                />
+              </Stack>
+            </Box>
+            <Button
+              variant="contained"
+              disabled={submissionState.isLoading}
+              sx={{ textTransform: "none" }}
+              disableElevation
+              onClick={onSave}
+            >
+              {submissionState.isLoading ? `${t.saving}...` : t.save}
+            </Button>
+            <FormHelperText style={{ marginTop: "4px" }}>
+              {submissionState.errorMessage}
+            </FormHelperText>
+            <Snackbar
+              open={isOpenSnackBarState}
+              onClose={() => setIsOpenSnackBarState(false)}
+              autoHideDuration={3000}
+              message={t.savedSuccessfully}
+            />
+          </Stack>
+        </FormControl>
+      </Card>
+    </PaperWithHeader>
   );
 };
 

@@ -1,20 +1,18 @@
 import Stack from "@mui/material/Stack";
-import t from "../../../../../i18n/Translations";
-import PaperWithHeader from "../../../shared/components/PaperWithHeader";
+import ModeSettingForm from "./ModeSettingForm";
 import PopupSizeSettingForm from "./PopupSizeSettingForm";
 import ThemeColorSettingForm from "./ThemeColorSettingForm";
 import ToolbarSettingForm from "./ToolbarSettingForm";
 
-const Settings = () => {
+const SettingsPage = () => {
   return (
-    <Stack spacing={2}>
+    <Stack spacing={1}>
+      <ModeSettingForm />
       <ThemeColorSettingForm />
-      <PaperWithHeader header={t.popupSettingHeader}>
-        <PopupSizeSettingForm />
-      </PaperWithHeader>
+      <PopupSizeSettingForm />
       <ToolbarSettingForm />
     </Stack>
   );
 };
 
-export default Settings;
+export default SettingsPage;
