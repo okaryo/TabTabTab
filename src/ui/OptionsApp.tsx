@@ -10,10 +10,10 @@ import {
   ThemeColorProvider,
 } from "./contexts/ThemeColorContext";
 import { WindowsProvider } from "./contexts/WindowsContext";
-import Header from "./views/options/Header";
-import Overview from "./views/options/Overview";
-import { tabGroupColorPalette } from "./views/shared/resources/tabGroupColorPalette";
-import { themeColorPaletteBy } from "./views/shared/resources/themeColorPalette";
+import Header from "./options/Header";
+import Overview from "./options/Overview";
+import { tabGroupColorPalette } from "./resources/tabGroupColorPalette";
+import { themeColorPaletteBy } from "./resources/themeColorPalette";
 
 const MuiThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { mode } = useContext(ModeContext);
