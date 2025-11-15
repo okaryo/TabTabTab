@@ -20,7 +20,7 @@ jobs:
           VERSION=$(jq -r '.version' dist/manifest.json)
           echo "VERSION=$VERSION" >> $GITHUB_ENV
       - name: Create tag and release note
-        uses: softprops/action-gh-release@6da8fa9354ddfdc4aeace5fc48d7f679b5214090 # v2.4.1
+        uses: softprops/action-gh-release@5be0e66d93ac7ed76da52eca8bb058f665c3a5fe # v2.4.2
         with:
           target_commitish: main
           name: ${{ env.VERSION }}
@@ -34,7 +34,7 @@ jobs:
       - uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
       - uses: actions/setup-node@2028fbc5c25fe9cf00d9f06a71cc4710d4507903 # v6.0.0
         with:
-          node-version: 24.11.0
+          node-version: 24.11.1
           cache: npm
       - uses: actions/cache@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
         id: node_modules_cache_id
