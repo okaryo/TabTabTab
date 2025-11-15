@@ -11,7 +11,7 @@ import {
   isValidIconClickOpenView,
   type ToolbarSetting,
 } from "../../../model/ToolbarSetting";
-import PaperWithHeader from "../PaperWithHeader";
+import PaperWithHeader from "../../components/PaperWithHeader";
 
 const ToolbarSettingForm = () => {
   const [settingState, setSettingState] = useState<ToolbarSetting>(null);

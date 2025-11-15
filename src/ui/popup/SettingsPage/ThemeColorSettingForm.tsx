@@ -3,9 +3,9 @@ import { useContext } from "react";
 import { updateThemeColor } from "../../../data/repository/ThemeRepository";
 import t from "../../../i18n/Translations";
 import { themeColors } from "../../../model/Theme";
+import PaperWithHeader from "../../components/PaperWithHeader";
+import TabGroupColorRadio from "../../components/TabGroupColorRadio";
 import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import PaperWithHeader from "../PaperWithHeader";
-import TabGroupColorRadio from "../TabGroupColorRadio";
 
 const ThemeColorSetting = () => {
   const { themeColor } = useContext(ThemeColorContext);

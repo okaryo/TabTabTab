@@ -18,7 +18,7 @@ import {
 import { removeListenerOnChangeTabGroupSetting } from "../../../data/repository/TabGroupSettingRepository";
 import t from "../../../i18n/Translations";
 import type { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
-import PaperWithHeader from "../PaperWithHeader";
+import PaperWithHeader from "../../components/PaperWithHeader";
 
 type TabCleanerFormProps = {
   dense: boolean;

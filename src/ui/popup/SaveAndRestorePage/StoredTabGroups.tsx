@@ -29,9 +29,9 @@ import {
   type StoredTabGroup,
   tabGroupColors,
 } from "../../../model/TabContainer";
+import { StoredTabGroupActionMenu } from "../../components/ActionMenu";
+import TabGroupColorRadio from "../../components/TabGroupColorRadio";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
-import { StoredTabGroupActionMenu } from "../ActionMenu";
-import TabGroupColorRadio from "../TabGroupColorRadio";
 import AddTabForm from "./AddTabFrom";
 import StoredTabItem from "./StoredTabItem";
 

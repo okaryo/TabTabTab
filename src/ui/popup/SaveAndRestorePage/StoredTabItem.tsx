@@ -6,7 +6,7 @@ import ListItemText from "@mui/material/ListItemText";
 import { useState } from "react";
 import { createNewTab } from "../../../data/repository/TabsRepository";
 import type { StoredTab } from "../../../model/Tab";
-import TabFavicon from "../TabFavicon";
+import TabFavicon from "../../components/TabFavicon";
 
 type StoredGridTabItemProps = {
   tab: StoredTab;

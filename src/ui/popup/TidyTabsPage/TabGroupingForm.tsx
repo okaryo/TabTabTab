@@ -19,7 +19,7 @@ import {
 } from "../../../data/repository/TabGroupSettingRepository";
 import t from "../../../i18n/Translations";
 import type { TabGroupSetting } from "../../../model/TabGroupSetting";
-import PaperWithHeader from "../PaperWithHeader";
+import PaperWithHeader from "../../components/PaperWithHeader";
 
 type TabGroupingFormProps = {
   dense: boolean;

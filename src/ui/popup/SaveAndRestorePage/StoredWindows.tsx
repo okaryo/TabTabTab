@@ -27,9 +27,9 @@ import {
 import t from "../../../i18n/Translations";
 import { isLoading } from "../../../model/AsyncState";
 import type { StoredWindow } from "../../../model/Window";
+import { StoredWindowActionMenu } from "../../components/ActionMenu";
 import { StoredWindowsContext } from "../../contexts/StoredWindowsContext";
 import { WindowsContext } from "../../contexts/WindowsContext";
-import { StoredWindowActionMenu } from "../ActionMenu";
 import AddTabForm from "./AddTabFrom";
 import StoredTabItem from "./StoredTabItem";
 import { StoredTabItemContainer } from "./StoredTabItemContainer";

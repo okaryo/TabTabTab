@@ -7,8 +7,8 @@ import { useContext } from "react";
 import { updateMode } from "../../../data/repository/ThemeRepository";
 import t from "../../../i18n/Translations";
 import type { Mode } from "../../../model/Theme";
+import PaperWithHeader from "../../components/PaperWithHeader";
 import { ModeContext } from "../../contexts/ModeContext";
-import PaperWithHeader from "../PaperWithHeader";
 
 const ModeSettingForm = () => {
   const { mode } = useContext(ModeContext);

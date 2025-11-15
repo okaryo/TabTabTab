@@ -4,8 +4,8 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import { forwardRef, useCallback, useEffect, useState } from "react";
 import t from "../../../i18n/Translations";
+import TabFavicon from "../../components/TabFavicon";
 import useDebounce from "../../hooks/useDebounce";
-import TabFavicon from "../TabFavicon";
 
 type AddTabFormProps = {
   onComplete: (data: {
