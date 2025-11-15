@@ -2,7 +2,7 @@ import {
   cleanupTabLastActivatedAt,
   updateRecentActiveTabs,
   updateTabLastActivatedAt,
-} from "../platform/repository/TabsRepository";
+} from "../repository/TabsRepository";
 
 export const addTabAccessesListener = () => {
   chrome.tabs.onCreated.addListener((tab) => {

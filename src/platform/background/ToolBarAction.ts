@@ -1,17 +1,14 @@
-import t from "../i18n/Translations";
+import t from "../../i18n/Translations";
 import {
   getToolbarSetting,
   navigateToOptionsPage,
-} from "../platform/repository/SettingsRepository";
+} from "../repository/SettingsRepository";
 import {
   getTabGroupSetting,
   groupTabsBySetting,
-} from "../platform/repository/TabGroupSettingRepository";
-import { setToolbarIconBehavior } from "../platform/repository/ToolbarRepository";
-import {
-  getWindows,
-  saveWindow,
-} from "../platform/repository/WindowsRepository";
+} from "../repository/TabGroupSettingRepository";
+import { setToolbarIconBehavior } from "../repository/ToolbarRepository";
+import { getWindows, saveWindow } from "../repository/WindowsRepository";
 
 const saveCurrentWindowId = "saveCurrentWindow";
 const groupTabsNowId = "groupTabsNow";
