@@ -7,8 +7,8 @@ import IconButton from "@mui/material/IconButton";
 import { alpha, useTheme } from "@mui/material/styles";
 import Tab from "@mui/material/Tab";
 import { useState } from "react";
-import type { Window, WindowId } from "../../../model/Window";
-import { WindowActionMenu } from "../../components/ActionMenu";
+import type { Window, WindowId } from "../../model/Window";
+import { WindowActionMenu } from "../components/ActionMenu";
 
 type WindowTabProps = {
   id: WindowId;

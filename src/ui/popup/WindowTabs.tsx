@@ -3,9 +3,9 @@ import { useTheme } from "@mui/material/styles";
 import Tabs from "@mui/material/Tabs";
 import { type Dispatch, useContext, useEffect } from "react";
 
-import t from "../../../i18n/Translations";
-import { flatTabsInWindow } from "../../../model/Window";
-import { WindowsContext } from "../../contexts/WindowsContext";
+import t from "../../i18n/Translations";
+import { flatTabsInWindow } from "../../model/Window";
+import { WindowsContext } from "../contexts/WindowsContext";
 
 import WindowTab from "./WindowTab";
 

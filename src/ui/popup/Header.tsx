@@ -13,8 +13,8 @@ import { alpha, styled } from "@mui/material/styles";
 import Toolbar from "@mui/material/Toolbar";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import t from "../../../i18n/Translations";
-import { PopupHeaderActionMenu } from "../../components/ActionMenu";
+import t from "../../i18n/Translations";
+import { PopupHeaderActionMenu } from "../components/ActionMenu";
 import type { PopupPage } from "./Home";
 
 type HeaderProps = {

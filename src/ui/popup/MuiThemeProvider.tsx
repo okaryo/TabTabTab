@@ -2,10 +2,10 @@ import { ThemeProvider } from "@emotion/react";
 import { createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import { useContext, useMemo } from "react";
-import { ModeContext } from "../../contexts/ModeContext";
-import { ThemeColorContext } from "../../contexts/ThemeColorContext";
-import { tabGroupColorPalette } from "../../resources/tabGroupColorPalette";
-import { themeColorPaletteBy } from "../../resources/themeColorPalette";
+import { ModeContext } from "../contexts/ModeContext";
+import { ThemeColorContext } from "../contexts/ThemeColorContext";
+import { tabGroupColorPalette } from "../resources/tabGroupColorPalette";
+import { themeColorPaletteBy } from "../resources/themeColorPalette";
 
 type MuiThemeProviderProps = {
   children: React.ReactNode;

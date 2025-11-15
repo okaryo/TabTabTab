@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
-import DragAndDropContext from "../../components/DragAndDropContext";
-import TabList from "../../components/TabList";
-import { WindowsContext } from "../../contexts/WindowsContext";
+import DragAndDropContext from "../components/DragAndDropContext";
+import TabList from "../components/TabList";
+import { WindowsContext } from "../contexts/WindowsContext";
 import WindowTabs from "./WindowTabs";
 
 const WindowsContainer = () => {

@@ -3,8 +3,8 @@ import { useEffect } from "react";
 import { ModeProvider } from "./contexts/ModeContext";
 import { ThemeColorProvider } from "./contexts/ThemeColorContext";
 import { WindowsProvider } from "./contexts/WindowsContext";
-import Home from "./popup/components/Home";
-import MuiThemeProvider from "./popup/components/MuiThemeProvider";
+import Home from "./popup/Home";
+import MuiThemeProvider from "./popup/MuiThemeProvider";
 
 const PopupApp = ({ sidePanel = false }) => {
   useEffect(() => {

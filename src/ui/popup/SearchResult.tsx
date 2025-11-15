@@ -11,13 +11,13 @@ import { useContext, useEffect, useRef, useState } from "react";
 import {
   focusTab,
   getRecentActiveTabs,
-} from "../../../data/repository/TabsRepository";
-import t from "../../../i18n/Translations";
-import type { Tab } from "../../../model/Tab";
-import { findTabsByTitleOrUrl } from "../../../model/Window";
-import TabItem from "../../components/TabItem";
-import { WindowsContext } from "../../contexts/WindowsContext";
-import groupTabsBySearchKeyword from "../../functions/groupTabsBySearchKeyword";
+} from "../../data/repository/TabsRepository";
+import t from "../../i18n/Translations";
+import type { Tab } from "../../model/Tab";
+import { findTabsByTitleOrUrl } from "../../model/Window";
+import TabItem from "../components/TabItem";
+import { WindowsContext } from "../contexts/WindowsContext";
+import groupTabsBySearchKeyword from "../functions/groupTabsBySearchKeyword";
 
 type SearchResultProps = {
   searchText: string;
