@@ -10,15 +10,15 @@ import MenuItem from "@mui/material/MenuItem";
 import Select from "@mui/material/Select";
 import Switch from "@mui/material/Switch";
 import { useEffect, useState } from "react";
+import t from "../../../i18n/Translations";
+import type { TabGroupSetting } from "../../../model/TabGroupSetting";
 import {
   addListenerOnChangeTabGroupSetting,
   getTabGroupSetting,
   groupTabsBySetting,
   removeListenerOnChangeTabGroupSetting,
   updateTabGroupSetting,
-} from "../../../data/repository/TabGroupSettingRepository";
-import t from "../../../i18n/Translations";
-import type { TabGroupSetting } from "../../../model/TabGroupSetting";
+} from "../../../platform/repository/TabGroupSettingRepository";
 import PaperWithHeader from "../../components/PaperWithHeader";
 
 const TabGroupingForm = () => {

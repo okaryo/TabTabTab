@@ -17,17 +17,17 @@ import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
 import {
-  collapseTabGroup,
-  expandTabGroup,
-  updateTabGroupColor,
-  updateTabGroupTitle,
-} from "../../data/repository/TabGroupRepository";
-import {
   adjacentToTabContainerAfter,
   adjacentToTabContainerBefore,
   type TabGroup,
   tabGroupColors,
 } from "../../model/TabContainer";
+import {
+  collapseTabGroup,
+  expandTabGroup,
+  updateTabGroupColor,
+  updateTabGroupTitle,
+} from "../../platform/repository/TabGroupRepository";
 import { WindowsContext } from "../contexts/WindowsContext";
 import { TabGroupActionMenu } from "./ActionMenu";
 import TabGroupColorRadio from "./TabGroupColorRadio";

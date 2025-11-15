@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
+import { defaultThemeColor, type ThemeColor } from "../../model/Theme";
 import {
   addListenerOnChangeThemeColor,
   getThemeColor,
   removeListenerOnChangeThemeColor,
-} from "../../data/repository/ThemeRepository";
-import { defaultThemeColor, type ThemeColor } from "../../model/Theme";
+} from "../../platform/repository/ThemeRepository";
 
 type ThemeColorContextType = {
   themeColor: ThemeColor;

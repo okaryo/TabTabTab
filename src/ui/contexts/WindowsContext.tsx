@@ -1,10 +1,10 @@
 import { createContext, useCallback, useEffect, useState } from "react";
+import type { Window } from "../../model/Window";
 import {
   addListenerOnChangeTabs,
   removeListenerOnChangeTabs,
-} from "../../data/repository/TabsRepository";
-import { getWindows } from "../../data/repository/WindowsRepository";
-import type { Window } from "../../model/Window";
+} from "../../platform/repository/TabsRepository";
+import { getWindows } from "../../platform/repository/WindowsRepository";
 
 type WindowsContextType = {
   windows: Window[];

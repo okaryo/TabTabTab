@@ -4,13 +4,13 @@ import ListItemText from "@mui/material/ListItemText";
 import MenuItem from "@mui/material/MenuItem";
 import Select, { type SelectChangeEvent } from "@mui/material/Select";
 import { useEffect, useState } from "react";
-import { getToolbarSetting } from "../../../data/repository/SettingsRepository";
-import { setToolbarIconClickOpenView } from "../../../data/repository/ToolbarRepository";
 import t from "../../../i18n/Translations";
 import {
   isValidIconClickOpenView,
   type ToolbarSetting,
 } from "../../../model/ToolbarSetting";
+import { getToolbarSetting } from "../../../platform/repository/SettingsRepository";
+import { setToolbarIconClickOpenView } from "../../../platform/repository/ToolbarRepository";
 import PaperWithHeader from "../../components/PaperWithHeader";
 
 const ToolbarSettingForm = () => {

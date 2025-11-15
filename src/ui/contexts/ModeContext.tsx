@@ -1,10 +1,10 @@
 import { createContext, useEffect, useState } from "react";
+import type { Mode } from "../../model/Theme";
 import {
   addListenerOnChangeMode,
   getMode,
   removeListenerOnChangeMode,
-} from "../../data/repository/ThemeRepository";
-import type { Mode } from "../../model/Theme";
+} from "../../platform/repository/ThemeRepository";
 
 type ModeContextType = {
   mode: Mode;

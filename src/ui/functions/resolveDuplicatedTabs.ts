@@ -1,6 +1,6 @@
-import { closeTabs } from "../../data/repository/TabsRepository";
 import { isSamePageTabs, type Tab } from "../../model/Tab";
 import { flatTabsInWindows, type Window } from "../../model/Window";
+import { closeTabs } from "../../platform/repository/TabsRepository";
 
 const resolveDuplicatedTabs = async (windows: Window[], targetTab: Tab) => {
   const allTabs = flatTabsInWindows(windows);

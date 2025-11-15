@@ -4,9 +4,9 @@ import SettingsBrightnessIcon from "@mui/icons-material/SettingsBrightness";
 import ToggleButton from "@mui/material/ToggleButton";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import { useContext } from "react";
-import { updateMode } from "../../../data/repository/ThemeRepository";
 import t from "../../../i18n/Translations";
 import type { Mode } from "../../../model/Theme";
+import { updateMode } from "../../../platform/repository/ThemeRepository";
 import PaperWithHeader from "../../components/PaperWithHeader";
 import { ModeContext } from "../../contexts/ModeContext";
 

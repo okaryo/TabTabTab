@@ -15,7 +15,6 @@ import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { forwardRef, useContext, useState } from "react";
-import { closeTab, focusTab } from "../../data/repository/TabsRepository";
 import t from "../../i18n/Translations";
 import { durationSinceLastActivatedAt, type Tab } from "../../model/Tab";
 import {
@@ -29,6 +28,7 @@ import {
   hasDuplicatedTabs,
   type Window,
 } from "../../model/Window";
+import { closeTab, focusTab } from "../../platform/repository/TabsRepository";
 import { WindowsContext } from "../contexts/WindowsContext";
 import resolveDuplicatedTabs from "../functions/resolveDuplicatedTabs";
 import { TabItemActionMenu } from "./ActionMenu";

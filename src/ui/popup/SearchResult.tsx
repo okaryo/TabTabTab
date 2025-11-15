@@ -8,13 +8,13 @@ import Stack from "@mui/material/Stack";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
-import {
-  focusTab,
-  getRecentActiveTabs,
-} from "../../data/repository/TabsRepository";
 import t from "../../i18n/Translations";
 import type { Tab } from "../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../model/Window";
+import {
+  focusTab,
+  getRecentActiveTabs,
+} from "../../platform/repository/TabsRepository";
 import TabItem from "../components/TabItem";
 import { WindowsContext } from "../contexts/WindowsContext";
 import groupTabsBySearchKeyword from "../functions/groupTabsBySearchKeyword";

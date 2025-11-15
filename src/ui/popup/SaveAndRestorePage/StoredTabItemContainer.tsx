@@ -15,10 +15,6 @@ import Stack from "@mui/material/Stack";
 import { useTheme } from "@mui/material/styles";
 import Typography from "@mui/material/Typography";
 import { useState } from "react";
-import {
-  restorePinned,
-  restoreTabGroup,
-} from "../../../data/repository/TabGroupRepository";
 import t from "../../../i18n/Translations";
 import {
   adjacentToStoredTabContainerAfter,
@@ -28,6 +24,10 @@ import {
   type StoredTabContainer,
 } from "../../../model/TabContainer";
 import type { StoredWindow } from "../../../model/Window";
+import {
+  restorePinned,
+  restoreTabGroup,
+} from "../../../platform/repository/TabGroupRepository";
 import StoredTabItem from "./StoredTabItem";
 
 type StoredTabItemContainerProps = {

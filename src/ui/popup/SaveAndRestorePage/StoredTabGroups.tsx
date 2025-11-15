@@ -17,18 +17,18 @@ import { alpha, styled, useTheme } from "@mui/material/styles";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useContext, useEffect, useRef, useState } from "react";
-import {
-  addTabToSavedGroup,
-  removeTabFromStoredTabGroup,
-  updateStoredTabGroupColor,
-  updateStoredTabGroupName,
-} from "../../../data/repository/TabGroupRepository";
 import t from "../../../i18n/Translations";
 import { isLoading } from "../../../model/AsyncState";
 import {
   type StoredTabGroup,
   tabGroupColors,
 } from "../../../model/TabContainer";
+import {
+  addTabToSavedGroup,
+  removeTabFromStoredTabGroup,
+  updateStoredTabGroupColor,
+  updateStoredTabGroupName,
+} from "../../../platform/repository/TabGroupRepository";
 import { StoredTabGroupActionMenu } from "../../components/ActionMenu";
 import TabGroupColorRadio from "../../components/TabGroupColorRadio";
 import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";

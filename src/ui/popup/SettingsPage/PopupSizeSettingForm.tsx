@@ -10,12 +10,11 @@ import Stack from "@mui/material/Stack";
 import TextField from "@mui/material/TextField";
 import Typography from "@mui/material/Typography";
 import { useEffect, useState } from "react";
-
+import t from "../../../i18n/Translations";
 import {
   getPopupSizeSetting,
   updatePopupSizeSetting,
-} from "../../../data/repository/SettingsRepository";
-import t from "../../../i18n/Translations";
+} from "../../../platform/repository/SettingsRepository";
 import PaperWithHeader from "../../components/PaperWithHeader";
 
 type SettingForm = {

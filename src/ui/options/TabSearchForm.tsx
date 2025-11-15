@@ -18,13 +18,13 @@ import TextField from "@mui/material/TextField";
 import Tooltip from "@mui/material/Tooltip";
 import Typography from "@mui/material/Typography";
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
-import {
-  focusTab,
-  getRecentActiveTabs,
-} from "../../data/repository/TabsRepository";
 import t from "../../i18n/Translations";
 import type { Tab } from "../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../model/Window";
+import {
+  focusTab,
+  getRecentActiveTabs,
+} from "../../platform/repository/TabsRepository";
 import TabItem from "../components/TabItem";
 import { WindowsContext, WindowsProvider } from "../contexts/WindowsContext";
 import groupTabsBySearchKeyword from "../functions/groupTabsBySearchKeyword";

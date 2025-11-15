@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
+import { type AsyncState, initialState } from "../../model/AsyncState";
+import type { StoredTabGroup } from "../../model/TabContainer";
 import {
   addListenerOnChangeStoredTabGroups,
   getStoredTabGroups,
   removeListenerOnChangeStoredTabGroups,
-} from "../../data/repository/TabGroupRepository";
-import { type AsyncState, initialState } from "../../model/AsyncState";
-import type { StoredTabGroup } from "../../model/TabContainer";
+} from "../../platform/repository/TabGroupRepository";
 import useAsync from "../hooks/useAsync";
 
 export const StoredTabGroupsContext =

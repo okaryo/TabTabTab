@@ -1,7 +1,7 @@
 import Box from "@mui/material/Box";
 import { useEffect, useState } from "react";
-import { getPopupSizeSetting } from "../../data/repository/SettingsRepository";
 import { defaultPopupSize, type PopupSize } from "../../model/PopupSize";
+import { getPopupSizeSetting } from "../../platform/repository/SettingsRepository";
 import Header from "./Header";
 import SaveAndRestorePage from "./SaveAndRestorePage";
 import SearchResult from "./SearchResult";

@@ -10,14 +10,14 @@ import Stack from "@mui/material/Stack";
 import Switch from "@mui/material/Switch";
 import TextField from "@mui/material/TextField";
 import { useEffect, useState } from "react";
+import t from "../../../i18n/Translations";
+import type { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
 import {
   addListenerOnChangeTabCleanerSetting,
   getTabCleanerSetting,
   updateTabCleanerSetting,
-} from "../../../data/repository/TabCleanerRepository";
-import { removeListenerOnChangeTabGroupSetting } from "../../../data/repository/TabGroupSettingRepository";
-import t from "../../../i18n/Translations";
-import type { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
+} from "../../../platform/repository/TabCleanerRepository";
+import { removeListenerOnChangeTabGroupSetting } from "../../../platform/repository/TabGroupSettingRepository";
 import PaperWithHeader from "../../components/PaperWithHeader";
 
 type DurationErrorState = {

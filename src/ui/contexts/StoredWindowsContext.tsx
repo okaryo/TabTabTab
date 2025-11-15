@@ -1,11 +1,11 @@
 import { createContext, useEffect, useState } from "react";
+import { type AsyncState, initialState } from "../../model/AsyncState";
+import type { StoredWindow } from "../../model/Window";
 import {
   addListenerOnChangeStoredWindows,
   getStoredWindows,
   removeListenerOnChangeStoredWindows,
-} from "../../data/repository/WindowsRepository";
-import { type AsyncState, initialState } from "../../model/AsyncState";
-import type { StoredWindow } from "../../model/Window";
+} from "../../platform/repository/WindowsRepository";
 import useAsync from "../hooks/useAsync";
 
 export const StoredWindowsContext =
