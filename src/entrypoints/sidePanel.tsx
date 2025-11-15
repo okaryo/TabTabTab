@@ -1,7 +1,6 @@
 import { createRoot } from "react-dom/client";
-
-import App from "./App";
+import PopupApp from "../presentation/PopupApp";
 
 const app = document.getElementById("app");
 const root = createRoot(app);
-root.render(<App />);
+root.render(<PopupApp sidePanel />);

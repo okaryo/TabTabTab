@@ -4,16 +4,16 @@ import { createTheme } from "@mui/material/styles";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import type React from "react";
 import { useContext } from "react";
-import { ModeContext, ModeProvider } from "../../contexts/ModeContext";
+import { ModeContext, ModeProvider } from "./contexts/ModeContext";
 import {
   ThemeColorContext,
   ThemeColorProvider,
-} from "../../contexts/ThemeColorContext";
-import { WindowsProvider } from "../../contexts/WindowsContext";
-import { tabGroupColorPalette } from "../shared/resources/tabGroupColorPalette";
-import { themeColorPaletteBy } from "../shared/resources/themeColorPalette";
-import Header from "./Header";
-import Overview from "./Overview";
+} from "./contexts/ThemeColorContext";
+import { WindowsProvider } from "./contexts/WindowsContext";
+import Header from "./views/options/Header";
+import Overview from "./views/options/Overview";
+import { tabGroupColorPalette } from "./views/shared/resources/tabGroupColorPalette";
+import { themeColorPaletteBy } from "./views/shared/resources/themeColorPalette";
 
 const MuiThemeProvider = ({ children }: { children: React.ReactNode }) => {
   const { mode } = useContext(ModeContext);
@@ -32,7 +32,7 @@ const MuiThemeProvider = ({ children }: { children: React.ReactNode }) => {
   return <ThemeProvider theme={themePalette}>{children}</ThemeProvider>;
 };
 
-const App = () => {
+const OptionsApp = () => {
   return (
     <ModeProvider>
       <ThemeColorProvider>
@@ -49,4 +49,4 @@ const App = () => {
   );
 };
 
-export default App;
+export default OptionsApp;

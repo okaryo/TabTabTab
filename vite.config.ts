@@ -19,16 +19,10 @@ export default defineConfig(({ mode }) => {
       reportCompressedSize: isProduction,
       rollupOptions: {
         input: {
-          popup: resolve(__dirname, "src/presentation/views/popup/index.tsx"),
-          sidePanel: resolve(
-            __dirname,
-            "src/presentation/views/sidePanel/index.tsx",
-          ),
-          options: resolve(
-            __dirname,
-            "src/presentation/views/options/index.tsx",
-          ),
-          background: resolve(__dirname, "src/background/index.ts"),
+          popup: resolve(__dirname, "src/entrypoints/popup.tsx"),
+          sidePanel: resolve(__dirname, "src/entrypoints/sidePanel.tsx"),
+          options: resolve(__dirname, "src/entrypoints/options.tsx"),
+          background: resolve(__dirname, "src/entrypoints/background.ts"),
         },
         output: {
           entryFileNames: "[name].js",

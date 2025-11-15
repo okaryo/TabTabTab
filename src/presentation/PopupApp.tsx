@@ -1,12 +1,12 @@
 import CssBaseline from "@mui/material/CssBaseline";
 import { useEffect } from "react";
-import { ModeProvider } from "../../contexts/ModeContext";
-import { ThemeColorProvider } from "../../contexts/ThemeColorContext";
-import { WindowsProvider } from "../../contexts/WindowsContext";
-import Home from "./components/Home";
-import MuiThemeProvider from "./components/MuiThemeProvider";
+import { ModeProvider } from "./contexts/ModeContext";
+import { ThemeColorProvider } from "./contexts/ThemeColorContext";
+import { WindowsProvider } from "./contexts/WindowsContext";
+import Home from "./views/popup/components/Home";
+import MuiThemeProvider from "./views/popup/components/MuiThemeProvider";
 
-const App = ({ sidePanel = false }) => {
+const PopupApp = ({ sidePanel = false }) => {
   useEffect(() => {
     if (sidePanel) return;
 
@@ -35,4 +35,4 @@ const App = ({ sidePanel = false }) => {
   );
 };
 
-export default App;
+export default PopupApp;
