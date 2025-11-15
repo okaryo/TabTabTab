@@ -56,7 +56,8 @@ const MuiThemeProvider = (props: MuiThemeProviderProps) => {
         MuiToolbar: {
           styleOverrides: {
             root: {
-              minHeight: 42,
+              minHeight: 48,
+              padding: 8,
             },
           },
         },
