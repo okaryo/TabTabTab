@@ -10,12 +10,7 @@ import StoredWindows from "./StoredWindows";
 
 type Page = "window" | "tabGroup";
 
-type SaveAndRestorePageProps = {
-  dense?: boolean;
-};
-
-const SaveAndRestorePage = (props: SaveAndRestorePageProps) => {
-  const { dense = false } = props;
+const SaveAndRestorePage = () => {
   const [currentPage, setCurrentPage] = useState<Page>("window");
   const pages = [
     {
@@ -34,7 +29,7 @@ const SaveAndRestorePage = (props: SaveAndRestorePageProps) => {
   };
 
   return (
-    <Stack sx={{ height: "100%" }} spacing={dense ? 1 : 2}>
+    <Stack sx={{ height: "100%" }} spacing={1}>
       <ToggleButtonGroup
         fullWidth
         exclusive
@@ -54,12 +49,12 @@ const SaveAndRestorePage = (props: SaveAndRestorePageProps) => {
       </ToggleButtonGroup>
       {currentPage === "window" && (
         <StoredWindowsProvider>
-          <StoredWindows dense={dense} />
+          <StoredWindows />
         </StoredWindowsProvider>
       )}
       {currentPage === "tabGroup" && (
         <StoredTabGroupsProvider>
-          <StoredTabGroups dense={dense} />
+          <StoredTabGroups />
         </StoredTabGroupsProvider>
       )}
     </Stack>

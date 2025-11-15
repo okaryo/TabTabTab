@@ -55,12 +55,12 @@ const Home = (props: HomeProps) => {
       )}
       {searchText.length === 0 && currentPage === "saveAndRestore" && (
         <Box sx={{ p: 1 }}>
-          <SaveAndRestorePage dense />
+          <SaveAndRestorePage />
         </Box>
       )}
       {searchText.length === 0 && currentPage === "tidyTabs" && (
         <Box sx={{ p: 1 }}>
-          <TidyTabsPage dense />
+          <TidyTabsPage />
         </Box>
       )}
       {searchText.length === 0 && currentPage === "settings" && (

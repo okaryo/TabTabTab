@@ -35,13 +35,9 @@ import { StoredTabGroupsContext } from "../../contexts/StoredTabGroupsContext";
 import AddTabForm from "./AddTabFrom";
 import StoredTabItem from "./StoredTabItem";
 
-type StoredTabGroupsProps = {
-  dense: boolean;
-};
 type StoredTabGroupAccordionProps = {
   group: StoredTabGroup;
   index: number;
-  dense: boolean;
 };
 
 const OutlinedAccordion = styled((props: AccordionProps) => (
@@ -68,7 +64,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
-  const { group, index, dense } = props;
+  const { group, index } = props;
   const theme = useTheme();
   const editTabGroupFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
@@ -141,7 +137,7 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
       <AccordionSummary
         sx={[
           {
-            px: dense ? 1 : 2,
+            px: 1,
             "&.Mui-focusVisible": {
               backgroundColor: "background.paper",
             },
@@ -279,8 +275,7 @@ const StoredTabGroupAccordion = (props: StoredTabGroupAccordionProps) => {
   );
 };
 
-const StoredTabGroups = (props: StoredTabGroupsProps) => {
-  const { dense } = props;
+const StoredTabGroups = () => {
   const state = useContext(StoredTabGroupsContext);
   const sortedGroups = state.value?.sort((a, b) =>
     a.storedAt > b.storedAt ? -1 : 1,
@@ -310,7 +305,6 @@ const StoredTabGroups = (props: StoredTabGroupsProps) => {
               key={group.internalUid}
               group={group}
               index={index}
-              dense={dense}
             />
           ))}
         </Stack>

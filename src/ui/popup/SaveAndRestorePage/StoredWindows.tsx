@@ -34,13 +34,9 @@ import AddTabForm from "./AddTabFrom";
 import StoredTabItem from "./StoredTabItem";
 import { StoredTabItemContainer } from "./StoredTabItemContainer";
 
-type StoredWindowsProps = {
-  dense?: boolean;
-};
 type StoredWindowAccordionProps = {
   window: StoredWindow;
   index: number;
-  dense: boolean;
 };
 
 const OutlinedAccordion = styled((props: AccordionProps) => (
@@ -67,7 +63,7 @@ const AccordionDetails = styled(MuiAccordionDetails)(({ theme }) => ({
 }));
 
 const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
-  const { window, index, dense } = props;
+  const { window, index } = props;
   const editWindowNameFormRef = useRef<HTMLDivElement>(null);
   const editButtonRef = useRef<HTMLButtonElement>(null);
   const addTabFormRef = useRef<HTMLDivElement>(null);
@@ -142,7 +138,7 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
       <AccordionSummary
         sx={[
           {
-            px: dense ? 1 : 2,
+            px: 1,
             "&.Mui-focusVisible": {
               backgroundColor: "background.paper",
             },
@@ -251,8 +247,7 @@ const StoredWindowAccordion = (props: StoredWindowAccordionProps) => {
   );
 };
 
-const StoredWindows = (props: StoredWindowsProps) => {
-  const { dense } = props;
+const StoredWindows = () => {
   const state = useContext(StoredWindowsContext);
   const sortedWindows = state.value?.sort((a, b) =>
     a.storedAt > b.storedAt ? -1 : 1,
@@ -284,7 +279,6 @@ const StoredWindows = (props: StoredWindowsProps) => {
                 key={window.internalUid}
                 window={window}
                 index={index}
-                dense={dense}
               />
             ))}
           </Stack>

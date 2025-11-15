@@ -21,12 +21,7 @@ import t from "../../../i18n/Translations";
 import type { TabGroupSetting } from "../../../model/TabGroupSetting";
 import PaperWithHeader from "../../components/PaperWithHeader";
 
-type TabGroupingFormProps = {
-  dense: boolean;
-};
-
-const TabGroupingForm = (props: TabGroupingFormProps) => {
-  const { dense } = props;
+const TabGroupingForm = () => {
   const [setting, setSetting] = useState<TabGroupSetting>(null);
 
   useEffect(() => {
@@ -70,7 +65,7 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
     <PaperWithHeader header={t.tabGroupingHeader}>
       {setting && (
         <>
-          <List dense={dense}>
+          <List dense>
             <Box sx={{ py: 1, px: 2 }}>
               <Button
                 variant="contained"
@@ -92,7 +87,7 @@ const TabGroupingForm = (props: TabGroupingFormProps) => {
             </ListItemButton>
           </List>
           <List
-            dense={dense}
+            dense
             subheader={
               <ListSubheader>
                 {t.tabGroupingDetailSettingsSubheader}

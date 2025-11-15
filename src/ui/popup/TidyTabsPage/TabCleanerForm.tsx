@@ -20,16 +20,12 @@ import t from "../../../i18n/Translations";
 import type { DurationUnit, TabCleaner } from "../../../model/TabCleaner";
 import PaperWithHeader from "../../components/PaperWithHeader";
 
-type TabCleanerFormProps = {
-  dense: boolean;
-};
 type DurationErrorState = {
   isError: boolean;
   errorMessage: string;
 };
 
-const TabCleanerForm = (props: TabCleanerFormProps) => {
-  const { dense } = props;
+const TabCleanerForm = () => {
   const [setting, setSetting] = useState<TabCleaner>(null);
   const [inputDuration, setInputDuration] = useState("");
   const [durationError, setDurationError] = useState<DurationErrorState>({
@@ -89,7 +85,7 @@ const TabCleanerForm = (props: TabCleanerFormProps) => {
   return (
     <PaperWithHeader header={t.cleanupTabsHeader}>
       {setting && (
-        <List dense={dense}>
+        <List dense>
           <ListItemButton onClick={onChangeIsEnabled}>
             <ListItemText
               primary={t.tabCleanerHeader}

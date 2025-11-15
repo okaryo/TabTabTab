@@ -2,17 +2,11 @@ import Stack from "@mui/material/Stack";
 import TabCleanerSettingForm from "./TabCleanerForm";
 import TabGroupingForm from "./TabGroupingForm";
 
-type TidyTabsPageProps = {
-  dense?: boolean;
-};
-
-const TidyTabsPage = (props: TidyTabsPageProps) => {
-  const { dense = false } = props;
-
+const TidyTabsPage = () => {
   return (
-    <Stack spacing={dense ? 1 : 2}>
-      <TabGroupingForm dense={dense} />
-      <TabCleanerSettingForm dense={dense} />
+    <Stack spacing={1}>
+      <TabGroupingForm />
+      <TabCleanerSettingForm />
     </Stack>
   );
 };
