@@ -4,8 +4,14 @@ import type {
   TabGroup,
   TabGroupColor,
 } from "../../model/TabContainer";
-import type { WindowId } from "../../model/Window";
+import {
+  findGroupsByName,
+  flatTabsInWindows,
+  type Window,
+  type WindowId,
+} from "../../model/Window";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
+import { addTabsToGroup } from "./TabsRepository";
 
 export const collapseTabGroup = async (groupId: number): Promise<void> => {
   await chrome.tabGroups.update(groupId, { collapsed: true });
@@ -29,6 +35,24 @@ export const createGroupWithTabs = async (name: string, tabIds: number[]) => {
     tabIds: tabIds as [number, ...number[]],
   });
   await chrome.tabGroups.update(groupId, { title: name });
+};
+
+export const groupTabsBySearchKeyword = async (
+  keyword: string,
+  windows: Window[],
+  tabIds: number[],
+) => {
+  const pinnedTabs = flatTabsInWindows(windows).filter((tab) => tab.pinned);
+  const tabIdsExcludingPinned = tabIds.filter(
+    (tabId) => !pinnedTabs.some((tab) => tab.id === tabId),
+  );
+
+  const sameNameGroups = findGroupsByName(keyword, windows);
+  if (sameNameGroups.length > 0) {
+    await addTabsToGroup(tabIdsExcludingPinned, sameNameGroups[0].id);
+  }
+
+  await createGroupWithTabs(keyword, tabIdsExcludingPinned);
 };
 
 export const moveTabGroup = async (

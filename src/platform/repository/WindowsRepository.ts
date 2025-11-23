@@ -129,6 +129,23 @@ export const closeWindow = async (window: Window): Promise<Window[]> => {
   return getWindows();
 };
 
+export const mergeWindow = async (destWindowId: number, sourceWindow: Window) => {
+  for (const child of sourceWindow.children) {
+    if (isPinned(child)) {
+      for (const tab of child.children) {
+        await chrome.tabs.move(tab.id, { windowId: destWindowId, index: -1 });
+        await chrome.tabs.update(tab.id, { pinned: true });
+      }
+    }
+    if (isTabGroup(child)) {
+      await chrome.tabGroups.move(child.id, { windowId: destWindowId, index: -1 });
+    }
+    if (isTab(child)) {
+      await chrome.tabs.move(child.id, { windowId: destWindowId, index: -1 });
+    }
+  }
+};
+
 const applyLastActivatedAtToTabs = async (
   windows: Window[],
 ): Promise<Window[]> => {

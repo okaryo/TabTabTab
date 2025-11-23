@@ -15,9 +15,9 @@ import {
   focusTab,
   getRecentActiveTabs,
 } from "../../platform/repository/TabsRepository";
+import { groupTabsBySearchKeyword } from "../../platform/repository/TabGroupRepository";
 import TabItem from "../components/TabItem";
 import { WindowsContext } from "../contexts/WindowsContext";
-import groupTabsBySearchKeyword from "../functions/groupTabsBySearchKeyword";
 
 type SearchResultProps = {
   searchText: string;

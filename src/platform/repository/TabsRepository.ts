@@ -1,5 +1,5 @@
-import type { Tab, TabId, TabStatus } from "../../model/Tab";
-import type { WindowId } from "../../model/Window";
+import { isSamePageTabs, type Tab, type TabId, type TabStatus } from "../../model/Tab";
+import { flatTabsInWindows, type Window, type WindowId } from "../../model/Window";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 import { ChromeSessionStorage } from "../storage/ChromeSessionStorage";
 
@@ -22,6 +22,31 @@ export const closeTab = async (tabId: number) => {
 
 export const closeTabs = async (tabIds: number[]) => {
   await chrome.tabs.remove(tabIds);
+};
+
+export const moveTabFromRootToPinned = async (
+  tabId: number,
+  windowId: number,
+  index: number,
+) => {
+  await moveTab(tabId, windowId, -1);
+  await pinTab(tabId);
+  await moveTab(tabId, windowId, index);
+};
+
+export const moveTabFromPinnedToPinned = async (
+  tabId: number,
+  sourceWindowId: number,
+  destWindowId: number,
+  index: number,
+) => {
+  if (sourceWindowId === destWindowId) {
+    await moveTab(tabId, sourceWindowId, index);
+  } else {
+    await moveTab(tabId, destWindowId, -1);
+    await pinTab(tabId);
+    await moveTab(tabId, destWindowId, index);
+  }
 };
 
 export const updateTabLastActivatedAt = async (
@@ -162,6 +187,15 @@ export const unpinAllTabs = async (tabs: Tab[]) => {
   for (const tab of tabs) {
     await unpinTab(tab.id);
   }
+};
+
+export const resolveDuplicatedTabs = async (windows: Window[], targetTab: Tab) => {
+  const allTabs = flatTabsInWindows(windows);
+  const duplicateTabs = allTabs.filter(
+    (tab) => tab.id !== targetTab.id && isSamePageTabs(tab, targetTab),
+  );
+  const duplicateTabIds = duplicateTabs.map((t) => t.id);
+  await closeTabs(duplicateTabIds);
 };
 
 export const getRecentActiveTabs = async (): Promise<Tab[]> => {
