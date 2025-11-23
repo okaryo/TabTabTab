@@ -1,5 +1,14 @@
-import { isSamePageTabs, type Tab, type TabId, type TabStatus } from "../../model/Tab";
-import { flatTabsInWindows, type Window, type WindowId } from "../../model/Window";
+import {
+  isSamePageTabs,
+  type Tab,
+  type TabId,
+  type TabStatus,
+} from "../../model/Tab";
+import {
+  flatTabsInWindows,
+  type Window,
+  type WindowId,
+} from "../../model/Window";
 import { ChromeLocalStorage } from "../storage/ChromeLocalStorage";
 import { ChromeSessionStorage } from "../storage/ChromeSessionStorage";
 
@@ -189,7 +198,10 @@ export const unpinAllTabs = async (tabs: Tab[]) => {
   }
 };
 
-export const resolveDuplicatedTabs = async (windows: Window[], targetTab: Tab) => {
+export const resolveDuplicatedTabs = async (
+  windows: Window[],
+  targetTab: Tab,
+) => {
   const allTabs = flatTabsInWindows(windows);
   const duplicateTabs = allTabs.filter(
     (tab) => tab.id !== targetTab.id && isSamePageTabs(tab, targetTab),
