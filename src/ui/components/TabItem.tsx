@@ -28,9 +28,12 @@ import {
   hasDuplicatedTabs,
   type Window,
 } from "../../model/Window";
-import { closeTab, focusTab } from "../../platform/repository/TabsRepository";
+import {
+  closeTab,
+  focusTab,
+  resolveDuplicatedTabs,
+} from "../../platform/repository/TabsRepository";
 import { WindowsContext } from "../contexts/WindowsContext";
-import resolveDuplicatedTabs from "../functions/resolveDuplicatedTabs";
 import { TabItemActionMenu } from "./ActionMenu";
 import TabFavicon from "./TabFavicon";
 

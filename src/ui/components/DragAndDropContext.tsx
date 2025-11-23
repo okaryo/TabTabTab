@@ -44,6 +44,8 @@ import {
 } from "../../platform/repository/TabGroupRepository";
 import {
   moveTab,
+  moveTabFromPinnedToPinned,
+  moveTabFromRootToPinned,
   moveTabOutOfGroup,
   moveTabToOtherWindow,
   unpinTab,
@@ -53,8 +55,6 @@ import {
   addWindowWithTabGroup,
 } from "../../platform/repository/WindowsRepository";
 import { WindowsContext } from "../contexts/WindowsContext";
-import moveTabFromPinnedToPinned from "../functions/moveTabFromPinnedToPinned";
-import moveTabFromRootToPinned from "../functions/moveTabFromRootToPinned";
 import TabGroupContainer from "./TabGroupContainer";
 import TabItem from "./TabItem";
 

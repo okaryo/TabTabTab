@@ -21,13 +21,13 @@ import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import t from "../../i18n/Translations";
 import type { Tab } from "../../model/Tab";
 import { findTabsByTitleOrUrl } from "../../model/Window";
+import { groupTabsBySearchKeyword } from "../../platform/repository/TabGroupRepository";
 import {
   focusTab,
   getRecentActiveTabs,
 } from "../../platform/repository/TabsRepository";
 import TabItem from "../components/TabItem";
 import { WindowsContext, WindowsProvider } from "../contexts/WindowsContext";
-import groupTabsBySearchKeyword from "../functions/groupTabsBySearchKeyword";
 
 const smoothScrollTo = (container: HTMLElement, targetScrollTop: number) => {
   const startScrollTop = container.scrollTop;
