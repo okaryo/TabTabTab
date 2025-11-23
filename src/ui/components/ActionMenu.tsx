@@ -59,12 +59,12 @@ import {
 } from "../../platform/repository/TabsRepository";
 import {
   closeWindow,
+  mergeWindow,
   removeStoredWindow,
   restoreWindow,
   saveWindow,
   saveWindows,
 } from "../../platform/repository/WindowsRepository";
-import mergeWindow from "../functions/mergeWindow";
 
 type ActionMenuItemAttrs =
   | {
